@@ -19,15 +19,24 @@ int windowWidth = 1024;
 int windowHeight = 768;
 
 int pixelCounter = 0;
+Vector3D<int> axiesColor = Vector3D<int>(0, 255, 0);
+
+SDL_Window* window;
+SDL_Renderer* renderer;
+
 //-----------------------------------------------------------------------------|---------------------------------------|
 //                                                                            80                                     120
 int main(int argc, char * argv[])
 {
-    SDL_Renderer *renderer;
-    SDL_Window* window;
+    
 
     SDL_Init(SDL_INIT_VIDEO);
-    SDL_CreateWindowAndRenderer(windowWidth, windowHeight, 0, &window, &renderer);
+
+    window = SDL_CreateWindow("YasEngine with software renderer", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    //SDL_CreateWindowAndRenderer(windowWidth, windowHeight, 0, &window, &renderer);
+
+    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
 
     if(!window)
     {
@@ -106,6 +115,8 @@ int main(int argc, char * argv[])
             circleY = static_cast<int>(circleCenterY + 32*sin(i));
             SDL_RenderDrawPoint(renderer, circleX, circleY);
         }
+
+        YasGL::drawCartesianAxies(renderer, windowWidth, windowHeight, &axiesColor);
 
         SDL_RenderPresent(renderer);
 

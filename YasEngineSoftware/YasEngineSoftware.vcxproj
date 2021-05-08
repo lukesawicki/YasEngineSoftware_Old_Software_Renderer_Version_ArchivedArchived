@@ -27,6 +27,7 @@
   <ItemGroup>
     <ClInclude Include="TimePicker.hpp" />
     <ClInclude Include="Vector2D.hpp" />
+    <ClInclude Include="Vector3D.hpp" />
     <ClInclude Include="YasGraphicsLibrary.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

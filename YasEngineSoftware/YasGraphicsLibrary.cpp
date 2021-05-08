@@ -92,4 +92,33 @@ namespace YasGL
         }
     }
 
+    void cartesianPositionToWindow(Vector2D<int>* point, Vector2D<int>* screen)
+    {
+        point->x = point->x + (screen->x / 2);
+        point->y = (point->y * -1) + (screen->y / 2);
+    }
+
+    void windowPositionToCartesian(Vector2D<int>* point, Vector2D<int>* screen)
+    {
+        point->x = point->x - (screen->x / 2);
+        point->y = (point->y * -1) + (screen->y / 2);
+    }
+
+    void drawCartesianAxies(SDL_Renderer* renderer, int screenWidth, int screenHeight, Vector3D<int>* color) {
+        SDL_SetRenderDrawColor(renderer, 0, color->x, color->y, color->z);
+
+        int centerX = screenWidth / 2;
+        int centerY = screenHeight / 2;
+
+        for (int i=0; i < screenWidth; i++)
+        {
+            SDL_RenderDrawPoint(renderer, i, centerY);
+        }
+
+        for (int i = 0; i < screenHeight; i++)
+        {
+            SDL_RenderDrawPoint(renderer, centerX, i);
+        }
+    }
+
 }
