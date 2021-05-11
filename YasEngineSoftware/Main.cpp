@@ -28,15 +28,55 @@ SDL_Renderer* renderer;
 //                                                                            80                                     120
 int main(int argc, char * argv[])
 {
-    
+    Vector2D<int>* screenDimensions = new Vector2D<int>(windowWidth, windowHeight);
+    Vector3D<int> drawingColor = Vector3D<int>(0, 255, 0);
+
+    Vector3D<int> red(255, 0, 0);
+    Vector3D<int> green(0, 255, 0);
+    Vector3D<int> blue(0, 0, 255);
+
+    bool leftMouseButtonDown = false;
+    bool quit = false;
+    SDL_Event event;
+
+    int circleSpeedFactor = 255;
+    int circleSpeed = 2 * circleSpeedFactor;
+    Vector2D<int>* circlePosition = new Vector2D<int>(0, 0);
+    YasGL::cartesianPositionToWindow(circlePosition, screenDimensions);
+    Vector3D<int>* circleColor = new Vector3D<int>(255, 255, 255);
+    int circleRadius = 50;
+    //int circleCenterX = 50
+    //int circleCenterY = 300;
+    int circleX = 0;
+    int circleY = 0;
+
+    Vector2D<int>* xAxiesBegin = new Vector2D<int>(0, windowHeight / 2);
+    Vector2D<int>* xAxiesEnd = new Vector2D<int>(windowWidth, windowHeight / 2);
+    Vector2D<int>* yAxiesBegin = new Vector2D<int>(windowWidth / 2, 0);
+    Vector2D<int>* yAxiesEnd = new Vector2D<int>(windowWidth / 2, windowHeight);
+
+    float canvasWidth = 2, canvasHeight = 2;
+    uint32_t imageWidth = 512, imageHeight = 512;
+
+    Vector2D<int>* line1_A = new Vector2D<int>(50, 50);
+    Vector2D<int>* line1_B = new Vector2D<int>(400, 60);
+
+    Vector2D<int>* line2_A = new Vector2D<int>(-10, 400);
+    Vector2D<int>* line2_B = new Vector2D<int>(550, -20);
 
     SDL_Init(SDL_INIT_VIDEO);
 
     window = SDL_CreateWindow("YasEngine with software renderer", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
-    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    //renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     //SDL_CreateWindowAndRenderer(windowWidth, windowHeight, 0, &window, &renderer);
 
-    SDL_SetRenderDrawBlendMode(renderer, SDL_BLENDMODE_BLEND);
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
+    SDL_Texture* texture = SDL_CreateTexture(renderer,
+        SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STATIC, windowWidth, windowHeight);
+    const int PIXELS_TABLE_SIZE = windowWidth * windowHeight;
+    Uint32* pixels = new Uint32[PIXELS_TABLE_SIZE];
+
+    memset(pixels, 255, windowWidth * windowHeight * sizeof(Uint32));
 
     if(!window)
     {
@@ -44,12 +84,11 @@ int main(int argc, char * argv[])
         return 1;
     }
     
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-    SDL_RenderClear(renderer);
+    //SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+    //SDL_RenderClear(renderer);
     
-    SDL_Event event;
+    //SDL_Event event;
     bool running = true;
-
 
     double time;
     double newTime;
@@ -66,57 +105,51 @@ int main(int argc, char * argv[])
     frames = 0;
     message.message = WM_NULL;
 
-    int circleSpeedFactor = 1000;
-    int circleSpeed = 2 * circleSpeedFactor;
-    int circleCenterX = 50;
-    int circleCenterY = 300;
-    int circleX = 0;
-    int circleY = 0;
+    SDL_PixelFormat* pixelFormat = nullptr;
+    Uint32 windowPixelFormat = SDL_GetWindowPixelFormat(window);
+    pixelFormat = SDL_AllocFormat(windowPixelFormat);
 
-    float canvasWidth = 2, canvasHeight = 2;
-    uint32_t imageWidth = 512, imageHeight = 512;
-
-    Vector2D<int>* line1_A = new Vector2D<int>(50, 50);
-    Vector2D<int>* line1_B = new Vector2D<int>(400, 60);
-
-    Vector2D<int>* line2_A= new Vector2D<int>(-10, 400);
-    Vector2D<int>* line2_B= new Vector2D<int>(550, -20);
+    bool switched = false;
 
     while(running)
     {
-    
+        SDL_UpdateTexture(texture, NULL, pixels, windowWidth * sizeof(Uint32));
+
         while(SDL_PollEvent(&event))
         {
-            running = event.type != SDL_QUIT;
+            //running = event.type != SDL_QUIT;
+            switch (event.type)
+            {
+                case SDL_QUIT:
+                    running = false;
+                    break;
+                case SDL_KEYDOWN:
+                    if (event.key.keysym.sym == SDLK_SPACE)
+                    {
+                        drawingColor.x = 255;
+                        drawingColor.y = 0;
+                        drawingColor.z = 0;
+                    }
+                case SDL_MOUSEBUTTONUP:
+                    if (event.button.button == SDL_BUTTON_LEFT)
+                        leftMouseButtonDown = false;
+                    break;
+                case SDL_MOUSEBUTTONDOWN:
+                    if (event.button.button == SDL_BUTTON_LEFT)
+                        leftMouseButtonDown = true;
+                case SDL_MOUSEMOTION:
+                    if (leftMouseButtonDown)
+                    {
+                        int mouseX = event.motion.x;
+                        int mouseY = event.motion.y;
+                    }
+                    break;
+            }
         }
-        
+
         newTime = timePicker.getSeconds();  
         deltaTime = newTime - time;
         time = newTime;
-
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        SDL_RenderClear(renderer);
-        int randomX = rand() % 600;
-        int randomY = rand() & 600;
-        pixelCounter++;
-        SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-        circleCenterX = static_cast<int>(circleCenterX + deltaTime * circleSpeed);
-        if (circleCenterX <= 0 || circleCenterX >= 1024) {
-            circleSpeed = circleSpeed * -1;
-        }
-        //(Vector2D<int>*point0, Vector2D<int>*point1, SDL_Renderer * renderer)
-
-        YasGL::drawLine(line1_A, line1_B, renderer);
-
-        YasGL::drawLine(line2_B, line2_A, renderer);
-
-        for(int i=0; i< 360;i++) {
-            circleX = static_cast<int>(circleCenterX + 32*cos(i));
-            circleY = static_cast<int>(circleCenterY + 32*sin(i));
-            SDL_RenderDrawPoint(renderer, circleX, circleY);
-        }
-
-        YasGL::drawCartesianAxies(renderer, windowWidth, windowHeight, &axiesColor);
 
         SDL_RenderPresent(renderer);
 
@@ -128,7 +161,38 @@ int main(int argc, char * argv[])
             frames = 0;
             fpsTime = 0.0F;
         }
+
+        circlePosition->x = static_cast<int>(circlePosition->x + deltaTime * circleSpeed);
+        if (circlePosition->x < 0 && !switched) {
+            circleSpeed = circleSpeed * -1;
+            circlePosition->x = 0;
+
+        }
+
+        if (circlePosition->x > 1024) {
+            circleSpeed = circleSpeed * -1;
+            circlePosition->x = 1024;
+        }
+
+        //SDL_RenderPresent(renderer);
+        //Vector2D<int>* point0, Vector2D<int>* point1, SDL_Renderer* renderer);
+        //void drawLine(Vector2D<int>*point0, Vector2D<int>*point1, Uint32 * pixels, Vector3D<int>*drawingColor, SDL_PixelFormat * pixelFormat, int windowWidth)
+
+
+        for (int i = 0; i < PIXELS_TABLE_SIZE; i++) {
+            pixels[i] = SDL_MapRGBA(pixelFormat, 0, 0, 0, 0);
+        }
+        YasGL::drawLine(xAxiesBegin, xAxiesEnd, pixels, &red, pixelFormat, windowWidth);
+        YasGL::drawLine(yAxiesBegin, yAxiesEnd, pixels, &green, pixelFormat, windowWidth);
+        YasGL::drawCircle(pixels, circlePosition, circleRadius, windowWidth, circleColor, pixelFormat);
+
+        SDL_RenderClear(renderer);
+        SDL_RenderCopy(renderer, texture, NULL, NULL);
+        SDL_RenderPresent(renderer);
     }
+
+    delete[] pixels;
+    SDL_DestroyTexture(texture);
 
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
@@ -138,110 +202,3 @@ int main(int argc, char * argv[])
 }
 //                                                                            80                                     120
 //-----------------------------------------------------------------------------|---------------------------------------|
-
-//
-//void drawGentleSlopeLine(Vector2D<int>* point0, Vector2D<int>* point1, SDL_Renderer* renderer)
-//{
-//    int deltaX = point1->x - point0->x;
-//    int deltaY = point1->y - point0->y;
-//
-//    int yIteration = 1;
-//
-//    if(deltaY <0)
-//    {
-//        yIteration = -1;
-//        deltaY = -deltaY;
-//    }
-//
-//    int difference = (2 * deltaY) - deltaX;
-//
-//    int y = point0->y;
-//
-//    for (int i = point0->x; i <= point1->x; i++)
-//    {
-//        SDL_RenderDrawPoint(renderer, i, y);
-//        if(difference >0)
-//        {
-//            y = y + yIteration;
-//            difference = difference + (2*(deltaY - deltaX));
-//        }
-//        else
-//        {
-//            difference = difference + 2*deltaY;
-//        }
-//    }
-//}
-//
-//
-//void drawSteepSlopeLine(Vector2D<int>* point0, Vector2D<int>* point1, SDL_Renderer* renderer)
-//{
-//    int deltaX = point1->x - point0->x;
-//    int deltaY = point1->y - point0->y;
-//
-//    int xIteration = 1;
-//
-//    if(deltaX <0)
-//    {
-//        xIteration = -1;
-//        deltaX = -deltaX;
-//    }
-//
-//    int difference = (2 * deltaX) - deltaY;
-//
-//    int x = point0->x;
-//
-//    for (int i = point0->y; i <= point1->y; i++)
-//    {
-//        SDL_RenderDrawPoint(renderer, x, i);
-//        if(difference >0)
-//        {
-//            x = x + xIteration;
-//            difference = difference + (2*(deltaX - deltaY));
-//        }
-//        else
-//        {
-//            difference = difference + 2*deltaX;
-//        }
-//    }
-//}
-//
-//void drawLine(Vector2D<int>* point0, Vector2D<int>* point1, SDL_Renderer* renderer)
-//{
-//    if(abs(point1->y - point0->y) < abs(point1->x - point0->x))
-//    {
-//        if(point0->x > point1->x)
-//        {
-//            drawGentleSlopeLine(point1, point0, renderer);
-//        }
-//        else
-//        {
-//            drawGentleSlopeLine(point0, point1, renderer);
-//        }
-//    }
-//    else
-//    {
-//        if(point0->y > point1->y)
-//        {
-//            drawSteepSlopeLine(point1, point0, renderer);
-//        }
-//        else
-//        {
-//            drawSteepSlopeLine(point0, point1, renderer);
-//        }
-//    }
-//}
-//
-//void render(float dt, SDL_Renderer *renderer)
-//{
-//    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-//    SDL_RenderClear(renderer);
-//    int randomX = rand() % 600;
-//    int randomY = rand() & 600;
-//    pixelCounter++;
-//    if(pixelCounter < 1000)
-//    {
-//        SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
-//        SDL_RenderDrawPoint(renderer, randomX, randomY);
-//    }
-//    SDL_RenderPresent(renderer);
-//}
