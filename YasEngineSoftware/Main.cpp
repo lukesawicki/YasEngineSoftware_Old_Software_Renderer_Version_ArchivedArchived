@@ -19,7 +19,7 @@ int windowWidth = 1024;
 int windowHeight = 768;
 
 int pixelCounter = 0;
-Vector3D<int> axiesColor = Vector3D<int>(0, 255, 0);
+//Vector3D<int> axiesColor = Vector3D<int>(0, 255, 0);
 
 SDL_Window* window;
 SDL_Renderer* renderer;
@@ -29,11 +29,11 @@ SDL_Renderer* renderer;
 int main(int argc, char * argv[])
 {
     Vector2D<int>* screenDimensions = new Vector2D<int>(windowWidth, windowHeight);
-    Vector3D<int> drawingColor = Vector3D<int>(0, 255, 0);
+    //Vector3D<int> drawingColor = Vector3D<int>(0, 255, 0);
 
-    Vector3D<int> red(255, 0, 0);
-    Vector3D<int> green(0, 255, 0);
-    Vector3D<int> blue(0, 0, 255);
+    Vector3D<Uint8> red(255, 0, 0);
+    Vector3D<Uint8> green(0, 255, 0);
+    Vector3D<Uint8> blue(0, 0, 255);
 
     bool leftMouseButtonDown = false;
     bool quit = false;
@@ -58,22 +58,25 @@ int main(int argc, char * argv[])
     float canvasWidth = 2, canvasHeight = 2;
     uint32_t imageWidth = 512, imageHeight = 512;
 
-    Vector2D<int>* line1_A = new Vector2D<int>(50, 50);
+    Vector2D<int>* line1_A = new Vector2D<int>(0, 10);
     Vector2D<int>* line1_B = new Vector2D<int>(400, 60);
 
-    Vector2D<int>* line2_A = new Vector2D<int>(-10, 400);
-    Vector2D<int>* line2_B = new Vector2D<int>(550, -20);
+    Vector2D<int>* line2_A = new Vector2D<int>(30, 40);
+    Vector2D<int>* line2_B = new Vector2D<int>(430, 90);
 
     SDL_Init(SDL_INIT_VIDEO);
 
     window = SDL_CreateWindow("YasEngine with software renderer", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
+    //screen = SDL_SetVideoMode(screen_width, screen_height, 8, videoflags);
     //renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     //SDL_CreateWindowAndRenderer(windowWidth, windowHeight, 0, &window, &renderer);
 
     SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, 0);
-    SDL_Texture* texture = SDL_CreateTexture(renderer,
-        SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STATIC, windowWidth, windowHeight);
+
+    SDL_Texture* texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STATIC, windowWidth, windowHeight);
+
     const int PIXELS_TABLE_SIZE = windowWidth * windowHeight;
+
     Uint32* pixels = new Uint32[PIXELS_TABLE_SIZE];
 
     memset(pixels, 255, windowWidth * windowHeight * sizeof(Uint32));
@@ -108,12 +111,20 @@ int main(int argc, char * argv[])
     SDL_PixelFormat* pixelFormat = nullptr;
     Uint32 windowPixelFormat = SDL_GetWindowPixelFormat(window);
     pixelFormat = SDL_AllocFormat(windowPixelFormat);
+    std::cout << "Bites per pixel: " << pixelFormat->BitsPerPixel << std::endl;
+    std::cout << "Bytes per pixel: " << pixelFormat->BytesPerPixel << std::endl;
+    std::cout << "Format: " << pixelFormat->format << std::endl;
+
+
+
+    // One of many formats which I found
+    //SDL_PIXELFORMAT_RGBA8888
 
     bool switched = false;
 
     while(running)
     {
-        SDL_UpdateTexture(texture, NULL, pixels, windowWidth * sizeof(Uint32));
+        
 
         while(SDL_PollEvent(&event))
         {
@@ -126,17 +137,22 @@ int main(int argc, char * argv[])
                 case SDL_KEYDOWN:
                     if (event.key.keysym.sym == SDLK_SPACE)
                     {
-                        drawingColor.x = 255;
-                        drawingColor.y = 0;
-                        drawingColor.z = 0;
+                        //drawingColor.x = 255;
+                        //drawingColor.y = 0;
+                        //drawingColor.z = 0;
                     }
                 case SDL_MOUSEBUTTONUP:
                     if (event.button.button == SDL_BUTTON_LEFT)
+                    {
                         leftMouseButtonDown = false;
+                    }
                     break;
                 case SDL_MOUSEBUTTONDOWN:
                     if (event.button.button == SDL_BUTTON_LEFT)
+                    {
                         leftMouseButtonDown = true;
+                    }
+                    break;
                 case SDL_MOUSEMOTION:
                     if (leftMouseButtonDown)
                     {
@@ -147,11 +163,13 @@ int main(int argc, char * argv[])
             }
         }
 
+        
+
         newTime = timePicker.getSeconds();  
         deltaTime = newTime - time;
         time = newTime;
 
-        SDL_RenderPresent(renderer);
+      
 
         ++frames;
         fpsTime = fpsTime + deltaTime;
@@ -180,11 +198,23 @@ int main(int argc, char * argv[])
 
 
         for (int i = 0; i < PIXELS_TABLE_SIZE; i++) {
-            pixels[i] = SDL_MapRGBA(pixelFormat, 0, 0, 0, 0);
+            pixels[i] = SDL_MapRGBA(pixelFormat, 0, 0, 0, 255);
         }
-        YasGL::drawLine(xAxiesBegin, xAxiesEnd, pixels, &red, pixelFormat, windowWidth);
-        YasGL::drawLine(yAxiesBegin, yAxiesEnd, pixels, &green, pixelFormat, windowWidth);
-        YasGL::drawCircle(pixels, circlePosition, circleRadius, windowWidth, circleColor, pixelFormat);
+        //YasGL::drawLine(xAxiesBegin, xAxiesEnd, pixels, &red, pixelFormat, windowWidth);
+        //YasGL::drawLine(yAxiesBegin, yAxiesEnd, pixels, &green, pixelFormat, windowWidth);
+        //YasGL::drawCircle(pixels, circlePosition, circleRadius, windowWidth, circleColor, pixelFormat);\
+
+        //YasGL::lukeDrawLine(line1_A, line1_B, pixels, &red, pixelFormat, windowWidth);
+
+        //YasGL::helsinkiDraw(line1_A, line1_B, pixels, &red, pixelFormat, windowWidth);
+        //YasGL::lukeDrawLineOctan0V1(line2_A, line2_B, pixels, &red, pixelFormat, windowWidth);
+        YasGL::lukeDrawLineOctan0V2(line2_A, line2_B, pixels, &red, pixelFormat, windowWidth);
+        //Vector2D<int>* line1_A = new Vector2D<int>(50, 50);
+        //Vector2D<int>* line1_B = new Vector2D<int>(400, 60);
+        
+        //lukeDrawLine
+
+        SDL_UpdateTexture(texture, NULL, pixels, windowWidth * sizeof(Uint32));
 
         SDL_RenderClear(renderer);
         SDL_RenderCopy(renderer, texture, NULL, NULL);
