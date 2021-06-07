@@ -1,5 +1,5 @@
 #include <GLFW/glfw3.h>
-
+#include<iostream>
 
 void update(unsigned char* data, unsigned char color)
 {
@@ -14,9 +14,20 @@ void update(unsigned char* data, unsigned char color)
     }
 }
 
+void keyCallback(GLFWwindow* window, int key, int scanCode, int action, int mods)
+{
+    std::cout << "KEY: " << key << std::endl;
+}
+
 int main(void)
 {
+    const unsigned char RED_POSITION = 0;
+    const unsigned char GREEN_POSITION = 1;
+    const unsigned char BLUE_POSITION = 2;
+
     GLFWwindow* window;
+
+ 
 
     /* Initialize the library */
     if( !glfwInit() )
@@ -32,6 +43,8 @@ int main(void)
         return -1;
     }
 
+    glfwSetKeyCallback(window, keyCallback);
+
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
@@ -41,23 +54,37 @@ int main(void)
     {
         for (int x = 0; x < 100; x++)
         {
-            data[y * 100 * 3 + x * 3 ] = 255;
-            data[y * 100 * 3 + x * 3 + 1] = 0;
-            data[y * 100 * 3 + x * 3 + 2] = 0;
+            data[3 * (y * 100 + x) + RED_POSITION] = 255;
+            data[3 * (y * 100 + x) + GREEN_POSITION] = 0;
+            data[3 * (y * 100 + x) + BLUE_POSITION] = 0;
         }
     }
 
     unsigned char color = 0;
 
     /* Loop until the user closes the window */
+    bool changeColor = false;
     while (!glfwWindowShouldClose(window))
     {
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        for (color; color < 255; color++)
+        if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
+            changeColor = true;
+        }
+
+        if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_RELEASE) {
+            changeColor = false;
+        }
+        if (changeColor)
         {
+            std::cout << "CHANGING COLOR" << std::endl;
+            color = color + 1;
             update(data, color);
+            //for (color; color < 255; color++)
+            //{
+            //    update(data, color);
+            //}
         }
         glDrawPixels(100, 100, GL_RGB, GL_UNSIGNED_BYTE, data);
 
