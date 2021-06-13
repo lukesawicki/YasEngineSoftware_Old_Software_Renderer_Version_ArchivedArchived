@@ -25,21 +25,20 @@ const int RGB = 3;
 int pixelCounter = 0;
 //Vector3D<int> axiesColor = Vector3D<int>(0, 255, 0);
 
-const unsigned char RED_POSITION = 0;
-const unsigned char GREEN_POSITION = 1;
-const unsigned char BLUE_POSITION = 2;
+const uint8_t RED_POSITION = 0;
+const uint8_t GREEN_POSITION = 1;
+const uint8_t BLUE_POSITION = 2;
 
 GLFWwindow* window;
 
     //-----------------------------------------------------------------------------|---------------------------------------|
 //                                                                            80                                     120
-int main(int argc, char * argv[])
+int main(int argc, char* argv[])
 {
     if (!glfwInit())
     {
         return 1;
     }
-
 
     window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Hello World", NULL, NULL);
     if (!window)
@@ -50,20 +49,20 @@ int main(int argc, char * argv[])
 
     glfwMakeContextCurrent(window);
 
-    Vector2D<int>* screenDimensions = new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
+    Vector2D<int>* windowDimensions = new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
     //Vector3D<int> drawingColor = Vector3D<int>(0, 255, 0);
 
-    Vector3D<unsigned char> red(255, 0, 0);
-    Vector3D<unsigned char> green(0, 255, 0);
-    Vector3D<unsigned char> blue(0, 0, 255);
+    Vector3D<uint8_t> red(255, 0, 0);
+    Vector3D<uint8_t> green(0, 255, 0);
+    Vector3D<uint8_t> blue(0, 0, 255);
 
     bool leftMouseButtonDown = false;
     bool quit = false;
-    
+
     int circleSpeedFactor = 255;
     int circleSpeed = 2 * circleSpeedFactor;
     Vector2D<int>* circlePosition = new Vector2D<int>(0, 0);
-    YasGL::cartesianPositionToWindow(circlePosition, screenDimensions);
+    YasGL::cartesianPositionToWindow(circlePosition, windowDimensions);
     Vector3D<int>* circleColor = new Vector3D<int>(255, 255, 255);
     int circleRadius = 50;
     //int circleCenterX = 50
@@ -87,29 +86,47 @@ int main(int argc, char * argv[])
 
     constexpr int PIXELS_TABLE_SIZE = WINDOW_WIDTH * WINDOW_HEIGHT * RGB;
 
-    unsigned char* pixels = new unsigned char[PIXELS_TABLE_SIZE];
+//    unsigned char* data = new unsigned char[100 * 100 * 3];
+//    for (int y = 0; y < 100; y++)
+//    {
+//        for (int x = 0; x < 100; x++)
+//        {
+//            data[3 * (y * 100 + x) + RED_POSITION] = 255;
+//            data[3 * (y * 100 + x) + GREEN_POSITION] = 0;
+//            data[3 * (y * 100 + x) + BLUE_POSITION] = 0;
+//        }
+//    }
 
-    for (int y = 0; y < 100; y++)
+    uint8_t* pixels = new uint8_t[PIXELS_TABLE_SIZE];
+
+    for (int y = 0; y < WINDOW_HEIGHT; y++)
     {
-        for (int x = 0; x < 100; x++)
+        for (int x = 0; x < WINDOW_WIDTH; x++)
         {
-            pixels[3 * (y * 100 + x) + RED_POSITION] = 0;
-            pixels[3 * (y * 100 + x) + GREEN_POSITION] = 0;
-            pixels[3 * (y * 100 + x) + BLUE_POSITION] = 0;
+            pixels[3 * (y * WINDOW_WIDTH + x) + RED_POSITION] = 0;
+            pixels[3 * (y * WINDOW_WIDTH + x) + GREEN_POSITION] = 0;
+            pixels[3 * (y * WINDOW_WIDTH + x) + BLUE_POSITION] = 0;
         }
+    }
+
+
+
+    for (int i = 0; i < PIXELS_TABLE_SIZE; i++)
+    {
+        //std::cout << i << std::endl;
     }
 
     //memset(pixels, 255, windowWidth * windowHeight * sizeof(Uint32));
 
-    if(!window)
+    if (!window)
     {
         std::cerr << "Error failed to create window!\n";
         return 1;
     }
-    
+
     //SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     //SDL_RenderClear(renderer);
-    
+
     //SDL_Event event;
     bool running = true;
 
@@ -119,7 +136,7 @@ int main(int argc, char * argv[])
     double fps;
     double fpsTime;
     unsigned int frames;
-    MSG message;
+    //MSG message;
 
     TimePicker timePicker = TimePicker();
     time = timePicker.getSeconds();
@@ -128,86 +145,97 @@ int main(int argc, char * argv[])
     frames = 0;
 
 
-
-
     // One of many formats which I found
     //SDL_PIXELFORMAT_RGBA8888
 
     bool switched = false;
     bool close = false;
-    while(running)
+    while (running)
     {
-        
 
-        while(!glfwWindowShouldClose(window))
+        while (!glfwWindowShouldClose(window))
         {
 
             if (glfwGetKey(window, GLFW_KEY_BACKSPACE) == GLFW_PRESS)
             {
-                running  = false;
+                running = false;
                 break;
             }
-       
 
-        newTime = timePicker.getSeconds();  
-        deltaTime = newTime - time;
-        time = newTime;
+            newTime = timePicker.getSeconds();
+            deltaTime = newTime - time;
+            time = newTime;
 
-      
+            ++frames;
+            fpsTime = fpsTime + deltaTime;
+            if (fpsTime >= 1.0F)
+            {
+                fps = frames / fpsTime;
+                frames = 0;
+                fpsTime = 0.0F;
+            }
 
-        ++frames;
-        fpsTime = fpsTime + deltaTime;
-        if(fpsTime >= 1.0F)
-        {
-            fps = frames / fpsTime;
-            frames = 0;
-            fpsTime = 0.0F;
+            circlePosition->x = static_cast<int>(circlePosition->x + deltaTime * circleSpeed);
+            if (circlePosition->x < 0 && !switched) {
+                circleSpeed = circleSpeed * -1;
+                circlePosition->x = 0;
+
+            }
+
+            if (circlePosition->x > 1024) {
+                circleSpeed = circleSpeed * -1;
+                circlePosition->x = 1024;
+            }
+
+            //SDL_RenderPresent(renderer);
+            //Vector2D<int>* point0, Vector2D<int>* point1, SDL_Renderer* renderer);
+            //void drawLine(Vector2D<int>*point0, Vector2D<int>*point1, Uint32 * pixels, Vector3D<int>*drawingColor, SDL_PixelFormat * pixelFormat, int windowWidth)
+
+
+            for (int i = 0; i < PIXELS_TABLE_SIZE; i++) {
+                //pixels[i] = SDL_MapRGBA(pixelFormat, 0, 0, 0, 255);
+            }
+            //YasGL::drawLine(xAxiesBegin, xAxiesEnd, pixels, &red, pixelFormat, windowWidth);
+            //YasGL::drawLine(yAxiesBegin, yAxiesEnd, pixels, &green, pixelFormat, windowWidth);
+            //YasGL::drawCircle(pixels, circlePosition, circleRadius, windowWidth, circleColor, pixelFormat);\
+
+            //YasGL::lukeDrawLine(line1_A, line1_B, pixels, &red, pixelFormat, windowWidth);
+
+            //YasGL::helsinkiDraw(line1_A, line1_B, pixels, &red, pixelFormat, windowWidth);
+            //YasGL::lukeDrawLineOctan0V1(line2_A, line2_B, pixels, &red, pixelFormat, windowWidth);
+
+
+
+            //Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, int windowWidth
+            YasGL::lukeDrawLineOctan0V2(line2_A, line2_B, pixels, &red, windowDimensions);
+            
+            //uint8_t some8Int;
+
+            //Vector2D<int>* line1_A = new Vector2D<int>(50, 50);
+            //Vector2D<int>* line1_B = new Vector2D<int>(400, 60);
+
+            //lukeDrawLine
+
+            glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGB, GL_UNSIGNED_BYTE, pixels);
+
+            /* Swap front and back buffers */
+            glfwSwapBuffers(window);
+
+            /* Poll for and process events */
+            glfwPollEvents();
+            /*
+            SDL_UpdateTexture(texture, NULL, pixels, WINDOW_WIDTH * sizeof(Uint32));
+
+            SDL_RenderClear(renderer);
+            SDL_RenderCopy(renderer, texture, NULL, NULL);
+            SDL_RenderPresent(renderer);
+            */
         }
 
-        circlePosition->x = static_cast<int>(circlePosition->x + deltaTime * circleSpeed);
-        if (circlePosition->x < 0 && !switched) {
-            circleSpeed = circleSpeed * -1;
-            circlePosition->x = 0;
-
-        }
-
-        if (circlePosition->x > 1024) {
-            circleSpeed = circleSpeed * -1;
-            circlePosition->x = 1024;
-        }
-
-        //SDL_RenderPresent(renderer);
-        //Vector2D<int>* point0, Vector2D<int>* point1, SDL_Renderer* renderer);
-        //void drawLine(Vector2D<int>*point0, Vector2D<int>*point1, Uint32 * pixels, Vector3D<int>*drawingColor, SDL_PixelFormat * pixelFormat, int windowWidth)
-
-
-        for (int i = 0; i < PIXELS_TABLE_SIZE; i++) {
-            pixels[i] = SDL_MapRGBA(pixelFormat, 0, 0, 0, 255);
-        }
-        //YasGL::drawLine(xAxiesBegin, xAxiesEnd, pixels, &red, pixelFormat, windowWidth);
-        //YasGL::drawLine(yAxiesBegin, yAxiesEnd, pixels, &green, pixelFormat, windowWidth);
-        //YasGL::drawCircle(pixels, circlePosition, circleRadius, windowWidth, circleColor, pixelFormat);\
-
-        //YasGL::lukeDrawLine(line1_A, line1_B, pixels, &red, pixelFormat, windowWidth);
-
-        //YasGL::helsinkiDraw(line1_A, line1_B, pixels, &red, pixelFormat, windowWidth);
-        //YasGL::lukeDrawLineOctan0V1(line2_A, line2_B, pixels, &red, pixelFormat, windowWidth);
-        YasGL::lukeDrawLineOctan0V2(line2_A, line2_B, pixels, &red, pixelFormat, WINDOW_WIDTH);
-        //Vector2D<int>* line1_A = new Vector2D<int>(50, 50);
-        //Vector2D<int>* line1_B = new Vector2D<int>(400, 60);
-        
-        //lukeDrawLine
-
-        SDL_UpdateTexture(texture, NULL, pixels, WINDOW_WIDTH * sizeof(Uint32));
-
-        SDL_RenderClear(renderer);
-        SDL_RenderCopy(renderer, texture, NULL, NULL);
-        SDL_RenderPresent(renderer);
+        delete[] pixels;
+        glfwTerminate();
+        return 0;
     }
-
-    delete[] pixels;
-    glfwTerminate();
-    return 0;
 }
 //                                                                            80                                     120
 //-----------------------------------------------------------------------------|---------------------------------------|
@@ -244,8 +272,6 @@ int main(int argc, char * argv[])
 //
 //    GLFWwindow* window;
 //
-//
-//
 //    /* Initialize the library */
 //    if (!glfwInit())
 //    {
@@ -266,14 +292,14 @@ int main(int argc, char * argv[])
 //    glfwMakeContextCurrent(window);
 //
 //
-//    unsigned char* data = new unsigned char[100 * 100 * 3];
-//    for (int y = 0; y < 100; y++)
+//    unsigned char* data = new unsigned char[640 * 480 * 3];
+//    for (int y = 0; y < 480; y++)
 //    {
-//        for (int x = 0; x < 100; x++)
+//        for (int x = 0; x < 640; x++)
 //        {
-//            data[3 * (y * 100 + x) + RED_POSITION] = 255;
-//            data[3 * (y * 100 + x) + GREEN_POSITION] = 0;
-//            data[3 * (y * 100 + x) + BLUE_POSITION] = 0;
+//            data[3 * (y * 640 + x) + RED_POSITION] = 255;
+//            data[3 * (y * 640 + x) + GREEN_POSITION] = 0;
+//            data[3 * (y * 640 + x) + BLUE_POSITION] = 0;
 //        }
 //    }
 //
@@ -303,7 +329,7 @@ int main(int argc, char * argv[])
 //            //    update(data, color);
 //            //}
 //        }
-//        glDrawPixels(100, 100, GL_RGB, GL_UNSIGNED_BYTE, data);
+//        glDrawPixels(640, 480, GL_RGB, GL_UNSIGNED_BYTE, data);
 //
 //        /* Swap front and back buffers */
 //        glfwSwapBuffers(window);
