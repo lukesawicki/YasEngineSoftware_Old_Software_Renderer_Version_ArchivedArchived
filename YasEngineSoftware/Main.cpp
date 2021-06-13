@@ -55,6 +55,7 @@ int main(int argc, char* argv[])
     Vector3D<uint8_t> red(255, 0, 0);
     Vector3D<uint8_t> green(0, 255, 0);
     Vector3D<uint8_t> blue(0, 0, 255);
+    Vector3D<uint8_t> BLACK(0, 0, 0);
 
     bool leftMouseButtonDown = false;
     bool quit = false;
@@ -63,7 +64,7 @@ int main(int argc, char* argv[])
     int circleSpeed = 2 * circleSpeedFactor;
     Vector2D<int>* circlePosition = new Vector2D<int>(0, 0);
     YasGL::cartesianPositionToWindow(circlePosition, windowDimensions);
-    Vector3D<int>* circleColor = new Vector3D<int>(255, 255, 255);
+    Vector3D<uint8_t>* circleColor = new Vector3D<uint8_t>(255, 255, 255);
     int circleRadius = 50;
     //int circleCenterX = 50
     //int circleCenterY = 300;
@@ -187,6 +188,8 @@ int main(int argc, char* argv[])
                 circlePosition->x = 1024;
             }
 
+            YasGL::clearColor(pixels, &BLACK, windowDimensions);
+
             //SDL_RenderPresent(renderer);
             //Vector2D<int>* point0, Vector2D<int>* point1, SDL_Renderer* renderer);
             //void drawLine(Vector2D<int>*point0, Vector2D<int>*point1, Uint32 * pixels, Vector3D<int>*drawingColor, SDL_PixelFormat * pixelFormat, int windowWidth)
@@ -197,7 +200,7 @@ int main(int argc, char* argv[])
             }
             //YasGL::drawLine(xAxiesBegin, xAxiesEnd, pixels, &red, pixelFormat, windowWidth);
             //YasGL::drawLine(yAxiesBegin, yAxiesEnd, pixels, &green, pixelFormat, windowWidth);
-            //YasGL::drawCircle(pixels, circlePosition, circleRadius, windowWidth, circleColor, pixelFormat);\
+            YasGL::drawCircle(circlePosition, circleRadius, pixels, circleColor, windowDimensions);\
 
             //YasGL::lukeDrawLine(line1_A, line1_B, pixels, &red, pixelFormat, windowWidth);
 

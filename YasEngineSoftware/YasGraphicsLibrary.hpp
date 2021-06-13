@@ -13,6 +13,8 @@ namespace YasGL
     const uint8_t GREEN_POSITION = 1;
     const uint8_t BLUE_POSITION = 2;
 
+    void clearColor(uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
+
     void cartesianPositionToWindow(Vector2D<int>* point, Vector2D<int>* windowDimensions);
     void windowPositionToCartesian(Vector2D<int>* point, Vector2D<int>* windowDimensions);
 

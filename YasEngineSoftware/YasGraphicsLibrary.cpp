@@ -4,11 +4,11 @@ namespace YasGL
 {
     Vector3D<uint8_t> BLACK(0, 0, 0);
 
-    void clearColor(Vector2D<int>* point, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
+    void clearColor(uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
     {
-        for (int y = 0; y < windowDimensions->x; y++)
+        for (int y = 0; y < windowDimensions->y; y++)
         {
-            for (int x = 0; x < windowDimensions->y; x++)
+            for (int x = 0; x < windowDimensions->x; x++)
             {
                 pixels[3 * (y * windowDimensions->x + x) + RED_POSITION] = 0; // windowDimensions->x <- WINDOW WIDTH
                 pixels[3 * (y * windowDimensions->x + x) + GREEN_POSITION] = 0;
@@ -178,10 +178,6 @@ namespace YasGL
 
 
     void helsinkiDraw(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
-        //void linev6(Screen & s,
-        //    unsigned x1, unsigned y1,
-        //    unsigned x2, unsigned y2,
-        //    uint8_t colour)
     {
     int dx = point1->x - point0->x;
     int dy = point1->y - point0->y;
