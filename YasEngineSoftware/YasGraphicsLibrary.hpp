@@ -28,7 +28,7 @@ namespace YasGL
 
     void helsinkiDraw(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
 
-    void drawCartesianAxies(int screenWidth, int screenHeight, uint8_t* pixels, Vector3D<uint8_t>* drawingColor);
+    void drawCartesianAxies(Vector2D<int>* windowDimensions, uint8_t* pixels);
     int xyPixelToArrayPosition(Vector2D<int>* point, int windowWidth);
     int xyPixelToArrayPosition(int x, int y, int windowWidth);
     void drawCircle(Vector2D<int>* position, int& radius, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions); //Vector2D<int>* windowDimensions

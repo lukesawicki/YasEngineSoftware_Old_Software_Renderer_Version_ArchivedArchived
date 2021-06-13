@@ -149,6 +149,7 @@ namespace YasGL
     }
 
 
+    // It is integer values version
     void lukeDrawLineOctan0V2(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
     {
         int x0 = point0->x;
@@ -206,16 +207,24 @@ namespace YasGL
         point->y = (point->y * -1) + (windowDimensions->y / 2);
     }
 
-    void drawCartesianAxies(int screenWidth, int screenHeight, uint8_t* pixels, Vector3D<uint8_t>* drawingColor)
+    void drawCartesianAxies(Vector2D<int>* windowDimensions, uint8_t* pixels)
     {
-        int centerX = screenWidth / 2;
-        int centerY = screenHeight / 2;
+        int centerX = windowDimensions->x / 2;
+        int centerY = windowDimensions->y / 2;
+        //BY-
+        Vector3D<uint8_t> xDrawingColorRed(255,0,0); // RED
+        Vector3D<uint8_t> yDrawingColorGreen(0,255,0); // GREEN
 
-        Vector2D<int> windowDimensions(screenWidth, screenHeight);
+        //Vector2D<int> windowDimensions(screenWidth, screenHeight);
 
-        for (int i=0; i < screenWidth; i++)
+        for (int i=0; i < windowDimensions->x; i++) //X
         {
-            drawPoint(i, centerY, pixels, drawingColor, &windowDimensions);
+
+            //void drawPoint(Vector2D<int>*point, uint8_t * pixels, Vector3D<uint8_t>*drawingColor, Vector2D<int>*windowDimensions);
+            //void drawPoint(int x, int y, uint8_t * pixels, Vector3D<uint8_t>*drawingColor, Vector2D<int>*windowDimensions);
+
+
+            drawPoint(i, centerY, pixels, &xDrawingColorRed, windowDimensions);
 
             //SDL_RenderDrawPoint(renderer, i, centerY);
 
@@ -225,9 +234,9 @@ namespace YasGL
 
         }
 
-        for (int i = 0; i < screenHeight; i++)
+        for (int i = 0; i < windowDimensions->y; i++) //Y
         {
-            drawPoint(centerX, i, pixels, drawingColor, &windowDimensions);
+            drawPoint(centerX, i, pixels, &yDrawingColorGreen, windowDimensions);
             //SDL_RenderDrawPoint(renderer, centerX, i);
         }
     }

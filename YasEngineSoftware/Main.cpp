@@ -151,6 +151,11 @@ int main(int argc, char* argv[])
 
     bool switched = false;
     bool close = false;
+
+    //GLdouble left, GLdouble right, GLdouble bottom, GLdouble top, GLdouble zNear, GLdouble zFar
+    //glOrtho(0.0, 1024.0, 0.0, 768.0, 0.0, 1.0); // this creates a canvas you can do 2D drawing on
+
+
     while (running)
     {
 
@@ -194,6 +199,8 @@ int main(int argc, char* argv[])
             //Vector2D<int>* point0, Vector2D<int>* point1, SDL_Renderer* renderer);
             //void drawLine(Vector2D<int>*point0, Vector2D<int>*point1, Uint32 * pixels, Vector3D<int>*drawingColor, SDL_PixelFormat * pixelFormat, int windowWidth)
 
+            ///drawCartesianAxies
+            YasGL::drawCartesianAxies(windowDimensions, pixels);
 
             for (int i = 0; i < PIXELS_TABLE_SIZE; i++) {
                 //pixels[i] = SDL_MapRGBA(pixelFormat, 0, 0, 0, 255);
@@ -219,8 +226,8 @@ int main(int argc, char* argv[])
 
             //lukeDrawLine
 
-            glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGB, GL_UNSIGNED_BYTE, pixels);
-
+            glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_BGR_EXT, GL_UNSIGNED_BYTE, pixels);
+            //glDrawPixels(width, height, GL_BGRA, GL_UNSIGNED_BYTE, pixels);
             /* Swap front and back buffers */
             glfwSwapBuffers(window);
 
