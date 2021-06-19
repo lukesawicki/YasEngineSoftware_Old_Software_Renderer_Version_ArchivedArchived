@@ -5,6 +5,7 @@
 #include <GLFW/glfw3.h>
 #include"Vector2D.hpp"
 #include"Vector3D.hpp"
+#include"Vector4D.hpp"
 
 
 namespace YasGL
@@ -12,14 +13,22 @@ namespace YasGL
     const uint8_t RED_POSITION = 0;
     const uint8_t GREEN_POSITION = 1;
     const uint8_t BLUE_POSITION = 2;
+    const uint8_t ALPHA_POSITION = 3;
 
     void clearColor(uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
 
     void cartesianPositionToWindow(Vector2D<int>* point, Vector2D<int>* windowDimensions);
     void windowPositionToCartesian(Vector2D<int>* point, Vector2D<int>* windowDimensions);
 
-    void drawPoint(Vector2D<int>* point, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
-    void drawPoint(int x, int y, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
+    //void drawPoint(Vector2D<int>* point, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
+    //void drawPoint(int x, int y, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
+    //void drawPoint(int x, int y, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
+    //void drawPoint(Vector2D<int>* point, uint8_t* pixels, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, Vector2D<int>* windowDimensions);
+    void drawPoint(int x, int y, uint8_t* pixels, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, Vector2D<int>* windowDimensions);
+    
+    void drawPoint(Vector2D<int>* point, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
+
+    void drawPoint(Vector2D<int>* point, uint8_t* pixels, uint8_t* drawingColor, Vector2D<int>* windowDimensions);
 
     void drawLine(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
 

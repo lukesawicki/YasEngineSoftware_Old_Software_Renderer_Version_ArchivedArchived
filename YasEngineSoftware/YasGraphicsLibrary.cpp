@@ -17,19 +17,64 @@ namespace YasGL
         }
     }
 
-    void drawPoint(Vector2D<int>* point, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
+  //  void drawPoint(Vector2D<int>* point, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
+  //  {
+  //      pixels[3 * (point->y * windowDimensions->x + point->x) + RED_POSITION] = drawingColor->x; // windowDimensions->x <- WINDOW WIDTH
+  //      pixels[3 * (point->y * windowDimensions->x + point->x) + GREEN_POSITION] = drawingColor->y;
+  //      pixels[3 * (point->y * windowDimensions->x + point->x) + BLUE_POSITION] = drawingColor->z;
+  //  }
+
+  //  void drawPoint(int x, int y, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
+  //  {
+  //      pixels[3 * (y * windowDimensions->x + x) + RED_POSITION] = drawingColor->x; // windowDimensions->x <- WINDOW WIDTH
+  //      pixels[3 * (y * windowDimensions->x + x) + GREEN_POSITION] = drawingColor->y;
+  //      pixels[3 * (y * windowDimensions->x + x) + BLUE_POSITION] = drawingColor->z;
+  //  }
+
+  //  //
+
+
+  //  void drawPoint(int x, int y, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
+  //  {
+		//pixels[3 * (y * windowDimensions->x + x) + RED_POSITION] = drawingColor->x; // windowDimensions->x <- WINDOW WIDTH
+		//pixels[3 * (y * windowDimensions->x + x) + GREEN_POSITION] = drawingColor->y;
+  //      pixels[3 * (y * windowDimensions->x + x) + BLUE_POSITION] = drawingColor->w;
+  //      pixels[4 * (y * windowDimensions->x + x) + BLUE_POSITION] = drawingColor->z;
+  //  }
+
+	//void drawPoint(int x, int y, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
+	//{
+	//	pixels[3 * (y * windowDimensions->x + x) + RED_POSITION] = drawingColor->x; // windowDimensions->x <- WINDOW WIDTH
+	//	pixels[3 * (y * windowDimensions->x + x) + GREEN_POSITION] = drawingColor->y;
+	//	pixels[3 * (y * windowDimensions->x + x) + BLUE_POSITION] = drawingColor->w;
+	//	pixels[4 * (y * windowDimensions->x + x) + BLUE_POSITION] = drawingColor->z;
+	//}
+
+	void drawPoint(int x, int y, uint8_t* pixels, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, Vector2D<int>* windowDimensions)
+	{
+		pixels[4 * (y * windowDimensions->x + x) + RED_POSITION] = red; // windowDimensions->x <- WINDOW WIDTH
+		pixels[4 * (y * windowDimensions->x + x) + GREEN_POSITION] = green;
+		pixels[4 * (y * windowDimensions->x + x) + BLUE_POSITION] = blue;
+		pixels[4 * (y * windowDimensions->x + x) + ALPHA_POSITION] = alpha;
+	}
+
+    void drawPoint(Vector2D<int>* point, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
     {
-        pixels[3 * (point->y * windowDimensions->x + point->x) + RED_POSITION] = drawingColor->x; // windowDimensions->x <- WINDOW WIDTH
-        pixels[3 * (point->y * windowDimensions->x + point->x) + GREEN_POSITION] = drawingColor->y;
-        pixels[3 * (point->y * windowDimensions->x + point->x) + BLUE_POSITION] = drawingColor->z;
+        //point->
+		pixels[4 * (point->y * windowDimensions->x + point->x) + RED_POSITION] = drawingColor->x; // windowDimensions->x <- WINDOW WIDTH
+		pixels[4 * (point->y * windowDimensions->x + point->x) + GREEN_POSITION] = drawingColor->y;
+		pixels[4 * (point->y * windowDimensions->x + point->x) + BLUE_POSITION] = drawingColor->z;
+		pixels[4 * (point->y * windowDimensions->x + point->x) + ALPHA_POSITION] = drawingColor->w;
     }
 
-    void drawPoint(int x, int y, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
-    {
-        pixels[3 * (y * windowDimensions->x + x) + RED_POSITION] = drawingColor->x; // windowDimensions->x <- WINDOW WIDTH
-        pixels[3 * (y * windowDimensions->x + x) + GREEN_POSITION] = drawingColor->y;
-        pixels[3 * (y * windowDimensions->x + x) + BLUE_POSITION] = drawingColor->z;
-    }
+	void drawPoint(Vector2D<int>* point, uint8_t* pixels, uint8_t* drawingColor, Vector2D<int>* windowDimensions)
+	{
+		//point->
+		pixels[4 * (point->y * windowDimensions->x + point->x) + RED_POSITION] = drawingColor[0]; // windowDimensions->x <- WINDOW WIDTH
+		pixels[4 * (point->y * windowDimensions->x + point->x) + GREEN_POSITION] = drawingColor[1];
+		pixels[4 * (point->y * windowDimensions->x + point->x) + BLUE_POSITION] = drawingColor[2];
+		pixels[4 * (point->y * windowDimensions->x + point->x) + ALPHA_POSITION] = drawingColor[3];
+	}
 
     void  drawGentleSlopeLine(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
     {
@@ -47,7 +92,8 @@ namespace YasGL
         int difference = (2 * deltaY) - deltaX;
 
         int y = point0->y;
-
+        
+        /*
         for (int i = point0->x; i <= point1->x; i++)
         {
             drawPoint(i, y, pixels, drawingColor, windowDimensions);
@@ -62,6 +108,7 @@ namespace YasGL
                 difference = difference + 2 * deltaY;
             }
         }
+        */
     }
 
     void drawSteepSlopeLine(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
@@ -81,20 +128,20 @@ namespace YasGL
 
         int x = point0->x;
 
-        for (int i = point0->y; i <= point1->y; i++)
-        {
-            drawPoint(x, i, pixels, drawingColor, windowDimensions);
+		/*for (int i = point0->y; i <= point1->y; i++)
+		{
+			drawPoint(x, i, pixels, drawingColor, windowDimensions);
 
-            if (difference > 0)
-            {
-                x = x + xIteration;
-                difference = difference + (2 * (deltaX - deltaY));
-            }
-            else
-            {
-                difference = difference + 2 * deltaX;
-            }
-        }
+			if (difference > 0)
+			{
+				x = x + xIteration;
+				difference = difference + (2 * (deltaX - deltaY));
+			}
+			else
+			{
+				difference = difference + 2 * deltaX;
+			}
+		}*/
     }
 
     // uint8_t* pixels, Vector2D<int>* position, int& radius, int windowWidth, Vector3D<int>* drawingColor, SDL_PixelFormat* pixelFormat
@@ -133,7 +180,7 @@ namespace YasGL
         float slope = static_cast<float>((point1->y - point0->y)) / (point1->x - point0->x);
         
 
-        for (int i = point0->x; i <= point1->x; i++)
+        /*for (int i = point0->x; i <= point1->x; i++)
         {
             drawPoint(x, y, pixels, drawingColor, windowDimensions);
             x++;
@@ -145,7 +192,7 @@ namespace YasGL
                 y++;
                 cumulativeError = cumulativeError + slope - 1;
             }
-        }
+        }*/
     }
 
 
@@ -160,7 +207,7 @@ namespace YasGL
         int deltaY = point1->y - point0->y;
         int cumulativeError = 0;
         //float slope = static_cast<float>((point1->y - point0->y)) / (point1->x - point0->x);
-
+        /*
         for (int i = point0->x; i <= point1->x; i++) {
             drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
             x0++;
@@ -173,7 +220,7 @@ namespace YasGL
                 y0++;
                 cumulativeError = cumulativeError + deltaY - deltaX;
             }
-        }
+        }*/
     }
 
 
@@ -185,14 +232,14 @@ namespace YasGL
     int y = point0->y;
     int eps = 0;
 
-        for (int x = point0->x; x <= point1->x; x++) {
+        /*for (int x = point0->x; x <= point1->x; x++) {
             drawPoint(x, y, pixels, drawingColor, windowDimensions);
             eps += dy;
             std::cout << "eps: " << eps << std::endl;
             if ((eps * 2) >= dx) {
                 y++;  eps -= dx;
             }
-        }
+        }*/
     }
 
     void cartesianPositionToWindow(Vector2D<int>* point, Vector2D<int>* windowDimensions)
@@ -215,30 +262,17 @@ namespace YasGL
         Vector3D<uint8_t> xDrawingColorRed(255,0,0); // RED
         Vector3D<uint8_t> yDrawingColorGreen(0,255,0); // GREEN
 
-        //Vector2D<int> windowDimensions(screenWidth, screenHeight);
-
-        for (int i=0; i < windowDimensions->x; i++) //X
+        /*for (int i = 0; i < windowDimensions->x; i++) //X
         {
-
-            //void drawPoint(Vector2D<int>*point, uint8_t * pixels, Vector3D<uint8_t>*drawingColor, Vector2D<int>*windowDimensions);
-            //void drawPoint(int x, int y, uint8_t * pixels, Vector3D<uint8_t>*drawingColor, Vector2D<int>*windowDimensions);
-
-
             drawPoint(i, centerY, pixels, &xDrawingColorRed, windowDimensions);
-
-            //SDL_RenderDrawPoint(renderer, i, centerY);
-
-//            data[3 * (y * 100 + x) + RED_POSITION] = 255;
-//            data[3 * (y * 100 + x) + GREEN_POSITION] = 0;
-//            data[3 * (y * 100 + x) + BLUE_POSITION] = 0;
 
         }
 
         for (int i = 0; i < windowDimensions->y; i++) //Y
         {
             drawPoint(centerX, i, pixels, &yDrawingColorGreen, windowDimensions);
-            //SDL_RenderDrawPoint(renderer, centerX, i);
         }
+        */
     }
 
     int xyPixelToArrayPosition(int x, int y, int windowWidth)
@@ -260,7 +294,11 @@ namespace YasGL
             circleX = static_cast<int>(position->x + radius * cos(i));
             circleY = static_cast<int>(position->y + radius * sin(i));
             Vector2D<int> circlePixelPosition(circleX, circleY);
+            
+            /*
             drawPoint(&circlePixelPosition, pixels, drawingColor, windowDimensions);
+            */
+            
             //drawPoint(Vector2D<int>*point, uint8_t* pixels, Vector3D<uint8_t>*drawingColor, int windowWidth);
             //pixels[xyPixelToArrayPosition(&circlePixelPosition, windowWidth)] = SDL_MapRGBA(pixelFormat, drawingColor->x, drawingColor->y, drawingColor->z, 255);
             

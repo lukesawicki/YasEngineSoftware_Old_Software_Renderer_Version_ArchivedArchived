@@ -4,7 +4,6 @@
 template <typename Type>
 class Vector3D
 {
-
     public:
         Type x;
         Type y;
@@ -23,7 +22,6 @@ class Vector3D
             this->z = y;
         }
     private:
-
 };
 
 #endif

@@ -28,6 +28,7 @@
     <ClInclude Include="TimePicker.hpp" />
     <ClInclude Include="Vector2D.hpp" />
     <ClInclude Include="Vector3D.hpp" />
+    <ClInclude Include="Vector4D.hpp" />
     <ClInclude Include="YasGraphicsLibrary.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -106,7 +107,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)libraries\GLFW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)libraries\GLFW\include;C:\development\libraries\OpenGLadditionalLibraries\include\GL;C:\development\libraries\OpenGLheaders;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -124,7 +125,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)libraries\GLFW\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)libraries\GLFW\include;C:\development\libraries\OpenGLadditionalLibraries\include\GL;C:\development\libraries\OpenGLheaders;</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
