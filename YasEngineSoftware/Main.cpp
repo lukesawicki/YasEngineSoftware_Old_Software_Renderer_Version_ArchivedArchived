@@ -27,6 +27,7 @@ const int WINDOW_WIDTH = 1024;
 const int WINDOW_HEIGHT = 768;
 
 const int RGB = 3;
+const int RGBA = 4;
 
 int pixelCounter = 0;
 //Vector3D<int> axiesColor = Vector3D<int>(0, 255, 0);
@@ -34,7 +35,7 @@ int pixelCounter = 0;
 const uint8_t RED_POSITION = 0;
 const uint8_t GREEN_POSITION = 1;
 const uint8_t BLUE_POSITION = 2;
-const uint8_t ALPHA_POSITION = 2;
+const uint8_t ALPHA_POSITION = 3;
 
 GLFWwindow* window;
 
@@ -67,9 +68,6 @@ int main(int argc, char* argv[])
 
     fourElementsTable[2] = 255;
     
-
-
-
     std::cout << fourElementsTable << std::endl;
     std::cout << &justStruct << std::endl;
     std::cout << &vectorFourDimensions << std::endl;
@@ -79,8 +77,6 @@ int main(int argc, char* argv[])
     std::cout << "Size of four dimensions vector   " << sizeof(vectorFourDimensions) << std::endl;
 
 	vectorFourDimensions;
-
-    
 
     if (!glfwInit())
     {
@@ -138,8 +134,6 @@ int main(int argc, char* argv[])
     PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVPROC glGetFramebufferAttachmentParameteriv = nullptr;
     glGetFramebufferAttachmentParameteriv = reinterpret_cast<PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVPROC>(glfwGetProcAddress("glGetFramebufferAttachmentParameteriv"));
 
-
-
     if(!glGetFramebufferAttachmentParameteriv) {
         exit(1);
     }
@@ -186,10 +180,10 @@ int main(int argc, char* argv[])
     Vector2D<int>* windowDimensions = new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
     //Vector3D<int> drawingColor = Vector3D<int>(0, 255, 0);
 
-    Vector3D<uint8_t> red(255, 0, 0);
-    Vector3D<uint8_t> green(0, 255, 0);
-    Vector3D<uint8_t> blue(0, 0, 255);
-    Vector3D<uint8_t> BLACK(0, 0, 0);
+    Vector4D<uint8_t> red(255, 0, 0, 0);
+    Vector4D<uint8_t> green(0, 255, 0, 0);
+    Vector4D<uint8_t> blue(0, 0, 255, 0);
+    Vector4D<uint8_t> BLACK(0, 0, 0, 0);
 
     bool leftMouseButtonDown = false;
     bool quit = false;
@@ -198,7 +192,7 @@ int main(int argc, char* argv[])
     int circleSpeed = 2 * circleSpeedFactor;
     Vector2D<int>* circlePosition = new Vector2D<int>(0, 0);
     YasGL::cartesianPositionToWindow(circlePosition, windowDimensions);
-    Vector3D<uint8_t>* circleColor = new Vector3D<uint8_t>(255, 255, 255);
+    Vector4D<uint8_t>* circleColor = new Vector4D<uint8_t>(255, 255, 255, 0);
     int circleRadius = 50;
     //int circleCenterX = 50
     //int circleCenterY = 300;
@@ -219,7 +213,7 @@ int main(int argc, char* argv[])
     Vector2D<int>* line2_A = new Vector2D<int>(30, 40);
     Vector2D<int>* line2_B = new Vector2D<int>(430, 90);
 
-    constexpr int PIXELS_TABLE_SIZE = WINDOW_WIDTH * WINDOW_HEIGHT * RGB;
+    constexpr int PIXELS_TABLE_SIZE = WINDOW_WIDTH * WINDOW_HEIGHT * RGBA;
 
 //    unsigned char* data = new unsigned char[100 * 100 * 3];
 //    for (int y = 0; y < 100; y++)
@@ -237,13 +231,15 @@ int main(int argc, char* argv[])
     {
         for (int x = 0; x < WINDOW_WIDTH; x++)
         {
-            pixels[3 * (y * WINDOW_WIDTH + x) + RED_POSITION] = 0;
-            pixels[3 * (y * WINDOW_WIDTH + x) + GREEN_POSITION] = 0;
-            pixels[3 * (y * WINDOW_WIDTH + x) + BLUE_POSITION] = 0;
+            pixels[4 * (y * WINDOW_WIDTH + x) + RED_POSITION] = 0;
+            pixels[4 * (y * WINDOW_WIDTH + x) + GREEN_POSITION] = 0;
+            pixels[4 * (y * WINDOW_WIDTH + x) + BLUE_POSITION] = 0;
+            pixels[4 * (y * WINDOW_WIDTH + x) + ALPHA_POSITION] = 0;
         }
     }
 
     constexpr int PIXELS_TABLE_SIZE2 = WINDOW_WIDTH * WINDOW_HEIGHT * 4;
+
 
     uint8_t* pixels2 = new uint8_t[PIXELS_TABLE_SIZE2];
 	for (int y = 0; y < WINDOW_HEIGHT; y++)
@@ -253,7 +249,7 @@ int main(int argc, char* argv[])
 			pixels2[4 * (y * WINDOW_WIDTH + x) + RED_POSITION] = 0; //0
 			pixels2[4 * (y * WINDOW_WIDTH + x) + GREEN_POSITION] = 0;//1
 			pixels2[4 * (y * WINDOW_WIDTH + x) + BLUE_POSITION] = 0;//2
-            pixels2[4 * (y * WINDOW_WIDTH + x) + 3] = 0; // 3 alpha
+            pixels2[4 * (y * WINDOW_WIDTH + x) + ALPHA_POSITION] = 0; // 3 alpha
 		}
 	}
 
@@ -341,7 +337,7 @@ int main(int argc, char* argv[])
                 circlePosition->x = 1024;
             }
 
-            YasGL::clearColor(pixels, &BLACK, windowDimensions);
+            YasGL::clearColor(pixels2, &BLACK, windowDimensions);
 
             //SDL_RenderPresent(renderer);
             //Vector2D<int>* point0, Vector2D<int>* point1, SDL_Renderer* renderer);
@@ -353,27 +349,31 @@ int main(int argc, char* argv[])
             //void drawPoint(int x, int y, uint8_t * pixels, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, Vector2D<int>*windowDimensions)
             /*void drawPoint(int x, int y, uint8_t * pixels, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, Vector2D<int>*windowDimensions)*/
 
-
-			//for (int i = 0; i < 100; i++)
-   //         {
-			//	for (int j = 0; j < 100; j++)
-   //             {   //R  G  B, A   
-   //                 positions->x = i;
-   //                 positions->y = j;
-			//		YasGL::drawPoint(positions, pixels2, squareColor, windowDimensions);
-			//	}
-			//}
-
+/////////////////////////////////////////////////////////////////////////////////////////////////
+// 
 			for (int i = 0; i < 100; i++)
-			{
+            {
 				for (int j = 0; j < 100; j++)
-				{   //R  G  B, A   
-					positions->x = i;
-					positions->y = j;
-					YasGL::drawPoint(positions, pixels2, fourElementsTable, windowDimensions);
+                {   //R  G  B, A   
+                    positions->x = i;
+                    positions->y = j;
+					YasGL::drawPoint(positions, pixels2, squareColor, windowDimensions);
 				}
 			}
 
+			//for (int i = 0; i < 100; i++)
+			//{
+			//	for (int j = 0; j < 100; j++)
+			//	{   //R  G  B, A   
+			//		positions->x = i;
+			//		positions->y = j;
+			//		//YasGL::drawPoint(positions, pixels2, squareColor, windowDimensions);
+   //                 YasGL::drawPoint(positions, pixels2, fourElementsTable, windowDimensions);
+			//	}
+			//}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+            //fourElementsTable
 
 			//for (int i = 0; i < 100; i++)
    //         {

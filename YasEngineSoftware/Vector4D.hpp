@@ -22,7 +22,7 @@ public:
 	{
 		this->x = x;
 		this->y = y;
-		this->z = y;
+		this->z = z;
 		this->w = w;
 	}
 

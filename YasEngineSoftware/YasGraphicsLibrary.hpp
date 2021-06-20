@@ -15,7 +15,12 @@ namespace YasGL
     const uint8_t BLUE_POSITION = 2;
     const uint8_t ALPHA_POSITION = 3;
 
-    void clearColor(uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
+	const Vector4D<uint8_t> RED(255, 0, 0, 0);
+	const Vector4D<uint8_t> GREEN(0, 255, 0, 0);
+	const Vector4D<uint8_t> BLUE(0, 0, 255, 0);
+	const Vector4D<uint8_t> BLACK(0, 0, 0, 0);
+
+    void clearColor(uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
 
     void cartesianPositionToWindow(Vector2D<int>* point, Vector2D<int>* windowDimensions);
     void windowPositionToCartesian(Vector2D<int>* point, Vector2D<int>* windowDimensions);
@@ -24,23 +29,24 @@ namespace YasGL
     //void drawPoint(int x, int y, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
     //void drawPoint(int x, int y, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
     //void drawPoint(Vector2D<int>* point, uint8_t* pixels, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, Vector2D<int>* windowDimensions);
-    void drawPoint(int x, int y, uint8_t* pixels, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, Vector2D<int>* windowDimensions);
+    //void drawPoint(int x, int y, uint8_t* pixels, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, Vector2D<int>* windowDimensions);
     
     void drawPoint(Vector2D<int>* point, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
+    void drawPoint(int x, int y, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
 
-    void drawPoint(Vector2D<int>* point, uint8_t* pixels, uint8_t* drawingColor, Vector2D<int>* windowDimensions);
+    //void drawPoint(Vector2D<int>* point, uint8_t* pixels, uint8_t* drawingColor, Vector2D<int>* windowDimensions);
 
-    void drawLine(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
+    void drawLine(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
 
-    void lukeDrawLineOctan0V1(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
-    void lukeDrawLineOctan0V2(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
+    void lukeDrawLineOctan0V1(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
+    void lukeDrawLineOctan0V2(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
 
     void helsinkiDraw(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
 
     void drawCartesianAxies(Vector2D<int>* windowDimensions, uint8_t* pixels);
     int xyPixelToArrayPosition(Vector2D<int>* point, int windowWidth);
     int xyPixelToArrayPosition(int x, int y, int windowWidth);
-    void drawCircle(Vector2D<int>* position, int& radius, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions); //Vector2D<int>* windowDimensions
+    void drawCircle(Vector2D<int>* position, int& radius, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions); //Vector2D<int>* windowDimensions
 }
 
 #endif
