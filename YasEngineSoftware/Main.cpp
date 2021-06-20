@@ -2,24 +2,14 @@
 #include <GLFW/glfw3.h>
 #include<gl/gl.h>
 #include<glext.h>
-//#include<wglext.h>
-
 #include<cstdlib>
 #include<iostream>
 #include<vector>
 #include<cmath>
-//#include<SDL.h>
-
 #include"Vector2D.hpp"
 #include"Vector3D.hpp"
 #include"YasGraphicsLibrary.hpp"
 #include"TimePicker.hpp"
-
-
-//void drawGentleSlopeLine(Vector2D<int>* point0, Vector2D<int>* point1, SDL_Renderer* renderer);
-//void drawSteepSlopeLine(Vector2D<int>* point0, Vector2D<int>* point1, SDL_Renderer* renderer);
-//void drawLine(Vector2D<int>* point0, Vector2D<int>* point1, SDL_Renderer* renderer);
-//void render(float dt, SDL_Renderer *renderer);
 
 float aspect;
 
@@ -30,12 +20,6 @@ const int RGB = 3;
 const int RGBA = 4;
 
 int pixelCounter = 0;
-//Vector3D<int> axiesColor = Vector3D<int>(0, 255, 0);
-
-const uint8_t RED_POSITION = 0;
-const uint8_t GREEN_POSITION = 1;
-const uint8_t BLUE_POSITION = 2;
-const uint8_t ALPHA_POSITION = 3;
 
 GLFWwindow* window;
 
@@ -52,138 +36,26 @@ struct Four
 //                                                                            80                                     120
 int main(int argc, char* argv[])
 {
-
-
-    uint8_t* fourElementsTable = new uint8_t[4];
-    Four justStruct;
-    Vector4D<uint8_t> vectorFourDimensions;
-
-    int* fourInts = new int[4];
-
-	for (int i = 0; i < 4; i++)
-    {
-		fourElementsTable[i] = 0;
-        fourInts[i] = 0;
-	}
-
-    fourElementsTable[2] = 255;
-    
-    std::cout << fourElementsTable << std::endl;
-    std::cout << &justStruct << std::endl;
-    std::cout << &vectorFourDimensions << std::endl;
-    
-	std::cout << "Size of four element table:    " << sizeof(fourElementsTable) << std::endl;
-    std::cout << "Size of four element struct    " << sizeof(justStruct) << std::endl;
-    std::cout << "Size of four dimensions vector   " << sizeof(vectorFourDimensions) << std::endl;
-
-	vectorFourDimensions;
-
     if (!glfwInit())
     {
         return 1;
     }
-    //GLFWmonitor* primaryMonitor = glfwGetPrimaryMonitor();
-    //const GLFWvidmode* videoMode = glfwGetVideoMode(primaryMonitor);
 
     window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Hello World", NULL, NULL);
+    Vector2D<int>* windowDimensions = new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
+
     if (!window)
     {
         glfwTerminate();
         return 1;
     }
 
-    //GLAPI void APIENTRY glGetFramebufferAttachmentParameteriv (GLenum target, GLenum attachment, GLenum pname, GLint *params);
-    //typedef void (APIENTRYP PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVPROC) (GLenum target, GLenum attachment, GLenum pname, GLint* params);
-
-    /*
-        PFNGLCREATESHADERPROC glCreateShader;
-        typedef GLuint(APIENTRYP PFNGLCREATESHADERPROC) (GLenum type);
-        glCreateShader = reinterpret_cast<PFNGLCREATESHADERPROC>(wglGetProcAddress("glCreateShader"));
-    */
-
-
-    //typedef void (APIENTRYP PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVPROC) (GLenum target, GLenum attachment, GLenum pname, GLint* params);
-    //GLAPI void APIENTRY glGetFramebufferAttachmentParameteriv(GLenum target, GLenum attachment, GLenum pname, GLint * params);
-
-    //PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVPROC prod;
-    //glGetFramebufferAttachmentParameteriv();
-    //glGetNamedFramebufferAttachmentParameteriv();
-    //glfwWindowHint()
-    
-    /*
-        PFNWGLCHOOSEPIXELFORMATARBPROC wglChoosePixelFormatARB = nullptr;
-        wglChoosePixelFormatARB = reinterpret_cast<PFNWGLCHOOSEPIXELFORMATARBPROC>(wglGetProcAddress("wglChoosePixelFormatARB"));
-        const bool status = wglChoosePixelFormatARB(deviceContext, pixelAttribs, NULL, 1, &pixelFormatID, &formatsNumber);
-    */
-
-    
-    //GLFWglproc frameBufferAttachmentParameters = glfwGetProcAddress("glGetFramebufferAttachmentParameteriv");
-
-
-    //Attribute 	glGetIntegerv 	glGetFramebufferAttachmentParameteriv
-    //Red bits 	GL_RED_BITS 	GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE
-    //Green bits 	GL_GREEN_BITS 	GL_FRAMEBUFFER_ATTACHMENT_GREEN_SIZE
-    //Blue bits 	GL_BLUE_BITS 	GL_FRAMEBUFFER_ATTACHMENT_BLUE_SIZE
-    //Alpha bits 	GL_ALPHA_BITS 	GL_FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE
-    //Depth bits 	GL_DEPTH_BITS 	GL_FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE
-    //Stencil bits 	GL_STENCIL_BITS 	GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE
-    //MSAA samples 	GL_SAMPLES 	Not provided by this function
-
-
-    glfwMakeContextCurrent(window);
-    PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVPROC glGetFramebufferAttachmentParameteriv = nullptr;
-    glGetFramebufferAttachmentParameteriv = reinterpret_cast<PFNGLGETFRAMEBUFFERATTACHMENTPARAMETERIVPROC>(glfwGetProcAddress("glGetFramebufferAttachmentParameteriv"));
-
-    if(!glGetFramebufferAttachmentParameteriv) {
-        exit(1);
-    }
-
-    GLenum target = GL_DRAW_FRAMEBUFFER;
-    GLenum attachment = GL_COLOR_ATTACHMENT0;
-    //GLint component_type;
-    //glGetFramebufferAttachmentParameteriv(target, attachment, GL_FRAMEBUFFER_ATTACHMENT_COMPONENT_TYPE, &component_type);
-    // Get the size, in bits, for the attachment's components
-    GLint red_size = 0;
-    GLint blue_size = 0;
-    GLint alpha_size = 0;
-    GLint depth_size = 0;
-    GLint stencil_size = 0;
-    GLint green_size = 0;
-    glGetFramebufferAttachmentParameteriv(target, attachment, GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE, &red_size);
-    glGetFramebufferAttachmentParameteriv(target, attachment, GL_FRAMEBUFFER_ATTACHMENT_GREEN_SIZE, &green_size);
-    glGetFramebufferAttachmentParameteriv(target, attachment, GL_FRAMEBUFFER_ATTACHMENT_BLUE_SIZE, &blue_size);
-    glGetFramebufferAttachmentParameteriv(target, attachment, GL_FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE, &alpha_size);
-    glGetFramebufferAttachmentParameteriv(target, attachment, GL_FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE, &depth_size);
-    glGetFramebufferAttachmentParameteriv(target, attachment, GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE, &stencil_size);
-    std::cout << "Number of bits for attachment components: " << std::endl;
-    std::cout << " GL_FRAMEBUFFER_ATTACHMENT_RED_SIZE: " << red_size << std::endl;
-    std::cout << " GL_FRAMEBUFFER_ATTACHMENT_GREEN_SIZE: " << green_size << std::endl;
-    std::cout << " GL_FRAMEBUFFER_ATTACHMENT_BLUE_SIZE: " << blue_size << std::endl;
-    std::cout << " GL_FRAMEBUFFER_ATTACHMENT_ALPHA_SIZE: " << alpha_size << std::endl;
-    std::cout << " GL_FRAMEBUFFER_ATTACHMENT_DEPTH_SIZE: " << depth_size << std::endl;
-    std::cout << " GL_FRAMEBUFFER_ATTACHMENT_STENCIL_SIZE: " << stencil_size << std::endl;
-
-
-    //frameBufferAttachmentParameters
-    //glGetFramebufferAttachmentParameteriv();
-
-    //if (glfwGetWindowAttrib(window, GLFW_FOCUSED))
-
-    //GLFWmonitor* primaryMonitor = glfwGetWindowMonitor(window);
-
-    //const GLFWvidmode* videoMode = glfwGetVideoMode(primaryMonitor);
-
-    //glfwSetWindowMonitor(window, NULL, 10, 10, WINDOW_WIDTH, WINDOW_HEIGHT, 60);
-
     glfwMakeContextCurrent(window);
 
-    Vector2D<int>* windowDimensions = new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
-    //Vector3D<int> drawingColor = Vector3D<int>(0, 255, 0);
-
-    Vector4D<uint8_t> red(255, 0, 0, 0);
-    Vector4D<uint8_t> green(0, 255, 0, 0);
-    Vector4D<uint8_t> blue(0, 0, 255, 0);
-    Vector4D<uint8_t> BLACK(0, 0, 0, 0);
+    Vector4D<uint8_t>* red = new Vector4D<uint8_t>(255, 0, 0, 255);
+    Vector4D<uint8_t>* green = new Vector4D<uint8_t>(0, 255, 0, 255);
+    Vector4D<uint8_t>* blue = new Vector4D<uint8_t>(0, 0, 255, 255);
+    Vector4D<uint8_t>* black = new Vector4D<uint8_t>(0, 0, 0, 255);
 
     bool leftMouseButtonDown = false;
     bool quit = false;
@@ -192,10 +64,9 @@ int main(int argc, char* argv[])
     int circleSpeed = 2 * circleSpeedFactor;
     Vector2D<int>* circlePosition = new Vector2D<int>(0, 0);
     YasGL::cartesianPositionToWindow(circlePosition, windowDimensions);
-    Vector4D<uint8_t>* circleColor = new Vector4D<uint8_t>(255, 255, 255, 0);
+    Vector4D<uint8_t>* circleColor = new Vector4D<uint8_t>(255, 255, 255, 255);
     int circleRadius = 50;
-    //int circleCenterX = 50
-    //int circleCenterY = 300;
+
     int circleX = 0;
     int circleY = 0;
 
@@ -215,52 +86,7 @@ int main(int argc, char* argv[])
 
     constexpr int PIXELS_TABLE_SIZE = WINDOW_WIDTH * WINDOW_HEIGHT * RGBA;
 
-//    unsigned char* data = new unsigned char[100 * 100 * 3];
-//    for (int y = 0; y < 100; y++)
-//    {
-//        for (int x = 0; x < 100; x++)
-//        {
-//            data[3 * (y * 100 + x) + RED_POSITION] = 255;
-//            data[3 * (y * 100 + x) + GREEN_POSITION] = 0;
-//            data[3 * (y * 100 + x) + BLUE_POSITION] = 0;
-//        }
-//    }
-
-    uint8_t* pixels = new uint8_t[PIXELS_TABLE_SIZE];
-    for (int y = 0; y < WINDOW_HEIGHT; y++)
-    {
-        for (int x = 0; x < WINDOW_WIDTH; x++)
-        {
-            pixels[4 * (y * WINDOW_WIDTH + x) + RED_POSITION] = 0;
-            pixels[4 * (y * WINDOW_WIDTH + x) + GREEN_POSITION] = 0;
-            pixels[4 * (y * WINDOW_WIDTH + x) + BLUE_POSITION] = 0;
-            pixels[4 * (y * WINDOW_WIDTH + x) + ALPHA_POSITION] = 0;
-        }
-    }
-
-    constexpr int PIXELS_TABLE_SIZE2 = WINDOW_WIDTH * WINDOW_HEIGHT * 4;
-
-
-    uint8_t* pixels2 = new uint8_t[PIXELS_TABLE_SIZE2];
-	for (int y = 0; y < WINDOW_HEIGHT; y++)
-	{
-		for (int x = 0; x < WINDOW_WIDTH; x++)
-		{
-			pixels2[4 * (y * WINDOW_WIDTH + x) + RED_POSITION] = 0; //0
-			pixels2[4 * (y * WINDOW_WIDTH + x) + GREEN_POSITION] = 0;//1
-			pixels2[4 * (y * WINDOW_WIDTH + x) + BLUE_POSITION] = 0;//2
-            pixels2[4 * (y * WINDOW_WIDTH + x) + ALPHA_POSITION] = 0; // 3 alpha
-		}
-	}
-
-    //void drawPoint(int x, int y, uint8_t * pixels, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, Vector2D<int>*windowDimensions)
-
-    for (int i = 0; i < PIXELS_TABLE_SIZE; i++)
-    {
-        //std::cout << i << std::endl;
-    }
-
-    //memset(pixels, 255, windowWidth * windowHeight * sizeof(Uint32));
+    uint8_t* pixels = YasGL::createPixelsTable(windowDimensions, black);
 
     if (!window)
     {
@@ -268,14 +94,8 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    //SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-    //SDL_RenderClear(renderer);
-
-    //SDL_Event event;
-
-	Vector4D<uint8_t> *squareColor = new Vector4D<uint8_t>(0, 0, 255, 0);
+	Vector4D<uint8_t> *squareColor = new Vector4D<uint8_t>(0, 0, 255, 255);
 	Vector2D<int> *positions = new Vector2D<int>(0, 0);
-
 
     bool running = true;
 
@@ -285,17 +105,12 @@ int main(int argc, char* argv[])
     double fps;
     double fpsTime;
     unsigned int frames;
-    //MSG message;
 
     TimePicker timePicker = TimePicker();
     time = timePicker.getSeconds();
 
     fpsTime = 0.0F;
     frames = 0;
-
-
-    // One of many formats which I found
-    //SDL_PIXELFORMAT_RGBA8888
 
     bool switched = false;
     bool close = false;
@@ -326,123 +141,43 @@ int main(int argc, char* argv[])
             }
 
             circlePosition->x = static_cast<int>(circlePosition->x + deltaTime * circleSpeed);
-            if (circlePosition->x < 0 && !switched) {
+            if (circlePosition->x < 0 && !switched)
+            {
                 circleSpeed = circleSpeed * -1;
                 circlePosition->x = 0;
 
             }
 
-            if (circlePosition->x > 1024) {
+            if (circlePosition->x > 1024)
+            {
                 circleSpeed = circleSpeed * -1;
                 circlePosition->x = 1024;
             }
 
-            YasGL::clearColor(pixels2, &BLACK, windowDimensions);
+            YasGL::clearColor(pixels, black, windowDimensions);
 
-            //SDL_RenderPresent(renderer);
-            //Vector2D<int>* point0, Vector2D<int>* point1, SDL_Renderer* renderer);
-            //void drawLine(Vector2D<int>*point0, Vector2D<int>*point1, Uint32 * pixels, Vector3D<int>*drawingColor, SDL_PixelFormat * pixelFormat, int windowWidth)
-
-            ///drawCartesianAxies
             YasGL::drawCartesianAxies(windowDimensions, pixels);
 
-            //void drawPoint(int x, int y, uint8_t * pixels, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, Vector2D<int>*windowDimensions)
-            /*void drawPoint(int x, int y, uint8_t * pixels, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, Vector2D<int>*windowDimensions)*/
-
-/////////////////////////////////////////////////////////////////////////////////////////////////
-// 
 			for (int i = 0; i < 100; i++)
             {
 				for (int j = 0; j < 100; j++)
-                {   //R  G  B, A   
+                {
                     positions->x = i;
                     positions->y = j;
-					YasGL::drawPoint(positions, pixels2, squareColor, windowDimensions);
+					YasGL::drawPoint(positions, pixels, squareColor, windowDimensions);
 				}
 			}
 
-			//for (int i = 0; i < 100; i++)
-			//{
-			//	for (int j = 0; j < 100; j++)
-			//	{   //R  G  B, A   
-			//		positions->x = i;
-			//		positions->y = j;
-			//		//YasGL::drawPoint(positions, pixels2, squareColor, windowDimensions);
-   //                 YasGL::drawPoint(positions, pixels2, fourElementsTable, windowDimensions);
-			//	}
-			//}
-
-/////////////////////////////////////////////////////////////////////////////////////////////////
-            //fourElementsTable
-
-			//for (int i = 0; i < 100; i++)
-   //         {
-			//	for (int j = 0; j < 100; j++)
-   //             {
-   //                 //R  G  B, A   
-   //                 YasGL::drawPoint(i, j, pixels2, 0, 0, 255, 0, windowDimensions);
-   //                 //drawPoint(i, j, pixels2, 0, 0, 255, 0, windowDimensions);
-			//	}
-			//}
-
-
-            //void drawPoint(int x, int y, uint8_t* pixels, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, Vector2D<int>* windowDimensions)
-			//for (int i = 0; i < 100; i++) {
-			//	for (int j = 0; j < 100; j++) {   //R  G  B, A   
-			//		//positions.x = i;
-			//		//positions.y = j;
-			//		YasGL::drawPoint(i, j, pixels2, 0, 0, 255, 0, windowDimensions);
-			//	}
-			//}
-
-
-
-            //drawPoint(int x, int y, uint8_t* pixels, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, Vector2D<int>* windowDimensions)
-
-			//for (int i = 0; i < 100; i++) {
-			//	for (int j = 0; j < 100; j++) {   //R  G  A    B
-			//		YasGL::drawPoint(i, j, pixels2, 0, 255, 128, 0, windowDimensions);
-			//	}
-			//}
-
-            for (int i = 0; i < PIXELS_TABLE_SIZE; i++) {
-                //pixels[i] = SDL_MapRGBA(pixelFormat, 0, 0, 0, 255);
-            }
-            //YasGL::drawLine(xAxiesBegin, xAxiesEnd, pixels, &red, pixelFormat, windowWidth);
-            //YasGL::drawLine(yAxiesBegin, yAxiesEnd, pixels, &green, pixelFormat, windowWidth);
             YasGL::drawCircle(circlePosition, circleRadius, pixels, circleColor, windowDimensions);\
 
-            //YasGL::lukeDrawLine(line1_A, line1_B, pixels, &red, pixelFormat, windowWidth);
+            YasGL::lukeDrawLineOctan0V2(line2_A, line2_B, pixels, red, windowDimensions);
 
-            //YasGL::helsinkiDraw(line1_A, line1_B, pixels, &red, pixelFormat, windowWidth);
-            //YasGL::lukeDrawLineOctan0V1(line2_A, line2_B, pixels, &red, pixelFormat, windowWidth);
+            glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
-
-            //Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, int windowWidth
-            YasGL::lukeDrawLineOctan0V2(line2_A, line2_B, pixels, &red, windowDimensions);
-            
-            //uint8_t some8Int;
-
-            //Vector2D<int>* line1_A = new Vector2D<int>(50, 50);
-            //Vector2D<int>* line1_B = new Vector2D<int>(400, 60);
-
-            //lukeDrawLine
-
-            //glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGB, GL_UNSIGNED_BYTE, pixels);
-            glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixels2);
-
-            /* Swap front and back buffers */
             glfwSwapBuffers(window);
 
-            /* Poll for and process events */
             glfwPollEvents();
-            /*
-            SDL_UpdateTexture(texture, NULL, pixels, WINDOW_WIDTH * sizeof(Uint32));
 
-            SDL_RenderClear(renderer);
-            SDL_RenderCopy(renderer, texture, NULL, NULL);
-            SDL_RenderPresent(renderer);
-            */
         }
 
         delete[] pixels;
@@ -452,105 +187,3 @@ int main(int argc, char* argv[])
 }
 //                                                                            80                                     120
 //-----------------------------------------------------------------------------|---------------------------------------|
-
-
-
-
-//#include <GLFW/glfw3.h>
-//#include<iostream>
-//
-//void update(unsigned char* data, unsigned char color)
-//{
-//    for (int y = 0; y < 100; y++)
-//    {
-//        for (int x = 0; x < 100; x++)
-//        {
-//            data[y * 100 * 3 + x * 3] = 255;
-//            data[y * 100 * 3 + x * 3 + 1] = color;
-//            data[y * 100 * 3 + x * 3 + 2] = 0;
-//        }
-//    }
-//}
-//
-//void keyCallback(GLFWwindow* window, int key, int scanCode, int action, int mods)
-//{
-//    std::cout << "KEY: " << key << std::endl;
-//}
-//
-//int main(void)
-//{
-//    const unsigned char RED_POSITION = 0;
-//    const unsigned char GREEN_POSITION = 1;
-//    const unsigned char BLUE_POSITION = 2;
-//
-//    GLFWwindow* window;
-//
-//    /* Initialize the library */
-//    if (!glfwInit())
-//    {
-//        return -1;
-//    }
-//
-//    /* Create a windowed mode window and its OpenGL context */
-//    window = glfwCreateWindow(640, 480, "Hello World", NULL, NULL);
-//    if (!window)
-//    {
-//        glfwTerminate();
-//        return -1;
-//    }
-//
-//    glfwSetKeyCallback(window, keyCallback);
-//
-//    /* Make the window's context current */
-//    glfwMakeContextCurrent(window);
-//
-//
-//    unsigned char* data = new unsigned char[640 * 480 * 3];
-//    for (int y = 0; y < 480; y++)
-//    {
-//        for (int x = 0; x < 640; x++)
-//        {
-//            data[3 * (y * 640 + x) + RED_POSITION] = 255;
-//            data[3 * (y * 640 + x) + GREEN_POSITION] = 0;
-//            data[3 * (y * 640 + x) + BLUE_POSITION] = 0;
-//        }
-//    }
-//
-//    unsigned char color = 0;
-//
-//    /* Loop until the user closes the window */
-//    bool changeColor = false;
-//    while (!glfwWindowShouldClose(window))
-//    {
-//        /* Render here */
-//        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//
-//        if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS) {
-//            changeColor = true;
-//        }
-//
-//        if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_RELEASE) {
-//            changeColor = false;
-//        }
-//        if (changeColor)
-//        {
-//            std::cout << "CHANGING COLOR" << std::endl;
-//            color = color + 1;
-//            update(data, color);
-//            //for (color; color < 255; color++)
-//            //{
-//            //    update(data, color);
-//            //}
-//        }
-//        glDrawPixels(640, 480, GL_RGB, GL_UNSIGNED_BYTE, data);
-//
-//        /* Swap front and back buffers */
-//        glfwSwapBuffers(window);
-//
-//        /* Poll for and process events */
-//        glfwPollEvents();
-//    }
-//
-//    glfwTerminate();
-//    return 0;
-//}

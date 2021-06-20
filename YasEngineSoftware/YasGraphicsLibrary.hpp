@@ -10,6 +10,10 @@
 
 namespace YasGL
 {
+    const uint8_t NUMBER_OF_COLORS = 4;
+    const uint8_t RGB_FORMAT = 3;
+    const uint8_t RGBA_FORMAT = 4;
+
     const uint8_t RED_POSITION = 0;
     const uint8_t GREEN_POSITION = 1;
     const uint8_t BLUE_POSITION = 2;
@@ -20,21 +24,17 @@ namespace YasGL
 	const Vector4D<uint8_t> BLUE(0, 0, 255, 0);
 	const Vector4D<uint8_t> BLACK(0, 0, 0, 0);
 
+    
+
     void clearColor(uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
 
     void cartesianPositionToWindow(Vector2D<int>* point, Vector2D<int>* windowDimensions);
     void windowPositionToCartesian(Vector2D<int>* point, Vector2D<int>* windowDimensions);
-
-    //void drawPoint(Vector2D<int>* point, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
-    //void drawPoint(int x, int y, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
-    //void drawPoint(int x, int y, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
-    //void drawPoint(Vector2D<int>* point, uint8_t* pixels, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, Vector2D<int>* windowDimensions);
-    //void drawPoint(int x, int y, uint8_t* pixels, uint8_t red, uint8_t green, uint8_t blue, uint8_t alpha, Vector2D<int>* windowDimensions);
     
+    uint8_t* createPixelsTable(Vector2D<int>* windowDimensions, Vector4D<uint8_t>* defaultColor);
+
     void drawPoint(Vector2D<int>* point, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
     void drawPoint(int x, int y, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
-
-    //void drawPoint(Vector2D<int>* point, uint8_t* pixels, uint8_t* drawingColor, Vector2D<int>* windowDimensions);
 
     void drawLine(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
 
