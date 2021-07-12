@@ -9,7 +9,6 @@ namespace YasGL
         return pixels;
     }
 
-
     void clearColor(uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
     {
         for (int y = 0; y < windowDimensions->y; y++)
@@ -166,6 +165,7 @@ namespace YasGL
         }
     }
 
+    // V2 Has modified equation(lukeDrawLineOctan0V1) (it is multiplied by delta X and then by 2)
     void lukeDrawLineOctan0V2(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
     {
         int x0 = point0->x;
@@ -193,6 +193,7 @@ namespace YasGL
 
     void helsinkiDraw(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
     {
+        // https://www.cs.helsinki.fi/group/goa/mallinnus/lines/bresenh.html
         int dx = point1->x - point0->x;
         int dy = point1->y - point0->y;
         int y = point0->y;
@@ -202,7 +203,7 @@ namespace YasGL
     void cartesianPositionToWindow(Vector2D<int>* point, Vector2D<int>* windowDimensions)
     {
         point->x = point->x + (windowDimensions->x / 2);
-        point->y = (point->y * -1) + (windowDimensions->y / 2);
+        point->y = (point->y * -1) + (windowDimensions->y / 2); // point->y = (point->y * -1) + (windowDimensions->y / 2);
     }
 
     void windowPositionToCartesian(Vector2D<int>* point, Vector2D<int>* windowDimensions)
