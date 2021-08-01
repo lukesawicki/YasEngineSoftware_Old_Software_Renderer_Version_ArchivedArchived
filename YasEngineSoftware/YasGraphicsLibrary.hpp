@@ -28,8 +28,8 @@ namespace YasGL
 
     void clearColor(uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
 
-    void cartesianPositionToWindow(Vector2D<int>* point, Vector2D<int>* windowDimensions);
-    void windowPositionToCartesian(Vector2D<int>* point, Vector2D<int>* windowDimensions);
+    void cartesianPositionToWindow(Vector2D<int>* point, Vector2D<int>* windowDimenstions);
+    void cartesianPositionToWindow(int& x, int& y, Vector2D<int>* windowDimenstions);
     
     uint8_t* createPixelsTable(Vector2D<int>* windowDimensions, Vector4D<uint8_t>* defaultColor);
 

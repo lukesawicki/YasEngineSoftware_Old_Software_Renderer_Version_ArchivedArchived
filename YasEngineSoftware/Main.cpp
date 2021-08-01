@@ -23,6 +23,7 @@ int main(int argc, char* argv[])
 	Vector4D<uint8_t>* green = new Vector4D<uint8_t>(0, 255, 0, 255);
 	Vector4D<uint8_t>* blue = new Vector4D<uint8_t>(0, 0, 255, 255);
 	Vector4D<uint8_t>* black = new Vector4D<uint8_t>(0, 0, 0, 255);
+    Vector4D<uint8_t>* testObjectsColor = new Vector4D<uint8_t>(255, 242, 0, 255);
 
 	GLFWwindow* window;
     
@@ -56,14 +57,20 @@ int main(int argc, char* argv[])
     int circleSpeedFactor = 255;
     int circleSpeed = 2 * circleSpeedFactor;
     Vector4D<uint8_t>* circleColor = new Vector4D<uint8_t>(255, 255, 255, 255);
-    Vector2D<int>* circlePosition = new Vector2D<int>(250, 50); // defined in Cartesian coordination system it's mean the center of window is 0,0. The x increasing to right and y up.
-    YasGL::cartesianPositionToWindow(circlePosition, windowDimensions);
+
+	Vector2D<int>* circlePosition = new Vector2D<int>(250, 300);
+
+    ////
+    //Vector2D<int>* circlePosition = new Vector2D<int>(250, 50); // defined in Cartesian coordination system it's mean the center of window is 0,0. The x increasing to right and y up.
+    //YasGL::cartesianPositionToWindow(circlePosition, windowDimensions);
+    ////
+
     bool switched = false;
     // End of data defined Circle for drawing circle for varied tests
 
     // Points representing test line for Octan 0
-    Vector2D<int>* testLine0PointA = new Vector2D<int>(0, 0);
-    Vector2D<int>* testLine0PointB = new Vector2D<int>(400, 128);
+    Vector2D<int>* testLine0PointA = new Vector2D<int>(0, 0); //(25, 40);
+    Vector2D<int>* testLine0PointB = new Vector2D<int>(384, 20); //(256, 192);
     // End of points representing test line for Octan 0
 
     // Data required to draw simple square filled with color for tests
@@ -90,6 +97,8 @@ int main(int argc, char* argv[])
 
 
     bool close = false;
+
+    //int temporary = 0;
 
     while (!shouldApplicationStopRunning)
     {
@@ -142,6 +151,10 @@ int main(int argc, char* argv[])
             {
 				for (int j = 0; j < 100; j++)
                 {
+                   /* ++temporary;
+                    if (i == j) {
+                        std::cout << "I: " << i << " J: " << j << " Pixel value on first position (RGBA): " << pixels[i] << " temporary " << temporary;
+                    }*/
                     positions->x = i;
                     positions->y = j;
 					YasGL::drawPoint(positions, pixels, squareColor, windowDimensions);
@@ -150,7 +163,7 @@ int main(int argc, char* argv[])
 
             YasGL::drawCircle(circlePosition, circleRadius, pixels, circleColor, windowDimensions);\
 
-            YasGL::lukeDrawLineOctan0V2(testLine0PointA, testLine0PointB, pixels, red, windowDimensions);
+            YasGL::lukeDrawLineOctan0V2(testLine0PointA, testLine0PointB, pixels, testObjectsColor, windowDimensions);
             //
             glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 

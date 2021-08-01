@@ -117,6 +117,42 @@
 //        deltaError = deltaError + 2*deltaY;
 //    }
 //}
+// 
+// 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	//void cartesianPositionToWindow(Vector2D<int>* point, Vector2D<int>* windowDimensions)
+	//{
+	//    point->x = point->x + (windowDimensions->x / 2);
+	//    point->y = (point->y * -1) + (windowDimensions->y / 2); // point->y = (point->y * -1) + (windowDimensions->y / 2);
+	//}
+
+	//void windowPositionToCartesian(Vector2D<int>* point, Vector2D<int>* windowDimensions)
+	//{
+	//    point->x = point->x - (windowDimensions->x / 2);
+	//    point->y = (point->y * -1) + (windowDimensions->y / 2);
+	//}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//void drawCartesianAxies(Vector2D<int>* windowDimensions, uint8_t* pixels)
+//{
+//	int centerX = static_cast<int>(0.5F * windowDimensions->x);
+//	int centerY = static_cast<int>(0.5F * windowDimensions->y);
+//
+//	Vector4D<uint8_t> xDrawingColorRed(255, 0, 0, 0); // RED
+//	Vector4D<uint8_t> yDrawingColorGreen(0, 255, 0, 0); // GREEN
+//
+//	for (int i = 0; i < windowDimensions->x; i++) //X
+//	{
+//		drawPoint(i, centerY, pixels, &xDrawingColorRed, windowDimensions);
+//	}
+//
+//	for (int i = 0; i < windowDimensions->y; i++) //Y
+//	{
+//		drawPoint(centerX, i, pixels, &yDrawingColorGreen, windowDimensions);
+//	}
+//}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 //                                                                            80                                     120
 //-----------------------------------------------------------------------------|---------------------------------------|

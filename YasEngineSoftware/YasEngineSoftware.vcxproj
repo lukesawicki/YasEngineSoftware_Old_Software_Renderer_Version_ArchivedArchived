@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BackupCpp.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="temporary.cpp" />
     <ClCompile Include="TimePicker.cpp" />
