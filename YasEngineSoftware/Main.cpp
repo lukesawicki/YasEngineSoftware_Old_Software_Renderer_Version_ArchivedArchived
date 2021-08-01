@@ -58,7 +58,7 @@ int main(int argc, char* argv[])
     int circleSpeed = 2 * circleSpeedFactor;
     Vector4D<uint8_t>* circleColor = new Vector4D<uint8_t>(255, 255, 255, 255);
 
-	Vector2D<int>* circlePosition = new Vector2D<int>(250, 300);
+	Vector2D<int>* circlePosition = new Vector2D<int>(0, 0);
 
     ////
     //Vector2D<int>* circlePosition = new Vector2D<int>(250, 50); // defined in Cartesian coordination system it's mean the center of window is 0,0. The x increasing to right and y up.
@@ -68,9 +68,14 @@ int main(int argc, char* argv[])
     bool switched = false;
     // End of data defined Circle for drawing circle for varied tests
 
-    // Points representing test line for Octan 0
-    Vector2D<int>* testLine0PointA = new Vector2D<int>(0, 0); //(25, 40);
-    Vector2D<int>* testLine0PointB = new Vector2D<int>(384, 20); //(256, 192);
+    // Points representing test line for Octan 0 // positive slope
+    Vector2D<int>* testLinePos_slope_Oct_0PointA = new Vector2D<int>(0, 0); //(25, 40);
+    Vector2D<int>* testLinePos_slope_Oct_0PointB = new Vector2D<int>(384, 20); //(256, 192);
+
+    // Points representing test line for Octan 0 // negative slope
+	Vector2D<int>* testLineNeg_slope_Oct_0PointA = new Vector2D<int>(0, 50); //(25, 40);
+	Vector2D<int>* testLineNeg_slope_Oct_0PointB = new Vector2D<int>(512, -30); //(256, 192);
+
     // End of points representing test line for Octan 0
 
     // Data required to draw simple square filled with color for tests
@@ -133,16 +138,16 @@ int main(int argc, char* argv[])
 
             // In real-time Generating CIRCLE
             circlePosition->x = static_cast<int>(circlePosition->x + deltaTime * circleSpeed);
-            if (circlePosition->x < 0 && !switched)
+            if (circlePosition->x < circleRadius && !switched)
             {
                 circleSpeed = circleSpeed * -1;
-                circlePosition->x = 0;
+                circlePosition->x = circleRadius;
             }
 
-            if (circlePosition->x > 1024)
+            if (circlePosition->x > 512 - circleRadius)
             {
                 circleSpeed = circleSpeed * -1;
-                circlePosition->x = 1024;
+                circlePosition->x = 512 - circleRadius;
             }
             // END Generating CIRCLE
             // 
@@ -163,7 +168,9 @@ int main(int argc, char* argv[])
 
             YasGL::drawCircle(circlePosition, circleRadius, pixels, circleColor, windowDimensions);\
 
-            YasGL::lukeDrawLineOctan0V2(testLine0PointA, testLine0PointB, pixels, testObjectsColor, windowDimensions);
+            YasGL::lukeDrawLineOctan0_V2(testLinePos_slope_Oct_0PointA, testLinePos_slope_Oct_0PointB, pixels, testObjectsColor, windowDimensions);
+
+            YasGL::lukeDrawLineOctan0_V2(testLineNeg_slope_Oct_0PointA, testLineNeg_slope_Oct_0PointB, pixels, testObjectsColor, windowDimensions);
             //
             glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
