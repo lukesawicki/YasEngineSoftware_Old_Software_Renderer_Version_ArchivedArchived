@@ -25,6 +25,8 @@ int main(int argc, char* argv[])
 	Vector4D<uint8_t>* black = new Vector4D<uint8_t>(0, 0, 0, 255);
     Vector4D<uint8_t>* testObjectsColor = new Vector4D<uint8_t>(255, 242, 0, 255);
 
+    Vector4D<uint8_t>* testObjectsColor2 = new Vector4D<uint8_t>(255, 174, 201, 255);
+
 	GLFWwindow* window;
     
     // Points that to draw axies
@@ -75,6 +77,9 @@ int main(int argc, char* argv[])
     // Points representing test line for Octan 0 // negative slope
 	Vector2D<int>* testLineNeg_slope_Oct_0PointA = new Vector2D<int>(0, 50); //(25, 40);
 	Vector2D<int>* testLineNeg_slope_Oct_0PointB = new Vector2D<int>(512, -30); //(256, 192);
+
+	Vector2D<int>* testLineBpos_slope_Oct_0PointA = new Vector2D<int>(0, 0); //(25, 40);
+	Vector2D<int>* testLineBpos_slope_Oct_0PointB = new Vector2D<int>(64, 1000); //(256, 192);
 
     // End of points representing test line for Octan 0
 
@@ -171,7 +176,9 @@ int main(int argc, char* argv[])
             YasGL::lukeDrawLineOctan0_V2(testLinePos_slope_Oct_0PointA, testLinePos_slope_Oct_0PointB, pixels, testObjectsColor, windowDimensions);
 
             YasGL::lukeDrawLineOctan0_V2(testLineNeg_slope_Oct_0PointA, testLineNeg_slope_Oct_0PointB, pixels, testObjectsColor, windowDimensions);
-            //
+            
+            YasGL::lukeDrawLineOctan0_V2(testLineBpos_slope_Oct_0PointA, testLineBpos_slope_Oct_0PointB, pixels, testObjectsColor2, windowDimensions);
+
             glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
             glfwSwapBuffers(window);
