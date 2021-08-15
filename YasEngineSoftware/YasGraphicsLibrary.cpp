@@ -172,45 +172,99 @@ namespace YasGL
         int deltaX = point1->x - point0->x;
         int deltaY = point1->y - point0->y;
         int cumulativeError = 0;
-        if (deltaY > 0)
-        {
-            for (int i = point0->x; i <= point1->x; i++)
+
+        // Check if it is slope line (Octant: 0,3 4,7)
+        //if (abs(point1->y - point0->y) < abs(point1->x - point0->x))
+        //{
+            if (deltaY > 0)
             {
-                drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
-                x0++;
-                if (2 * (cumulativeError + deltaY) < deltaX)
+                for (int i = point0->x; i <= point1->x; i++)
                 {
-                    //y stays the same
-                    cumulativeError = cumulativeError + deltaY;
-                }
-                else
-                {
-                    y0++;
-                    cumulativeError = cumulativeError + deltaY - deltaX;
+                    drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+                    x0++;
+                    if (2 * (cumulativeError + deltaY) < deltaX)
+                    {
+                        //y stays the same
+                        cumulativeError = cumulativeError + deltaY;
+                    }
+                    else
+                    {
+                        y0++;
+                        cumulativeError = cumulativeError + deltaY - deltaX;
+                    }
                 }
             }
-        }
-        else
-        {
-            if (deltaY < 0)
+            else
             {
-				for (int i = point0->x; i <= point1->x; i++)
-				{
-					drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
-					x0++;
-					if (2 * (cumulativeError + deltaY) > -deltaX)
-					{
-						//y stays the same
-						cumulativeError = cumulativeError + deltaY;
-					}
-					else
-					{
-						y0--;
-						cumulativeError = cumulativeError + deltaY + deltaX;
-					}
-				}
+                if (deltaY < 0)
+                {
+                    for (int i = point0->x; i <= point1->x; i++)
+                    {
+                        drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+                        x0++;
+                        if (2 * (cumulativeError + deltaY) > -deltaX)
+                        {
+                            //y stays the same
+                            cumulativeError = cumulativeError + deltaY;
+                        }
+                        else
+                        {
+                            y0--;
+                            cumulativeError = cumulativeError + deltaY + deltaX;
+                        }
+                    }
+                }
+                else {
+                    //Horizontal line
+                }
             }
-        }
+        //}
+        //else // If it is not slope it is steep and these are 1,2,5, 6
+        //{
+        //    if (point0->y > point1->y)
+        //    {
+        //        for (int i = point0->y; i <= point1->y; i++) // int i = point0->x; i <= point1->x; i++
+        //        {
+        //            drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+        //            y0++; // x0++;
+        //            if (2 * (cumulativeError + deltaX) < deltaY) // cumulativeError + deltaY) < deltaX
+        //            {
+        //                //y stays the same
+        //                cumulativeError = cumulativeError + deltaX; // cumulativeError = cumulativeError + deltaY;
+        //            }
+        //            else
+        //            {
+        //                x0++; // y0++;
+        //                cumulativeError = cumulativeError + deltaX - deltaY; // cumulativeError = cumulativeError + deltaY - deltaX;
+        //            }
+        //        }
+        //    }
+        //    else
+        //    {
+        //        if (point0->y < point1->y)
+        //        {
+        //            for (int i = point0->y; i <= point1->y; i++) // for (int i = point0->x; i <= point1->x; i++)
+        //            {
+        //                drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+        //                y0++; // x0++;
+        //                if (2 * (cumulativeError + deltaX) > -deltaY) // if (2 * (cumulativeError + deltaY) > -deltaX)
+        //                {
+        //                    //y stays the same
+        //                    cumulativeError = cumulativeError + deltaX; // cumulativeError = cumulativeError + deltaY;
+        //                }
+        //                else
+        //                {
+        //                    x0--; // y0--;
+        //                    cumulativeError = cumulativeError + deltaX + deltaY; // cumulativeError = cumulativeError + deltaY + deltaX;
+        //                }
+        //            }
+        //        }
+        //        else
+        //        {
+        //            //Vertical line
+        //        }
+        //    }
+        //}
     }
 
     void helsinkiDraw(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
@@ -221,8 +275,6 @@ namespace YasGL
         int y = point0->y;
         int eps = 0;
     }
-
-
 
     void drawCartesianAxies(Vector2D<int>* windowDimensions, uint8_t* pixels)
     {

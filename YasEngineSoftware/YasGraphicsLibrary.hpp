@@ -24,8 +24,6 @@ namespace YasGL
 	const Vector4D<uint8_t> BLUE(0, 0, 255, 0);
 	const Vector4D<uint8_t> BLACK(0, 0, 0, 0);
 
-    
-
     void clearColor(uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
 
     void cartesianPositionToWindow(Vector2D<int>* point, Vector2D<int>* windowDimenstions);

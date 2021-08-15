@@ -55,7 +55,7 @@ int main(int argc, char* argv[])
     // Data defined Circle for drawing circle for varied tests
 	int circleX = 0;
 	int circleY = 0;
-    int circleRadius = 50;
+    int circleRadius = 80;
     int circleSpeedFactor = 255;
     int circleSpeed = 2 * circleSpeedFactor;
     Vector4D<uint8_t>* circleColor = new Vector4D<uint8_t>(255, 255, 255, 255);
@@ -75,11 +75,14 @@ int main(int argc, char* argv[])
     Vector2D<int>* testLinePos_slope_Oct_0PointB = new Vector2D<int>(384, 20); //(256, 192);
 
     // Points representing test line for Octan 0 // negative slope
-	Vector2D<int>* testLineNeg_slope_Oct_0PointA = new Vector2D<int>(0, 50); //(25, 40);
-	Vector2D<int>* testLineNeg_slope_Oct_0PointB = new Vector2D<int>(512, -30); //(256, 192);
+	//Vector2D<int>* testLineNeg_slope_Oct_0PointA = new Vector2D<int>(0, 50); //(25, 40);
+	//Vector2D<int>* testLineNeg_slope_Oct_0PointB = new Vector2D<int>(512, -30); //(256, 192);
 
-	Vector2D<int>* testLineBpos_slope_Oct_0PointA = new Vector2D<int>(0, 0); //(25, 40);
-	Vector2D<int>* testLineBpos_slope_Oct_0PointB = new Vector2D<int>(64, 1000); //(256, 192);
+	//Vector2D<int>* testLineBpos_slope_Oct_0PointA = new Vector2D<int>(-256, -400); //(25, 40);
+	//Vector2D<int>* testLineBpos_slope_Oct_0PointB = new Vector2D<int>(256, -450); //(256, 192);
+
+	//Vector2D<int>* testLineBpos_slope_Oct_0PointA = new Vector2D<int>(-256, -300); //(25, 40);
+	//Vector2D<int>* testLineBpos_slope_Oct_0PointB = new Vector2D<int>(-240, 150); //(256, 192);
 
     // End of points representing test line for Octan 0
 
@@ -175,9 +178,9 @@ int main(int argc, char* argv[])
 
             YasGL::lukeDrawLineOctan0_V2(testLinePos_slope_Oct_0PointA, testLinePos_slope_Oct_0PointB, pixels, testObjectsColor, windowDimensions);
 
-            YasGL::lukeDrawLineOctan0_V2(testLineNeg_slope_Oct_0PointA, testLineNeg_slope_Oct_0PointB, pixels, testObjectsColor, windowDimensions);
-            
-            YasGL::lukeDrawLineOctan0_V2(testLineBpos_slope_Oct_0PointA, testLineBpos_slope_Oct_0PointB, pixels, testObjectsColor2, windowDimensions);
+            //YasGL::lukeDrawLineOctan0_V2(testLineNeg_slope_Oct_0PointA, testLineNeg_slope_Oct_0PointB, pixels, testObjectsColor, windowDimensions);
+            //
+            //YasGL::lukeDrawLineOctan0_V2(testLineBpos_slope_Oct_0PointA, testLineBpos_slope_Oct_0PointB, pixels, testObjectsColor2, windowDimensions);
 
             glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
