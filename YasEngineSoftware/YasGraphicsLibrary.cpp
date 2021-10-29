@@ -182,7 +182,7 @@ namespace YasGL
 		{
 			drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
 			x0++;
-			if (2 * (cumulativeError + deltaY) < deltaX)
+			if ( ( 2 * (cumulativeError + deltaY) ) < deltaX)
 			{
 				//y stays the same
 				cumulativeError = cumulativeError + deltaY;
@@ -205,8 +205,8 @@ namespace YasGL
 
         // Check if line is not steep (Octant: 0,3 4,7)
         if (abs(deltaY) < abs(deltaX))
-        {
-            if (point0->x < point1->x)
+        { // This if is working
+            if (point0->x < point1->x) // In draw line is > why??? Why? Kurwa??!
             {
                 drawNotSteepLine(point0, point1, pixels, drawingColor, windowDimensions);
             }
@@ -221,7 +221,7 @@ namespace YasGL
         }
     }
 
-    void lukeDrawLineOctan4(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
+    void lukeDrawLineOctanNEWEST(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
     {
         int x0 = point0->x;
         int y0 = point0->y;
@@ -230,24 +230,44 @@ namespace YasGL
         int cumulativeError = 0;
 
         //if (point0->x > point1->x) this is 
-
-        for (int i = point0->x; i <= point1->x; i++)
+        // uproszczenie bo jak bedzie odwrotna kolejnosc punktow to bedzie bledne
+        if (deltaY > 0) // it is positive slope so it means octan 0 and points in correct order ( incorrect order is octan 4 )
         {
-            drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
-            x0++;
-            if (2 * (cumulativeError + deltaY) < deltaX)
+            for (int i = point0->x; i <= point1->x; i++)
             {
-                //y stays the same
-                cumulativeError = cumulativeError + deltaY;
+                drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+                x0++;
+                if ( ( 2 * (cumulativeError + deltaY) ) < deltaX)
+                {
+                    //y stays the same
+                    cumulativeError = cumulativeError + deltaY;
+                }
+                else
+                {
+                    y0++;
+                    cumulativeError = cumulativeError + deltaY - deltaX;
+                }
             }
-            else
-            {
-                y0++;
-                cumulativeError = cumulativeError + deltaY - deltaX;
-            }
+        } 
+        else // it is negitive slope so it means octan 8 and points in "correct order" ( incorrect order is ocatn 3 )
+        {
+			for (int i = point0->x; i <= point1->x; i++)
+			{
+				drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+				x0++;
+				if ( ( 2 * (cumulativeError + deltaY) ) > -deltaX)
+				{
+					//y stays the same
+					cumulativeError = cumulativeError + deltaY;
+				}
+				else
+				{
+					y0--;
+					cumulativeError = cumulativeError + deltaY + deltaX;
+				}
+			}
         }
-
-        FIRST THING IS TO PUT HERE SOMWHERE IF IT IS OCTAN 7
+        //FIRST THING IS TO PUT HERE SOMWHERE IF IT IS OCTAN 7
     }
 
 
