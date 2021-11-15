@@ -77,8 +77,8 @@ int main(int argc, char* argv[])
     Vector2D<int>* testLinePos_slope_Oct_0PointB = new Vector2D<int>(384, 25); //(256, 192);
 
     // MIRROR Same as testLinePos_slope_Oct_0Point* but points order inverted
-    Vector2D<int>* testLinePos_slope_Oct_4PointA = new Vector2D<int>(394, 35); //(25, 40); testLinePos_slope_Oct_4PointA;
-	Vector2D<int>* testLinePos_slope_Oct_4PointB = new Vector2D<int>(20, 15); //(256, 192); testLinePos_slope_Oct_4PointB;
+    Vector2D<int>* testLinePos_slope_Oct_4PointA = new Vector2D<int>(250, 25); //(25, 40); testLinePos_slope_Oct_4PointA;
+	Vector2D<int>* testLinePos_slope_Oct_4PointB = new Vector2D<int>(10, 5); //(256, 192); testLinePos_slope_Oct_4PointB;
 
 	// Points representing test line for Octan 0 // positive slope
 	Vector2D<int>* testLinePos_slope_Oct_0APointA = new Vector2D<int>(10, -25); //(25, 40);
