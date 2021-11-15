@@ -77,8 +77,8 @@ int main(int argc, char* argv[])
     Vector2D<int>* testLinePos_slope_Oct_0PointB = new Vector2D<int>(384, 25); //(256, 192);
 
     // MIRROR Same as testLinePos_slope_Oct_0Point* but points order inverted
-    Vector2D<int>* testLinePos_slope_Oct_4PointA = new Vector2D<int>(388, 29); //(25, 40); testLinePos_slope_Oct_4PointA;
-	Vector2D<int>* testLinePos_slope_Oct_4PointB = new Vector2D<int>(14, 9); //(256, 192); testLinePos_slope_Oct_4PointB;
+    Vector2D<int>* testLinePos_slope_Oct_4PointA = new Vector2D<int>(394, 35); //(25, 40); testLinePos_slope_Oct_4PointA;
+	Vector2D<int>* testLinePos_slope_Oct_4PointB = new Vector2D<int>(20, 15); //(256, 192); testLinePos_slope_Oct_4PointB;
 
 	// Points representing test line for Octan 0 // positive slope
 	Vector2D<int>* testLinePos_slope_Oct_0APointA = new Vector2D<int>(10, -25); //(25, 40);
@@ -235,7 +235,8 @@ int main(int argc, char* argv[])
             //YasGL::lukeDrawLineOctan0_V2(testLineBpos_slope_Oct_0PointA, testLineBpos_slope_Oct_0PointB, pixels, testObjectsColor2, windowDimensions);
 
 
-            YasGL::simplestNiveLineDraw(pointA, pointB, pixels, yellow, windowDimensions);
+            //YasGL::simplestNiveLineDraw(pointA, pointB, pixels, yellow, windowDimensions);
+            //YasGL::simplestNiveLineDraw(testLinePos_slope_Oct_4PointA, testLinePos_slope_Oct_4PointB, pixels, yellow, windowDimensions);
 
 
             glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixels);

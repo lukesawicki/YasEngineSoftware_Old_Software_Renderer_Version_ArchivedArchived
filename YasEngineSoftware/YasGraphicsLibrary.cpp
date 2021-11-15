@@ -238,52 +238,115 @@ namespace YasGL
         // Check if it is gentle slope
         if (abs(deltaX) > abs(deltaY))
         {
-            if (deltaX > 0) // it means that order of points are correct
-            {
-                // you have to swtich points that point0 is end of line and point1 i start of the line;
-                                
-                // swtich x for for loop condition
-                temporaryForForLoopCondition = originalPoint0X;
-                originalPoint0X = originalPoint1X;
-                originalPoint1X = temporaryForForLoopCondition;
+            //if ((deltaX < 0 && deltaY <0)||(deltaX < 0 && deltaY >0)) // it means that order of points is not correct
+            //{
+            //    // you have to swtich points that point0 is end of line and point1 i start of the line;
+            //                    
+            //    // swtich x for for loop condition
+            //    temporaryForForLoopCondition = originalPoint0X;
+            //    originalPoint0X = originalPoint1X;
+            //    originalPoint1X = temporaryForForLoopCondition;
 
-                // switch x for drawing
-                x0 = point1->x;
+            //    // switch x for drawing
+            //    x0 = point1->x;
 
-            }
+            //}
                 if (deltaY > 0) // it is positive slope so it means octan 0 and points in correct order ( incorrect order is octan 4 )
                 {
-                    for (int i = originalPoint0X; i <= originalPoint1X; i++)
+
+					if (deltaX < 0) // with previous condition this mean that this is negative slope with switched order of points 
+					{
+						// you have to swtich points that point0 is end of line and point1 i start of the line;
+
+						// swtich x for for loop condition
+						temporaryForForLoopCondition = originalPoint0X;
+						originalPoint0X = originalPoint1X;
+						originalPoint1X = temporaryForForLoopCondition;
+
+						// switch x for drawing
+						x0 = point1->x;
+						
+                        for (int i = originalPoint0X; i <= originalPoint1X; i++)
+						{
+							drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+							x0++;
+							if ((2 * (cumulativeError + deltaY)) > -deltaX)
+							{
+								//y stays the same
+								cumulativeError = cumulativeError + deltaY;
+							}
+							else
+							{
+								y0--;
+								cumulativeError = cumulativeError + deltaY + deltaX;
+							}
+						}
+					}
+                    else
                     {
-                        drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
-                        x0++;
-                        if ((2 * (cumulativeError + deltaY)) < deltaX)
+                        for (int i = originalPoint0X; i <= originalPoint1X; i++)
                         {
-                            //y stays the same
-                            cumulativeError = cumulativeError + deltaY;
-                        }
-                        else
-                        {
-                            y0++;
-                            cumulativeError = cumulativeError + deltaY - deltaX;
+                            drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+                            x0++;
+                            if ((2 * (cumulativeError + deltaY)) < deltaX)
+                            {
+                                //y stays the same
+                                cumulativeError = cumulativeError + deltaY;
+                            }
+                            else
+                            {
+                                y0++;
+                                cumulativeError = cumulativeError + deltaY - deltaX;
+                            }
                         }
                     }
                 }
                 else // it is negitive slope so it means octan 8 and points in "correct order" ( incorrect order is ocatn 3 )
                 {
-                    for (int i = originalPoint0X; i <= originalPoint1X; i++)
-                    {
-                        drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
-                        x0++;
-                        if ((2 * (cumulativeError + deltaY)) > -deltaX)
+
+
+                    if (deltaX < 0) {
+						// you have to swtich points that point0 is end of line and point1 i start of the line;
+
+                        // swtich x for for loop condition
+						temporaryForForLoopCondition = originalPoint0X;
+						originalPoint0X = originalPoint1X;
+						originalPoint1X = temporaryForForLoopCondition;
+
+						// switch x for drawing
+						x0 = point1->x;
+
+						for (int i = originalPoint0X; i <= originalPoint1X; i++)
+						{
+							drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+							x0++;
+							if ((2 * (cumulativeError + deltaY)) < deltaX)
+							{
+								//y stays the same
+								cumulativeError = cumulativeError + deltaY;
+							}
+							else
+							{
+								y0++;
+								cumulativeError = cumulativeError + deltaY - deltaX;
+							}
+						}
+                    }
+                    else {
+                        for (int i = originalPoint0X; i <= originalPoint1X; i++)
                         {
-                            //y stays the same
-                            cumulativeError = cumulativeError + deltaY;
-                        }
-                        else
-                        {
-                            y0--;
-                            cumulativeError = cumulativeError + deltaY + deltaX;
+                            drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+                            x0++;
+                            if ((2 * (cumulativeError + deltaY)) > -deltaX)
+                            {
+                                //y stays the same
+                                cumulativeError = cumulativeError + deltaY;
+                            }
+                            else
+                            {
+                                y0--;
+                                cumulativeError = cumulativeError + deltaY + deltaX;
+                            }
                         }
                     }
                 }
