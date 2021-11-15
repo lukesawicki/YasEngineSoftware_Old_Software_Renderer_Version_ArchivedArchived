@@ -105,6 +105,10 @@ int main(int argc, char* argv[])
 	Vector2D<int>* testLine_slope_Oct_1PointA = new Vector2D<int>(2, 2); //(25, 40);
 	Vector2D<int>* testLine_slope_Oct_1PointB = new Vector2D<int>(20, 400); //(256, 192);
 
+    // Test points for naive version:
+	Vector2D<int>* pointA = new Vector2D<int>(30, 30); //(25, 40);
+	Vector2D<int>* pointB = new Vector2D<int>(500, 220); //(256, 192);
+
     // End of points representing test line for Octan 0
 
     // Data required to draw simple square filled with color for tests
@@ -229,6 +233,10 @@ int main(int argc, char* argv[])
             //YasGL::lukeDrawLineOctan0_V2(testLineNeg_slope_Oct_0PointA, testLineNeg_slope_Oct_0PointB, pixels, testObjectsColor, windowDimensions);
             //
             //YasGL::lukeDrawLineOctan0_V2(testLineBpos_slope_Oct_0PointA, testLineBpos_slope_Oct_0PointB, pixels, testObjectsColor2, windowDimensions);
+
+
+            YasGL::simplestNiveLineDraw(pointA, pointB, pixels, yellow, windowDimensions);
+
 
             glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 

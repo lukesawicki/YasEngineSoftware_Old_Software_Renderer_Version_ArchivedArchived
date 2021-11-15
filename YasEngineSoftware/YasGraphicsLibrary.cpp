@@ -224,50 +224,75 @@ namespace YasGL
     void lukeDrawLineOctanNEWEST(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
     {
         int x0 = point0->x;
+        int originalPoint0X = point0->x;
         int y0 = point0->y;
+        int originalPoint1X = point1->x;
         int deltaX = point1->x - point0->x;
         int deltaY = point1->y - point0->y;
         int cumulativeError = 0;
+        int temporaryForForLoopCondition = 0;
+        int temporaryForDrawingXValue = 0;
+      
+        
 
-        //if (point0->x > point1->x) this is 
-        // uproszczenie bo jak bedzie odwrotna kolejnosc punktow to bedzie bledne
-        if (deltaY > 0) // it is positive slope so it means octan 0 and points in correct order ( incorrect order is octan 4 )
+        // Check if it is gentle slope
+        if (abs(deltaX) > abs(deltaY))
         {
-            for (int i = point0->x; i <= point1->x; i++)
+            if (deltaX > 0) // it means that order of points are correct
             {
-                drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
-                x0++;
-                if ( ( 2 * (cumulativeError + deltaY) ) < deltaX)
-                {
-                    //y stays the same
-                    cumulativeError = cumulativeError + deltaY;
-                }
-                else
-                {
-                    y0++;
-                    cumulativeError = cumulativeError + deltaY - deltaX;
-                }
+                // you have to swtich points that point0 is end of line and point1 i start of the line;
+                                
+                // swtich x for for loop condition
+                temporaryForForLoopCondition = originalPoint0X;
+                originalPoint0X = originalPoint1X;
+                originalPoint1X = temporaryForForLoopCondition;
+
+                // switch x for drawing
+                x0 = point1->x;
+
             }
-        } 
-        else // it is negitive slope so it means octan 8 and points in "correct order" ( incorrect order is ocatn 3 )
-        {
-			for (int i = point0->x; i <= point1->x; i++)
-			{
-				drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
-				x0++;
-				if ( ( 2 * (cumulativeError + deltaY) ) > -deltaX)
-				{
-					//y stays the same
-					cumulativeError = cumulativeError + deltaY;
-				}
-				else
-				{
-					y0--;
-					cumulativeError = cumulativeError + deltaY + deltaX;
-				}
-			}
+                if (deltaY > 0) // it is positive slope so it means octan 0 and points in correct order ( incorrect order is octan 4 )
+                {
+                    for (int i = originalPoint0X; i <= originalPoint1X; i++)
+                    {
+                        drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+                        x0++;
+                        if ((2 * (cumulativeError + deltaY)) < deltaX)
+                        {
+                            //y stays the same
+                            cumulativeError = cumulativeError + deltaY;
+                        }
+                        else
+                        {
+                            y0++;
+                            cumulativeError = cumulativeError + deltaY - deltaX;
+                        }
+                    }
+                }
+                else // it is negitive slope so it means octan 8 and points in "correct order" ( incorrect order is ocatn 3 )
+                {
+                    for (int i = originalPoint0X; i <= originalPoint1X; i++)
+                    {
+                        drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+                        x0++;
+                        if ((2 * (cumulativeError + deltaY)) > -deltaX)
+                        {
+                            //y stays the same
+                            cumulativeError = cumulativeError + deltaY;
+                        }
+                        else
+                        {
+                            y0--;
+                            cumulativeError = cumulativeError + deltaY + deltaX;
+                        }
+                    }
+                }
+            
         }
-        //FIRST THING IS TO PUT HERE SOMWHERE IF IT IS OCTAN 7
+        else // it is steep slope
+        {
+
+        }
     }
 
 
@@ -305,6 +330,25 @@ namespace YasGL
         int y = point0->y;
         int eps = 0;
     }
+
+    // only for positives positions
+    void simplestNiveLineDraw(Vector2D<int>* point0, Vector2D<int>* point1,  uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
+    {
+        if (point0->x < 0 || point0->y < 0 || point1->x < 0 || point1->y < 0)
+        {
+            return;
+        }
+        float l;
+        int dx = point1->x - point0->x;
+        int dy = point1->y - point0->y;
+
+        for (l = 0.0F; l < 1.0F; l += dl)
+        {
+            drawPoint(point0->x + int(floor(dx*l+0.5F)), point0->y + int(floor(dy*l+0.5F)), pixels, drawingColor, windowDimensions);
+        }
+    }
+
+    //drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
 
     void drawCartesianAxies(Vector2D<int>* windowDimensions, uint8_t* pixels)
     {
