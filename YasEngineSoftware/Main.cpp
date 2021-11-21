@@ -146,8 +146,7 @@ int main(int argc, char* argv[])
 
     //int temporary = 0;
 
-    prepareTestLines(YasGL::PositionInSpace::Q2, YasGL::PointsOrder::Normal, positivePointA, positivePointB, negativePointA, negativePointB, windowDimensions);
-
+    prepareTestLines(YasGL::PositionInSpace::Q123_230, YasGL::PointsOrder::Normal, positivePointA, positivePointB, negativePointA, negativePointB, windowDimensions);
 
 
     while (!shouldApplicationStopRunning)

@@ -67,40 +67,87 @@ namespace YasGL
 		negativePointA = new Vector2D<int>(10, 25); //(25, 40);
 		negativePointB = new Vector2D<int>(384, 5); //(256, 192);
 		//Quadrant 0
-        if (order == PointsOrder::Normal)
+
+        Vector2D<int>* temporaryVector = nullptr;
+        if (order == PointsOrder::Reverse)
         {
-            switch (whichSpace)
+            temporaryVector = positivePointA;
+            positivePointA = positivePointB;
+            positivePointB = temporaryVector;
+            
+            temporaryVector = negativePointA;
+            negativePointA = negativePointB;
+            negativePointB = temporaryVector;
+            temporaryVector = nullptr;
+        }
+
+        switch (whichSpace)
+        {
+            case PositionInSpace::Q0:
             {
-                case PositionInSpace::Q0:
-                {
-                    // This is the same as Default value
-                }
-                break;
-
-				case PositionInSpace::Q1:
-				{
-					// This is the same as Default value
-                    modifyTestPoints(positivePointA, positivePointB, negativePointA, negativePointB, -quadrantsWidth, 0, - quadrantsWidth, 0);
-				}
-				break;
-
-				case PositionInSpace::Q2:
-				{
-					// This is the same as Default value
-					modifyTestPoints(positivePointA, positivePointB, negativePointA, negativePointB, -quadrantsWidth, -quadrantsHeight, -quadrantsWidth, -quadrantsHeight);
-				}
-				break;
-
-                default:
-                    // Positive slope
-                    positivePointA = new Vector2D<int>(10, 5); //(25, 40);
-                    positivePointB = new Vector2D<int>(370, 25);
-
-                    // Negative slope
-                    negativePointA = new Vector2D<int>(10, 25); //(25, 40);
-                    negativePointB = new Vector2D<int>(384, 5); //(256, 192);
+                // This is the same as Default value
                 break;
             }
+            
+			case PositionInSpace::Q1:
+			{
+				// This is the same as Default value
+                modifyTestPoints(positivePointA, positivePointB, negativePointA, negativePointB, -quadrantsWidth, 0, - quadrantsWidth, 0);
+                break;
+			}
+			
+			case PositionInSpace::Q2:
+			{
+				// This is the same as Default value
+				modifyTestPoints(positivePointA, positivePointB, negativePointA, negativePointB, -quadrantsWidth, -quadrantsHeight, -quadrantsWidth, -quadrantsHeight);
+                break;
+			}
+			
+			case PositionInSpace::Q3:
+			{
+				// This is the same as Default value
+				modifyTestPoints(positivePointA, positivePointB, negativePointA, negativePointB, 0, -quadrantsHeight, 0, -quadrantsHeight);
+                break;
+			}
+			
+            case PositionInSpace::Q10:
+			{
+				// This is the same as Default value
+				modifyTestPoints(positivePointA, positivePointB, negativePointA, negativePointB, -quadrantsWidth/2, 0, -quadrantsWidth/2, 0);
+                break;
+			}
+			
+            case PositionInSpace::Q23:
+			{
+				// This is the same as Default value
+				modifyTestPoints(positivePointA, positivePointB, negativePointA, negativePointB, -quadrantsWidth/2, -quadrantsHeight, -quadrantsWidth/2, -quadrantsHeight);
+                break;
+			}
+			
+            case PositionInSpace::Q123_230:
+            {
+                negativePointA->x = negativePointA->x - quadrantsWidth / 2;
+                negativePointA->y = negativePointA->y - quadrantsHeight / 18;
+				negativePointB->x = negativePointB->x - quadrantsWidth / 2;
+				negativePointB->y = negativePointB->y - quadrantsHeight / 18;
+
+				positivePointA->x = positivePointA->x - quadrantsWidth / 2;
+				positivePointA->y = positivePointA->y - quadrantsHeight / 18;
+				positivePointB->x = positivePointB->x - quadrantsWidth / 2;
+				positivePointB->y = positivePointB->y - quadrantsHeight / 18;
+
+            }
+            break; 
+
+            default:
+                // Positive slope
+                positivePointA = new Vector2D<int>(10, 5); //(25, 40);
+                positivePointB = new Vector2D<int>(370, 25);
+
+                // Negative slope
+                negativePointA = new Vector2D<int>(10, 25); //(25, 40);
+                negativePointB = new Vector2D<int>(384, 5); //(256, 192);
+            break;
         }
 	}
 

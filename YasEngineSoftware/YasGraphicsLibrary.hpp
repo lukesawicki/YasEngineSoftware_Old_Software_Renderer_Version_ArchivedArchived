@@ -28,7 +28,7 @@ namespace YasGL
 
 
 	enum class PointsOrder { Normal, Reverse };
-	enum class PositionInSpace { Q0, Q1, Q2, Q3, Q10, Q23, Q12, Q03, Q123, Q230 };
+	enum class PositionInSpace { Q0, Q1, Q2, Q3, Q10, Q23, Q12, Q03, Q123_230 };
 
 	void prepareTestLines(PositionInSpace whichSpace, PointsOrder order, Vector2D<int>*& positivePointA, Vector2D<int>*& positivePointB, Vector2D<int>*& negativePointA, Vector2D<int>*& negativePointB, Vector2D<int>* windowDimensions);
     void modifyTestPoints(Vector2D<int>* positivePointA, Vector2D<int>* positivePointB, Vector2D<int>* negativePointA, Vector2D<int>* negativePointB, int positiveXmodifier, int positiveYmodifier, int negativeXmodifier, int negativeYmodifier);
