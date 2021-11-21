@@ -72,50 +72,23 @@ int main(int argc, char* argv[])
     bool switched = false;
     // End of data defined Circle for drawing circle for varied tests
 
-    // Points representing test line for Octan 0 // positive slope
-    Vector2D<int>* testLinePos_slope_Oct_0PointA = new Vector2D<int>(10, 5); //(25, 40);
-    Vector2D<int>* testLinePos_slope_Oct_0PointB = new Vector2D<int>(384, 25); //(256, 192);
-
-    // MIRROR Same as testLinePos_slope_Oct_0Point* but points order inverted
-    Vector2D<int>* testLinePos_slope_Oct_4PointA = new Vector2D<int>(250, 25); //(25, 40); testLinePos_slope_Oct_4PointA;
-	Vector2D<int>* testLinePos_slope_Oct_4PointB = new Vector2D<int>(10, 5); //(256, 192); testLinePos_slope_Oct_4PointB;
-
-	// Points representing test line for Octan 0 // positive slope
-	Vector2D<int>* testLinePos_slope_Oct_0APointA = new Vector2D<int>(10, -25); //(25, 40);
-	Vector2D<int>* testLinePos_slope_Oct_0APointB = new Vector2D<int>(384, -5); //(256, 192);
-
-	// Points representing test line for Octan 7 // negative slope
-	Vector2D<int>* testLinePos_slope_Oct_7PointA = new Vector2D<int>(10, 25); //(25, 40);
-	Vector2D<int>* testLinePos_slope_Oct_7PointB = new Vector2D<int>(384, 5); //(256, 192);
-
-    // Points representing test line for Octan 7 // negative slope
-	Vector2D<int>* testLinePos_slope_Oct_7APointA = new Vector2D<int>(10, -5); //(25, 40);
-	Vector2D<int>* testLinePos_slope_Oct_7APointB = new Vector2D<int>(384, -25); //(256, 192);
-
-    // Points representing test line for Octan 0 // negative slope
-	//Vector2D<int>* testLineNeg_slope_Oct_0PointA = new Vector2D<int>(0, 50); //(25, 40);
-	//Vector2D<int>* testLineNeg_slope_Oct_0PointB = new Vector2D<int>(512, -30); //(256, 192);
-
-	//Vector2D<int>* testLineBpos_slope_Oct_0PointA = new Vector2D<int>(-256, -400); //(25, 40);
-	//Vector2D<int>* testLineBpos_slope_Oct_0PointB = new Vector2D<int>(256, -450); //(256, 192);
-
-	//Vector2D<int>* testLineBpos_slope_Oct_0PointA = new Vector2D<int>(-256, -300); //(25, 40);
-	//Vector2D<int>* testLineBpos_slope_Oct_0PointB = new Vector2D<int>(-240, 150); //(256, 192);
-
-	Vector2D<int>* testLine_slope_Oct_1PointA = new Vector2D<int>(2, 2); //(25, 40);
-	Vector2D<int>* testLine_slope_Oct_1PointB = new Vector2D<int>(20, 400); //(256, 192);
-
-    // Test points for naive version:
-	Vector2D<int>* pointA = new Vector2D<int>(30, 30); //(25, 40);
-	Vector2D<int>* pointB = new Vector2D<int>(500, 220); //(256, 192);
-
     // Positive slope;
-    Vector2D<int>* positivePointA = nullptr;
-    Vector2D<int>* positivePointB = nullptr;
+    Vector2D<int>* positiveGentlePointA = nullptr;
+    Vector2D<int>* positiveGentlePointB = nullptr;
 
 	// Negative slope
-	Vector2D<int>* negativePointA = nullptr;
-	Vector2D<int>* negativePointB = nullptr;
+	Vector2D<int>* negativeGentlePointA = nullptr;
+	Vector2D<int>* negativeGentlePointB = nullptr;
+
+    // STEEP
+
+	// Positive slope;
+    Vector2D<int>* positiveSteepPointA = nullptr;
+    Vector2D<int>* positiveSteepPointB = nullptr;
+
+	// Negative slope
+	Vector2D<int>* negativeSteepPointA = nullptr;
+	Vector2D<int>* negativeSteepPointB = nullptr;
 
     // End of points representing test line for Octan 0
 
@@ -145,9 +118,9 @@ int main(int argc, char* argv[])
     bool close = false;
 
     //int temporary = 0;
-
-    prepareTestLines(YasGL::PositionInSpace::Q123_230, YasGL::PointsOrder::Normal, positivePointA, positivePointB, negativePointA, negativePointB, windowDimensions);
-
+    // Green positive ,-*` Red negative `*-,
+    prepareTestLines(YasGL::LineSlope::GENTLE, YasGL::PositionInSpace::Q123_230, YasGL::PointsOrder::REVERSE, positiveGentlePointA, positiveGentlePointB, negativeGentlePointA, negativeGentlePointB, windowDimensions);
+    prepareTestLines(YasGL::LineSlope::STEEP, YasGL::PositionInSpace::Q123_230, YasGL::PointsOrder::NORMAL, positiveSteepPointA, positiveSteepPointB, negativeSteepPointA, negativeSteepPointB, windowDimensions);
 
     while (!shouldApplicationStopRunning)
     {
@@ -212,27 +185,19 @@ int main(int argc, char* argv[])
 
             YasGL::drawCircle(circlePosition, circleRadius, pixels, circleColor, windowDimensions);
 
-   //         // Test Octan 0 (positive slope line / )
-   //         YasGL::lukeDrawLineOctanNEWEST(testLinePos_slope_Oct_0PointA, testLinePos_slope_Oct_0PointB, pixels, green, windowDimensions); // ok
-   //         
-   //         // Test Octan 4 (positive slope line / but direction to the left or Point A swaped with point B
-   //         YasGL::lukeDrawLineOctanNEWEST(testLinePos_slope_Oct_4PointA, testLinePos_slope_Oct_4PointB, pixels, white, windowDimensions); // ok
-   //         //YasGL::lukeDrawLineOctan4(mirroredA, mirroredB, pixels, white, windowDimensions);
+             //Gentle lines
+             //Positive
+            YasGL::lukeDrawLineOctanNEWEST(positiveGentlePointA, positiveGentlePointB, pixels, red, windowDimensions);
 
-			//// Test Octan 7 (negative slope line \ )
-			//YasGL::lukeDrawLineOctanNEWEST(testLinePos_slope_Oct_7PointA, testLinePos_slope_Oct_7PointB, pixels, red, windowDimensions); // ok
+             //Negative
+			YasGL::lukeDrawLineOctanNEWEST(negativeGentlePointA, negativeGentlePointB, pixels, green, windowDimensions);
 
-            // Positive
-            YasGL::lukeDrawLineOctanNEWEST(positivePointA, positivePointB, pixels, red, windowDimensions);
+            // Steep lines
+			// Positive
+			YasGL::lukeDrawLineOctanNEWEST(positiveSteepPointA, positiveSteepPointB, pixels, red, windowDimensions);
 
-            // Negative
-			YasGL::lukeDrawLineOctanNEWEST(negativePointA, negativePointB, pixels, green, windowDimensions);
-
-
-
-
-
-
+			// Negative
+			YasGL::lukeDrawLineOctanNEWEST(negativeSteepPointA, negativeSteepPointB, pixels, green, windowDimensions);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //YasGL::drawLine(testLinePos_slope_Oct_7PointA, testLinePos_slope_Oct_7PointB, pixels, testObjectsColor, windowDimensions);
@@ -250,7 +215,9 @@ int main(int argc, char* argv[])
 
         }
 
-        YasGL::deleteTestLines(positivePointA, positivePointB, negativePointA, negativePointB);
+
+        YasGL::deleteTestLines(positiveGentlePointA, positiveGentlePointB, negativeGentlePointA, negativeGentlePointB);
+        YasGL::deleteTestLines(positiveSteepPointA, positiveSteepPointB, negativeSteepPointA, negativeSteepPointB);
 
         delete[] pixels;
         glfwTerminate();

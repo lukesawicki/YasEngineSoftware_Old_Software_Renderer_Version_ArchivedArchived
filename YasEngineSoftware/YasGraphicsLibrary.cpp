@@ -50,7 +50,7 @@ namespace YasGL
     }
 
 
-	void prepareTestLines(PositionInSpace whichSpace, PointsOrder order, Vector2D<int>*& positivePointA, Vector2D<int>*& positivePointB, Vector2D<int>*& negativePointA, Vector2D<int>*& negativePointB, Vector2D<int>* windowDimensions)
+	void prepareTestLines(LineSlope lineSlope, PositionInSpace whichSpace, PointsOrder order, Vector2D<int>*& positivePointA, Vector2D<int>*& positivePointB, Vector2D<int>*& negativePointA, Vector2D<int>*& negativePointB, Vector2D<int>* windowDimensions)
 	{
 
         int quadrantsWidth = windowDimensions->x / 2;
@@ -60,16 +60,33 @@ namespace YasGL
         //---------
         // Q2 | Q3
 		// Positive slope
-		positivePointA = new Vector2D<int>(10, 5); //(25, 40);
-		positivePointB = new Vector2D<int>(370, 25);
+        if (lineSlope == LineSlope::GENTLE)
+        {
+            positivePointA = new Vector2D<int>(10, 5); //(25, 40);
+            positivePointB = new Vector2D<int>(370, 25);
+
+			negativePointA = new Vector2D<int>(10, 25); //(25, 40);
+			negativePointB = new Vector2D<int>(370, 5); //(256, 192);
+        }
+        else
+        {
+			positivePointA = new Vector2D<int>(7, 10); //(25, 40);
+			positivePointB = new Vector2D<int>(260, 360);
+
+			// Negative slope
+			negativePointA = new Vector2D<int>(7, 370); //(25, 40);
+			negativePointB = new Vector2D<int>(260,10); //(256, 192);
+
+            int x = 0;
+        }
+
 
 		// Negative slope
-		negativePointA = new Vector2D<int>(10, 25); //(25, 40);
-		negativePointB = new Vector2D<int>(384, 5); //(256, 192);
+
 		//Quadrant 0
 
         Vector2D<int>* temporaryVector = nullptr;
-        if (order == PointsOrder::Reverse)
+        if (order == PointsOrder::REVERSE)
         {
             temporaryVector = positivePointA;
             positivePointA = positivePointB;
@@ -363,7 +380,7 @@ namespace YasGL
         int deltaY = point1->y - point0->y;
         int cumulativeError = 0;
 
-        if(abs(deltaX) != abs(deltaY))
+        if (abs(deltaX) != abs(deltaY))
         {
             // Check if it is gentle slope
             if (abs(deltaX) > abs(deltaY))
@@ -477,129 +494,120 @@ namespace YasGL
                     }
 
                 }
-
-
-            }
-            else // it is steep slope
+            } // end gentle
+            else // it is steep slope  STEEP STEEP STEEP STEEP
             {
+		        if (deltaY < 0) 
+                { // STEEEEEEEEEP
 
-                if (deltaY < 0)
-                {
+			        // you have to swtich points that point0 is end of line and point1 i start of the line;
 
-                    // you have to swtich points that point0 is end of line and point1 i start of the line;
+			        // swtich x for for loop condition
+			        //temporaryForForLoopCondition = originalPoint0X;
+			        originalPoint0Y = point1->y;
+			        originalPoint1Y = point0->y;
 
-                    // swtich x for for loop condition
-                    //temporaryForForLoopCondition = originalPoint0X;
-                    originalPoint0X = point1->x;
-                    originalPoint1X = point0->x;
-
-                    // switch x for drawing
-                    x0 = point1->x;
-                    y0 = point1->y;
-
+			        // switch x for drawing
+			        x0 = point1->x;
+			        y0 = point1->y;
 
 
-                    if (deltaX > 0) // it is positive slope so it means octan 0 and points in correct order ( incorrect order is octan 4 )
-                    {
 
-                        deltaX = point0->x - point1->x;
-                        deltaY = point0->y - point1->y;
-                        for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
-                        {
-                            drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
-                            y0++;
-                            if ((2 * (cumulativeError + deltaX)) > -deltaY)
-                            {
-                                //y stays the same
-                                cumulativeError = cumulativeError + deltaX;
-                            }
-                            else
-                            {
-                                x0--;
-                                cumulativeError = cumulativeError + deltaX + deltaY; // actualy the same but i change it for steep to be consistent
-                            }
-                        }
+			        if (deltaX > 0) // it is positive slope so it means octan 0 and points in correct order ( incorrect order is octan 4 )
+			        {
 
-                    }
-                    else // it is negitive slope so it means octan 8 and points in "correct order" ( incorrect order is ocatn 3 )
-                    {
+				        deltaX = point0->x - point1->x;
+				        deltaY = point0->y - point1->y;
+				        for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
+				        {
+					        drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+					        y0++;
+					        if ((2 * (cumulativeError + deltaX)) > -deltaY)
+					        {
+						        //y stays the same
+						        cumulativeError = cumulativeError + deltaX;
+					        }
+					        else
+					        {
+						        x0--;
+						        cumulativeError = cumulativeError + deltaX + deltaY;
+					        }
+				        }
 
-                        deltaX = point0->x - point1->x;
-                        deltaY = point0->y - point1->y;
-                        for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
-                        {
-                            drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
-                            y0++;
-                            if ((2 * (cumulativeError + deltaX)) < deltaY)
-                            {
-                                //y stays the same
-                                cumulativeError = cumulativeError + deltaX;
-                            }
-                            else
-                            {
-                                x0++;
-                                cumulativeError = cumulativeError + deltaX - deltaY;
-                            }
-                        }
+			        }
+			        else // it is negitive slope so it means octan 8 and points in "correct order" ( incorrect order is ocatn 3 )
+			        {
 
-                    }
+				        deltaX = point0->x - point1->x;
+				        deltaY = point0->y - point1->y;
+				        for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
+				        {
+					        drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+					        y0++;
+					        if ((2 * (cumulativeError + deltaX)) < deltaY)
+					        {
+						        //y stays the same
+						        cumulativeError = cumulativeError + deltaX;
+					        }
+					        else
+					        {
+						        x0++;
+						        cumulativeError = cumulativeError + deltaX - deltaY;
+					        }
+				        }
 
-                }
-                else
-                {
+			        }
 
-                    if (deltaX > 0) // it is positive slope so it means octan 0 and points in correct order ( incorrect order is octan 4 )
-                    {
+		        }
+		        else
+		        {
 
-
-                        for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
-                        {
-                            drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
-                            y0++;
-                            if ((2 * (cumulativeError + deltaX)) < deltaY)
-                            {
-                                //y stays the same
-                                cumulativeError = cumulativeError + deltaX;
-                            }
-                            else
-                            {
-                                x0++;
-                                cumulativeError = cumulativeError + deltaX - deltaY;
-                            }
-                        }
-
-                    }
-                    else // it is negitive slope so it means octan 8 and points in "correct order" ( incorrect order is ocatn 3 )
-                    {
+			        if (deltaX > 0) // it is positive slope so it means octan 0 and points in correct order ( incorrect order is octan 4 )
+			        {
 
 
-                        for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
-                        {
-                            drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
-                            y0++;
-                            if ((2 * (cumulativeError + deltaX)) > -deltaY)
-                            {
-                                //y stays the same
-                                cumulativeError = cumulativeError + deltaX;
-                            }
-                            else
-                            {
-                                x0--;
-                                cumulativeError = cumulativeError + deltaX + deltaY;
-                            }
-                        }
+				        for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
+				        {
+					        drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+					        y0++;
+					        if ((2 * (cumulativeError + deltaX)) < deltaY)
+					        {
+						        //y stays the same
+						        cumulativeError = cumulativeError + deltaX;
+					        }
+					        else
+					        {
+						        x0++;
+						        cumulativeError = cumulativeError + deltaX - deltaY;
+					        }
+				        }
 
-                    }
+			        }
+			        else // it is negitive slope so it means octan 8 and points in "correct order" ( incorrect order is ocatn 3 )
+			        {
 
-                }
-            } // it is steep slope
 
+				        for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
+				        {
+					        drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+					        y0++;
+					        if ((2 * (cumulativeError + deltaX)) > -deltaY)
+					        {
+						        //y stays the same
+						        cumulativeError = cumulativeError + deltaX;
+					        }
+					        else
+					        {
+						        x0--;
+						        cumulativeError = cumulativeError + deltaX + deltaY;
+					        }
+				        }
+
+			        }
+
+		        }
+            }
         }
-        else 
-        {
-            // it is 45 degrees
-        }
-
     }
 
 
