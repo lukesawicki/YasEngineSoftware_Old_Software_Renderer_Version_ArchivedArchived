@@ -109,6 +109,14 @@ int main(int argc, char* argv[])
 	Vector2D<int>* pointA = new Vector2D<int>(30, 30); //(25, 40);
 	Vector2D<int>* pointB = new Vector2D<int>(500, 220); //(256, 192);
 
+    // Positive slope;
+    Vector2D<int>* positivePointA = nullptr;
+    Vector2D<int>* positivePointB = nullptr;
+
+	// Negative slope
+	Vector2D<int>* negativePointA = nullptr;
+	Vector2D<int>* negativePointB = nullptr;
+
     // End of points representing test line for Octan 0
 
     // Data required to draw simple square filled with color for tests
@@ -137,6 +145,10 @@ int main(int argc, char* argv[])
     bool close = false;
 
     //int temporary = 0;
+
+    prepareTestLines(YasGL::PositionInSpace::Q2, YasGL::PointsOrder::Normal, positivePointA, positivePointB, negativePointA, negativePointB, windowDimensions);
+
+
 
     while (!shouldApplicationStopRunning)
     {
@@ -201,40 +213,32 @@ int main(int argc, char* argv[])
 
             YasGL::drawCircle(circlePosition, circleRadius, pixels, circleColor, windowDimensions);
 
+   //         // Test Octan 0 (positive slope line / )
+   //         YasGL::lukeDrawLineOctanNEWEST(testLinePos_slope_Oct_0PointA, testLinePos_slope_Oct_0PointB, pixels, green, windowDimensions); // ok
+   //         
+   //         // Test Octan 4 (positive slope line / but direction to the left or Point A swaped with point B
+   //         YasGL::lukeDrawLineOctanNEWEST(testLinePos_slope_Oct_4PointA, testLinePos_slope_Oct_4PointB, pixels, white, windowDimensions); // ok
+   //         //YasGL::lukeDrawLineOctan4(mirroredA, mirroredB, pixels, white, windowDimensions);
 
-            // Test Octan 0 (positive slope line / )
-            YasGL::lukeDrawLineOctanNEWEST(testLinePos_slope_Oct_0PointA, testLinePos_slope_Oct_0PointB, pixels, green, windowDimensions); // ok
-            
-            // Test Octan 4 (positive slope line / but direction to the left or Point A swaped with point B
-            YasGL::lukeDrawLineOctanNEWEST(testLinePos_slope_Oct_4PointA, testLinePos_slope_Oct_4PointB, pixels, white, windowDimensions); // ok
-            //YasGL::lukeDrawLineOctan4(mirroredA, mirroredB, pixels, white, windowDimensions);
+			//// Test Octan 7 (negative slope line \ )
+			//YasGL::lukeDrawLineOctanNEWEST(testLinePos_slope_Oct_7PointA, testLinePos_slope_Oct_7PointB, pixels, red, windowDimensions); // ok
 
-			// Test Octan 7 (negative slope line \ )
-			YasGL::lukeDrawLineOctanNEWEST(testLinePos_slope_Oct_7PointA, testLinePos_slope_Oct_7PointB, pixels, red, windowDimensions); // failing
+            // Positive
+            YasGL::lukeDrawLineOctanNEWEST(positivePointA, positivePointB, pixels, red, windowDimensions);
+
+            // Negative
+			YasGL::lukeDrawLineOctanNEWEST(negativePointA, negativePointB, pixels, green, windowDimensions);
+
+
+
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //YasGL::drawLine(testLinePos_slope_Oct_7PointA, testLinePos_slope_Oct_7PointB, pixels, testObjectsColor, windowDimensions);
             //YasGL::lukeDrawLineOctan0_V2(mirroredA, mirroredB, pixels, testObjectsColor, windowDimensions);
-
             ////////////////////////YasGL::drawLine(testLinePos_slope_Oct_7PointA, testLinePos_slope_Oct_7PointB, pixels, yellow, windowDimensions); // Same as above but it is working
-
-			//// Octan 0A // here failing
-			//YasGL::lukeDrawLineOctan0_V2(testLinePos_slope_Oct_0APointA, testLinePos_slope_Oct_0APointB, pixels, testObjectsColor, windowDimensions);
-
-			//// Octan 7
-			//YasGL::lukeDrawLineOctan0_V2(testLinePos_slope_Oct_7PointA, testLinePos_slope_Oct_7PointB, pixels, testObjectsColor, windowDimensions);
-
-			//// Octan 7A
-			//YasGL::lukeDrawLineOctan0_V2(testLinePos_slope_Oct_7APointA, testLinePos_slope_Oct_7APointB, pixels, testObjectsColor, windowDimensions);
-
-   //         //testLine_slope_Oct_1PointA
-   //         YasGL::lukeDrawLineOctan0_V2(testLine_slope_Oct_1PointA, testLine_slope_Oct_1PointB, pixels, testObjectsColor, windowDimensions);
-
-
-
-            //YasGL::lukeDrawLineOctan0_V2(testLineNeg_slope_Oct_0PointA, testLineNeg_slope_Oct_0PointB, pixels, testObjectsColor, windowDimensions);
-            //
-            //YasGL::lukeDrawLineOctan0_V2(testLineBpos_slope_Oct_0PointA, testLineBpos_slope_Oct_0PointB, pixels, testObjectsColor2, windowDimensions);
-
-
             //YasGL::simplestNiveLineDraw(pointA, pointB, pixels, yellow, windowDimensions);
             //YasGL::simplestNiveLineDraw(testLinePos_slope_Oct_4PointA, testLinePos_slope_Oct_4PointB, pixels, yellow, windowDimensions);
 
@@ -246,6 +250,8 @@ int main(int argc, char* argv[])
             glfwPollEvents();
 
         }
+
+        YasGL::deleteTestLines(positivePointA, positivePointB, negativePointA, negativePointB);
 
         delete[] pixels;
         glfwTerminate();

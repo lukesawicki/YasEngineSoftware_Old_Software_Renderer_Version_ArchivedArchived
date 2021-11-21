@@ -24,7 +24,15 @@ namespace YasGL
 	const Vector4D<uint8_t> BLUE(0, 0, 255, 0);
 	const Vector4D<uint8_t> BLACK(0, 0, 0, 0);
 
-    const float dl = 3.125e-3;
+    const float dl = 3.125e-3F;
+
+
+	enum class PointsOrder { Normal, Reverse };
+	enum class PositionInSpace { Q0, Q1, Q2, Q3, Q10, Q23, Q12, Q03, Q123, Q230 };
+
+	void prepareTestLines(PositionInSpace whichSpace, PointsOrder order, Vector2D<int>*& positivePointA, Vector2D<int>*& positivePointB, Vector2D<int>*& negativePointA, Vector2D<int>*& negativePointB, Vector2D<int>* windowDimensions);
+    void modifyTestPoints(Vector2D<int>* positivePointA, Vector2D<int>* positivePointB, Vector2D<int>* negativePointA, Vector2D<int>* negativePointB, int positiveXmodifier, int positiveYmodifier, int negativeXmodifier, int negativeYmodifier);
+    void deleteTestLines(Vector2D<int>*& positivePointA, Vector2D<int>*& positivePointB, Vector2D<int>*& negativePointA, Vector2D<int>*& negativePointB);
 
     void clearColor(uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
 
