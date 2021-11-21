@@ -224,9 +224,14 @@ namespace YasGL
     void lukeDrawLineOctanNEWEST(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
     {
         int x0 = point0->x;
-        int originalPoint0X = point0->x;
         int y0 = point0->y;
+
+        int originalPoint0X = point0->x;
+        int originalPoint0Y = point0->y;
+
         int originalPoint1X = point1->x;
+        int originalPoint1Y = point1->y;
+
         int deltaX = point1->x - point0->x;
         int deltaY = point1->y - point0->y;
         int cumulativeError = 0;
