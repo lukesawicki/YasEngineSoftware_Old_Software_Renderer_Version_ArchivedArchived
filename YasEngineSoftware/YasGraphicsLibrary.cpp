@@ -14,7 +14,7 @@ namespace YasGL
         for (int y = 0; y < windowDimensions->y; y++)
         {
             for (int x = 0; x < windowDimensions->x; x++)
-            {///
+            {
                 pixels[NUMBER_OF_COLORS * (y * windowDimensions->x + x) + RED_POSITION] = 0; // windowDimensions->x <- WINDOW WIDTH
                 pixels[NUMBER_OF_COLORS * (y * windowDimensions->x + x) + GREEN_POSITION] = 0;
                 pixels[NUMBER_OF_COLORS * (y * windowDimensions->x + x) + BLUE_POSITION] = 0;
@@ -49,10 +49,8 @@ namespace YasGL
         }
     }
 
-
-	void prepareTestLines(LineSlope lineSlope, PositionInSpace whichSpace, PointsOrder order, Vector2D<int>*& positivePointA, Vector2D<int>*& positivePointB, Vector2D<int>*& negativePointA, Vector2D<int>*& negativePointB, Vector2D<int>* windowDimensions)
+	void prepareTestLines(LineSlope lineSlope, PositionInSpace whichSpace, PointsOrder order, Vector2D<int>*& positivePointA, Vector2D<int>*& positivePointB,Vector2D<int>*& negativePointA, Vector2D<int>*& negativePointB, Vector2D<int>* windowDimensions)
 	{
-
         int quadrantsWidth = windowDimensions->x / 2;
         int quadrantsHeight = windowDimensions->y / 2;
 
@@ -60,27 +58,53 @@ namespace YasGL
         //---------
         // Q2 | Q3
 		// Positive slope
-        if (lineSlope == LineSlope::GENTLE)
+
+        switch (lineSlope)
         {
-            positivePointA = new Vector2D<int>(10, 5); //(25, 40);
-            positivePointB = new Vector2D<int>(370, 25);
+            case LineSlope::GENTLE:
+			{
+				positivePointA = new Vector2D<int>(10, 5); //(25, 40);
+				positivePointB = new Vector2D<int>(370, 25);
 
-			negativePointA = new Vector2D<int>(10, 25); //(25, 40);
-			negativePointB = new Vector2D<int>(370, 5); //(256, 192);
+				negativePointA = new Vector2D<int>(10, 25); //(25, 40);
+				negativePointB = new Vector2D<int>(370, 5); //(256, 192);
+                break;
+			}
+
+            case LineSlope::STEEP:
+		    {
+		        positivePointA = new Vector2D<int>(7, 10); //(25, 40);
+		        positivePointB = new Vector2D<int>(260, 360);
+
+		        // Negative slope
+		        negativePointA = new Vector2D<int>(7, 370); //(25, 40);
+		        negativePointB = new Vector2D<int>(260, 10); //(256, 192);
+
+		        int x = 0;
+                break;
+		    }
+
+			case LineSlope::HORIZONTAL:
+			{
+				positivePointA = new Vector2D<int>(-windowDimensions->x / 3, windowDimensions->y / 3);
+				positivePointB = new Vector2D<int>(windowDimensions->x / 3, windowDimensions->y / 3);
+
+				negativePointA = new Vector2D<int>(-windowDimensions->x / 3, windowDimensions->y / 3);
+				negativePointB = new Vector2D<int>(windowDimensions->x / 3, windowDimensions->y / 3);
+				break;
+			}
+
+			case LineSlope::VERTICAL:
+			{
+                positivePointA = new Vector2D<int>(windowDimensions->x / 3, windowDimensions->y / 3);
+                positivePointB = new Vector2D<int>(windowDimensions->x / 3, -windowDimensions->y / 3);
+
+				negativePointA = new Vector2D<int>(windowDimensions->x / 3, windowDimensions->y / 3);
+				negativePointB = new Vector2D<int>(windowDimensions->x / 3, -windowDimensions->y / 3);
+				break;
+			}
         }
-        else
-        {
-			positivePointA = new Vector2D<int>(7, 10); //(25, 40);
-			positivePointB = new Vector2D<int>(260, 360);
-
-			// Negative slope
-			negativePointA = new Vector2D<int>(7, 370); //(25, 40);
-			negativePointB = new Vector2D<int>(260,10); //(256, 192);
-
-            int x = 0;
-        }
-
-
+        
 		// Negative slope
 
 		//Quadrant 0
@@ -152,11 +176,31 @@ namespace YasGL
 				positivePointA->y = positivePointA->y - quadrantsHeight / 18;
 				positivePointB->x = positivePointB->x - quadrantsWidth / 2;
 				positivePointB->y = positivePointB->y - quadrantsHeight / 18;
-
+                break;
             }
-            break; 
+
+            case PositionInSpace::Q10_H:
+            {
+			    //positivePointA = new Vector2D<int>(-windowDimensions->x / 2, windowDimensions->y / 2);
+			    //positivePointB = new Vector2D<int>(windowDimensions->x / 2, windowDimensions->y / 2);
+
+       //         negativePointB = new Vector2D<int>(-windowDimensions->x / 2, windowDimensions->y / 3);
+       //         negativePointB = new Vector2D<int>(windowDimensions->x / 2, windowDimensions->y / 3);
+			    break;
+            }
+
+            case PositionInSpace::Q12_V:
+			{
+				//positivePointA = new Vector2D<int>(-windowDimensions->x / 2, windowDimensions->y / 2);
+				//positivePointB = new Vector2D<int>(-windowDimensions->x / 2, -windowDimensions->y / 2);
+
+				//negativePointB = new Vector2D<int>(-windowDimensions->x / 2, windowDimensions->y / 3);
+				//negativePointB = new Vector2D<int>(-windowDimensions->x / 2, -windowDimensions->y / 3);
+				break;
+			}
 
             default:
+            {
                 // Positive slope
                 positivePointA = new Vector2D<int>(10, 5); //(25, 40);
                 positivePointB = new Vector2D<int>(370, 25);
@@ -164,7 +208,8 @@ namespace YasGL
                 // Negative slope
                 negativePointA = new Vector2D<int>(10, 25); //(25, 40);
                 negativePointB = new Vector2D<int>(384, 5); //(256, 192);
-            break;
+                break;
+            }
         }
 	}
 
@@ -222,7 +267,6 @@ namespace YasGL
                 difference = difference + 2 * deltaY;
             }
         }
-
     }
 
     void drawSteepSlopeLine(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
@@ -376,6 +420,9 @@ namespace YasGL
         int originalPoint1X = point1->x;
         int originalPoint1Y = point1->y;
 
+        Vector2D<int>* copyPoint0 = new Vector2D<int>(point0->x, point0->y);
+        Vector2D<int>* copyPoint1 = new Vector2D<int>(point1->x, point1->y);
+
         int deltaX = point1->x - point0->x;
         int deltaY = point1->y - point0->y;
         int cumulativeError = 0;
@@ -385,9 +432,8 @@ namespace YasGL
             // Check if it is gentle slope
             if (abs(deltaX) > abs(deltaY))
             {
-
-                if (deltaX < 0) {
-
+                if (deltaX < 0)
+                {
                     // you have to swtich points that point0 is end of line and point1 i start of the line;
 
                     // swtich x for for loop condition
@@ -399,11 +445,8 @@ namespace YasGL
                     x0 = point1->x;
                     y0 = point1->y;
 
-
-
                     if (deltaY > 0) // it is positive slope so it means octan 0 and points in correct order ( incorrect order is octan 4 )
                     {
-
                         deltaX = point0->x - point1->x;
                         deltaY = point0->y - point1->y;
                         for (int i = originalPoint0X; i <= originalPoint1X; i++)
@@ -421,11 +464,9 @@ namespace YasGL
                                 cumulativeError = cumulativeError + deltaY + deltaX;
                             }
                         }
-
                     }
                     else // it is negitive slope so it means octan 8 and points in "correct order" ( incorrect order is ocatn 3 )
                     {
-
                         deltaX = point0->x - point1->x;
                         deltaY = point0->y - point1->y;
                         for (int i = originalPoint0X; i <= originalPoint1X; i++)
@@ -443,17 +484,13 @@ namespace YasGL
                                 cumulativeError = cumulativeError + deltaY - deltaX;
                             }
                         }
-
                     }
-
                 }
                 else
                 {
 
                     if (deltaY > 0) // it is positive slope so it means octan 0 and points in correct order ( incorrect order is octan 4 )
                     {
-
-
                         for (int i = originalPoint0X; i <= originalPoint1X; i++)
                         {
                             drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
@@ -469,12 +506,9 @@ namespace YasGL
                                 cumulativeError = cumulativeError + deltaY - deltaX;
                             }
                         }
-
                     }
                     else // it is negitive slope so it means octan 8 and points in "correct order" ( incorrect order is ocatn 3 )
                     {
-
-
                         for (int i = originalPoint0X; i <= originalPoint1X; i++)
                         {
                             drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
@@ -490,18 +524,15 @@ namespace YasGL
                                 cumulativeError = cumulativeError + deltaY + deltaX;
                             }
                         }
-
                     }
-
                 }
             } // end gentle
             else // it is steep slope  STEEP STEEP STEEP STEEP
             {
 		        if (deltaY < 0) 
-                { // STEEEEEEEEEP
-
+                {
+                    // STEEEEEEEEEP
 			        // you have to swtich points that point0 is end of line and point1 i start of the line;
-
 			        // swtich x for for loop condition
 			        //temporaryForForLoopCondition = originalPoint0X;
 			        originalPoint0Y = point1->y;
@@ -511,11 +542,8 @@ namespace YasGL
 			        x0 = point1->x;
 			        y0 = point1->y;
 
-
-
 			        if (deltaX > 0) // it is positive slope so it means octan 0 and points in correct order ( incorrect order is octan 4 )
 			        {
-
 				        deltaX = point0->x - point1->x;
 				        deltaY = point0->y - point1->y;
 				        for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
@@ -533,11 +561,9 @@ namespace YasGL
 						        cumulativeError = cumulativeError + deltaX + deltaY;
 					        }
 				        }
-
 			        }
 			        else // it is negitive slope so it means octan 8 and points in "correct order" ( incorrect order is ocatn 3 )
 			        {
-
 				        deltaX = point0->x - point1->x;
 				        deltaY = point0->y - point1->y;
 				        for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
@@ -555,17 +581,12 @@ namespace YasGL
 						        cumulativeError = cumulativeError + deltaX - deltaY;
 					        }
 				        }
-
 			        }
-
 		        }
 		        else
 		        {
-
 			        if (deltaX > 0) // it is positive slope so it means octan 0 and points in correct order ( incorrect order is octan 4 )
 			        {
-
-
 				        for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
 				        {
 					        drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
@@ -581,12 +602,9 @@ namespace YasGL
 						        cumulativeError = cumulativeError + deltaX - deltaY;
 					        }
 				        }
-
 			        }
 			        else // it is negitive slope so it means octan 8 and points in "correct order" ( incorrect order is ocatn 3 )
 			        {
-
-
 				        for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
 				        {
 					        drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
@@ -602,14 +620,59 @@ namespace YasGL
 						        cumulativeError = cumulativeError + deltaX + deltaY;
 					        }
 				        }
-
 			        }
-
 		        }
+            }
+            if(deltaX == 0) // It is straight line where x is constant. So draw simple line from y0 to y1
+            {
+                if (copyPoint0->y > copyPoint1->y)
+                {
+                    swapVectors(copyPoint0, copyPoint1);
+                }
+                for (int i = copyPoint0->y; i <= copyPoint1->y; i++ )
+                {
+                    drawPoint(copyPoint0->x, i, pixels, drawingColor, windowDimensions);
+                }
+            }
+            else // deltaY == 0 It is straight line where y is constant. So draw simple line from x0 to x1
+            { 
+				if (copyPoint0->x > copyPoint1->x)
+				{
+					swapVectors(copyPoint0, copyPoint1);
+				}
+				for (int i = copyPoint0->x; i <= copyPoint1->x; i++)
+				{
+					drawPoint(i, copyPoint0->y, pixels, drawingColor, windowDimensions);
+				}
+            }
+        }
+        else
+        {
+            if (deltaX == 0 && deltaY == 0) // if both are equals 0 just draw point.
+            {
+                drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+            }
+            else
+            {
+				if (copyPoint0->x > copyPoint1->x)
+				{
+					swapVectors(copyPoint0, copyPoint1);
+				}
+                for (int i = point0->x; i <= point1->x; i++)
+                {
+                    drawPoint(i, i, pixels, drawingColor, windowDimensions);
+                }
             }
         }
     }
 
+    void swapVectors(Vector2D<int>* point0, Vector2D<int>* point1)
+    {
+        Vector2D<int>* tmpVector;
+        tmpVector = point0;
+        point0 = point1;
+        point1 = tmpVector;
+    }
 
     // This is instead writing more options in lukeDrawLineOctan0_V2 - for learning poprose of course
     void lukeDrawLineOctan7(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)

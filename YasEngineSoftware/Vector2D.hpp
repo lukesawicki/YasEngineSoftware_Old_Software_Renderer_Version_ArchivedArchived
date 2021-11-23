@@ -19,7 +19,8 @@ public:
         this->x = x;
         this->y = y;
     }
-	//Vector2D(const Vector2D<Type> &point)
+
+	//Vector2D(const Vector2D<int>& point)
 	//{
 	//	this->x = point.x;
 	//	this->y = point.y;

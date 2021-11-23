@@ -90,6 +90,28 @@ int main(int argc, char* argv[])
 	Vector2D<int>* negativeSteepPointA = nullptr;
 	Vector2D<int>* negativeSteepPointB = nullptr;
 
+    // Horizontal line
+	Vector2D<int>* horizontalLinePointA = nullptr;
+	Vector2D<int>* horizontalLinePointB = nullptr;
+
+	Vector2D<int>* horizontalLineBPointA = nullptr;
+	Vector2D<int>* horizontalLineBPointB = nullptr;
+
+    // Vertical line
+	Vector2D<int>* verticalLinePointA = nullptr;
+	Vector2D<int>* verticalLinePointB = nullptr;
+
+	Vector2D<int>* verticalLineBPointA = nullptr;
+	Vector2D<int>* verticalLineBPointB = nullptr;
+
+	Vector2D<int>* line45degreePointA = new Vector2D<int>(100, 100);
+	Vector2D<int>* line45degreePointB = new Vector2D<int>(10, 10);
+
+	Vector2D<int>* lineB45degreePointA = new Vector2D<int>(-10, -10);
+	Vector2D<int>* lineB45degreePointB = new Vector2D<int>(-100, -100);
+
+
+
     // End of points representing test line for Octan 0
 
     // Data required to draw simple square filled with color for tests
@@ -119,8 +141,12 @@ int main(int argc, char* argv[])
 
     //int temporary = 0;
     // Green positive ,-*` Red negative `*-,
-    prepareTestLines(YasGL::LineSlope::GENTLE, YasGL::PositionInSpace::Q123_230, YasGL::PointsOrder::REVERSE, positiveGentlePointA, positiveGentlePointB, negativeGentlePointA, negativeGentlePointB, windowDimensions);
-    prepareTestLines(YasGL::LineSlope::STEEP, YasGL::PositionInSpace::Q123_230, YasGL::PointsOrder::NORMAL, positiveSteepPointA, positiveSteepPointB, negativeSteepPointA, negativeSteepPointB, windowDimensions);
+    
+
+    //prepareTestLines(YasGL::LineSlope::GENTLE, YasGL::PositionInSpace::Q123_230, YasGL::PointsOrder::REVERSE, positiveGentlePointA, positiveGentlePointB, negativeGentlePointA, negativeGentlePointB, windowDimensions);
+    //prepareTestLines(YasGL::LineSlope::STEEP, YasGL::PositionInSpace::Q123_230, YasGL::PointsOrder::NORMAL, positiveSteepPointA, positiveSteepPointB, negativeSteepPointA, negativeSteepPointB, windowDimensions);
+    prepareTestLines(YasGL::LineSlope::HORIZONTAL, YasGL::PositionInSpace::Q10_H, YasGL::PointsOrder::NORMAL, horizontalLinePointA, horizontalLinePointB, horizontalLineBPointA, horizontalLineBPointB, windowDimensions);
+    prepareTestLines(YasGL::LineSlope::VERTICAL, YasGL::PositionInSpace::Q12_V, YasGL::PointsOrder::NORMAL, verticalLinePointA, verticalLinePointB, verticalLineBPointA, verticalLineBPointB, windowDimensions);
 
     while (!shouldApplicationStopRunning)
     {
@@ -187,17 +213,45 @@ int main(int argc, char* argv[])
 
              //Gentle lines
              //Positive
-            YasGL::lukeDrawLineOctanNEWEST(positiveGentlePointA, positiveGentlePointB, pixels, red, windowDimensions);
+            //YasGL::lukeDrawLineOctanNEWEST(positiveGentlePointA, positiveGentlePointB, pixels, red, windowDimensions);
 
-             //Negative
-			YasGL::lukeDrawLineOctanNEWEST(negativeGentlePointA, negativeGentlePointB, pixels, green, windowDimensions);
+            ////Negative
+			//YasGL::lukeDrawLineOctanNEWEST(negativeGentlePointA, negativeGentlePointB, pixels, green, windowDimensions);
 
             // Steep lines
 			// Positive
-			YasGL::lukeDrawLineOctanNEWEST(positiveSteepPointA, positiveSteepPointB, pixels, red, windowDimensions);
+			//YasGL::lukeDrawLineOctanNEWEST(positiveSteepPointA, positiveSteepPointB, pixels, red, windowDimensions);
 
-			// Negative
-			YasGL::lukeDrawLineOctanNEWEST(negativeSteepPointA, negativeSteepPointB, pixels, green, windowDimensions);
+			//// Negative
+			//YasGL::lukeDrawLineOctanNEWEST(negativeSteepPointA, negativeSteepPointB, pixels, green, windowDimensions);
+
+            //YasGL::lukeDrawLineOctanNEWEST(negativeSteepPointA, negativeSteepPointB, pixels, green, windowDimensions);
+
+			
+   //         // Horizontal line
+			//Vector2D<int>* horizontalLinePointA = nullptr;
+			//Vector2D<int>* horizontalLinePointB = nullptr;
+
+			//Vector2D<int>* horizontalLineBPointA = nullptr;
+			//Vector2D<int>* horizontalLineBPointB = nullptr;
+
+			//// Vertical line
+			//Vector2D<int>* verticalLinePointA = nullptr;
+			//Vector2D<int>* verticalLinePointB = nullptr;
+
+			//Vector2D<int>* verticalLineBPointA = nullptr;
+			//Vector2D<int>* verticalLineBPointB = nullptr;
+
+
+				// Horizontal line
+            YasGL::lukeDrawLineOctanNEWEST(horizontalLinePointA, horizontalLinePointB, pixels, red, windowDimensions);
+            YasGL::lukeDrawLineOctanNEWEST(horizontalLineBPointA, horizontalLineBPointB, pixels, red, windowDimensions);
+
+            YasGL::lukeDrawLineOctanNEWEST(verticalLinePointA, verticalLinePointB, pixels, yellow, windowDimensions);
+            YasGL::lukeDrawLineOctanNEWEST(verticalLineBPointA, verticalLineBPointB, pixels, white, windowDimensions);
+
+            YasGL::lukeDrawLineOctanNEWEST(line45degreePointA, line45degreePointB, pixels, red, windowDimensions);
+            YasGL::lukeDrawLineOctanNEWEST(lineB45degreePointA, lineB45degreePointB, pixels, green, windowDimensions);
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             //YasGL::drawLine(testLinePos_slope_Oct_7PointA, testLinePos_slope_Oct_7PointB, pixels, testObjectsColor, windowDimensions);
@@ -215,9 +269,18 @@ int main(int argc, char* argv[])
 
         }
 
-
         YasGL::deleteTestLines(positiveGentlePointA, positiveGentlePointB, negativeGentlePointA, negativeGentlePointB);
         YasGL::deleteTestLines(positiveSteepPointA, positiveSteepPointB, negativeSteepPointA, negativeSteepPointB);
+
+		YasGL::deleteTestLines(horizontalLinePointA, horizontalLinePointB, horizontalLineBPointA, horizontalLineBPointB);
+		YasGL::deleteTestLines(verticalLinePointA, verticalLinePointB, verticalLineBPointA, verticalLineBPointB);
+
+		delete line45degreePointA;
+		delete line45degreePointB;
+
+		delete lineB45degreePointA;
+		delete lineB45degreePointB;
+
 
         delete[] pixels;
         glfwTerminate();
