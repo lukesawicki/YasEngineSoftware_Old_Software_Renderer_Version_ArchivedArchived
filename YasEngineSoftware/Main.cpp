@@ -105,7 +105,7 @@ int main(int argc, char* argv[])
 	Vector2D<int>* verticalLineBPointB = nullptr;
 
 	Vector2D<int>* line45degreePointA = new Vector2D<int>(100, 100);
-	Vector2D<int>* line45degreePointB = new Vector2D<int>(10, 10);
+	Vector2D<int>* line45degreePointB = new Vector2D<int>(0, 0);
 
 	Vector2D<int>* lineB45degreePointA = new Vector2D<int>(-10, -10);
 	Vector2D<int>* lineB45degreePointB = new Vector2D<int>(-100, -100);

@@ -99,8 +99,8 @@ namespace YasGL
                 positivePointA = new Vector2D<int>(windowDimensions->x / 3, windowDimensions->y / 3);
                 positivePointB = new Vector2D<int>(windowDimensions->x / 3, -windowDimensions->y / 3);
 
-				negativePointA = new Vector2D<int>(windowDimensions->x / 3, windowDimensions->y / 3);
-				negativePointB = new Vector2D<int>(windowDimensions->x / 3, -windowDimensions->y / 3);
+				negativePointA = new Vector2D<int>(windowDimensions->x / 4, windowDimensions->y / 4);
+				negativePointB = new Vector2D<int>(windowDimensions->x / 4, -windowDimensions->y / 4);
 				break;
 			}
         }
@@ -658,12 +658,17 @@ namespace YasGL
 				{
 					swapVectors(copyPoint0, copyPoint1);
 				}
-                for (int i = point0->x; i <= point1->x; i++)
+                int absDeltaX = abs(point1->x - point0->x);
+                int i = 0;
+                while(i < absDeltaX)
                 {
-                    drawPoint(i, i, pixels, drawingColor, windowDimensions);
+                    drawPoint(copyPoint0->x+i, copyPoint0->y+i, pixels, drawingColor, windowDimensions);
+                    i++;
                 }
             }
         }
+        delete copyPoint0;
+        delete copyPoint1;
     }
 
     void swapVectors(Vector2D<int>* point0, Vector2D<int>* point1)
