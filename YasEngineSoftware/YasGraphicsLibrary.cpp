@@ -654,19 +654,28 @@ namespace YasGL
             }
             else
             {
-				if (copyPoint0->x > copyPoint1->x)
-				{
-					swapVectors(copyPoint0, copyPoint1);
-				}
                 int absDeltaX = abs(point1->x - point0->x);
                 int i = 0;
-                while(i < absDeltaX)
+				if (copyPoint0->x > copyPoint1->x)
+				{
+                    i = -absDeltaX;
+					while (i < 0)
+					{
+						drawPoint(copyPoint0->x + i, copyPoint0->y + i, pixels, drawingColor, windowDimensions);
+						i++;
+					}
+				}
+                else
                 {
-                    drawPoint(copyPoint0->x+i, copyPoint0->y+i, pixels, drawingColor, windowDimensions);
-                    i++;
+                    while (i < absDeltaX)
+                    {
+                        drawPoint(copyPoint0->x + i, copyPoint0->y + i, pixels, drawingColor, windowDimensions);
+                        i++;
+                    }
                 }
             }
         }
+
         delete copyPoint0;
         delete copyPoint1;
     }
