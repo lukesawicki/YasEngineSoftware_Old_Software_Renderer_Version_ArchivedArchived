@@ -654,25 +654,43 @@ namespace YasGL
             }
             else
             {
-                int absDeltaX = abs(point1->x - point0->x);
+				int absDeltaX = abs(copyPoint1->x - copyPoint0->x);
+				// Positive line
                 int i = 0;
-				if (copyPoint0->x > copyPoint1->x)
+				if (copyPoint0->x < copyPoint1->x && copyPoint0->y < copyPoint1->y)
 				{
-                    i = -absDeltaX;
-					while (i < 0)
+					while (i < absDeltaX)
 					{
 						drawPoint(copyPoint0->x + i, copyPoint0->y + i, pixels, drawingColor, windowDimensions);
 						i++;
 					}
 				}
-                else
-                {
+				if (copyPoint1->x < copyPoint0->x && copyPoint0->y > copyPoint1->y)
+				{
                     while (i < absDeltaX)
-                    {
-                        drawPoint(copyPoint0->x + i, copyPoint0->y + i, pixels, drawingColor, windowDimensions);
-                        i++;
-                    }
-                }
+					{
+						drawPoint(copyPoint1->x + i, copyPoint1->y + i, pixels, drawingColor, windowDimensions);
+						i++;
+					}
+				}
+
+				// Negative line
+				if (copyPoint0->x < copyPoint1->x && copyPoint0->y > copyPoint1->y)
+				{
+					while (i < absDeltaX)
+					{
+						drawPoint(copyPoint0->x + i, copyPoint0->y - i, pixels, drawingColor, windowDimensions);
+						i++;
+					}
+				}
+				if (copyPoint1->x < copyPoint0->x && copyPoint1->y > copyPoint0->y)
+				{
+					while (i < absDeltaX)
+					{
+						drawPoint(copyPoint1->x + i, copyPoint1->y - i, pixels, drawingColor, windowDimensions);
+						i++;
+					}
+				}
             }
         }
 
@@ -686,6 +704,7 @@ namespace YasGL
         tmpVector = point0;
         point0 = point1;
         point1 = tmpVector;
+        std::cout << point0->x << point1->x << std::endl;
     }
 
     // This is instead writing more options in lukeDrawLineOctan0_V2 - for learning poprose of course

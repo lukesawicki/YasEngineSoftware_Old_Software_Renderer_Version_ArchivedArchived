@@ -18,6 +18,8 @@ int main(int argc, char* argv[])
 	const int WINDOW_WIDTH = 1024;
 	const int WINDOW_HEIGHT = 768;
     Vector2D<int>* windowDimensions = new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
+    GLFWwindow* window;
+
 	const int RGBA = 4;
 	Vector4D<uint8_t>* red = new Vector4D<uint8_t>(255, 0, 0, 255);
 	Vector4D<uint8_t>* green = new Vector4D<uint8_t>(0, 255, 0, 255);
@@ -26,11 +28,8 @@ int main(int argc, char* argv[])
     Vector4D<uint8_t>* white = new Vector4D<uint8_t>(255, 255, 255, 255);
     Vector4D<uint8_t>* yellow = new Vector4D<uint8_t>(255, 255, 0, 255);
     Vector4D<uint8_t>* testObjectsColor = new Vector4D<uint8_t>(255, 242, 0, 255);
-
     Vector4D<uint8_t>* testObjectsColor2 = new Vector4D<uint8_t>(255, 174, 201, 255);
 
-	GLFWwindow* window;
-    
     // Points that to draw axies
 	Vector2D<int>* xAxiesBegin = new Vector2D<int>(0, WINDOW_HEIGHT / 2);
 	Vector2D<int>* xAxiesEnd = new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT / 2);
@@ -64,11 +63,6 @@ int main(int argc, char* argv[])
 
 	Vector2D<int>* circlePosition = new Vector2D<int>(0, 0);
 
-    ////
-    //Vector2D<int>* circlePosition = new Vector2D<int>(250, 50); // defined in Cartesian coordination system it's mean the center of window is 0,0. The x increasing to right and y up.
-    //YasGL::cartesianPositionToWindow(circlePosition, windowDimensions);
-    ////
-
     bool switched = false;
     // End of data defined Circle for drawing circle for varied tests
 
@@ -79,8 +73,6 @@ int main(int argc, char* argv[])
 	// Negative slope
 	Vector2D<int>* negativeGentlePointA = nullptr;
 	Vector2D<int>* negativeGentlePointB = nullptr;
-
-    // STEEP
 
 	// Positive slope;
     Vector2D<int>* positiveSteepPointA = nullptr;
@@ -104,22 +96,22 @@ int main(int argc, char* argv[])
 	Vector2D<int>* verticalLineBPointA = nullptr;
 	Vector2D<int>* verticalLineBPointB = nullptr;
 
-	Vector2D<int>* line45degreePointA = new Vector2D<int>(300, 300);
-	Vector2D<int>* line45degreePointB = new Vector2D<int>(100, 100);
+    // 45 degree line RED
+	Vector2D<int>* line45degreePointA = new Vector2D<int>(100, 100);
+	Vector2D<int>* line45degreePointB = new Vector2D<int>(50, 50);
 
-	Vector2D<int>* lineB45degreePointA = new Vector2D<int>(50, -150);
-	Vector2D<int>* lineB45degreePointB = new Vector2D<int>(250, -350);
-
-    // End of points representing test line for Octan 0
+    // 45 degree line GREEN
+	Vector2D<int>* lineB45degreePointA = new Vector2D<int>(250, -350);
+	Vector2D<int>* lineB45degreePointB = new Vector2D<int>(50, -150);
+	//Vector2D<int>* lineB45degreePointA = new Vector2D<int>(250, -350);
+	//Vector2D<int>* lineB45degreePointB = new Vector2D<int>(50, -150);
 
     // Data required to draw simple square filled with color for tests
 	Vector4D<uint8_t> *squareColor = new Vector4D<uint8_t>(0, 0, 255, 255);
 	Vector2D<int> *positions = new Vector2D<int>(0, 0);
     // End of data required to draw simple square filled with color for tests
 
-
     bool shouldApplicationStopRunning = false;
-
 
     double time;
     double newTime;
@@ -133,12 +125,8 @@ int main(int argc, char* argv[])
 
     fpsTime = 0.0F;
     frames = 0;
-
-
     bool close = false;
 
-    //int temporary = 0;
-    // Green positive ,-*` Red negative `*-,
     
 
     //prepareTestLines(YasGL::LineSlope::GENTLE, YasGL::PositionInSpace::Q123_230, YasGL::PointsOrder::REVERSE, positiveGentlePointA, positiveGentlePointB, negativeGentlePointA, negativeGentlePointB, windowDimensions);
@@ -173,9 +161,7 @@ int main(int argc, char* argv[])
             
             YasGL::clearColor(pixels, black, windowDimensions);
 
-			// Drawing AXIES
 			YasGL::drawCartesianAxies(windowDimensions, pixels);
-			// END Drawing AXIES
 
             // In real-time Generating CIRCLE
             circlePosition->x = static_cast<int>(circlePosition->x + deltaTime * circleSpeed);
@@ -190,17 +176,11 @@ int main(int argc, char* argv[])
                 circleSpeed = circleSpeed * -1;
                 circlePosition->x = 512 - circleRadius;
             }
-            // END Generating CIRCLE
-            // 
 
 			for (int i = 0; i < 100; i++)
             {
 				for (int j = 0; j < 100; j++)
                 {
-                   /* ++temporary;
-                    if (i == j) {
-                        std::cout << "I: " << i << " J: " << j << " Pixel value on first position (RGBA): " << pixels[i] << " temporary " << temporary;
-                    }*/
                     positions->x = i;
                     positions->y = j;
 					YasGL::drawPoint(positions, pixels, squareColor, windowDimensions);
@@ -209,39 +189,6 @@ int main(int argc, char* argv[])
 
             YasGL::drawCircle(circlePosition, circleRadius, pixels, circleColor, windowDimensions);
 
-             //Gentle lines
-             //Positive
-            //YasGL::lukeDrawLineOctanNEWEST(positiveGentlePointA, positiveGentlePointB, pixels, red, windowDimensions);
-
-            ////Negative
-			//YasGL::lukeDrawLineOctanNEWEST(negativeGentlePointA, negativeGentlePointB, pixels, green, windowDimensions);
-
-            // Steep lines
-			// Positive
-			//YasGL::lukeDrawLineOctanNEWEST(positiveSteepPointA, positiveSteepPointB, pixels, red, windowDimensions);
-
-			//// Negative
-			//YasGL::lukeDrawLineOctanNEWEST(negativeSteepPointA, negativeSteepPointB, pixels, green, windowDimensions);
-
-            //YasGL::lukeDrawLineOctanNEWEST(negativeSteepPointA, negativeSteepPointB, pixels, green, windowDimensions);
-
-			
-   //         // Horizontal line
-			//Vector2D<int>* horizontalLinePointA = nullptr;
-			//Vector2D<int>* horizontalLinePointB = nullptr;
-
-			//Vector2D<int>* horizontalLineBPointA = nullptr;
-			//Vector2D<int>* horizontalLineBPointB = nullptr;
-
-			//// Vertical line
-			//Vector2D<int>* verticalLinePointA = nullptr;
-			//Vector2D<int>* verticalLinePointB = nullptr;
-
-			//Vector2D<int>* verticalLineBPointA = nullptr;
-			//Vector2D<int>* verticalLineBPointB = nullptr;
-
-
-				// Horizontal line
             YasGL::lukeDrawLineOctanNEWEST(horizontalLinePointA, horizontalLinePointB, pixels, red, windowDimensions);
             YasGL::lukeDrawLineOctanNEWEST(horizontalLineBPointA, horizontalLineBPointB, pixels, red, windowDimensions);
 
@@ -250,14 +197,6 @@ int main(int argc, char* argv[])
 
             YasGL::lukeDrawLineOctanNEWEST(line45degreePointA, line45degreePointB, pixels, red, windowDimensions);
             YasGL::lukeDrawLineOctanNEWEST(lineB45degreePointA, lineB45degreePointB, pixels, green, windowDimensions);
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            //YasGL::drawLine(testLinePos_slope_Oct_7PointA, testLinePos_slope_Oct_7PointB, pixels, testObjectsColor, windowDimensions);
-            //YasGL::lukeDrawLineOctan0_V2(mirroredA, mirroredB, pixels, testObjectsColor, windowDimensions);
-            ////////////////////////YasGL::drawLine(testLinePos_slope_Oct_7PointA, testLinePos_slope_Oct_7PointB, pixels, yellow, windowDimensions); // Same as above but it is working
-            //YasGL::simplestNiveLineDraw(pointA, pointB, pixels, yellow, windowDimensions);
-            //YasGL::simplestNiveLineDraw(testLinePos_slope_Oct_4PointA, testLinePos_slope_Oct_4PointB, pixels, yellow, windowDimensions);
-
 
             glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
