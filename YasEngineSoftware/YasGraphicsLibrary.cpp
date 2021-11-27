@@ -86,21 +86,22 @@ namespace YasGL
 
 			case LineSlope::HORIZONTAL:
 			{
-				positivePointA = new Vector2D<int>(-windowDimensions->x / 3, windowDimensions->y / 3);
-				positivePointB = new Vector2D<int>(windowDimensions->x / 3, windowDimensions->y / 3);
 
-				negativePointA = new Vector2D<int>(-windowDimensions->x / 3, windowDimensions->y / 3);
-				negativePointB = new Vector2D<int>(windowDimensions->x / 3, windowDimensions->y / 3);
+                positivePointA = new Vector2D<int>(-30,20);  //(-windowDimensions->x / 8, windowDimensions->y / 8);
+				positivePointB = new Vector2D<int>(200,20);  //(windowDimensions->x / 8, windowDimensions->y / 8);
+                                                  
+				negativePointA = new Vector2D<int>(30, 60);  //(-windowDimensions->x / 16, windowDimensions->y / 16);
+				negativePointB = new Vector2D<int>(-30, 60);  //(windowDimensions->x / 16, windowDimensions->y / 16);
 				break;
 			}
 
 			case LineSlope::VERTICAL:
 			{
-                positivePointA = new Vector2D<int>(windowDimensions->x / 3, windowDimensions->y / 3);
-                positivePointB = new Vector2D<int>(windowDimensions->x / 3, -windowDimensions->y / 3);
-
-				negativePointA = new Vector2D<int>(windowDimensions->x / 4, windowDimensions->y / 4);
-				negativePointB = new Vector2D<int>(windowDimensions->x / 4, -windowDimensions->y / 4);
+                positivePointA = new Vector2D<int>(-60, 30);//(windowDimensions->x / 4, windowDimensions->y / 4);
+                positivePointB = new Vector2D<int>(-60,-200);//(windowDimensions->x / 4, -windowDimensions->y / 4);
+                                                  
+				negativePointA = new Vector2D<int>(-10,-100);//(windowDimensions->x / 32, windowDimensions->y / 32);
+				negativePointB = new Vector2D<int>(-10,30);//(windowDimensions->x / 32, -windowDimensions->y / 32);
 				break;
 			}
         }
@@ -698,13 +699,12 @@ namespace YasGL
         delete copyPoint1;
     }
 
-    void swapVectors(Vector2D<int>* point0, Vector2D<int>* point1)
+    void swapVectors(Vector2D<int>*& point0, Vector2D<int>*& point1)
     {
         Vector2D<int>* tmpVector;
         tmpVector = point0;
         point0 = point1;
         point1 = tmpVector;
-        std::cout << point0->x << point1->x << std::endl;
     }
 
     // This is instead writing more options in lukeDrawLineOctan0_V2 - for learning poprose of course

@@ -97,8 +97,8 @@ int main(int argc, char* argv[])
 	Vector2D<int>* verticalLineBPointB = nullptr;
 
     // 45 degree line RED
-	Vector2D<int>* line45degreePointA = new Vector2D<int>(100, 100);
-	Vector2D<int>* line45degreePointB = new Vector2D<int>(50, 50);
+	Vector2D<int>* line45degreePointA = new Vector2D<int>(90, 80);
+	Vector2D<int>* line45degreePointB = new Vector2D<int>(-10, -20);
 
     // 45 degree line GREEN
 	Vector2D<int>* lineB45degreePointA = new Vector2D<int>(250, -350);
