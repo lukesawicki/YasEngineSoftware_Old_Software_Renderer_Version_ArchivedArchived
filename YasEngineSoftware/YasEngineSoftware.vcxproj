@@ -20,12 +20,16 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BackupCpp.cpp" />
+    <ClCompile Include="LineDrawinTester.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Point2D.cpp" />
     <ClCompile Include="temporary.cpp" />
     <ClCompile Include="TimePicker.cpp" />
     <ClCompile Include="YasGraphicsLibrary.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="LineDrawingTester.hpp" />
+    <ClInclude Include="Point2D.hpp" />
     <ClInclude Include="TimePicker.hpp" />
     <ClInclude Include="Vector2D.hpp" />
     <ClInclude Include="Vector3D.hpp" />

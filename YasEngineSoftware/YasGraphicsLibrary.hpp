@@ -7,12 +7,9 @@
 #include"Vector3D.hpp"
 #include"Vector4D.hpp"
 
-
 namespace YasGL
 {
     const uint8_t NUMBER_OF_COLORS = 4;
-    const uint8_t RGB_FORMAT = 3;
-    const uint8_t RGBA_FORMAT = 4;
 
     const uint8_t RED_POSITION = 0;
     const uint8_t GREEN_POSITION = 1;
@@ -25,12 +22,12 @@ namespace YasGL
 	const Vector4D<uint8_t> BLACK(0, 0, 0, 0);
 
     const float dl = 3.125e-3F;
+    
+    struct Color
+    {
+        Vector4D<uint8_t>* color;
+    };
 
-    enum class LineSlope { GENTLE, STEEP, HORIZONTAL, VERTICAL };
-	enum class PointsOrder { NORMAL, REVERSE };
-	enum class PositionInSpace { Q0, Q1, Q2, Q3, Q10, Q23, Q12, Q03, Q123_230, Q12_V, Q10_H };
-
-	void prepareTestLines(LineSlope lineSlope, PositionInSpace whichSpace, PointsOrder order, Vector2D<int>*& positivePointA, Vector2D<int>*& positivePointB, Vector2D<int>*& negativePointA, Vector2D<int>*& negativePointB, Vector2D<int>* windowDimensions);
     void modifyTestPoints(Vector2D<int>* positivePointA, Vector2D<int>* positivePointB, Vector2D<int>* negativePointA, Vector2D<int>* negativePointB, int positiveXmodifier, int positiveYmodifier, int negativeXmodifier, int negativeYmodifier);
     void deleteTestLines(Vector2D<int>*& positivePointA, Vector2D<int>*& positivePointB, Vector2D<int>*& negativePointA, Vector2D<int>*& negativePointB);
 
@@ -46,16 +43,8 @@ namespace YasGL
 
     void drawLine(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
 
-    void lukeDrawLineOctan0V1(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
-    void drawNotSteepLine(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
-    void lukeDrawLineFullUnderstandingVersion(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
-    void lukeDrawLineOctanNEWEST(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
+    void lukesDrawLine(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
     void swapVectors(Vector2D<int>*& point0, Vector2D<int>*& point1);
-    void lukeDrawLineOctan7(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
-
-    void helsinkiDraw(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
-
-    void simplestNiveLineDraw(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions);
 
     void drawCartesianAxies(Vector2D<int>* windowDimensions, uint8_t* pixels);
     int xyPixelToArrayPosition(Vector2D<int>* point, int windowWidth);
