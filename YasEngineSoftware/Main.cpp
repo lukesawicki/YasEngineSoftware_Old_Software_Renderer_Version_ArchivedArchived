@@ -66,6 +66,46 @@ int main(int argc, char* argv[])
     bool switched = false;
     // End of data defined Circle for drawing circle for varied tests
 
+    // Positive slope;
+    Vector2D<int>* positiveGentlePointA = nullptr;
+    Vector2D<int>* positiveGentlePointB = nullptr;
+
+	// Negative slope
+	Vector2D<int>* negativeGentlePointA = nullptr;
+	Vector2D<int>* negativeGentlePointB = nullptr;
+
+	// Positive slope;
+    Vector2D<int>* positiveSteepPointA = nullptr;
+    Vector2D<int>* positiveSteepPointB = nullptr;
+
+	// Negative slope
+	Vector2D<int>* negativeSteepPointA = nullptr;
+	Vector2D<int>* negativeSteepPointB = nullptr;
+
+    // Horizontal line
+	Vector2D<int>* horizontalLinePointA = nullptr;
+	Vector2D<int>* horizontalLinePointB = nullptr;
+
+	Vector2D<int>* horizontalLineBPointA = nullptr;
+	Vector2D<int>* horizontalLineBPointB = nullptr;
+
+    // Vertical line
+	Vector2D<int>* verticalLinePointA = nullptr;
+	Vector2D<int>* verticalLinePointB = nullptr;
+
+	Vector2D<int>* verticalLineBPointA = nullptr;
+	Vector2D<int>* verticalLineBPointB = nullptr;
+
+    // 45 degree line RED
+	Vector2D<int>* line45degreePointA = new Vector2D<int>(90, 80);
+	Vector2D<int>* line45degreePointB = new Vector2D<int>(-10, -20);
+
+    // 45 degree line GREEN
+	Vector2D<int>* lineB45degreePointA = new Vector2D<int>(250, -350);
+	Vector2D<int>* lineB45degreePointB = new Vector2D<int>(50, -150);
+	//Vector2D<int>* lineB45degreePointA = new Vector2D<int>(250, -350);
+	//Vector2D<int>* lineB45degreePointB = new Vector2D<int>(50, -150);
+
     // Data required to draw simple square filled with color for tests
 	Vector4D<uint8_t> *squareColor = new Vector4D<uint8_t>(0, 0, 255, 255);
 	Vector2D<int> *positions = new Vector2D<int>(0, 0);
@@ -87,6 +127,7 @@ int main(int argc, char* argv[])
     frames = 0;
     bool close = false;
 
+    
 
     //prepareTestLines(YasGL::LineSlope::GENTLE, YasGL::PositionInSpace::Q123_230, YasGL::PointsOrder::REVERSE, positiveGentlePointA, positiveGentlePointB, negativeGentlePointA, negativeGentlePointB, windowDimensions);
     //prepareTestLines(YasGL::LineSlope::STEEP, YasGL::PositionInSpace::Q123_230, YasGL::PointsOrder::NORMAL, positiveSteepPointA, positiveSteepPointB, negativeSteepPointA, negativeSteepPointB, windowDimensions);
@@ -148,16 +189,14 @@ int main(int argc, char* argv[])
 
             YasGL::drawCircle(circlePosition, circleRadius, pixels, circleColor, windowDimensions);
 
-            //YasGL::lukeDrawLineOctanNEWEST(horizontalLinePointA, horizontalLinePointB, pixels, red, windowDimensions);
-            YasGL::lukesDrawLine(horizontalLineBPointA, horizontalLineBPointB, pixels, red, windowDimensions);
+            YasGL::lukeDrawLineOctanNEWEST(horizontalLinePointA, horizontalLinePointB, pixels, red, windowDimensions);
+            YasGL::lukeDrawLineOctanNEWEST(horizontalLineBPointA, horizontalLineBPointB, pixels, red, windowDimensions);
 
-            YasGL::lukesDrawLine(verticalLinePointA, verticalLinePointB, pixels, yellow, windowDimensions);
-            YasGL::lukesDrawLine(verticalLineBPointA, verticalLineBPointB, pixels, white, windowDimensions);
+            YasGL::lukeDrawLineOctanNEWEST(verticalLinePointA, verticalLinePointB, pixels, yellow, windowDimensions);
+            YasGL::lukeDrawLineOctanNEWEST(verticalLineBPointA, verticalLineBPointB, pixels, white, windowDimensions);
 
-            YasGL::lukesDrawLine(line45degreePointA, line45degreePointB, pixels, red, windowDimensions);
-            YasGL::lukesDrawLine(lineB45degreePointA, lineB45degreePointB, pixels, green, windowDimensions);
-
-            YasGL::drawLine(horizontalLinePointA, horizontalLinePointB, pixels, red, windowDimensions);
+            YasGL::lukeDrawLineOctanNEWEST(line45degreePointA, line45degreePointB, pixels, red, windowDimensions);
+            YasGL::lukeDrawLineOctanNEWEST(lineB45degreePointA, lineB45degreePointB, pixels, green, windowDimensions);
 
             glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
@@ -178,6 +217,7 @@ int main(int argc, char* argv[])
 
 		delete lineB45degreePointA;
 		delete lineB45degreePointB;
+
 
         delete[] pixels;
         glfwTerminate();

@@ -30,12 +30,6 @@
     <ClCompile Include="BackupCpp.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
-    <ClCompile Include="LineDrawinTester.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Point2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector2D.hpp">
@@ -51,12 +45,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Vector4D.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LineDrawingTester.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Point2D.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
