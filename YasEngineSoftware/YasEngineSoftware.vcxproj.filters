@@ -30,6 +30,9 @@
     <ClCompile Include="BackupCpp.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="PixelsTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector2D.hpp">
@@ -45,6 +48,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Vector4D.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelsTable.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

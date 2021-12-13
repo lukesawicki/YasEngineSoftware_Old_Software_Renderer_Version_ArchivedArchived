@@ -10,15 +10,17 @@
 #include"Vector3D.hpp"
 #include"YasGraphicsLibrary.hpp"
 #include"TimePicker.hpp"
+#include "PixelsTable.hpp"
 
 //-----------------------------------------------------------------------------|---------------------------------------|
 //                                                                            80                                     120
+
 int main(int argc, char* argv[])
 {
 	const int WINDOW_WIDTH = 1024;
 	const int WINDOW_HEIGHT = 768;
-    Vector2D<int>* windowDimensions = new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
     GLFWwindow* window;
+    Vector2D<int>* windowDimensions = new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
 
 	const int RGBA = 4;
 	Vector4D<uint8_t>* red = new Vector4D<uint8_t>(255, 0, 0, 255);
@@ -51,7 +53,7 @@ int main(int argc, char* argv[])
 
     glfwMakeContextCurrent(window);
 
-    uint8_t* pixels = YasGL::createPixelsTable(windowDimensions, black);
+    PixelsTable* pixelsTable = new PixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, black);
 
     // Data defined Circle for drawing circle for varied tests
 	int circleX = 0;
@@ -159,9 +161,9 @@ int main(int argc, char* argv[])
                 fpsTime = 0.0F;
             }
             
-            YasGL::clearColor(pixels, black, windowDimensions);
-
-			YasGL::drawCartesianAxies(windowDimensions, pixels);
+            pixelsTable->clearColor(black);
+            
+			YasGL::drawCartesianAxies(pixelsTable);
 
             // In real-time Generating CIRCLE
             circlePosition->x = static_cast<int>(circlePosition->x + deltaTime * circleSpeed);
@@ -183,22 +185,22 @@ int main(int argc, char* argv[])
                 {
                     positions->x = i;
                     positions->y = j;
-					YasGL::drawPoint(positions, pixels, squareColor, windowDimensions);
+                    pixelsTable->drawPoint(positions, squareColor);
 				}
 			}
 
-            YasGL::drawCircle(circlePosition, circleRadius, pixels, circleColor, windowDimensions);
+            YasGL::drawCircle(circlePosition, circleRadius, pixelsTable, circleColor);
 
-            YasGL::lukeDrawLineOctanNEWEST(horizontalLinePointA, horizontalLinePointB, pixels, red, windowDimensions);
-            YasGL::lukeDrawLineOctanNEWEST(horizontalLineBPointA, horizontalLineBPointB, pixels, red, windowDimensions);
+            YasGL::lukeDrawLineOctanNEWEST(horizontalLinePointA, horizontalLinePointB, pixelsTable, red);
+            YasGL::lukeDrawLineOctanNEWEST(horizontalLineBPointA, horizontalLineBPointB, pixelsTable, red);
 
-            YasGL::lukeDrawLineOctanNEWEST(verticalLinePointA, verticalLinePointB, pixels, yellow, windowDimensions);
-            YasGL::lukeDrawLineOctanNEWEST(verticalLineBPointA, verticalLineBPointB, pixels, white, windowDimensions);
+            YasGL::lukeDrawLineOctanNEWEST(verticalLinePointA, verticalLinePointB, pixelsTable, yellow);
+            YasGL::lukeDrawLineOctanNEWEST(verticalLineBPointA, verticalLineBPointB, pixelsTable, white);
 
-            YasGL::lukeDrawLineOctanNEWEST(line45degreePointA, line45degreePointB, pixels, red, windowDimensions);
-            YasGL::lukeDrawLineOctanNEWEST(lineB45degreePointA, lineB45degreePointB, pixels, green, windowDimensions);
+            YasGL::lukeDrawLineOctanNEWEST(line45degreePointA, line45degreePointB, pixelsTable, red);
+            YasGL::lukeDrawLineOctanNEWEST(lineB45degreePointA, lineB45degreePointB, pixelsTable, green);
 
-            glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+            glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixelsTable->pixels);
 
             glfwSwapBuffers(window);
 
@@ -219,7 +221,7 @@ int main(int argc, char* argv[])
 		delete lineB45degreePointB;
 
 
-        delete[] pixels;
+        //delete[] pixels;
         glfwTerminate();
         return 0;
     }

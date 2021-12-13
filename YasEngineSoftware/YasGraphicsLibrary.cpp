@@ -2,54 +2,8 @@
 
 namespace YasGL
 {
-    uint8_t* createPixelsTable(Vector2D<int>* windowDimensions, Vector4D<uint8_t>* defaultColor)
-    {
-        uint8_t* pixels = new uint8_t[windowDimensions->x * windowDimensions->y * NUMBER_OF_COLORS];
-        clearColor(pixels, defaultColor, windowDimensions);
-        return pixels;
-    }
 
-    void clearColor(uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
-    {
-        for (int y = 0; y < windowDimensions->y; y++)
-        {
-            for (int x = 0; x < windowDimensions->x; x++)
-            {
-                pixels[NUMBER_OF_COLORS * (y * windowDimensions->x + x) + RED_POSITION] = 0; // windowDimensions->x <- WINDOW WIDTH
-                pixels[NUMBER_OF_COLORS * (y * windowDimensions->x + x) + GREEN_POSITION] = 0;
-                pixels[NUMBER_OF_COLORS * (y * windowDimensions->x + x) + BLUE_POSITION] = 0;
-                pixels[NUMBER_OF_COLORS * (y * windowDimensions->x + x) + ALPHA_POSITION] = 0;
-            }
-        }
-    }
-
-
-
-    void drawPoint(Vector2D<int>* point, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
-    {
-        cartesianPositionToWindow(point, windowDimensions);
-        if (point->x >= 0 && point->x < windowDimensions->x && point->y >= 0 && point->y < windowDimensions->y)
-        {
-            pixels[NUMBER_OF_COLORS * (point->y * windowDimensions->x + point->x) + RED_POSITION] = drawingColor->x; // windowDimensions->x <- WINDOW WIDTH
-            pixels[NUMBER_OF_COLORS * (point->y * windowDimensions->x + point->x) + GREEN_POSITION] = drawingColor->y;
-            pixels[NUMBER_OF_COLORS * (point->y * windowDimensions->x + point->x) + BLUE_POSITION] = drawingColor->z;
-            pixels[NUMBER_OF_COLORS * (point->y * windowDimensions->x + point->x) + ALPHA_POSITION] = drawingColor->w;
-        }
-    }
-
-    void drawPoint(int x, int y, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
-    {
-        cartesianPositionToWindow(x, y, windowDimensions);
-        if (x >= 0 && x < windowDimensions->x && y >= 0 && y < windowDimensions->y)
-        {
-            pixels[NUMBER_OF_COLORS * (y * windowDimensions->x + x) + RED_POSITION] = drawingColor->x; // windowDimensions->x <- WINDOW WIDTH
-            pixels[NUMBER_OF_COLORS * (y * windowDimensions->x + x) + GREEN_POSITION] = drawingColor->y;
-            pixels[NUMBER_OF_COLORS * (y * windowDimensions->x + x) + BLUE_POSITION] = drawingColor->z;
-            pixels[NUMBER_OF_COLORS * (y * windowDimensions->x + x) + ALPHA_POSITION] = drawingColor->w;
-        }
-    }
-
-	void prepareTestLines(LineSlope lineSlope, PositionInSpace whichSpace, PointsOrder order, Vector2D<int>*& positivePointA, Vector2D<int>*& positivePointB,Vector2D<int>*& negativePointA, Vector2D<int>*& negativePointB, Vector2D<int>* windowDimensions)
+	void prepareTestLines(LineSlope lineSlope, PositionInSpace whichSpace, PointsOrder order, Vector2D<int>*& positivePointA, Vector2D<int>*& positivePointB,Vector2D<int>*& negativePointA, Vector2D<int>*& negativePointB, const Vector2D<int>* windowDimensions)
 	{
         int quadrantsWidth = windowDimensions->x / 2;
         int quadrantsHeight = windowDimensions->y / 2;
@@ -57,17 +11,16 @@ namespace YasGL
         // Q1 | Q0
         //---------
         // Q2 | Q3
-		// Positive slope
 
         switch (lineSlope)
         {
             case LineSlope::GENTLE:
 			{
-				positivePointA = new Vector2D<int>(10, 5); //(25, 40);
+				positivePointA = new Vector2D<int>(10, 5);
 				positivePointB = new Vector2D<int>(370, 25);
 
-				negativePointA = new Vector2D<int>(10, 25); //(25, 40);
-				negativePointB = new Vector2D<int>(370, 5); //(256, 192);
+				negativePointA = new Vector2D<int>(10, 25);
+				negativePointB = new Vector2D<int>(370, 5);
                 break;
 			}
 
@@ -76,7 +29,6 @@ namespace YasGL
 		        positivePointA = new Vector2D<int>(7, 10); //(25, 40);
 		        positivePointB = new Vector2D<int>(260, 360);
 
-		        // Negative slope
 		        negativePointA = new Vector2D<int>(7, 370); //(25, 40);
 		        negativePointB = new Vector2D<int>(260, 10); //(256, 192);
 
@@ -87,28 +39,33 @@ namespace YasGL
 			case LineSlope::HORIZONTAL:
 			{
 
-                positivePointA = new Vector2D<int>(-30,20);  //(-windowDimensions->x / 8, windowDimensions->y / 8);
-				positivePointB = new Vector2D<int>(200,20);  //(windowDimensions->x / 8, windowDimensions->y / 8);
-                                                  
-				negativePointA = new Vector2D<int>(30, 60);  //(-windowDimensions->x / 16, windowDimensions->y / 16);
-				negativePointB = new Vector2D<int>(-30, 60);  //(windowDimensions->x / 16, windowDimensions->y / 16);
+                positivePointA = new Vector2D<int>(-30,20);
+				positivePointB = new Vector2D<int>(200,20);
+
+				negativePointA = new Vector2D<int>(30, 60);
+				negativePointB = new Vector2D<int>(-30, 60);
 				break;
 			}
 
 			case LineSlope::VERTICAL:
 			{
-                positivePointA = new Vector2D<int>(-60, 30);//(windowDimensions->x / 4, windowDimensions->y / 4);
-                positivePointB = new Vector2D<int>(-60,-200);//(windowDimensions->x / 4, -windowDimensions->y / 4);
+                positivePointA = new Vector2D<int>(-60, 30);
+                positivePointB = new Vector2D<int>(-60,-200);
                                                   
-				negativePointA = new Vector2D<int>(-10,-100);//(windowDimensions->x / 32, windowDimensions->y / 32);
-				negativePointB = new Vector2D<int>(-10,30);//(windowDimensions->x / 32, -windowDimensions->y / 32);
+				negativePointA = new Vector2D<int>(-10,-100);
+				negativePointB = new Vector2D<int>(-10,30);
 				break;
 			}
-        }
-        
-		// Negative slope
+            default:
+            {
+                positivePointA = new Vector2D<int>(10, 5);
+                positivePointB = new Vector2D<int>(370, 25);
 
-		//Quadrant 0
+                negativePointA = new Vector2D<int>(10, 25);
+                negativePointB = new Vector2D<int>(370, 5);
+                break;
+            }
+        }
 
         Vector2D<int>* temporaryVector = nullptr;
         if (order == PointsOrder::REVERSE)
@@ -127,41 +84,43 @@ namespace YasGL
         {
             case PositionInSpace::Q0:
             {
-                // This is the same as Default value
+                if (positivePointA == nullptr && positivePointB == nullptr && negativePointA == nullptr && negativePointB == nullptr)
+                {
+                    positivePointA = new Vector2D<int>(10, 5);
+                    positivePointB = new Vector2D<int>(370, 25);
+
+                    negativePointA = new Vector2D<int>(10, 25);
+                    negativePointB = new Vector2D<int>(370, 5);
+                }
                 break;
             }
             
 			case PositionInSpace::Q1:
 			{
-				// This is the same as Default value
                 modifyTestPoints(positivePointA, positivePointB, negativePointA, negativePointB, -quadrantsWidth, 0, - quadrantsWidth, 0);
                 break;
 			}
 			
 			case PositionInSpace::Q2:
 			{
-				// This is the same as Default value
 				modifyTestPoints(positivePointA, positivePointB, negativePointA, negativePointB, -quadrantsWidth, -quadrantsHeight, -quadrantsWidth, -quadrantsHeight);
                 break;
 			}
 			
 			case PositionInSpace::Q3:
 			{
-				// This is the same as Default value
 				modifyTestPoints(positivePointA, positivePointB, negativePointA, negativePointB, 0, -quadrantsHeight, 0, -quadrantsHeight);
                 break;
 			}
 			
             case PositionInSpace::Q10:
 			{
-				// This is the same as Default value
 				modifyTestPoints(positivePointA, positivePointB, negativePointA, negativePointB, -quadrantsWidth/2, 0, -quadrantsWidth/2, 0);
                 break;
 			}
 			
             case PositionInSpace::Q23:
 			{
-				// This is the same as Default value
 				modifyTestPoints(positivePointA, positivePointB, negativePointA, negativePointB, -quadrantsWidth/2, -quadrantsHeight, -quadrantsWidth/2, -quadrantsHeight);
                 break;
 			}
@@ -237,7 +196,7 @@ namespace YasGL
     }
 
 
-    void  drawGentleSlopeLine(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
+    void  drawGentleSlopeLine(Vector2D<int>* point0, Vector2D<int>* point1, PixelsTable* pixelsTable, Vector4D<uint8_t>* drawingColor)
     {
         int deltaX = point1->x - point0->x;
         int deltaY = point1->y - point0->y;
@@ -256,7 +215,7 @@ namespace YasGL
 
         for (int i = point0->x; i <= point1->x; i++)
         {
-            drawPoint(i, y, pixels, drawingColor, windowDimensions);
+            pixelsTable->drawPoint(i, y, drawingColor);
 
             if (difference > 0)
             {
@@ -270,7 +229,7 @@ namespace YasGL
         }
     }
 
-    void drawSteepSlopeLine(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
+    void drawSteepSlopeLine(Vector2D<int>* point0, Vector2D<int>* point1, PixelsTable* pixelsTable, Vector4D<uint8_t>* drawingColor)
     {
         int deltaX = point1->x - point0->x;
         int deltaY = point1->y - point0->y;
@@ -289,7 +248,7 @@ namespace YasGL
 
         for (int i = point0->y; i <= point1->y; i++)
         {
-            drawPoint(x, i, pixels, drawingColor, windowDimensions);
+            pixelsTable->drawPoint(x, i, drawingColor);
 
             if (difference > 0)
             {
@@ -303,34 +262,34 @@ namespace YasGL
         }
     }
 
-    void drawLine(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
+    void drawLine(Vector2D<int>* point0, Vector2D<int>* point1, PixelsTable* pixelsTable, Vector4D<uint8_t>* drawingColor)
     {
         // Check if it is slope line (Octant: 0,3 4,7)
         if (abs(point1->y - point0->y) < abs(point1->x - point0->x))
         {
             if (point0->x > point1->x)
             {
-                drawGentleSlopeLine(point1, point0, pixels, drawingColor, windowDimensions);
+                drawGentleSlopeLine(point1, point0, pixelsTable, drawingColor);
             }
             else
             {
-                drawGentleSlopeLine(point0, point1, pixels, drawingColor, windowDimensions);
+                drawGentleSlopeLine(point0, point1, pixelsTable, drawingColor);
             }
         }
         else // If it is not slope it is steep and these are 1,2,5, 6
         {
             if (point0->y > point1->y)
             {
-                drawSteepSlopeLine(point1, point0, pixels, drawingColor, windowDimensions);
+                drawSteepSlopeLine(point1, point0, pixelsTable, drawingColor);
             }
             else
             {
-                drawSteepSlopeLine(point0, point1, pixels, drawingColor, windowDimensions);
+                drawSteepSlopeLine(point0, point1, pixelsTable, drawingColor);
             }
         }
     }
 
-    void lukeDrawLineOctan0V1(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
+    void lukeDrawLineOctan0V1(Vector2D<int>* point0, Vector2D<int>* point1, PixelsTable* pixelsTable, Vector4D<uint8_t>* drawingColor)
     {
         int x = point0->x;
         int y = point0->y;
@@ -339,7 +298,7 @@ namespace YasGL
 
         for (int i = point0->x; i <= point1->x; i++)
         {
-            drawPoint(x, y, pixels, drawingColor, windowDimensions);
+            pixelsTable->drawPoint(x, y, drawingColor);
             x++;
             if (abs(cumulativeError + slope) < 0.5F)
             {
@@ -359,7 +318,7 @@ namespace YasGL
 
     // V2 Has modified equation(lukeDrawLineOctan0V1) (it is multiplied by delta X and then by 2)
 
-    void drawNotSteepLine(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
+    void drawNotSteepLine(Vector2D<int>* point0, Vector2D<int>* point1, PixelsTable* pixelsTable, Vector4D<uint8_t>* drawingColor)
     {
 		int x0 = point0->x;
 		int y0 = point0->y;
@@ -369,7 +328,7 @@ namespace YasGL
 
 		for (int i = point0->x; i <= point1->x; i++)
 		{
-			drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+			pixelsTable->drawPoint(x0, y0, drawingColor);
 			x0++;
 			if ( ( 2 * (cumulativeError + deltaY) ) < deltaX)
 			{
@@ -384,33 +343,7 @@ namespace YasGL
 		}
     }
 
-    void lukeDrawLineFullUnderstandingVersion(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
-    { 
-        int x0 = point0->x;
-        int y0 = point0->y;
-        int deltaX = point1->x - point0->x;
-        int deltaY = point1->y - point0->y;
-        int cumulativeError = 0;
-
-        // Check if line is not steep (Octant: 0,3 4,7)
-        if (abs(deltaY) < abs(deltaX))
-        { // This if is working
-            if (point0->x < point1->x) // In draw line is > why??? Why? Kurwa??!
-            {
-                drawNotSteepLine(point0, point1, pixels, drawingColor, windowDimensions);
-            }
-            else
-            {
-                drawNotSteepLine(point1, point0, pixels, drawingColor, windowDimensions);
-            }
-        }
-        else // if line is steep or is horizontal
-        {
-
-        }
-    }
-
-    void lukeDrawLineOctanNEWEST(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
+    void lukeDrawLineOctanNEWEST(Vector2D<int>* point0, Vector2D<int>* point1, PixelsTable* pixelsTable, Vector4D<uint8_t>* drawingColor)
     {
         int x0 = point0->x;
         int y0 = point0->y;
@@ -452,7 +385,7 @@ namespace YasGL
                         deltaY = point0->y - point1->y;
                         for (int i = originalPoint0X; i <= originalPoint1X; i++)
                         {
-                            drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+                            pixelsTable->drawPoint(x0, y0, drawingColor);
                             x0++;
                             if ((2 * (cumulativeError + deltaY)) > -deltaX)
                             {
@@ -472,7 +405,7 @@ namespace YasGL
                         deltaY = point0->y - point1->y;
                         for (int i = originalPoint0X; i <= originalPoint1X; i++)
                         {
-                            drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+                            pixelsTable->drawPoint(x0, y0, drawingColor);
                             x0++;
                             if ((2 * (cumulativeError + deltaY)) < deltaX)
                             {
@@ -494,7 +427,7 @@ namespace YasGL
                     {
                         for (int i = originalPoint0X; i <= originalPoint1X; i++)
                         {
-                            drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+                            pixelsTable->drawPoint(x0, y0, drawingColor);
                             x0++;
                             if ((2 * (cumulativeError + deltaY)) < deltaX)
                             {
@@ -512,7 +445,7 @@ namespace YasGL
                     {
                         for (int i = originalPoint0X; i <= originalPoint1X; i++)
                         {
-                            drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+                            pixelsTable->drawPoint(x0, y0, drawingColor);
                             x0++;
                             if ((2 * (cumulativeError + deltaY)) > -deltaX)
                             {
@@ -549,7 +482,7 @@ namespace YasGL
 				        deltaY = point0->y - point1->y;
 				        for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
 				        {
-					        drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+					        pixelsTable->drawPoint(x0, y0, drawingColor);
 					        y0++;
 					        if ((2 * (cumulativeError + deltaX)) > -deltaY)
 					        {
@@ -569,7 +502,7 @@ namespace YasGL
 				        deltaY = point0->y - point1->y;
 				        for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
 				        {
-					        drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+					        pixelsTable->drawPoint(x0, y0, drawingColor);
 					        y0++;
 					        if ((2 * (cumulativeError + deltaX)) < deltaY)
 					        {
@@ -590,7 +523,7 @@ namespace YasGL
 			        {
 				        for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
 				        {
-					        drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+					        pixelsTable->drawPoint(x0, y0, drawingColor);
 					        y0++;
 					        if ((2 * (cumulativeError + deltaX)) < deltaY)
 					        {
@@ -608,7 +541,7 @@ namespace YasGL
 			        {
 				        for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
 				        {
-					        drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+					        pixelsTable->drawPoint(x0, y0, drawingColor);
 					        y0++;
 					        if ((2 * (cumulativeError + deltaX)) > -deltaY)
 					        {
@@ -632,7 +565,7 @@ namespace YasGL
                 }
                 for (int i = copyPoint0->y; i <= copyPoint1->y; i++ )
                 {
-                    drawPoint(copyPoint0->x, i, pixels, drawingColor, windowDimensions);
+                    pixelsTable->drawPoint(copyPoint0->x, i, drawingColor);
                 }
             }
             else // deltaY == 0 It is straight line where y is constant. So draw simple line from x0 to x1
@@ -643,7 +576,7 @@ namespace YasGL
 				}
 				for (int i = copyPoint0->x; i <= copyPoint1->x; i++)
 				{
-					drawPoint(i, copyPoint0->y, pixels, drawingColor, windowDimensions);
+					pixelsTable->drawPoint(i, copyPoint0->y, drawingColor);
 				}
             }
         }
@@ -651,7 +584,7 @@ namespace YasGL
         {
             if (deltaX == 0 && deltaY == 0) // if both are equals 0 just draw point.
             {
-                drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+                pixelsTable->drawPoint(x0, y0, drawingColor);
             }
             else
             {
@@ -662,7 +595,7 @@ namespace YasGL
 				{
 					while (i < absDeltaX)
 					{
-						drawPoint(copyPoint0->x + i, copyPoint0->y + i, pixels, drawingColor, windowDimensions);
+						pixelsTable->drawPoint(copyPoint0->x + i, copyPoint0->y + i, drawingColor);
 						i++;
 					}
 				}
@@ -670,7 +603,7 @@ namespace YasGL
 				{
                     while (i < absDeltaX)
 					{
-						drawPoint(copyPoint1->x + i, copyPoint1->y + i, pixels, drawingColor, windowDimensions);
+                        pixelsTable->drawPoint(copyPoint1->x + i, copyPoint1->y + i, drawingColor);
 						i++;
 					}
 				}
@@ -680,7 +613,7 @@ namespace YasGL
 				{
 					while (i < absDeltaX)
 					{
-						drawPoint(copyPoint0->x + i, copyPoint0->y - i, pixels, drawingColor, windowDimensions);
+                        pixelsTable->drawPoint(copyPoint0->x + i, copyPoint0->y - i, drawingColor);
 						i++;
 					}
 				}
@@ -688,7 +621,7 @@ namespace YasGL
 				{
 					while (i < absDeltaX)
 					{
-						drawPoint(copyPoint1->x + i, copyPoint1->y - i, pixels, drawingColor, windowDimensions);
+                        pixelsTable->drawPoint(copyPoint1->x + i, copyPoint1->y - i, drawingColor);
 						i++;
 					}
 				}
@@ -707,76 +640,26 @@ namespace YasGL
         point1 = tmpVector;
     }
 
-    // This is instead writing more options in lukeDrawLineOctan0_V2 - for learning poprose of course
-    void lukeDrawLineOctan7(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
-    {
-        int x0 = point0->x;
-        int y0 = point0->y;
-        int deltaX = point1->x - point0->x;
-        int deltaY = point1->y - point0->y;
-        int cumulativeError = 0;
-
-		for (int i = point0->x; i <= point1->x; i++)
-		{
-		    drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
-		    x0++;
-		    if (2 * (cumulativeError + deltaY) > -deltaX)
-		    {
-		        //y stays the same
-		        cumulativeError = cumulativeError + deltaY;
-		    }
-		    else
-		    {
-		        y0--;
-		        cumulativeError = cumulativeError + deltaY + deltaX;
-		    }
-		}
-    }
-
-    void helsinkiDraw(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector3D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
-    {
-        // https://www.cs.helsinki.fi/group/goa/mallinnus/lines/bresenh.html
-        int dx = point1->x - point0->x;
-        int dy = point1->y - point0->y;
-        int y = point0->y;
-        int eps = 0;
-    }
-
-    // only for positives positions
-    void simplestNiveLineDraw(Vector2D<int>* point0, Vector2D<int>* point1,  uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
-    {
-        if (point0->x < 0 || point0->y < 0 || point1->x < 0 || point1->y < 0)
-        {
-            return;
-        }
-        float l;
-        int dx = point1->x - point0->x;
-        int dy = point1->y - point0->y;
-
-        for (l = 0.0F; l < 1.0F; l += dl)
-        {
-            drawPoint(point0->x + int(floor(dx*l+0.5F)), point0->y + int(floor(dy*l+0.5F)), pixels, drawingColor, windowDimensions);
-        }
-    }
-
     //drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
 
-    void drawCartesianAxies(Vector2D<int>* windowDimensions, uint8_t* pixels)
+    void drawCartesianAxies(PixelsTable* pixelsTable)
     {
-        int maxX = static_cast<int>(0.5F * windowDimensions->x);
-        int maxY = static_cast<int>(0.5F * windowDimensions->y);
+        int maxX = static_cast<int>(0.5F * pixelsTable->windowDimensions->x);
+        int maxY = static_cast<int>(0.5F * pixelsTable->windowDimensions->y);
 
         Vector4D<uint8_t> xDrawingColorRed(255,0,0, 0); // RED
         Vector4D<uint8_t> yDrawingColorGreen(0,255,0, 0); // GREEN
 
         for (int i = -maxX; i < maxX; i++) //X
         {
-            drawPoint(i, 0, pixels, &xDrawingColorRed, windowDimensions);
+            //void PixelsTable::drawPoint(Vector2D<int>* point, Vector4D<uint8_t>* drawingColor)
+            //void PixelsTable::drawPoint(int x, int y, Vector4D<uint8_t>* drawingColor)
+            pixelsTable->drawPoint(i, 0, &xDrawingColorRed);
         }
 
         for (int i = -maxY; i < maxY; i++) //Y
         {
-            drawPoint(0, i, pixels, &yDrawingColorGreen, windowDimensions);
+            pixelsTable->drawPoint(0, i, &yDrawingColorGreen);
         }
     }
 
@@ -790,7 +673,7 @@ namespace YasGL
         return point->y* windowWidth + point->x;
     }
 
-    void drawCircle(Vector2D<int>* position, int& radius, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
+    void drawCircle(Vector2D<int>* position, int& radius, PixelsTable* pixelsTable, Vector4D<uint8_t>* drawingColor)
     {
         int circleX;
         int circleY;
@@ -803,17 +686,7 @@ namespace YasGL
             circlePixelPosition.x = circleX;
             circlePixelPosition.y = circleY;
                         
-            drawPoint(&circlePixelPosition, pixels, drawingColor, windowDimensions);
+            pixelsTable->drawPoint(&circlePixelPosition, drawingColor);
         }
     }
-
-    void cartesianPositionToWindow(Vector2D<int>* point, Vector2D<int>* windowDimenstions) {
-        point->x = point->x + static_cast<int>(0.5F * windowDimenstions->x);
-        point->y = point->y + static_cast<int>(0.5F * windowDimenstions->y);
-    }
-
-	void cartesianPositionToWindow(int& x, int& y, Vector2D<int>* windowDimenstions) {
-		x = x + static_cast<int>(0.5F * windowDimenstions->x);
-		y = y + static_cast<int>(0.5F * windowDimenstions->y);
-	}
 }
