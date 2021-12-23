@@ -139,6 +139,10 @@ namespace YasGL
                 break;
             }
 
+
+            // Q1 | Q0
+            //---------
+            // Q2 | Q3
             case PositionInSpace::Q10_H:
             {
 			    //positivePointA = new Vector2D<int>(-windowDimensions->x / 2, windowDimensions->y / 2);
@@ -162,12 +166,12 @@ namespace YasGL
             default:
             {
                 // Positive slope
-                positivePointA = new Vector2D<int>(10, 5); //(25, 40);
+                positivePointA = new Vector2D<int>(10, 5);
                 positivePointB = new Vector2D<int>(370, 25);
 
                 // Negative slope
-                negativePointA = new Vector2D<int>(10, 25); //(25, 40);
-                negativePointB = new Vector2D<int>(384, 5); //(256, 192);
+                negativePointA = new Vector2D<int>(10, 25);
+                negativePointB = new Vector2D<int>(384, 5);
                 break;
             }
         }
@@ -184,7 +188,6 @@ namespace YasGL
 		negativePointA->y = negativePointA->y + negativeYmodifier;
 		negativePointB->x = negativePointB->x + negativeXmodifier;
 		negativePointB->y = negativePointB->y + negativeYmodifier;
-
     }
 
     void deleteTestLines(Vector2D<int>*& positivePointA, Vector2D<int>*& positivePointB, Vector2D<int>*& negativePointA, Vector2D<int>*& negativePointB)
@@ -288,35 +291,6 @@ namespace YasGL
             }
         }
     }
-
-    void lukeDrawLineOctan0V1(Vector2D<int>* point0, Vector2D<int>* point1, PixelsTable* pixelsTable, Vector4D<uint8_t>* drawingColor)
-    {
-        int x = point0->x;
-        int y = point0->y;
-        float cumulativeError = 0;
-        float slope = static_cast<float>((point1->y - point0->y)) / (point1->x - point0->x);
-
-        for (int i = point0->x; i <= point1->x; i++)
-        {
-            pixelsTable->drawPoint(x, y, drawingColor);
-            x++;
-            if (abs(cumulativeError + slope) < 0.5F)
-            {
-                cumulativeError = cumulativeError + slope;
-            }
-            else
-            {
-                y++;
-                cumulativeError = cumulativeError + slope - 1;
-            }
-        }
-    }
-
-
-    // Negative slope line is like "\" Positive slope line is like "/"
-    // Not steep line is line where slope (defined as dy/dx) > 1 
-
-    // V2 Has modified equation(lukeDrawLineOctan0V1) (it is multiplied by delta X and then by 2)
 
     void drawNotSteepLine(Vector2D<int>* point0, Vector2D<int>* point1, PixelsTable* pixelsTable, Vector4D<uint8_t>* drawingColor)
     {
@@ -640,8 +614,6 @@ namespace YasGL
         point1 = tmpVector;
     }
 
-    //drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
-
     void drawCartesianAxies(PixelsTable* pixelsTable)
     {
         int maxX = static_cast<int>(0.5F * pixelsTable->windowDimensions->x);
@@ -652,8 +624,6 @@ namespace YasGL
 
         for (int i = -maxX; i < maxX; i++) //X
         {
-            //void PixelsTable::drawPoint(Vector2D<int>* point, Vector4D<uint8_t>* drawingColor)
-            //void PixelsTable::drawPoint(int x, int y, Vector4D<uint8_t>* drawingColor)
             pixelsTable->drawPoint(i, 0, &xDrawingColorRed);
         }
 

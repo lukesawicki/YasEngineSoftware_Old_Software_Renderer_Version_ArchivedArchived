@@ -20,12 +20,6 @@ public:
         this->y = y;
     }
 
-	//Vector2D(const Vector2D<int>& point)
-	//{
-	//	this->x = point.x;
-	//	this->y = point.y;
-	//}
-
 private:
 
 };
