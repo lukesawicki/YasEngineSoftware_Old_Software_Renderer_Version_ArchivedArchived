@@ -337,15 +337,11 @@ namespace YasGL
 
         if (abs(deltaX) != abs(deltaY))
         {
-            // Check if it is gentle slope
-            if (abs(deltaX) > abs(deltaY))
+            // START GENTLE LINE IF
+            if (abs(deltaX) > abs(deltaY)) // DELTAS CONDITION DX > DY
             {
-                if (deltaX < 0)
+                if (deltaX < 0) // DELTA X < 0 CONDITION (IT MEANS WRONG ORDER)
                 {
-                    // you have to swtich points that point0 is end of line and point1 i start of the line;
-
-                    // swtich x for for loop condition
-                    //temporaryForForLoopCondition = originalPoint0X;
                     originalPoint0X = point1->x;
                     originalPoint1X = point0->x;
 
@@ -353,7 +349,8 @@ namespace YasGL
                     x0 = point1->x;
                     y0 = point1->y;
 
-                    if (deltaY > 0) // it is positive slope so it means octan 0 and points in correct order ( incorrect order is octan 4 )
+                    // NEGATIVE SLOPE)
+                    if (deltaY > 0) // && (DELTAS CONDITION DX > DY) && (DELTA X < 0 CONDITION) -> IT MEANS OCTAN 3(NEGATIVE SLOPE, POINTS IN "WRONG ORDER")
                     {
                         deltaX = point0->x - point1->x;
                         deltaY = point0->y - point1->y;
@@ -373,7 +370,7 @@ namespace YasGL
                             }
                         }
                     }
-                    else // it is negitive slope so it means octan 8 and points in "correct order" ( incorrect order is ocatn 3 )
+                    else // POSITIVE SLOPE // (deltaY < 0) && (DELTAS CONDITION DX > DY) && (DELTA X < 0 CONDITION) -> IT MEANS OCTAN 4(POSITIVE SLOPE, POINTS IN "WRONG ORDER")
                     {
                         deltaX = point0->x - point1->x;
                         deltaY = point0->y - point1->y;
@@ -394,55 +391,52 @@ namespace YasGL
                         }
                     }
                 }
-                else
+                else  // DELTA X > 0 CONDITION  (IT MEANS CORRECT ORDER)
+                {
+                    // POSITIVE SLOPE
+                    if (deltaY > 0)  // && (DELTAS CONDITION DX > DY) && (DELTA X > 0 CONDITION) -> IT MEANS OCTAN 0(POSITIVE SLOPE, POINTS IN "CORRECT ORDER")
+                    {
+                        for (int i = originalPoint0X; i <= originalPoint1X; i++)
+                        {
+                            pixelsTable->drawPoint(x0, y0, drawingColor);
+                            x0++;
+                            if ((2 * (cumulativeError + deltaY)) < deltaX)
+                            {
+                                //y stays the same
+                                cumulativeError = cumulativeError + deltaY;
+                            }
+                            else
+                            {
+                                y0++;
+                                cumulativeError = cumulativeError + deltaY - deltaX;
+                            }
+                        }
+                    }
+                    else  // NEGATIVE SLOPE // (deltaY < 0) && (DELTAS CONDITION DX > DY) && (DELTA X > 0 CONDITION) -> IT MEANS OCTAN 7(NEGATIVE SLOPE, POINTS IN "CORRECT ORDER")
+                    {
+                        for (int i = originalPoint0X; i <= originalPoint1X; i++)
+                        {
+                            pixelsTable->drawPoint(x0, y0, drawingColor);
+                            x0++;
+                            if ((2 * (cumulativeError + deltaY)) > -deltaX)
+                            {
+                                //y stays the same
+                                cumulativeError = cumulativeError + deltaY;
+                            }
+                            else
+                            {
+                                y0--;
+                                cumulativeError = cumulativeError + deltaY + deltaX;
+                            }
+                        }
+                    }
+                }
+            } // END GENTLE LINE IF
+            else // abs(deltaX) < abs(deltaY) // DELTAS CONDITION DX < DY  // STEEP SLOPE
+            {
+		        if (deltaY < 0) // DELTA Y < 0 CONDITION (IT MEANS WRONG ORDER (BECAUSE IN HERE Y IS LEADING AXIES)
                 {
 
-                    if (deltaY > 0) // it is positive slope so it means octan 0 and points in correct order ( incorrect order is octan 4 )
-                    {
-                        for (int i = originalPoint0X; i <= originalPoint1X; i++)
-                        {
-                            pixelsTable->drawPoint(x0, y0, drawingColor);
-                            x0++;
-                            if ((2 * (cumulativeError + deltaY)) < deltaX)
-                            {
-                                //y stays the same
-                                cumulativeError = cumulativeError + deltaY;
-                            }
-                            else
-                            {
-                                y0++;
-                                cumulativeError = cumulativeError + deltaY - deltaX;
-                            }
-                        }
-                    }
-                    else // it is negitive slope so it means octan 8 and points in "correct order" ( incorrect order is ocatn 3 )
-                    {
-                        for (int i = originalPoint0X; i <= originalPoint1X; i++)
-                        {
-                            pixelsTable->drawPoint(x0, y0, drawingColor);
-                            x0++;
-                            if ((2 * (cumulativeError + deltaY)) > -deltaX)
-                            {
-                                //y stays the same
-                                cumulativeError = cumulativeError + deltaY;
-                            }
-                            else
-                            {
-                                y0--;
-                                cumulativeError = cumulativeError + deltaY + deltaX;
-                            }
-                        }
-                    }
-                }
-            } // end gentle
-            else // it is steep slope  STEEP STEEP STEEP STEEP
-            {
-		        if (deltaY < 0) 
-                {
-                    // STEEEEEEEEEP
-			        // you have to swtich points that point0 is end of line and point1 i start of the line;
-			        // swtich x for for loop condition
-			        //temporaryForForLoopCondition = originalPoint0X;
 			        originalPoint0Y = point1->y;
 			        originalPoint1Y = point0->y;
 
@@ -450,7 +444,8 @@ namespace YasGL
 			        x0 = point1->x;
 			        y0 = point1->y;
 
-			        if (deltaX > 0) // it is positive slope so it means octan 0 and points in correct order ( incorrect order is octan 4 )
+                    // NEGATIVE SLOPE
+			        if (deltaX > 0) // && (DELTAS CONDITION DX < DY) && (DELTA Y < 0 CONDITION) IT MEANS OCTAN 6(NEGATIVE SLOPE, POINTS IN "WRONG ORDER")
 			        {
 				        deltaX = point0->x - point1->x;
 				        deltaY = point0->y - point1->y;
@@ -470,7 +465,7 @@ namespace YasGL
 					        }
 				        }
 			        }
-			        else // it is negitive slope so it means octan 8 and points in "correct order" ( incorrect order is ocatn 3 )
+			        else // POSITIVE SLOPE  // deltaX < 0 && (DELTAS CONDITION DX < DY) && (DELTA Y < 0 CONDITION) IT MEANS OCTAN 5(POSITIVE SLOPE, POINTS IN "WRONG ORDER")
 			        {
 				        deltaX = point0->x - point1->x;
 				        deltaY = point0->y - point1->y;
@@ -491,9 +486,10 @@ namespace YasGL
 				        }
 			        }
 		        }
-		        else
+		        else // DELTA Y > 0 CONDITION  (IT MEANS CORRECT ORDER)
 		        {
-			        if (deltaX > 0) // it is positive slope so it means octan 0 and points in correct order ( incorrect order is octan 4 )
+                    // POSITIVE SLOPE
+			        if (deltaX > 0) // && (DELTAS CONDITION DX < DY) && (DELTA Y > 0 CONDITION) -> IT MEANS OCTAN 1(POSITIVE SLOPE, POINT IN "CORRECT ORDER")
 			        {
 				        for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
 				        {
@@ -511,7 +507,7 @@ namespace YasGL
 					        }
 				        }
 			        }
-			        else // it is negitive slope so it means octan 8 and points in "correct order" ( incorrect order is ocatn 3 )
+			        else // NEGATIVE SLOPE // (deltaX < 0) && (DELTAS CONDITION DX < DY) && (DELTA Y > 0 CONDITION) -> IT MEANS OCTAN 2(NEGATIVE SLOPE POINTS IN "CORRECT ORDER")
 			        {
 				        for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
 				        {
@@ -554,7 +550,7 @@ namespace YasGL
 				}
             }
         }
-        else
+        else // deltaX is equals deltaY
         {
             if (deltaX == 0 && deltaY == 0) // if both are equals 0 just draw point.
             {
