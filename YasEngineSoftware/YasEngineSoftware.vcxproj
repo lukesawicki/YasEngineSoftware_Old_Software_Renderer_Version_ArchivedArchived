@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BackupCpp.cpp" />
+    <ClCompile Include="Circle.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PixelsTable.cpp" />
     <ClCompile Include="temporary.cpp" />
@@ -27,7 +28,12 @@
     <ClCompile Include="YasGraphicsLibrary.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Circle.hpp" />
+    <ClInclude Include="Matrix2D.hpp" />
+    <ClInclude Include="Matrix3D.hpp" />
+    <ClInclude Include="Matrix4D.hpp" />
     <ClInclude Include="PixelsTable.hpp" />
+    <ClInclude Include="Shape.hpp" />
     <ClInclude Include="TimePicker.hpp" />
     <ClInclude Include="Vector2D.hpp" />
     <ClInclude Include="Vector3D.hpp" />

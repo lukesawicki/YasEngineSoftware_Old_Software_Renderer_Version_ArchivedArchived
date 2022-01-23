@@ -24,7 +24,9 @@ namespace YasGL
     const Vector4D<uint8_t> RED(255, 0, 0, 0);
     const Vector4D<uint8_t> GREEN(0, 255, 0, 0);
     const Vector4D<uint8_t> BLUE(0, 0, 255, 0);
-    const Vector4D<uint8_t> BLACK(0, 0, 0, 0);
+    const Vector4D<uint8_t> BLACK(0, 0, 0, 255);
+	const Vector4D<uint8_t> WHITE(255, 255, 255, 255);
+	const Vector4D<uint8_t> YELLOW(255, 255, 0, 255);
 
     const float dl = 3.125e-3F;
 
@@ -32,16 +34,13 @@ namespace YasGL
     enum class PointsOrder { NORMAL, REVERSE };
     enum class PositionInSpace { Q0, Q1, Q2, Q3, Q10, Q23, Q12, Q03, Q123_230, Q12_V, Q10_H };
 
-    void prepareTestLines(LineSlope lineSlope, PositionInSpace whichSpace, PointsOrder order, Vector2D<int>*& positivePointA, Vector2D<int>*& positivePointB, Vector2D<int>*& negativePointA, Vector2D<int>*& negativePointB, const Vector2D<int>* windowDimensions);
-    void modifyTestPoints(Vector2D<int>* positivePointA, Vector2D<int>* positivePointB, Vector2D<int>* negativePointA, Vector2D<int>* negativePointB, int positiveXmodifier, int positiveYmodifier, int negativeXmodifier, int negativeYmodifier);
-    void deleteTestLines(Vector2D<int>*& positivePointA, Vector2D<int>*& positivePointB, Vector2D<int>*& negativePointA, Vector2D<int>*& negativePointB);
-    void lukeDrawLineOctanNEWEST(Vector2D<int>* point0, Vector2D<int>* point1, PixelsTable* pixelsTable, Vector4D<uint8_t>* drawingColor);
+    void lukeDrawLineOctanNEWEST(Vector2D<int>* point0, Vector2D<int>* point1, PixelsTable& pixelsTable, const Vector4D<uint8_t>& drawingColor);
     void swapVectors(Vector2D<int>*& point0, Vector2D<int>*& point1);
 
-    void drawCartesianAxies(PixelsTable* pixelsTable);
+    void drawCartesianAxies(PixelsTable& pixelsTable);
     int xyPixelToArrayPosition(Vector2D<int>* point, int windowWidth);
     int xyPixelToArrayPosition(int x, int y, int windowWidth);
-    void drawCircle(Vector2D<int>* position, int& radius, PixelsTable* pixelsTable, Vector4D<uint8_t>* drawingColor);
+    void drawCircle(Vector2D<int>* position, int& radius, PixelsTable& pixelsTable, const Vector4D<uint8_t>& drawingColor);
 }
 
 #endif
