@@ -325,20 +325,4 @@ namespace YasGL
         return point->y* windowWidth + point->x;
     }
 
-    void drawCircle(Vector2D<int>* position, int& radius, PixelsTable& pixelsTable, const Vector4D<uint8_t>& drawingColor)
-    {
-        int circleX;
-        int circleY;
-        Vector2D<int> circlePixelPosition;
-        for (int i = 0; i < 360; i++)
-        {
-            circleX = static_cast<int>(position->x + radius * cos(i));
-            circleY = static_cast<int>(position->y + radius * sin(i));
-
-            circlePixelPosition.x = circleX;
-            circlePixelPosition.y = circleY;
-                        
-            pixelsTable.drawPoint(&circlePixelPosition, drawingColor);
-        }
-    }
 }

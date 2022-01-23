@@ -40,7 +40,6 @@ namespace YasGL
     void drawCartesianAxies(PixelsTable& pixelsTable);
     int xyPixelToArrayPosition(Vector2D<int>* point, int windowWidth);
     int xyPixelToArrayPosition(int x, int y, int windowWidth);
-    void drawCircle(Vector2D<int>* position, int& radius, PixelsTable& pixelsTable, const Vector4D<uint8_t>& drawingColor);
 }
 
 #endif
