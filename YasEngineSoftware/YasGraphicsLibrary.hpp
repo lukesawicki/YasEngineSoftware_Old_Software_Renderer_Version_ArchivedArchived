@@ -34,7 +34,7 @@ namespace YasGL
     enum class PointsOrder { NORMAL, REVERSE };
     enum class PositionInSpace { Q0, Q1, Q2, Q3, Q10, Q23, Q12, Q03, Q123_230, Q12_V, Q10_H };
 
-    void lukeDrawLineOctanNEWEST(Vector2D<int>* point0, Vector2D<int>* point1, PixelsTable& pixelsTable, const Vector4D<uint8_t>& drawingColor);
+    void drawLine(Vector2D<int>* point0, Vector2D<int>* point1, PixelsTable& pixelsTable, const Vector4D<uint8_t>& drawingColor);
     void swapVectors(Vector2D<int>*& point0, Vector2D<int>*& point1);
 
     void drawCartesianAxies(PixelsTable& pixelsTable);

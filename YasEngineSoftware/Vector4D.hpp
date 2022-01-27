@@ -5,28 +5,37 @@ template <typename Type>
 class Vector4D
 {
 
-public:
-	Type x;
-	Type y;
-	Type z;
-	Type w;
+	public:
+		Type x;
+		Type y;
+		Type z;
+		Type w;
 
-	Vector4D()
-	{
-		this->x = 0;
-		this->y = 0;
-		this->z = 0;
-		this->w = 0;
-	}
-	Vector4D(Type x, Type y, Type z, Type w)
-	{
-		this->x = x;
-		this->y = y;
-		this->z = z;
-		this->w = w;
-	}
+		Vector4D()
+		{
+			this->x = 0;
+			this->y = 0;
+			this->z = 0;
+			this->w = 0;
+		}
 
-private:
+		Vector4D(Type x, Type y, Type z, Type w)
+		{
+			this->x = x;
+			this->y = y;
+			this->z = z;
+			this->w = w;
+		}
+
+		//Vector4D(Vector4D<Type> vector)
+		//{
+		//	this->x = vector.x;
+		//	this->y = vector.y;
+		//	this->z = vector.z;
+		//	this->w = vector.w;
+		//}
+
+	private:
 
 };
 

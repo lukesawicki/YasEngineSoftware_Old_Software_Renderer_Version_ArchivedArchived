@@ -59,16 +59,13 @@
     <ClInclude Include="Matrix4D.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Matrix3D.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Matrix2D.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Shape.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Circle.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="YasMathematicsLibrary.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

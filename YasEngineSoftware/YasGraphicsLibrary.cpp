@@ -3,7 +3,7 @@
 namespace YasGL
 {
 
-    void lukeDrawLineOctanNEWEST(Vector2D<int>* point0, Vector2D<int>* point1, PixelsTable& pixelsTable, const Vector4D<uint8_t>& drawingColor)
+    void drawLine(Vector2D<int>* point0, Vector2D<int>* point1, PixelsTable& pixelsTable, const Vector4D<uint8_t>& drawingColor)
     {
         int x0 = point0->x;
         int y0 = point0->y;

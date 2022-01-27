@@ -29,8 +29,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Circle.hpp" />
-    <ClInclude Include="Matrix2D.hpp" />
-    <ClInclude Include="Matrix3D.hpp" />
     <ClInclude Include="Matrix4D.hpp" />
     <ClInclude Include="PixelsTable.hpp" />
     <ClInclude Include="Shape.hpp" />
@@ -39,6 +37,7 @@
     <ClInclude Include="Vector3D.hpp" />
     <ClInclude Include="Vector4D.hpp" />
     <ClInclude Include="YasGraphicsLibrary.hpp" />
+    <ClInclude Include="YasMathematicsLibrary.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

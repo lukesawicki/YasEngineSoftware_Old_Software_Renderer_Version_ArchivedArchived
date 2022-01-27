@@ -12,13 +12,17 @@
 #include"TimePicker.hpp"
 #include"PixelsTable.hpp"
 #include"Circle.hpp"
-
+#include"Matrix4D.hpp"
+#include<vector>
+#include"Vector3D.hpp"
 //-----------------------------------------------------------------------------|---------------------------------------|
 //                                                                            80                                     120
+
 int main(int argc, char* argv[])
 {
 	const int WINDOW_WIDTH = 1024;
 	const int WINDOW_HEIGHT = 768;
+
     Vector2D<int>* windowDimensions = new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
 
     GLFWwindow* window;
@@ -48,8 +52,6 @@ int main(int argc, char* argv[])
 
     // Test objects definitions
     Circle testCircle01 = Circle(2, 80, 0, 0);
-
-
     // End of test objects definitions
 
 
@@ -104,7 +106,6 @@ int main(int argc, char* argv[])
 
 //          ########  END TEST CODE  ################
 
-
             glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixelsTable.pixels);
             glfwSwapBuffers(window);
             glfwPollEvents();
@@ -114,7 +115,6 @@ int main(int argc, char* argv[])
         return 0;
     }
 }
-
 
 //                                                                            80                                     120
 //-----------------------------------------------------------------------------|---------------------------------------|
