@@ -7,20 +7,20 @@
 #include<vector>
 #include<cmath>
 #include"Vector2D.hpp"
-#include"Vector3D.hpp"
+
 #include"YasGraphicsLibrary.hpp"
 #include"TimePicker.hpp"
 #include"PixelsTable.hpp"
 #include"Circle.hpp"
-#include"Matrix4D.hpp"
+
 #include<vector>
-#include"Vector3D.hpp"
+
 //-----------------------------------------------------------------------------|---------------------------------------|
 //                                                                            80                                     120
 
 int main(int argc, char* argv[])
 {
-	const int WINDOW_WIDTH = 1024;
+    const int WINDOW_WIDTH = 1024;
 	const int WINDOW_HEIGHT = 768;
 
     Vector2D<int>* windowDimensions = new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);

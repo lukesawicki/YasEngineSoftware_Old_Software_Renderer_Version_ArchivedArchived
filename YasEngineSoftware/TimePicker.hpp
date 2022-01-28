@@ -1,6 +1,5 @@
 #ifndef TIMEPICKER_HPP
 #define TIMEPICKER_HPP
-//#include<iostream>
 #include<Windows.h>
 //-----------------------------------------------------------------------------|---------------------------------------|
 //                                                                            80                                     120

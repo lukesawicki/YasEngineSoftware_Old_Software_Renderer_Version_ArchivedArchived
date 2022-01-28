@@ -4,7 +4,6 @@
 template <typename Type>
 class Vector2D
 {
-
 	public:
 		Type x;
 		Type y;
@@ -19,9 +18,6 @@ class Vector2D
 			this->x = x;
 			this->y = y;
 		}
-
-	private:
-
 };
 
 #endif

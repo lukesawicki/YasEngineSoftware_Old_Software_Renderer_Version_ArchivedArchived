@@ -2,7 +2,6 @@
 
 namespace YasGL
 {
-
     void drawLine(Vector2D<int>* point0, Vector2D<int>* point1, PixelsTable& pixelsTable, const Vector4D<uint8_t>& drawingColor)
     {
         int x0 = point0->x;
@@ -324,5 +323,4 @@ namespace YasGL
     {
         return point->y* windowWidth + point->x;
     }
-
 }

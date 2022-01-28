@@ -11,7 +11,6 @@ class Shape
 		int* points = nullptr;
 		virtual void draw(const Vector4D<uint8_t>& drawingColor, PixelsTable& pixelsTable) = 0;
 		virtual void move(double deltaTime) = 0;
-
 };
 
 #endif

@@ -4,7 +4,6 @@
 #include<iostream>
 #include <GLFW/glfw3.h>
 #include"Vector2D.hpp"
-#include"Vector3D.hpp"
 #include"Vector4D.hpp"
 #include "PixelsTable.hpp"
 
@@ -27,12 +26,6 @@ namespace YasGL
     const Vector4D<uint8_t> BLACK(0, 0, 0, 255);
 	const Vector4D<uint8_t> WHITE(255, 255, 255, 255);
 	const Vector4D<uint8_t> YELLOW(255, 255, 0, 255);
-
-    const float dl = 3.125e-3F;
-
-    enum class LineSlope { GENTLE, STEEP, HORIZONTAL, VERTICAL };
-    enum class PointsOrder { NORMAL, REVERSE };
-    enum class PositionInSpace { Q0, Q1, Q2, Q3, Q10, Q23, Q12, Q03, Q123_230, Q12_V, Q10_H };
 
     void drawLine(Vector2D<int>* point0, Vector2D<int>* point1, PixelsTable& pixelsTable, const Vector4D<uint8_t>& drawingColor);
     void swapVectors(Vector2D<int>*& point0, Vector2D<int>*& point1);

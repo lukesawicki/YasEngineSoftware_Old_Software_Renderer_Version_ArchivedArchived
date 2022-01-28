@@ -51,15 +51,14 @@ void PixelsTable::drawPoint(Vector2D<int>* point, const Vector4D<uint8_t>& drawi
 	}
 }
 
-void PixelsTable::cartesianPositionToWindow(int& x, int& y) {
+void PixelsTable::cartesianPositionToWindow(int& x, int& y)
+{
 	x = x + static_cast<int>(0.5F * windowDimensions.x);
 	y = y + static_cast<int>(0.5F * windowDimensions.y);
 }
 
-void PixelsTable::cartesianPositionToWindow(Vector2D<int>* point) {
+void PixelsTable::cartesianPositionToWindow(Vector2D<int>* point)
+{
 	point->x = point->x + static_cast<int>(0.5F * windowDimensions.x);
 	point->y = point->y + static_cast<int>(0.5F * windowDimensions.y);
 }
-
-
-

@@ -26,17 +26,6 @@ class Vector4D
 			this->z = z;
 			this->w = w;
 		}
-
-		//Vector4D(Vector4D<Type> vector)
-		//{
-		//	this->x = vector.x;
-		//	this->y = vector.y;
-		//	this->z = vector.z;
-		//	this->w = vector.w;
-		//}
-
-	private:
-
 };
 
 #endif
