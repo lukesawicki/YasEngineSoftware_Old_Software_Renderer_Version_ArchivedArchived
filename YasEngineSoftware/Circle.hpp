@@ -1,20 +1,19 @@
 #ifndef CIRCLE_HPP
 #define CIRCLE_HPP
-#include"Shape.hpp"
+#include"Polygonn.hpp"
 #include"YasGraphicsLibrary.hpp"
 
-class Circle: public Shape
+namespace YasGL
 {
-	private:
-		Vector2D<int> position;
-		int radius = 0;
-		bool directionSwitched = false;
-		int speedFactor = 255;
-		int speed = 2 * speedFactor;
-	public:
-		Circle(int pointsNumber, int radius, int x, int y);
-		void draw(const Vector4D<uint8_t>& drawingColor, PixelsTable& pixelsTable) override;
-		void move(double deltaTime) override;
-};
+	class Circle : public Polygonn
+	{
+		public:
+			Circle(int radius, int x, int y);
+			void move(double deltaTime) override;
+			void generate() override;
+			void generateRegularPolygonVertices(Vector2D<int>& position, int circumscribedCircleRadius, int numberOfVertices) override;
+	};
+
+}
 
 #endif

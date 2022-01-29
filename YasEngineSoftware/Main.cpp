@@ -1,5 +1,6 @@
+
 #include<Windows.h>
-#include <GLFW/glfw3.h>
+#include<GLFW/glfw3.h>
 #include<gl/gl.h>
 #include<glext.h>
 #include<cstdlib>
@@ -7,7 +8,6 @@
 #include<vector>
 #include<cmath>
 #include"Vector2D.hpp"
-
 #include"YasGraphicsLibrary.hpp"
 #include"TimePicker.hpp"
 #include"PixelsTable.hpp"
@@ -15,8 +15,11 @@
 
 #include<vector>
 
+#include"Polygonn.hpp"
+
 //-----------------------------------------------------------------------------|---------------------------------------|
 //                                                                            80                                     120
+
 
 int main(int argc, char* argv[])
 {
@@ -51,7 +54,9 @@ int main(int argc, char* argv[])
     PixelsTable pixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, YasGL::BLACK);
 
     // Test objects definitions
-    Circle testCircle01 = Circle(2, 80, 0, 0);
+    //Circle(int radius, int x, int y);
+    YasGL::Polygonn* testCircle01;
+    testCircle01 = new YasGL::Circle(80, 0, 0);
     // End of test objects definitions
 
 
@@ -101,8 +106,10 @@ int main(int argc, char* argv[])
 
 //          ########  BEGINT TEST CODE  ################
 
-            testCircle01.move(deltaTime);
-            testCircle01.draw(YasGL::WHITE, pixelsTable);
+            //testCircle01->move(deltaTime);
+            
+            drawPolygon(testCircle01, YasGL::BLUE, pixelsTable);
+            //testCircle01.draw(YasGL::WHITE, pixelsTable);
 
 //          ########  END TEST CODE  ################
 

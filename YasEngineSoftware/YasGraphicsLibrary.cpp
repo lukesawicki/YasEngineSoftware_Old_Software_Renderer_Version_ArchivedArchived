@@ -287,6 +287,21 @@ namespace YasGL
         delete copyPoint1;
     }
 
+    void drawPolygon(Polygonn* polygon, const Vector4D<uint8_t>& color, PixelsTable& pixelsTable)
+    {
+        for (int i = 0; i < polygon->numberOfVertices; i++)
+        {
+            if (!(i == polygon->numberOfVertices - 1))
+            {
+                drawLine(&(polygon->vertices[i]), &(polygon->vertices[i + 1]), pixelsTable, color);
+            }
+            else
+            {
+                drawLine(&(polygon->vertices[i]), &(polygon->vertices[0]), pixelsTable, color);
+            }
+        }
+    }
+
     void swapVectors(Vector2D<int>*& point0, Vector2D<int>*& point1)
     {
         Vector2D<int>* tmpVector;

@@ -53,7 +53,7 @@
     <ClInclude Include="PixelsTable.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Shape.hpp">
+    <ClInclude Include="Polygonn.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Circle.hpp">

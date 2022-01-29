@@ -30,7 +30,7 @@
   <ItemGroup>
     <ClInclude Include="Circle.hpp" />
     <ClInclude Include="PixelsTable.hpp" />
-    <ClInclude Include="Shape.hpp" />
+    <ClInclude Include="Polygonn.hpp" />
     <ClInclude Include="TimePicker.hpp" />
     <ClInclude Include="Vector2D.hpp" />
     <ClInclude Include="Vector4D.hpp" />
