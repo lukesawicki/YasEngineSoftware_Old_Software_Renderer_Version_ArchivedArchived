@@ -289,17 +289,36 @@ namespace YasGL
 
     void drawPolygon(Polygonn* polygon, const Vector4D<uint8_t>& color, PixelsTable& pixelsTable)
     {
+        //for (int i = 0; i < polygon->numberOfVertices; i++)
+        //{
+        //    if (!(i == polygon->numberOfVertices - 1))
+        //    {
+        //        drawLine(&(polygon->vertices[i]), &(polygon->vertices[i + 1]), pixelsTable, color);
+        //    }
+        //    else
+        //    {
+        //        drawLine(&(polygon->vertices[i]), &(polygon->vertices[0]), pixelsTable, color);
+        //    }
+        //}
+
+
         for (int i = 0; i < polygon->numberOfVertices; i++)
         {
-            if (!(i == polygon->numberOfVertices - 1))
-            {
-                drawLine(&(polygon->vertices[i]), &(polygon->vertices[i + 1]), pixelsTable, color);
-            }
-            else
-            {
-                drawLine(&(polygon->vertices[i]), &(polygon->vertices[0]), pixelsTable, color);
-            }
+            pixelsTable.drawPoint(polygon->vertices[i].x, polygon->vertices[i].y, YasGL::YELLOW);
         }
+
+        //Vector2D<int> v;
+        //for (int i = 0; i < 100; i++)
+        //{
+
+        //    for (int j = 0; j < 100; j++)
+        //    {
+        //        v.x = i;
+        //        v.y = j;
+                //pixelsTable.drawPoint(100, 100, YasGL::BLUE); //Vector4D<uint8_t>& drawingColor ////const Vector4D<uint8_t> YELLOW(255, 255, 0, 255);
+            //}
+        //}
+
     }
 
     void swapVectors(Vector2D<int>*& point0, Vector2D<int>*& point1)

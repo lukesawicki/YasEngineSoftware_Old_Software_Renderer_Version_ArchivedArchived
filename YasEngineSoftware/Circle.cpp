@@ -24,11 +24,21 @@ void YasGL::Circle::move(double deltaTime)
 
 void YasGL::Circle::generate()
 {
+
+	angle = startAngle;
+	stepAngle = 360 / numberOfVertices;
 	for (int i = 0; i < numberOfVertices; i++)
 	{
-		vertices[i].x = static_cast<int>(position.x + circumscribedCircleRadius * cos(i));
-		vertices[i].y = static_cast<int>(position.y + circumscribedCircleRadius * sin(i));
-		std::cout << "X: " << vertices[i].x << "Y: " << vertices[i].y << std::endl;
+		//vertices[i].x = static_cast<int>(position.x + circumscribedCircleRadius * cos(i));
+		//vertices[i].y = static_cast<int>(position.y + circumscribedCircleRadius * sin(i));
+		//std::cout << "X: " << vertices[i].x << "Y: " << vertices[i].y << std::endl;
+
+		//x[n] = r * cos(2 * pi * n / N)
+		//y[n] = r * sin(2 * pi * n / N)
+
+		vertices[i].x = position.x + circumscribedCircleRadius * cos(angle*(YasGL::PI/180.0F));
+		vertices[i].y = position.y + circumscribedCircleRadius * sin(angle*(YasGL::PI / 180.0F));
+		angle += stepAngle;
 	}
 }
 
@@ -38,7 +48,7 @@ void YasGL::Circle::generateRegularPolygonVertices(Vector2D<int>& position, int 
 	this->numberOfVertices = numberOfVertices;
 	this->position.x = position.x;
 	this->position.y = position.y;
-	vertices = new Vector2D<int>[numberOfVertices];
+	this->vertices = new Vector2D<int>[numberOfVertices];
 	generate();
 }
 

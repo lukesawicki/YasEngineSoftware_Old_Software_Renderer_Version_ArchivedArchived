@@ -12,6 +12,7 @@ class PixelsTable;
 
 namespace YasGL
 {
+    const float PI = 3.141592F;
     const uint8_t NUMBER_OF_COLORS = 4;
     const uint8_t RGB_FORMAT = 3;
     const uint8_t RGBA_FORMAT = 4;

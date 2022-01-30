@@ -16,6 +16,9 @@ namespace YasGL
 			int* points = nullptr;
 			Vector4D<uint8_t> color;
 			int circumscribedCircleRadius;
+			float angle;
+			float startAngle;
+			float stepAngle;
 
 			bool directionSwitched = false;
 			int  speedFactor = 255;
