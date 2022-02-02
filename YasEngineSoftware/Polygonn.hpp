@@ -13,7 +13,7 @@ namespace YasGL
 			Vector2D<int> position;
 			Vector2D<int>* vertices = nullptr;
 			int numberOfVertices = 0;
-			int* points = nullptr;
+			//int* points = nullptr;
 			Vector4D<uint8_t> color;
 			int circumscribedCircleRadius;
 			float angle;
@@ -26,7 +26,7 @@ namespace YasGL
 
 			virtual void move(double deltaTime) = 0;
 			virtual void generate() = 0;
-			virtual void generateRegularPolygonVertices(Vector2D<int>& position, int circumscribedCircleRadius, int numberOfVertices) = 0;
+			virtual void generateRegularPolygonVertices(const Vector2D<int>& position, int circumscribedCircleRadius, int numberOfVertices) = 0;
 	};
 
 }

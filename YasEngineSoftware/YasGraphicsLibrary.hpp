@@ -29,14 +29,14 @@ namespace YasGL
     const Vector4D<uint8_t> WHITE(255, 255, 255, 255);
     const Vector4D<uint8_t> YELLOW(255, 255, 0, 255);
 
-    void drawLine(Vector2D<int>* point0, Vector2D<int>* point1, PixelsTable& pixelsTable, const Vector4D<uint8_t>& drawingColor);
+    void drawLine(const Vector2D<int>& point0, const Vector2D<int>& point1, PixelsTable& pixelsTable, const Vector4D<uint8_t>& drawingColor);
 
     void drawPolygon(YasGL::Polygonn* polygon, const Vector4D<uint8_t>& color, PixelsTable& pixelsTable);
 
-    void swapVectors(Vector2D<int>*& point0, Vector2D<int>*& point1);
+    void swapVectors(Vector2D<int>& point0, Vector2D<int>& point1);
 
     void drawCartesianAxies(PixelsTable& pixelsTable);
-    int xyPixelToArrayPosition(Vector2D<int>* point, int windowWidth);
+    int xyPixelToArrayPosition(Vector2D<int>& point, int windowWidth);
     int xyPixelToArrayPosition(int x, int y, int windowWidth);
 
 }

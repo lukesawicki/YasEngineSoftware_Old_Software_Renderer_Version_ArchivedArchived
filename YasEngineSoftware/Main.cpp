@@ -36,6 +36,13 @@ int main(int argc, char* argv[])
 	Vector2D<int>* yAxisBegin = new Vector2D<int>(WINDOW_WIDTH / 2, 0);
 	Vector2D<int>* yAxisEnd = new Vector2D<int>(WINDOW_WIDTH / 2, WINDOW_HEIGHT);
 
+    //Vector2D<int> start(0, 100);
+    //Vector2D<int> stop(100, 100);
+
+    Vector2D<int> start(100, 100);
+    Vector2D<int> stop(0, 100);
+
+
     if (!glfwInit())
     {
         return 1;
@@ -56,7 +63,7 @@ int main(int argc, char* argv[])
     // Test objects definitions
     //Circle(int radius, int x, int y);
     YasGL::Polygonn* testCircle01;
-    testCircle01 = new YasGL::Circle(80, 0, 0);
+    testCircle01 = new YasGL::Circle(100, 0, 0);
     // End of test objects definitions
 
 
@@ -107,7 +114,7 @@ int main(int argc, char* argv[])
 //          ########  BEGINT TEST CODE  ################
 
             //testCircle01->move(deltaTime);
-            
+            YasGL::drawLine(start, stop, pixelsTable, YasGL::YELLOW);
             drawPolygon(testCircle01, YasGL::BLUE, pixelsTable);
             //testCircle01.draw(YasGL::WHITE, pixelsTable);
 
