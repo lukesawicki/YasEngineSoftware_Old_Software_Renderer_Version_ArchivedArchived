@@ -35,7 +35,12 @@ namespace YasGL
 
     void swapVectors(Vector2D<int>& point0, Vector2D<int>& point1);
 
+	void horizontalLineOnScreen(PixelsTable& pixelsTable, int y, Vector4D<uint8_t> color);
+
+	void verticalLineOnScreen(PixelsTable& pixelsTable, int x, Vector4D<uint8_t> color);
+
     void drawCartesianAxies(PixelsTable& pixelsTable);
+    
     int xyPixelToArrayPosition(Vector2D<int>& point, int windowWidth);
     int xyPixelToArrayPosition(int x, int y, int windowWidth);
 }

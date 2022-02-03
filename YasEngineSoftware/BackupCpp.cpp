@@ -447,4 +447,19 @@
 //        //    }
 //        //}
 //    }
+// 
+// 
+//          CIRCLE DRAWING USING MATHEMATIC FORMULA FOR CIRCLE (BAD APROXIMATION FOR RECTANGLE BECAUSE OF PIXELS ARE INTEGER VALUES)
+//for (int i = 0; i < 3600; i++)
+//{
+//circleX = static_cast<int>(position.x + radius * cos(i));
+//circleY = static_cast<int>(position.y + radius * sin(i));
+
+//circlePixelPosition.x = circleX;
+//circlePixelPosition.y = circleY;
+
+//pixelsTable.drawPoint(circlePixelPosition.x, circlePixelPosition.y, YasGL::RED);
+//}
+// 
+// 
 ///// END 20210925

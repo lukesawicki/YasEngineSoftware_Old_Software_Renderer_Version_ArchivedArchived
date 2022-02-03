@@ -337,23 +337,27 @@ namespace YasGL
 
     void drawCartesianAxies(PixelsTable& pixelsTable)
     {
-        int maxX = static_cast<int>(0.5F * pixelsTable.windowDimensions.x);
-        int maxY = static_cast<int>(0.5F * pixelsTable.windowDimensions.y);
-
-        Vector4D<uint8_t> xDrawingColorRed(255,0,0, 0); // RED
-        Vector4D<uint8_t> yDrawingColorGreen(0,255,0, 0); // GREEN
-
-        for (int i = -maxX; i < maxX; i++) //X
-        {
-            pixelsTable.drawPoint(i, 0, xDrawingColorRed);
-            int a = i;
-        }
-
-        for (int i = -maxY; i < maxY; i++) //Y
-        {
-            pixelsTable.drawPoint(0, i, yDrawingColorGreen);
-        }
+        horizontalLineOnScreen(pixelsTable, 0, YasGL::RED);
+        verticalLineOnScreen(pixelsTable, 0, YasGL::GREEN);
     }
+
+    void horizontalLineOnScreen(PixelsTable& pixelsTable, int y, Vector4D<uint8_t> color)
+    {
+        int maxX = static_cast<int>(0.5F * pixelsTable.windowDimensions.x);
+		for (int i = -maxX; i < maxX; i++) //X
+		{
+			pixelsTable.drawPoint(i, y, color);
+		}
+    }
+
+	void verticalLineOnScreen(PixelsTable& pixelsTable, int x, Vector4D<uint8_t> color)
+	{
+		int maxY = static_cast<int>(0.5F * pixelsTable.windowDimensions.y);
+		for (int i = -maxY; i < maxY; i++) //X
+		{
+			pixelsTable.drawPoint(x, i, color);
+		}
+	}
 
     int xyPixelToArrayPosition(int x, int y, int windowWidth)
     {

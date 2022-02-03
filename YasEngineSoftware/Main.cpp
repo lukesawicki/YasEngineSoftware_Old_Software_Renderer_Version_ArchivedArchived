@@ -61,11 +61,11 @@ int main(int argc, char* argv[])
     PixelsTable pixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, YasGL::BLACK);
 
     // Test objects definitions
-    //Circle(int radius, int x, int y);
-    YasGL::Polygonn* testCircle01;
-    testCircle01 = new YasGL::Circle(100, 0, 0);
-    // End of test objects definitions
 
+	std::vector<YasGL::Polygonn*> objectsToDraw;
+    objectsToDraw.push_back(new YasGL::Circle(300, 0, 0));
+
+    // End of test objects definitions
 
     bool shouldApplicationStopRunning = false;
     double time;
@@ -84,6 +84,8 @@ int main(int argc, char* argv[])
 
     Vector2D<int> point0(100, 0);
     Vector2D<int> point1(50, 86);
+
+
 
     while (!shouldApplicationStopRunning)
     {
@@ -116,12 +118,13 @@ int main(int argc, char* argv[])
 
 //          ########  BEGINT TEST CODE  ################
 
-            //testCircle01->move(deltaTime);
             YasGL::drawLine(start, stop, pixelsTable, YasGL::YELLOW);
-            //YasGL::drawLine(point0, point1, pixelsTable, YasGL::GREEN);
-            YasGL::drawPolygon(testCircle01, YasGL::BLUE, pixelsTable);
-
-            //testCircle01.draw(YasGL::WHITE, pixelsTable);
+            for (auto object : objectsToDraw)
+            {
+                YasGL::drawPolygon(object, YasGL::BLUE, pixelsTable);
+            }
+            
+            // testCircle01->move()
 
 //          ########  END TEST CODE  ################
 
