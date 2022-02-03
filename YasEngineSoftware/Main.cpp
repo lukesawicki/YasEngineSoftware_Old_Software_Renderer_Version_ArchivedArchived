@@ -36,12 +36,8 @@ int main(int argc, char* argv[])
 	Vector2D<int>* yAxisBegin = new Vector2D<int>(WINDOW_WIDTH / 2, 0);
 	Vector2D<int>* yAxisEnd = new Vector2D<int>(WINDOW_WIDTH / 2, WINDOW_HEIGHT);
 
-    //Vector2D<int> start(0, 100);
-    //Vector2D<int> stop(100, 100);
-
     Vector2D<int> start(100, 100);
     Vector2D<int> stop(0, 100);
-
 
     if (!glfwInit())
     {
@@ -85,11 +81,8 @@ int main(int argc, char* argv[])
     Vector2D<int> point0(100, 0);
     Vector2D<int> point1(50, 86);
 
-
-
     while (!shouldApplicationStopRunning)
     {
-
         while (!glfwWindowShouldClose(window))
         {
 
@@ -122,9 +115,10 @@ int main(int argc, char* argv[])
             for (auto object : objectsToDraw)
             {
                 YasGL::drawPolygon(object, YasGL::BLUE, pixelsTable);
+                object->move(deltaTime);
             }
             
-            // testCircle01->move()
+            
 
 //          ########  END TEST CODE  ################
 
