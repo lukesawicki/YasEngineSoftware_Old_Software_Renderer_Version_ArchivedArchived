@@ -296,7 +296,7 @@ namespace YasGL
 
     //void drawLine(Vector2D<int>* point0, Vector2D<int>* point1, PixelsTable& pixelsTable, const Vector4D<uint8_t>& drawingColor);
 
-    void drawPolygon(Polygonn* polygon, const Vector4D<uint8_t>& color, PixelsTable& pixelsTable)
+    void drawPolygon(Polygon* polygon, const Vector4D<uint8_t>& color, PixelsTable& pixelsTable)
     {
         bool drawLines = true;
         if (drawLines)

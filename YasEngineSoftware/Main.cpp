@@ -12,10 +12,9 @@
 #include"TimePicker.hpp"
 #include"PixelsTable.hpp"
 #include"Circle.hpp"
-
 #include<vector>
-
-#include"Polygonn.hpp"
+#include"Polygon.hpp"
+#include"Player.hpp"
 
 //-----------------------------------------------------------------------------|---------------------------------------|
 //                                                                            80                                     120
@@ -58,8 +57,10 @@ int main(int argc, char* argv[])
 
     // Test objects definitions
 
-	std::vector<YasGL::Polygonn*> objectsToDraw;
-    objectsToDraw.push_back(new YasGL::Circle(300, 0, 0));
+	std::vector<YasGL::Polygon*> objectsToDraw;
+    YasGL::Player* player = new YasGL::Player(0, 0);
+    objectsToDraw.push_back(new YasGL::Circle(100, 0, 0));
+    objectsToDraw.push_back(player);
 
     // End of test objects definitions
 
@@ -85,12 +86,41 @@ int main(int argc, char* argv[])
     {
         while (!glfwWindowShouldClose(window))
         {
-
+            // ESCAPE
             if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
             {
                 shouldApplicationStopRunning = true;
-                break;
             }
+
+
+
+            // LEFT
+			if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+			{
+                //player->xDirection = -1;
+                player->position.x = player->position.x + 10;
+			}
+
+			
+            // RIGHT
+            if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+			{
+                player->xDirection = 1;
+			}
+
+
+            // UP
+			if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+			{
+                player->yDirection = 1;
+			}
+
+
+            // DOWN
+			if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+			{
+                player->yDirection = -1;
+			}
 
             newTime = timePicker.getSeconds();
             deltaTime = newTime - time;
@@ -114,17 +144,23 @@ int main(int argc, char* argv[])
             YasGL::drawLine(start, stop, pixelsTable, YasGL::YELLOW);
             for (auto object : objectsToDraw)
             {
-                YasGL::drawPolygon(object, YasGL::BLUE, pixelsTable);
                 object->move(deltaTime);
+                object->regeneratePolygon();
+                YasGL::drawPolygon(object, YasGL::GREEN, pixelsTable);
             }
             
-            
-
 //          ########  END TEST CODE  ################
 
             glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixelsTable.pixels);
             glfwSwapBuffers(window);
             glfwPollEvents();
+            player->xDirection = 0;
+            player->yDirection = 0;
+        }
+        
+        for (auto drawableObject : objectsToDraw)
+        {
+            delete drawableObject;
         }
 
         glfwTerminate();

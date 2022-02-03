@@ -1,13 +1,12 @@
-#ifndef POLYGONN_HPP
-#define POLYGONN_HPP
+#ifndef POLYGON_HPP
+#define POLYGON_HPP
 #include "Vector2D.hpp"
 #include "Vector4D.hpp"
 #include <GLFW/glfw3.h>
 
 namespace YasGL
 {
-
-	class Polygonn
+	class Polygon
 	{
 		public:
 			Vector2D<int> position;
@@ -21,12 +20,13 @@ namespace YasGL
 			float stepAngle;
 
 			bool directionSwitched = false;
-			int  speedFactor = 255;
-			int  speed = 2 * speedFactor;
+			int  speedFactor = 0;
+			int  speed = 0;
 
 			virtual void move(double deltaTime) = 0;
 			virtual void generate() = 0;
 			virtual void generateRegularPolygonVertices(const Vector2D<int>& position, int circumscribedCircleRadius, int numberOfVertices) = 0;
+			virtual void regeneratePolygon() = 0;
 	};
 
 }

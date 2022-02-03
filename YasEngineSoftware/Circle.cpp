@@ -2,6 +2,9 @@
 
 YasGL::Circle::Circle(int radius, int x, int y)
 {
+	directionSwitched = false;
+	speedFactor = 255;
+	speed = 2 * speedFactor;
 	Vector2D<int> position(x, y);
 	generateRegularPolygonVertices(position, radius, 64);
 }
@@ -46,5 +49,10 @@ void YasGL::Circle::generateRegularPolygonVertices(const Vector2D<int>& position
 	this->position.x = position.x;
 	this->position.y = position.y;
 	this->vertices = new Vector2D<int>[numberOfVertices];
+	generate();
+}
+
+void YasGL::Circle::regeneratePolygon()
+{
 	generate();
 }

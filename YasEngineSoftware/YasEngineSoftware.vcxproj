@@ -23,6 +23,7 @@
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PixelsTable.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="temporary.cpp" />
     <ClCompile Include="TimePicker.cpp" />
     <ClCompile Include="YasGraphicsLibrary.cpp" />
@@ -30,7 +31,8 @@
   <ItemGroup>
     <ClInclude Include="Circle.hpp" />
     <ClInclude Include="PixelsTable.hpp" />
-    <ClInclude Include="Polygonn.hpp" />
+    <ClInclude Include="Player.hpp" />
+    <ClInclude Include="Polygon.hpp" />
     <ClInclude Include="TimePicker.hpp" />
     <ClInclude Include="Vector2D.hpp" />
     <ClInclude Include="Vector4D.hpp" />
