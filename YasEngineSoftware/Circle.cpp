@@ -3,7 +3,7 @@
 YasGL::Circle::Circle(int radius, int x, int y)
 {
 	Vector2D<int> position(x, y);
-	generateRegularPolygonVertices(position, radius, 6);
+	generateRegularPolygonVertices(position, radius, 3);
 }
 
 YasGL::Circle::~Circle()
@@ -34,13 +34,6 @@ void YasGL::Circle::generate()
 	stepAngle = 360.0F / numberOfVertices;
 	for (int i = 0; i < numberOfVertices; i++)
 	{
-		//vertices[i].x = static_cast<int>(position.x + circumscribedCircleRadius * cos(i));
-		//vertices[i].y = static_cast<int>(position.y + circumscribedCircleRadius * sin(i));
-		//std::cout << "X: " << vertices[i].x << "Y: " << vertices[i].y << std::endl;
-
-		//x[n] = r * cos(2 * pi * n / N)
-		//y[n] = r * sin(2 * pi * n / N)
-
 		vertices[i].x = position.x + static_cast<int>(circumscribedCircleRadius * cos(angle*(YasGL::PI/180.0F)));
 		vertices[i].y = position.y + static_cast<int>(circumscribedCircleRadius * sin(angle*(YasGL::PI / 180.0F)));
 		angle += stepAngle;
@@ -56,25 +49,4 @@ void YasGL::Circle::generateRegularPolygonVertices(const Vector2D<int>& position
 	this->vertices = new Vector2D<int>[numberOfVertices];
 	generate();
 
-
-	//for (int i = 0; i < numberOfVertices; i++)
-	//{
-
-	//	std::cout << i <<  "   X: " << vertices[i].x << "    " << "Y: "<< vertices[i].y << std::endl;
-	//}
-
 }
-
-//int circleX;
-//int circleY;
-//Vector2D<int> circlePixelPosition;
-//for (int i = 0; i < 360; i++)
-//{
-//	circleX = static_cast<int>(position.x + radius * cos(i));
-//	circleY = static_cast<int>(position.y + radius * sin(i));
-//
-//	circlePixelPosition.x = circleX;
-//	circlePixelPosition.y = circleY;
-//
-//	pixelsTable.drawPoint(&circlePixelPosition, drawingColor);
-//}

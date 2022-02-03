@@ -118,8 +118,8 @@ int main(int argc, char* argv[])
 
             //testCircle01->move(deltaTime);
             YasGL::drawLine(start, stop, pixelsTable, YasGL::YELLOW);
-            YasGL::drawLine(point0, point1, pixelsTable, YasGL::GREEN);
-            //YasGL::drawPolygon(testCircle01, YasGL::BLUE, pixelsTable);
+            //YasGL::drawLine(point0, point1, pixelsTable, YasGL::GREEN);
+            YasGL::drawPolygon(testCircle01, YasGL::BLUE, pixelsTable);
 
             //testCircle01.draw(YasGL::WHITE, pixelsTable);
 

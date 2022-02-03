@@ -38,7 +38,6 @@ namespace YasGL
     void drawCartesianAxies(PixelsTable& pixelsTable);
     int xyPixelToArrayPosition(Vector2D<int>& point, int windowWidth);
     int xyPixelToArrayPosition(int x, int y, int windowWidth);
-
 }
 
 #endif
