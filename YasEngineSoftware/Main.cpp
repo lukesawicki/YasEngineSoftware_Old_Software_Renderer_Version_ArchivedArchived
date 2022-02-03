@@ -82,6 +82,9 @@ int main(int argc, char* argv[])
     frames = 0;
     bool close = false;
 
+    Vector2D<int> point0(100, 0);
+    Vector2D<int> point1(50, 86);
+
     while (!shouldApplicationStopRunning)
     {
 
@@ -115,7 +118,9 @@ int main(int argc, char* argv[])
 
             //testCircle01->move(deltaTime);
             YasGL::drawLine(start, stop, pixelsTable, YasGL::YELLOW);
-            drawPolygon(testCircle01, YasGL::BLUE, pixelsTable);
+            YasGL::drawLine(point0, point1, pixelsTable, YasGL::GREEN);
+            //YasGL::drawPolygon(testCircle01, YasGL::BLUE, pixelsTable);
+
             //testCircle01.draw(YasGL::WHITE, pixelsTable);
 
 //          ########  END TEST CODE  ################

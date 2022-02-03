@@ -293,7 +293,8 @@ namespace YasGL
         bool drawLines = true;
         if (drawLines)
         {
-            for (int i = 0; i < polygon->numberOfVertices; i++)
+            drawLine(polygon->vertices[0], polygon->vertices[1], pixelsTable, color);
+            /*for (int i = 0; i < polygon->numberOfVertices; i++)
             {
                 if ((i == polygon->numberOfVertices - 1))
                 {
@@ -303,7 +304,7 @@ namespace YasGL
                 {
                     drawLine(polygon->vertices[i], polygon->vertices[i + 1], pixelsTable, color);
                 }
-            }
+            }*/
         }
         else
         {
@@ -337,6 +338,7 @@ namespace YasGL
         for (int i = -maxX; i < maxX; i++) //X
         {
             pixelsTable.drawPoint(i, 0, xDrawingColorRed);
+            int a = i;
         }
 
         for (int i = -maxY; i < maxY; i++) //Y
