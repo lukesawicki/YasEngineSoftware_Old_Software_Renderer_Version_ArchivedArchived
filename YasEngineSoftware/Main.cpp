@@ -19,6 +19,54 @@
 //-----------------------------------------------------------------------------|---------------------------------------|
 //                                                                            80                                     120
 
+bool up = false;
+bool down = false;
+bool left = false;
+bool right = false;
+
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+    if (key == GLFW_KEY_W && action == GLFW_PRESS)
+    {
+        up = true;
+    }
+		
+	if (key == GLFW_KEY_S && action == GLFW_PRESS)
+	{
+        down = true;
+	}
+	
+    if (key == GLFW_KEY_A && action == GLFW_PRESS)
+	{
+        left = true;
+	}
+	
+    if (key == GLFW_KEY_D && action == GLFW_PRESS)
+	{
+        right = true;
+	}
+
+
+	if (key == GLFW_KEY_W && action == GLFW_RELEASE)
+	{
+		up = false;
+	}
+
+	if (key == GLFW_KEY_S && action == GLFW_RELEASE)
+	{
+		down = false;
+	}
+
+	if (key == GLFW_KEY_A && action == GLFW_RELEASE)
+	{
+		left = false;
+	}
+
+	if (key == GLFW_KEY_D && action == GLFW_RELEASE)
+	{
+		right = false;
+	}
+}
 
 int main(int argc, char* argv[])
 {
@@ -35,8 +83,8 @@ int main(int argc, char* argv[])
 	Vector2D<int>* yAxisBegin = new Vector2D<int>(WINDOW_WIDTH / 2, 0);
 	Vector2D<int>* yAxisEnd = new Vector2D<int>(WINDOW_WIDTH / 2, WINDOW_HEIGHT);
 
-    Vector2D<int> start(100, 100);
-    Vector2D<int> stop(0, 100);
+    Vector2D<int> start(500, 500);
+    Vector2D<int> stop(-500, -500);
 
     if (!glfwInit())
     {
@@ -52,6 +100,8 @@ int main(int argc, char* argv[])
     }
 
     glfwMakeContextCurrent(window);
+
+    glfwSetKeyCallback(window, key_callback);
 
     PixelsTable pixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, YasGL::BLACK);
 
@@ -79,8 +129,8 @@ int main(int argc, char* argv[])
     frames = 0;
     bool close = false;
 
-    Vector2D<int> point0(100, 0);
-    Vector2D<int> point1(50, 86);
+    //Vector2D<int> point0(-500, 500);
+    //Vector2D<int> point1(500, -500 );
 
     while (!shouldApplicationStopRunning)
     {
@@ -92,34 +142,42 @@ int main(int argc, char* argv[])
                 shouldApplicationStopRunning = true;
             }
 
-
-
             // LEFT
-			if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
+			if (left) //glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
 			{
                 //player->xDirection = -1;
-                player->position.x = player->position.x + 10;
+                player->xDirection = -1;
+				player->position.x = static_cast<int>(player->position.x + deltaTime * (-player->speed));
+				//player->position.y = static_cast<int>(player->position.y + deltaTime * player->speed) * player->yDirection;
+
 			}
 
 			
             // RIGHT
-            if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
+            if (right) //glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
 			{
                 player->xDirection = 1;
+				player->position.x = static_cast<int>(player->position.x + deltaTime * player->speed);
+				//player->position.y = static_cast<int>(player->position.y + deltaTime * player->speed) * player->yDirection;
 			}
 
 
             // UP
-			if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
+			if (up) //glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 			{
                 player->yDirection = 1;
+                //player->position.y = player->position.y + 2;
+				//player->position.x = static_cast<int>(player->position.x + deltaTime * player->speed) * player->xDirection;
+				player->position.y = static_cast<int>(player->position.y + deltaTime * player->speed);
 			}
 
 
             // DOWN
-			if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
+			if (down) //glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
 			{
                 player->yDirection = -1;
+				//player->position.x = static_cast<int>(player->position.x + deltaTime * player->speed) * player->xDirection;
+				player->position.y = static_cast<int>(player->position.y + deltaTime * (-player->speed));
 			}
 
             newTime = timePicker.getSeconds();
@@ -137,25 +195,24 @@ int main(int argc, char* argv[])
             
             pixelsTable.clearColor(YasGL::BLACK);
             
-			YasGL::drawCartesianAxies(pixelsTable);
+			//YasGL::drawCartesianAxies(pixelsTable);
 
 //          ########  BEGINT TEST CODE  ################
 
             YasGL::drawLine(start, stop, pixelsTable, YasGL::YELLOW);
             for (auto object : objectsToDraw)
             {
-                object->move(deltaTime);
+                //object->move(deltaTime);
                 object->regeneratePolygon();
                 YasGL::drawPolygon(object, YasGL::GREEN, pixelsTable);
             }
-            
+			//player->position.x = static_cast<int>(player->position.x + deltaTime * player->speed) * player->xDirection;
+			//player->position.y = static_cast<int>(player->position.y + deltaTime * player->speed) * player->yDirection;
 //          ########  END TEST CODE  ################
 
             glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixelsTable.pixels);
             glfwSwapBuffers(window);
             glfwPollEvents();
-            player->xDirection = 0;
-            player->yDirection = 0;
         }
         
         for (auto drawableObject : objectsToDraw)

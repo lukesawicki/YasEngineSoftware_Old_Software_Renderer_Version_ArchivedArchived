@@ -21,7 +21,7 @@ namespace YasGL
 
 			bool directionSwitched = false;
 			int  speedFactor = 0;
-			int  speed = 0;
+			int  speed = 200;
 
 			virtual void move(double deltaTime) = 0;
 			virtual void generate() = 0;

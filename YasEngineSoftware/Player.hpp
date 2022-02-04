@@ -7,6 +7,13 @@ namespace YasGL
 	{
 	public:
 
+		struct Input {
+			bool left;
+			bool right;
+			bool up;
+			bool down;
+		};
+
 		Player(int x, int y);
 		~Player();
 		void move(double deltaTime) override;
