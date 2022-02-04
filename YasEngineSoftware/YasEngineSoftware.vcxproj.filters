@@ -65,7 +65,7 @@
     <ClInclude Include="Player.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InputOutputHandler.h">
+    <ClInclude Include="InputOutputHandler.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

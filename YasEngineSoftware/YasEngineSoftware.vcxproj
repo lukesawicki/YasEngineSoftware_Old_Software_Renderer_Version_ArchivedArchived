@@ -30,7 +30,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Circle.hpp" />
-    <ClInclude Include="InputOutputHandler.h" />
+    <ClInclude Include="InputOutputHandler.hpp" />
     <ClInclude Include="PixelsTable.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Polygon.hpp" />

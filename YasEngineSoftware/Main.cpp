@@ -15,56 +15,54 @@
 #include<vector>
 #include"Polygon.hpp"
 #include"Player.hpp"
+#include"InputOutputHandler.hpp"
 
 //-----------------------------------------------------------------------------|---------------------------------------|
 //                                                                            80                                     120
 
-bool up = false;
-bool down = false;
-bool left = false;
-bool right = false;
+YasInOut::Input* input = new YasInOut::Input();
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    if (key == GLFW_KEY_W && action == GLFW_PRESS)
-    {
-        up = true;
-    }
-		
+	if (key == GLFW_KEY_W && action == GLFW_PRESS)
+	{
+		input->up = true;
+	}
+
 	if (key == GLFW_KEY_S && action == GLFW_PRESS)
 	{
-        down = true;
+		input->down = true;
 	}
-	
-    if (key == GLFW_KEY_A && action == GLFW_PRESS)
+
+	if (key == GLFW_KEY_A && action == GLFW_PRESS)
 	{
-        left = true;
+		input->left = true;
 	}
-	
-    if (key == GLFW_KEY_D && action == GLFW_PRESS)
+
+	if (key == GLFW_KEY_D && action == GLFW_PRESS)
 	{
-        right = true;
+		input->right = true;
 	}
 
 
 	if (key == GLFW_KEY_W && action == GLFW_RELEASE)
 	{
-		up = false;
+		input->up = false;
 	}
 
 	if (key == GLFW_KEY_S && action == GLFW_RELEASE)
 	{
-		down = false;
+		input->down = false;
 	}
 
 	if (key == GLFW_KEY_A && action == GLFW_RELEASE)
 	{
-		left = false;
+		input->left = false;
 	}
 
 	if (key == GLFW_KEY_D && action == GLFW_RELEASE)
 	{
-		right = false;
+		input->right = false;
 	}
 }
 
@@ -109,6 +107,7 @@ int main(int argc, char* argv[])
 
 	std::vector<YasGL::Polygon*> objectsToDraw;
     YasGL::Player* player = new YasGL::Player(0, 0);
+    player->setInput(input);
     objectsToDraw.push_back(new YasGL::Circle(100, 0, 0));
     objectsToDraw.push_back(player);
 
@@ -129,9 +128,6 @@ int main(int argc, char* argv[])
     frames = 0;
     bool close = false;
 
-    //Vector2D<int> point0(-500, 500);
-    //Vector2D<int> point1(500, -500 );
-
     while (!shouldApplicationStopRunning)
     {
         while (!glfwWindowShouldClose(window))
@@ -141,44 +137,6 @@ int main(int argc, char* argv[])
             {
                 shouldApplicationStopRunning = true;
             }
-
-            // LEFT
-			if (left) //glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-			{
-                //player->xDirection = -1;
-                player->xDirection = -1;
-				player->position.x = static_cast<int>(player->position.x + deltaTime * (-player->speed));
-				//player->position.y = static_cast<int>(player->position.y + deltaTime * player->speed) * player->yDirection;
-
-			}
-
-			
-            // RIGHT
-            if (right) //glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-			{
-                player->xDirection = 1;
-				player->position.x = static_cast<int>(player->position.x + deltaTime * player->speed);
-				//player->position.y = static_cast<int>(player->position.y + deltaTime * player->speed) * player->yDirection;
-			}
-
-
-            // UP
-			if (up) //glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-			{
-                player->yDirection = 1;
-                //player->position.y = player->position.y + 2;
-				//player->position.x = static_cast<int>(player->position.x + deltaTime * player->speed) * player->xDirection;
-				player->position.y = static_cast<int>(player->position.y + deltaTime * player->speed);
-			}
-
-
-            // DOWN
-			if (down) //glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-			{
-                player->yDirection = -1;
-				//player->position.x = static_cast<int>(player->position.x + deltaTime * player->speed) * player->xDirection;
-				player->position.y = static_cast<int>(player->position.y + deltaTime * (-player->speed));
-			}
 
             newTime = timePicker.getSeconds();
             deltaTime = newTime - time;
@@ -195,19 +153,16 @@ int main(int argc, char* argv[])
             
             pixelsTable.clearColor(YasGL::BLACK);
             
-			//YasGL::drawCartesianAxies(pixelsTable);
+			YasGL::drawCartesianAxies(pixelsTable);
 
 //          ########  BEGINT TEST CODE  ################
-
             YasGL::drawLine(start, stop, pixelsTable, YasGL::YELLOW);
             for (auto object : objectsToDraw)
             {
-                //object->move(deltaTime);
+                object->move(deltaTime);
                 object->regeneratePolygon();
                 YasGL::drawPolygon(object, YasGL::GREEN, pixelsTable);
             }
-			//player->position.x = static_cast<int>(player->position.x + deltaTime * player->speed) * player->xDirection;
-			//player->position.y = static_cast<int>(player->position.y + deltaTime * player->speed) * player->yDirection;
 //          ########  END TEST CODE  ################
 
             glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixelsTable.pixels);

@@ -21,22 +21,29 @@ YasGL::Player::~Player()
 
 void YasGL::Player::move(double deltaTime)
 {
-	position.x = static_cast<int>(position.x + deltaTime * speed) * xDirection;
-	position.y = static_cast<int>(position.y + deltaTime * speed) * yDirection;
-	
-	//int xDirection, int yDirection
-	
-	/*if (position.x < circumscribedCircleRadius && !directionSwitched)
+	// LEFT
+	if (input->left && !input->right)
 	{
-		speed = speed * -1;
-		position.x = circumscribedCircleRadius;
+		position.x = static_cast<int>(position.x + deltaTime * (-speed));
 	}
 
-	if (position.x > 512 - circumscribedCircleRadius)
+	// RIGHT
+	if (input->right && !input->left)
 	{
-		speed = speed * -1;
-		position.x = 512 - circumscribedCircleRadius;
-	}*/
+		position.x = static_cast<int>(position.x + deltaTime * speed);
+	}
+
+	// UP
+	if (input->up && !input->down)
+	{
+		position.y = static_cast<int>(position.y + deltaTime * speed);
+	}
+
+	// DOWN
+	if (input->down && !input->up)
+	{
+		position.y = static_cast<int>(position.y + deltaTime * (-speed));
+	}
 }
 
 void YasGL::Player::generate()
@@ -73,6 +80,8 @@ void YasGL::Player::regeneratePolygon()
 	generate();
 }
 
-void YasGL::Player::update(int xDirection, int yDirection)
+
+void YasGL::Player::setInput(YasInOut::Input* input)
 {
+	this->input = input;
 }
