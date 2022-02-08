@@ -44,6 +44,12 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		input->right = true;
 	}
 
+	if (key == GLFW_KEY_R && action == GLFW_PRESS)
+	{
+		input->rotateClocwise = true;
+	}
+
+    // RELEASE
 
 	if (key == GLFW_KEY_W && action == GLFW_RELEASE)
 	{
@@ -63,6 +69,11 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	if (key == GLFW_KEY_D && action == GLFW_RELEASE)
 	{
 		input->right = false;
+	}
+
+	if (key == GLFW_KEY_R && action == GLFW_RELEASE)
+	{
+		input->rotateClocwise = false;
 	}
 }
 
@@ -157,6 +168,7 @@ int main(int argc, char* argv[])
 
 //          ########  BEGINT TEST CODE  ################
             YasGL::drawLine(start, stop, pixelsTable, YasGL::YELLOW);
+            player->rotate(deltaTime, 30);
             for (auto object : objectsToDraw)
             {
                 object->move(deltaTime);

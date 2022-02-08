@@ -14,6 +14,7 @@ namespace YasGL
 		Player(int x, int y);
 		~Player();
 		void move(double deltaTime) override;
+		void rotate(double deltaTime, float angle);
 		void generate() override;
 		void generateRegularPolygonVertices(const Vector2D<int>& position, int circumscribedCircleRadius, int numberOfVertices) override;
 		void regeneratePolygon() override;

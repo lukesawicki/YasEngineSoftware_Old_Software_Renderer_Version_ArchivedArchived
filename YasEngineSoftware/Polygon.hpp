@@ -1,5 +1,6 @@
 #ifndef POLYGON_HPP
 #define POLYGON_HPP
+#include<cmath>
 #include "Vector2D.hpp"
 #include "Vector4D.hpp"
 #include <GLFW/glfw3.h>
@@ -10,7 +11,8 @@ namespace YasGL
 	{
 		public:
 			Vector2D<int> position;
-			Vector2D<int>* vertices = nullptr;
+			Vector2D<int>* worldVertices = nullptr;
+			Vector2D<int>* localVertices = nullptr;
 			int numberOfVertices = 0;
 			//int* points = nullptr;
 			Vector4D<uint8_t> color;

@@ -301,16 +301,16 @@ namespace YasGL
         bool drawLines = true;
         if (drawLines)
         {
-            drawLine(polygon->vertices[0], polygon->vertices[1], pixelsTable, color);
+            drawLine(polygon->worldVertices[0], polygon->worldVertices[1], pixelsTable, color);
             for (int i = 0; i < polygon->numberOfVertices; i++)
             {
                 if ((i == polygon->numberOfVertices - 1))
                 {
-                    drawLine(polygon->vertices[i], polygon->vertices[0], pixelsTable, color);   
+                    drawLine(polygon->worldVertices[i], polygon->worldVertices[0], pixelsTable, color);   
                 }
                 else
                 {
-                    drawLine(polygon->vertices[i], polygon->vertices[i + 1], pixelsTable, color);
+                    drawLine(polygon->worldVertices[i], polygon->worldVertices[i + 1], pixelsTable, color);
                 }
             }
         }
@@ -318,7 +318,7 @@ namespace YasGL
         {
             for (int i = 0; i < polygon->numberOfVertices; i++)
             {
-                pixelsTable.drawPoint(polygon->vertices[i].x, polygon->vertices[i].y, YasGL::YELLOW);
+                pixelsTable.drawPoint(polygon->worldVertices[i].x, polygon->worldVertices[i].y, YasGL::YELLOW);
                 //pixelsTable.drawPoint(polygon->vertices, YasGL::YELLOW);
             }
         }
