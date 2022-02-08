@@ -74,12 +74,17 @@ void YasGL::Player::rotate(double deltaTime, float angle)
 {
 	if (input->rotateClocwise)
 	{
-		angle = angle * 3.141592F / 180;
+		angle = angle * 3.141592F / 180.0F;
 		for (int i = 0; i < numberOfVertices; i++)
 		{
-			worldVertices[i].x = worldVertices[i].x * cos(angle) - worldVertices[i].y * sin(angle);
-			worldVertices[i].y = worldVertices[i].x * sin(angle) - worldVertices[i].y * cos(angle);
+			int x = localVertices[i].x * cos(angle) - localVertices[i].y * sin(angle);
+			int y = localVertices[i].x * sin(angle) + localVertices[i].y * cos(angle);
+
+
+			localVertices[i].x = x;
+			localVertices[i].y = y;
 		}
+		generate();
 	}
 }
 
