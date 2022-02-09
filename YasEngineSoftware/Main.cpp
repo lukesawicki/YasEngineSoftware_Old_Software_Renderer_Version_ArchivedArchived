@@ -168,7 +168,7 @@ int main(int argc, char* argv[])
 
 //          ########  BEGINT TEST CODE  ################
             YasGL::drawLine(start, stop, pixelsTable, YasGL::YELLOW);
-            player->rotate(deltaTime, 10.0F);
+            player->rotate(deltaTime);
             for (auto object : objectsToDraw)
             {
                 object->move(deltaTime);

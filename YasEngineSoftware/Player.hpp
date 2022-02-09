@@ -11,17 +11,15 @@ namespace YasGL
 		YasInOut::Input* input;
 			
 
-		Player(int x, int y);
+		Player(float x, float y);
 		~Player();
-		void move(double deltaTime) override;
-		void rotate(double deltaTime, float angle);
+		void move(float deltaTime) override;
+		void rotate(double deltaTime);
 		void generate() override;
-		void generateRegularPolygonVertices(const Vector2D<int>& position, int circumscribedCircleRadius, int numberOfVertices) override;
+		void generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) override;
 		void regeneratePolygon() override;
 		void setInput(YasInOut::Input* input);
 
-		int xDirection = 1;
-		int yDirection = 1;
 	};
 
 }

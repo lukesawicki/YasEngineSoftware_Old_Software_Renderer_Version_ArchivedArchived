@@ -1,17 +1,15 @@
 #include"Player.hpp"
 
-YasGL::Player::Player(int x, int y)
+YasGL::Player::Player(float x, float y)
 {
-
-	bool directionSwitched = false;
-	int  speedFactor = 255;
-	int  speed = 2 * speedFactor;
+	speed = 200;
+	rotationSpeed = 15;
 
 	position.x = x;
 	position.y = y;
 	numberOfVertices = 7;
-	worldVertices = new Vector2D<int>[numberOfVertices];
-	localVertices = new Vector2D<int>[numberOfVertices];
+	worldVertices = new Vector2D<float>[numberOfVertices];
+	localVertices = new Vector2D<float>[numberOfVertices];
 
 	localVertices[0].x = -80;
 	localVertices[0].y = -160;
@@ -43,43 +41,43 @@ YasGL::Player::~Player()
 	delete[] worldVertices;
 }
 
-void YasGL::Player::move(double deltaTime)
+void YasGL::Player::move(float deltaTime)
 {
 	// LEFT
 	if (input->left && !input->right)
 	{
-		position.x = static_cast<int>(position.x + deltaTime * (-speed));
+		position.x = position.x + deltaTime * (-speed);
 	}
 
 	// RIGHT
 	if (input->right && !input->left)
 	{
-		position.x = static_cast<int>(position.x + deltaTime * speed);
+		position.x = position.x + deltaTime * speed;
 	}
 
 	// UP
 	if (input->up && !input->down)
 	{
-		position.y = static_cast<int>(position.y + deltaTime * speed);
+		position.y = position.y + deltaTime * speed;
 	}
 
 	// DOWN
 	if (input->down && !input->up)
 	{
-		position.y = static_cast<int>(position.y + deltaTime * (-speed));
+		position.y = position.y + deltaTime * (-speed);
 	}
 }
 
-void YasGL::Player::rotate(double deltaTime, float angle)
+void YasGL::Player::rotate(double deltaTime)
 {
 	if (input->rotateClocwise)
 	{
 		angle = angle * 3.141592F / 180.0F;
+		angle = deltaTime * rotationSpeed;
 		for (int i = 0; i < numberOfVertices; i++)
 		{
-			int x = localVertices[i].x * cos(angle) - localVertices[i].y * sin(angle);
-			int y = localVertices[i].x * sin(angle) + localVertices[i].y * cos(angle);
-
+			float x = localVertices[i].x * cos(angle) - localVertices[i].y * sin(angle);
+			float y = localVertices[i].x * sin(angle) + localVertices[i].y * cos(angle);
 
 			localVertices[i].x = x;
 			localVertices[i].y = y;
@@ -112,7 +110,7 @@ void YasGL::Player::generate()
 	worldVertices[6].y = position.y + localVertices[6].y;
 }
 
-void YasGL::Player::generateRegularPolygonVertices(const Vector2D<int>& position, int circumscribedCircleRadius, int numberOfVertices)
+void YasGL::Player::generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices)
 {
 
 }

@@ -1,11 +1,10 @@
 #include"Circle.hpp"
 
-YasGL::Circle::Circle(int radius, int x, int y)
+YasGL::Circle::Circle(float radius, float x, float y)
 {
 	directionSwitched = false;
-	speedFactor = 255;
-	speed = 2 * speedFactor;
-	Vector2D<int> position(x, y);
+	speed = 500;
+	Vector2D<float> position(x, y);
 	generateRegularPolygonVertices(position, radius, 64);
 }
 
@@ -14,9 +13,9 @@ YasGL::Circle::~Circle()
 	delete[] worldVertices;
 }
 
-void YasGL::Circle::move(double deltaTime)
+void YasGL::Circle::move(float deltaTime)
 {
-	position.x = static_cast<int>(position.x + deltaTime * speed);
+	position.x = position.x + deltaTime * speed;
 	if (position.x < circumscribedCircleRadius && !directionSwitched)
 	{
 		speed = speed * -1;
@@ -42,13 +41,13 @@ void YasGL::Circle::generate()
 	}
 }
 
-void YasGL::Circle::generateRegularPolygonVertices(const Vector2D<int>& position, int circumscribedCircleRadius, int numberOfVertices)
+void YasGL::Circle::generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices)
 {
 	this->circumscribedCircleRadius = circumscribedCircleRadius;
 	this->numberOfVertices = numberOfVertices;
 	this->position.x = position.x;
 	this->position.y = position.y;
-	this->worldVertices = new Vector2D<int>[numberOfVertices];
+	this->worldVertices = new Vector2D<float>[numberOfVertices];
 	generate();
 }
 

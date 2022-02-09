@@ -8,11 +8,11 @@ namespace YasGL
 	class Circle : public Polygon
 	{
 		public:
-			Circle(int radius, int x, int y);
+			Circle(float radius, float x, float y);
 			~Circle();
-			void move(double deltaTime) override;
+			void move(float deltaTime) override;
 			void generate() override;
-			void generateRegularPolygonVertices(const Vector2D<int>& position, int circumscribedCircleRadius, int numberOfVertices) override;
+			void generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) override;
 			void regeneratePolygon() override;
 	};
 

@@ -30,6 +30,7 @@ namespace YasGL
     const Vector4D<uint8_t> YELLOW(255, 255, 0, 255);
 
     void drawLine(const Vector2D<int>& point0, const Vector2D<int>& point1, PixelsTable& pixelsTable, const Vector4D<uint8_t>& drawingColor);
+    void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, PixelsTable& pixelsTable, const Vector4D<uint8_t>& drawingColor);
 
     void drawPolygon(YasGL::Polygon* polygon, const Vector4D<uint8_t>& color, PixelsTable& pixelsTable);
 
