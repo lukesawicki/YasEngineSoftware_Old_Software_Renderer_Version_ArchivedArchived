@@ -1,6 +1,8 @@
 #ifndef VECTOR2D_HPP
 #define VECTOR2D_HPP
 
+#include<cmath>
+
 template <typename Type>
 class Vector2D
 {
@@ -18,6 +20,7 @@ class Vector2D
 			this->x = x;
 			this->y = y;
 		}
+
 };
 
 #endif

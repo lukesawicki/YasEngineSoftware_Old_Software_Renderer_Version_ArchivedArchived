@@ -8,6 +8,7 @@ namespace YasInOut
 		bool right;
 		bool up;
 		bool down;
+		bool shoot;
 		bool rotateClocwise;
 	};
 }

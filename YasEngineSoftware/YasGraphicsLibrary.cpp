@@ -296,32 +296,18 @@ namespace YasGL
         }
     }
 
-    //void drawLine(Vector2D<int>* point0, Vector2D<int>* point1, PixelsTable& pixelsTable, const Vector4D<uint8_t>& drawingColor);
-
-    void drawPolygon(Polygon* polygon, const Vector4D<uint8_t>& color, PixelsTable& pixelsTable)
+    void drawPolygon(Polygon* polygon, PixelsTable& pixelsTable)
     {
-        bool drawLines = true;
-        if (drawLines)
+        drawLine(polygon->worldVertices[0], polygon->worldVertices[1], pixelsTable, polygon->color);
+        for (int i = 0; i < polygon->numberOfVertices; i++)
         {
-            drawLine(polygon->worldVertices[0], polygon->worldVertices[1], pixelsTable, color);
-            for (int i = 0; i < polygon->numberOfVertices; i++)
+            if ((i == polygon->numberOfVertices - 1))
             {
-                if ((i == polygon->numberOfVertices - 1))
-                {
-                    drawLine(polygon->worldVertices[i], polygon->worldVertices[0], pixelsTable, color);   
-                }
-                else
-                {
-                    drawLine(polygon->worldVertices[i], polygon->worldVertices[i + 1], pixelsTable, color);
-                }
+                drawLine(polygon->worldVertices[i], polygon->worldVertices[0], pixelsTable, polygon->color);
             }
-        }
-        else
-        {
-            for (int i = 0; i < polygon->numberOfVertices; i++)
+            else
             {
-                pixelsTable.drawPoint(static_cast<float>(polygon->worldVertices[i].x), static_cast<float>(polygon->worldVertices[i].y), YasGL::YELLOW);
-                //pixelsTable.drawPoint(polygon->vertices, YasGL::YELLOW);
+                drawLine(polygon->worldVertices[i], polygon->worldVertices[i + 1], pixelsTable, polygon->color);
             }
         }
     }

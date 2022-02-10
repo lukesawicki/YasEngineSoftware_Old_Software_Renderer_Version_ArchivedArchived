@@ -28,6 +28,13 @@ namespace YasGL
 			virtual void generate() = 0;
 			virtual void generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) = 0;
 			virtual void regeneratePolygon() = 0;
+			virtual void setColor(const Vector4D<uint8_t>& color)
+			{
+				this->color.x = color.x;
+				this->color.y = color.y;
+				this->color.z = color.z;
+				this->color.w = color.w;
+			}
 	};
 
 }

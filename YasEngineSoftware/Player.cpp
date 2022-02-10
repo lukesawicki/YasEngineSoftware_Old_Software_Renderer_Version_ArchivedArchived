@@ -2,11 +2,15 @@
 
 YasGL::Player::Player(float x, float y)
 {
-	speed = 200;
-	rotationSpeed = 15;
+	speed = 8;
+	rotationSpeed = 5;
 
 	position.x = x;
 	position.y = y;
+
+	direction.x = 0;
+	direction.y = 1;
+
 	numberOfVertices = 7;
 	worldVertices = new Vector2D<float>[numberOfVertices];
 	localVertices = new Vector2D<float>[numberOfVertices];
@@ -66,6 +70,13 @@ void YasGL::Player::move(float deltaTime)
 	{
 		position.y = position.y + deltaTime * (-speed);
 	}
+
+	// SPACE
+	if (input->shoot)
+	{
+		isShooting = true;
+	}
+
 }
 
 void YasGL::Player::rotate(double deltaTime)
@@ -74,16 +85,25 @@ void YasGL::Player::rotate(double deltaTime)
 	{
 		angle = angle * 3.141592F / 180.0F;
 		angle = deltaTime * rotationSpeed;
+		rotateDirection(angle);
 		for (int i = 0; i < numberOfVertices; i++)
 		{
 			float x = localVertices[i].x * cos(angle) - localVertices[i].y * sin(angle);
 			float y = localVertices[i].x * sin(angle) + localVertices[i].y * cos(angle);
-
+			
 			localVertices[i].x = x;
 			localVertices[i].y = y;
 		}
 		generate();
 	}
+}
+
+void YasGL::Player::rotateDirection(float angle)
+{
+	float directionX = direction.x * cos(angle) - direction.y * sin(angle);
+	float directionY = direction.x * sin(angle) + direction.y * cos(angle);
+	direction.x = directionX;
+	direction.y = directionY;
 }
 
 void YasGL::Player::generate()
@@ -108,6 +128,7 @@ void YasGL::Player::generate()
 
 	worldVertices[6].x = position.x + localVertices[6].x;
 	worldVertices[6].y = position.y + localVertices[6].y;
+
 }
 
 void YasGL::Player::generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices)
@@ -124,4 +145,13 @@ void YasGL::Player::regeneratePolygon()
 void YasGL::Player::setInput(YasInOut::Input* input)
 {
 	this->input = input;
+}
+
+YasGL::Projectile* YasGL::Player::shoot()
+{
+	if (isShooting) {
+		isShooting = false;
+		return new Projectile(32, position.x, position.y, direction);
+	}
+	
 }

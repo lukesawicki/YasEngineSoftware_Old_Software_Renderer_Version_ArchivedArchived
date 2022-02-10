@@ -19,11 +19,20 @@
 
 //-----------------------------------------------------------------------------|---------------------------------------|
 //                                                                            80                                     120
-
+bool shouldApplicationStopRunning = false;
 YasInOut::Input* input = new YasInOut::Input();
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
+    //
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+	{
+        shouldApplicationStopRunning = true;
+        glfwSetWindowShouldClose(window, GL_TRUE);
+	}
+
+    // PRESS
+
 	if (key == GLFW_KEY_W && action == GLFW_PRESS)
 	{
 		input->up = true;
@@ -47,6 +56,11 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	if (key == GLFW_KEY_R && action == GLFW_PRESS)
 	{
 		input->rotateClocwise = true;
+	}
+
+	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
+	{
+		input->shoot = true;
 	}
 
     // RELEASE
@@ -75,6 +89,11 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	{
 		input->rotateClocwise = false;
 	}
+
+	if (key == GLFW_KEY_SPACE && action == GLFW_RELEASE)
+	{
+		input->shoot = false;
+	}
 }
 
 int main(int argc, char* argv[])
@@ -85,15 +104,6 @@ int main(int argc, char* argv[])
     Vector2D<int>* windowDimensions = new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
 
     GLFWwindow* window;
-
-    // Points that to draw axes
-	Vector2D<int>* xAxisBegin = new Vector2D<int>(0, WINDOW_HEIGHT / 2);
-	Vector2D<int>* xAxisEnd = new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT / 2);
-	Vector2D<int>* yAxisBegin = new Vector2D<int>(WINDOW_WIDTH / 2, 0);
-	Vector2D<int>* yAxisEnd = new Vector2D<int>(WINDOW_WIDTH / 2, WINDOW_HEIGHT);
-
-    Vector2D<int> start(500, 500);
-    Vector2D<int> stop(-500, -500);
 
     if (!glfwInit())
     {
@@ -117,14 +127,19 @@ int main(int argc, char* argv[])
     // Test objects definitions
 
 	std::vector<YasGL::Polygon*> objectsToDraw;
+
     YasGL::Player* player = new YasGL::Player(0, 0);
+    player->setColor(YasGL::YELLOW);
     player->setInput(input);
-    objectsToDraw.push_back(new YasGL::Circle(100, 0, 0));
+
+    YasGL::Circle* circle = new YasGL::Circle(100, 0, 0);
+    circle->setColor(YasGL::BLUE);
+
+    objectsToDraw.push_back(circle);
     objectsToDraw.push_back(player);
 
     // End of test objects definitions
 
-    bool shouldApplicationStopRunning = false;
     double time;
     double newTime;
     double deltaTime;
@@ -143,12 +158,6 @@ int main(int argc, char* argv[])
     {
         while (!glfwWindowShouldClose(window))
         {
-            // ESCAPE
-            if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-            {
-                shouldApplicationStopRunning = true;
-            }
-
             newTime = timePicker.getSeconds();
             deltaTime = newTime - time;
             time = newTime;
@@ -167,14 +176,16 @@ int main(int argc, char* argv[])
 			YasGL::drawCartesianAxies(pixelsTable);
 
 //          ########  BEGINT TEST CODE  ################
-            YasGL::drawLine(start, stop, pixelsTable, YasGL::YELLOW);
+
             player->rotate(deltaTime);
+            
             for (auto object : objectsToDraw)
             {
                 object->move(deltaTime);
                 object->regeneratePolygon();
-                YasGL::drawPolygon(object, YasGL::GREEN, pixelsTable);
+                YasGL::drawPolygon(object, pixelsTable);
             }
+            objectsToDraw.push_back(player->shoot());
 //          ########  END TEST CODE  ################
 
             glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixelsTable.pixels);

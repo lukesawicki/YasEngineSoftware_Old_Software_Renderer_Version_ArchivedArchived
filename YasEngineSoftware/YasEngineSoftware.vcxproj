@@ -24,6 +24,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="PixelsTable.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="temporary.cpp" />
     <ClCompile Include="TimePicker.cpp" />
     <ClCompile Include="YasGraphicsLibrary.cpp" />
@@ -34,6 +35,7 @@
     <ClInclude Include="PixelsTable.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Polygon.hpp" />
+    <ClInclude Include="Projectile.hpp" />
     <ClInclude Include="TimePicker.hpp" />
     <ClInclude Include="Vector2D.hpp" />
     <ClInclude Include="Vector4D.hpp" />
