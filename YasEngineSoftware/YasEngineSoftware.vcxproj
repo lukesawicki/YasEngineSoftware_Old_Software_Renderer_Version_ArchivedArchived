@@ -34,11 +34,11 @@
     <ClInclude Include="InputOutputHandler.hpp" />
     <ClInclude Include="PixelsTable.hpp" />
     <ClInclude Include="Player.hpp" />
-    <ClInclude Include="Polygon.hpp" />
+    <ClInclude Include="YasPolygon.hpp" />
     <ClInclude Include="Projectile.hpp" />
     <ClInclude Include="TimePicker.hpp" />
-    <ClInclude Include="Vector2D.hpp" />
-    <ClInclude Include="Vector4D.hpp" />
+    <ClInclude Include="YasVector2D.hpp" />
+    <ClInclude Include="YasVector4D.hpp" />
     <ClInclude Include="YasGraphicsLibrary.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

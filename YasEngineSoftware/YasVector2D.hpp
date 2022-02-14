@@ -4,23 +4,22 @@
 #include<cmath>
 
 template <typename Type>
-class Vector2D
+class YasVector2D
 {
 	public:
 		Type x;
 		Type y;
 
-		Vector2D()
+		YasVector2D()
 		{
 			this->x = 0;
 			this->y = 0;
 		}
-		Vector2D(Type x, Type y)
+		YasVector2D(Type x, Type y)
 		{
 			this->x = x;
 			this->y = y;
 		}
-
 };
 
 #endif

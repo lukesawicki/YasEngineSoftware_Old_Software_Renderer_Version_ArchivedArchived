@@ -1,8 +1,8 @@
 #include"Player.hpp"
 
-YasGL::Player::Player(float x, float y)
+Player::Player(float x, float y)
 {
-	speed = 8;
+	speed = 200;
 	rotationSpeed = 5;
 
 	position.x = x;
@@ -12,8 +12,8 @@ YasGL::Player::Player(float x, float y)
 	direction.y = 1;
 
 	numberOfVertices = 7;
-	worldVertices = new Vector2D<float>[numberOfVertices];
-	localVertices = new Vector2D<float>[numberOfVertices];
+	worldVertices = new YasVector2D<float>[numberOfVertices];
+	localVertices = new YasVector2D<float>[numberOfVertices];
 
 	localVertices[0].x = -80;
 	localVertices[0].y = -160;
@@ -40,12 +40,12 @@ YasGL::Player::Player(float x, float y)
 	//generateRegularPolygonVertices(position, 16, 7);
 }
 
-YasGL::Player::~Player()
+Player::~Player()
 {
 	delete[] worldVertices;
 }
 
-void YasGL::Player::move(float deltaTime)
+void Player::move(float deltaTime)
 {
 	// LEFT
 	if (input->left && !input->right)
@@ -79,7 +79,7 @@ void YasGL::Player::move(float deltaTime)
 
 }
 
-void YasGL::Player::rotate(double deltaTime)
+void Player::rotate(double deltaTime)
 {
 	if (input->rotateClocwise)
 	{
@@ -98,7 +98,7 @@ void YasGL::Player::rotate(double deltaTime)
 	}
 }
 
-void YasGL::Player::rotateDirection(float angle)
+void Player::rotateDirection(float angle)
 {
 	float directionX = direction.x * cos(angle) - direction.y * sin(angle);
 	float directionY = direction.x * sin(angle) + direction.y * cos(angle);
@@ -106,7 +106,7 @@ void YasGL::Player::rotateDirection(float angle)
 	direction.y = directionY;
 }
 
-void YasGL::Player::generate()
+void Player::generate()
 {
 	worldVertices[0].x = position.x + localVertices[0].x;
 	worldVertices[0].y = position.y + localVertices[0].y;
@@ -131,27 +131,31 @@ void YasGL::Player::generate()
 
 }
 
-void YasGL::Player::generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices)
+void Player::generateRegularPolygonVertices(const YasVector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices)
 {
 
 }
 
-void YasGL::Player::regeneratePolygon()
+void Player::regeneratePolygon()
 {
 	generate();
 }
 
 
-void YasGL::Player::setInput(YasInOut::Input* input)
+void Player::setInput(YasInOut::Input* input)
 {
 	this->input = input;
 }
 
-YasGL::Projectile* YasGL::Player::shoot()
+Projectile* Player::shoot()
 {
-	if (isShooting) {
+	if (isShooting)
+	{
 		isShooting = false;
 		return new Projectile(32, position.x, position.y, direction);
 	}
-	
+	else
+	{
+		return nullptr;
+	}
 }

@@ -458,7 +458,7 @@
 //circlePixelPosition.x = circleX;
 //circlePixelPosition.y = circleY;
 
-//pixelsTable.drawPoint(circlePixelPosition.x, circlePixelPosition.y, YasGL::RED);
+//pixelsTable.drawPoint(circlePixelPosition.x, circlePixelPosition.y, RED);
 //}
 // 
 // 

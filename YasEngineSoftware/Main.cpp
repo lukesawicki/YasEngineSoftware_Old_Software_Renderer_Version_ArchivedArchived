@@ -1,4 +1,3 @@
-
 #include<Windows.h>
 #include<GLFW/glfw3.h>
 #include<gl/gl.h>
@@ -7,13 +6,13 @@
 #include<iostream>
 #include<vector>
 #include<cmath>
-#include"Vector2D.hpp"
+#include"YasVector2D.hpp"
 #include"YasGraphicsLibrary.hpp"
 #include"TimePicker.hpp"
 #include"PixelsTable.hpp"
 #include"Circle.hpp"
 #include<vector>
-#include"Polygon.hpp"
+#include"YasPolygon.hpp"
 #include"Player.hpp"
 #include"InputOutputHandler.hpp"
 
@@ -101,7 +100,7 @@ int main(int argc, char* argv[])
     const int WINDOW_WIDTH = 1024;
 	const int WINDOW_HEIGHT = 768;
 
-    Vector2D<int>* windowDimensions = new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
+    YasVector2D<int>* windowDimensions = new YasVector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
 
     GLFWwindow* window;
 
@@ -122,18 +121,18 @@ int main(int argc, char* argv[])
 
     glfwSetKeyCallback(window, key_callback);
 
-    PixelsTable pixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, YasGL::BLACK);
+    PixelsTable pixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, BLACK);
 
     // Test objects definitions
 
-	std::vector<YasGL::Polygon*> objectsToDraw;
+	std::vector<YasPolygon*> objectsToDraw;
 
-    YasGL::Player* player = new YasGL::Player(0, 0);
-    player->setColor(YasGL::YELLOW);
+    Player* player = new Player(0, 0);
+    player->setColor(YELLOW);
     player->setInput(input);
 
-    YasGL::Circle* circle = new YasGL::Circle(100, 0, 0);
-    circle->setColor(YasGL::BLUE);
+    Circle* circle = new Circle(100, 0, 0);
+    circle->setColor(BLUE);
 
     objectsToDraw.push_back(circle);
     objectsToDraw.push_back(player);
@@ -171,9 +170,9 @@ int main(int argc, char* argv[])
                 fpsTime = 0.0F;
             }
             
-            pixelsTable.clearColor(YasGL::BLACK);
+            pixelsTable.clearColor(BLACK);
             
-			YasGL::drawCartesianAxies(pixelsTable);
+			drawCartesianAxies(pixelsTable);
 
 //          ########  BEGINT TEST CODE  ################
 
@@ -183,9 +182,16 @@ int main(int argc, char* argv[])
             {
                 object->move(deltaTime);
                 object->regeneratePolygon();
-                YasGL::drawPolygon(object, pixelsTable);
+                drawPolygon(object, pixelsTable);
             }
-            objectsToDraw.push_back(player->shoot());
+
+            Projectile* projectile = player->shoot();
+            if (projectile != nullptr)
+            {
+                objectsToDraw.push_back(projectile);
+            }
+
+            projectile = nullptr;
 //          ########  END TEST CODE  ################
 
             glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixelsTable.pixels);

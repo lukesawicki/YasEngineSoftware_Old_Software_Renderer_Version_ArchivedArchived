@@ -44,7 +44,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Vector2D.hpp">
+    <ClInclude Include="YasVector2D.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TimePicker.hpp">
@@ -53,13 +53,13 @@
     <ClInclude Include="YasGraphicsLibrary.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vector4D.hpp">
+    <ClInclude Include="YasVector4D.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PixelsTable.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Polygon.hpp">
+    <ClInclude Include="YasPolygon.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Circle.hpp">
