@@ -16,7 +16,7 @@ Projectile::~Projectile()
 	delete[] worldVertices;
 }
 
-void Projectile::move(float deltaTime)
+void Projectile::move(double deltaTime)
 {
 	position.x = position.x + deltaTime * velocity.x;
 	position.y = position.y + deltaTime * velocity.y;

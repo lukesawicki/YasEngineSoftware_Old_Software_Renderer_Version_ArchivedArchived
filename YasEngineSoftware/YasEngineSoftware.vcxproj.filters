@@ -74,5 +74,8 @@
     <ClInclude Include="Projectile.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="YasMathsLibrary.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

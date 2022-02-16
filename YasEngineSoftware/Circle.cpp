@@ -13,7 +13,7 @@ Circle::~Circle()
 	delete[] worldVertices;
 }
 
-void Circle::move(float deltaTime)
+void Circle::move(double deltaTime)
 {
 	position.x = position.x + deltaTime * speed;
 	if (position.x < circumscribedCircleRadius && !directionSwitched)

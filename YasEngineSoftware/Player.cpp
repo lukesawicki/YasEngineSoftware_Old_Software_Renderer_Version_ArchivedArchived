@@ -45,7 +45,7 @@ Player::~Player()
 	delete[] worldVertices;
 }
 
-void Player::move(float deltaTime)
+void Player::move(double deltaTime)
 {
 	// LEFT
 	if (input->left && !input->right)
@@ -97,6 +97,53 @@ void Player::rotate(double deltaTime)
 		generate();
 	}
 }
+
+
+void Player::rotateToMousePosition(float mouseX, float mouseY, YasVector2D<int>& windowDimensions)
+{
+
+	windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
+	YasVector2D<float> mousePositionVector(mouseX, mouseY);
+	YasVector2D<float>* normalizedMousePositionVector = YasVector2D<float>::getNormalizedVector(mousePositionVector);
+
+	direction.x = normalizedMousePositionVector->x;
+	direction.y = normalizedMousePositionVector->y;
+
+	generate();
+
+
+	//if (input->rotateClocwise)
+	//{
+	//	angle = angle * 3.141592F / 180.0F;
+	//	angle = deltaTime * rotationSpeed;
+	//	rotateDirection(angle);
+	//	for (int i = 0; i < numberOfVertices; i++)
+	//	{
+	//		float x = localVertices[i].x * cos(angle) - localVertices[i].y * sin(angle);
+	//		float y = localVertices[i].x * sin(angle) + localVertices[i].y * cos(angle);
+
+	//		localVertices[i].x = x;
+	//		localVertices[i].y = y;
+	//	}
+	//	generate();
+	//}
+}
+
+
+//void Player::rotateToMousePosition(float mouseX, float mouseY, YasVector2D<int>& windowDimensions)
+//{
+//
+//	windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
+//	YasVector2D<float> mousePositionVector(mouseX, mouseY);
+//	YasVector2D<float>* normalizedMousePositionVector = YasVector2D<float>::getNormalizedVector(mousePositionVector);
+//
+//	direction.x = normalizedMousePositionVector->x;
+//	direction.y = normalizedMousePositionVector->y;
+//
+//	generate();
+//
+//}
+
 
 void Player::rotateDirection(float angle)
 {

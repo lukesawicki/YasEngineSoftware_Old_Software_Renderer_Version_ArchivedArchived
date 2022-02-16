@@ -27,9 +27,11 @@ const YasVector4D<uint8_t> BLACK(0, 0, 0, 255);
 const YasVector4D<uint8_t> WHITE(255, 255, 255, 255);
 const YasVector4D<uint8_t> YELLOW(255, 255, 0, 255);
 
-void drawLine(const YasVector2D<int>& point0, const YasVector2D<int>& point1, PixelsTable& pixelsTable, const YasVector4D<uint8_t>& drawingColor);
+void drawLine(const YasVector2D<float>& point0, const YasVector2D<float>& point1, PixelsTable& pixelsTable, const YasVector4D<uint8_t>& drawingColor);
 
 void drawPolygon(YasPolygon* polygon, PixelsTable& pixelsTable);
+
+void drawPolygonDirection(YasPolygon* polygon, PixelsTable& pixelsTable);
 
 void swapVectors(YasVector2D<int>& point0, YasVector2D<int>& point1);
 
@@ -41,5 +43,7 @@ void drawCartesianAxies(PixelsTable& pixelsTable);
     
 int xyPixelToArrayPosition(YasVector2D<int>& point, int windowWidth);
 int xyPixelToArrayPosition(int x, int y, int windowWidth);
+
+void windowPositionToCartesianPosition(float& x, float& y, YasVector2D<int>& windowDimensions);
 
 #endif

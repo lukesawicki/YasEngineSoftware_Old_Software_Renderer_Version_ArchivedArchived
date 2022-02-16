@@ -8,7 +8,7 @@ class Circle : public YasPolygon
 public:
 	Circle(float radius, float x, float y);
 	~Circle();
-	void move(float deltaTime) override;
+	void move(double deltaTime) override;
 	void generate() override;
 	void generateRegularPolygonVertices(const YasVector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) override;
 	void regeneratePolygon() override;

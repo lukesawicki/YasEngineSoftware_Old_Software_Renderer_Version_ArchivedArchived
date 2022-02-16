@@ -62,6 +62,11 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 		input->shoot = true;
 	}
 
+	if (key == GLFW_MOUSE_BUTTON_1 && action == GLFW_PRESS)
+	{
+		input->mouseLeftButton = true;
+	}
+
     // RELEASE
 
 	if (key == GLFW_KEY_W && action == GLFW_RELEASE)
@@ -93,6 +98,11 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	{
 		input->shoot = false;
 	}
+
+	if (key == GLFW_MOUSE_BUTTON_1 && action == GLFW_RELEASE)
+	{
+		input->mouseLeftButton = false;
+	}
 }
 
 int main(int argc, char* argv[])
@@ -122,6 +132,15 @@ int main(int argc, char* argv[])
     glfwSetKeyCallback(window, key_callback);
 
     PixelsTable pixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, BLACK);
+
+    YasVector2D<int> zeroVector;
+    YasVector2D<int> direction;
+
+	YasVector2D<int> testA;
+	YasVector2D<int> testB;
+
+	double mouseX;
+	double mouseY;
 
     // Test objects definitions
 
@@ -153,6 +172,8 @@ int main(int argc, char* argv[])
     frames = 0;
     bool close = false;
 
+    glfwGetCursorPos(window, &mouseX, &mouseY);
+
     while (!shouldApplicationStopRunning)
     {
         while (!glfwWindowShouldClose(window))
@@ -175,15 +196,21 @@ int main(int argc, char* argv[])
 			drawCartesianAxies(pixelsTable);
 
 //          ########  BEGINT TEST CODE  ################
+            glfwGetCursorPos(window, &mouseX, &mouseY);
+
+            //std::cout << "mouse X: " << mouseX << "  " << " mouse Y: " << mouseY << std::endl;
 
             player->rotate(deltaTime);
-            
+            player->rotateToMousePosition(mouseX, mouseY, *windowDimensions);
             for (auto object : objectsToDraw)
             {
                 object->move(deltaTime);
                 object->regeneratePolygon();
                 drawPolygon(object, pixelsTable);
             }
+
+            drawPolygon(player, pixelsTable);
+            drawPolygonDirection(player, pixelsTable);
 
             Projectile* projectile = player->shoot();
             if (projectile != nullptr)

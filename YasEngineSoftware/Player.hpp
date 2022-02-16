@@ -7,14 +7,15 @@
 class Player : public YasPolygon
 {
 	public:
-		YasVector2D<float> direction;
+		
 		bool isShooting;
 		YasInOut::Input* input;
 
 		Player(float x, float y);
 		~Player();
-		void move(float deltaTime) override;
+		void move(double deltaTime) override;
 		void rotate(double deltaTime);
+		void rotateToMousePosition(float mouseX, float mouseY, YasVector2D<int>& windowDimensions);
 		void rotateDirection(float angle);
 		void generate() override;
 		void generateRegularPolygonVertices(const YasVector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) override;

@@ -308,6 +308,12 @@
         }
     }
 
+    void drawPolygonDirection(YasPolygon* polygon, PixelsTable& pixelsTable)
+    {
+        YasVector2D<float> direction(polygon->direction.x*100, polygon->direction.y*100);
+        drawLine(polygon->vectorZero, direction, pixelsTable, polygon->color);
+    }
+
     void swapVectors(YasVector2D<int>& point0, YasVector2D<int>& point1)
     {
         //Vector2D<int>* tmpVector;
@@ -364,5 +370,10 @@
         return point.y* windowWidth + point.x;
     }
 
+	void windowPositionToCartesianPosition(float& x, float& y, YasVector2D<int>& windowDimensions)
+	{
+		x = x - static_cast<int>(0.5F * windowDimensions.x);
+		y = ( -( y - static_cast<int>(0.5F * windowDimensions.y) ) );
+	}
 
 
