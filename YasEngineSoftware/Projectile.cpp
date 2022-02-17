@@ -1,6 +1,6 @@
 #include"Projectile.hpp"
 
-Projectile::Projectile(float radius, float x, float y, YasVector2D<float> direction)
+Projectile::Projectile(float radius, float x, float y, YasVector2D<double> direction)
 {
 	directionSwitched = false;
 	speed = 200;

@@ -13,7 +13,7 @@ class YasPolygon
 		YasVector2D<float> position;
 		YasVector2D<float>* worldVertices = nullptr;
 		YasVector2D<float>* localVertices = nullptr;
-		YasVector2D<float> direction;
+		YasVector2D<double> direction;
 		YasVector2D<float> vectorZero;
 		int numberOfVertices = 0;
 		YasVector4D<uint8_t> color;
@@ -22,6 +22,9 @@ class YasPolygon
 		float angle;
 		float startAngle;
 		float stepAngle;
+		double oldDirectionMouseAngle;
+		double directionMouseAngle = 90.0 * (3.141592 / 180.0);
+
 
 		bool directionSwitched = false;
 		float  speed = 0.0F;

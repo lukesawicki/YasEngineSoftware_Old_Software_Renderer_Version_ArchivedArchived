@@ -21,8 +21,6 @@
 bool shouldApplicationStopRunning = false;
 YasInOut::Input* input = new YasInOut::Input();
 YasInOut::MousePositionChangeInformation* mousePositionChangeInformation = new YasInOut::MousePositionChangeInformation();
-double const MOUSE_POSITION_EPSYLON = 4.0;
-//double mouseMovementDelta = 0;
 
 void windowToCartesian(double& x, double& y, YasVector2D<int>& windowDimensions)
 {
@@ -131,18 +129,22 @@ void mouseButtonsCallbackFunction(GLFWwindow* window, int button, int action, in
 
 void mouseMoveHandleCallbackFunction(GLFWwindow* window, double x, double y)
 {
-    if (abs(x - mousePositionChangeInformation->x) > MOUSE_POSITION_EPSYLON || abs(y - mousePositionChangeInformation->y) > MOUSE_POSITION_EPSYLON)
-    {
-        mousePositionChangeInformation->oldX = mousePositionChangeInformation->x;
-        mousePositionChangeInformation->oldY = mousePositionChangeInformation->y;
-        mousePositionChangeInformation->x = x;
-        mousePositionChangeInformation->y = y;
+    //std::cout << "X: " << x << "  " << "Y: " << y << std::endl;
+    //std::cout << "OX: " << mousePositionChangeInformation->oldX << "  " << "OY: " << mousePositionChangeInformation->oldY << std::endl;
+
+    if (abs(mousePositionChangeInformation->x - x) > 10 || abs(mousePositionChangeInformation->y - y) > 10) {
         mousePositionChangeInformation->mouseMoved = true;
     }
     else
     {
         mousePositionChangeInformation->mouseMoved = false;
     }
+
+        mousePositionChangeInformation->oldX = mousePositionChangeInformation->x;
+        mousePositionChangeInformation->oldY = mousePositionChangeInformation->y;
+        mousePositionChangeInformation->x = x;
+        mousePositionChangeInformation->y = y;
+
 
 }
 
@@ -225,6 +227,7 @@ int main(int argc, char* argv[])
     fpsTime = 0.0F;
     frames = 0;
     bool close = false;
+    bool firstTime = true;
 
     //glfwGetCursorPos(window, &mouseX, &mouseY);
 
@@ -250,23 +253,17 @@ int main(int argc, char* argv[])
 			drawCartesianAxies(pixelsTable);
 
 //          ########  BEGINT TEST CODE  ################
-            //glfwGetCursorPos(window, &mouseX, &mouseY);
 
-            //std::cout << "mouse X: " << mouseX << "  " << " mouse Y: " << mouseY << std::endl;
-
-			if (mousePositionChangeInformation->mouseMoved && player->mouse->leftMouseButton) // && input->mouseLeftButton)
-			{
-				oldMouseX = mousePositionChangeInformation->oldX;
-				oldMouseY = mousePositionChangeInformation->oldY;
-                mouseX = mousePositionChangeInformation->x;
-                mouseY = mousePositionChangeInformation->y;
-                
-                player->rotateToMousePosition(oldMouseX, oldMouseY, mouseX, mouseY, windowDimensions);
-//                player->rotateToMousePosition(mousePositionChangeInformation->x, mousePositionChangeInformation->y, *windowDimensions);
-			}
+            //if ( abs(player->directionMouseAngle - player->oldDirectionMouseAngle) > 0.00001 || firstTime)
+            //{
+            if (mousePositionChangeInformation->mouseMoved)
+            {
+                player->rotateToMousePosition(mousePositionChangeInformation->oldX, mousePositionChangeInformation->oldY, mousePositionChangeInformation->x, mousePositionChangeInformation->y, windowDimensions);
+                //firstTime = false;
+            }
+                //}
 
             //player->rotate(deltaTime);
-
 
             for (auto object : objectsToDraw)
             {
