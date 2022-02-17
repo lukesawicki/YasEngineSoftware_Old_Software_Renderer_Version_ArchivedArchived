@@ -20,8 +20,17 @@
 //                                                                            80                                     120
 bool shouldApplicationStopRunning = false;
 YasInOut::Input* input = new YasInOut::Input();
+YasInOut::MousePositionChangeInformation* mousePositionChangeInformation = new YasInOut::MousePositionChangeInformation();
+double const MOUSE_POSITION_EPSYLON = 100.0;
+//double mouseMovementDelta = 0;
 
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+void windowToCartesian(double& x, double& y, YasVector2D<int>& windowDimensions)
+{
+	x = x - static_cast<int>(0.5 * windowDimensions.x);
+	y = (-(y - static_cast<int>(0.5 * windowDimensions.y)));
+}
+
+void keysHandleCallbackFunction(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
     //
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
@@ -105,6 +114,23 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 	}
 }
 
+void mouseMoveHandleCallbackFunction(GLFWwindow* window, double x, double y)
+{
+    if (abs(x - mousePositionChangeInformation->x) > MOUSE_POSITION_EPSYLON || abs(y - mousePositionChangeInformation->y) > MOUSE_POSITION_EPSYLON)
+    {
+        mousePositionChangeInformation->oldX = mousePositionChangeInformation->x;
+        mousePositionChangeInformation->oldY = mousePositionChangeInformation->y;
+        mousePositionChangeInformation->x = x;
+        mousePositionChangeInformation->y = y;
+        mousePositionChangeInformation->mouseMoved = true;
+    }
+    else
+    {
+        mousePositionChangeInformation->mouseMoved = true;
+    }
+
+}
+
 int main(int argc, char* argv[])
 {
     const int WINDOW_WIDTH = 1024;
@@ -129,7 +155,14 @@ int main(int argc, char* argv[])
 
     glfwMakeContextCurrent(window);
 
-    glfwSetKeyCallback(window, key_callback);
+    glfwSetKeyCallback(window, keysHandleCallbackFunction);
+
+    glfwSetCursorPosCallback(window, mouseMoveHandleCallbackFunction);
+
+    if(glfwRawMouseMotionSupported())
+    {
+        glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
+    }
 
     PixelsTable pixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, BLACK);
 
@@ -141,6 +174,9 @@ int main(int argc, char* argv[])
 
 	double mouseX;
 	double mouseY;
+
+	double oldMouseX;
+	double oldMouseY;
 
     // Test objects definitions
 
@@ -172,7 +208,7 @@ int main(int argc, char* argv[])
     frames = 0;
     bool close = false;
 
-    glfwGetCursorPos(window, &mouseX, &mouseY);
+    //glfwGetCursorPos(window, &mouseX, &mouseY);
 
     while (!shouldApplicationStopRunning)
     {
@@ -196,12 +232,24 @@ int main(int argc, char* argv[])
 			drawCartesianAxies(pixelsTable);
 
 //          ########  BEGINT TEST CODE  ################
-            glfwGetCursorPos(window, &mouseX, &mouseY);
+            //glfwGetCursorPos(window, &mouseX, &mouseY);
 
             //std::cout << "mouse X: " << mouseX << "  " << " mouse Y: " << mouseY << std::endl;
 
+			if (mousePositionChangeInformation->mouseMoved)
+			{
+				oldMouseX = mousePositionChangeInformation->oldX;
+				oldMouseY = mousePositionChangeInformation->oldY;
+                mouseX = mousePositionChangeInformation->x;
+                mouseY = mousePositionChangeInformation->y;
+                
+                player->rotateToMousePosition(oldMouseX, oldMouseY, mouseX, mouseY, windowDimensions);
+//                player->rotateToMousePosition(mousePositionChangeInformation->x, mousePositionChangeInformation->y, *windowDimensions);
+			}
+
             player->rotate(deltaTime);
-            player->rotateToMousePosition(mouseX, mouseY, *windowDimensions);
+
+
             for (auto object : objectsToDraw)
             {
                 object->move(deltaTime);

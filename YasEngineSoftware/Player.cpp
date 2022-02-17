@@ -99,34 +99,35 @@ void Player::rotate(double deltaTime)
 }
 
 
-void Player::rotateToMousePosition(float mouseX, float mouseY, YasVector2D<int>& windowDimensions)
+void Player::rotateToMousePosition(double oldX, double oldY, double x, double y, YasVector2D<int>* windowDimensions)
 {
 
-	windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
-	YasVector2D<float> mousePositionVector(mouseX, mouseY);
-	YasVector2D<float>* normalizedMousePositionVector = YasVector2D<float>::getNormalizedVector(mousePositionVector);
+	windowPositionToCartesianPosition(oldX, oldY, windowDimensions);
+	windowPositionToCartesianPosition(x, y, windowDimensions);
 
-	direction.x = normalizedMousePositionVector->x;
-	direction.y = normalizedMousePositionVector->y;
+	YasVector2D<double> mouseOldPositionVector(oldX, oldY);
+	YasVector2D<double> mouseCurrentPositionVector(x, y);
+
+	double oldMagnitude = YasVector2D<double>::getVectorMagnitude(mouseOldPositionVector);
+	double currentMagnitude = YasVector2D<double>::getVectorMagnitude(mouseCurrentPositionVector);
+
+	//YasVector2D<double>::normalizedVector(mouseOldPositionVector);
+	//YasVector2D<double>::normalizedVector(mouseCurrentPositionVector);
+
+	double angle = (mouseCurrentPositionVector.x * mouseOldPositionVector.x + mouseCurrentPositionVector.y * mouseCurrentPositionVector.y)
+		/ (currentMagnitude*oldMagnitude);
+
+	angle = angle * 3.141592F / 180.0F;
+	for (int i = 0; i < numberOfVertices; i++)
+	{
+		float x = localVertices[i].x * cos(angle) - localVertices[i].y * sin(angle);
+		float y = localVertices[i].x * sin(angle) + localVertices[i].y * cos(angle);
+
+		localVertices[i].x = x;
+		localVertices[i].y = y;
+	}
 
 	generate();
-
-
-	//if (input->rotateClocwise)
-	//{
-	//	angle = angle * 3.141592F / 180.0F;
-	//	angle = deltaTime * rotationSpeed;
-	//	rotateDirection(angle);
-	//	for (int i = 0; i < numberOfVertices; i++)
-	//	{
-	//		float x = localVertices[i].x * cos(angle) - localVertices[i].y * sin(angle);
-	//		float y = localVertices[i].x * sin(angle) + localVertices[i].y * cos(angle);
-
-	//		localVertices[i].x = x;
-	//		localVertices[i].y = y;
-	//	}
-	//	generate();
-	//}
 }
 
 
