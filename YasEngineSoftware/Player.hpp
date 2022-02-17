@@ -10,6 +10,7 @@ class Player : public YasPolygon
 		
 		bool isShooting;
 		YasInOut::Input* input;
+		YasInOut::MousePositionChangeInformation* mouse;
 
 		Player(float x, float y);
 		~Player();
@@ -21,6 +22,7 @@ class Player : public YasPolygon
 		void generateRegularPolygonVertices(const YasVector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) override;
 		void regeneratePolygon() override;
 		void setInput(YasInOut::Input* input);
+		void setInput(YasInOut::MousePositionChangeInformation* mouse);
 		Projectile* shoot();
 };
 

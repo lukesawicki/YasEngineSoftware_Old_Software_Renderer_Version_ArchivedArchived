@@ -72,7 +72,7 @@ void Player::move(double deltaTime)
 	}
 
 	// SPACE
-	if (input->shoot)
+	if (input->shoot || mouse->leftMouseButton)
 	{
 		isShooting = true;
 	}
@@ -101,7 +101,6 @@ void Player::rotate(double deltaTime)
 
 void Player::rotateToMousePosition(double oldX, double oldY, double x, double y, YasVector2D<int>* windowDimensions)
 {
-
 	windowPositionToCartesianPosition(oldX, oldY, windowDimensions);
 	windowPositionToCartesianPosition(x, y, windowDimensions);
 
@@ -193,6 +192,11 @@ void Player::regeneratePolygon()
 void Player::setInput(YasInOut::Input* input)
 {
 	this->input = input;
+}
+
+void Player::setInput(YasInOut::MousePositionChangeInformation* mouse)
+{
+	this->mouse = mouse;
 }
 
 Projectile* Player::shoot()

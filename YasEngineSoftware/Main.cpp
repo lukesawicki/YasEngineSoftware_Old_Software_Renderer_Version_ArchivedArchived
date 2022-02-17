@@ -21,7 +21,7 @@
 bool shouldApplicationStopRunning = false;
 YasInOut::Input* input = new YasInOut::Input();
 YasInOut::MousePositionChangeInformation* mousePositionChangeInformation = new YasInOut::MousePositionChangeInformation();
-double const MOUSE_POSITION_EPSYLON = 100.0;
+double const MOUSE_POSITION_EPSYLON = 4.0;
 //double mouseMovementDelta = 0;
 
 void windowToCartesian(double& x, double& y, YasVector2D<int>& windowDimensions)
@@ -71,11 +71,6 @@ void keysHandleCallbackFunction(GLFWwindow* window, int key, int scancode, int a
 		input->shoot = true;
 	}
 
-	if (key == GLFW_MOUSE_BUTTON_1 && action == GLFW_PRESS)
-	{
-		input->mouseLeftButton = true;
-	}
-
     // RELEASE
 
 	if (key == GLFW_KEY_W && action == GLFW_RELEASE)
@@ -107,10 +102,30 @@ void keysHandleCallbackFunction(GLFWwindow* window, int key, int scancode, int a
 	{
 		input->shoot = false;
 	}
+}
 
-	if (key == GLFW_MOUSE_BUTTON_1 && action == GLFW_RELEASE)
+void mouseButtonsCallbackFunction(GLFWwindow* window, int button, int action, int mods)
+{
+    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
+    {
+        mousePositionChangeInformation->leftMouseButton = true;
+    }
+
+	if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
 	{
-		input->mouseLeftButton = false;
+        mousePositionChangeInformation->rightMouseButton = true;
+	}
+
+    //////////////////////////////////////////////////////////////////////////
+
+	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
+	{
+        mousePositionChangeInformation->leftMouseButton = false;
+	}
+
+	if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
+	{
+        mousePositionChangeInformation->rightMouseButton = false;
 	}
 }
 
@@ -126,7 +141,7 @@ void mouseMoveHandleCallbackFunction(GLFWwindow* window, double x, double y)
     }
     else
     {
-        mousePositionChangeInformation->mouseMoved = true;
+        mousePositionChangeInformation->mouseMoved = false;
     }
 
 }
@@ -164,6 +179,8 @@ int main(int argc, char* argv[])
         glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
     }
 
+    glfwSetMouseButtonCallback(window, mouseButtonsCallbackFunction);
+
     PixelsTable pixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, BLACK);
 
     YasVector2D<int> zeroVector;
@@ -185,6 +202,7 @@ int main(int argc, char* argv[])
     Player* player = new Player(0, 0);
     player->setColor(YELLOW);
     player->setInput(input);
+    player->setInput(mousePositionChangeInformation);
 
     Circle* circle = new Circle(100, 0, 0);
     circle->setColor(BLUE);
@@ -236,7 +254,7 @@ int main(int argc, char* argv[])
 
             //std::cout << "mouse X: " << mouseX << "  " << " mouse Y: " << mouseY << std::endl;
 
-			if (mousePositionChangeInformation->mouseMoved)
+			if (mousePositionChangeInformation->mouseMoved && player->mouse->leftMouseButton) // && input->mouseLeftButton)
 			{
 				oldMouseX = mousePositionChangeInformation->oldX;
 				oldMouseY = mousePositionChangeInformation->oldY;
@@ -247,7 +265,7 @@ int main(int argc, char* argv[])
 //                player->rotateToMousePosition(mousePositionChangeInformation->x, mousePositionChangeInformation->y, *windowDimensions);
 			}
 
-            player->rotate(deltaTime);
+            //player->rotate(deltaTime);
 
 
             for (auto object : objectsToDraw)
