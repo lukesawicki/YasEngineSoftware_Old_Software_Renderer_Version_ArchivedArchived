@@ -43,6 +43,11 @@ class YasVector2D
 		{
 			return sqrt(pow(vector.x, 2.0) + pow(vector.y, 2.0));
 		}
+
+		static Type getVectorMagnitude(Type x0, Type y0, Type x1, Type y1)
+		{
+			return sqrt(pow(x1 - x0, 2.0) + pow(y1 - y0, 2.0));
+		}
 };
 
 #endif

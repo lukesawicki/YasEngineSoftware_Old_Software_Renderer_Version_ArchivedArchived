@@ -25,13 +25,13 @@ void Projectile::move(double deltaTime)
 
 void Projectile::generate()
 {
-	angle = startAngle;
+	angleForGenerateInisoscelesPolygons = startAngle;
 	stepAngle = 360.0F / numberOfVertices;
 	for (int i = 0; i < numberOfVertices; i++)
 	{
-		worldVertices[i].x = position.x + static_cast<int>(circumscribedCircleRadius * cos(angle * (PI / 180.0F)));
-		worldVertices[i].y = position.y + static_cast<int>(circumscribedCircleRadius * sin(angle * (PI / 180.0F)));
-		angle += stepAngle;
+		worldVertices[i].x = position.x + static_cast<int>(circumscribedCircleRadius * cos(angleForGenerateInisoscelesPolygons * (PI / 180.0F)));
+		worldVertices[i].y = position.y + static_cast<int>(circumscribedCircleRadius * sin(angleForGenerateInisoscelesPolygons * (PI / 180.0F)));
+		angleForGenerateInisoscelesPolygons += stepAngle;
 	}
 }
 

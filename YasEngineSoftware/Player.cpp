@@ -36,7 +36,14 @@ Player::Player(float x, float y)
 	localVertices[6].x = +80;
 	localVertices[6].y = -160;
 
+	zeroDegreeAngleVector.x = 1.0F;
+	zeroDegreeAngleVector.y = 0.0F;
+
+	currentPlayerDirectionVector.x = 0;
+	currentPlayerDirectionVector.y = 1;
+
 	generate();
+
 	//generateRegularPolygonVertices(position, 16, 7);
 }
 
@@ -85,6 +92,12 @@ void Player::rotate(double deltaTime)
 	{
 		directionMouseAngle = directionMouseAngle * 3.141592F / 180.0F;
 		directionMouseAngle = deltaTime * rotationSpeed;
+		playerCurrentDirectionAngle = playerCurrentDirectionAngle + directionMouseAngle;
+		if (playerCurrentDirectionAngle >= 6.28319)
+		{
+			playerCurrentDirectionAngle = playerCurrentDirectionAngle - 6.28319;
+		}
+		std::cout << playerCurrentDirectionAngle << std::endl;
 		//rotateDirection(angle);
 		for (int i = 0; i < numberOfVertices; i++)
 		{
@@ -98,7 +111,38 @@ void Player::rotate(double deltaTime)
 	}
 }
 
+void Player::rotateToMousePosition(double x, double y, YasVector2D<int>* windowDimensions)
+{
+	double currentX = x;
+	double currentY = y;
+	windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
+	YasVector2D<double> mousePositionVector(currentX, currentY);
+	YasVector2D<double>::normalizedVector(mousePositionVector);
 
+
+	directionMouseAngle = atan2f(
+		// uzyc nie diraction a old mouse position
+		(zeroDegreeAngleVector.x * mousePositionVector.x + zeroDegreeAngleVector.y * mousePositionVector.y),
+		(YasVector2D<double>::getVectorMagnitude(zeroDegreeAngleVector) * YasVector2D<double>::getVectorMagnitude(mousePositionVector))
+	);
+
+	//oldDirectionMouseAngle = directionMouseAngle;
+
+	float angleToRotateOf = directionMouseAngle - playerCurrentDirectionAngle;
+
+	for (int i = 0; i < numberOfVertices; i++)
+	{
+		float x = localVertices[i].x * cos(angleToRotateOf) - localVertices[i].y * sin(angleToRotateOf);
+		float y = localVertices[i].x * sin(angleToRotateOf) + localVertices[i].y * cos(angleToRotateOf);
+
+		localVertices[i].x = x;
+		localVertices[i].y = y;
+	}
+	playerCurrentDirectionAngle = directionMouseAngle;
+	generate();
+}
+
+/* COMMENTED 2022 04 04 
 void Player::rotateToMousePosition(double oldX, double oldY, double x, double y, YasVector2D<int>* windowDimensions)
 {
 	double currentX = x;
@@ -107,22 +151,24 @@ void Player::rotateToMousePosition(double oldX, double oldY, double x, double y,
 	YasVector2D<double> mousePositionVector(currentX, currentY);
 	YasVector2D<double>::normalizedVector(mousePositionVector);
 
+
+	directionMouseAngle = atan2f(
+		// uzyc nie diraction a old mouse position
+		(direction.x * mousePositionVector.x + direction.y * mousePositionVector.y),
+		(YasVector2D<double>::getVectorMagnitude(direction) * YasVector2D<double>::getVectorMagnitude(mousePositionVector))
+	);
+
 	oldDirectionMouseAngle = directionMouseAngle;
 
-	directionMouseAngle = acos(
-
-		(3.141592 / 180.0) * 
-		(
-			(direction.x*mousePositionVector.x + direction.y*mousePositionVector.y) /
-			( YasVector2D<double>::getVectorMagnitude(direction) * YasVector2D<double>::getVectorMagnitude(mousePositionVector) )
-		)
-	);
+	//directionMouseAngle = atan2f(
+	// 
+	//	(direction.x * mousePositionVector.x + direction.y * mousePositionVector.y),
+	//	(YasVector2D<double>::getVectorMagnitude(direction) * YasVector2D<double>::getVectorMagnitude(mousePositionVector))
+	//	
+	//);
 
 	direction.x = mousePositionVector.x;
 	direction.y = mousePositionVector.y;
-
-	//lukesawicki
-	//directionMouseAngle = abs(directionMouseAngle);
 
 	for (int i = 0; i < numberOfVertices; i++)
 	{
@@ -133,35 +179,8 @@ void Player::rotateToMousePosition(double oldX, double oldY, double x, double y,
 		localVertices[i].y = y;
 	}
 	generate();
-
-	//windowPositionToCartesianPosition(oldX, oldY, windowDimensions);
-	//windowPositionToCartesianPosition(x, y, windowDimensions);
-
-	//YasVector2D<double> mouseOldPositionVector(oldX, oldY);
-	//YasVector2D<double> mouseCurrentPositionVector(x, y);
-
-	//double oldMagnitude = YasVector2D<double>::getVectorMagnitude(mouseOldPositionVector);
-	//double currentMagnitude = YasVector2D<double>::getVectorMagnitude(mouseCurrentPositionVector);
-
-	////YasVector2D<double>::normalizedVector(mouseOldPositionVector);
-	////YasVector2D<double>::normalizedVector(mouseCurrentPositionVector);
-
-	//double ang = (mouseCurrentPositionVector.x * mouseOldPositionVector.x + mouseCurrentPositionVector.y * mouseCurrentPositionVector.y)
-	//	/ (currentMagnitude*oldMagnitude);
-
-	//angle = acos(ang * 3.141592F / 180.0F);
-	//for (int i = 0; i < numberOfVertices; i++)
-	//{
-	//	float x = localVertices[i].x * cos(angle) - localVertices[i].y * sin(angle);
-	//	float y = localVertices[i].x * sin(angle) + localVertices[i].y * cos(angle);
-
-	//	localVertices[i].x = x;
-	//	localVertices[i].y = y;
-	//}
-
-	//generate();
 }
-
+*/
 
 //void Player::rotateToMousePosition(float mouseX, float mouseY, YasVector2D<int>& windowDimensions)
 //{
