@@ -39,6 +39,16 @@ class YasVector2D
 			/*return new YasVector2D<Type>(x, y);*/
 		}
 
+		static YasVector2D<Type>* normalizedVector(const YasVector2D<Type>& vector)
+		{
+			double magnitude = getVectorMagnitude(vector);
+			double x = vector.x / magnitude;
+			double y = vector.y / magnitude;
+			vector.x = x;
+			vector.y = y;
+			return new YasVector2D<Type>(x, y);
+		}
+
 		static Type getVectorMagnitude(const YasVector2D<Type>& vector)
 		{
 			return sqrt(pow(vector.x, 2.0) + pow(vector.y, 2.0));

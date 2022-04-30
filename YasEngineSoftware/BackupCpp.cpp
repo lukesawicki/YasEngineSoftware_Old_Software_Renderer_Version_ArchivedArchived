@@ -463,3 +463,48 @@
 // 
 // 
 ///// END 20210925
+
+
+
+
+
+//////////// ROTATION TO MOUSE POSITION //////////////
+//////////// IN THIS VERSION ROTATING SIMPLE LINE TO SHOW IN WHICH DIRECTION WILL BE SHOOTING WORKING CORRECTLY BUT OUR OBJECT
+//////////// ROTATING LIKE CRAZY RANDOMLY
+//void Player::rotateToMousePosition(double oldX, double oldY, double x, double y, YasVector2D<int>* windowDimensions)
+//{
+//	double currentX = x;
+//	double currentY = y;
+//	windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
+//	YasVector2D<double> mousePositionVector(currentX, currentY);
+//	YasVector2D<double>::normalizedVector(mousePositionVector);
+//
+//
+//	directionMouseAngle = atan2f(
+//		// uzyc nie diraction a old mouse position
+//		(direction.x * mousePositionVector.x + direction.y * mousePositionVector.y),
+//		(YasVector2D<double>::getVectorMagnitude(direction) * YasVector2D<double>::getVectorMagnitude(mousePositionVector))
+//	);
+//
+//	oldDirectionMouseAngle = directionMouseAngle;
+//
+//	//directionMouseAngle = atan2f(
+//	// 
+//	//	(direction.x * mousePositionVector.x + direction.y * mousePositionVector.y),
+//	//	(YasVector2D<double>::getVectorMagnitude(direction) * YasVector2D<double>::getVectorMagnitude(mousePositionVector))
+//	//	
+//	//);
+//
+//	direction.x = mousePositionVector.x;
+//	direction.y = mousePositionVector.y;
+//
+//	for (int i = 0; i < numberOfVertices; i++)
+//	{
+//		float x = localVertices[i].x * cos(directionMouseAngle) - localVertices[i].y * sin(directionMouseAngle);
+//		float y = localVertices[i].x * sin(directionMouseAngle) + localVertices[i].y * cos(directionMouseAngle);
+//
+//		localVertices[i].x = x;
+//		localVertices[i].y = y;
+//	}
+//	generate();
+//}

@@ -8,39 +8,89 @@ Player::Player(float x, float y)
 	position.x = x;
 	position.y = y;
 
-	direction.x = 0;
-	direction.y = 1;
+	direction.x = 1;
+	direction.y = 0;
 
 	numberOfVertices = 7;
 	worldVertices = new YasVector2D<float>[numberOfVertices];
 	localVertices = new YasVector2D<float>[numberOfVertices];
 
-	localVertices[0].x = -80;
-	localVertices[0].y = -160;
+	localVertices[0].x = -160;
+	localVertices[0].y = -80;
 
-	localVertices[1].x = -50;
-	localVertices[1].y = +0;
+	//static void normalizedVector(YasVector2D<Type>&vector)
+	//static Type getVectorMagnitude(const YasVector2D<Type>&vector)
 
-	localVertices[2].x = -50;
-	localVertices[2].y = +80;
+	//std::cout << YasVector2D::normlalize(localVertices[0])->
 
-	localVertices[3].x = +0;
-	localVertices[3].y = +160;
 
-	localVertices[4].x = +50;
-	localVertices[4].y = +80;
+	localVertices[1].x = 0;
+	localVertices[1].y = -50;
 
-	localVertices[5].x = +50;
-	localVertices[5].y = +0;
+	localVertices[2].x = 80;
+	localVertices[2].y = -50;
 
-	localVertices[6].x = +80;
-	localVertices[6].y = -160;
+	localVertices[3].x = 160;
+	localVertices[3].y = 0;
 
-	zeroDegreeAngleVector.x = 1.0F;
-	zeroDegreeAngleVector.y = 0.0F;
+	localVertices[4].x = 80;
+	localVertices[4].y = 50;
 
-	currentPlayerDirectionVector.x = 0;
-	currentPlayerDirectionVector.y = 1;
+	localVertices[5].x = 0;
+	localVertices[5].y = 50;
+
+	localVertices[6].x = -160;
+	localVertices[6].y = 80;
+
+	YasVector2D<float>*
+
+//i: 0 X : -160
+//i : 0 Y : -80.0
+//
+//i : 1 X : 0.0
+//i : 1 Y : -50
+//
+//i : 2 X : 80.0
+//i : 2 Y : -50
+//
+//i : 3 X : 160
+//i : 3 Y : 0.0
+//
+//i : 4 X : 80
+//i : 4 Y : 50.0
+//
+//i : 5 X : 0.0
+//i : 5 Y : 50
+//
+//i : 6 X : -160
+//i : 6 Y : 80
+//
+//	//// JEDNORAZOWO PRZELICZAM SOBIE JAK TO BEDZIE W DOBRYM KIERUNKU
+//	// 90 stopni:= 1.5708 radianow
+//	double ninteDegree = 1.5708;
+//	//this is clockwise
+//	for (int i = 0; i < numberOfVertices; i++)
+//	{
+//		float x = localVertices[i].x * cos(ninteDegree) + localVertices[i].y * sin(ninteDegree);
+//		float y = localVertices[i].x * sin(ninteDegree) - localVertices[i].y * cos(ninteDegree);
+//
+//		localVertices[i].x = x;
+//		localVertices[i].y = y;
+//	}
+//
+//	for (int i = 0; i < numberOfVertices; i++)
+//	{
+//		std::cout << "i: " << i << "X: " << localVertices[i].x << std::endl;
+//		std::cout << "i: " << i << "Y: " << localVertices[i].y << std::endl;
+//
+//	}
+//	int stop = 0;
+//	std::cin >> stop;
+	//zeroDegreeAngleVector.x = 1.0F;
+	//zeroDegreeAngleVector.y = 0.0F;
+
+	//currentPlayerDirectionVector.x = 1;
+	//currentPlayerDirectionVector.y = 0;
 
 	generate();
 
@@ -99,6 +149,7 @@ void Player::rotate(double deltaTime)
 		}
 		std::cout << playerCurrentDirectionAngle << std::endl;
 		//rotateDirection(angle);
+		// THIS IS Counter clockwise
 		for (int i = 0; i < numberOfVertices; i++)
 		{
 			float x = localVertices[i].x * cos(directionMouseAngle) - localVertices[i].y * sin(directionMouseAngle);
@@ -111,6 +162,8 @@ void Player::rotate(double deltaTime)
 	}
 }
 
+
+/*
 void Player::rotateToMousePosition(double x, double y, YasVector2D<int>* windowDimensions)
 {
 	double currentX = x;
@@ -120,29 +173,36 @@ void Player::rotateToMousePosition(double x, double y, YasVector2D<int>* windowD
 	YasVector2D<double>::normalizedVector(mousePositionVector);
 
 
-	directionMouseAngle = atan2f(
-		// uzyc nie diraction a old mouse position
-		(zeroDegreeAngleVector.x * mousePositionVector.x + zeroDegreeAngleVector.y * mousePositionVector.y),
-		(YasVector2D<double>::getVectorMagnitude(zeroDegreeAngleVector) * YasVector2D<double>::getVectorMagnitude(mousePositionVector))
-	);
+	//directionMouseAngle = atan2f(
+	//	// uzyc nie diraction a old mouse position
+	//	(zeroDegreeAngleVector.x * mousePositionVector.x + zeroDegreeAngleVector.y * mousePositionVector.y),
+	//	(YasVector2D<double>::getVectorMagnitude(zeroDegreeAngleVector) * YasVector2D<double>::getVectorMagnitude(mousePositionVector))
+	//);
 
 	//oldDirectionMouseAngle = directionMouseAngle;
 
-	float angleToRotateOf = directionMouseAngle - playerCurrentDirectionAngle;
+	rotateDirection(directionMouseAngle);
+	
+	//float angleToRotateOf = directionMouseAngle - playerCurrentDirectionAngle;
 
-	for (int i = 0; i < numberOfVertices; i++)
-	{
-		float x = localVertices[i].x * cos(angleToRotateOf) - localVertices[i].y * sin(angleToRotateOf);
-		float y = localVertices[i].x * sin(angleToRotateOf) + localVertices[i].y * cos(angleToRotateOf);
+	//for (int i = 0; i < numberOfVertices; i++)
+	//{
+	//	float x = localVertices[i].x * cos(angleToRotateOf) - localVertices[i].y * sin(angleToRotateOf);
+	//	float y = localVertices[i].x * sin(angleToRotateOf) + localVertices[i].y * cos(angleToRotateOf);
 
-		localVertices[i].x = x;
-		localVertices[i].y = y;
-	}
-	playerCurrentDirectionAngle = directionMouseAngle;
+	//	localVertices[i].x = x;
+	//	localVertices[i].y = y;
+	//}
+
+
+
+	//playerCurrentDirectionAngle = directionMouseAngle;
 	generate();
 }
 
-/* COMMENTED 2022 04 04 
+*/
+
+ // COMMENTED 2022 04 04 
 void Player::rotateToMousePosition(double oldX, double oldY, double x, double y, YasVector2D<int>* windowDimensions)
 {
 	double currentX = x;
@@ -151,8 +211,7 @@ void Player::rotateToMousePosition(double oldX, double oldY, double x, double y,
 	YasVector2D<double> mousePositionVector(currentX, currentY);
 	YasVector2D<double>::normalizedVector(mousePositionVector);
 
-
-	directionMouseAngle = atan2f(
+	double angleBetweenCurrentAndMouse = atan2f(
 		// uzyc nie diraction a old mouse position
 		(direction.x * mousePositionVector.x + direction.y * mousePositionVector.y),
 		(YasVector2D<double>::getVectorMagnitude(direction) * YasVector2D<double>::getVectorMagnitude(mousePositionVector))
@@ -169,18 +228,18 @@ void Player::rotateToMousePosition(double oldX, double oldY, double x, double y,
 
 	direction.x = mousePositionVector.x;
 	direction.y = mousePositionVector.y;
-
+	// CHYBA NIE MUSZE UZYWAC KATOW WYSTARCZY MIEC PIERWOTNA DLUGOSC WEKTOROW WIERZCHOLKOW I WETKRO KIERUNKOWY
 	for (int i = 0; i < numberOfVertices; i++)
 	{
-		float x = localVertices[i].x * cos(directionMouseAngle) - localVertices[i].y * sin(directionMouseAngle);
-		float y = localVertices[i].x * sin(directionMouseAngle) + localVertices[i].y * cos(directionMouseAngle);
+		float x = localVertices[i].x * cos(angleBetweenCurrentAndMouse) - localVertices[i].y * sin(angleBetweenCurrentAndMouse);
+		float y = localVertices[i].x * sin(angleBetweenCurrentAndMouse) + localVertices[i].y * cos(angleBetweenCurrentAndMouse);
 
 		localVertices[i].x = x;
 		localVertices[i].y = y;
 	}
 	generate();
 }
-*/
+
 
 //void Player::rotateToMousePosition(float mouseX, float mouseY, YasVector2D<int>& windowDimensions)
 //{
@@ -197,13 +256,13 @@ void Player::rotateToMousePosition(double oldX, double oldY, double x, double y,
 //}
 
 
-void Player::rotateDirection(double angle)
-{
-	double directionX = direction.x * cos(angle) - direction.y * sin(angle);
-	double directionY = direction.x * sin(angle) + direction.y * cos(angle);
-	direction.x = directionX;
-	direction.y = directionY;
-}
+//void Player::rotateDirection(double angle)
+//{
+//	double directionX = direction.x * cos(angle) - direction.y * sin(angle);
+//	double directionY = direction.x * sin(angle) + direction.y * cos(angle);
+//	direction.x = directionX;
+//	direction.y = directionY;
+//}
 
 void Player::generate()
 {
@@ -227,7 +286,7 @@ void Player::generate()
 
 	worldVertices[6].x = position.x + localVertices[6].x;
 	worldVertices[6].y = position.y + localVertices[6].y;
-
+	
 }
 
 void Player::generateRegularPolygonVertices(const YasVector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices)

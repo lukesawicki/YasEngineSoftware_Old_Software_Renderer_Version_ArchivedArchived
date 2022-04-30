@@ -263,7 +263,7 @@ int main(int argc, char* argv[])
 
             if (mousePositionChangeInformation->mouseMoved)
             {
-                player->rotateToMousePosition(mousePositionChangeInformation->x, mousePositionChangeInformation->y, windowDimensions);
+                player->rotateToMousePosition(mousePositionChangeInformation->oldX, mousePositionChangeInformation->oldY, mousePositionChangeInformation->x, mousePositionChangeInformation->y, windowDimensions);
                 //firstTime = false;
             }
 
@@ -282,6 +282,8 @@ int main(int argc, char* argv[])
             }
 
             drawPolygon(player, pixelsTable);
+
+            // DRAW YELLOW LINE WHICH SHOWING THE DIRECTION OF MOUSE(PREVIOUSLY PLAYER)
             drawPolygonDirection(player, pixelsTable);
 
             Projectile* projectile = player->shoot();
@@ -291,11 +293,15 @@ int main(int argc, char* argv[])
             }
 
             projectile = nullptr;
+
 //          ########  END TEST CODE  ################
 
             glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixelsTable.pixels);
             glfwSwapBuffers(window);
             glfwPollEvents();
+
+            //int stop = 0;
+            //std::cin >> stop;
         }
         
         for (auto drawableObject : objectsToDraw)
