@@ -13,7 +13,7 @@ class YasPolygon
 		YasVector2D<float> position;
 		YasVector2D<float>* worldVertices = nullptr;
 		YasVector2D<float>* localVertices = nullptr;
-		YasVector2D<double> direction;
+		YasVector2D<float> direction;
 		YasVector2D<float> vectorZero;
 		int numberOfVertices = 0;
 		YasVector4D<uint8_t> color;
@@ -22,13 +22,13 @@ class YasPolygon
 		float angleForGenerateInisoscelesPolygons;
 		float startAngle = 0.0F;
 		float stepAngle;
-		double oldDirectionMouseAngle;
-		double directionMouseAngle = 0; //  90.0 * (3.141592 / 180.0);
+		float oldDirectionMouseAngle;
+		float directionMouseAngle = 0; //  90.0 * (3.141592 / 180.0);
 
 		bool directionSwitched = false;
 		float  speed = 0.0F;
 
-		virtual void move(double deltaTime) = 0;
+		virtual void move(float deltaTime) = 0;
 		virtual void generate() = 0;
 		virtual void generateRegularPolygonVertices(const YasVector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) = 0;
 		virtual void regeneratePolygon() = 0;

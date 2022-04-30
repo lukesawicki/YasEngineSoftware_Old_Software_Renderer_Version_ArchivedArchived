@@ -508,3 +508,31 @@
 //	}
 //	generate();
 //}
+
+/////////////
+
+
+
+
+//void Player::rotateToMousePosition(float mouseX, float mouseY, YasVector2D<int>& windowDimensions)
+//{
+//
+//	windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
+//	YasVector2D<float> mousePositionVector(mouseX, mouseY);
+//	YasVector2D<float>* normalizedMousePositionVector = YasVector2D<float>::getNormalizedVector(mousePositionVector);
+//
+//	direction.x = normalizedMousePositionVector->x;
+//	direction.y = normalizedMousePositionVector->y;
+//
+//	generate();
+//
+//}
+
+
+//void Player::rotateDirection(double angle)
+//{
+//	double directionX = direction.x * cos(angle) - direction.y * sin(angle);
+//	double directionY = direction.x * sin(angle) + direction.y * cos(angle);
+//	direction.x = directionX;
+//	direction.y = directionY;
+//}

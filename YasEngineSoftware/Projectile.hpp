@@ -7,9 +7,9 @@ class Projectile : public YasPolygon
 {
 	public:
 		YasVector2D<float> velocity;
-		Projectile(float radius, float x, float y, YasVector2D<double> direction);
+		Projectile(float radius, float x, float y, YasVector2D<float> direction);
 		~Projectile();
-		void move(double deltaTime) override;
+		void move(float deltaTime) override;
 		void generate() override;
 		void generateRegularPolygonVertices(const YasVector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) override;
 		void regeneratePolygon() override;

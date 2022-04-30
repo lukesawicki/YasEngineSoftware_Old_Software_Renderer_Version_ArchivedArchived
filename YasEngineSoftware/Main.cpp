@@ -61,7 +61,7 @@ void keysHandleCallbackFunction(GLFWwindow* window, int key, int scancode, int a
 
 	if (key == GLFW_KEY_R && action == GLFW_PRESS)
 	{
-		input->rotateClocwise = true;
+		input->rotateCounterClockwise = true;
 	}
 
 	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
@@ -93,7 +93,7 @@ void keysHandleCallbackFunction(GLFWwindow* window, int key, int scancode, int a
 
 	if (key == GLFW_KEY_R && action == GLFW_RELEASE)
 	{
-		input->rotateClocwise = false;
+		input->rotateCounterClockwise = false;
 	}
 
 	if (key == GLFW_KEY_SPACE && action == GLFW_RELEASE)
@@ -192,11 +192,11 @@ int main(int argc, char* argv[])
 	YasVector2D<int> testA;
 	YasVector2D<int> testB;
 
-	double mouseX;
-	double mouseY;
+	//double mouseX;
+	//double mouseY;
 
-	double oldMouseX;
-	double oldMouseY;
+	//double oldMouseX;
+	//double oldMouseY;
 
     // Test objects definitions
 
@@ -261,22 +261,24 @@ int main(int argc, char* argv[])
 
             // COMMENTED 2022 04 04 for testing saveing player angle
 
-            if (mousePositionChangeInformation->mouseMoved)
-            {
-                player->rotateToMousePosition(mousePositionChangeInformation->oldX, mousePositionChangeInformation->oldY, mousePositionChangeInformation->x, mousePositionChangeInformation->y, windowDimensions);
-                //firstTime = false;
-            }
+
+            // 2022-04-30 - only for a moment to test refactor of rotations :)
+            //if (mousePositionChangeInformation->mouseMoved)
+            //{
+            //    player->rotateToMousePosition(mousePositionChangeInformation->oldX, mousePositionChangeInformation->oldY, mousePositionChangeInformation->x, mousePositionChangeInformation->y, windowDimensions);
+            //    //firstTime = false;
+            //}
 
             
 
 
                 //}
 
-            //player->rotate(deltaTime);
+            player->rotate(static_cast<float>(deltaTime));
 
             for (auto object : objectsToDraw)
             {
-                object->move(deltaTime);
+                object->move(static_cast<float>(deltaTime));
                 object->regeneratePolygon();
                 drawPolygon(object, pixelsTable);
             }

@@ -1,6 +1,6 @@
 #include"Projectile.hpp"
 
-Projectile::Projectile(float radius, float x, float y, YasVector2D<double> direction)
+Projectile::Projectile(float radius, float x, float y, YasVector2D<float> direction)
 {
 	directionSwitched = false;
 	speed = 200;
@@ -16,7 +16,7 @@ Projectile::~Projectile()
 	delete[] worldVertices;
 }
 
-void Projectile::move(double deltaTime)
+void Projectile::move(float deltaTime)
 {
 	position.x = position.x + deltaTime * velocity.x;
 	position.y = position.y + deltaTime * velocity.y;

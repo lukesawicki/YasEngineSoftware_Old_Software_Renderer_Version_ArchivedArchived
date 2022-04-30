@@ -13,9 +13,9 @@ Circle::~Circle()
 	delete[] worldVertices;
 }
 
-void Circle::move(double deltaTime)
+void Circle::move(float deltaTime)
 {
-	position.x = position.x + deltaTime * speed;
+	position.x = position.x + static_cast<float>(deltaTime) * speed;
 	if (position.x < circumscribedCircleRadius && !directionSwitched)
 	{
 		speed = speed * -1;

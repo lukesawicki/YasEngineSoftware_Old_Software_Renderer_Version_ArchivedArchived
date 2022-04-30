@@ -9,7 +9,7 @@ namespace YasInOut
 		bool up;
 		bool down;
 		bool shoot;
-		bool rotateClocwise;
+		bool rotateCounterClockwise;
 		bool mouseLeftButton;
 	};
 
