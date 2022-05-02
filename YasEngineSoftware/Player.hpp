@@ -15,6 +15,7 @@ class Player : public YasPolygon
 
 		float playerDirectionAngle = 90.0F * (3.141592F / 180.0F);
 		float playerCurrentDirectionAngle = playerDirectionAngle;
+		const YasVector2D<float> xDirectionVector = YasVector2D<float>(1.0F, 0.0F);
 		YasVector2D<float> currentMouseAngleVector;
 
 		Player(float x, float y);
@@ -23,7 +24,7 @@ class Player : public YasPolygon
 		void rotateAllVerticesOverAnAngle(float angle);
 		void rotate(float deltaTime);
 		/////rotateToMousePosition(double oldX, double oldY, double x, double y, YasVector2D<int>* windowDimensions)
-		void rotateToMousePosition(double oldX, double oldY, double x, double y, YasVector2D<int>* windowDimensions);
+		void rotateToMousePosition(float x, float y, YasVector2D<int>* windowDimensions);
 		void generate() override;
 		void generateRegularPolygonVertices(const YasVector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) override;
 		void regeneratePolygon() override;

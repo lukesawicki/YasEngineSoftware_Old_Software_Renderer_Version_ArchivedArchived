@@ -129,10 +129,6 @@ void mouseButtonsCallbackFunction(GLFWwindow* window, int button, int action, in
 
 void mouseMoveHandleCallbackFunction(GLFWwindow* window, double x, double y)
 {
-    //std::cout << "X: " << x << "  " << "Y: " << y << std::endl;
-    //std::cout << "OX: " << mousePositionChangeInformation->oldX << "  " << "OY: " << mousePositionChangeInformation->oldY << std::endl;
-    //if(YasVector2D<double>::getVectorMagnitude(mousePositionChangeInformation->x, x, mousePositionChangeInformation->y, y) > 1.0)
-    //{
     if (abs(mousePositionChangeInformation->x - x) > 1 || abs(mousePositionChangeInformation->y - y) > 1)
     {
         mousePositionChangeInformation->mouseMoved = true;
@@ -142,8 +138,6 @@ void mouseMoveHandleCallbackFunction(GLFWwindow* window, double x, double y)
         mousePositionChangeInformation->mouseMoved = false;
     }
 
-	mousePositionChangeInformation->oldX = mousePositionChangeInformation->x;
-	mousePositionChangeInformation->oldY = mousePositionChangeInformation->y;
 	mousePositionChangeInformation->x = x;
 	mousePositionChangeInformation->y = y;
 
@@ -264,12 +258,9 @@ int main(int argc, char* argv[])
 
             if (mousePositionChangeInformation->mouseMoved)
             {
-                player->rotateToMousePosition(mousePositionChangeInformation->oldX, mousePositionChangeInformation->oldY, mousePositionChangeInformation->x, mousePositionChangeInformation->y, windowDimensions);
-                //firstTime = false;
+                player->rotateToMousePosition(mousePositionChangeInformation->x, mousePositionChangeInformation->y, windowDimensions);
+
             }
-
-            
-
 
                 //}
 

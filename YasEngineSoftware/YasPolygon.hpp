@@ -22,7 +22,6 @@ class YasPolygon
 		float angleForGenerateInisoscelesPolygons;
 		float startAngle = 0.0F;
 		float stepAngle;
-		float oldDirectionMouseAngle;
 		float directionMouseAngle = 0; //  90.0 * (3.141592 / 180.0);
 
 		bool directionSwitched = false;
