@@ -26,6 +26,7 @@ class Player : public YasPolygon
 		
 		void rotateToMousePosition(float x, float y, YasVector2D<int>* windowDimensions);
 		//void rotateToMousePosition1(float x, float y, YasVector2D<int>* windowDimensions);
+		void setDirection(float x, float y);
 		void generate() override;
 		void generateRegularPolygonVertices(const YasVector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) override;
 		void regeneratePolygon() override;

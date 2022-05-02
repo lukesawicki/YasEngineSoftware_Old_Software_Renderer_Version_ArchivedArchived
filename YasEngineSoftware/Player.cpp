@@ -110,14 +110,21 @@ void Player::rotateToMousePosition(float x, float y, YasVector2D<int>* windowDim
 		float angleBetweenCurrentAndMouse = YasVector2D<float>::angleBetweenVectors(direction, mousePositionVector);
 		if (abs(angleBetweenCurrentAndMouse) > 0.0174533F)
 		{
-			direction.x = mousePositionVector.x;
-			direction.y = mousePositionVector.y;
+			setDirection(mousePositionVector.x, mousePositionVector.y);
+			//direction.x = mousePositionVector.x;
+			//direction.y = mousePositionVector.y;
 
 			rotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
 
 			generate();
 		}
 	}
+}
+
+void Player::setDirection(float x, float y)
+{
+	direction.x = x;
+	direction.y = y;
 }
 
 //void Player::rotateToMousePosition1(float x, float y, YasVector2D<int>* windowDimensions)
