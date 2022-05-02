@@ -370,10 +370,15 @@
         return point.y* windowWidth + point.x;
     }
 
-	void windowPositionToCartesianPosition(double& x, double& y, YasVector2D<int>* windowDimensions)
-	{
-		x = x - static_cast<int>(0.5 * windowDimensions->x);
-		y = ( -( y - static_cast<int>(0.5 * windowDimensions->y) ) );
-	}
+	//void windowPositionToCartesianPosition(double& x, double& y, YasVector2D<int>* windowDimensions)
+	//{
+	//	x = x - static_cast<int>(0.5 * windowDimensions->x);
+	//	y = ( -( y - static_cast<int>(0.5 * windowDimensions->y) ) );
+	//}
 
+    void windowPositionToCartesianPosition(float& x, float& y, YasVector2D<int>* windowDimensions)
+    {
+        x = x - static_cast<int>(0.5 * windowDimensions->x);
+        y = (-(y - static_cast<int>(0.5 * windowDimensions->y)));
+    }
 

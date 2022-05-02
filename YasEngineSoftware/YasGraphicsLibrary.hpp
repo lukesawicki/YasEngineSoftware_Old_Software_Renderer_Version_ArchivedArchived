@@ -44,6 +44,7 @@ void drawCartesianAxies(PixelsTable& pixelsTable);
 int xyPixelToArrayPosition(YasVector2D<int>& point, int windowWidth);
 int xyPixelToArrayPosition(int x, int y, int windowWidth);
 
-void windowPositionToCartesianPosition(double& x, double& y, YasVector2D<int>* windowDimensions);
+//void windowPositionToCartesianPosition(double& x, double& y, YasVector2D<int>* windowDimensions);
+void windowPositionToCartesianPosition(float& x, float& y, YasVector2D<int>* windowDimensions);
 
 #endif

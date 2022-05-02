@@ -38,7 +38,6 @@ Player::Player(float x, float y)
 
 	generate();
 
-	//generateRegularPolygonVertices(position, 16, 7);
 }
 
 Player::~Player()
@@ -96,53 +95,12 @@ void Player::rotate(float deltaTime)
 	}
 }
 
-
-/*
-void Player::rotateToMousePosition(double x, double y, YasVector2D<int>* windowDimensions)
-{
-	double currentX = x;
-	double currentY = y;
-	windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
-	YasVector2D<double> mousePositionVector(currentX, currentY);
-	YasVector2D<double>::normalizedVector(mousePositionVector);
-
-
-	//directionMouseAngle = atan2f(
-	//	// uzyc nie diraction a old mouse position
-	//	(zeroDegreeAngleVector.x * mousePositionVector.x + zeroDegreeAngleVector.y * mousePositionVector.y),
-	//	(YasVector2D<double>::getVectorMagnitude(zeroDegreeAngleVector) * YasVector2D<double>::getVectorMagnitude(mousePositionVector))
-	//);
-
-	//oldDirectionMouseAngle = directionMouseAngle;
-
-	rotateDirection(directionMouseAngle);
-	
-	//float angleToRotateOf = directionMouseAngle - playerCurrentDirectionAngle;
-
-	//for (int i = 0; i < numberOfVertices; i++)
-	//{
-	//	float x = localVertices[i].x * cos(angleToRotateOf) - localVertices[i].y * sin(angleToRotateOf);
-	//	float y = localVertices[i].x * sin(angleToRotateOf) + localVertices[i].y * cos(angleToRotateOf);
-
-	//	localVertices[i].x = x;
-	//	localVertices[i].y = y;
-	//}
-
-
-
-	//playerCurrentDirectionAngle = directionMouseAngle;
-	generate();
-}
-
-*/
-
- // COMMENTED 2022 04 04 
 void Player::rotateToMousePosition(float x, float y, YasVector2D<int>* windowDimensions)
 {
 	if (x <= windowDimensions->x && y <= windowDimensions->y)
 	{
-		double currentX = x;
-		double currentY = y;
+		float currentX = x;
+		float currentY = y;
 
 		windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
 
@@ -150,27 +108,43 @@ void Player::rotateToMousePosition(float x, float y, YasVector2D<int>* windowDim
 		YasVector2D<float>::normalizedVector(mousePositionVector);
 
 		float angleBetweenCurrentAndMouse = YasVector2D<float>::angleBetweenVectors(direction, mousePositionVector);
-		if (angleBetweenCurrentAndMouse > 0.0174533)
+		if (abs(angleBetweenCurrentAndMouse) > 0.0174533F)
 		{
 			direction.x = mousePositionVector.x;
 			direction.y = mousePositionVector.y;
-			// CHYBA NIE MUSZE UZYWAC KATOW WYSTARCZY MIEC PIERWOTNA DLUGOSC WEKTOROW WIERZCHOLKOW I WETKRO KIERUNKOWY
-			// kolejny raz dochodze do tego samego ze tak sie nie da bo kazdy wierzcholek ma swoj kierunek
 
 			rotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
 
-			/*for (int i = 0; i < numberOfVertices; i++)
-			{
-				float x = static_cast<float>(localVertices[i].x * cos(angleBetweenCurrentAndMouse) - localVertices[i].y * sin(angleBetweenCurrentAndMouse));
-				float y = static_cast<float>(localVertices[i].x * sin(angleBetweenCurrentAndMouse) + localVertices[i].y * cos(angleBetweenCurrentAndMouse));
-
-				localVertices[i].x = x;
-				localVertices[i].y = y;
-			}*/
 			generate();
 		}
 	}
 }
+
+//void Player::rotateToMousePosition1(float x, float y, YasVector2D<int>* windowDimensions)
+//{
+//	if (x <= windowDimensions->x && y <= windowDimensions->y)
+//	{
+//		double currentX = x;
+//		double currentY = y;
+//
+//		windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
+//
+//		YasVector2D<float> mousePositionVector(static_cast<float>(currentX), static_cast<float>(currentY));
+//		YasVector2D<float>::normalizedVector(mousePositionVector);
+//
+//		float angleBetweenCurrentAndMouse = YasVector2D<float>::angleBetweenVectors(direction, mousePositionVector);
+//		
+//		if (angleBetweenCurrentAndMouse > 0.0174533F)
+//		{
+//			direction.x = mousePositionVector.x;
+//			direction.y = mousePositionVector.y;
+//
+//			rotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
+//
+//			generate();
+//		}
+//	}
+//}
 
 void Player::generate()
 {

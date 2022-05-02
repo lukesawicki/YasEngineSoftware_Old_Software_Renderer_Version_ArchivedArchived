@@ -37,7 +37,7 @@ void keysHandleCallbackFunction(GLFWwindow* window, int key, int scancode, int a
         glfwSetWindowShouldClose(window, GL_TRUE);
 	}
 
-    // PRESS
+    // PRESS KEY
 
 	if (key == GLFW_KEY_W && action == GLFW_PRESS)
 	{
@@ -69,7 +69,7 @@ void keysHandleCallbackFunction(GLFWwindow* window, int key, int scancode, int a
 		input->shoot = true;
 	}
 
-    // RELEASE
+    // RELEASE KEY
 
 	if (key == GLFW_KEY_W && action == GLFW_RELEASE)
 	{
@@ -136,6 +136,7 @@ void mouseMoveHandleCallbackFunction(GLFWwindow* window, double x, double y)
     else
     {
         mousePositionChangeInformation->mouseMoved = false;
+        return;
     }
 
 	mousePositionChangeInformation->x = x;
@@ -186,14 +187,6 @@ int main(int argc, char* argv[])
 	YasVector2D<int> testA;
 	YasVector2D<int> testB;
 
-	//double mouseX;
-	//double mouseY;
-
-	//double oldMouseX;
-	//double oldMouseY;
-
-    // Test objects definitions
-
 	std::vector<YasPolygon*> objectsToDraw;
 
     Player* player = new Player(0, 0);
@@ -224,8 +217,6 @@ int main(int argc, char* argv[])
     bool close = false;
     bool firstTime = true;
 
-    //glfwGetCursorPos(window, &mouseX, &mouseY);
-
     while (!shouldApplicationStopRunning)
     {
         while (!glfwWindowShouldClose(window))
@@ -249,22 +240,16 @@ int main(int argc, char* argv[])
 
 //          ########  BEGINT TEST CODE  ################
 
-            //if ( abs(player->directionMouseAngle - player->oldDirectionMouseAngle) > 0.00001 || firstTime)
-            //{
-
-
-            // COMMENTED 2022 04 04 for testing saveing player angle
-
-
             if (mousePositionChangeInformation->mouseMoved)
             {
                 player->rotateToMousePosition(mousePositionChangeInformation->x, mousePositionChangeInformation->y, windowDimensions);
-
+                //verystrangeExperiment
+                //player->rotate(static_cast<float>(deltaTime)); // rotation using key
             }
 
-                //}
 
-            //player->rotate(static_cast<float>(deltaTime));
+            //player->rotateToMousePosition(mousePositionChangeInformation->x, mousePositionChangeInformation->y, windowDimensions);
+            //player->rotate(static_cast<float>(deltaTime)); // rotation using key
 
             for (auto object : objectsToDraw)
             {
@@ -273,7 +258,7 @@ int main(int argc, char* argv[])
                 drawPolygon(object, pixelsTable);
             }
 
-            drawPolygon(player, pixelsTable);
+            //drawPolygon(player, pixelsTable);
 
             // DRAW YELLOW LINE WHICH SHOWING THE DIRECTION OF MOUSE(PREVIOUSLY PLAYER)
             drawPolygonDirection(player, pixelsTable);
@@ -291,10 +276,9 @@ int main(int argc, char* argv[])
             glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixelsTable.pixels);
             glfwSwapBuffers(window);
             glfwPollEvents();
-
-            //int stop = 0;
-            //std::cin >> stop;
         }
+
+
         
         for (auto drawableObject : objectsToDraw)
         {
