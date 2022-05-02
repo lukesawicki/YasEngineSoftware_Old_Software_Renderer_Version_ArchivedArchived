@@ -262,19 +262,18 @@ int main(int argc, char* argv[])
             // COMMENTED 2022 04 04 for testing saveing player angle
 
 
-            // 2022-04-30 - only for a moment to test refactor of rotations :)
-            //if (mousePositionChangeInformation->mouseMoved)
-            //{
-            //    player->rotateToMousePosition(mousePositionChangeInformation->oldX, mousePositionChangeInformation->oldY, mousePositionChangeInformation->x, mousePositionChangeInformation->y, windowDimensions);
-            //    //firstTime = false;
-            //}
+            if (mousePositionChangeInformation->mouseMoved)
+            {
+                player->rotateToMousePosition(mousePositionChangeInformation->oldX, mousePositionChangeInformation->oldY, mousePositionChangeInformation->x, mousePositionChangeInformation->y, windowDimensions);
+                //firstTime = false;
+            }
 
             
 
 
                 //}
 
-            player->rotate(static_cast<float>(deltaTime));
+            //player->rotate(static_cast<float>(deltaTime));
 
             for (auto object : objectsToDraw)
             {
