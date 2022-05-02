@@ -147,7 +147,6 @@ void Player::rotate(float deltaTime)
 		{
 			playerCurrentDirectionAngle = playerCurrentDirectionAngle - 6.28319F;
 		}
-		//std::cout << playerCurrentDirectionAngle << std::endl;
 		rotateAllVerticesOverAnAngle(directionMouseAngle);
 		generate();
 	}
@@ -261,7 +260,7 @@ void Player::rotateAllVerticesOverAnAngle(float angle)
 {
 	for (int i = 0; i < numberOfVertices; i++)
 	{
-		YasVector2D<float>::rotateVectorOverTheAngle(localVertices[i], angle);
+		YasVector2D<float>::rotateVectorOverTheAngle(localVertices+i, angle);
 
 		/*float x = localVertices[i].x * cos(directionMouseAngle) - localVertices[i].y * sin(directionMouseAngle);
 		float y = localVertices[i].x * sin(directionMouseAngle) + localVertices[i].y * cos(directionMouseAngle);

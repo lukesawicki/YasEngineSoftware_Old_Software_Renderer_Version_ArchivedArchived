@@ -2,6 +2,7 @@
 #define VECTOR2D_HPP
 
 #include<cmath>
+#include<iostream>
 
 template <typename Type>
 class YasVector2D
@@ -59,14 +60,22 @@ class YasVector2D
 			);
 		}
 
-		static void rotateVectorOverTheAngle(YasVector2D<Type>& v, float angle)
+		static void rotateVectorOverTheAngle(YasVector2D<Type>* v, float angle)
 		{
-			float modifiedX = v.x * cos(angle) - v.y * sin(angle);
-			float modifiedY = v.x * sin(angle) + v.y * cos(angle);
+			//std::cout << (long)v << " | " << v++ << std::endl;
+			float modifiedX = v->x * cos(angle) - v->y * sin(angle);
+			float modifiedY = v->x * sin(angle) + v->y * cos(angle);
 
-			v.x = modifiedX;
-			v.y = modifiedX;
+			v->x = modifiedX;
+			v->y = modifiedY;
 		}
+
+		//directionMouseAngle = atan2f(
+		//	// uzyc nie diraction a old mouse position
+		//	(zeroDegreeAngleVector.x * mousePositionVector.x + zeroDegreeAngleVector.y * mousePositionVector.y),
+		//	(YasVector2D<double>::getVectorMagnitude(zeroDegreeAngleVector) * YasVector2D<double>::getVectorMagnitude(mousePositionVector))
+		//);
+
 };
 
 #endif
