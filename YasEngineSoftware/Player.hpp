@@ -10,6 +10,7 @@ class Player : public YasPolygon
 	public:
 		
 		bool isShooting;
+		int projectilePositionShift = 140;
 		YasInOut::Input* input;
 		YasInOut::MousePositionChangeInformation* mouse;
 

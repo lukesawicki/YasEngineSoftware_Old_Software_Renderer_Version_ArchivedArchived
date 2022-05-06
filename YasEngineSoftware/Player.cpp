@@ -125,32 +125,6 @@ void Player::setDirection(float x, float y)
 	direction.y = y;
 }
 
-//void Player::rotateToMousePosition1(float x, float y, YasVector2D<int>* windowDimensions)
-//{
-//	if (x <= windowDimensions->x && y <= windowDimensions->y)
-//	{
-//		double currentX = x;
-//		double currentY = y;
-//
-//		windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
-//
-//		YasVector2D<float> mousePositionVector(static_cast<float>(currentX), static_cast<float>(currentY));
-//		YasVector2D<float>::normalizedVector(mousePositionVector);
-//
-//		float angleBetweenCurrentAndMouse = YasVector2D<float>::angleBetweenVectors(direction, mousePositionVector);
-//		
-//		if (angleBetweenCurrentAndMouse > 0.0174533F)
-//		{
-//			direction.x = mousePositionVector.x;
-//			direction.y = mousePositionVector.y;
-//
-//			rotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
-//
-//			generate();
-//		}
-//	}
-//}
-
 void Player::generate()
 {
 	worldVertices[0].x = position.x + localVertices[0].x;
@@ -209,7 +183,9 @@ Projectile* Player::shoot()
 	if (isShooting)
 	{
 		isShooting = false;
-		return new Projectile(32, position.x, position.y, direction);
+		float projectileX = position.x + direction.x * projectilePositionShift;
+		float projectileY = position.y + direction.y * projectilePositionShift;
+		return new Projectile(32, projectileX, projectileY, direction);
 	}
 	else
 	{

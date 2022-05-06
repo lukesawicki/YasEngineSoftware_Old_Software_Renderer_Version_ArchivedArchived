@@ -5,6 +5,7 @@
 
 class Projectile : public YasPolygon
 {
+		
 	public:
 		YasVector2D<float> velocity;
 		Projectile(float radius, float x, float y, YasVector2D<float> direction);

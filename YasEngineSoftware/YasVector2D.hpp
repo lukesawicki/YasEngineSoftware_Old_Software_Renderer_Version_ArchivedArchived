@@ -63,28 +63,11 @@ class YasVector2D
 
 		static Type angleBetweenVectors(const YasVector2D<Type>& u, const YasVector2D& v)
 		{
-			//angle = atan2(vector2.y, vector2.x) - atan2(vector1.y, vector1.x);
-
-			
-			//return acosf((u.x * v.x + u.y * v.y) / YasVector2D<Type>::getVectorMagnitude(u) * YasVector2D<Type>::getVectorMagnitude(v));
-			
 			return atan2(crossProduct(u, v), dotProduct(u, v));
-			
-			// 
-			//return atanf()
-			//2 * atan(norm(x*norm(y) - norm(x)*y) / norm(x * norm(y) + norm(x) * y))
-			//return atanf(v.x * v.y - u.x * u.y / v.x * v.y + u.x * u.y);
-			//return atan2f
-			//(
-			//	(u.x * v.x - u.y * v.y),
-			//	(YasVector2D<Type>::getVectorMagnitude(u) * YasVector2D<Type>::getVectorMagnitude(v))
-			//);
 		}
 
 		static void rotateVectorOverTheAngle(YasVector2D<Type>* v, float angle)
 		{
-			//counterclockwise
-			//std::cout << v->x << " | " << v->y << std::endl;
 			float modifiedX = v->x * cos(angle) - v->y * sin(angle);
 			float modifiedY = v->x * sin(angle) + v->y * cos(angle);
 
@@ -92,19 +75,6 @@ class YasVector2D
 			v->y = modifiedY;
 		}
 
-		//directionMouseAngle = atan2f(
-		//	// uzyc nie diraction a old mouse position
-		//	(zeroDegreeAngleVector.x * mousePositionVector.x + zeroDegreeAngleVector.y * mousePositionVector.y),
-		//	(YasVector2D<double>::getVectorMagnitude(zeroDegreeAngleVector) * YasVector2D<double>::getVectorMagnitude(mousePositionVector))
-		//);
-
 };
 
 #endif
-
-
-/*float x = localVertices[i].x * cos(directionMouseAngle) - localVertices[i].y * sin(directionMouseAngle);
-float y = localVertices[i].x * sin(directionMouseAngle) + localVertices[i].y * cos(directionMouseAngle);
-
-localVertices[i].x = x;
-localVertices[i].y = y;*/
