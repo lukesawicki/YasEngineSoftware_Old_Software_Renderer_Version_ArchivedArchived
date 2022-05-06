@@ -14,7 +14,7 @@ class Player : public YasPolygon
 		YasInOut::MousePositionChangeInformation* mouse;
 
 		float playerDirectionAngle = 90.0F * (3.141592F / 180.0F);
-		float playerCurrentDirectionAngle = playerDirectionAngle;
+		float playerCurrentDirectionAngle = 0.0F; // playerDirectionAngle;
 		const YasVector2D<float> xDirectionVector = YasVector2D<float>(1.0F, 0.0F);
 		YasVector2D<float> currentMouseAngleVector;
 

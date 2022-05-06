@@ -108,15 +108,13 @@ void Player::rotateToMousePosition(float x, float y, YasVector2D<int>* windowDim
 		YasVector2D<float>::normalizedVector(mousePositionVector);
 
 		float angleBetweenCurrentAndMouse = YasVector2D<float>::angleBetweenVectors(direction, mousePositionVector);
-		if (abs(angleBetweenCurrentAndMouse) > 0.0174533F)
+
+
+		if (abs(angleBetweenCurrentAndMouse) > 0.0174533F) // jesli obrot jest wiekszy niz 1 stopien.... komentuje bo to bez sensu
 		{
-			setDirection(mousePositionVector.x, mousePositionVector.y);
-			//direction.x = mousePositionVector.x;
-			//direction.y = mousePositionVector.y;
-
 			rotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
-
-			generate();
+			setDirection(mousePositionVector.x, mousePositionVector.y);
+			
 		}
 	}
 }
@@ -192,7 +190,7 @@ void Player::rotateAllVerticesOverAnAngle(float angle)
 {
 	for (int i = 0; i < numberOfVertices; i++)
 	{
-		YasVector2D<float>::rotateVectorOverTheAngle(localVertices+i, angle);
+		YasVector2D<float>::rotateVectorOverTheAngle(&localVertices[i], angle);
 	}
 }
 

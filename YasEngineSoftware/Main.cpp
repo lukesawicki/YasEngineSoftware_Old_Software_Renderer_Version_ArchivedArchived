@@ -129,7 +129,7 @@ void mouseButtonsCallbackFunction(GLFWwindow* window, int button, int action, in
 
 void mouseMoveHandleCallbackFunction(GLFWwindow* window, double x, double y)
 {
-    if (abs(mousePositionChangeInformation->x - x) > 1 || abs(mousePositionChangeInformation->y - y) > 1)
+    if (!mousePositionChangeInformation->mouseMoved && (abs(mousePositionChangeInformation->x - x) > 1.0F || abs(mousePositionChangeInformation->y - y) > 1.0F))
     {
         mousePositionChangeInformation->mouseMoved = true;
     }
@@ -251,12 +251,16 @@ int main(int argc, char* argv[])
             //player->rotateToMousePosition(mousePositionChangeInformation->x, mousePositionChangeInformation->y, windowDimensions);
             //player->rotate(static_cast<float>(deltaTime)); // rotation using key
 
+
             for (auto object : objectsToDraw)
             {
                 object->move(static_cast<float>(deltaTime));
                 object->regeneratePolygon();
                 drawPolygon(object, pixelsTable);
             }
+
+
+
 
             //drawPolygon(player, pixelsTable);
 
