@@ -16,6 +16,8 @@
 #include"Player.hpp"
 #include"InputOutputHandler.hpp"
 
+#define DEBUG_DRAWINGS
+
 //-----------------------------------------------------------------------------|---------------------------------------|
 //                                                                            80                                     120
 bool shouldApplicationStopRunning = false;
@@ -128,7 +130,7 @@ void mouseButtonsCallbackFunction(GLFWwindow* window, int button, int action, in
 
 void mouseMoveHandleCallbackFunction(GLFWwindow* window, double x, double y)
 {
-    if (!mousePositionChangeInformation->mouseMoved && (abs(mousePositionChangeInformation->x - x) > 0.25F || abs(mousePositionChangeInformation->y - y) > 0.25F))
+    if (abs(mousePositionChangeInformation->x - x) > 0.01F || abs(mousePositionChangeInformation->y - y) > 0.01F)
     {
         mousePositionChangeInformation->mouseMoved = true;
     }
@@ -193,10 +195,12 @@ int main(int argc, char* argv[])
     player->setInput(input);
     player->setInput(mousePositionChangeInformation);
 
+#ifdef DEBUG_DRAWINGS
     Circle* circle = new Circle(100, 0, 0);
     circle->setColor(BLUE);
-
     objectsToDraw.push_back(circle);
+#endif // DEBUG_DRAWINGS
+
     objectsToDraw.push_back(player);
 
     // End of test objects definitions
@@ -235,7 +239,10 @@ int main(int argc, char* argv[])
             
             pixelsTable.clearColor(BLACK);
             
+#ifdef DEBUG_DRAWINGS
 			drawCartesianAxies(pixelsTable);
+#endif // DEBUG_DRAWINGS
+
 
 //          ########  BEGINT TEST CODE  ################
 
@@ -257,8 +264,11 @@ int main(int argc, char* argv[])
                 drawPolygon(object, pixelsTable);
             }
 
+#ifdef DEBUG_DRAWINGS
             // DRAW YELLOW LINE WHICH SHOWING THE DIRECTION OF MOUSE(PREVIOUSLY PLAYER)
             drawPolygonDirection(player, pixelsTable);
+#endif // DEBUG_DRAWINGS
+
 
             Projectile* projectile = player->shoot();
             if (projectile != nullptr)
