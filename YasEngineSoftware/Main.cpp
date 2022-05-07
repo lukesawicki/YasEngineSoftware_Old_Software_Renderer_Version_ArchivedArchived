@@ -30,7 +30,6 @@ void windowToCartesian(double& x, double& y, YasVector2D<int>& windowDimensions)
 
 void keysHandleCallbackFunction(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-    //
 	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
 	{
         shouldApplicationStopRunning = true;
@@ -114,7 +113,7 @@ void mouseButtonsCallbackFunction(GLFWwindow* window, int button, int action, in
         mousePositionChangeInformation->rightMouseButton = true;
 	}
 
-    //////////////////////////////////////////////////////////////////////////
+    // RELEASE KEY
 
 	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
 	{
@@ -129,7 +128,7 @@ void mouseButtonsCallbackFunction(GLFWwindow* window, int button, int action, in
 
 void mouseMoveHandleCallbackFunction(GLFWwindow* window, double x, double y)
 {
-    if (!mousePositionChangeInformation->mouseMoved && (abs(mousePositionChangeInformation->x - x) > 1.0F || abs(mousePositionChangeInformation->y - y) > 1.0F))
+    if (!mousePositionChangeInformation->mouseMoved && (abs(mousePositionChangeInformation->x - x) > 0.25F || abs(mousePositionChangeInformation->y - y) > 0.25F))
     {
         mousePositionChangeInformation->mouseMoved = true;
     }
@@ -240,17 +239,16 @@ int main(int argc, char* argv[])
 
 //          ########  BEGINT TEST CODE  ################
 
-            if (mousePositionChangeInformation->mouseMoved)
+            if (mousePositionChangeInformation->mouseMoved || input->up || input->down || input->left || input->right)
             {
-                player->rotateToMousePosition(mousePositionChangeInformation->x, mousePositionChangeInformation->y, windowDimensions);
-                //verystrangeExperiment
-                //player->rotate(static_cast<float>(deltaTime)); // rotation using key
+                player->rotateToMousePositionInLocalCoordinateSystem(mousePositionChangeInformation->x, mousePositionChangeInformation->y, windowDimensions);
             }
 
+            float mouseX = mousePositionChangeInformation->x;
+            float mouseY = mousePositionChangeInformation->y;
 
-            //player->rotateToMousePosition(mousePositionChangeInformation->x, mousePositionChangeInformation->y, windowDimensions);
-            //player->rotate(static_cast<float>(deltaTime)); // rotation using key
-
+            windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
+            drawCrossOnScreen(mouseX, mouseY, pixelsTable);
 
             for (auto object : objectsToDraw)
             {
@@ -258,11 +256,6 @@ int main(int argc, char* argv[])
                 object->regeneratePolygon();
                 drawPolygon(object, pixelsTable);
             }
-
-
-
-
-            //drawPolygon(player, pixelsTable);
 
             // DRAW YELLOW LINE WHICH SHOWING THE DIRECTION OF MOUSE(PREVIOUSLY PLAYER)
             drawPolygonDirection(player, pixelsTable);
@@ -274,6 +267,14 @@ int main(int argc, char* argv[])
             }
 
             projectile = nullptr;
+
+            for (auto object : objectsToDraw)
+            {
+                if (object->position.x > (2 * WINDOW_WIDTH) || object->position.y > (2 * WINDOW_HEIGHT))
+                {
+
+                }
+            }
 
 //          ########  END TEST CODE  ################
 

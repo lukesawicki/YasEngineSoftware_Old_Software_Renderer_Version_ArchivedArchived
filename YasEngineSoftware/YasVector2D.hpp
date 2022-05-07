@@ -31,15 +31,15 @@ class YasVector2D
 			vector.y = static_cast<Type>(y);
 		}
 
-		static YasVector2D<Type>* normalizedVector(const YasVector2D<Type>& vector)
-		{
-			double magnitude = getVectorMagnitude(vector);
-			double x = vector.x / magnitude;
-			double y = vector.y / magnitude;
-			vector.x = static_cast<Type>(x);
-			vector.y = static_cast<Type>(y);
-			return new YasVector2D<Type>(x, y);
-		}
+		//static YasVector2D<Type>* normalizedVector(const YasVector2D<Type>& vector)
+		//{
+		//	double magnitude = getVectorMagnitude(vector);
+		//	double x = vector.x / magnitude;
+		//	double y = vector.y / magnitude;
+		//	vector.x = static_cast<Type>(x);
+		//	vector.y = static_cast<Type>(y);
+		//	return new YasVector2D<Type>(x, y);
+		//}
 
 		static Type getVectorMagnitude(const YasVector2D<Type>& vector)
 		{
@@ -74,7 +74,13 @@ class YasVector2D
 			v->x = modifiedX;
 			v->y = modifiedY;
 		}
-
+		
+		static YasVector2D<Type> createUnitVectorFromBoundVector(const YasVector2D<Type>& u, const YasVector2D& v)
+		{
+			YasVector2D<Type> w = YasVector2D<Type>(u.x - v.x, u.y - v.y);
+			YasVector2D::normalizedVector(w);
+			return w;
+		}
 };
 
 #endif

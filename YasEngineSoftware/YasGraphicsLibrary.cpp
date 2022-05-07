@@ -342,6 +342,12 @@
         verticalLineOnScreen(pixelsTable, 0, GREEN);
     }
 
+    void drawCrossOnScreen(float x, float y, PixelsTable& pixelsTable)
+    {
+        horizontalLineOnScreen(pixelsTable, y, BLUE);
+        verticalLineOnScreen(pixelsTable, x, BLUE);
+    }
+
     void horizontalLineOnScreen(PixelsTable& pixelsTable, int y, YasVector4D<uint8_t> color)
     {
         int maxX = static_cast<int>(0.5F * pixelsTable.windowDimensions.x);

@@ -40,6 +40,8 @@ void horizontalLineOnScreen(PixelsTable& pixelsTable, int y, YasVector4D<uint8_t
 void verticalLineOnScreen(PixelsTable& pixelsTable, int x, YasVector4D<uint8_t> color);
 
 void drawCartesianAxies(PixelsTable& pixelsTable);
+
+void drawCrossOnScreen(float x, float y, PixelsTable& pixelsTable);
     
 int xyPixelToArrayPosition(YasVector2D<int>& point, int windowWidth);
 int xyPixelToArrayPosition(int x, int y, int windowWidth);

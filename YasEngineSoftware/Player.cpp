@@ -104,20 +104,45 @@ void Player::rotateToMousePosition(float x, float y, YasVector2D<int>* windowDim
 
 		windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
 
+		// MOUSE POSITION TO PLAYER POSITION
+		//currentX = currentX - x;
+		//currentY = currentY - y;
+
 		YasVector2D<float> mousePositionVector(static_cast<float>(currentX), static_cast<float>(currentY));
 		YasVector2D<float>::normalizedVector(mousePositionVector);
 
 		float angleBetweenCurrentAndMouse = YasVector2D<float>::angleBetweenVectors(direction, mousePositionVector);
 
 
-		if (abs(angleBetweenCurrentAndMouse) > 0.0174533F) // jesli obrot jest wiekszy niz 1 stopien.... komentuje bo to bez sensu
-		{
+		//if (abs(angleBetweenCurrentAndMouse) > 0.0174533F) // jesli obrot jest wiekszy niz 1 stopien.... komentuje bo to bez sensu
+		//{
 			rotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
 			setDirection(mousePositionVector.x, mousePositionVector.y);
 			
-		}
+		//}
 	}
 }
+
+void Player::rotateToMousePositionInLocalCoordinateSystem(float x, float y, YasVector2D<int>* windowDimensions)
+{
+	if (x <= windowDimensions->x && y <= windowDimensions->y)
+	{
+		float currentX = x;
+		float currentY = y;
+
+		windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
+
+		YasVector2D<float> currentMousePosition = YasVector2D<float>(currentX, currentY);
+
+		YasVector2D<float> mouseDirectionInLocalCoordynationSystem = YasVector2D<float>::createUnitVectorFromBoundVector(currentMousePosition, position);
+
+		float angleBetweenCurrentAndMouse = YasVector2D<float>::angleBetweenVectors(direction, mouseDirectionInLocalCoordynationSystem);
+
+		rotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
+		YasVector2D<float>::rotateVectorOverTheAngle(&direction, angleBetweenCurrentAndMouse);
+	}
+}
+
 
 void Player::setDirection(float x, float y)
 {
@@ -176,6 +201,11 @@ void Player::setInput(YasInOut::Input* input)
 void Player::setInput(YasInOut::MousePositionChangeInformation* mouse)
 {
 	this->mouse = mouse;
+}
+
+void Player::recalculateLookAt()
+{
+
 }
 
 Projectile* Player::shoot()
