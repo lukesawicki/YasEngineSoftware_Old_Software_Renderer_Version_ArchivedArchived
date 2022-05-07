@@ -8,7 +8,7 @@ Projectile::Projectile(float radius, float x, float y, YasVector2D<float> direct
 	velocity.x = speed * direction.x;
 	velocity.y = speed * direction.y;
 	color = BLUE;
-	generateRegularPolygonVertices(position, radius, 64);
+	generateRegularPolygonVertices(position, radius, 3);
 }
 
 Projectile::~Projectile()
@@ -25,13 +25,10 @@ void Projectile::move(float deltaTime)
 
 void Projectile::generate()
 {
-	angleForGenerateInisoscelesPolygons = startAngle;
-	stepAngle = 360.0F / numberOfVertices;
 	for (int i = 0; i < numberOfVertices; i++)
 	{
-		worldVertices[i].x = position.x + static_cast<int>(circumscribedCircleRadius * cos(angleForGenerateInisoscelesPolygons * (PI / 180.0F)));
-		worldVertices[i].y = position.y + static_cast<int>(circumscribedCircleRadius * sin(angleForGenerateInisoscelesPolygons * (PI / 180.0F)));
-		angleForGenerateInisoscelesPolygons += stepAngle;
+		worldVertices[i].x = position.x + localVertices[i].x;
+		worldVertices[i].y = position.y + localVertices[i].y;
 	}
 }
 
@@ -42,6 +39,16 @@ void Projectile::generateRegularPolygonVertices(const YasVector2D<float>& positi
 	this->position.x = position.x;
 	this->position.y = position.y;
 	this->worldVertices = new YasVector2D<float>[numberOfVertices];
+	this->localVertices = new YasVector2D<float>[numberOfVertices];
+
+	angleForGenerateInisoscelesPolygons = startAngle;
+	stepAngle = 360.0F / numberOfVertices;
+	for (int i = 0; i < numberOfVertices; i++)
+	{
+		localVertices[i].x = 0.0F + static_cast<int>(circumscribedCircleRadius * cos(angleForGenerateInisoscelesPolygons * (PI / 180.0F)));
+		localVertices[i].y = 0.0F + static_cast<int>(circumscribedCircleRadius * sin(angleForGenerateInisoscelesPolygons * (PI / 180.0F)));
+		angleForGenerateInisoscelesPolygons += stepAngle;
+	}
 	generate();
 }
 
