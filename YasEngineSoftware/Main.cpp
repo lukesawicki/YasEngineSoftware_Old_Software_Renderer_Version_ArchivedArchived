@@ -5,6 +5,8 @@
 #include<cstdlib>
 #include<iostream>
 #include<vector>
+#include<map>
+#include<utility>
 #include<cmath>
 #include"YasVector2D.hpp"
 #include"YasGraphicsLibrary.hpp"
@@ -145,6 +147,54 @@ void mouseMoveHandleCallbackFunction(GLFWwindow* window, double x, double y)
 
 }
 
+
+
+std::vector<int> generatePrimeNumberLessThanN(int n)
+{
+    std::vector<int> primeNumbers;
+    std::map<int, bool> numbers;
+
+    for (int i = 2; i <= n; i++)
+    {
+        numbers.insert(std::pair<int, bool>(i, true));
+    }
+    int k = 0;
+    int j = 0;
+    for (int i = 2; i < sqrt(n); i++)
+    {
+        
+        if (numbers.at(i))
+        {
+            while (true)//j < n)
+            {
+                
+                j = (i * i) + (k*i);
+                if (j <= n)
+                {
+                    numbers.at(j) = false;
+                }
+                else
+                {
+                    break;
+                }
+                k++;
+            }
+            k = 0;
+            j = 0;
+        }
+    }
+
+    for (int i = 2; i < numbers.size(); i++)
+    {
+        if (numbers.at(i))
+        {
+            //std::cout << i << std::endl;
+            primeNumbers.push_back(i);
+        }
+    }
+    return primeNumbers;
+}
+
 int main(int argc, char* argv[])
 {
     const int WINDOW_WIDTH = 1024;
@@ -167,6 +217,18 @@ int main(int argc, char* argv[])
         return 1;
     }
 
+    //lukesawicki
+    std::vector<int> groupOfPrimeNumbers = generatePrimeNumberLessThanN(1000);
+
+    std::cout << "NUMBER OF PRIME NUMBERS: " << groupOfPrimeNumbers.size() << std::endl;
+
+    for (int i = 0; i < groupOfPrimeNumbers.size(); i++)
+    {
+        std::cout << groupOfPrimeNumbers.at(i) << std::endl;
+    }
+
+   
+
     glfwMakeContextCurrent(window);
 
     glfwSetKeyCallback(window, keysHandleCallbackFunction);
@@ -179,6 +241,8 @@ int main(int argc, char* argv[])
     }
 
     glfwSetMouseButtonCallback(window, mouseButtonsCallbackFunction);
+
+
 
     PixelsTable pixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, BLACK);
 
@@ -278,13 +342,15 @@ int main(int argc, char* argv[])
 
             projectile = nullptr;
 
-            for (auto object : objectsToDraw)
-            {
-                if (object->position.x > (2 * WINDOW_WIDTH) || object->position.y > (2 * WINDOW_HEIGHT))
-                {
+            //for (auto object : objectsToDraw)
+            //{
+            //    if (object->position.x > (2 * WINDOW_WIDTH) || object->position.y > (2 * WINDOW_HEIGHT))
+            //    {
 
-                }
-            }
+            //    }
+            //}
+
+            drawPrimeNumbers(groupOfPrimeNumbers, pixelsTable);
 
 //          ########  END TEST CODE  ################
 

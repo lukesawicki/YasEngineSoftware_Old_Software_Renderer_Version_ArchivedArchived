@@ -2,6 +2,7 @@
 #define YASGRAPHICSLIBRARY_HPP
 #include<cmath>
 #include<iostream>
+#include<vector>
 #include <GLFW/glfw3.h>
 #include"YasVector2D.hpp"
 #include"YasVector4D.hpp"
@@ -30,6 +31,8 @@ const YasVector4D<uint8_t> YELLOW(255, 255, 0, 255);
 void drawLine(const YasVector2D<float>& point0, const YasVector2D<float>& point1, PixelsTable& pixelsTable, const YasVector4D<uint8_t>& drawingColor);
 
 void drawPolygon(YasPolygon* polygon, PixelsTable& pixelsTable);
+
+void drawPrimeNumbers(const std::vector<int>& primeNumbers, PixelsTable& pixelsTable);
 
 void drawPolygonDirection(YasPolygon* polygon, PixelsTable& pixelsTable);
 

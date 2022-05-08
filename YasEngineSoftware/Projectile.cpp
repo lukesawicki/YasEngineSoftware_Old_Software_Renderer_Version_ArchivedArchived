@@ -41,13 +41,13 @@ void Projectile::generateRegularPolygonVertices(const YasVector2D<float>& positi
 	this->worldVertices = new YasVector2D<float>[numberOfVertices];
 	this->localVertices = new YasVector2D<float>[numberOfVertices];
 
-	angleForGenerateInisoscelesPolygons = startAngle;
+	angleForGenerateInIsoscelesPolygons = startAngle;
 	stepAngle = 360.0F / numberOfVertices;
 	for (int i = 0; i < numberOfVertices; i++)
 	{
-		localVertices[i].x = 0.0F + static_cast<int>(circumscribedCircleRadius * cos(angleForGenerateInisoscelesPolygons * (PI / 180.0F)));
-		localVertices[i].y = 0.0F + static_cast<int>(circumscribedCircleRadius * sin(angleForGenerateInisoscelesPolygons * (PI / 180.0F)));
-		angleForGenerateInisoscelesPolygons += stepAngle;
+		localVertices[i].x = 0.0F + static_cast<int>(circumscribedCircleRadius * cos(angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
+		localVertices[i].y = 0.0F + static_cast<int>(circumscribedCircleRadius * sin(angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
+		angleForGenerateInIsoscelesPolygons += stepAngle;
 	}
 	generate();
 }

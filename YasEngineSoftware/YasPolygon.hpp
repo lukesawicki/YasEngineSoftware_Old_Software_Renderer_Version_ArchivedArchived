@@ -19,7 +19,7 @@ class YasPolygon
 		YasVector4D<uint8_t> color;
 		float circumscribedCircleRadius;
 		float rotationSpeed;
-		float angleForGenerateInisoscelesPolygons;
+		float angleForGenerateInIsoscelesPolygons;
 		float startAngle = 0.0F;
 		float stepAngle;
 		float directionMouseAngle = 0; //  90.0 * (3.141592 / 180.0);

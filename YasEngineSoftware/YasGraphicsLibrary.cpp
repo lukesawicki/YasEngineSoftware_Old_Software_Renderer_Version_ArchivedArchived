@@ -308,6 +308,83 @@
         }
     }
 
+    int calculateMaximuNumberOfElementsToProcess(const int& primaryMaximum)
+    {
+        int maximum = 0;
+        if (primaryMaximum % 2 == 0)
+        {
+            maximum = primaryMaximum - 1;
+        }
+        else
+        {
+            maximum = primaryMaximum - 2;
+        }
+        return maximum;
+    }
+
+    void drawPrimeNumbers(const std::vector<int> &primeNumbers, PixelsTable& pixelsTable)
+    {
+        if (primeNumbers.size() < 4) {
+            return;
+        }
+        int numbersSize = primeNumbers.size();
+        int maximumNumberOfVertices = numbersSize / 2;
+
+        YasVector2D<float>* vertices = new YasVector2D<float>[maximumNumberOfVertices];
+
+        int maximum = calculateMaximuNumberOfElementsToProcess(numbersSize);
+
+
+        //if (numbersSize % 2 == 0)
+        //{
+        //    maximum = numbersSize - 1;
+        //}
+        //else
+        //{
+        //    maximum = numbersSize - 2;
+        //}
+
+
+
+
+
+        int j = 0;
+        for (int i = 0; i < maximum; i+=2)
+        {
+            vertices[j].x = primeNumbers.at(i);
+            vertices[j].y = primeNumbers.at(i + 1);
+            j++;
+        }
+
+        if (maximumNumberOfVertices <= 3)
+        {
+            drawLine(vertices[0], vertices[1], pixelsTable, YELLOW);
+        }
+        else
+        {
+            int maximumVertisesToDraw = calculateMaximuNumberOfElementsToProcess(maximumNumberOfVertices);
+
+            /*if (maximumVertisesToDraw % 2 == 0)
+            {
+                maximumVertisesToDraw = maximumNumberOfVertices - 1;
+            }
+            else
+            {
+                maximumVertisesToDraw = maximumNumberOfVertices - 2;
+            }*/
+
+
+
+
+            for (int i = 0; i < maximumNumberOfVertices; i+=2)
+            {
+                drawLine(vertices[i], vertices[i + 1], pixelsTable, YELLOW);
+            }
+        }
+
+        delete[] vertices;
+    }
+
     void drawPolygonDirection(YasPolygon* polygon, PixelsTable& pixelsTable)
     {
         YasVector2D<float> direction(polygon->direction.x*100, polygon->direction.y*100);
