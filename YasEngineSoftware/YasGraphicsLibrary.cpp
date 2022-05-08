@@ -322,67 +322,51 @@
         return maximum;
     }
 
-    void drawPrimeNumbers(const std::vector<int> &primeNumbers, PixelsTable& pixelsTable)
+    //YasVector2D<float>* createListOfVertices(const std::vector<int>& primeNumbers)
+    //{
+
+    //}
+
+    YasVector2D<float>* generateVerticesFromNumbers(const std::vector<int> &numbers)
     {
-        if (primeNumbers.size() < 4) {
-            return;
+        if (numbers.size() < 4) {
+            return nullptr;
         }
-        int numbersSize = primeNumbers.size();
+        int numbersSize = numbers.size();
         int maximumNumberOfVertices = numbersSize / 2;
 
         YasVector2D<float>* vertices = new YasVector2D<float>[maximumNumberOfVertices];
 
         int maximum = calculateMaximuNumberOfElementsToProcess(numbersSize);
 
-
-        //if (numbersSize % 2 == 0)
-        //{
-        //    maximum = numbersSize - 1;
-        //}
-        //else
-        //{
-        //    maximum = numbersSize - 2;
-        //}
-
-
-
-
-
         int j = 0;
-        for (int i = 0; i < maximum; i+=2)
+        for (int i = 0; i < maximum; i += 2)
         {
-            vertices[j].x = primeNumbers.at(i);
-            vertices[j].y = primeNumbers.at(i + 1);
+            vertices[j].x = numbers.at(i);
+            vertices[j].y = numbers.at(i + 1);
             j++;
         }
 
+        return vertices;
+    }
+
+
+    void drawPrimeNumbers(YasVector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable)
+    {
         if (maximumNumberOfVertices <= 3)
         {
             drawLine(vertices[0], vertices[1], pixelsTable, YELLOW);
         }
         else
         {
-            int maximumVertisesToDraw = calculateMaximuNumberOfElementsToProcess(maximumNumberOfVertices);
+            int maximumVerticesToGenerateSegments = calculateMaximuNumberOfElementsToProcess(maximumNumberOfVertices);
 
-            /*if (maximumVertisesToDraw % 2 == 0)
-            {
-                maximumVertisesToDraw = maximumNumberOfVertices - 1;
-            }
-            else
-            {
-                maximumVertisesToDraw = maximumNumberOfVertices - 2;
-            }*/
-
-
-
-
-            for (int i = 0; i < maximumNumberOfVertices; i+=2)
+            for (int i = 0; i < maximumVerticesToGenerateSegments; i+=2)
             {
                 drawLine(vertices[i], vertices[i + 1], pixelsTable, YELLOW);
             }
         }
 
-        delete[] vertices;
     }
 
     void drawPolygonDirection(YasPolygon* polygon, PixelsTable& pixelsTable)

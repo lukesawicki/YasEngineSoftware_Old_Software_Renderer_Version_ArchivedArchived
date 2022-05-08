@@ -218,7 +218,12 @@ int main(int argc, char* argv[])
     }
 
     //lukesawicki
+    
     std::vector<int> groupOfPrimeNumbers = generatePrimeNumberLessThanN(1000);
+
+    int numberOfVerticesFromPrimeNumbers = groupOfPrimeNumbers.size() / 2;
+
+    YasVector2D<float>* verticesForPrimeNumbersSegments = generateVerticesFromNumbers(groupOfPrimeNumbers);
 
     std::cout << "NUMBER OF PRIME NUMBERS: " << groupOfPrimeNumbers.size() << std::endl;
 
@@ -349,8 +354,8 @@ int main(int argc, char* argv[])
 
             //    }
             //}
-
-            drawPrimeNumbers(groupOfPrimeNumbers, pixelsTable);
+            drawPrimeNumbers(verticesForPrimeNumbersSegments, numberOfVerticesFromPrimeNumbers, pixelsTable);
+            //drawPrimeNumbers(groupOfPrimeNumbers, pixelsTable);
 
 //          ########  END TEST CODE  ################
 
@@ -359,12 +364,12 @@ int main(int argc, char* argv[])
             glfwPollEvents();
         }
 
-
-        
         for (auto drawableObject : objectsToDraw)
         {
             delete drawableObject;
         }
+
+        delete[] verticesForPrimeNumbersSegments;
 
         glfwTerminate();
         return 0;
