@@ -8,6 +8,7 @@
 #include<map>
 #include<utility>
 #include<cmath>
+#include<bitset>
 #include"YasVector2D.hpp"
 #include"YasGraphicsLibrary.hpp"
 #include"TimePicker.hpp"
@@ -217,23 +218,6 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    //lukesawicki
-    
-    std::vector<int> groupOfPrimeNumbers = generatePrimeNumberLessThanN(1000);
-
-    int numberOfVerticesFromPrimeNumbers = groupOfPrimeNumbers.size() / 2;
-
-    YasVector2D<float>* verticesForPrimeNumbersSegments = generateVerticesFromNumbers(groupOfPrimeNumbers);
-
-    std::cout << "NUMBER OF PRIME NUMBERS: " << groupOfPrimeNumbers.size() << std::endl;
-
-    for (int i = 0; i < groupOfPrimeNumbers.size(); i++)
-    {
-        std::cout << groupOfPrimeNumbers.at(i) << std::endl;
-    }
-
-   
-
     glfwMakeContextCurrent(window);
 
     glfwSetKeyCallback(window, keysHandleCallbackFunction);
@@ -247,7 +231,26 @@ int main(int argc, char* argv[])
 
     glfwSetMouseButtonCallback(window, mouseButtonsCallbackFunction);
 
+    /////////
 
+        //lukesawicki
+
+    std::vector<int> groupOfPrimeNumbers = generatePrimeNumberLessThanN(2000);
+
+
+
+    int numberOfVerticesFromPrimeNumbers = groupOfPrimeNumbers.size() / 2;
+
+    YasVector2D<float>* verticesForPrimeNumbersSegments = generateVerticesFromNumbers(groupOfPrimeNumbers);
+
+    std::cout << "NUMBER OF PRIME NUMBERS: " << groupOfPrimeNumbers.size() << std::endl;
+
+    //for (int i = 0; i < groupOfPrimeNumbers.size(); i++)
+    //{
+    //    std::cout << groupOfPrimeNumbers.at(i) << std::endl;
+    //}
+
+    /////////
 
     PixelsTable pixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, BLACK);
 
@@ -354,7 +357,26 @@ int main(int argc, char* argv[])
 
             //    }
             //}
-            drawPrimeNumbers(verticesForPrimeNumbersSegments, numberOfVerticesFromPrimeNumbers, pixelsTable);
+            
+            
+            //drawNumbersAsLineSegmentsNotContinuous(verticesForPrimeNumbersSegments, numberOfVerticesFromPrimeNumbers, pixelsTable);
+            drawNumbersAsPolyline(verticesForPrimeNumbersSegments, numberOfVerticesFromPrimeNumbers, pixelsTable);
+            for (int i = 0; i < groupOfPrimeNumbers.size(); i++)
+            {
+                std::string str = std::bitset<10>(groupOfPrimeNumbers.at(i)).to_string();
+                for (int j = 0; j < 10; j++)
+                {
+                    if (str.at(j) == '1')
+                    {
+                        pixelsTable.drawPoint(j, i, YELLOW);
+                    }
+                    else
+                    {
+                        pixelsTable.drawPoint(j, i, BLUE);
+                    }
+                }
+                str.clear();
+            }
             //drawPrimeNumbers(groupOfPrimeNumbers, pixelsTable);
 
 //          ########  END TEST CODE  ################

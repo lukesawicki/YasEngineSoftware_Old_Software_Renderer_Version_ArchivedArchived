@@ -35,7 +35,9 @@ void drawPolygon(YasPolygon* polygon, PixelsTable& pixelsTable);
 YasVector2D<float>* generateVerticesFromNumbers(const std::vector<int>& numbers);
 
 //void drawPrimeNumbers(const std::vector<int>& primeNumbers, PixelsTable& pixelsTable);
-void drawPrimeNumbers(YasVector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable);
+void drawNumbersAsLineSegmentsNotContinuous(YasVector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable);
+
+void drawNumbersAsPolyline(YasVector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable);
 
 void drawPolygonDirection(YasPolygon* polygon, PixelsTable& pixelsTable);
 
