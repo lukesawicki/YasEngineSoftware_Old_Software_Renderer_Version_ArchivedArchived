@@ -1,8 +1,7 @@
-#include<Windows.h>
-
+//#include<Windows.h>
+#define SDL_MAIN_HANDLED
 #include <SDL.h>
 #include <stdio.h>
-
 #include<cstdlib>
 #include<iostream>
 #include<vector>
@@ -20,57 +19,55 @@
 #include"Player.hpp"
 #include"InputOutputHandler.hpp"
 
-#include <SDL.h>
-#include <stdio.h>
 
-    //Screen dimension constants
-    const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
-
-int main(int argc, char* args[])
+int main()
 {
-    //The window we'll be rendering to
-    SDL_Window* window = NULL;
+    SDL_Init(SDL_INIT_VIDEO);
 
-    //The surface contained by the window
-    SDL_Surface* screenSurface = NULL;
+    SDL_Window* window = SDL_CreateWindow("", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, SDL_WINDOW_RESIZABLE);
 
-    //Initialize SDL
-    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+
+    int width = 320;
+    int height = 240;
+
+    // Since we are going to display a low resolution buffer,
+    // it is best to limit the window size so that it cannot
+    // be smaller than our internal buffer size.
+    SDL_SetWindowMinimumSize(window, width, height);
+
+    SDL_RenderSetLogicalSize(renderer, width, height);
+    SDL_RenderSetIntegerScale(renderer, SDL_TRUE);
+
+    SDL_Texture* screen_texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+
+    unsigned int* pixels = new unsigned int[width * height * 4];
+
+    while (1)
     {
-        printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
-    }
-    else
-    {
-        //Create window
-        window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
-        if (window == NULL)
+        SDL_Event event;
+        while (SDL_PollEvent(&event))
         {
-            printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+            if (event.type == SDL_QUIT) exit(0);
         }
-        else
+
+        // Set every pixel to white.
+        for (int y = 0; y < 22; ++y)
         {
-            //Get window surface
-            screenSurface = SDL_GetWindowSurface(window);
-
-            //Fill the surface white
-            SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
-
-            //Update the surface
-            SDL_UpdateWindowSurface(window);
-
-            //Wait two seconds
-            SDL_Delay(2000);
+            for (int x = 0; x < 33; ++x)
+            {
+                pixels[x + y * width] = 0xffffffff;
+            }
         }
+
+        // It's a good idea to clear the screen every frame,
+        // as artifacts may occur if the window overlaps with
+        // other windows or transparent overlays.
+        SDL_RenderClear(renderer);
+        SDL_UpdateTexture(screen_texture, NULL, pixels, width * 4);
+        SDL_RenderCopy(renderer, screen_texture, NULL, NULL);
+        SDL_RenderPresent(renderer);
     }
-
-    //Destroy window
-    SDL_DestroyWindow(window);
-
-    //Quit SDL subsystems
-    SDL_Quit();
-
-    return 0;
 }
 
 /*

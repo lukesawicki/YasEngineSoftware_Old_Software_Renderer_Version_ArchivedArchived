@@ -18,33 +18,10 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="BackupCpp.cpp" />
-    <ClCompile Include="Circle.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="PixelsTable.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="Projectile.cpp" />
-    <ClCompile Include="temporary.cpp" />
-    <ClCompile Include="TimePicker.cpp" />
-    <ClCompile Include="YasGraphicsLibrary.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Circle.hpp" />
-    <ClInclude Include="InputOutputHandler.hpp" />
-    <ClInclude Include="PixelsTable.hpp" />
-    <ClInclude Include="Player.hpp" />
-    <ClInclude Include="YasPolygon.hpp" />
-    <ClInclude Include="Projectile.hpp" />
-    <ClInclude Include="TimePicker.hpp" />
-    <ClInclude Include="YasVector2D.hpp" />
-    <ClInclude Include="YasVector4D.hpp" />
-    <ClInclude Include="YasGraphicsLibrary.hpp" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{b97f0924-0f5f-4cf1-b8d1-7349e8f2b322}</ProjectGuid>
+    <ProjectGuid>{527d014d-911b-41fa-9240-e630d38c613d}</ProjectGuid>
     <RootNamespace>YasEngineSoftware</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -53,14 +30,14 @@
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <CharacterSet>MultiByte</CharacterSet>
+    <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -95,18 +72,16 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>C:\development\libraries\SDL2-devel-2.0.22-VC\SDL2-2.0.22\lib\x86;$(LibraryPath)</LibraryPath>
     <IncludePath>C:\development\libraries\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\development\libraries\SDL2-devel-2.0.22-VC\SDL2-2.0.22\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>C:\development\libraries\SDL2-devel-2.0.22-VC\SDL2-2.0.22\lib\x86;$(LibraryPath)</LibraryPath>
     <IncludePath>C:\development\libraries\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\development\libraries\SDL2-devel-2.0.22-VC\SDL2-2.0.22\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>$(LibraryPath)</LibraryPath>
-    <ExecutablePath>$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -117,15 +92,11 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\development\libraries\SDL2-devel-2.0.22-VC\SDL2-2.0.22\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -136,17 +107,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;opengl32.lib;user32.lib;gdi32.lib;shell32.lib</AdditionalDependencies>
-      <AdditionalLibraryDirectories>C:\development\libraries\SDL2-devel-2.0.22-VC\SDL2-2.0.22\lib\x86</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -155,15 +122,10 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)libraries\GLFW\include</AdditionalIncludeDirectories>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -174,18 +136,38 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)libraries\GLFW\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Circle.hpp" />
+    <ClInclude Include="InputOutputHandler.hpp" />
+    <ClInclude Include="PixelsTable.hpp" />
+    <ClInclude Include="Player.hpp" />
+    <ClInclude Include="Projectile.hpp" />
+    <ClInclude Include="TimePicker.hpp" />
+    <ClInclude Include="YasGraphicsLibrary.hpp" />
+    <ClInclude Include="YasPolygon.hpp" />
+    <ClInclude Include="YasVector2D.hpp" />
+    <ClInclude Include="YasVector4D.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="BackupCpp.cpp" />
+    <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="HelloWorld.cpp" />
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PixelsTable.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="temporary.cpp" />
+    <ClCompile Include="TimePicker.cpp" />
+    <ClCompile Include="YasGraphicsLibrary.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
