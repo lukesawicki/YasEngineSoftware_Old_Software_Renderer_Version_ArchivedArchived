@@ -149,7 +149,6 @@ void mouseMoveHandleCallbackFunction(GLFWwindow* window, double x, double y)
 }
 
 
-
 std::vector<int> generatePrimeNumberLessThanN(int n)
 {
     std::vector<int> primeNumbers;
@@ -220,6 +219,8 @@ int main(int argc, char* argv[])
 
     glfwMakeContextCurrent(window);
 
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
+
     glfwSetKeyCallback(window, keysHandleCallbackFunction);
 
     glfwSetCursorPosCallback(window, mouseMoveHandleCallbackFunction);
@@ -233,11 +234,9 @@ int main(int argc, char* argv[])
 
     /////////
 
-        //lukesawicki
+    //lukesawicki
 
     std::vector<int> groupOfPrimeNumbers = generatePrimeNumberLessThanN(2000);
-
-
 
     int numberOfVerticesFromPrimeNumbers = groupOfPrimeNumbers.size() / 2;
 
