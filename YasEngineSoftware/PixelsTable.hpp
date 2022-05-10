@@ -1,6 +1,5 @@
 #ifndef PIXELSTABLE_HPP
 #define PIXELSTABLE_HPP
-#include <GLFW/glfw3.h>
 #include "YasVector2D.hpp"
 #include "YasVector4D.hpp"
 #include "YasGraphicsLibrary.hpp"

@@ -3,7 +3,7 @@
 #include<cmath>
 #include "YasVector2D.hpp"
 #include "YasVector4D.hpp"
-#include <GLFW/glfw3.h>
+
 
 
 

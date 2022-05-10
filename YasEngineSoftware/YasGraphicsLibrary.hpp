@@ -3,7 +3,6 @@
 #include<cmath>
 #include<iostream>
 #include<vector>
-#include <GLFW/glfw3.h>
 #include"YasVector2D.hpp"
 #include"YasVector4D.hpp"
 #include "PixelsTable.hpp"
