@@ -40,7 +40,35 @@ int main()
 
     SDL_Texture* screenTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, width, height);
 
-    Uint32* pixelsTable = new Uint32[width * height * 4];
+
+    SDL_SetTextureBlendMode(screenTexture, SDL_BLENDMODE_BLEND);
+
+
+    int pixelsTableSize = width * height * 4;
+
+    Uint32* pixelsTable = new Uint32[pixelsTableSize];
+
+    for (int y = 0; y < height; y++)
+    {
+        for (int x = 0; x < width; x++)
+        {
+            pixelsTable[x + y * width] = 0x000000;
+        }
+    }
+
+    //Uint8* NEW_RED = new Uint8(0);
+    //Uint8* NEW_GREEN = new Uint8(0);
+    //Uint8* NEW_BLUE = new Uint8(0);
+    //Uint8* ALPHA_OPAQUE = new Uint8(SDL_ALPHA_OPAQUE);
+
+
+
+    Uint8 NEW_RED = 55;
+    Uint8 NEW_GREEN = 55;
+    Uint8 NEW_BLUE = 55;
+    Uint8 ALPHA_OPAQUE = SDL_ALPHA_OPAQUE;
+
+    //SDL_SetRenderDrawColor(renderer, NEW_RED, NEW_GREEN, NEW_BLUE, ALPHA_OPAQUE);
 
     while (1)
     {
@@ -50,15 +78,27 @@ int main()
             if (event.type == SDL_QUIT) exit(0);
         }
 
-        for (int y = 0; y < 22; ++y)
+        for (int y = 0; y < height; y++)
         {
-            for (int x = 0; x < 33; ++x)
+            for (int x = 0; x < width; x++)
             {
-                pixelsTable[x + y * width] = 0xffffffff;
+                pixelsTable[x + y * width] = 0x000000;
             }
         }
 
+        for (int y = 0; y < 100; ++y)
+        {
+            for (int x = 0; x < 100; ++x)
+            {
+                if (y == x)
+                {
+                    pixelsTable[x + y * width] = 0xFF000030;
+                }
+            }
+        }
+       // SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
         SDL_RenderClear(renderer);
+        //SDL_RenderClear(renderer);
         SDL_UpdateTexture(screenTexture, NULL, pixelsTable, width * 4);
         SDL_RenderCopy(renderer, screenTexture, NULL, NULL);
         SDL_RenderPresent(renderer);
