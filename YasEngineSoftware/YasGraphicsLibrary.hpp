@@ -25,6 +25,7 @@ const YasVector4D<Uint8> RED(255, 0, 0, 0);
 const YasVector4D<Uint8> GREEN(0, 255, 0, 0);
 const YasVector4D<Uint8> BLUE(0, 0, 255, 0);
 const YasVector4D<Uint8> BLACK(0, 0, 0, 255);
+const YasVector4D<Uint8> ALT_BLACK(0, 0, 0, 0); //ABRG
 const YasVector4D<Uint8> WHITE(255, 255, 255, 255);
 const YasVector4D<Uint8> YELLOW(255, 255, 0, 255);
 

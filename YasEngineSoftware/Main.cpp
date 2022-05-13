@@ -1,6 +1,7 @@
 //#include<Windows.h>
 #define SDL_MAIN_HANDLED
 #include<SDL.h>
+#include<SDL_endian.h>
 #include<stdio.h>
 #include<cstdlib>
 #include<iostream>
@@ -9,6 +10,7 @@
 #include<utility>
 #include<cmath>
 #include<bitset>
+#include"VariousTools.hpp"
 #include"YasVector2D.hpp"
 #include"YasGraphicsLibrary.hpp"
 #include"TimePicker.hpp"
@@ -217,54 +219,20 @@ int main(int argc, char* argv[])
 
     SDL_Init(SDL_INIT_VIDEO);
 
-    //GLFWwindow* window;
-
     SDL_Window* window = SDL_CreateWindow("YasEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE);
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+    
+    listRenderersInformation();
 
-    // Since we are going to display a low resolution buffer,
-    // it is best to limit the window size so that it cannot
-    // be smaller than our internal buffer size.
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED); // SDL_RENDERER_PRESENTVSYNC);
+
     SDL_SetWindowMinimumSize(window, WINDOW_WIDTH, WINDOW_HEIGHT);
 
     SDL_RenderSetLogicalSize(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
     SDL_RenderSetIntegerScale(renderer, SDL_TRUE);
 
-    SDL_Texture* screenTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
-
-    //if (!glfwInit())
-    //{
-    //    return 1;
-    //}
-
-    //window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "Hello World", NULL, NULL);
+    SDL_Texture* screenTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
     
-    //if (!window)
-    //{
-    //    glfwTerminate();
-    //    return 1;
-    //}
 
-    //glfwMakeContextCurrent(window);
-
-    //glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_HIDDEN);
-
-    //glfwSetKeyCallback(window, keysHandleCallbackFunction);
-
-    //glfwSetCursorPosCallback(window, mouseMoveHandleCallbackFunction);
-
-    //if(glfwRawMouseMotionSupported())
-    //{
-    //    glfwSetInputMode(window, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
-    //}
-
-    //glfwSetMouseButtonCallback(window, mouseButtonsCallbackFunction);
-
-    /////////
-
-    //lukesawicki
-
-    //SDL_SetTextureBlendMode(screenTexture, SDL_BLENDMODE_BLEND);
 
     std::vector<int> groupOfPrimeNumbers = generatePrimeNumberLessThanN(2000);
 
@@ -274,12 +242,6 @@ int main(int argc, char* argv[])
 
     std::cout << "NUMBER OF PRIME NUMBERS: " << groupOfPrimeNumbers.size() << std::endl;
 
-    //for (int i = 0; i < groupOfPrimeNumbers.size(); i++)
-    //{
-    //    std::cout << groupOfPrimeNumbers.at(i) << std::endl;
-    //}
-
-    /////////
 
     PixelsTable pixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, BLACK);
 
@@ -321,10 +283,15 @@ int main(int argc, char* argv[])
     bool close = false;
     bool firstTime = true;
 
-    //while (!shouldApplicationStopRunning)
-    //{
-        //while (!glfwWindowShouldClose(window))
-        //{
+    if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
+    {
+        std::cout << "Endianness: BIG_ENDIAN " << std::endl;
+    }
+
+    if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
+    {
+        std::cout << "Endianness: LITTLE_ENDIAN " << std::endl;
+    }
 
     while (1)
     {
@@ -346,7 +313,8 @@ int main(int argc, char* argv[])
                 fpsTime = 0.0F;
             }
             
-            pixelsTable.clearColor(BLACK);
+            pixelsTable.clearColor(ALT_BLACK);
+           // SDL_RenderClear(renderer);
             
 #ifdef DEBUG_DRAWINGS
 			drawCartesianAxies(pixelsTable);
@@ -386,16 +354,33 @@ int main(int argc, char* argv[])
             }
 
             projectile = nullptr;
-
-            //for (auto object : objectsToDraw)
-            //{
-            //    if (object->position.x > (2 * WINDOW_WIDTH) || object->position.y > (2 * WINDOW_HEIGHT))
-            //    {
-
-            //    }
-            //}
             
+            //SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
             
+
+            /*SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+            for (int i = 0; i < WINDOW_HEIGHT/2; i++)
+            {
+                for (int j = 0; j < WINDOW_WIDTH/2; j++)
+                {
+                    if (i == j)
+                    {
+                        SDL_RenderDrawPoint(renderer, j, i);
+                    }
+                }
+            }*/
+
+            for (int i = 0; i < WINDOW_HEIGHT / 3; i++)
+            {
+                //for (int j = 0; j < WINDOW_WIDTH / 2; j++)
+                //{
+                //    if (i == j)
+                //    {
+                        pixelsTable.drawPoint(50, i, YELLOW);
+                //    }
+                //}
+            }
+
             //drawNumbersAsLineSegmentsNotContinuous(verticesForPrimeNumbersSegments, numberOfVerticesFromPrimeNumbers, pixelsTable);
             drawNumbersAsPolyline(verticesForPrimeNumbersSegments, numberOfVerticesFromPrimeNumbers, pixelsTable);
             for (int i = 0; i < groupOfPrimeNumbers.size(); i++)
@@ -414,18 +399,11 @@ int main(int argc, char* argv[])
                 }
                 str.clear();
             }
-            //drawPrimeNumbers(groupOfPrimeNumbers, pixelsTable);
 
-//          ########  END TEST CODE  ################
-
-            //glDrawPixels(WINDOW_WIDTH, WINDOW_HEIGHT, GL_RGBA, GL_UNSIGNED_BYTE, pixelsTable.pixels);
-            //glfwSwapBuffers(window);
-            //glfwPollEvents();
-        //}
-            SDL_RenderClear(renderer);
             SDL_UpdateTexture(screenTexture, NULL, pixelsTable.pixels, WINDOW_WIDTH * 4);
-            SDL_RenderCopy(renderer, screenTexture, NULL, NULL);
+            SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_VERTICAL);
             SDL_RenderPresent(renderer);
+
 
     }
 
@@ -435,8 +413,6 @@ int main(int argc, char* argv[])
     }
 
     delete[] verticesForPrimeNumbersSegments;
-
-    //        glfwTerminate();
     return 0;
 }
 

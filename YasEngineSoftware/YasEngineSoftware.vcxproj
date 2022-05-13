@@ -151,6 +151,7 @@
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Projectile.hpp" />
     <ClInclude Include="TimePicker.hpp" />
+    <ClInclude Include="VariousTools.hpp" />
     <ClInclude Include="YasGraphicsLibrary.hpp" />
     <ClInclude Include="YasPolygon.hpp" />
     <ClInclude Include="YasVector2D.hpp" />
