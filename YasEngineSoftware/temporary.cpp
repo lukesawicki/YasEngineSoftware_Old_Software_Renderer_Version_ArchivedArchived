@@ -153,6 +153,120 @@
 //}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+//int main()
+//{
+//    SDL_Init(SDL_INIT_VIDEO);
+//
+//    SDL_Window* window = SDL_CreateWindow("YasEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 320, 240, SDL_WINDOW_RESIZABLE);
+//
+//    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_PRESENTVSYNC);
+//
+//    int width = 320;
+//    int height = 240;
+//
+//    // Since we are going to display a low resolution buffer,
+//    // it is best to limit the window size so that it cannot
+//    // be smaller than our internal buffer size.
+//    SDL_SetWindowMinimumSize(window, width, height);
+//
+//    SDL_RenderSetLogicalSize(renderer, width, height);
+//    SDL_RenderSetIntegerScale(renderer, SDL_TRUE);
+//
+//    SDL_Texture* screenTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, width, height);
+//
+//    //this->pixels = new Uint8[windowDimensions.x * windowDimensions.y * NUMBER_OF_COLORS];
+//    //{
+//    //    for (int y = 0; y < windowDimensions.y; y++)
+//    //    {
+//    //        for (int x = 0; x < windowDimensions.x; x++)
+//    //        {
+//    //            pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + RED_POSITION] = drawingColor.x; // windowDimensions->x <- WINDOW WIDTH
+//    //            pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + GREEN_POSITION] = drawingColor.y;
+//    //            pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + BLUE_POSITION] = drawingColor.z;
+//    //            pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + ALPHA_POSITION] = drawingColor.w;
+//    //        }
+//    //    }
+//    //}
+//
+//
+//    SDL_SetTextureBlendMode(screenTexture, SDL_BLENDMODE_BLEND);
+//
+//
+//    int pixelsTableSize = width * height * 4;
+//
+//    Uint8* pixelsTable = new Uint8[pixelsTableSize];
+//
+//    for (int y = 0; y < height; y++)
+//    {
+//        for (int x = 0; x < width; x++)
+//        {
+//            ///0xffffffff
+//            //pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + ALPHA_POSITION] = drawingColor.w;
+//            pixelsTable[4 * (y * width + x) + 0] = 255;
+//            pixelsTable[4 * (y * width + x) + 1] = 255;
+//            pixelsTable[4 * (y * width + x) + 2] = 255;
+//            pixelsTable[4 * (y * width + x) + 3] = 255;
+//        }
+//    }
+//
+//    //Uint8* NEW_RED = new Uint8(0);
+//    //Uint8* NEW_GREEN = new Uint8(0);
+//    //Uint8* NEW_BLUE = new Uint8(0);
+//    //Uint8* ALPHA_OPAQUE = new Uint8(SDL_ALPHA_OPAQUE);
+//
+//
+//
+//    Uint8 NEW_RED = 55;
+//    Uint8 NEW_GREEN = 55;
+//    Uint8 NEW_BLUE = 55;
+//    Uint8 ALPHA_OPAQUE = SDL_ALPHA_OPAQUE;
+//
+//    //SDL_SetRenderDrawColor(renderer, NEW_RED, NEW_GREEN, NEW_BLUE, ALPHA_OPAQUE);
+//
+//    while (1)
+//    {
+//        SDL_Event event;
+//        while (SDL_PollEvent(&event))
+//        {
+//            if (event.type == SDL_QUIT) exit(0);
+//        }
+//
+//        for (int y = 0; y < height; y++)
+//        {
+//            for (int x = 0; x < width; x++)
+//            {
+//                //pixelsTable[x + y * width] = 0x000000;
+//                //pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + ALPHA_POSITION] = drawingColor.w;
+//                pixelsTable[4 * (y * width + x) + 0] = 0;
+//                pixelsTable[4 * (y * width + x) + 1] = 0;
+//                pixelsTable[4 * (y * width + x) + 2] = 0;
+//                pixelsTable[4 * (y * width + x) + 3] = 0;
+//            }
+//        }
+//
+//        for (int y = 0; y < 50; y++)
+//        {
+//            for (int x = 0; x < 50; x++)
+//            {
+//                if (y == x)
+//                {
+//                    // pixelsTable[x + y * width] = 0xFF000030;
+//
+//                    pixelsTable[4 * (y * width + x) + 0] = 255;
+//                    pixelsTable[4 * (y * width + x) + 1] = 0;
+//                    pixelsTable[4 * (y * width + x) + 2] = 0;
+//                    pixelsTable[4 * (y * width + x) + 3] = 255;
+//                }
+//            }
+//        }
+//        // SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+//        SDL_RenderClear(renderer);
+//        //SDL_RenderClear(renderer);
+//        SDL_UpdateTexture(screenTexture, NULL, pixelsTable, width * 4);
+//        SDL_RenderCopy(renderer, screenTexture, NULL, NULL);
+//        SDL_RenderPresent(renderer);
+//    }
+//}
 
 //                                                                            80                                     120
 //-----------------------------------------------------------------------------|---------------------------------------|

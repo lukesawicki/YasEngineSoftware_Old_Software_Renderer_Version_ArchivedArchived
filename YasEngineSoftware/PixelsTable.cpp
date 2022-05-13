@@ -1,18 +1,18 @@
 #include"PixelsTable.hpp"
 
-PixelsTable::PixelsTable(int width, int height, const YasVector4D<uint8_t>& defaultColor)
+PixelsTable::PixelsTable(int width, int height, const YasVector4D<Uint8>& defaultColor)
 {
 	this->windowDimensions.x = width;
 	this->windowDimensions.y = height;
-	this->pixels = new uint8_t[windowDimensions.x * windowDimensions.y * NUMBER_OF_COLORS];
+	this->pixels = new Uint8[windowDimensions.x * windowDimensions.y * NUMBER_OF_COLORS];
 	clearColor(defaultColor);
 }
 
-PixelsTable::PixelsTable(const PixelsTable& originalPixelsTable, const YasVector4D<uint8_t>& defaultColor)
+PixelsTable::PixelsTable(const PixelsTable& originalPixelsTable, const YasVector4D<Uint8>& defaultColor)
 {
 	this->windowDimensions.x = originalPixelsTable.windowDimensions.x;
 	this->windowDimensions.y = originalPixelsTable.windowDimensions.y;
-	this->pixels = new uint8_t[originalPixelsTable.windowDimensions.x * originalPixelsTable.windowDimensions.y * NUMBER_OF_COLORS];
+	this->pixels = new Uint8[originalPixelsTable.windowDimensions.x * originalPixelsTable.windowDimensions.y * NUMBER_OF_COLORS];
 	for (int i = 0; i < windowDimensions.x * windowDimensions.y * NUMBER_OF_COLORS; i++)
 	{
 		this->pixels[i] = originalPixelsTable.pixels[i];
@@ -24,7 +24,7 @@ PixelsTable::~PixelsTable()
 	delete[] pixels;
 }
 
-void PixelsTable::clearColor(const YasVector4D<uint8_t>& drawingColor)
+void PixelsTable::clearColor(const YasVector4D<Uint8>& drawingColor)
 {
 	for (int y = 0; y < windowDimensions.y; y++)
 	{
@@ -38,7 +38,7 @@ void PixelsTable::clearColor(const YasVector4D<uint8_t>& drawingColor)
 	}
 }
 
-void PixelsTable::drawPoint(int x, int y, const YasVector4D<uint8_t>& drawingColor)
+void PixelsTable::drawPoint(int x, int y, const YasVector4D<Uint8>& drawingColor)
 {
 	cartesianPositionToWindow(x, y);
 	if (x >= 0 && x < windowDimensions.x && y >= 0 && y < windowDimensions.y)

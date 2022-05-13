@@ -1,6 +1,6 @@
 #include"YasGraphicsLibrary.hpp"
 
-    void drawLine(const YasVector2D<float>& point0, const YasVector2D<float>& point1, PixelsTable& pixelsTable, const YasVector4D<uint8_t>& drawingColor)
+    void drawLine(const YasVector2D<float>& point0, const YasVector2D<float>& point1, PixelsTable& pixelsTable, const YasVector4D<Uint8>& drawingColor)
     {
         int x0 = point0.x;
         int y0 = point0.y;
@@ -417,7 +417,6 @@
 
     void swapVectors(YasVector2D<int>& point0, YasVector2D<int>& point1)
     {
-        //Vector2D<int>* tmpVector;
         int temporaryX = point0.x;
         int temporaryY = point0.y;
         point0.x = point1.x;
@@ -428,7 +427,6 @@
 
     void swapVectors(YasVector2D<float>& point0, YasVector2D<float>& point1)
     {
-        //Vector2D<int>* tmpVector;
         float temporaryX = point0.x;
         float temporaryY = point0.y;
         point0.x = point1.x;
@@ -449,7 +447,7 @@
         verticalLineOnScreen(pixelsTable, x, BLUE);
     }
 
-    void horizontalLineOnScreen(PixelsTable& pixelsTable, int y, YasVector4D<uint8_t> color)
+    void horizontalLineOnScreen(PixelsTable& pixelsTable, int y, YasVector4D<Uint8> color)
     {
         int maxX = static_cast<int>(0.5F * pixelsTable.windowDimensions.x);
 		for (int i = -maxX; i < maxX; i++) //X
@@ -458,7 +456,7 @@
 		}
     }
 
-	void verticalLineOnScreen(PixelsTable& pixelsTable, int x, YasVector4D<uint8_t> color)
+	void verticalLineOnScreen(PixelsTable& pixelsTable, int x, YasVector4D<Uint8> color)
 	{
 		int maxY = static_cast<int>(0.5F * pixelsTable.windowDimensions.y);
 		for (int i = -maxY; i < maxY; i++) //X

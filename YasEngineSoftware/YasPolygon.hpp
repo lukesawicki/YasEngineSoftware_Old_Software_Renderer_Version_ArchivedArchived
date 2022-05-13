@@ -1,10 +1,9 @@
 #ifndef POLYGON_HPP
 #define POLYGON_HPP
 #include<cmath>
+#include<SDL.h>
 #include "YasVector2D.hpp"
 #include "YasVector4D.hpp"
-
-
 
 
 class YasPolygon
@@ -16,7 +15,7 @@ class YasPolygon
 		YasVector2D<float> direction;
 		YasVector2D<float> vectorZero;
 		int numberOfVertices = 0;
-		YasVector4D<uint8_t> color;
+		YasVector4D<Uint8> color;
 		float circumscribedCircleRadius;
 		float rotationSpeed;
 		float angleForGenerateInIsoscelesPolygons;
@@ -32,7 +31,7 @@ class YasPolygon
 		virtual void generateRegularPolygonVertices(const YasVector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) = 0;
 		virtual void regeneratePolygon() = 0;
 
-		virtual void setColor(const YasVector4D<uint8_t>& color)
+		virtual void setColor(const YasVector4D<Uint8>& color)
 		{
 			this->color.x = color.x;
 			this->color.y = color.y;
