@@ -293,13 +293,97 @@ int main(int argc, char* argv[])
         std::cout << "Endianness: LITTLE_ENDIAN " << std::endl;
     }
 
-    while (1)
+    //Main loop flag
+    bool quit = false;
+
+    //Event handler
+    SDL_Event event;
+
+
+    while (!quit)
     {
-        SDL_Event event;
+        
         while (SDL_PollEvent(&event))
         {
-            if (event.type == SDL_QUIT) exit(0);
+            if (event.type == SDL_QUIT)
+            {
+                quit = true;
+            }
+            else
+            {
+                if (event.type == SDL_KEYDOWN)
+                {
+                    switch (event.key.keysym.sym)
+                    {
+                        case SDLK_ESCAPE:
+                            quit = true;
+                        break;
+                        case SDLK_w:
+                            input->up = true;
+                            break;
+                        case SDLK_s:
+                            input->down = true;
+                                break;
+                        case SDLK_a:
+                            input->left = true;
+                                break;
+                        case SDLK_d:
+                            input->right = true;
+                                break;
+                        default:
+                            ;
+                    }
+                }
+                if (event.type == SDL_KEYUP)
+                {
+                    switch (event.key.keysym.sym)
+                    {
+                        case SDLK_w:
+                            input->up = false;
+                        break;
+                        case SDLK_s:
+                            input->down = false;
+                        break;
+                        case SDLK_a:
+                            input->left = false;
+                        break;
+                        case SDLK_d:
+                            input->right = false;
+                        break;
+                        default:
+                        ;
+                    }
+                }
+                if (event.type == SDL_MOUSEMOTION || event.type == SDL_MOUSEBUTTONDOWN || event.type == SDL_MOUSEBUTTONUP)
+                {
+                    if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
+                    {
+                        input->mouseLeftButton = true;
+                        player->isShooting = true;
+                    }
+                    if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
+                    {
+                        input->mouseLeftButton = false;
+                        player->isShooting = false;
+                    }
+
+                                        //case SDL_MOUSEBUTTONDOWN:
+                                        //    mCurrentSprite = BUTTON_SPRITE_MOUSE_DOWN;
+                                        //    break;
+
+                                        //case SDL_MOUSEBUTTONUP:
+                                        //    mCurrentSprite = BUTTON_SPRITE_MOUSE_UP;
+                                        //    break;
+                    mousePositionChangeInformation->mouseMoved = true;
+                    int x, y;
+                    SDL_GetMouseState(&x, &y);
+                    mousePositionChangeInformation->x = x;
+                    mousePositionChangeInformation->y = y;
+
+                }
+            }
         }
+
             newTime = timePicker.getSeconds();
             deltaTime = newTime - time;
             time = newTime;

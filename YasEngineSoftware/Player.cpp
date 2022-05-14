@@ -212,7 +212,7 @@ Projectile* Player::shoot()
 {
 	if (isShooting)
 	{
-		isShooting = false;
+		//isShooting = false;
 		float projectileX = position.x + direction.x * projectilePositionShift;
 		float projectileY = position.y + direction.y * projectilePositionShift;
 		return new Projectile(32, projectileX, projectileY, direction);
