@@ -20,6 +20,8 @@
 #include"Player.hpp"
 #include"InputOutputHandler.hpp"
 
+//Strange World by Darkroom (c) copyright 2022 Licensed under a Creative Commons Attribution Noncommercial  (3.0) license. http://dig.ccmixter.org/files/mactonite/64736 Ft: Martin Cee
+
 #define DEBUG_DRAWINGS
 
 bool shouldApplicationStopRunning = false;
