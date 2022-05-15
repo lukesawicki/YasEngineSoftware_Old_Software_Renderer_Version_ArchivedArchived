@@ -4,6 +4,7 @@ YasEngine* YasEngine::instance = nullptr;
 
 void YasEngine::initialize()
 {
+    prepareGameWorld();
     prepareBasicSettings();
     prepareRendering();
     preparePlayer();
@@ -11,25 +12,13 @@ void YasEngine::initialize()
 
 void YasEngine::YasEnginStart()
 {
-
-
-#ifdef DEBUG_DRAWINGS
-    Circle* circle = new Circle(100, 0, 0);
-    circle->setColor(BLUE);
-    objectsToDraw.push_back(circle);
-#endif // DEBUG_DRAWINGS
-
-    objectsToDraw.push_back(player);
-
     TimePicker timePicker = TimePicker();
     time = timePicker.getSeconds();
-
     fpsTime = 0.0F;
     frames = 0;
 
     while (!quit)
     {
-
         while (SDL_PollEvent(&event))
         {
             handleInput(event);
@@ -144,12 +133,10 @@ void YasEngine::handleInput(SDL_Event& event)
         }
         if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
         {
-            input->mouseLeftButton  = true;
             player->isShooting      = true;
         }
         if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
         {
-            input->mouseLeftButton  = false;
             player->isShooting      = false;
         }
     }
@@ -161,6 +148,7 @@ void YasEngine::preparePlayer()
     player->setColor(YELLOW);
     player->setInput(input);
     player->setInput(mousePositionChangeInformation);
+    objectsToDraw.push_back(player);
 }
 
 void YasEngine::update(double deltaTime)
@@ -205,4 +193,14 @@ void YasEngine::render(double& deltaTime)
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
     SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_VERTICAL);
     SDL_RenderPresent(renderer);
+}
+
+void YasEngine::prepareGameWorld()
+{
+    #ifdef DEBUG_DRAWINGS
+        Circle* circle = new Circle(100, 0, 0);
+        circle->setColor(BLUE);
+        objectsToDraw.push_back(circle);
+    #endif
+
 }

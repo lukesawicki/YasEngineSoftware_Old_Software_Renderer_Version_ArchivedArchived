@@ -71,8 +71,8 @@ class YasEngine
 
 		Player* player;
 
-		YasEngine() {};
-		~YasEngine() {};
+		YasEngine();
+		~YasEngine();
 		bool shouldApplicationStopRunning = false;
 		YasInOut::Input* input = new YasInOut::Input();
 		YasInOut::MousePositionChangeInformation* mousePositionChangeInformation = new YasInOut::MousePositionChangeInformation();
@@ -80,6 +80,7 @@ class YasEngine
 		bool engineInstantiated = false;
 		void prepareRendering();
 		void prepareBasicSettings();
+		void prepareGameWorld();
 		void preparePlayer();
 		void handleInput(SDL_Event& event);
 		void update(double deltaTime);

@@ -2,16 +2,17 @@
 
 Player::Player(float x, float y)
 {
-	speed = 200;
-	rotationSpeed = 5;
-
 	position.x = x;
 	position.y = y;
 
 	direction.x = 1;
 	direction.y = 0;
 
+	speed = 200;
+	rotationSpeed = 5;
+
 	numberOfVertices = 17;
+
 	worldVertices = new YasVector2D<float>[numberOfVertices];
 	localVertices = new YasVector2D<float>[numberOfVertices];
 

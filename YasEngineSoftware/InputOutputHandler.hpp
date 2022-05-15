@@ -10,7 +10,7 @@ namespace YasInOut
 		bool down;
 		bool shoot;
 		bool rotateCounterClockwise;
-		bool mouseLeftButton;
+
 	};
 
 	struct MousePositionChangeInformation {
