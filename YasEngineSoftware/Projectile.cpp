@@ -1,10 +1,10 @@
 #include"Projectile.hpp"
 
-Projectile::Projectile(float radius, float x, float y, YasVector2D<float> direction)
+Projectile::Projectile(float radius, float x, float y, Vector2D<float> direction)
 {
 	directionSwitched = false;
 	speed = 200;
-	YasVector2D<float> position(x, y);
+	Vector2D<float> position(x, y);
 	velocity.x = speed * direction.x;
 	velocity.y = speed * direction.y;
 	color = BLUE;
@@ -20,7 +20,7 @@ void Projectile::move(float deltaTime)
 {
 	position.x = position.x + deltaTime * velocity.x;
 	position.y = position.y + deltaTime * velocity.y;
-
+	regeneratePolygon();
 }
 
 void Projectile::generate()
@@ -32,14 +32,14 @@ void Projectile::generate()
 	}
 }
 
-void Projectile::generateRegularPolygonVertices(const YasVector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices)
+void Projectile::generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices)
 {
 	this->circumscribedCircleRadius = circumscribedCircleRadius;
 	this->numberOfVertices = numberOfVertices;
 	this->position.x = position.x;
 	this->position.y = position.y;
-	this->worldVertices = new YasVector2D<float>[numberOfVertices];
-	this->localVertices = new YasVector2D<float>[numberOfVertices];
+	this->worldVertices = new Vector2D<float>[numberOfVertices];
+	this->localVertices = new Vector2D<float>[numberOfVertices];
 
 	angleForGenerateInIsoscelesPolygons = startAngle;
 	stepAngle = 360.0F / numberOfVertices;

@@ -2,7 +2,7 @@
 #define VECTOR4D_HPP
 
 template <typename Type>
-class YasVector4D
+class Vector4D
 {
 	public:
 		Type x;
@@ -10,7 +10,7 @@ class YasVector4D
 		Type z;
 		Type w;
 
-		YasVector4D()
+		Vector4D()
 		{
 			this->x = 0;
 			this->y = 0;
@@ -18,7 +18,7 @@ class YasVector4D
 			this->w = 0;
 		}
 
-		YasVector4D(Type x, Type y, Type z, Type w)
+		Vector4D(Type x, Type y, Type z, Type w)
 		{
 			this->x = x;
 			this->y = y;

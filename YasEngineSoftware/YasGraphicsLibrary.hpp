@@ -6,8 +6,8 @@
 #include<bitset>
 #include<cmath>
 #include<SDL.h>
-#include"YasVector2D.hpp"
-#include"YasVector4D.hpp"
+#include"Vector2D.hpp"
+#include"Vector4D.hpp"
 #include"PixelsTable.hpp"
 #include"YasPolygon.hpp"
 
@@ -23,39 +23,39 @@ const Uint8 GREEN_POSITION = 1;
 const Uint8 BLUE_POSITION = 2;
 const Uint8 ALPHA_POSITION = 3;
 
-const YasVector4D<Uint8> RED(255, 0, 0, 0);
-const YasVector4D<Uint8> GREEN(0, 255, 0, 0);
-const YasVector4D<Uint8> BLUE(0, 0, 255, 0);
-const YasVector4D<Uint8> BLACK(0, 0, 0, 255);
-const YasVector4D<Uint8> ALT_BLACK(0, 0, 0, 0);
-const YasVector4D<Uint8> WHITE(255, 255, 255, 255);
-const YasVector4D<Uint8> YELLOW(255, 255, 0, 255);
+const Vector4D<Uint8> RED(255, 0, 0, 0);
+const Vector4D<Uint8> GREEN(0, 255, 0, 0);
+const Vector4D<Uint8> BLUE(0, 0, 255, 0);
+const Vector4D<Uint8> BLACK(0, 0, 0, 255);
+//const Vector4D<Uint8> ALT_BLACK(0, 0, 0, 0);
+const Vector4D<Uint8> WHITE(255, 255, 255, 255);
+const Vector4D<Uint8> YELLOW(255, 255, 0, 255);
 
-void drawLine(const YasVector2D<float>& point0, const YasVector2D<float>& point1, PixelsTable& pixelsTable, const YasVector4D<Uint8>& drawingColor);
+void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, PixelsTable& pixelsTable, const Vector4D<Uint8>& drawingColor);
 
 void drawPolygon(YasPolygon* polygon, PixelsTable& pixelsTable);
 
-YasVector2D<float>* generateVerticesFromNumbers(const std::vector<int>& numbers);
+Vector2D<float>* generateVerticesFromNumbers(const std::vector<int>& numbers);
 
-void drawNumbersAsLineSegmentsNotContinuous(YasVector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable);
+void drawNumbersAsLineSegmentsNotContinuous(Vector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable);
 
-void drawNumbersAsPolyline(YasVector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable);
+void drawNumbersAsPolyline(Vector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable);
 
 void drawPolygonDirection(YasPolygon* polygon, PixelsTable& pixelsTable);
 
-void swapVectors(YasVector2D<int>& point0, YasVector2D<int>& point1);
+void swapVectors(Vector2D<int>& point0, Vector2D<int>& point1);
 
-void horizontalLineOnScreen(PixelsTable& pixelsTable, int y, YasVector4D<Uint8> color);
+void horizontalLineOnScreen(PixelsTable& pixelsTable, int y, Vector4D<Uint8> color);
 
-void verticalLineOnScreen(PixelsTable& pixelsTable, int x, YasVector4D<Uint8> color);
+void verticalLineOnScreen(PixelsTable& pixelsTable, int x, Vector4D<Uint8> color);
 
 void drawCartesianAxies(PixelsTable& pixelsTable);
 
-void drawCrossOnScreen(float x, float y, PixelsTable& pixelsTable);
+void drawCrossHair(float x, float y, PixelsTable& pixelsTable);
     
-int xyPixelToArrayPosition(YasVector2D<int>& point, int windowWidth);
+int xyPixelToArrayPosition(Vector2D<int>& point, int windowWidth);
 int xyPixelToArrayPosition(int x, int y, int windowWidth);
 
-void windowPositionToCartesianPosition(float& x, float& y, YasVector2D<int>* windowDimensions);
+void windowPositionToCartesianPosition(float& x, float& y, Vector2D<int>* windowDimensions);
 
 #endif

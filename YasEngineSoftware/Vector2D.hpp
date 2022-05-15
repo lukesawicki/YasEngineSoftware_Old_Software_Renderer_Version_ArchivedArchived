@@ -5,24 +5,24 @@
 #include<cmath>
 
 template <typename Type>
-class YasVector2D
+class Vector2D
 {
 	public:
 		Type x;
 		Type y;
 
-		YasVector2D()
+		Vector2D()
 		{
 			this->x = 0;
 			this->y = 0;
 		}
-		YasVector2D(Type x, Type y)
+		Vector2D(Type x, Type y)
 		{
 			this->x = x;
 			this->y = y;
 		}
 		
-		static void normalizedVector(YasVector2D<Type>& vector)
+		static void normalizedVector(Vector2D<Type>& vector)
 		{
 			double magnitude = getVectorMagnitude(vector);
 			double x = vector.x / magnitude;
@@ -31,7 +31,7 @@ class YasVector2D
 			vector.y = static_cast<Type>(y);
 		}
 
-		static Type getVectorMagnitude(const YasVector2D<Type>& vector)
+		static Type getVectorMagnitude(const Vector2D<Type>& vector)
 		{
 			return static_cast<Type>(sqrt(pow(vector.x, 2.0) + pow(vector.y, 2.0)));
 		}
@@ -41,22 +41,22 @@ class YasVector2D
 			return static_cast<Type>(sqrt(pow(x1 - x0, 2.0) + pow(y1 - y0, 2.0)));
 		}
 
-		static Type crossProduct(const YasVector2D<Type>& u, const YasVector2D& v)
+		static Type crossProduct(const Vector2D<Type>& u, const Vector2D& v)
 		{
 			return u.x * v.y - u.y * v.x;
 		}
 
-		static Type dotProduct(const YasVector2D<Type>& u, const YasVector2D& v)
+		static Type dotProduct(const Vector2D<Type>& u, const Vector2D& v)
 		{
 			return u.x * v.x + u.y * v.y;
 		}
 
-		static Type angleBetweenVectors(const YasVector2D<Type>& u, const YasVector2D& v)
+		static Type angleBetweenVectors(const Vector2D<Type>& u, const Vector2D& v)
 		{
 			return atan2(crossProduct(u, v), dotProduct(u, v));
 		}
 
-		static void rotateVectorOverTheAngle(YasVector2D<Type>* v, float angle)
+		static void rotateVectorOverTheAngle(Vector2D<Type>* v, float angle)
 		{
 			float modifiedX = v->x * cos(angle) - v->y * sin(angle);
 			float modifiedY = v->x * sin(angle) + v->y * cos(angle);
@@ -65,10 +65,10 @@ class YasVector2D
 			v->y = modifiedY;
 		}
 		
-		static YasVector2D<Type> createUnitVectorFromBoundVector(const YasVector2D<Type>& u, const YasVector2D& v)
+		static Vector2D<Type> createUnitVectorFromBoundVector(const Vector2D<Type>& u, const Vector2D& v)
 		{
-			YasVector2D<Type> w = YasVector2D<Type>(u.x - v.x, u.y - v.y);
-			YasVector2D::normalizedVector(w);
+			Vector2D<Type> w = Vector2D<Type>(u.x - v.x, u.y - v.y);
+			Vector2D::normalizedVector(w);
 			return w;
 		}
 };

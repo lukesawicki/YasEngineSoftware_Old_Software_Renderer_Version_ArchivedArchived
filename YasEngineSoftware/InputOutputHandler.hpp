@@ -16,7 +16,6 @@ namespace YasInOut
 	struct MousePositionChangeInformation {
 		double x = 0.0;
 		double y = 0.0;
-		double angle = 0.0;
 		bool mouseMoved = false;
 		bool leftMouseButton;
 		bool rightMouseButton;

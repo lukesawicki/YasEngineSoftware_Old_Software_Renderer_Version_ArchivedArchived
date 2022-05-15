@@ -156,8 +156,8 @@
     <ClInclude Include="YasEngine.hpp" />
     <ClInclude Include="YasGraphicsLibrary.hpp" />
     <ClInclude Include="YasPolygon.hpp" />
-    <ClInclude Include="YasVector2D.hpp" />
-    <ClInclude Include="YasVector4D.hpp" />
+    <ClInclude Include="Vector2D.hpp" />
+    <ClInclude Include="Vector4D.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BackupCpp.cpp" />

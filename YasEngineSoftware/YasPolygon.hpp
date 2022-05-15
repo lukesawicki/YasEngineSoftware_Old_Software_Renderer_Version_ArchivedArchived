@@ -2,17 +2,17 @@
 #define POLYGON_HPP
 #include<cmath>
 #include<SDL.h>
-#include"YasVector2D.hpp"
-#include"YasVector4D.hpp"
+#include"Vector2D.hpp"
+#include"Vector4D.hpp"
 
 class YasPolygon
 {
 	public:
-		YasVector2D<float>* localVertices = nullptr;
-		YasVector2D<float>* worldVertices = nullptr;
-		YasVector2D<float> vectorZero;
-		YasVector2D<float> direction;
-		YasVector4D<Uint8> color;
+		Vector2D<float>* localVertices = nullptr;
+		Vector2D<float>* worldVertices = nullptr;
+		Vector2D<float> vectorZero;
+		Vector2D<float> direction;
+		Vector4D<Uint8> color;
 		int numberOfVertices;
 		float rotationSpeed;
 		float circumscribedCircleRadius;
@@ -23,7 +23,7 @@ class YasPolygon
 		float  speed = 0.0F;
 
 		virtual void generate() = 0;
-		virtual void generateRegularPolygonVertices(const YasVector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) = 0;
+		virtual void generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) = 0;
 		virtual void regeneratePolygon() = 0;
 
 		virtual void setPosition(float x, float y)
@@ -32,7 +32,7 @@ class YasPolygon
 			position.y = y;
 		}
 
-		virtual void setPosition(const YasVector2D<float>& position)
+		virtual void setPosition(const Vector2D<float>& position)
 		{
 			this->position.x = position.x;
 			this->position.y = position.y;
@@ -40,7 +40,7 @@ class YasPolygon
 		
 		virtual void move(float deltaTime) = 0;
 
-		virtual void setColor(const YasVector4D<Uint8>& color)
+		virtual void setColor(const Vector4D<Uint8>& color)
 		{
 			this->color.x = color.x;
 			this->color.y = color.y;
@@ -49,7 +49,7 @@ class YasPolygon
 		}
 
 	protected:
-		YasVector2D<float> position;
+		Vector2D<float> position;
 
 	private:
 

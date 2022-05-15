@@ -9,12 +9,12 @@ class Projectile : public YasPolygon
 	private:
 		bool directionSwitched = false;
 	public:
-		YasVector2D<float> velocity;
-		Projectile(float radius, float x, float y, YasVector2D<float> direction);
+		Vector2D<float> velocity;
+		Projectile(float radius, float x, float y, Vector2D<float> direction);
 		~Projectile();
 		void move(float deltaTime) override;
 		void generate() override;
-		void generateRegularPolygonVertices(const YasVector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) override;
+		void generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) override;
 		void regeneratePolygon() override;
 
 };

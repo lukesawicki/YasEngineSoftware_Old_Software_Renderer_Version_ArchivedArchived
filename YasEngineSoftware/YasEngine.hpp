@@ -9,7 +9,7 @@
 #include<utility>
 #include<cmath>
 #include"VariousTools.hpp"
-#include"YasVector2D.hpp"
+#include"Vector2D.hpp"
 #include"YasGraphicsLibrary.hpp"
 #include"TimePicker.hpp"
 #include"PixelsTable.hpp"
@@ -29,8 +29,8 @@ class YasEngine
 			{
 				return instance;
 			} 
-
-			return new YasEngine();
+			instance = new YasEngine();
+			return instance;
 		}
 		
 		void initialize();
@@ -44,7 +44,7 @@ class YasEngine
 		SDL_Texture* screenTexture;
 		
 		PixelsTable* pixelsTable;
-		YasVector2D<int>* windowDimensions;
+		Vector2D<int>* windowDimensions;
 		SDL_Event event;
 		bool quit = false;
 
@@ -61,18 +61,10 @@ class YasEngine
 		int WINDOW_WIDTH = 1024;
 		int WINDOW_HEIGHT = 768;
 
-		YasVector2D<int> zeroVector;
-		YasVector2D<int> direction;
-
-		YasVector2D<int> testA;
-		YasVector2D<int> testB;
-
 		std::vector<YasPolygon*> objectsToDraw;
-
 		Player* player;
 
-		YasEngine();
-		~YasEngine();
+		YasEngine() {};
 		bool shouldApplicationStopRunning = false;
 		YasInOut::Input* input = new YasInOut::Input();
 		YasInOut::MousePositionChangeInformation* mousePositionChangeInformation = new YasInOut::MousePositionChangeInformation();
@@ -83,7 +75,8 @@ class YasEngine
 		void prepareGameWorld();
 		void preparePlayer();
 		void handleInput(SDL_Event& event);
-		void update(double deltaTime);
+		void update(double& deltaTime);
+		void drawHudElements(double& deltaTime);
 		void render(double& deltaTime);
 };
 

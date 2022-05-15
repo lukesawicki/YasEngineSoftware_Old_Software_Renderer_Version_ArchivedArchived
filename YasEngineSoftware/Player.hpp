@@ -17,9 +17,9 @@ class Player : public YasPolygon
 
 		float playerDirectionAngle = 90.0F * (3.141592F / 180.0F);
 		float playerCurrentDirectionAngle = 0.0F;
-		const YasVector2D<float> xDirectionVector = YasVector2D<float>(1.0F, 0.0F);
-		YasVector2D<float> lookAt = YasVector2D<float>(1.0F, 0.0F);
-		YasVector2D<float> currentMouseAngleVector;
+		const Vector2D<float> xDirectionVector = Vector2D<float>(1.0F, 0.0F);
+		Vector2D<float> lookAt = Vector2D<float>(1.0F, 0.0F);
+		Vector2D<float> currentMouseAngleVector;
 
 		Player(float x, float y);
 		~Player();
@@ -27,15 +27,17 @@ class Player : public YasPolygon
 		void rotateAllVerticesOverAnAngle(float angle);
 		void rotate(float deltaTime);
 		
-		void rotateToMousePosition(float x, float y, YasVector2D<int>* windowDimensions);
-		void rotateToMousePositionInLocalCoordinateSystem(float x, float y, YasVector2D<int>* windowDimensions);
+		void rotateToMousePosition(float x, float y, Vector2D<int>* windowDimensions);
+		void rotateToMousePositionInLocalCoordinateSystem(float x, float y, Vector2D<int>* windowDimensions);
 		void setDirection(float x, float y);
 		void generate() override;
-		void generateRegularPolygonVertices(const YasVector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) override;
+		void generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) override;
 		void regeneratePolygon() override;
 		void setInput(YasInOut::Input* input);
 		void setInput(YasInOut::MousePositionChangeInformation* mouse);
 		Projectile* shoot();
+	private:
+
 };
 
 #endif

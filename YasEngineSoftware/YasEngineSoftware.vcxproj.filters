@@ -15,10 +15,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="YasVector4D.hpp">
+    <ClInclude Include="Vector4D.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="YasVector2D.hpp">
+    <ClInclude Include="Vector2D.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="YasPolygon.hpp">

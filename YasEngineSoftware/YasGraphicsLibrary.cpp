@@ -1,6 +1,6 @@
 #include"YasGraphicsLibrary.hpp"
 
-    void drawLine(const YasVector2D<float>& point0, const YasVector2D<float>& point1, PixelsTable& pixelsTable, const YasVector4D<Uint8>& drawingColor)
+    void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, PixelsTable& pixelsTable, const Vector4D<Uint8>& drawingColor)
     {
         int x0 = point0.x;
         int y0 = point0.y;
@@ -11,8 +11,8 @@
         int originalPoint1X = point1.x;
         int originalPoint1Y = point1.y;
 
-        YasVector2D<int> copyPoint0(point0.x, point0.y);
-        YasVector2D<int> copyPoint1(point1.x, point1.y);
+        Vector2D<int> copyPoint0(point0.x, point0.y);
+        Vector2D<int> copyPoint1(point1.x, point1.y);
 
         int deltaX = point1.x - point0.x;
         int deltaY = point1.y - point0.y;
@@ -322,7 +322,7 @@
         return maximum;
     }
 
-    YasVector2D<float>* generateVerticesFromNumbers(const std::vector<int> &numbers)
+    Vector2D<float>* generateVerticesFromNumbers(const std::vector<int> &numbers)
     {
         if (numbers.size() < 4)
         {
@@ -331,7 +331,7 @@
         int numbersSize = numbers.size();
         int maximumNumberOfVertices = numbersSize / 2;
 
-        YasVector2D<float>* vertices = new YasVector2D<float>[maximumNumberOfVertices];
+        Vector2D<float>* vertices = new Vector2D<float>[maximumNumberOfVertices];
 
         int maximum = calculateMaximuNumberOfElementsToProcess(numbersSize);
 
@@ -346,7 +346,7 @@
         return vertices;
     }
 
-    YasVector2D<float>* generateVerticesFromNumbersAsVerticalLines(const std::vector<int>& numbers)
+    Vector2D<float>* generateVerticesFromNumbersAsVerticalLines(const std::vector<int>& numbers)
     {
         //if (numbers.size() < 4)
         //{
@@ -355,7 +355,7 @@
         //int numbersSize = numbers.size();
         int maximumNumberOfVertices = calculateMaximuNumberOfElementsToProcess(numbers.size());
 
-        YasVector2D<float>* vertices = new YasVector2D<float>[maximumNumberOfVertices];
+        Vector2D<float>* vertices = new Vector2D<float>[maximumNumberOfVertices];
 
         for (int i = 0; i < numbers.size(); i++)
         {
@@ -375,7 +375,7 @@
         return vertices;
     }
 
-    void drawNumbersAsLineSegmentsNotContinuous(YasVector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable)
+    void drawNumbersAsLineSegmentsNotContinuous(Vector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable)
     {
         if (maximumNumberOfVertices <= 3)
         {
@@ -392,7 +392,7 @@
         }
     }
 
-    void drawNumbersAsPolyline(YasVector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable)
+    void drawNumbersAsPolyline(Vector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable)
     {
         if (maximumNumberOfVertices == 2)
         {
@@ -429,11 +429,11 @@
 
     void drawPolygonDirection(YasPolygon* polygon, PixelsTable& pixelsTable)
     {
-        YasVector2D<float> direction(polygon->direction.x*100, polygon->direction.y*100);
+        Vector2D<float> direction(polygon->direction.x*100, polygon->direction.y*100);
         drawLine(polygon->vectorZero, direction, pixelsTable, polygon->color);
     }
 
-    void swapVectors(YasVector2D<int>& point0, YasVector2D<int>& point1)
+    void swapVectors(Vector2D<int>& point0, Vector2D<int>& point1)
     {
         int temporaryX = point0.x;
         int temporaryY = point0.y;
@@ -443,7 +443,7 @@
         point1.y = temporaryY;
     }
 
-    void swapVectors(YasVector2D<float>& point0, YasVector2D<float>& point1)
+    void swapVectors(Vector2D<float>& point0, Vector2D<float>& point1)
     {
         float temporaryX = point0.x;
         float temporaryY = point0.y;
@@ -459,13 +459,13 @@
         verticalLineOnScreen(pixelsTable, 0, GREEN);
     }
 
-    void drawCrossOnScreen(float x, float y, PixelsTable& pixelsTable)
+    void drawCrossHair(float x, float y, PixelsTable& pixelsTable)
     {
         horizontalLineOnScreen(pixelsTable, y, BLUE);
         verticalLineOnScreen(pixelsTable, x, BLUE);
     }
 
-    void horizontalLineOnScreen(PixelsTable& pixelsTable, int y, YasVector4D<Uint8> color)
+    void horizontalLineOnScreen(PixelsTable& pixelsTable, int y, Vector4D<Uint8> color)
     {
         int maxX = static_cast<int>(0.5F * pixelsTable.windowDimensions.x);
 		for (int i = -maxX; i < maxX; i++) //X
@@ -474,7 +474,7 @@
 		}
     }
 
-	void verticalLineOnScreen(PixelsTable& pixelsTable, int x, YasVector4D<Uint8> color)
+	void verticalLineOnScreen(PixelsTable& pixelsTable, int x, Vector4D<Uint8> color)
 	{
 		int maxY = static_cast<int>(0.5F * pixelsTable.windowDimensions.y);
 		for (int i = -maxY; i < maxY; i++) //X
@@ -488,12 +488,12 @@
         return y * windowWidth + x;
     }
 
-    int xyPixelToArrayPosition(YasVector2D<int>& point, int windowWidth)
+    int xyPixelToArrayPosition(Vector2D<int>& point, int windowWidth)
     {
         return point.y* windowWidth + point.x;
     }
 
-    void windowPositionToCartesianPosition(float& x, float& y, YasVector2D<int>* windowDimensions)
+    void windowPositionToCartesianPosition(float& x, float& y, Vector2D<int>* windowDimensions)
     {
         x = x - static_cast<int>(0.5 * windowDimensions->x);
         y = (-(y - static_cast<int>(0.5 * windowDimensions->y)));

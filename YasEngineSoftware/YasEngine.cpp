@@ -64,10 +64,19 @@ void YasEngine::prepareBasicSettings()
 {
     SDL_Init(SDL_INIT_EVERYTHING);
 
-    windowDimensions    =   new YasVector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
+    windowDimensions    =   new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
     window              =   SDL_CreateWindow("YasEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE);
 
     SDL_SetWindowMinimumSize(window, WINDOW_WIDTH, WINDOW_HEIGHT);
+}
+
+void YasEngine::drawHudElements(double& deltaTime)
+{
+    #ifdef DEBUG_DRAWINGS
+        drawCartesianAxies(*pixelsTable);
+    #endif // DEBUG_DRAWINGS
+
+    drawCrossHair(mouseX, mouseY, *pixelsTable);
 }
 
 void YasEngine::handleInput(SDL_Event& event)
@@ -151,8 +160,20 @@ void YasEngine::preparePlayer()
     objectsToDraw.push_back(player);
 }
 
-void YasEngine::update(double deltaTime)
+void YasEngine::update(double& deltaTime)
 {
+    for (auto object : objectsToDraw)
+    {
+        object->move(static_cast<float>(deltaTime));
+        object->regeneratePolygon();
+    }
+
+    Projectile* projectile = player->shoot();
+    if (projectile != nullptr)
+    {
+        objectsToDraw.push_back(projectile);
+    }
+
     if (mousePositionChangeInformation->mouseMoved || input->up || input->down || input->left || input->right)
     {
         player->rotateToMousePositionInLocalCoordinateSystem(mousePositionChangeInformation->x, mousePositionChangeInformation->y, windowDimensions);
@@ -162,33 +183,20 @@ void YasEngine::update(double deltaTime)
     mouseY = mousePositionChangeInformation->y;
 
     windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
+
+    projectile = nullptr;
 }
 
 void YasEngine::render(double& deltaTime)
 {
-    pixelsTable->clearColor(ALT_BLACK);
-
-#ifdef DEBUG_DRAWINGS
-    drawCartesianAxies(*pixelsTable);
-#endif // DEBUG_DRAWINGS
-
-
-    drawCrossOnScreen(mouseX, mouseY, *pixelsTable);
+    pixelsTable->clearColor(BLACK);
 
     for (auto object : objectsToDraw)
     {
-        object->move(static_cast<float>(deltaTime));
-        object->regeneratePolygon();
         drawPolygon(object, *pixelsTable);
     }
 
-    Projectile* projectile = player->shoot();
-    if (projectile != nullptr)
-    {
-        objectsToDraw.push_back(projectile);
-    }
-
-    projectile = nullptr;
+    drawHudElements(deltaTime);
 
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
     SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_VERTICAL);

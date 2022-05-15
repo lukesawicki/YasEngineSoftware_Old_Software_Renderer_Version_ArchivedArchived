@@ -13,8 +13,8 @@ Player::Player(float x, float y)
 
 	numberOfVertices = 17;
 
-	worldVertices = new YasVector2D<float>[numberOfVertices];
-	localVertices = new YasVector2D<float>[numberOfVertices];
+	worldVertices = new Vector2D<float>[numberOfVertices];
+	localVertices = new Vector2D<float>[numberOfVertices];
 
 	localVertices[0].x = -12;
 	localVertices[0].y = -11;
@@ -106,6 +106,7 @@ void Player::move(float deltaTime)
 	{
 		isShooting = true;
 	}
+	regeneratePolygon();
 }
 
 void Player::rotate(float deltaTime)
@@ -124,7 +125,7 @@ void Player::rotate(float deltaTime)
 	}
 }
 
-void Player::rotateToMousePosition(float x, float y, YasVector2D<int>* windowDimensions)
+void Player::rotateToMousePosition(float x, float y, Vector2D<int>* windowDimensions)
 {
 	if (x <= windowDimensions->x && y <= windowDimensions->y)
 	{
@@ -133,16 +134,16 @@ void Player::rotateToMousePosition(float x, float y, YasVector2D<int>* windowDim
 
 		windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
 
-		YasVector2D<float> mousePositionVector(static_cast<float>(currentX), static_cast<float>(currentY));
-		YasVector2D<float>::normalizedVector(mousePositionVector);
+		Vector2D<float> mousePositionVector(static_cast<float>(currentX), static_cast<float>(currentY));
+		Vector2D<float>::normalizedVector(mousePositionVector);
 
-		float angleBetweenCurrentAndMouse = YasVector2D<float>::angleBetweenVectors(direction, mousePositionVector);
+		float angleBetweenCurrentAndMouse = Vector2D<float>::angleBetweenVectors(direction, mousePositionVector);
 		rotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
 		setDirection(mousePositionVector.x, mousePositionVector.y);
 	}
 }
 
-void Player::rotateToMousePositionInLocalCoordinateSystem(float x, float y, YasVector2D<int>* windowDimensions)
+void Player::rotateToMousePositionInLocalCoordinateSystem(float x, float y, Vector2D<int>* windowDimensions)
 {
 	if (x <= windowDimensions->x && y <= windowDimensions->y)
 	{
@@ -151,14 +152,14 @@ void Player::rotateToMousePositionInLocalCoordinateSystem(float x, float y, YasV
 
 		windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
 
-		YasVector2D<float> currentMousePosition = YasVector2D<float>(currentX, currentY);
+		Vector2D<float> currentMousePosition = Vector2D<float>(currentX, currentY);
 
-		YasVector2D<float> mouseDirectionInLocalCoordynationSystem = YasVector2D<float>::createUnitVectorFromBoundVector(currentMousePosition, position);
+		Vector2D<float> mouseDirectionInLocalCoordynationSystem = Vector2D<float>::createUnitVectorFromBoundVector(currentMousePosition, position);
 
-		float angleBetweenCurrentAndMouse = YasVector2D<float>::angleBetweenVectors(direction, mouseDirectionInLocalCoordynationSystem);
+		float angleBetweenCurrentAndMouse = Vector2D<float>::angleBetweenVectors(direction, mouseDirectionInLocalCoordynationSystem);
 
 		rotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
-		YasVector2D<float>::rotateVectorOverTheAngle(&direction, angleBetweenCurrentAndMouse);
+		Vector2D<float>::rotateVectorOverTheAngle(&direction, angleBetweenCurrentAndMouse);
 	}
 }
 
@@ -224,7 +225,7 @@ void Player::generate()
 
 }
 
-void Player::generateRegularPolygonVertices(const YasVector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices)
+void Player::generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices)
 {
 
 }
@@ -238,7 +239,7 @@ void Player::rotateAllVerticesOverAnAngle(float angle)
 {
 	for (int i = 0; i < numberOfVertices; i++)
 	{
-		YasVector2D<float>::rotateVectorOverTheAngle(&localVertices[i], angle);
+		Vector2D<float>::rotateVectorOverTheAngle(&localVertices[i], angle);
 	}
 }
 
