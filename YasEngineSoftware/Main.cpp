@@ -8,6 +8,7 @@
 int main(int argc, char* argv[])
 {
 	YasEngine* yasEngine = YasEngine::GetInstance();
+	yasEngine->initialize();
 	yasEngine->YasEnginStart();
 	return 0;
 }

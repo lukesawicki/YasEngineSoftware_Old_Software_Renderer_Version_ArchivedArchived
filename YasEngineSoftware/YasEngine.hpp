@@ -33,10 +33,41 @@ class YasEngine
 			return new YasEngine();
 		}
 		
-		void initialization();
+		void initialize();
 		void YasEnginStart();
 	private:
 		static YasEngine* instance;
+
+		bool quit = false;
+
+		SDL_Event event;
+
+		float mouseX;
+		float mouseY;
+
+		const int WINDOW_WIDTH = 1024;
+		const int WINDOW_HEIGHT = 768;
+
+		YasVector2D<int>* windowDimensions;
+
+		SDL_Window* window;
+
+		SDL_Renderer* renderer;
+
+		SDL_Texture* screenTexture;
+
+		PixelsTable* pixelsTable; // (WINDOW_WIDTH, WINDOW_HEIGHT, BLACK);
+
+		YasVector2D<int> zeroVector;
+		YasVector2D<int> direction;
+
+		YasVector2D<int> testA;
+		YasVector2D<int> testB;
+
+		std::vector<YasPolygon*> objectsToDraw;
+
+		Player* player;
+
 		YasEngine() {};
 		~YasEngine() {};
 		bool shouldApplicationStopRunning = false;
@@ -44,7 +75,11 @@ class YasEngine
 		YasInOut::MousePositionChangeInformation* mousePositionChangeInformation = new YasInOut::MousePositionChangeInformation();
 
 		bool engineInstantiated = false;
-		
+		void prepareRendering();
+		void prepareBasicSettings();
+		void handleInput(SDL_Event& event);
+		void update(double deltaTime);
+		void render(double& deltaTime);
 };
 
 #endif
