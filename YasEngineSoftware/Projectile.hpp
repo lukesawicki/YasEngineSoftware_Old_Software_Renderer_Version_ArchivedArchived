@@ -1,7 +1,8 @@
 #ifndef PROJECTILE_HPP
 #define PROJECTILE_HPP
-#include"YasPolygon.hpp"
 #include"YasGraphicsLibrary.hpp"
+#include"YasPolygon.hpp"
+
 
 class Projectile : public YasPolygon
 {

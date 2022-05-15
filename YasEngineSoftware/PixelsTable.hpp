@@ -1,9 +1,9 @@
 #ifndef PIXELSTABLE_HPP
 #define PIXELSTABLE_HPP
 #include<SDL.h>
-#include "YasVector2D.hpp"
-#include "YasVector4D.hpp"
-#include "YasGraphicsLibrary.hpp"
+#include"YasVector2D.hpp"
+#include"YasVector4D.hpp"
+#include"YasGraphicsLibrary.hpp"
 
 class PixelsTable
 {

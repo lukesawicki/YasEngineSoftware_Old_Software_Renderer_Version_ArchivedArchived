@@ -1,13 +1,15 @@
 #ifndef YASGRAPHICSLIBRARY_HPP
 #define YASGRAPHICSLIBRARY_HPP
-#include<cmath>
 #include<iostream>
 #include<vector>
+#include<map>
+#include<bitset>
+#include<cmath>
 #include<SDL.h>
 #include"YasVector2D.hpp"
 #include"YasVector4D.hpp"
-#include "PixelsTable.hpp"
-#include "YasPolygon.hpp"
+#include"PixelsTable.hpp"
+#include"YasPolygon.hpp"
 
 class PixelsTable;
 
@@ -25,7 +27,7 @@ const YasVector4D<Uint8> RED(255, 0, 0, 0);
 const YasVector4D<Uint8> GREEN(0, 255, 0, 0);
 const YasVector4D<Uint8> BLUE(0, 0, 255, 0);
 const YasVector4D<Uint8> BLACK(0, 0, 0, 255);
-const YasVector4D<Uint8> ALT_BLACK(0, 0, 0, 0); //ABRG
+const YasVector4D<Uint8> ALT_BLACK(0, 0, 0, 0);
 const YasVector4D<Uint8> WHITE(255, 255, 255, 255);
 const YasVector4D<Uint8> YELLOW(255, 255, 0, 255);
 
@@ -35,7 +37,6 @@ void drawPolygon(YasPolygon* polygon, PixelsTable& pixelsTable);
 
 YasVector2D<float>* generateVerticesFromNumbers(const std::vector<int>& numbers);
 
-//void drawPrimeNumbers(const std::vector<int>& primeNumbers, PixelsTable& pixelsTable);
 void drawNumbersAsLineSegmentsNotContinuous(YasVector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable);
 
 void drawNumbersAsPolyline(YasVector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable);
@@ -55,7 +56,6 @@ void drawCrossOnScreen(float x, float y, PixelsTable& pixelsTable);
 int xyPixelToArrayPosition(YasVector2D<int>& point, int windowWidth);
 int xyPixelToArrayPosition(int x, int y, int windowWidth);
 
-//void windowPositionToCartesianPosition(double& x, double& y, YasVector2D<int>* windowDimensions);
 void windowPositionToCartesianPosition(float& x, float& y, YasVector2D<int>* windowDimensions);
 
 #endif

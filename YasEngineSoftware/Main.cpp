@@ -9,7 +9,6 @@
 #include<map>
 #include<utility>
 #include<cmath>
-#include<bitset>
 #include"VariousTools.hpp"
 #include"YasVector2D.hpp"
 #include"YasGraphicsLibrary.hpp"
@@ -28,190 +27,6 @@ bool shouldApplicationStopRunning = false;
 YasInOut::Input* input = new YasInOut::Input();
 YasInOut::MousePositionChangeInformation* mousePositionChangeInformation = new YasInOut::MousePositionChangeInformation();
 
-void windowToCartesian(double& x, double& y, YasVector2D<int>& windowDimensions)
-{
-	x = x - static_cast<int>(0.5 * windowDimensions.x);
-	y = (-(y - static_cast<int>(0.5 * windowDimensions.y)));
-}
-
-// mocks
-int GLFW_KEY_ESCAPE;
-int GLFW_PRESS;
-bool GL_TRUE;
-int GLFW_KEY_W;
-int GLFW_KEY_S;
-int GLFW_KEY_A;
-int GLFW_KEY_D;
-int GLFW_KEY_R;
-int GLFW_KEY_SPACE;
-int GLFW_RELEASE;
-int GLFW_MOUSE_BUTTON_LEFT;
-int GLFW_MOUSE_BUTTON_RIGHT;
-
-// end of mocks
-
-void keysHandleCallbackFunction(SDL_Window* window, int key, int scancode, int action, int mods)
-{
-	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-	{
-        shouldApplicationStopRunning = true;
-        //glfwSetWindowShouldClose(window, GL_TRUE);
-	}
-
-    // PRESS KEY
-
-	if (key == GLFW_KEY_W && action == GLFW_PRESS)
-	{
-		input->up = true;
-	}
-
-	if (key == GLFW_KEY_S && action == GLFW_PRESS)
-	{
-		input->down = true;
-	}
-
-	if (key == GLFW_KEY_A && action == GLFW_PRESS)
-	{
-		input->left = true;
-	}
-
-	if (key == GLFW_KEY_D && action == GLFW_PRESS)
-	{
-		input->right = true;
-	}
-
-	if (key == GLFW_KEY_R && action == GLFW_PRESS)
-	{
-		input->rotateCounterClockwise = true;
-	}
-
-	if (key == GLFW_KEY_SPACE && action == GLFW_PRESS)
-	{
-		input->shoot = true;
-	}
-
-    // RELEASE KEY
-
-	if (key == GLFW_KEY_W && action == GLFW_RELEASE)
-	{
-		input->up = false;
-	}
-
-	if (key == GLFW_KEY_S && action == GLFW_RELEASE)
-	{
-		input->down = false;
-	}
-
-	if (key == GLFW_KEY_A && action == GLFW_RELEASE)
-	{
-		input->left = false;
-	}
-
-	if (key == GLFW_KEY_D && action == GLFW_RELEASE)
-	{
-		input->right = false;
-	}
-
-	if (key == GLFW_KEY_R && action == GLFW_RELEASE)
-	{
-		input->rotateCounterClockwise = false;
-	}
-
-	if (key == GLFW_KEY_SPACE && action == GLFW_RELEASE)
-	{
-		input->shoot = false;
-	}
-}
-
-void mouseButtonsCallbackFunction(SDL_Window* window, int button, int action, int mods)
-{
-    if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_PRESS)
-    {
-        mousePositionChangeInformation->leftMouseButton = true;
-    }
-
-	if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS)
-	{
-        mousePositionChangeInformation->rightMouseButton = true;
-	}
-
-    // RELEASE KEY
-
-	if (button == GLFW_MOUSE_BUTTON_LEFT && action == GLFW_RELEASE)
-	{
-        mousePositionChangeInformation->leftMouseButton = false;
-	}
-
-	if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_RELEASE)
-	{
-        mousePositionChangeInformation->rightMouseButton = false;
-	}
-}
-
-void mouseMoveHandleCallbackFunction(SDL_Window* window, double x, double y)
-{
-    if (abs(mousePositionChangeInformation->x - x) > 0.01F || abs(mousePositionChangeInformation->y - y) > 0.01F)
-    {
-        mousePositionChangeInformation->mouseMoved = true;
-    }
-    else
-    {
-        mousePositionChangeInformation->mouseMoved = false;
-        return;
-    }
-
-	mousePositionChangeInformation->x = x;
-	mousePositionChangeInformation->y = y;
-
-}
-
-
-std::vector<int> generatePrimeNumberLessThanN(int n)
-{
-    std::vector<int> primeNumbers;
-    std::map<int, bool> numbers;
-
-    for (int i = 2; i <= n; i++)
-    {
-        numbers.insert(std::pair<int, bool>(i, true));
-    }
-    int k = 0;
-    int j = 0;
-    for (int i = 2; i < sqrt(n); i++)
-    {
-        
-        if (numbers.at(i))
-        {
-            while (true)//j < n)
-            {
-                
-                j = (i * i) + (k*i);
-                if (j <= n)
-                {
-                    numbers.at(j) = false;
-                }
-                else
-                {
-                    break;
-                }
-                k++;
-            }
-            k = 0;
-            j = 0;
-        }
-    }
-
-    for (int i = 2; i < numbers.size(); i++)
-    {
-        if (numbers.at(i))
-        {
-            //std::cout << i << std::endl;
-            primeNumbers.push_back(i);
-        }
-    }
-    return primeNumbers;
-}
-
 int main(int argc, char* argv[])
 {
     const int WINDOW_WIDTH = 1024;
@@ -222,28 +37,16 @@ int main(int argc, char* argv[])
     SDL_Init(SDL_INIT_VIDEO);
 
     SDL_Window* window = SDL_CreateWindow("YasEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE);
-    
+    SDL_SetWindowMinimumSize(window, WINDOW_WIDTH, WINDOW_HEIGHT);
+
     listRenderersInformation();
 
-    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED); // SDL_RENDERER_PRESENTVSYNC);
-
-    SDL_SetWindowMinimumSize(window, WINDOW_WIDTH, WINDOW_HEIGHT);
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     SDL_RenderSetLogicalSize(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
     SDL_RenderSetIntegerScale(renderer, SDL_TRUE);
 
     SDL_Texture* screenTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
-    
-
-
-    std::vector<int> groupOfPrimeNumbers = generatePrimeNumberLessThanN(2000);
-
-    int numberOfVerticesFromPrimeNumbers = groupOfPrimeNumbers.size() / 2;
-
-    YasVector2D<float>* verticesForPrimeNumbersSegments = generateVerticesFromNumbers(groupOfPrimeNumbers);
-
-    std::cout << "NUMBER OF PRIME NUMBERS: " << groupOfPrimeNumbers.size() << std::endl;
-
 
     PixelsTable pixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, BLACK);
 
@@ -285,20 +88,8 @@ int main(int argc, char* argv[])
     bool close = false;
     bool firstTime = true;
 
-    if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
-    {
-        std::cout << "Endianness: BIG_ENDIAN " << std::endl;
-    }
-
-    if (SDL_BYTEORDER == SDL_LIL_ENDIAN)
-    {
-        std::cout << "Endianness: LITTLE_ENDIAN " << std::endl;
-    }
-
-    //Main loop flag
     bool quit = false;
 
-    //Event handler
     SDL_Event event;
 
 
@@ -369,13 +160,6 @@ int main(int argc, char* argv[])
                         player->isShooting = false;
                     }
 
-                                        //case SDL_MOUSEBUTTONDOWN:
-                                        //    mCurrentSprite = BUTTON_SPRITE_MOUSE_DOWN;
-                                        //    break;
-
-                                        //case SDL_MOUSEBUTTONUP:
-                                        //    mCurrentSprite = BUTTON_SPRITE_MOUSE_UP;
-                                        //    break;
                     mousePositionChangeInformation->mouseMoved = true;
                     int x, y;
                     SDL_GetMouseState(&x, &y);
@@ -400,14 +184,10 @@ int main(int argc, char* argv[])
             }
             
             pixelsTable.clearColor(ALT_BLACK);
-           // SDL_RenderClear(renderer);
             
-#ifdef DEBUG_DRAWINGS
+            #ifdef DEBUG_DRAWINGS
 			drawCartesianAxies(pixelsTable);
-#endif // DEBUG_DRAWINGS
-
-
-//          ########  BEGINT TEST CODE  ################
+            #endif // DEBUG_DRAWINGS
 
             if (mousePositionChangeInformation->mouseMoved || input->up || input->down || input->left || input->right)
             {
@@ -427,12 +207,6 @@ int main(int argc, char* argv[])
                 drawPolygon(object, pixelsTable);
             }
 
-#ifdef DEBUG_DRAWINGS
-            // DRAW YELLOW LINE WHICH SHOWING THE DIRECTION OF MOUSE(PREVIOUSLY PLAYER)
-            drawPolygonDirection(player, pixelsTable);
-#endif // DEBUG_DRAWINGS
-
-
             Projectile* projectile = player->shoot();
             if (projectile != nullptr)
             {
@@ -440,57 +214,10 @@ int main(int argc, char* argv[])
             }
 
             projectile = nullptr;
-            
-            //SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-            
-
-            /*SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
-            for (int i = 0; i < WINDOW_HEIGHT/2; i++)
-            {
-                for (int j = 0; j < WINDOW_WIDTH/2; j++)
-                {
-                    if (i == j)
-                    {
-                        SDL_RenderDrawPoint(renderer, j, i);
-                    }
-                }
-            }*/
-
-            for (int i = 0; i < WINDOW_HEIGHT / 3; i++)
-            {
-                //for (int j = 0; j < WINDOW_WIDTH / 2; j++)
-                //{
-                //    if (i == j)
-                //    {
-                        pixelsTable.drawPoint(50, i, YELLOW);
-                //    }
-                //}
-            }
-
-            //drawNumbersAsLineSegmentsNotContinuous(verticesForPrimeNumbersSegments, numberOfVerticesFromPrimeNumbers, pixelsTable);
-            drawNumbersAsPolyline(verticesForPrimeNumbersSegments, numberOfVerticesFromPrimeNumbers, pixelsTable);
-            for (int i = 0; i < groupOfPrimeNumbers.size(); i++)
-            {
-                std::string str = std::bitset<10>(groupOfPrimeNumbers.at(i)).to_string();
-                for (int j = 0; j < 10; j++)
-                {
-                    if (str.at(j) == '1')
-                    {
-                        pixelsTable.drawPoint(j, i, YELLOW);
-                    }
-                    else
-                    {
-                        pixelsTable.drawPoint(j, i, BLUE);
-                    }
-                }
-                str.clear();
-            }
 
             SDL_UpdateTexture(screenTexture, NULL, pixelsTable.pixels, WINDOW_WIDTH * 4);
             SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_VERTICAL);
             SDL_RenderPresent(renderer);
-
-
     }
 
     for (auto drawableObject : objectsToDraw)
@@ -498,10 +225,8 @@ int main(int argc, char* argv[])
         delete drawableObject;
     }
 
-    delete[] verticesForPrimeNumbersSegments;
     return 0;
 }
-
 
 //                                                                            80                                     120
 //-----------------------------------------------------------------------------|---------------------------------------|

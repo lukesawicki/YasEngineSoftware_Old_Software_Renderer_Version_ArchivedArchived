@@ -362,8 +362,6 @@
             
         }
 
-        
-
         //int maximum = calculateMaximuNumberOfElementsToProcess(numbersSize);
 
         //int j = 0;
@@ -406,6 +404,26 @@
             {
                 drawLine(vertices[i], vertices[i + 1], pixelsTable, YELLOW);
             }
+        }
+    }
+
+    void drawBinaryRepresentationOfFixedNumbers(std::vector<int> numbers, PixelsTable& pixelsTable)
+    {
+        for (int i = 0; i < numbers.size(); i++)
+        {
+            std::string str = std::bitset<10>(numbers.at(i)).to_string();
+            for (int j = 0; j < 10; j++)
+            {
+                if (str.at(j) == '1')
+                {
+                    pixelsTable.drawPoint(j, i, YELLOW);
+                }
+                else
+                {
+                    pixelsTable.drawPoint(j, i, BLUE);
+                }
+            }
+            str.clear();
         }
     }
 
@@ -475,15 +493,8 @@
         return point.y* windowWidth + point.x;
     }
 
-	//void windowPositionToCartesianPosition(double& x, double& y, YasVector2D<int>* windowDimensions)
-	//{
-	//	x = x - static_cast<int>(0.5 * windowDimensions->x);
-	//	y = ( -( y - static_cast<int>(0.5 * windowDimensions->y) ) );
-	//}
-
     void windowPositionToCartesianPosition(float& x, float& y, YasVector2D<int>* windowDimensions)
     {
         x = x - static_cast<int>(0.5 * windowDimensions->x);
         y = (-(y - static_cast<int>(0.5 * windowDimensions->y)));
     }
-

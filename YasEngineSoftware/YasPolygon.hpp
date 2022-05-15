@@ -2,9 +2,8 @@
 #define POLYGON_HPP
 #include<cmath>
 #include<SDL.h>
-#include "YasVector2D.hpp"
-#include "YasVector4D.hpp"
-
+#include"YasVector2D.hpp"
+#include"YasVector4D.hpp"
 
 class YasPolygon
 {
@@ -21,7 +20,7 @@ class YasPolygon
 		float angleForGenerateInIsoscelesPolygons;
 		float startAngle = 0.0F;
 		float stepAngle;
-		float directionMouseAngle = 0; //  90.0 * (3.141592 / 180.0);
+		float directionMouseAngle = 0;
 
 		bool directionSwitched = false;
 		float  speed = 0.0F;

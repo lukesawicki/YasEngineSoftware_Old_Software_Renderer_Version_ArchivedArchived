@@ -3,7 +3,6 @@
 #include<vector>
 #include<SDL.h>
 
-
 void listRenderersInformation()
 {
     int renderDriversNumber = SDL_GetNumRenderDrivers();
@@ -23,12 +22,6 @@ void listRenderersInformation()
             std::cout << SDL_GetPixelFormatName(renderersDriversInformations[i]->texture_formats[j]) << std::endl;
         }
     }
-
-    for (int i = 0; i < renderDriversNumber; i++)
-    {
-        delete renderersDriversInformations.at(i);
-    }
-
 }
 
 #endif

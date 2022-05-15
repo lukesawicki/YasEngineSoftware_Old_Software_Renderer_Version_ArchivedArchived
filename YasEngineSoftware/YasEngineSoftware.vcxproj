@@ -147,11 +147,13 @@
   <ItemGroup>
     <ClInclude Include="Circle.hpp" />
     <ClInclude Include="InputOutputHandler.hpp" />
+    <ClInclude Include="Math.hpp" />
     <ClInclude Include="PixelsTable.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Projectile.hpp" />
     <ClInclude Include="TimePicker.hpp" />
     <ClInclude Include="VariousTools.hpp" />
+    <ClInclude Include="YasEngine.hpp" />
     <ClInclude Include="YasGraphicsLibrary.hpp" />
     <ClInclude Include="YasPolygon.hpp" />
     <ClInclude Include="YasVector2D.hpp" />
@@ -160,7 +162,6 @@
   <ItemGroup>
     <ClCompile Include="BackupCpp.cpp" />
     <ClCompile Include="Circle.cpp" />
-    <ClCompile Include="HelloWorld.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="PixelsTable.cpp" />
     <ClCompile Include="Player.cpp" />

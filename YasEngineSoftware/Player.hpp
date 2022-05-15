@@ -1,9 +1,9 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
-#include "YasPolygon.hpp"
-#include "InputOutputHandler.hpp"
-#include "Projectile.hpp"
 #include<cmath>
+#include"InputOutputHandler.hpp"
+#include"YasPolygon.hpp"
+#include"Projectile.hpp"
 
 class Player : public YasPolygon
 {
@@ -16,7 +16,7 @@ class Player : public YasPolygon
 		YasInOut::MousePositionChangeInformation* mouse;
 
 		float playerDirectionAngle = 90.0F * (3.141592F / 180.0F);
-		float playerCurrentDirectionAngle = 0.0F; // playerDirectionAngle;
+		float playerCurrentDirectionAngle = 0.0F;
 		const YasVector2D<float> xDirectionVector = YasVector2D<float>(1.0F, 0.0F);
 		YasVector2D<float> lookAt = YasVector2D<float>(1.0F, 0.0F);
 		YasVector2D<float> currentMouseAngleVector;
@@ -28,7 +28,6 @@ class Player : public YasPolygon
 		void rotate(float deltaTime);
 		
 		void rotateToMousePosition(float x, float y, YasVector2D<int>* windowDimensions);
-		//void rotateToMousePosition1(float x, float y, YasVector2D<int>* windowDimensions);
 		void rotateToMousePositionInLocalCoordinateSystem(float x, float y, YasVector2D<int>* windowDimensions);
 		void setDirection(float x, float y);
 		void generate() override;

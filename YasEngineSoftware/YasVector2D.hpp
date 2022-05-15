@@ -1,8 +1,8 @@
 #ifndef VECTOR2D_HPP
 #define VECTOR2D_HPP
 
-#include<cmath>
 #include<iostream>
+#include<cmath>
 
 template <typename Type>
 class YasVector2D
@@ -30,16 +30,6 @@ class YasVector2D
 			vector.x = static_cast<Type>(x);
 			vector.y = static_cast<Type>(y);
 		}
-
-		//static YasVector2D<Type>* normalizedVector(const YasVector2D<Type>& vector)
-		//{
-		//	double magnitude = getVectorMagnitude(vector);
-		//	double x = vector.x / magnitude;
-		//	double y = vector.y / magnitude;
-		//	vector.x = static_cast<Type>(x);
-		//	vector.y = static_cast<Type>(y);
-		//	return new YasVector2D<Type>(x, y);
-		//}
 
 		static Type getVectorMagnitude(const YasVector2D<Type>& vector)
 		{
