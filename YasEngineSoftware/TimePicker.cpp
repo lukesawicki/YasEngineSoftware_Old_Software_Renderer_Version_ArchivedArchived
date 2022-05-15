@@ -6,7 +6,6 @@
     TimePicker::TimePicker()
     {
         isFrequencyOfThePerformanceCounterPickedUp = (QueryPerformanceFrequency(&frequency) != 0);
-        //isFrequencyOfThePerformanceCounterPickedUp = (QueryPerformanceFrequency((LARGE_INTEGER*)&frequency) != 0);
     }
 
     double TimePicker::getSeconds()
