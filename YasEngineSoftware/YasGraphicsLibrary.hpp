@@ -37,7 +37,7 @@ void drawPolygon(GameObject* polygon, PixelsTable& pixelsTable);
 
 Vector2D<float>* generateVerticesFromNumbers(const std::vector<int>& numbers);
 
-void drawNumbersAsLineSegmentsNotContinuous(Vector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable);
+void drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable);
 
 void drawNumbersAsPolyline(Vector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable);
 

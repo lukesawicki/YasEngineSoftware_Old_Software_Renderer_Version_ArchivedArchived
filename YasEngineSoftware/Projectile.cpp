@@ -8,7 +8,7 @@ Projectile::Projectile(float radius, float x, float y, Vector2D<float> direction
 	velocity.x = speed * direction.x;
 	velocity.y = speed * direction.y;
 	color = BLUE;
-	generateRegularPolygonVertices(position, radius, 6);
+	generateRegularPolygonVertices(position, radius, 4);
 }
 
 Projectile::~Projectile()
