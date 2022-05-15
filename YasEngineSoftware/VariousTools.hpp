@@ -3,7 +3,7 @@
 #include<vector>
 #include<SDL.h>
 
-void listRenderersInformation()
+static void listRenderersInformation()
 {
     int renderDriversNumber = SDL_GetNumRenderDrivers();
     std::vector<SDL_RendererInfo*> renderersDriversInformations;
