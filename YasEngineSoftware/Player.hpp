@@ -35,7 +35,6 @@ class Player : public YasPolygon
 		void regeneratePolygon() override;
 		void setInput(YasInOut::Input* input);
 		void setInput(YasInOut::MousePositionChangeInformation* mouse);
-		void recalculateLookAt();
 		Projectile* shoot();
 };
 

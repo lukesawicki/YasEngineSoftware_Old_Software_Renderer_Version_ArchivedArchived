@@ -66,11 +66,7 @@ Player::Player(float x, float y)
 	localVertices[16].x = -8;
 	localVertices[16].y = -7;
 
-
-	//rotateAllVerticesOverAnAngle(-90.0F);
-
 	generate();
-
 }
 
 Player::~Player()
@@ -109,7 +105,6 @@ void Player::move(float deltaTime)
 	{
 		isShooting = true;
 	}
-
 }
 
 void Player::rotate(float deltaTime)
@@ -137,22 +132,12 @@ void Player::rotateToMousePosition(float x, float y, YasVector2D<int>* windowDim
 
 		windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
 
-		// MOUSE POSITION TO PLAYER POSITION
-		//currentX = currentX - x;
-		//currentY = currentY - y;
-
 		YasVector2D<float> mousePositionVector(static_cast<float>(currentX), static_cast<float>(currentY));
 		YasVector2D<float>::normalizedVector(mousePositionVector);
 
 		float angleBetweenCurrentAndMouse = YasVector2D<float>::angleBetweenVectors(direction, mousePositionVector);
-
-
-		//if (abs(angleBetweenCurrentAndMouse) > 0.0174533F) // jesli obrot jest wiekszy niz 1 stopien.... komentuje bo to bez sensu
-		//{
-			rotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
-			setDirection(mousePositionVector.x, mousePositionVector.y);
-			
-		//}
+		rotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
+		setDirection(mousePositionVector.x, mousePositionVector.y);
 	}
 }
 
@@ -264,11 +249,6 @@ void Player::setInput(YasInOut::Input* input)
 void Player::setInput(YasInOut::MousePositionChangeInformation* mouse)
 {
 	this->mouse = mouse;
-}
-
-void Player::recalculateLookAt()
-{
-
 }
 
 Projectile* Player::shoot()

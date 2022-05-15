@@ -55,7 +55,6 @@ void Circle::generateRegularPolygonVertices(const YasVector2D<float>& position, 
 		localVertices[i].y = 0.0F + static_cast<int>(circumscribedCircleRadius * sin(angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
 		angleForGenerateInIsoscelesPolygons += stepAngle;
 	}
-
 	generate();
 }
 

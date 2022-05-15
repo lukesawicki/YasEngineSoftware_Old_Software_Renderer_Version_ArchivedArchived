@@ -170,6 +170,7 @@
     <ClCompile Include="TimePicker.cpp" />
     <ClCompile Include="YasEngine.cpp" />
     <ClCompile Include="YasGraphicsLibrary.cpp" />
+    <ClCompile Include="YasPolygon.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

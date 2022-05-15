@@ -6,15 +6,12 @@ void YasEngine::initialize()
 {
     prepareBasicSettings();
     prepareRendering();
+    preparePlayer();
 }
 
 void YasEngine::YasEnginStart()
 {
-    player = new Player(0, 0);
-    
-    player->setColor(YELLOW);
-    player->setInput(input);
-    player->setInput(mousePositionChangeInformation);
+
 
 #ifdef DEBUG_DRAWINGS
     Circle* circle = new Circle(100, 0, 0);
@@ -24,22 +21,11 @@ void YasEngine::YasEnginStart()
 
     objectsToDraw.push_back(player);
 
-    // End of test objects definitions
-
-    double time;
-    double newTime;
-    double deltaTime;
-    double fps;
-    double fpsTime;
-    unsigned int frames;
-
     TimePicker timePicker = TimePicker();
     time = timePicker.getSeconds();
 
     fpsTime = 0.0F;
     frames = 0;
-    bool close = false;
-    bool firstTime = true;
 
     while (!quit)
     {
@@ -62,7 +48,6 @@ void YasEngine::YasEnginStart()
             fpsTime = 0.0F;
         }
 
-        handleInput(event);
         update(deltaTime);
         render(deltaTime);
     }
@@ -77,21 +62,21 @@ void YasEngine::YasEnginStart()
 
 void YasEngine::prepareRendering()
 {
-    pixelsTable =       new PixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, BLACK);
-    renderer =          SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    pixelsTable     =   new PixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, BLACK);
+    renderer        =   SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     SDL_RenderSetLogicalSize(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
     SDL_RenderSetIntegerScale(renderer, SDL_TRUE);
 
-    screenTexture =     SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
+    screenTexture   =   SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
 void YasEngine::prepareBasicSettings()
 {
     SDL_Init(SDL_INIT_EVERYTHING);
 
-    windowDimensions =      new YasVector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
-    window =                SDL_CreateWindow("YasEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE);
+    windowDimensions    =   new YasVector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
+    window              =   SDL_CreateWindow("YasEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE);
 
     SDL_SetWindowMinimumSize(window, WINDOW_WIDTH, WINDOW_HEIGHT);
 }
@@ -147,27 +132,35 @@ void YasEngine::handleInput(SDL_Event& event)
                 ;
             }
         }
-        if (event.type == SDL_MOUSEMOTION || event.type == SDL_MOUSEBUTTONDOWN || event.type == SDL_MOUSEBUTTONUP)
+        if (event.type == SDL_MOUSEMOTION)
         {
-            if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
-            {
-                input->mouseLeftButton = true;
-                player->isShooting = true;
-            }
-            if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
-            {
-                input->mouseLeftButton = false;
-                player->isShooting = false;
-            }
-
+            int x;
+            int y;
             mousePositionChangeInformation->mouseMoved = true;
-            int x, y;
             SDL_GetMouseState(&x, &y);
             mousePositionChangeInformation->x = x;
             mousePositionChangeInformation->y = y;
 
         }
+        if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
+        {
+            input->mouseLeftButton  = true;
+            player->isShooting      = true;
+        }
+        if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
+        {
+            input->mouseLeftButton  = false;
+            player->isShooting      = false;
+        }
     }
+}
+
+void YasEngine::preparePlayer()
+{
+    player = new Player(0, 0);
+    player->setColor(YELLOW);
+    player->setInput(input);
+    player->setInput(mousePositionChangeInformation);
 }
 
 void YasEngine::update(double deltaTime)

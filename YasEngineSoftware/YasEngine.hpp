@@ -35,28 +35,31 @@ class YasEngine
 		
 		void initialize();
 		void YasEnginStart();
+
 	private:
 		static YasEngine* instance;
-
+		
+		SDL_Window* window;
+		SDL_Renderer* renderer;
+		SDL_Texture* screenTexture;
+		
+		PixelsTable* pixelsTable;
+		YasVector2D<int>* windowDimensions;
+		SDL_Event event;
 		bool quit = false;
 
-		SDL_Event event;
+		double time;
+		double newTime;
+		double deltaTime;
+		double fps;
+		double fpsTime;
+		unsigned int frames;
 
 		float mouseX;
 		float mouseY;
 
-		const int WINDOW_WIDTH = 1024;
-		const int WINDOW_HEIGHT = 768;
-
-		YasVector2D<int>* windowDimensions;
-
-		SDL_Window* window;
-
-		SDL_Renderer* renderer;
-
-		SDL_Texture* screenTexture;
-
-		PixelsTable* pixelsTable; // (WINDOW_WIDTH, WINDOW_HEIGHT, BLACK);
+		int WINDOW_WIDTH = 1024;
+		int WINDOW_HEIGHT = 768;
 
 		YasVector2D<int> zeroVector;
 		YasVector2D<int> direction;
@@ -77,6 +80,7 @@ class YasEngine
 		bool engineInstantiated = false;
 		void prepareRendering();
 		void prepareBasicSettings();
+		void preparePlayer();
 		void handleInput(SDL_Event& event);
 		void update(double deltaTime);
 		void render(double& deltaTime);
