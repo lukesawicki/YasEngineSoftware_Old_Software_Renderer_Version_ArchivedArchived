@@ -1,7 +1,7 @@
 #ifndef PROJECTILE_HPP
 #define PROJECTILE_HPP
 #include"YasGraphicsLibrary.hpp"
-#include"YasPolygon.hpp"
+#include"GameObject.hpp"
 
 
 class Projectile : public GameObject

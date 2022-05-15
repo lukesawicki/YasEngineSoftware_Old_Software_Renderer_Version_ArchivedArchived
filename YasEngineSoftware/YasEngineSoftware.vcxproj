@@ -155,7 +155,7 @@
     <ClInclude Include="VariousTools.hpp" />
     <ClInclude Include="YasEngine.hpp" />
     <ClInclude Include="YasGraphicsLibrary.hpp" />
-    <ClInclude Include="YasPolygon.hpp" />
+    <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="Vector2D.hpp" />
     <ClInclude Include="Vector4D.hpp" />
   </ItemGroup>

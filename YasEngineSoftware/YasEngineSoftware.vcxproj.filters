@@ -21,7 +21,7 @@
     <ClInclude Include="Vector2D.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="YasPolygon.hpp">
+    <ClInclude Include="GameObject.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="YasGraphicsLibrary.hpp">

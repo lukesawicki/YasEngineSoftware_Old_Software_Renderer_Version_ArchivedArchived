@@ -2,7 +2,7 @@
 #define PLAYER_HPP
 #include<cmath>
 #include"InputOutputHandler.hpp"
-#include"YasPolygon.hpp"
+#include"GameObject.hpp"
 #include"Projectile.hpp"
 
 class Player : public GameObject

@@ -14,7 +14,7 @@
 #include"TimePicker.hpp"
 #include"PixelsTable.hpp"
 #include"Circle.hpp"
-#include"YasPolygon.hpp"
+#include"GameObject.hpp"
 #include"Player.hpp"
 #include"InputOutputHandler.hpp"
 

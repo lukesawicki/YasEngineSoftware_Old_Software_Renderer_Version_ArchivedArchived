@@ -9,7 +9,7 @@
 #include"Vector2D.hpp"
 #include"Vector4D.hpp"
 #include"PixelsTable.hpp"
-#include"YasPolygon.hpp"
+#include"GameObject.hpp"
 
 class PixelsTable;
 

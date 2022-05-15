@@ -1,6 +1,6 @@
 #ifndef CIRCLE_HPP
 #define CIRCLE_HPP
-#include"YasPolygon.hpp"
+#include"GameObject.hpp"
 #include"YasGraphicsLibrary.hpp"
 
 class Circle : public GameObject
