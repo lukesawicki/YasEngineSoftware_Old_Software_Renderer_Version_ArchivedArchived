@@ -25,7 +25,7 @@ class GameObject
 		virtual void generate() = 0;
 		virtual void generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) = 0;
 		virtual void regeneratePolygon() = 0;
-
+		  
 		virtual void setPosition(float x, float y)
 		{
 			position.x = x;

@@ -375,7 +375,7 @@
         return vertices;
     }
 
-    void drawNumbersAsLineSegmentsNotContinuous(Vector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable)
+    void drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable)
     {
         if (maximumNumberOfVertices <= 3)
         {
