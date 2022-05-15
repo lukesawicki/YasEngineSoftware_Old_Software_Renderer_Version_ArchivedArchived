@@ -4,7 +4,7 @@
 #include"YasPolygon.hpp"
 
 
-class Projectile : public YasPolygon
+class Projectile : public GameObject
 {
 	private:
 		bool directionSwitched = false;

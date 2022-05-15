@@ -3,7 +3,7 @@
 #include"YasPolygon.hpp"
 #include"YasGraphicsLibrary.hpp"
 
-class Circle : public YasPolygon
+class Circle : public GameObject
 {
 	private:
 		bool directionSwitched;

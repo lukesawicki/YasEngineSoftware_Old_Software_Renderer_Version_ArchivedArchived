@@ -5,7 +5,7 @@
 #include"YasPolygon.hpp"
 #include"Projectile.hpp"
 
-class Player : public YasPolygon
+class Player : public GameObject
 {
 	public:
 		

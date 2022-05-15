@@ -61,7 +61,7 @@ class YasEngine
 		int WINDOW_WIDTH = 1024;
 		int WINDOW_HEIGHT = 768;
 
-		std::vector<YasPolygon*> objectsToDraw;
+		std::vector<GameObject*> objectsToDraw;
 		Player* player;
 
 		YasEngine() {};

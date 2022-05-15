@@ -292,7 +292,7 @@
         }
     }
 
-    void drawPolygon(YasPolygon* polygon, PixelsTable& pixelsTable)
+    void drawPolygon(GameObject* polygon, PixelsTable& pixelsTable)
     {
         drawLine(polygon->worldVertices[0], polygon->worldVertices[1], pixelsTable, polygon->color);
         for (int i = 0; i < polygon->numberOfVertices; i++)
@@ -427,7 +427,7 @@
         }
     }
 
-    void drawPolygonDirection(YasPolygon* polygon, PixelsTable& pixelsTable)
+    void drawPolygonDirection(GameObject* polygon, PixelsTable& pixelsTable)
     {
         Vector2D<float> direction(polygon->direction.x*100, polygon->direction.y*100);
         drawLine(polygon->vectorZero, direction, pixelsTable, polygon->color);

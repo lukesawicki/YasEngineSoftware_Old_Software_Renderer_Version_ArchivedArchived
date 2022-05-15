@@ -5,7 +5,7 @@
 #include"Vector2D.hpp"
 #include"Vector4D.hpp"
 
-class YasPolygon
+class GameObject
 {
 	public:
 		Vector2D<float>* localVertices = nullptr;

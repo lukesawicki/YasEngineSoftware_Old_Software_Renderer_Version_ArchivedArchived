@@ -33,7 +33,7 @@ const Vector4D<Uint8> YELLOW(255, 255, 0, 255);
 
 void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, PixelsTable& pixelsTable, const Vector4D<Uint8>& drawingColor);
 
-void drawPolygon(YasPolygon* polygon, PixelsTable& pixelsTable);
+void drawPolygon(GameObject* polygon, PixelsTable& pixelsTable);
 
 Vector2D<float>* generateVerticesFromNumbers(const std::vector<int>& numbers);
 
@@ -41,7 +41,7 @@ void drawNumbersAsLineSegmentsNotContinuous(Vector2D<float>* vertices, int maxim
 
 void drawNumbersAsPolyline(Vector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable);
 
-void drawPolygonDirection(YasPolygon* polygon, PixelsTable& pixelsTable);
+void drawPolygonDirection(GameObject* polygon, PixelsTable& pixelsTable);
 
 void swapVectors(Vector2D<int>& point0, Vector2D<int>& point1);
 
