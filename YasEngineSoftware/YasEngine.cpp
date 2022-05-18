@@ -4,14 +4,18 @@ YasEngine* YasEngine::instance = nullptr;
 
 void YasEngine::initialize()
 {
-    prepareGameWorld();
     prepareBasicSettings();
     prepareRendering();
+    prepareGameWorld();
     preparePlayer();
 }
 
 void YasEngine::YasEnginStart()
 {
+    //std::cout << fib(10) << std::endl;
+    //generateNfibonaccinumbers(10);
+    //fib(10);
+
     TimePicker timePicker = TimePicker();
     time = timePicker.getSeconds();
     fpsTime = 0.0F;
@@ -47,6 +51,10 @@ void YasEngine::YasEnginStart()
     }
 
     return;
+}
+
+void YasEngine::drawMathArt()
+{
 }
 
 void YasEngine::prepareRendering()

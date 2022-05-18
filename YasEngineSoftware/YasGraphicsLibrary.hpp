@@ -58,4 +58,6 @@ int xyPixelToArrayPosition(int x, int y, int windowWidth);
 
 void windowPositionToCartesianPosition(float& x, float& y, Vector2D<int>* windowDimensions);
 
+void drawMandelbrotSet();
+
 #endif

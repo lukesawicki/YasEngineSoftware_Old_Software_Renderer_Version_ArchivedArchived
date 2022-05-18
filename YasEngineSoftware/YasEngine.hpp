@@ -17,12 +17,15 @@
 #include"GameObject.hpp"
 #include"Player.hpp"
 #include"InputOutputHandler.hpp"
+#include"Math.hpp"
 
 #define DEBUG_DRAWINGS
+
 
 class YasEngine
 {	
 	public:
+
 		static YasEngine* GetInstance()
 		{
 			if (instance != nullptr)
@@ -37,6 +40,7 @@ class YasEngine
 		void YasEnginStart();
 
 	private:
+
 		static YasEngine* instance;
 		
 		SDL_Window* window;
@@ -58,8 +62,8 @@ class YasEngine
 		float mouseX;
 		float mouseY;
 
-		int WINDOW_WIDTH = 1024;
-		int WINDOW_HEIGHT = 768;
+		int WINDOW_WIDTH = 1280;
+		int WINDOW_HEIGHT = 800;
 
 		std::vector<GameObject*> objectsToDraw;
 		Player* player;
@@ -70,6 +74,8 @@ class YasEngine
 		YasInOut::MousePositionChangeInformation* mousePositionChangeInformation = new YasInOut::MousePositionChangeInformation();
 
 		bool engineInstantiated = false;
+		void generateNumbers();
+		void drawMathArt();
 		void prepareRendering();
 		void prepareBasicSettings();
 		void prepareGameWorld();
@@ -78,6 +84,7 @@ class YasEngine
 		void update(double& deltaTime);
 		void drawHudElements(double& deltaTime);
 		void render(double& deltaTime);
+
 };
 
 #endif

@@ -498,3 +498,8 @@
         x = x - static_cast<int>(0.5 * windowDimensions->x);
         y = (-(y - static_cast<int>(0.5 * windowDimensions->y)));
     }
+
+    void drawMandelbrotSet()
+    {
+
+    }

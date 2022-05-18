@@ -1,5 +1,5 @@
-#ifndef POLYGON_HPP
-#define POLYGON_HPP
+#ifndef GAMEOBJECT_HPP
+#define GAMEOBJECT_HPP
 #include<cmath>
 #include<SDL.h>
 #include"Vector2D.hpp"
