@@ -153,6 +153,7 @@
     <ClInclude Include="Projectile.hpp" />
     <ClInclude Include="TimePicker.hpp" />
     <ClInclude Include="VariousTools.hpp" />
+    <ClInclude Include="ViewPort.hpp" />
     <ClInclude Include="YasEngine.hpp" />
     <ClInclude Include="YasGraphicsLibrary.hpp" />
     <ClInclude Include="GameObject.hpp" />
@@ -169,6 +170,7 @@
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="temporary.cpp" />
     <ClCompile Include="TimePicker.cpp" />
+    <ClCompile Include="ViewPort.cpp" />
     <ClCompile Include="YasEngine.cpp" />
     <ClCompile Include="YasGraphicsLibrary.cpp" />
   </ItemGroup>
