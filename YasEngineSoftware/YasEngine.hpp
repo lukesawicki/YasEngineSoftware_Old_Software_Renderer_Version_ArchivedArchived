@@ -41,6 +41,9 @@ class YasEngine
 
 	private:
 
+		Vector2D<float> A = Vector2D<float>(-300, 200);
+		Vector2D<float> B = Vector2D<float>(100, -350);
+
 		static YasEngine* instance;
 		
 		SDL_Window* window;

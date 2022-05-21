@@ -204,10 +204,15 @@ void YasEngine::render(double& deltaTime)
         drawPolygon(object, *pixelsTable);
     }
 
-    for (int i = -200; i < -100; i++)
-    {
-        pixelsTable->drawPoint(i, -100, YELLOW);
-    }
+    //for (int i = -300; i < -150; i++)
+    //{
+    //    for (int j = -200; j < -50; j++)
+    //    {
+    //        pixelsTable->drawPoint(i, j, YELLOW);
+    //    }
+    //}
+
+    drawLine(A, B, *pixelsTable, YELLOW);
 
     drawHudElements(deltaTime);
 

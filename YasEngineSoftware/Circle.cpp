@@ -4,6 +4,7 @@ Circle::Circle(float radius, float x, float y)
 {
 	directionSwitched = false;
 	speed = 200;
+
 	Vector2D<float> position(x, y);
 	generateRegularPolygonVertices(position, radius, 64);
 }

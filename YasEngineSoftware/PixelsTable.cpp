@@ -53,5 +53,5 @@ void PixelsTable::drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor)
 void PixelsTable::cartesianPositionToWindow(int& x, int& y)
 {
 	x = x + static_cast<int>(0.5F * windowDimensions.x);
-	y = y + static_cast<int>(0.5F * windowDimensions.y);
+	y = -y + static_cast<int>(0.5F * windowDimensions.y);
 }
