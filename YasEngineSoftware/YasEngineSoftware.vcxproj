@@ -148,6 +148,7 @@
     <ClInclude Include="Circle.hpp" />
     <ClInclude Include="InputOutputHandler.hpp" />
     <ClInclude Include="Math.hpp" />
+    <ClInclude Include="MathematicsFunSurface.hpp" />
     <ClInclude Include="PixelsTable.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Projectile.hpp" />
@@ -165,12 +166,12 @@
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Math.cpp" />
+    <ClCompile Include="MathematicsFunSurface.cpp" />
     <ClCompile Include="PixelsTable.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="temporary.cpp" />
     <ClCompile Include="TimePicker.cpp" />
-    <ClCompile Include="ViewPort.cpp" />
     <ClCompile Include="YasEngine.cpp" />
     <ClCompile Include="YasGraphicsLibrary.cpp" />
   </ItemGroup>

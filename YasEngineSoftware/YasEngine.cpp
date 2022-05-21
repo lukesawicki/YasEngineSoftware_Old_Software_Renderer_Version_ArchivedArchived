@@ -204,10 +204,15 @@ void YasEngine::render(double& deltaTime)
         drawPolygon(object, *pixelsTable);
     }
 
+    for (int i = -200; i < -100; i++)
+    {
+        pixelsTable->drawPoint(i, -100, YELLOW);
+    }
+
     drawHudElements(deltaTime);
 
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
-    SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_VERTICAL);
+    SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);
     SDL_RenderPresent(renderer);
 }
 

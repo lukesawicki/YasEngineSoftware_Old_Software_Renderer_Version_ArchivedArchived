@@ -57,6 +57,9 @@
     <ClInclude Include="ViewPort.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MathematicsFunSurface.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YasGraphicsLibrary.cpp">
@@ -92,7 +95,7 @@
     <ClCompile Include="Math.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ViewPort.cpp">
+    <ClCompile Include="MathematicsFunSurface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
