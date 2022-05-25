@@ -18,8 +18,9 @@
 #include"Player.hpp"
 #include"InputOutputHandler.hpp"
 #include"Math.hpp"
+#include"MathematicsFunSurface.hpp"
 
-#define DEBUG_DRAWINGS
+//#define DEBUG_DRAWINGS
 
 
 class YasEngine
@@ -70,6 +71,7 @@ class YasEngine
 
 		std::vector<GameObject*> objectsToDraw;
 		Player* player;
+		MathematicsFunSurface* mathPlay;
 
 		YasEngine() {};
 		bool shouldApplicationStopRunning = false;
@@ -77,7 +79,6 @@ class YasEngine
 		YasInOut::MousePositionChangeInformation* mousePositionChangeInformation = new YasInOut::MousePositionChangeInformation();
 
 		bool engineInstantiated = false;
-		void generateNumbers();
 		void drawMathArt();
 		void prepareRendering();
 		void prepareBasicSettings();

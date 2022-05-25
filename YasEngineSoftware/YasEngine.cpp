@@ -8,14 +8,12 @@ void YasEngine::initialize()
     prepareRendering();
     prepareGameWorld();
     preparePlayer();
+
+    mathPlay = new MathematicsFunSurface(0, 0, windowDimensions->x * 0.5F, windowDimensions->y * 0.5F, BLACK);
 }
 
 void YasEngine::YasEnginStart()
 {
-    //std::cout << fib(10) << std::endl;
-    //generateNfibonaccinumbers(10);
-    //fib(10);
-
     TimePicker timePicker = TimePicker();
     time = timePicker.getSeconds();
     fpsTime = 0.0F;
@@ -193,28 +191,31 @@ void YasEngine::update(double& deltaTime)
     windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
 
     projectile = nullptr;
+
+
+
 }
 
 void YasEngine::render(double& deltaTime)
 {
     pixelsTable->clearColor(BLACK);
+    mathPlay->clearColor(BLACK);
 
     for (auto object : objectsToDraw)
     {
         drawPolygon(object, *pixelsTable);
     }
-
-    //for (int i = -300; i < -150; i++)
-    //{
-    //    for (int j = -200; j < -50; j++)
-    //    {
-    //        pixelsTable->drawPoint(i, j, YELLOW);
-    //    }
-    //}
-
-    drawLine(A, B, *pixelsTable, YELLOW);
-
     drawHudElements(deltaTime);
+
+    int vertical = -WINDOW_WIDTH * 0.25F;
+    int horizontal = -WINDOW_HEIGHT * 0.25F;
+
+    mathPlay->verticalLineOnScreen(vertical, GREEN);
+    mathPlay->horizontalLineOnScreen(horizontal+1, GREEN);//-WINDOW_HEIGHT * 0.25F
+    mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
+
+    verticalLineOnScreen(*pixelsTable, -WINDOW_WIDTH * 0.5F, RED);
+    horizontalLineOnScreen(*pixelsTable, -WINDOW_HEIGHT * 0.5F + 1, RED);
 
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
     SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);
