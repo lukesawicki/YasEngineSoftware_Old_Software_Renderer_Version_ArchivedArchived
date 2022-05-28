@@ -93,7 +93,10 @@ void Tile::drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor)
 
 void Tile::drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor, bool cartesian)
 {
-    cartesianPositionToWindow(x, y);
+    if (cartesian)
+    {
+        cartesianPositionToWindow(x, y);
+    }
     if (x >= 0 && x < viewPortSizes.x && y >= 0 && y < viewPortSizes.y)
     {
         pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + RED_POSITION] = drawingColor.x; // windowDimensions->x <- WINDOW WIDTH
@@ -547,7 +550,7 @@ void Tile::drawLeftTopCorner()
     {
         for (int j = 0; j < 6; j++)
         {
-            drawPoint(j, i, BLUE);
+            drawPoint(j, i, BLUE, false);
         }
     }
 }
@@ -558,7 +561,7 @@ void Tile::drawRightTopCorner()
     {
         for (int j = 31; j > 25; j--) //int i = 31; i > 25; i--
         {
-            drawPoint(j, i, BLUE);
+            drawPoint(j, i, BLUE, false);
         }
     }
 }
@@ -569,7 +572,7 @@ void Tile::drawRightBottomCorner()
     {
         for(int j = 31; j > 31; j--)
         {
-            drawPoint(j, i, BLUE);
+            drawPoint(j, i, BLUE, false);
         }
     }
 }
@@ -580,7 +583,7 @@ void Tile::drawLeftBottomCorner()
     {
         for (int j = 0; j < 6; j++)
         {
-            drawPoint(j, i, BLUE);
+            drawPoint(j, i, BLUE, false);
         }
     }
 }

@@ -58,7 +58,7 @@ class Tile : public ViewPort
 		{
 			for (int i = 0; i < viewPortSizes.x; i++) //X
 			{
-				drawPoint(i, y, color);
+				drawPoint(i, y, color, false);
 			}
 		}
 
@@ -66,7 +66,7 @@ class Tile : public ViewPort
 		{
 			for (int i = 0; i < viewPortSizes.y; i++) //X
 			{
-				drawPoint(x, i, color);
+				drawPoint(x, i, color, false);
 			}
 		}
 };

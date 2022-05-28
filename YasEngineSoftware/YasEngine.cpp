@@ -266,35 +266,43 @@ void YasEngine::prepareGameWorld()
 
         /* generate secret number between 1 and 10: */
         //Tile(int x, int y, int width, int height, const Vector4D<Uint8>&defaultColor);
-        tiles = new Tile[3];
-        for(int i=0; i<3; i++)
+        tiles = new Tile[10];
+        for(int i=0; i<9; i++)
         {
             tiles[i].setPositions(0, 0);
             tiles[i].setSizes(32, 32);
             tiles[i].createPixelsTable();
-            switch (i)
-        	{
-	            case 0:
-                    tiles[i].setColor(RED);
-	                break;
-	            case 1:
-                    tiles[i].setColor(GREEN);
-	                break;
-	            case 2:
-                    tiles[i].setColor(BLUE);
-	                break;
-	            default:
-	                ;
-            }
-            
-
+            tiles[i].clearColor(BLACK);
+            tiles[i].drawPattern(i, BLUE);
         }
-
+        int patter = 0;
         for(int i=0; i<25; i++)
         {
+
 	        for(int j=0; j<40; j++)
 	        {
-                simplifiedMap[i][j] = rand() % 3;
+                // if(i%2==0)
+                // {
+                //     simplifiedMap[i][j] = simplifiedMap[i][j] = 1;//rand() % 10;;
+                // }
+                // else
+                // {
+                    
+                    // if(i==0 && j ==0)
+                    // {
+                    //     simplifiedMap[i][j] = simplifiedMap[i][j] = 0;
+                    // }
+                    // else
+                    // {
+                    //     if(i==1 && j==0)
+                        // {
+                            simplifiedMap[i][j] = simplifiedMap[i][j] = rand() % 10;
+                        // }
+                        //simplifiedMap[i][j] = simplifiedMap[i][j] = 4;
+                    // }
+                // }
+                //simplifiedMap[i][j] = simplifiedMap[i][j] = rand() % 10;;
+
 	        }
         }
 
