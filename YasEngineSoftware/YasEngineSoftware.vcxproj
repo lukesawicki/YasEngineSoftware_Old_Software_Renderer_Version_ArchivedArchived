@@ -148,7 +148,7 @@
     <ClInclude Include="Circle.hpp" />
     <ClInclude Include="InputOutputHandler.hpp" />
     <ClInclude Include="Math.hpp" />
-    <ClInclude Include="MathematicsFunSurface.hpp" />
+    <ClInclude Include="Tile.hpp" />
     <ClInclude Include="PixelsTable.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Projectile.hpp" />

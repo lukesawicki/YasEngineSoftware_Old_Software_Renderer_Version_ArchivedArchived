@@ -18,7 +18,7 @@
 #include"Player.hpp"
 #include"InputOutputHandler.hpp"
 #include"Math.hpp"
-#include"MathematicsFunSurface.hpp"
+#include"Tile.hpp"
 
 //#define DEBUG_DRAWINGS
 
