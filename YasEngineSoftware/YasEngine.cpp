@@ -1,5 +1,13 @@
 #include "YasEngine.hpp"
+#include <cstdlib>     /* srand, rand */
+#include <ctime> 
+#include<SDL_endian.h>
 
+#include"VariousTools.hpp"
+
+#include"Circle.hpp"
+
+#include"Math.hpp"
 YasEngine* YasEngine::instance = nullptr;
 
 void YasEngine::initialize()
@@ -9,7 +17,7 @@ void YasEngine::initialize()
     prepareGameWorld();
     preparePlayer();
 
-    mathPlay = new MathematicsFunSurface(0, 0, windowDimensions->x * 0.5F, windowDimensions->y * 0.5F, BLACK);
+    //mathPlay = new Tile(0, 0, windowDimensions->x * 0.5F, windowDimensions->y * 0.5F, BLACK);
 }
 
 void YasEngine::YasEnginStart()
@@ -83,6 +91,42 @@ void YasEngine::drawHudElements(double& deltaTime)
     #endif // DEBUG_DRAWINGS
 
     drawCrossHair(mouseX, mouseY, *pixelsTable);
+}
+
+
+//
+// for (int i = 0; i < 20; i++)
+// {
+//     for (int j = 0; j < 40; j++)
+//     {
+//         simplifiedMap[i][j] = rand() % 3;
+
+void YasEngine::drawTiles()
+{
+    for(int i=0; i<25; i++)
+    {
+	    for(int j=0; j<40; j++)
+	    {
+            // switch ()
+            // {
+            // case 0:
+
+            //                                              -608           -368
+                tiles[simplifiedMap[i][j]].setPositions(j * 32, i * 32);//setPositions(j*32+640, -(i*32 - 400));
+                tiles[simplifiedMap[i][j]].copyPixelsInToPIxelTable(*pixelsTable, false);
+                // break;
+            // case 1:
+                // tiles[simplifiedMap[i][j]];
+                // break;
+            // case 2:
+                // tiles[simplifiedMap[i][j]];
+                // break;
+            // default:
+                // ;
+            // };
+	    }
+    }
+
 }
 
 void YasEngine::handleInput(SDL_Event& event)
@@ -199,7 +243,7 @@ void YasEngine::update(double& deltaTime)
 void YasEngine::render(double& deltaTime)
 {
     pixelsTable->clearColor(BLACK);
-    mathPlay->clearColor(BLACK);
+    //mathPlay->clearColor(BLACK);
 
     for (auto object : objectsToDraw)
     {
@@ -210,9 +254,9 @@ void YasEngine::render(double& deltaTime)
     int vertical = -WINDOW_WIDTH * 0.25F;
     int horizontal = -WINDOW_HEIGHT * 0.25F;
 
-    mathPlay->verticalLineOnScreen(vertical, GREEN);
-    mathPlay->horizontalLineOnScreen(horizontal+1, GREEN);//-WINDOW_HEIGHT * 0.25F
-    mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
+    // mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
+
+    drawTiles();
 
     verticalLineOnScreen(*pixelsTable, -WINDOW_WIDTH * 0.5F, RED);
     horizontalLineOnScreen(*pixelsTable, -WINDOW_HEIGHT * 0.5F + 1, RED);
@@ -229,5 +273,42 @@ void YasEngine::prepareGameWorld()
         circle->setColor(BLUE);
         objectsToDraw.push_back(circle);
     #endif
+
+        /* initialize random seed: */
+        srand(std::time(NULL));
+
+        /* generate secret number between 1 and 10: */
+        //Tile(int x, int y, int width, int height, const Vector4D<Uint8>&defaultColor);
+        tiles = new Tile[3];
+        for(int i=0; i<3; i++)
+        {
+            tiles[i].setPositions(0, 0);
+            tiles[i].setSizes(32, 32);
+            tiles[i].createPixelsTable();
+            switch (i)
+        	{
+	            case 0:
+                    tiles[i].setColor(RED);
+	                break;
+	            case 1:
+                    tiles[i].setColor(GREEN);
+	                break;
+	            case 2:
+                    tiles[i].setColor(BLUE);
+	                break;
+	            default:
+	                ;
+            }
+            
+
+        }
+
+        for(int i=0; i<25; i++)
+        {
+	        for(int j=0; j<40; j++)
+	        {
+                simplifiedMap[i][j] = rand() % 3;
+	        }
+        }
 
 }

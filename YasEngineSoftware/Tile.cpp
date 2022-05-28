@@ -1,22 +1,32 @@
-#include"MathematicsFunSurface.hpp"
+#include"Tile.hpp"
 
 //derived
 //Vector2D<int> position;
 //Vector2D<int> viewPortSizes;
 //Uint8* pixels = nullptr;
 
-MathematicsFunSurface::MathematicsFunSurface(int x, int y, int width, int height, const Vector4D<Uint8>& defaultColor)
+
+Tile::Tile()
+{
+    position.x = 0;
+    position.y = 0;
+    viewPortSizes.x = 0;
+    viewPortSizes.y = 0;
+    pixels = nullptr;
+    clearColor(BLACK);
+}
+
+Tile::Tile(int x, int y, int width, int height, const Vector4D<Uint8>& defaultColor)
 {
 	position.x = x;
 	position.y = y;
 	viewPortSizes.x = width;
 	viewPortSizes.y = height;
 	pixels = new Uint8[viewPortSizes.x * viewPortSizes.y * NUMBER_OF_COLORS];
-	clearColor(defaultColor);
-
+    clearColor(defaultColor);
 }
 
-MathematicsFunSurface::MathematicsFunSurface(Vector2D<int> position, int width, int height, const Vector4D<Uint8>& defaultColor)
+Tile::Tile(Vector2D<int> position, int width, int height, const Vector4D<Uint8>& defaultColor)
 {
 	this->position.x = position.x;
 	this->position.y = position.y;
@@ -26,12 +36,34 @@ MathematicsFunSurface::MathematicsFunSurface(Vector2D<int> position, int width, 
 	clearColor(defaultColor);
 }
 
-MathematicsFunSurface::~MathematicsFunSurface()
+void Tile::setPositions(int x, int y)
+{
+    position.x = x;
+    position.y = y;
+}
+
+void Tile::setSizes(int width, int height)
+{
+    viewPortSizes.x = width;
+    viewPortSizes.y = height;
+}
+
+void Tile::setColor(const Vector4D<Uint8>& defaultColor)
+{
+    clearColor(defaultColor);
+}
+
+void Tile::createPixelsTable()
+{
+    pixels = new Uint8[viewPortSizes.x * viewPortSizes.y * NUMBER_OF_COLORS];
+}
+
+Tile::~Tile()
 {
 	delete[] pixels;
 }
 
-void MathematicsFunSurface::clearColor(const Vector4D<Uint8>& drawingColor)
+void Tile::clearColor(const Vector4D<Uint8>& drawingColor)
 {
 	for (int y = 0; y < viewPortSizes.y; y++)
 	{
@@ -45,7 +77,7 @@ void MathematicsFunSurface::clearColor(const Vector4D<Uint8>& drawingColor)
 	}
 }
 
-void MathematicsFunSurface::drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor)
+void Tile::drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor)
 {
 	cartesianPositionToWindow(x, y);
 	if (x >= 0 && x < viewPortSizes.x && y >= 0 && y < viewPortSizes.y)
@@ -57,7 +89,7 @@ void MathematicsFunSurface::drawPoint(int x, int y, const Vector4D<Uint8>& drawi
 	}
 }
 
-void MathematicsFunSurface::drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, const Vector4D<Uint8>& drawingColor)
+void Tile::drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, const Vector4D<Uint8>& drawingColor)
 {
     int x0 = point0.x;
     int y0 = point0.y;
@@ -349,11 +381,11 @@ void MathematicsFunSurface::drawLine(const Vector2D<float>& point0, const Vector
     }
 }
 
-void MathematicsFunSurface::drawPolygon(GameObject* polygon)
+void Tile::drawPolygon(GameObject* polygon)
 {
 }
 
-void MathematicsFunSurface::copyPixelsInToPIxelTable(PixelsTable& pixelsTable)
+void Tile::copyPixelsInToPIxelTable(PixelsTable& pixelsTable)
 {
     int posX = position.x;
     int posY = position.y + viewPortSizes.y;
@@ -370,6 +402,32 @@ void MathematicsFunSurface::copyPixelsInToPIxelTable(PixelsTable& pixelsTable)
             pixelsTable.pixels[NUMBER_OF_COLORS*((posY+i) * pixelsTable.windowDimensions.x + posX+j) + GREEN_POSITION] = pixels[NUMBER_OF_COLORS * (i * viewPortSizes.x + j) + GREEN_POSITION];// + GREEN_POSITION];
             pixelsTable.pixels[NUMBER_OF_COLORS*((posY+i) * pixelsTable.windowDimensions.x + posX+j) + BLUE_POSITION] =  pixels[NUMBER_OF_COLORS * (i * viewPortSizes.x + j) + BLUE_POSITION];// + BLUE_POSITION];
             pixelsTable.pixels[NUMBER_OF_COLORS*((posY+i) * pixelsTable.windowDimensions.x + posX+j) + ALPHA_POSITION] = pixels[NUMBER_OF_COLORS * (i * viewPortSizes.x + j) + ALPHA_POSITION];// + ALPHA_POSITION];
+            viewportIndex = viewportIndex + 1;
+        }
+        startPoint = startPoint + viewPortSizes.x;
+    }
+}
+
+void Tile::copyPixelsInToPIxelTable(PixelsTable& pixelsTable, bool cartesian)
+{
+    int posX = position.x;
+    int posY = position.y + viewPortSizes.y;
+
+    if (cartesian)
+    {
+        pixelsTable.cartesianPositionToWindow(posX, posY);
+    }
+
+    int startPoint = NUMBER_OF_COLORS * (posY * pixelsTable.windowDimensions.x + posX);
+    int viewportIndex = 0;
+    for (int i = 0; i < viewPortSizes.y; i++)
+    {
+        for (int j = 0; j < viewPortSizes.x; j++)
+        {
+            pixelsTable.pixels[NUMBER_OF_COLORS * ((posY + i) * pixelsTable.windowDimensions.x + posX + j) + RED_POSITION] = pixels[NUMBER_OF_COLORS * (i * viewPortSizes.x + j) + RED_POSITION];// + RED_POSITION];
+            pixelsTable.pixels[NUMBER_OF_COLORS * ((posY + i) * pixelsTable.windowDimensions.x + posX + j) + GREEN_POSITION] = pixels[NUMBER_OF_COLORS * (i * viewPortSizes.x + j) + GREEN_POSITION];// + GREEN_POSITION];
+            pixelsTable.pixels[NUMBER_OF_COLORS * ((posY + i) * pixelsTable.windowDimensions.x + posX + j) + BLUE_POSITION] = pixels[NUMBER_OF_COLORS * (i * viewPortSizes.x + j) + BLUE_POSITION];// + BLUE_POSITION];
+            pixelsTable.pixels[NUMBER_OF_COLORS * ((posY + i) * pixelsTable.windowDimensions.x + posX + j) + ALPHA_POSITION] = pixels[NUMBER_OF_COLORS * (i * viewPortSizes.x + j) + ALPHA_POSITION];// + ALPHA_POSITION];
             viewportIndex = viewportIndex + 1;
         }
         startPoint = startPoint + viewPortSizes.x;

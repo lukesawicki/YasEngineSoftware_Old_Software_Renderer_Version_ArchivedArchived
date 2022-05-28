@@ -1,23 +1,20 @@
 #ifndef YASENGINE_HPP
 #define YASENGINE_HPP
-#include<SDL_endian.h>
+
 #include<stdio.h>
-#include<cstdlib>
+
 #include<iostream>
 #include<vector>
-#include<map>
-#include<utility>
-#include<cmath>
-#include"VariousTools.hpp"
+
 #include"Vector2D.hpp"
 #include"YasGraphicsLibrary.hpp"
 #include"TimePicker.hpp"
 #include"PixelsTable.hpp"
-#include"Circle.hpp"
+
 #include"GameObject.hpp"
 #include"Player.hpp"
 #include"InputOutputHandler.hpp"
-#include"Math.hpp"
+
 #include"Tile.hpp"
 
 //#define DEBUG_DRAWINGS
@@ -71,7 +68,8 @@ class YasEngine
 
 		std::vector<GameObject*> objectsToDraw;
 		Player* player;
-		MathematicsFunSurface* mathPlay;
+		int simplifiedMap[25][40];
+		Tile* tiles;
 
 		YasEngine() {};
 		bool shouldApplicationStopRunning = false;
@@ -87,6 +85,7 @@ class YasEngine
 		void handleInput(SDL_Event& event);
 		void update(double& deltaTime);
 		void drawHudElements(double& deltaTime);
+		void drawTiles();
 		void render(double& deltaTime);
 
 };
