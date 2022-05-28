@@ -411,7 +411,7 @@ void Tile::copyPixelsInToPIxelTable(PixelsTable& pixelsTable)
 void Tile::copyPixelsInToPIxelTable(PixelsTable& pixelsTable, bool cartesian)
 {
     int posX = position.x;
-    int posY = position.y + viewPortSizes.y;
+    int posY = position.y;// +viewPortSizes.y;
 
     if (cartesian)
     {

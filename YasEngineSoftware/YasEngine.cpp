@@ -112,7 +112,8 @@ void YasEngine::drawTiles()
             // case 0:
 
             //                                              -608           -368
-                tiles[simplifiedMap[i][j]].setPositions(j * 32, i * 32);//setPositions(j*32+640, -(i*32 - 400));
+            //
+            tiles[simplifiedMap[i][j]].setPositions(j * 32, (i * 32));// -32); // In old version the origin point is bottom left
                 tiles[simplifiedMap[i][j]].copyPixelsInToPIxelTable(*pixelsTable, false);
                 // break;
             // case 1:
