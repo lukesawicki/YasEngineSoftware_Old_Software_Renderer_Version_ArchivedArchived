@@ -4,7 +4,7 @@ Projectile::Projectile(float radius, float x, float y, Vector2D<float> direction
 {
 	directionSwitched = false;
 	speed = 200;
-	Vector2D<float> position(x, y);
+	const Vector2D<float> position(x, y);
 	velocity.x = speed * direction.x;
 	velocity.y = speed * direction.y;
 	color = BLUE;

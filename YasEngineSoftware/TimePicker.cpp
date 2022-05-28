@@ -8,7 +8,7 @@
         isFrequencyOfThePerformanceCounterPickedUp = (QueryPerformanceFrequency(&frequency) != 0);
     }
 
-    double TimePicker::getSeconds()
+    double TimePicker::getSeconds() const
     {
         if(isFrequencyOfThePerformanceCounterPickedUp)
         {

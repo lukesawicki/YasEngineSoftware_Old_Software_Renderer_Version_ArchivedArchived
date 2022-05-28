@@ -9,12 +9,11 @@ class Circle : public GameObject
 		bool directionSwitched;
 	public:
 		Circle(float radius, float x, float y);
-		~Circle();
+		virtual ~Circle();
 		void move(float deltaTime) override;
 		void generate() override;
 		void generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) override;
 		void regeneratePolygon() override;
-
 };
 
 #endif

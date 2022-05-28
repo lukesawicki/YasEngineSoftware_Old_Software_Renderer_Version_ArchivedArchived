@@ -1,4 +1,5 @@
 #include"MathematicsFunSurface.hpp"
+#include "YasGraphicsLibrary.hpp"
 
 //derived
 //Vector2D<int> position;

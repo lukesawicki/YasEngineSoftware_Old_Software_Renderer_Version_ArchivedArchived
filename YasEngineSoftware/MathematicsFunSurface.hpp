@@ -1,5 +1,6 @@
 #ifndef MATHEMATICSFUNSURFACE_HPP
 #define MATHEMATICSFUNSURFACE_HPP
+#include "PixelsTable.hpp"
 #include"ViewPort.hpp"
 
 class MathematicsFunSurface : public ViewPort

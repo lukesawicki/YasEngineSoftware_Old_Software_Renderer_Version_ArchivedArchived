@@ -3,7 +3,7 @@
 #include<SDL.h>
 #include"Vector2D.hpp"
 #include"Vector4D.hpp"
-#include"YasGraphicsLibrary.hpp"
+// #include"YasGraphicsLibrary.hpp"
 
 class PixelsTable
 {

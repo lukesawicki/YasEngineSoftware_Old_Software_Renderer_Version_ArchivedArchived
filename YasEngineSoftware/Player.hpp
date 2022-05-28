@@ -1,6 +1,6 @@
 #ifndef PLAYER_HPP
 #define PLAYER_HPP
-#include<cmath>
+// #include<cmath>
 #include"InputOutputHandler.hpp"
 #include"GameObject.hpp"
 #include"Projectile.hpp"

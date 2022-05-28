@@ -1,6 +1,6 @@
 #ifndef GAMEOBJECT_HPP
 #define GAMEOBJECT_HPP
-#include<cmath>
+// #include<cmath>
 #include<SDL.h>
 #include"Vector2D.hpp"
 #include"Vector4D.hpp"

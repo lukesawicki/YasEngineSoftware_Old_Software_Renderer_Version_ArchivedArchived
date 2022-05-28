@@ -8,7 +8,7 @@ class TimePicker
 {
     public:
         TimePicker();
-        double getSeconds();
+        double getSeconds() const;
 
     private:
         LARGE_INTEGER frequency;

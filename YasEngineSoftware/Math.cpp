@@ -1,4 +1,5 @@
 #include"Math.hpp"
+#include <map>
 
 std::vector<int> generatePrimeNumbersLessThanN(int n)
 {

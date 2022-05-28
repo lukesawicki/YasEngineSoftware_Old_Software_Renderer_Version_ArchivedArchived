@@ -1,23 +1,23 @@
 #ifndef YASENGINE_HPP
 #define YASENGINE_HPP
-#include<SDL_endian.h>
-#include<stdio.h>
-#include<cstdlib>
+// #include<SDL_endian.h>
+// #include<cstdio>
+// #include<cstdlib>
 #include<iostream>
 #include<vector>
-#include<map>
-#include<utility>
-#include<cmath>
-#include"VariousTools.hpp"
+// #include<map>
+// #include<utility>
+// #include<cmath>
+// #include"VariousTools.hpp"
 #include"Vector2D.hpp"
 #include"YasGraphicsLibrary.hpp"
 #include"TimePicker.hpp"
 #include"PixelsTable.hpp"
-#include"Circle.hpp"
+// #include"Circle.hpp"
 #include"GameObject.hpp"
 #include"Player.hpp"
 #include"InputOutputHandler.hpp"
-#include"Math.hpp"
+// #include"Math.hpp"
 #include"MathematicsFunSurface.hpp"
 
 //#define DEBUG_DRAWINGS
