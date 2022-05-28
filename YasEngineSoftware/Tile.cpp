@@ -58,6 +58,8 @@ void Tile::createPixelsTable()
     pixels = new Uint8[viewPortSizes.x * viewPortSizes.y * NUMBER_OF_COLORS];
 }
 
+
+
 Tile::~Tile()
 {
 	delete[] pixels;
@@ -87,6 +89,18 @@ void Tile::drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor)
 		pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + BLUE_POSITION] = drawingColor.z;
 		pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + ALPHA_POSITION] = drawingColor.w;
 	}
+}
+
+void Tile::drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor, bool cartesian)
+{
+    cartesianPositionToWindow(x, y);
+    if (x >= 0 && x < viewPortSizes.x && y >= 0 && y < viewPortSizes.y)
+    {
+        pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + RED_POSITION] = drawingColor.x; // windowDimensions->x <- WINDOW WIDTH
+        pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + GREEN_POSITION] = drawingColor.y;
+        pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + BLUE_POSITION] = drawingColor.z;
+        pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + ALPHA_POSITION] = drawingColor.w;
+    }
 }
 
 void Tile::drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, const Vector4D<Uint8>& drawingColor)
@@ -385,6 +399,65 @@ void Tile::drawPolygon(GameObject* polygon)
 {
 }
 
+void Tile::drawPattern(int pattern, const Vector4D<Uint8>& drawingColor)
+{
+    switch (pattern)
+    {
+    case 0:
+        drawLeft();
+        drawRight();
+        break;
+    case 1:
+        drawTop();
+        drawBottom();
+        break;
+    case 2:
+        drawLeft();
+        drawBottom();
+        drawRightTopCorner();
+        break;
+    case 3:
+        drawLeft();
+        drawTop();
+        drawRightBottomCorner();
+        break;
+    case 4:
+        drawTop();
+        drawRight();
+        drawLeftBottomCorner();
+        break;
+    case 5:
+        drawRight();
+        drawBottom();
+        drawLeftTopCorner();
+        break;
+    case 6:
+        drawRight();
+        drawBottom();
+        drawLeft();
+        break;
+    case 7:
+        drawTop();
+        drawBottom();
+        drawLeft();
+        break;
+    case 8:
+        drawTop();
+        drawRight();
+        drawLeft();
+        break;
+    case 9:
+        drawTop();
+        drawRight();
+        drawBottom();
+        break;
+    default:
+        ;
+    }
+}
+
+
+
 void Tile::copyPixelsInToPIxelTable(PixelsTable& pixelsTable)
 {
     int posX = position.x;
@@ -431,5 +504,83 @@ void Tile::copyPixelsInToPIxelTable(PixelsTable& pixelsTable, bool cartesian)
             viewportIndex = viewportIndex + 1;
         }
         startPoint = startPoint + viewPortSizes.x;
+    }
+}
+
+void Tile::drawTop()
+{
+    for(int i = 0; i<6; i++)
+    {
+        horizontalLineOnViewport(i, BLUE);
+    }
+}
+
+void Tile::drawRight()
+{
+    for (int i = 31; i >25; i--)
+    {
+        verticalLineOnViewport(i, BLUE);
+    }
+}
+
+void Tile::drawBottom()
+{
+    for (int i = 31; i > 25; i--)
+    {
+        horizontalLineOnViewport(i, BLUE);
+    }
+}
+
+void Tile::drawLeft()
+{
+    for(int i=0; i<6; i++)
+    {
+        verticalLineOnViewport(i, BLUE);
+    }
+}
+
+
+
+void Tile::drawLeftTopCorner()
+{
+    for (int i = 0; i < 6; i++)
+    {
+        for (int j = 0; j < 6; j++)
+        {
+            drawPoint(j, i, BLUE);
+        }
+    }
+}
+
+void Tile::drawRightTopCorner()
+{
+    for (int i = 0; i < 6; i++)
+    {
+        for (int j = 31; j > 25; j--) //int i = 31; i > 25; i--
+        {
+            drawPoint(j, i, BLUE);
+        }
+    }
+}
+
+void Tile::drawRightBottomCorner()
+{
+    for (int i = 31; i > 25 ; i--)
+    {
+        for(int j = 31; j > 31; j--)
+        {
+            drawPoint(j, i, BLUE);
+        }
+    }
+}
+// REMEMBER TO ADD DRAWPOINT FOR ONLY VIEWPORT POSITION
+void Tile::drawLeftBottomCorner()
+{
+    for (int i = 31; i > 25; i--)
+    {
+        for (int j = 0; j < 6; j++)
+        {
+            drawPoint(j, i, BLUE);
+        }
     }
 }

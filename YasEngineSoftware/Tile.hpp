@@ -20,10 +20,21 @@ class Tile : public ViewPort
 		~Tile();
 		void clearColor(const Vector4D<Uint8>& drawingColor) override;
 		void drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor) override;
+		void drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor, bool cartesian);
 		void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, const Vector4D<Uint8>& drawingColor)  override;
 		void drawPolygon(GameObject* polygon)  override;
+		void drawPattern(int pattern, const Vector4D<Uint8>& drawingColor);
 		void copyPixelsInToPIxelTable(PixelsTable& pixelsTable);
 		void copyPixelsInToPIxelTable(PixelsTable& pixelsTable, bool cartesian);
+
+		void drawTop();
+		void drawRight();
+		void drawBottom();
+		void drawLeft();
+		void drawLeftTopCorner();
+		void drawRightTopCorner();
+		void drawRightBottomCorner();
+		void drawLeftBottomCorner();
 
 		void horizontalLineOnScreen(int y, Vector4D<Uint8> color)
 		{
@@ -38,6 +49,22 @@ class Tile : public ViewPort
 		{
 			int maxY = static_cast<int>(0.5F * viewPortSizes.y);
 			for (int i = -maxY; i < maxY; i++) //X
+			{
+				drawPoint(x, i, color);
+			}
+		}
+
+		void horizontalLineOnViewport(int y, Vector4D<Uint8> color)
+		{
+			for (int i = 0; i < viewPortSizes.x; i++) //X
+			{
+				drawPoint(i, y, color);
+			}
+		}
+
+		void verticalLineOnViewport(int x, Vector4D<Uint8> color)
+		{
+			for (int i = 0; i < viewPortSizes.y; i++) //X
 			{
 				drawPoint(x, i, color);
 			}
