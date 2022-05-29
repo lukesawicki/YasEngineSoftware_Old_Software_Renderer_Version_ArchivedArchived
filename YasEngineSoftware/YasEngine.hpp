@@ -114,6 +114,11 @@ class YasEngine
 			return x - 640;
 		}
 
+		int yWindowToCartesian(int y)
+		{
+			return -(y - 400);
+		}
+
 };
 
 #endif
