@@ -48,7 +48,7 @@ class GameObject
 			this->color.w = color.w;
 		}
 
-	protected:
+	
 		Vector2D<float> position;
 
 	private:

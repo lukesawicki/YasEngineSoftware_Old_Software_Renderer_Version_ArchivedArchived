@@ -192,6 +192,7 @@ void YasEngine::handleInput(SDL_Event& event)
 void YasEngine::preparePlayer()
 {
     player = new Player(0, 0);
+    player->circumscribedCircleRadius = 22;
     player->setColor(YELLOW);
     player->setInput(input);
     player->setInput(mousePositionChangeInformation);
@@ -204,6 +205,11 @@ void YasEngine::update(double& deltaTime)
     {
         object->move(static_cast<float>(deltaTime));
         object->regeneratePolygon();
+    }
+
+    if(player->position.x - player->circumscribedCircleRadius < xWindowToCartesian(544))
+    {
+        std::cout << "YOU DIED" << std::endl;
     }
 
     Projectile* projectile = player->shoot();
@@ -267,7 +273,7 @@ void YasEngine::prepareGameWorld()
 
         /* generate secret number between 1 and 10: */
         //Tile(int x, int y, int width, int height, const Vector4D<Uint8>&defaultColor);
-        tiles = new Tile[11];
+        tiles = new Tile[9];
         for(int i=0; i<9; i++)
         {
             tiles[i].setPositions(0, 0);
@@ -289,7 +295,7 @@ void YasEngine::prepareGameWorld()
         {
             for (int j = 0; j < 40; j++)
             {
-                //if((i<10 || i>14) || (j < 17 || j>22))
+                ////if((i<10 || i>14) || (j < 17 || j>22))
                 if ((i < numberOfWallsTop || i> numberOfWallsVertically - (numberOfWallsTop + 1))  || (j < numberOfWallsLeft || j>numberOfWallsHorizontally - (numberOfWallsRight + 1)))
                 {
                     simplifiedMap[i][j] = rand() % 8;

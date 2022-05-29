@@ -109,6 +109,11 @@ class YasEngine
 		void drawTiles();
 		void render(double& deltaTime);
 
+		int xWindowToCartesian(int x)
+		{
+			return x - 640;
+		}
+
 };
 
 #endif
