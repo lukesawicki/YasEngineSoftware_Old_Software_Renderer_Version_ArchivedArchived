@@ -407,52 +407,32 @@ void Tile::drawPattern(int pattern, const Vector4D<Uint8>& drawingColor)
     switch (pattern)
     {
     case 0:
-        drawLeft();
-        drawRight();
+        drawTop();
         break;
     case 1:
-        drawTop();
-        drawBottom();
+        drawRight();
         break;
     case 2:
-        drawLeft();
         drawBottom();
-        drawRightTopCorner();
         break;
     case 3:
         drawLeft();
-        drawTop();
-        drawRightBottomCorner();
         break;
     case 4:
         drawTop();
         drawRight();
-        drawLeftBottomCorner();
         break;
     case 5:
         drawRight();
         drawBottom();
-        drawLeftTopCorner();
         break;
     case 6:
-        drawRight();
         drawBottom();
         drawLeft();
         break;
     case 7:
         drawTop();
-        drawBottom();
         drawLeft();
-        break;
-    case 8:
-        drawTop();
-        drawRight();
-        drawLeft();
-        break;
-    case 9:
-        drawTop();
-        drawRight();
-        drawBottom();
         break;
     default:
         ;

@@ -16,9 +16,12 @@
 #include"InputOutputHandler.hpp"
 
 #include"Tile.hpp"
+#include"TileData.hpp"
 
 //#define DEBUG_DRAWINGS
 
+
+struct TileData;
 
 class YasEngine
 {	
@@ -38,7 +41,24 @@ class YasEngine
 		void YasEnginStart();
 
 	private:
+		//////// GAMEPLAY
+		///
+		int numberOfWallsVertically = 25;
+		int numberOfWallsHorizontally = 40;
+		int numberOfWallsLeft = 17;
+		int numberOfWallsRight = 17;
+		int numberOfWallsTop = 10;
+		int numberOfWallsBottom = 10;
 
+		//if((i<10 || i>14) || (j < 17 || j>22))
+		//if ((i < numberOfWallsTop || i> numberOfWallsVertically - (numberOfWallsTop+1))) || (j < numberOfWallsLeft || j>numberOfWallsHorizontally - (numberOfWallsRight+1)))
+
+		int leftBorder;
+		int rightBorder;
+		int topBorder;
+		int bottomBorder;
+
+		///////////////////////////////////////////////
 		Vector2D<float> A = Vector2D<float>(-300, 200);
 		Vector2D<float> B = Vector2D<float>(100, -350);
 
@@ -69,6 +89,7 @@ class YasEngine
 		std::vector<GameObject*> objectsToDraw;
 		Player* player;
 		int simplifiedMap[25][40];
+
 		Tile* tiles;
 
 		YasEngine() {};

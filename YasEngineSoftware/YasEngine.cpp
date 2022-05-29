@@ -107,10 +107,11 @@ void YasEngine::drawTiles()
     {
 	    for(int j=0; j<40; j++)
 	    {
-
-            tiles[simplifiedMap[i][j]].setPositions(j * 32, (i * 32));// -32); // In old version the origin point is bottom left
+            if (simplifiedMap[i][j] != -1)
+            {
+                tiles[simplifiedMap[i][j]].setPositions(j * 32, (i * 32));// -32); // In old version the origin point is bottom left
                 tiles[simplifiedMap[i][j]].copyPixelsInToPIxelTable(*pixelsTable, false);
-
+            }
 	    }
     }
 
@@ -266,7 +267,7 @@ void YasEngine::prepareGameWorld()
 
         /* generate secret number between 1 and 10: */
         //Tile(int x, int y, int width, int height, const Vector4D<Uint8>&defaultColor);
-        tiles = new Tile[10];
+        tiles = new Tile[11];
         for(int i=0; i<9; i++)
         {
             tiles[i].setPositions(0, 0);
@@ -275,35 +276,25 @@ void YasEngine::prepareGameWorld()
             tiles[i].clearColor(BLACK);
             tiles[i].drawPattern(i, BLUE);
         }
-        int patter = 0;
-        for(int i=0; i<25; i++)
+
+        for (int i = 0; i < 25; i++)
         {
+            for (int j = 0; j < 40; j++)
+            {
+                simplifiedMap[i][j] = -1;
+            }
+        }
 
-	        for(int j=0; j<40; j++)
-	        {
-                // if(i%2==0)
-                // {
-                //     simplifiedMap[i][j] = simplifiedMap[i][j] = 1;//rand() % 10;;
-                // }
-                // else
-                // {
-                    
-                    // if(i==0 && j ==0)
-                    // {
-                    //     simplifiedMap[i][j] = simplifiedMap[i][j] = 0;
-                    // }
-                    // else
-                    // {
-                    //     if(i==1 && j==0)
-                        // {
-                            simplifiedMap[i][j] = simplifiedMap[i][j] = rand() % 10;
-                        // }
-                        //simplifiedMap[i][j] = simplifiedMap[i][j] = 4;
-                    // }
-                // }
-                //simplifiedMap[i][j] = simplifiedMap[i][j] = rand() % 10;;
-
-	        }
+        for (int i = 0; i < 25; i++)
+        {
+            for (int j = 0; j < 40; j++)
+            {
+                //if((i<10 || i>14) || (j < 17 || j>22))
+                if ((i < numberOfWallsTop || i> numberOfWallsVertically - (numberOfWallsTop + 1))  || (j < numberOfWallsLeft || j>numberOfWallsHorizontally - (numberOfWallsRight + 1)))
+                {
+                    simplifiedMap[i][j] = rand() % 8;
+                }
+            }
         }
 
 }

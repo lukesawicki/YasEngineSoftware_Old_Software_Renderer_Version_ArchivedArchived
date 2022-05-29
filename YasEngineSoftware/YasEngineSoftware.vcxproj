@@ -152,6 +152,7 @@
     <ClInclude Include="PixelsTable.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Projectile.hpp" />
+    <ClInclude Include="TileData.hpp" />
     <ClInclude Include="TimePicker.hpp" />
     <ClInclude Include="VariousTools.hpp" />
     <ClInclude Include="ViewPort.hpp" />
