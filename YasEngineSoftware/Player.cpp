@@ -2,6 +2,7 @@
 
 Player::Player(float x, float y)
 {
+	lifes = 4;
 	position.x = x;
 	position.y = y;
 

@@ -119,6 +119,30 @@ class YasEngine
 			return -(y - 400);
 		}
 
+		void checkCollisions(GameObject* gameObj, std::vector<GameObject*>& objects)
+		{
+			// iAm => player -> 0; projectil = 1; obstacle = 2;
+			for(GameObject* go: objects)
+			{
+				if(go->lifes > 0 && gameObj->lifes > 0 && go->whoAmI() != gameObj->whoAmI())
+				{
+					if(gameObj->whoAmI() == 1 && go->whoAmI()==2)
+					{
+						if(gameObj->circumscribedCircleRadius + go->circumscribedCircleRadius <= Vector2D<float>::distanceBetweenPoints(gameObj->position, go->position))
+						{
+							if (gameObj->whoAmI() != 0)
+							{
+								gameObj->setMeDead();
+							} else
+							{
+								
+							}
+							go->setMeDead();
+						}
+					}
+				}
+			}
+		}
 };
 
 #endif

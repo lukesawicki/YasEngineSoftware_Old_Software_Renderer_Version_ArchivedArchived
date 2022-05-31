@@ -205,15 +205,15 @@ void YasEngine::update(double& deltaTime)
     {
         object->move(static_cast<float>(deltaTime));
         object->regeneratePolygon();
+
+
+
     }
 
     if(player->position.x - player->circumscribedCircleRadius < xWindowToCartesian(numberOfWallsLeft * 32) ||
         player->position.x + player->circumscribedCircleRadius > xWindowToCartesian(1280 - numberOfWallsRight*32)  ||
         player->position.y + player->circumscribedCircleRadius > yWindowToCartesian(numberOfWallsTop * 32) ||
-        player->position.y - player->circumscribedCircleRadius < yWindowToCartesian(800 - numberOfWallsBottom * 32)
-        
-        
-        )//xWindowToCartesian(544))
+        player->position.y - player->circumscribedCircleRadius < yWindowToCartesian(800 - numberOfWallsBottom * 32))//xWindowToCartesian(544))
     {
         std::cout << "YOU DIED" << std::endl;
         std::cout << numberOfWallsLeft * 32 << std::endl;

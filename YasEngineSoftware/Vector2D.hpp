@@ -71,6 +71,11 @@ class Vector2D
 			Vector2D::normalizedVector(w);
 			return w;
 		}
+
+		static float distanceBetweenPoints(const Vector2D<Type>& u, const Vector2D<Type>& v)
+		{
+			sqrt(pow(v.x - u.x, 2) + pow(v.y - u.y, 2));
+		}
 };
 
 #endif

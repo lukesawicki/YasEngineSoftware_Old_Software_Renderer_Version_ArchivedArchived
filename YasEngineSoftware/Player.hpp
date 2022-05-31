@@ -11,7 +11,8 @@ class Player : public GameObject
 		
 		bool isShooting;
 		int projectilePositionShift = 22;
-		
+
+
 		YasInOut::Input* input;
 		YasInOut::MousePositionChangeInformation* mouse;
 

@@ -8,11 +8,13 @@
 class GameObject
 {
 	public:
+		int lifes = 1;
 		Vector2D<float>* localVertices = nullptr;
 		Vector2D<float>* worldVertices = nullptr;
 		Vector2D<float> vectorZero;
 		Vector2D<float> direction;
 		Vector4D<Uint8> color;
+		Vector2D<float> position;
 		int numberOfVertices;
 		float rotationSpeed;
 		float circumscribedCircleRadius;
@@ -21,6 +23,9 @@ class GameObject
 		float stepAngle;
 		float directionMouseAngle = 0;
 		float  speed = 0.0F;
+		int layer;
+
+		int iAm;
 
 		virtual void generate() = 0;
 		virtual void generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) = 0;
@@ -48,8 +53,17 @@ class GameObject
 			this->color.w = color.w;
 		}
 
+		virtual virtual int whoAmI()
+		{
+			return iAm;
+		}
+
+		virtual virtual void setMeDead()
+		{
+			lifes = 0;
+		}
 	
-		Vector2D<float> position;
+		
 
 	private:
 
