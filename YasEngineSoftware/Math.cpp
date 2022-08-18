@@ -1,4 +1,5 @@
 #include"Math.hpp"
+#include <map>
 
 std::vector<int> generatePrimeNumbersLessThanN(int n)
 {
@@ -35,7 +36,7 @@ std::vector<int> generatePrimeNumbersLessThanN(int n)
         }
     }
 
-    for (int i = 2; i < numbers.size(); i++)
+    for (unsigned int i = 2; i < numbers.size(); i++)
     {
         if (numbers.at(i))
         {

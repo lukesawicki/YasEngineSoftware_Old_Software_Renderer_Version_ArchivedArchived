@@ -2,7 +2,6 @@
 #define VIEWPORT_HPP
 #include"Vector2D.hpp"
 #include"Vector4D.hpp"
-#include"PixelsTable.hpp"
 #include"GameObject.hpp"
 #include<SDL.h>
 
@@ -23,14 +22,3 @@ class ViewPort
 };
 
 #endif
-
-//Uint8* pixels = nullptr;
-//Vector2D<int> windowDimensions;
-//
-//PixelsTable(int x, int y, int width, int height, const PixelsTable& originalPixelsTable, const Vector4D<Uint8>& defaultColor);
-//PixelsTable(const Vector2D<int>& position, int width, int height, const PixelsTable& originalPixelsTable, const Vector4D<Uint8>& defaultColor);
-//~PixelsTable();
-//void clearColor(const Vector4D<Uint8>& drawingColor);
-//void drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor);
-//void cartesianPositionToWindow(int& x, int& y);
-//};

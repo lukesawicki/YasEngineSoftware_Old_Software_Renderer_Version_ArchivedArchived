@@ -1,4 +1,5 @@
 #include"MathematicsFunSurface.hpp"
+#include "YasGraphicsLibrary.hpp"
 
 //derived
 //Vector2D<int> position;
@@ -59,20 +60,20 @@ void MathematicsFunSurface::drawPoint(int x, int y, const Vector4D<Uint8>& drawi
 
 void MathematicsFunSurface::drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, const Vector4D<Uint8>& drawingColor)
 {
-    int x0 = point0.x;
-    int y0 = point0.y;
+    int x0 = static_cast<int>(point0.x);
+    int y0 = static_cast<int>(point0.y);
 
-    int originalPoint0X = point0.x;
-    int originalPoint0Y = point0.y;
+    int originalPoint0X = static_cast<int>(point0.x);
+    int originalPoint0Y = static_cast<int>(point0.y);
 
-    int originalPoint1X = point1.x;
-    int originalPoint1Y = point1.y;
+    int originalPoint1X = static_cast<int>(point1.x);
+    int originalPoint1Y = static_cast<int>(point1.y);
 
-    Vector2D<int> copyPoint0(point0.x, point0.y);
-    Vector2D<int> copyPoint1(point1.x, point1.y);
+    Vector2D<int> copyPoint0(static_cast<int>(point0.x), static_cast<int>(point0.y));
+    Vector2D<int> copyPoint1(static_cast<int>(point1.x), static_cast<int>(point1.y));
 
-    int deltaX = point1.x - point0.x;
-    int deltaY = point1.y - point0.y;
+    int deltaX = static_cast<int>(point1.x - point0.x);
+    int deltaY = static_cast<int>(point1.y - point0.y);
     int cumulativeError = 0;
 
     if (abs(deltaX) != abs(deltaY))
@@ -82,18 +83,18 @@ void MathematicsFunSurface::drawLine(const Vector2D<float>& point0, const Vector
         {
             if (deltaX < 0) // DELTA X < 0 CONDITION (IT MEANS WRONG ORDER)
             {
-                originalPoint0X = point1.x;
-                originalPoint1X = point0.x;
+                originalPoint0X = static_cast<int>(point1.x);
+                originalPoint1X = static_cast<int>(point0.x);
 
                 // switch x for drawing
-                x0 = point1.x;
-                y0 = point1.y;
+                x0 = static_cast<int>(point1.x);
+                y0 = static_cast<int>(point1.y);
 
                 // NEGATIVE SLOPE)
                 if (deltaY > 0) // && (DELTAS CONDITION DX > DY) && (DELTA X < 0 CONDITION) -> IT MEANS OCTAN 3(NEGATIVE SLOPE, POINTS IN "WRONG ORDER")
                 {
-                    deltaX = point0.x - point1.x;
-                    deltaY = point0.y - point1.y;
+                    deltaX = static_cast<int>(point0.x - point1.x);
+                    deltaY = static_cast<int>(point0.y - point1.y);
                     for (int i = originalPoint0X; i <= originalPoint1X; i++)
                     {
                         drawPoint(x0, y0, drawingColor);
@@ -114,8 +115,8 @@ void MathematicsFunSurface::drawLine(const Vector2D<float>& point0, const Vector
                 {
                     if (deltaX != 0)
                     {
-                        deltaX = point0.x - point1.x;
-                        deltaY = point0.y - point1.y;
+                        deltaX = static_cast<int>(point0.x - point1.x);
+                        deltaY = static_cast<int>(point0.y - point1.y);
                         for (int i = originalPoint0X; i <= originalPoint1X; i++)
                         {
                             drawPoint(x0, y0, drawingColor);
@@ -195,18 +196,18 @@ void MathematicsFunSurface::drawLine(const Vector2D<float>& point0, const Vector
         {
             if (deltaY < 0) // DELTA Y < 0 CONDITION (IT MEANS WRONG ORDER (BECAUSE IN HERE Y IS LEADING AXIES)
             {
-                originalPoint0Y = point1.y;
-                originalPoint1Y = point0.y;
+                originalPoint0Y = static_cast<int>(point1.y);
+                originalPoint1Y = static_cast<int>(point0.y);
 
                 // switch x for drawing
-                x0 = point1.x;
-                y0 = point1.y;
+                x0 = static_cast<int>(point1.x);
+                y0 = static_cast<int>(point1.y);
 
                 // NEGATIVE SLOPE
                 if (deltaX > 0) // && (DELTAS CONDITION DX < DY) && (DELTA Y < 0 CONDITION) IT MEANS OCTAN 6(NEGATIVE SLOPE, POINTS IN "WRONG ORDER")
                 {
-                    deltaX = point0.x - point1.x;
-                    deltaY = point0.y - point1.y;
+                    deltaX = static_cast<int>(point0.x - point1.x);
+                    deltaY = static_cast<int>(point0.y - point1.y);
                     for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
                     {
                         drawPoint(x0, y0, drawingColor);
@@ -225,8 +226,8 @@ void MathematicsFunSurface::drawLine(const Vector2D<float>& point0, const Vector
                 }
                 else // POSITIVE SLOPE  // deltaX < 0 && (DELTAS CONDITION DX < DY) && (DELTA Y < 0 CONDITION) IT MEANS OCTAN 5(POSITIVE SLOPE, POINTS IN "WRONG ORDER")
                 {
-                    deltaX = point0.x - point1.x;
-                    deltaY = point0.y - point1.y;
+                    deltaX = static_cast<int>(point0.x - point1.x);
+                    deltaY = static_cast<int>(point0.y - point1.y);
                     for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
                     {
                         drawPoint(x0, y0, drawingColor);
@@ -349,6 +350,55 @@ void MathematicsFunSurface::drawLine(const Vector2D<float>& point0, const Vector
     }
 }
 
+unsigned int MathematicsFunSurface::calculateMaximumNumberOfElementsToProcess(const unsigned int& primaryMaximum)
+{
+    int maximum = 0;
+    if (primaryMaximum % 2 == 0)
+    {
+        maximum = primaryMaximum - 1;
+    }
+    else
+    {
+        maximum = primaryMaximum - 2;
+    }
+    return maximum;
+}
+
+void MathematicsFunSurface::drawNumbersAsGroupOfNotConnectedLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color)
+{
+    if (maximumNumberOfVertices <= 3)
+    {
+        drawLine(vertices[0], vertices[1], color);
+    }
+    else
+    {
+        int maximumVerticesToGenerateSegments = calculateMaximumNumberOfElementsToProcess(maximumNumberOfVertices);
+
+        for (int i = 0; i < maximumVerticesToGenerateSegments; i += 1)
+        {
+            drawLine(vertices[i], vertices[i + 2], color);
+        }
+    }
+}
+
+void MathematicsFunSurface::drawNumbersAsGroupOfConnectedLines(Vector2D<float>* vertices, int maximumNumberOfVertices,
+	const Vector4D<Uint8>& color)
+{
+    if (maximumNumberOfVertices <= 3)
+    {
+        drawLine(vertices[0], vertices[1], color);
+    }
+    else
+    {
+        int maximumVerticesToGenerateSegments = calculateMaximumNumberOfElementsToProcess(maximumNumberOfVertices);
+
+        for (int i = 0; i < maximumVerticesToGenerateSegments; i += 1)
+        {
+            drawLine(vertices[i], vertices[i + 1], color);
+        }
+    }
+}
+
 void MathematicsFunSurface::drawPolygon(GameObject* polygon)
 {
 }
@@ -374,4 +424,10 @@ void MathematicsFunSurface::copyPixelsInToPIxelTable(PixelsTable& pixelsTable)
         }
         startPoint = startPoint + viewPortSizes.x;
     }
+}
+
+void MathematicsFunSurface::drawCartesianAxies()
+{
+        horizontalLineOnScreen(0, RED);
+        verticalLineOnScreen(0, GREEN);
 }

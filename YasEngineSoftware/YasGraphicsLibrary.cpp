@@ -1,21 +1,22 @@
+#include<bitset>
 #include"YasGraphicsLibrary.hpp"
 
     void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, PixelsTable& pixelsTable, const Vector4D<Uint8>& drawingColor)
     {
-        int x0 = point0.x;
-        int y0 = point0.y;
+        int x0 = static_cast<int>(point0.x);
+        int y0 = static_cast<int>(point0.y);
 
-        int originalPoint0X = point0.x;
-        int originalPoint0Y = point0.y;
+        int originalPoint0X = static_cast<int>(point0.x);
+        int originalPoint0Y = static_cast<int>(point0.y);
 
-        int originalPoint1X = point1.x;
-        int originalPoint1Y = point1.y;
+        int originalPoint1X = static_cast<int>(point1.x);
+        int originalPoint1Y = static_cast<int>(point1.y);
 
-        Vector2D<int> copyPoint0(point0.x, point0.y);
-        Vector2D<int> copyPoint1(point1.x, point1.y);
+        Vector2D<int> copyPoint0(static_cast<int>(point0.x), static_cast<int>(point0.y));
+        Vector2D<int> copyPoint1(static_cast<int>(point1.x), static_cast<int>(point1.y));
 
-        int deltaX = point1.x - point0.x;
-        int deltaY = point1.y - point0.y;
+        int deltaX = static_cast<int>(point1.x - point0.x);
+        int deltaY = static_cast<int>(point1.y - point0.y);
         int cumulativeError = 0;
 
         if (abs(deltaX) != abs(deltaY))
@@ -25,18 +26,18 @@
             {
                 if (deltaX < 0) // DELTA X < 0 CONDITION (IT MEANS WRONG ORDER)
                 {
-                    originalPoint0X = point1.x;
-                    originalPoint1X = point0.x;
+                    originalPoint0X = static_cast<int>(point1.x);
+                    originalPoint1X = static_cast<int>(point0.x);
 
                     // switch x for drawing
-                    x0 = point1.x;
-                    y0 = point1.y;
+                    x0 = static_cast<int>(point1.x);
+                    y0 = static_cast<int>(point1.y);
 
                     // NEGATIVE SLOPE)
                     if (deltaY > 0) // && (DELTAS CONDITION DX > DY) && (DELTA X < 0 CONDITION) -> IT MEANS OCTAN 3(NEGATIVE SLOPE, POINTS IN "WRONG ORDER")
                     {
-                        deltaX = point0.x - point1.x;
-                        deltaY = point0.y - point1.y;
+                        deltaX = static_cast<int>(point0.x - point1.x);
+                        deltaY = static_cast<int>(point0.y - point1.y);
                         for (int i = originalPoint0X; i <= originalPoint1X; i++)
                         {
                             pixelsTable.drawPoint(x0, y0, drawingColor);
@@ -57,8 +58,8 @@
                     {
                         if (deltaX != 0)
                         {
-                            deltaX = point0.x - point1.x;
-                            deltaY = point0.y - point1.y;
+                            deltaX = static_cast<int>(point0.x - point1.x);
+                            deltaY = static_cast<int>(point0.y - point1.y);
                             for (int i = originalPoint0X; i <= originalPoint1X; i++)
                             {
                                 pixelsTable.drawPoint(x0, y0, drawingColor);
@@ -138,18 +139,18 @@
             {
                 if (deltaY < 0) // DELTA Y < 0 CONDITION (IT MEANS WRONG ORDER (BECAUSE IN HERE Y IS LEADING AXIES)
                 {
-                    originalPoint0Y = point1.y;
-                    originalPoint1Y = point0.y;
+                    originalPoint0Y = static_cast<int>(point1.y);
+                    originalPoint1Y = static_cast<int>(point0.y);
 
                     // switch x for drawing
-                    x0 = point1.x;
-                    y0 = point1.y;
+                    x0 = static_cast<int>(point1.x);
+                    y0 = static_cast<int>(point1.y);
 
                     // NEGATIVE SLOPE
                     if (deltaX > 0) // && (DELTAS CONDITION DX < DY) && (DELTA Y < 0 CONDITION) IT MEANS OCTAN 6(NEGATIVE SLOPE, POINTS IN "WRONG ORDER")
                     {
-                        deltaX = point0.x - point1.x;
-                        deltaY = point0.y - point1.y;
+                        deltaX = static_cast<int>(point0.x - point1.x);
+                        deltaY = static_cast<int>(point0.y - point1.y);
                         for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
                         {
                             pixelsTable.drawPoint(x0, y0, drawingColor);
@@ -168,8 +169,8 @@
                     }
                     else // POSITIVE SLOPE  // deltaX < 0 && (DELTAS CONDITION DX < DY) && (DELTA Y < 0 CONDITION) IT MEANS OCTAN 5(POSITIVE SLOPE, POINTS IN "WRONG ORDER")
                     {
-                        deltaX = point0.x - point1.x;
-                        deltaY = point0.y - point1.y;
+                        deltaX = static_cast<int>(point0.x - point1.x);
+                        deltaY = static_cast<int>(point0.y - point1.y);
                         for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
                         {
                             pixelsTable.drawPoint(x0, y0, drawingColor);
@@ -308,7 +309,7 @@
         }
     }
 
-    int calculateMaximuNumberOfElementsToProcess(const int& primaryMaximum)
+    unsigned int calculateMaximumNumberOfElementsToProcess(const unsigned int& primaryMaximum)
     {
         int maximum = 0;
         if (primaryMaximum % 2 == 0)
@@ -328,18 +329,18 @@
         {
             return nullptr;
         }
-        int numbersSize = numbers.size();
-        int maximumNumberOfVertices = numbersSize / 2;
+        const unsigned int numbersSize = static_cast<unsigned int>(numbers.size());
+        const unsigned int maximumNumberOfVertices = numbersSize / 2;
 
         Vector2D<float>* vertices = new Vector2D<float>[maximumNumberOfVertices];
 
-        int maximum = calculateMaximuNumberOfElementsToProcess(numbersSize);
+        const unsigned int maximum = calculateMaximumNumberOfElementsToProcess(static_cast<unsigned int>(numbersSize));
 
         int j = 0;
-        for (int i = 0; i < maximum; i += 2)
+        for (unsigned int i = 0; i < maximum; i += 2)
         {
-            vertices[j].x = numbers.at(i);
-            vertices[j].y = numbers.at(i + 1);
+            vertices[j].x = static_cast<float>(numbers.at(i));
+            vertices[j].y = static_cast<float>(numbers.at(i + 1));
             j++;
         }
 
@@ -353,16 +354,16 @@
         //    return nullptr;
         //}
         //int numbersSize = numbers.size();
-        int maximumNumberOfVertices = calculateMaximuNumberOfElementsToProcess(numbers.size());
+        int maximumNumberOfVertices = calculateMaximumNumberOfElementsToProcess(numbers.size());
 
         Vector2D<float>* vertices = new Vector2D<float>[maximumNumberOfVertices];
 
-        for (int i = 0; i < numbers.size(); i++)
+        for (int i = 0; i < static_cast<int>(numbers.size()); i++)
         {
             
         }
 
-        //int maximum = calculateMaximuNumberOfElementsToProcess(numbersSize);
+        //int maximum = calculateMaximumNumberOfElementsToProcess(numbersSize);
 
         //int j = 0;
         //for (int i = 0; i < maximum; i += 2)
@@ -383,7 +384,7 @@
         }
         else
         {
-            int maximumVerticesToGenerateSegments = calculateMaximuNumberOfElementsToProcess(maximumNumberOfVertices);
+            int maximumVerticesToGenerateSegments = calculateMaximumNumberOfElementsToProcess(maximumNumberOfVertices);
 
             for (int i = 0; i < maximumVerticesToGenerateSegments; i+=2)
             {
@@ -409,7 +410,7 @@
 
     void drawBinaryRepresentationOfFixedNumbers(std::vector<int> numbers, PixelsTable& pixelsTable)
     {
-        for (int i = 0; i < numbers.size(); i++)
+        for (unsigned int i = 0; i < static_cast<unsigned int>(numbers.size()); i++)
         {
             std::string str = std::bitset<10>(numbers.at(i)).to_string();
             for (int j = 0; j < 10; j++)
@@ -461,8 +462,8 @@
 
     void drawCrossHair(float x, float y, PixelsTable& pixelsTable)
     {
-        horizontalLineOnScreen(pixelsTable, y, BLUE);
-        verticalLineOnScreen(pixelsTable, x, BLUE);
+        horizontalLineOnScreen(pixelsTable, static_cast<int>(y), BLUE);
+        verticalLineOnScreen(pixelsTable, static_cast<int>(x), BLUE);
     }
 
     void horizontalLineOnScreen(PixelsTable& pixelsTable, int y, Vector4D<Uint8> color)

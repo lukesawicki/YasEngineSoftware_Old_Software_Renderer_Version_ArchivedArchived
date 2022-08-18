@@ -1,10 +1,6 @@
 #ifndef YASGRAPHICSLIBRARY_HPP
 #define YASGRAPHICSLIBRARY_HPP
-#include<iostream>
 #include<vector>
-#include<map>
-#include<bitset>
-#include<cmath>
 #include<SDL.h>
 #include"Vector2D.hpp"
 #include"Vector4D.hpp"

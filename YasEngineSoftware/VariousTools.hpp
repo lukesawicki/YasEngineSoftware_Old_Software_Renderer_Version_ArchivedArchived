@@ -17,7 +17,7 @@ static void listRenderersInformation()
     for (int i = 0; i < renderDriversNumber; i++)
     {
         std::cout << renderersDriversInformations[i]->name << std::endl;
-        for (int j = 0; j < renderersDriversInformations[i]->num_texture_formats; j++)
+        for (Uint32 j = 0; j < renderersDriversInformations[i]->num_texture_formats; j++)
         {
             std::cout << SDL_GetPixelFormatName(renderersDriversInformations[i]->texture_formats[j]) << std::endl;
         }

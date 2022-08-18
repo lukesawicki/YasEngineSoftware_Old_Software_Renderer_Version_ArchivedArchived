@@ -1,4 +1,5 @@
 #include"PixelsTable.hpp"
+#include "YasGraphicsLibrary.hpp"
 
 PixelsTable::PixelsTable(int width, int height, const Vector4D<Uint8>& defaultColor)
 {

@@ -1,6 +1,5 @@
 #ifndef GAMEOBJECT_HPP
 #define GAMEOBJECT_HPP
-#include<cmath>
 #include<SDL.h>
 #include"Vector2D.hpp"
 #include"Vector4D.hpp"
@@ -8,6 +7,7 @@
 class GameObject
 {
 	public:
+		//virtual ~GameObject() = 0;
 		Vector2D<float>* localVertices = nullptr;
 		Vector2D<float>* worldVertices = nullptr;
 		Vector2D<float> vectorZero;

@@ -14,7 +14,7 @@
         {
             LARGE_INTEGER ticks;
             QueryPerformanceCounter(&ticks);
-            return (double)(ticks.QuadPart / (double)frequency.QuadPart);
+            return (ticks.QuadPart / (double)frequency.QuadPart);
         }
         else
         {
