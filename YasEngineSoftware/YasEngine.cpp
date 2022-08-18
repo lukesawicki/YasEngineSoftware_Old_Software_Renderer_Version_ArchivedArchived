@@ -1,5 +1,10 @@
 #include "YasEngine.hpp"
-
+#include <cstdlib>     /* srand, rand */
+#include <ctime> 
+#include<SDL_endian.h>
+#include"VariousTools.hpp"
+#include"Circle.hpp"
+#include"Math.hpp"
 YasEngine* YasEngine::instance = nullptr;
 
 void YasEngine::initialize()
