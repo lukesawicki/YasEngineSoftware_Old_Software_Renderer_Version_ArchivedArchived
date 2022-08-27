@@ -11,6 +11,7 @@
 #include"Player.hpp"
 #include"InputOutputHandler.hpp"
 #include"MathematicsFunSurface.hpp"
+#include "PointsGenerator.hpp"
 
 //#define DEBUG_DRAWINGS
 
@@ -64,6 +65,7 @@ class YasEngine
 		std::vector<GameObject*> objectsToDraw;
 		Player* player;
 		MathematicsFunSurface* mathPlay;
+		//std::vector<PointsGenerator*> pointsGenerators;
 		Vector2D<float>* sinusPoints;
 		Vector2D<float>* cosinusPoints;
 

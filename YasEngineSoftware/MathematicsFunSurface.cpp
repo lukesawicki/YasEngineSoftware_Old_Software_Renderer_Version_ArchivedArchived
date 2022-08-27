@@ -49,6 +49,10 @@ void MathematicsFunSurface::clearColor(const Vector4D<Uint8>& drawingColor)
 void MathematicsFunSurface::drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor)
 {
 	cartesianPositionToWindow(x, y);
+    // {
+    //     x = x + static_cast<int>(0.5F * viewPortSizes.x);
+    //     y = -y + static_cast<int>(0.5F * viewPortSizes.y);
+    // }
 	if (x >= 0 && x < viewPortSizes.x && y >= 0 && y < viewPortSizes.y)
 	{
 		pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + RED_POSITION] = drawingColor.x; // windowDimensions->x <- WINDOW WIDTH
@@ -57,6 +61,22 @@ void MathematicsFunSurface::drawPoint(int x, int y, const Vector4D<Uint8>& drawi
 		pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + ALPHA_POSITION] = drawingColor.w;
 	}
 }
+
+//void PixelsTable::cartesianPositionToWindow(int& x, int& y)
+//{
+//    x = x + static_cast<int>(0.5F * windowDimensions.x);
+//    y = -y + static_cast<int>(0.5F * windowDimensions.y);
+//}
+//if (x >= 0 && x < windowDimensions.x && y >= 0 && y < windowDimensions.y)
+//{
+//    pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + RED_POSITION] = drawingColor.x; // windowDimensions->x <- WINDOW WIDTH
+//    pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + GREEN_POSITION] = drawingColor.y;
+//    pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + BLUE_POSITION] = drawingColor.z;
+//    pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + ALPHA_POSITION] = drawingColor.w;
+//}
+
+
+
 
 void MathematicsFunSurface::drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, const Vector4D<Uint8>& drawingColor)
 {
@@ -350,7 +370,21 @@ void MathematicsFunSurface::drawLine(const Vector2D<float>& point0, const Vector
     }
 }
 
-unsigned int MathematicsFunSurface::calculateMaximumNumberOfElementsToProcess(const unsigned int& primaryMaximum)
+//unsigned int MathematicsFunSurface::calculateMaximumNumberOfElementsToProcess(const unsigned int& primaryMaximum)
+//{
+//    int maximum = 0;
+//    if (primaryMaximum % 2 == 0)
+//    {
+//        maximum = primaryMaximum - 1;
+//    }
+//    else
+//    {
+//        maximum = primaryMaximum - 2;
+//    }
+//    return maximum;
+//}
+
+unsigned int MathematicsFunSurface::calculateMaximumNumberOfElementsToProcess(const unsigned int& primaryMaximum, bool connectedLines)
 {
     int maximum = 0;
     if (primaryMaximum % 2 == 0)
@@ -364,38 +398,44 @@ unsigned int MathematicsFunSurface::calculateMaximumNumberOfElementsToProcess(co
     return maximum;
 }
 
-void MathematicsFunSurface::drawNumbersAsGroupOfNotConnectedLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color)
+//void MathematicsFunSurface::drawNumbersAsGroupOfNotConnectedLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color)
+//{
+//    if (maximumNumberOfVertices <= 3)
+//    {
+//        drawLine(vertices[0], vertices[1], color);
+//    }
+//    else
+//    {
+//        int maximumVerticesToGenerateSegments = calculateMaximumNumberOfElementsToProcess(maximumNumberOfVertices, false);
+//
+//        for (int i = 0; i < maximumVerticesToGenerateSegments; i += 2)
+//        {
+//            drawLine(vertices[i], vertices[i + 1], color);
+//        }
+//    }
+//}
+
+void MathematicsFunSurface::drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos)
 {
-    if (maximumNumberOfVertices <= 3)
+    int step = 1;
+    if(!areLinesContinuos)
     {
-        drawLine(vertices[0], vertices[1], color);
+        step = 2;
     }
-    else
+    if (maximumNumberOfVertices > 1)
     {
-        int maximumVerticesToGenerateSegments = calculateMaximumNumberOfElementsToProcess(maximumNumberOfVertices);
-
-        for (int i = 0; i < maximumVerticesToGenerateSegments; i += 1)
-        {
-            drawLine(vertices[i], vertices[i + 2], color);
+        if (maximumNumberOfVertices <= 3) {
+            drawLine(vertices[0], vertices[1], color);
         }
-    }
-}
+	    else
+	    {
+	        //int maximumVerticesToGenerateSegments = calculateMaximumNumberOfElementsToProcess(maximumNumberOfVertices, true);
 
-void MathematicsFunSurface::drawNumbersAsGroupOfConnectedLines(Vector2D<float>* vertices, int maximumNumberOfVertices,
-	const Vector4D<Uint8>& color)
-{
-    if (maximumNumberOfVertices <= 3)
-    {
-        drawLine(vertices[0], vertices[1], color);
-    }
-    else
-    {
-        int maximumVerticesToGenerateSegments = calculateMaximumNumberOfElementsToProcess(maximumNumberOfVertices);
-
-        for (int i = 0; i < maximumVerticesToGenerateSegments; i += 1)
-        {
-            drawLine(vertices[i], vertices[i + 1], color);
-        }
+	        for (int i = 0; i < maximumNumberOfVertices -1; i += step)
+	        {
+	            drawLine(vertices[i], vertices[i + 1], color);
+	        }
+	    }
     }
 }
 

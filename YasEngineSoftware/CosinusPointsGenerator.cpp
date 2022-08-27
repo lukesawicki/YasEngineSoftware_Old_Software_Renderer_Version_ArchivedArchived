@@ -13,7 +13,7 @@ Vector2D<float>* CosinusPointsGenerator::generatePoints()
 	for (int i = 0; i < POINTS_NUMBER; i++)
 	{
 		float x = i * step;
-		float y = cos(x);
+		float y = cos(x * 4.5F);
 
 		points[i].x = round(x * additionalFactor);
 		points[i].y = round(y * additionalFactor);

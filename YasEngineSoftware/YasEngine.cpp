@@ -4,7 +4,9 @@
 #include<SDL_endian.h>
 #include"VariousTools.hpp"
 #include"Circle.hpp"
+#include "CosinusPointsGenerator.hpp"
 #include"Math.hpp"
+#include "SinusPointsGenerator.hpp"
 YasEngine* YasEngine::instance = nullptr;
 
 void YasEngine::initialize()
@@ -14,7 +16,36 @@ void YasEngine::initialize()
     prepareGameWorld();
     preparePlayer();
 
-    mathPlay = new MathematicsFunSurface(0, 0, windowDimensions->x * 0.5F, windowDimensions->y * 0.5F, BLACK);
+    mathPlay = new MathematicsFunSurface(0, 0, static_cast<int>(windowDimensions->x * 0.5F), static_cast<int>(windowDimensions->y * 0.5F), BLACK);
+
+    SinusPointsGenerator sinusPointsGenerator;
+    CosinusPointsGenerator cosinusPointsGenerator;
+
+    //sinusPoints = sinusPointsGenerator.generatePoints();
+
+    // cosinusPoints = new Vector2D<float>[6];//cosinusPointsGenerator.generatePoints();
+    //
+    // cosinusPoints[0].x = 10;
+    // cosinusPoints[0].y = 10;
+    //
+    // cosinusPoints[1].x = 30;
+    // cosinusPoints[1].y = 20;
+    //
+    // cosinusPoints[2].x = 60;
+    // cosinusPoints[2].y = 20;
+    //
+    // cosinusPoints[3].x = 70;
+    // cosinusPoints[3].y = 50;
+    //
+    // cosinusPoints[4].x = 90;
+    // cosinusPoints[4].y = 100;
+    //
+    // cosinusPoints[5].x = 120;
+    // cosinusPoints[5].y = 140;
+
+    // Odtworzyc tworzenie generatorow
+    // wrzucanie punktow
+
 }
 
 void YasEngine::YasEnginStart()
@@ -187,11 +218,11 @@ void YasEngine::update(double& deltaTime)
 
     if (mousePositionChangeInformation->mouseMoved || input->up || input->down || input->left || input->right)
     {
-        player->rotateToMousePositionInLocalCoordinateSystem(mousePositionChangeInformation->x, mousePositionChangeInformation->y, windowDimensions);
+        player->rotateToMousePositionInLocalCoordinateSystem(static_cast<float>(mousePositionChangeInformation->x), static_cast<float>(mousePositionChangeInformation->y), windowDimensions);
     }
 
-    mouseX = mousePositionChangeInformation->x;
-    mouseY = mousePositionChangeInformation->y;
+    mouseX = static_cast<float>(mousePositionChangeInformation->x);
+    mouseY = static_cast<float>(mousePositionChangeInformation->y);
 
     windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
 
@@ -212,15 +243,22 @@ void YasEngine::render(double& deltaTime)
     }
     drawHudElements(deltaTime);
 
-    int vertical = -WINDOW_WIDTH * 0.25F;
-    int horizontal = -WINDOW_HEIGHT * 0.25F;
+    int vertical = static_cast<int>(-WINDOW_WIDTH * 0.25F);
+    int horizontal = static_cast<int>(-WINDOW_HEIGHT * 0.25F);
 
-    mathPlay->verticalLineOnScreen(vertical, GREEN);
-    mathPlay->horizontalLineOnScreen(horizontal+1, GREEN);//-WINDOW_HEIGHT * 0.25F
+    mathPlay->verticalLineOnScreen(0, GREEN);
+    mathPlay->horizontalLineOnScreen(0, RED);//-WINDOW_HEIGHT * 0.25F
+
+   // mathPlay->drawNumbersAsGroupOfNotConnectedLines(sinusPoints, 100, YELLOW);
+
+    mathPlay->drawNumbersAsGroupOfLines(cosinusPoints, 100, YELLOW, true);
+
     mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
 
-    verticalLineOnScreen(*pixelsTable, -WINDOW_WIDTH * 0.5F, RED);
-    horizontalLineOnScreen(*pixelsTable, -WINDOW_HEIGHT * 0.5F + 1, RED);
+    verticalLineOnScreen(*pixelsTable, 0, GREEN);
+    horizontalLineOnScreen(*pixelsTable, 0, RED);
+
+    //mathPlay->
 
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
     SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);
@@ -234,5 +272,41 @@ void YasEngine::prepareGameWorld()
         circle->setColor(BLUE);
         objectsToDraw.push_back(circle);
     #endif
+        SinusPointsGenerator sinusPointsGenerator;
+        CosinusPointsGenerator cosinusPointsGenerator;
 
+        sinusPoints = sinusPointsGenerator.generatePoints();
+		for(int i=0; i<100; i++)
+		{
+            std::cout << "i " << i << " X: " << sinusPoints[i].x << " Y: " << sinusPoints[i].y << std::endl;
+		}
+        cosinusPoints = cosinusPointsGenerator.generatePoints();
+
+        //sinusPoints = sinusPointsGenerator.generatePoints();
+
+        //cosinusPoints = new Vector2D<float>[6];//cosinusPointsGenerator.generatePoints();
+
+        //cosinusPoints[0].x = 10;
+        //cosinusPoints[0].y = 10;
+
+        //cosinusPoints[1].x = 30;
+        //cosinusPoints[1].y = 20;
+
+        //cosinusPoints[2].x = 60;
+        //cosinusPoints[2].y = 20;
+
+        //cosinusPoints[3].x = 70;
+        //cosinusPoints[3].y = 75;
+
+        //cosinusPoints[4].x = 90;
+        //cosinusPoints[4].y = 100;
+
+        //cosinusPoints[5].x = 120;
+        //cosinusPoints[5].y = 140;
+
+        //cosinusPoints[6].x = 135;
+        //cosinusPoints[6].y = 120;
+
+        // Odtworzyc tworzenie generatorow
+        // wrzucanie punktow
 }

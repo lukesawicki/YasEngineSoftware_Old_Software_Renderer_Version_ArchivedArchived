@@ -20,9 +20,10 @@ class MathematicsFunSurface final : public ViewPort
 		void drawPolygon(GameObject* polygon)  override;
 		void copyPixelsInToPIxelTable(PixelsTable& pixelsTable);
 
-		unsigned int calculateMaximumNumberOfElementsToProcess(const unsigned int& primaryMaximum);
-		void drawNumbersAsGroupOfNotConnectedLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color);
-		void drawNumbersAsGroupOfConnectedLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color);
+		unsigned int calculateMaximumNumberOfElementsToProcess(const unsigned int& primaryMaximum, bool connectedLines);
+
+		// void drawNumbersAsGroupOfNotConnectedLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color);
+		void drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos);
 
 		void horizontalLineOnScreen(int y, Vector4D<Uint8> color)
 		{
