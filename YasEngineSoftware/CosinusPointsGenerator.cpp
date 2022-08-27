@@ -3,14 +3,14 @@
 
 Vector2D<float>* CosinusPointsGenerator::generatePoints()
 {
-	constexpr int POINTS_NUMBER = 100;
+	pointsNumber = 100;
 	Vector2D<float>* points = new Vector2D<float>[100];
-	constexpr float divider = static_cast<int>(POINTS_NUMBER);
-	constexpr float MAX = 2.0F * PI;
-	constexpr float additionalFactor = 50.0F;
-	float step = (MAX / divider);
+	float divider = static_cast<float>(pointsNumber);
+	float maximumXvalue = 2.0F * PI;
+	float additionalFactor = 50.0F;
+	float step = (maximumXvalue / divider);
 
-	for (int i = 0; i < POINTS_NUMBER; i++)
+	for (int i = 0; i < pointsNumber; i++)
 	{
 		float x = i * step;
 		float y = cos(x * 4.5F);

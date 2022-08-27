@@ -251,7 +251,8 @@ void YasEngine::render(double& deltaTime)
 
    // mathPlay->drawNumbersAsGroupOfNotConnectedLines(sinusPoints, 100, YELLOW);
 
-    mathPlay->drawNumbersAsGroupOfLines(cosinusPoints, 100, YELLOW, true);
+    mathPlay->drawNumbersAsGroupOfLines(cosinusPoints.points, cosinusPoints.pointsNumber, YELLOW, true);
+    mathPlay->drawNumbersAsGroupOfLines(sinusPoints.points, sinusPoints.pointsNumber, BLUE, true);
 
     mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
 
@@ -275,38 +276,10 @@ void YasEngine::prepareGameWorld()
         SinusPointsGenerator sinusPointsGenerator;
         CosinusPointsGenerator cosinusPointsGenerator;
 
-        sinusPoints = sinusPointsGenerator.generatePoints();
-		for(int i=0; i<100; i++)
-		{
-            std::cout << "i " << i << " X: " << sinusPoints[i].x << " Y: " << sinusPoints[i].y << std::endl;
-		}
-        cosinusPoints = cosinusPointsGenerator.generatePoints();
+        sinusPoints.points = sinusPointsGenerator.generatePoints();
+        sinusPoints.pointsNumber = sinusPointsGenerator.pointsNumber;
 
-        //sinusPoints = sinusPointsGenerator.generatePoints();
+        cosinusPoints.points = cosinusPointsGenerator.generatePoints();
+        cosinusPoints.pointsNumber = cosinusPointsGenerator.pointsNumber;
 
-        //cosinusPoints = new Vector2D<float>[6];//cosinusPointsGenerator.generatePoints();
-
-        //cosinusPoints[0].x = 10;
-        //cosinusPoints[0].y = 10;
-
-        //cosinusPoints[1].x = 30;
-        //cosinusPoints[1].y = 20;
-
-        //cosinusPoints[2].x = 60;
-        //cosinusPoints[2].y = 20;
-
-        //cosinusPoints[3].x = 70;
-        //cosinusPoints[3].y = 75;
-
-        //cosinusPoints[4].x = 90;
-        //cosinusPoints[4].y = 100;
-
-        //cosinusPoints[5].x = 120;
-        //cosinusPoints[5].y = 140;
-
-        //cosinusPoints[6].x = 135;
-        //cosinusPoints[6].y = 120;
-
-        // Odtworzyc tworzenie generatorow
-        // wrzucanie punktow
 }

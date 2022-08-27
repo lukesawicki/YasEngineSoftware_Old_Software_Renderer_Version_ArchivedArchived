@@ -151,9 +151,11 @@
     <ClInclude Include="InputOutputHandler.hpp" />
     <ClInclude Include="Math.hpp" />
     <ClInclude Include="MathematicsFunSurface.hpp" />
+    <ClInclude Include="NumbersGenerator.hpp" />
     <ClInclude Include="PixelsTable.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="PointsGenerator.hpp" />
+    <ClInclude Include="PointsSet.hpp" />
     <ClInclude Include="Projectile.hpp" />
     <ClInclude Include="SinusPointsGenerator.hpp" />
     <ClInclude Include="TimePicker.hpp" />

@@ -5,6 +5,7 @@
 class PointsGenerator
 {
 	public:
+		int pointsNumber = 0;
 		virtual Vector2D<float>* generatePoints() = 0;
 		
 };

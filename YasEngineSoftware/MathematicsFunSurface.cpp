@@ -429,8 +429,6 @@ void MathematicsFunSurface::drawNumbersAsGroupOfLines(Vector2D<float>* vertices,
         }
 	    else
 	    {
-	        //int maximumVerticesToGenerateSegments = calculateMaximumNumberOfElementsToProcess(maximumNumberOfVertices, true);
-
 	        for (int i = 0; i < maximumNumberOfVertices -1; i += step)
 	        {
 	            drawLine(vertices[i], vertices[i + 1], color);

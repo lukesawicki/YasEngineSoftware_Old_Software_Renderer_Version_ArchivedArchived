@@ -12,6 +12,7 @@
 #include"InputOutputHandler.hpp"
 #include"MathematicsFunSurface.hpp"
 #include "PointsGenerator.hpp"
+#include "PointsSet.hpp"
 
 //#define DEBUG_DRAWINGS
 
@@ -66,8 +67,8 @@ class YasEngine
 		Player* player;
 		MathematicsFunSurface* mathPlay;
 		//std::vector<PointsGenerator*> pointsGenerators;
-		Vector2D<float>* sinusPoints;
-		Vector2D<float>* cosinusPoints;
+		PointsSet sinusPoints;
+		PointsSet cosinusPoints;
 
 		YasEngine() {};
 		bool shouldApplicationStopRunning = false;
