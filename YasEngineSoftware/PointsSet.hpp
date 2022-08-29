@@ -10,6 +10,11 @@ class PointsSet
 			points = nullptr;
 			pointsNumber = 0;
 		}
+		~PointsSet()
+		{
+			delete[] points;
+			pointsNumber = 0;
+		}
 		PointsSet(Vector2D<float>* newPoints, long pointsNumber)
 		{
 			points = newPoints;

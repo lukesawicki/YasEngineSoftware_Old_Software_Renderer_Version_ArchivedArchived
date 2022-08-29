@@ -1,7 +1,7 @@
 #include"CosinusPointsGenerator.hpp"
 
 
-Vector2D<float>* CosinusPointsGenerator::generatePoints()
+PointsSet* CosinusPointsGenerator::generatePoints()
 {
 	pointsNumber = 100;
 	Vector2D<float>* points = new Vector2D<float>[100];
@@ -19,5 +19,9 @@ Vector2D<float>* CosinusPointsGenerator::generatePoints()
 		points[i].y = round(y * additionalFactor);
 	}
 
-	return points;
+
+	PointsSet* pointsSet = new PointsSet();
+	pointsSet->points = points;
+	pointsSet->pointsNumber = pointsNumber;
+	return pointsSet;
 }

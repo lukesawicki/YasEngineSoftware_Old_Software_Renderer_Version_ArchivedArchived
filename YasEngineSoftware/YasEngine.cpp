@@ -5,6 +5,7 @@
 #include"VariousTools.hpp"
 #include"Circle.hpp"
 #include "CosinusPointsGenerator.hpp"
+#include "FibonacciPointsGenerator.hpp"
 #include"Math.hpp"
 #include "SinusPointsGenerator.hpp"
 YasEngine* YasEngine::instance = nullptr;
@@ -20,32 +21,25 @@ void YasEngine::initialize()
 
     SinusPointsGenerator sinusPointsGenerator;
     CosinusPointsGenerator cosinusPointsGenerator;
+}
 
-    //sinusPoints = sinusPointsGenerator.generatePoints();
+void YasEngine::clean()
+{
+    for (auto drawableObject : objectsToDraw)
+    {
+        delete drawableObject;
+    }
 
-    // cosinusPoints = new Vector2D<float>[6];//cosinusPointsGenerator.generatePoints();
-    //
-    // cosinusPoints[0].x = 10;
-    // cosinusPoints[0].y = 10;
-    //
-    // cosinusPoints[1].x = 30;
-    // cosinusPoints[1].y = 20;
-    //
-    // cosinusPoints[2].x = 60;
-    // cosinusPoints[2].y = 20;
-    //
-    // cosinusPoints[3].x = 70;
-    // cosinusPoints[3].y = 50;
-    //
-    // cosinusPoints[4].x = 90;
-    // cosinusPoints[4].y = 100;
-    //
-    // cosinusPoints[5].x = 120;
-    // cosinusPoints[5].y = 140;
-
-    // Odtworzyc tworzenie generatorow
-    // wrzucanie punktow
-
+    delete sinusPoints;
+    delete cosinusPoints;
+    delete fibonacciePoints;
+    delete mathPlay;
+    delete pixelsTable;
+    delete windowDimensions;
+    SDL_DestroyTexture(screenTexture);
+    SDL_DestroyRenderer(renderer);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
 }
 
 void YasEngine::YasEnginStart()
@@ -79,10 +73,7 @@ void YasEngine::YasEnginStart()
         render(deltaTime);
     }
 
-    for (auto drawableObject : objectsToDraw)
-    {
-        delete drawableObject;
-    }
+    clean();
 
     return;
 }
@@ -227,9 +218,6 @@ void YasEngine::update(double& deltaTime)
     windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
 
     projectile = nullptr;
-
-
-
 }
 
 void YasEngine::render(double& deltaTime)
@@ -251,9 +239,9 @@ void YasEngine::render(double& deltaTime)
 
    // mathPlay->drawNumbersAsGroupOfNotConnectedLines(sinusPoints, 100, YELLOW);
 
-    mathPlay->drawNumbersAsGroupOfLines(cosinusPoints.points, cosinusPoints.pointsNumber, YELLOW, true);
-    mathPlay->drawNumbersAsGroupOfLines(sinusPoints.points, sinusPoints.pointsNumber, BLUE, true);
-
+    mathPlay->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, YELLOW, true);
+    mathPlay->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, BLUE, false);
+    mathPlay->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, WHITE, false);
     mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
 
     verticalLineOnScreen(*pixelsTable, 0, GREEN);
@@ -275,11 +263,9 @@ void YasEngine::prepareGameWorld()
     #endif
         SinusPointsGenerator sinusPointsGenerator;
         CosinusPointsGenerator cosinusPointsGenerator;
+        FibonacciPointsGenerator fibonacciPointsGenerator;
 
-        sinusPoints.points = sinusPointsGenerator.generatePoints();
-        sinusPoints.pointsNumber = sinusPointsGenerator.pointsNumber;
-
-        cosinusPoints.points = cosinusPointsGenerator.generatePoints();
-        cosinusPoints.pointsNumber = cosinusPointsGenerator.pointsNumber;
-
+        sinusPoints = sinusPointsGenerator.generatePoints();
+        cosinusPoints = cosinusPointsGenerator.generatePoints();
+        fibonacciePoints = fibonacciPointsGenerator.generatePoints();
 }

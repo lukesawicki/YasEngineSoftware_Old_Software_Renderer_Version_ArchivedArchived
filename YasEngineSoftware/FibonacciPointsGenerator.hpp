@@ -1,11 +1,12 @@
-#ifndef SINUSPOINTSGENERATOR_HPP
-#define SINUSPOINTSGENERATOR_HPP
+#ifndef FIBONACCIPOINTSGENERATOR_HPP
+#define FIBONACCIPOINTSGENERATOR_HPP
 #include"PointsGenerator.hpp"
 #include"PointsSet.hpp"
+#include"Math.hpp"
 #include"Vector2D.hpp"
 #include "YasGraphicsLibrary.hpp"
 
-class SinusPointsGenerator: public PointsGenerator
+class FibonacciPointsGenerator : public PointsGenerator
 {
 	public:
 		virtual PointsSet* generatePoints() override;

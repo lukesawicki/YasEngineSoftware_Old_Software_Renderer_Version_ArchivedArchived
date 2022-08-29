@@ -75,7 +75,7 @@
     <ClInclude Include="PointsSet.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NumbersGenerator.hpp">
+    <ClInclude Include="FibonacciPointsGenerator.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -123,6 +123,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CosinusPointsGenerator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FibonacciPointsGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

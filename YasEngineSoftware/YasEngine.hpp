@@ -33,6 +33,7 @@ class YasEngine
 		
 		void initialize();
 		void YasEnginStart();
+		void clean();
 
 	private:
 
@@ -66,9 +67,10 @@ class YasEngine
 		std::vector<GameObject*> objectsToDraw;
 		Player* player;
 		MathematicsFunSurface* mathPlay;
-		//std::vector<PointsGenerator*> pointsGenerators;
-		PointsSet sinusPoints;
-		PointsSet cosinusPoints;
+		
+		PointsSet* sinusPoints;
+		PointsSet* cosinusPoints;
+		PointsSet* fibonacciePoints;
 
 		YasEngine() {};
 		bool shouldApplicationStopRunning = false;

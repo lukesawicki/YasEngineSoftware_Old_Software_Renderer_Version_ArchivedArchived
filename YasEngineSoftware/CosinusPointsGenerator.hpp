@@ -6,8 +6,8 @@
 
 class CosinusPointsGenerator : public PointsGenerator
 {
-public:
-	virtual Vector2D<float>* generatePoints() override;
+	public:
+		virtual PointsSet* generatePoints() override;
 
 };
 

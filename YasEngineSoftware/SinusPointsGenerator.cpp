@@ -1,7 +1,7 @@
 #include"SinusPointsGenerator.hpp"
 
 
-Vector2D<float>* SinusPointsGenerator::generatePoints()
+PointsSet* SinusPointsGenerator::generatePoints()
 {
 	pointsNumber = 100;
 	Vector2D<float>* points = new Vector2D<float>[pointsNumber];
@@ -19,5 +19,8 @@ Vector2D<float>* SinusPointsGenerator::generatePoints()
 		points[i].y = y * additionalFactor; // round(y * additionalFactor);
 	}
 
-	return points;
+	PointsSet* pointsSet = new PointsSet();
+	pointsSet->points = points;
+	pointsSet->pointsNumber = pointsNumber;
+	return pointsSet;
 }

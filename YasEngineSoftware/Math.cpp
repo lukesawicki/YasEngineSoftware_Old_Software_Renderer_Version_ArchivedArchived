@@ -17,7 +17,7 @@ std::vector<int> generatePrimeNumbersLessThanN(int n)
 
         if (numbers.at(i))
         {
-            while (true)//j < n)
+            while (true)
             {
 
                 j = (i * i) + (k * i);
@@ -46,7 +46,6 @@ std::vector<int> generatePrimeNumbersLessThanN(int n)
     return primeNumbers;
 }
 
-//std::vector<int>
 std::vector<int> generateNfibonaccinumbers(int n)
 {
     std::vector<int> fibbonacciNumbers;
