@@ -7,6 +7,7 @@
 #include "CosinusPointsGenerator.hpp"
 #include "FibonacciPointsGenerator.hpp"
 #include"Math.hpp"
+#include "PrimeNumbersPointsGenerator.hpp"
 #include "SinusPointsGenerator.hpp"
 YasEngine* YasEngine::instance = nullptr;
 
@@ -33,6 +34,7 @@ void YasEngine::clean()
     delete sinusPoints;
     delete cosinusPoints;
     delete fibonacciePoints;
+    delete primeNumbersPoints;
     delete mathPlay;
     delete pixelsTable;
     delete windowDimensions;
@@ -237,11 +239,14 @@ void YasEngine::render(double& deltaTime)
     mathPlay->verticalLineOnScreen(0, GREEN);
     mathPlay->horizontalLineOnScreen(0, RED);//-WINDOW_HEIGHT * 0.25F
 
-   // mathPlay->drawNumbersAsGroupOfNotConnectedLines(sinusPoints, 100, YELLOW);
+	// mathPlay->drawNumbersAsGroupOfNotConnectedLines(sinusPoints, 100, YELLOW);
 
     mathPlay->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, YELLOW, true);
     mathPlay->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, BLUE, false);
-    mathPlay->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, WHITE, false);
+    mathPlay->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, RED, false);
+
+    mathPlay->drawNumbersAsGroupOfLines(primeNumbersPoints->points, primeNumbersPoints->pointsNumber, YELLOW, false);
+
     mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
 
     verticalLineOnScreen(*pixelsTable, 0, GREEN);
@@ -264,8 +269,10 @@ void YasEngine::prepareGameWorld()
         SinusPointsGenerator sinusPointsGenerator;
         CosinusPointsGenerator cosinusPointsGenerator;
         FibonacciPointsGenerator fibonacciPointsGenerator;
+        PrimeNumbersPointsGenerator primeNumberPointsGenerator;
 
         sinusPoints = sinusPointsGenerator.generatePoints();
         cosinusPoints = cosinusPointsGenerator.generatePoints();
         fibonacciePoints = fibonacciPointsGenerator.generatePoints();
+        primeNumbersPoints = primeNumberPointsGenerator.generatePoints();
 }

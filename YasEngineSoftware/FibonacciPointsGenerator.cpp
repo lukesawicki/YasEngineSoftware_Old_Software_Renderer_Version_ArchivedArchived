@@ -2,7 +2,7 @@
 
 PointsSet* FibonacciPointsGenerator::generatePoints()
 {
-	pointsNumber = 16;
+	pointsNumber = 40;
 
 	Vector2D<float>* points = new Vector2D<float>[pointsNumber*2];
 	std::vector<int> fibonacci = generateNfibonaccinumbers(pointsNumber);
@@ -13,7 +13,7 @@ PointsSet* FibonacciPointsGenerator::generatePoints()
 	int j = 0;
 	for(int i=1; i < (pointsNumber*2) - 1; i+=2)
 	{
-		points[i].x = 100.0F; // static_cast<float>(fibonacci.at(j++));
+		points[i].x = static_cast<float>(fibonacci.at(j++));//100.0F; // static_cast<float>(fibonacci.at(j++));
 	}
 
 	// DLUGOSC LINI JEST TEZ FIBONACCI NARAZIE

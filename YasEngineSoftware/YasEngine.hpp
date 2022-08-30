@@ -71,6 +71,7 @@ class YasEngine
 		PointsSet* sinusPoints;
 		PointsSet* cosinusPoints;
 		PointsSet* fibonacciePoints;
+		PointsSet* primeNumbersPoints;
 
 		YasEngine() {};
 		bool shouldApplicationStopRunning = false;

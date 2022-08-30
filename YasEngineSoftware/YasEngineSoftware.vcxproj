@@ -156,6 +156,7 @@
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="PointsGenerator.hpp" />
     <ClInclude Include="PointsSet.hpp" />
+    <ClInclude Include="PrimeNumbersPointsGenerator.hpp" />
     <ClInclude Include="Projectile.hpp" />
     <ClInclude Include="SinusPointsGenerator.hpp" />
     <ClInclude Include="TimePicker.hpp" />
@@ -178,6 +179,7 @@
     <ClCompile Include="MathematicsFunSurface.cpp" />
     <ClCompile Include="PixelsTable.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PrimeNumbersPointsGenerator.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="SinusPointsGenerator.cpp" />
     <ClCompile Include="temporary.cpp" />
