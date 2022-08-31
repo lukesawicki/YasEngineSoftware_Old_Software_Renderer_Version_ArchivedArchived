@@ -9,6 +9,8 @@
 
 class PixelsTable;
 
+
+
 const float PI = 3.141592F;
 const Uint8 NUMBER_OF_COLORS = 4;
 const Uint8 RGB_FORMAT = 3;
@@ -41,13 +43,17 @@ void drawPolygonDirection(GameObject* polygon, PixelsTable& pixelsTable);
 
 void swapVectors(Vector2D<int>& point0, Vector2D<int>& point1);
 
-void horizontalLineOnScreen(PixelsTable& pixelsTable, int y, Vector4D<Uint8> color);
+void horizontalLineOnWholeScreen(PixelsTable& pixelsTable, int y, Vector4D<Uint8> color);
 
-void verticalLineOnScreen(PixelsTable& pixelsTable, int x, Vector4D<Uint8> color);
+void verticalLineOnWholeScreen(PixelsTable& pixelsTable, int x, Vector4D<Uint8> color);
 
 void drawCartesianAxies(PixelsTable& pixelsTable);
 
-void drawCrossHair(float x, float y, PixelsTable& pixelsTable);
+void drawCrossHair(float x, float y, PixelsTable& pixelsTable, bool isFullScreen);
+
+void drawHorizontalLine(PixelsTable& pixelsTable, int x0, int x1, int y, Vector4D<Uint8> color);
+
+void drawVerticalLine(PixelsTable& pixelsTable, int y0, int y1, int x, Vector4D<Uint8> color);
     
 int xyPixelToArrayPosition(Vector2D<int>& point, int windowWidth);
 int xyPixelToArrayPosition(int x, int y, int windowWidth);

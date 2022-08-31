@@ -158,6 +158,7 @@
     <ClInclude Include="PointsSet.hpp" />
     <ClInclude Include="PrimeNumbersPointsGenerator.hpp" />
     <ClInclude Include="Projectile.hpp" />
+    <ClInclude Include="Collider.hpp" />
     <ClInclude Include="SinusPointsGenerator.hpp" />
     <ClInclude Include="TimePicker.hpp" />
     <ClInclude Include="VariousTools.hpp" />
@@ -172,6 +173,7 @@
     <ClCompile Include="BackupCpp.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Collectible.cpp" />
+    <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CosinusPointsGenerator.cpp" />
     <ClCompile Include="FibonacciPointsGenerator.cpp" />
     <ClCompile Include="Main.cpp" />

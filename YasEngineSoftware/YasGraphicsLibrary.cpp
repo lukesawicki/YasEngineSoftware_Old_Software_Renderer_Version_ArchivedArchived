@@ -456,17 +456,43 @@
 
     void drawCartesianAxies(PixelsTable& pixelsTable)
     {
-        horizontalLineOnScreen(pixelsTable, 0, RED);
-        verticalLineOnScreen(pixelsTable, 0, GREEN);
+        horizontalLineOnWholeScreen(pixelsTable, 0, RED);
+        verticalLineOnWholeScreen(pixelsTable, 0, GREEN);
     }
 
-    void drawCrossHair(float x, float y, PixelsTable& pixelsTable)
+    void drawCrossHair(float x, float y, PixelsTable& pixelsTable, bool isFullScreen)
     {
-        horizontalLineOnScreen(pixelsTable, static_cast<int>(y), BLUE);
-        verticalLineOnScreen(pixelsTable, static_cast<int>(x), BLUE);
+        if(isFullScreen)
+        {
+            horizontalLineOnWholeScreen(pixelsTable, static_cast<int>(y), BLUE);
+            verticalLineOnWholeScreen(pixelsTable, static_cast<int>(x), BLUE);
+        }
+        else
+        {
+            drawHorizontalLine(pixelsTable, x - 15, x - 5, y, GREEN);
+            drawHorizontalLine(pixelsTable, x + 5, x + 15, y, GREEN);
+            drawVerticalLine(pixelsTable, y - 15, y - 5, x, GREEN);
+            drawVerticalLine(pixelsTable, y + 5, y + 15, x, GREEN);
+        }
     }
 
-    void horizontalLineOnScreen(PixelsTable& pixelsTable, int y, Vector4D<Uint8> color)
+    void drawHorizontalLine(PixelsTable& pixelsTable, int x0, int x1,  int y, Vector4D<Uint8> color)
+    {
+        for (int i = x0; i < x1; i++)
+        {
+            pixelsTable.drawPoint(i, y, color);
+        }
+    }
+
+    void drawVerticalLine(PixelsTable& pixelsTable, int y0, int y1, int x, Vector4D<Uint8> color)
+    {
+        for (int i = y0; i < y1; i++)
+        {
+            pixelsTable.drawPoint(x, i, color);
+        }
+    }
+
+    void horizontalLineOnWholeScreen(PixelsTable& pixelsTable, int y, Vector4D<Uint8> color)
     {
         int maxX = static_cast<int>(0.5F * pixelsTable.windowDimensions.x);
 		for (int i = -maxX; i < maxX; i++) //X
@@ -475,7 +501,7 @@
 		}
     }
 
-	void verticalLineOnScreen(PixelsTable& pixelsTable, int x, Vector4D<Uint8> color)
+	void verticalLineOnWholeScreen(PixelsTable& pixelsTable, int x, Vector4D<Uint8> color)
 	{
 		int maxY = static_cast<int>(0.5F * pixelsTable.windowDimensions.y);
 		for (int i = -maxY; i < maxY; i++) //X

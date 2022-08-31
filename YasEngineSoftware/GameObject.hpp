@@ -1,6 +1,8 @@
 #ifndef GAMEOBJECT_HPP
 #define GAMEOBJECT_HPP
 #include<SDL.h>
+
+#include "Collider.hpp"
 #include"Vector2D.hpp"
 #include"Vector4D.hpp"
 
@@ -8,6 +10,8 @@ class GameObject
 {
 	public:
 		//virtual ~GameObject() = 0;
+		bool isAlive = true;
+		Collider collider;
 		Vector2D<float>* localVertices = nullptr;
 		Vector2D<float>* worldVertices = nullptr;
 		Vector2D<float> vectorZero;

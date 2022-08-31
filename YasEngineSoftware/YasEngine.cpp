@@ -4,6 +4,7 @@
 #include<SDL_endian.h>
 #include"VariousTools.hpp"
 #include"Circle.hpp"
+#include "Collider.hpp"
 #include "CosinusPointsGenerator.hpp"
 #include "FibonacciPointsGenerator.hpp"
 #include"Math.hpp"
@@ -103,6 +104,7 @@ void YasEngine::prepareBasicSettings()
     window              =   SDL_CreateWindow("YasEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE);
 
     SDL_SetWindowMinimumSize(window, WINDOW_WIDTH, WINDOW_HEIGHT);
+    SDL_ShowCursor(SDL_DISABLE);
 }
 
 void YasEngine::drawHudElements(double& deltaTime)
@@ -111,7 +113,7 @@ void YasEngine::drawHudElements(double& deltaTime)
         drawCartesianAxies(*pixelsTable);
     #endif // DEBUG_DRAWINGS
 
-    drawCrossHair(mouseX, mouseY, *pixelsTable);
+    drawCrossHair(mouseX, mouseY, *pixelsTable, false);
 }
 
 void YasEngine::handleInput(SDL_Event& event)
@@ -197,10 +199,16 @@ void YasEngine::preparePlayer()
 
 void YasEngine::update(double& deltaTime)
 {
+    handlePhysics();
     for (auto object : objectsToDraw)
     {
-        object->move(static_cast<float>(deltaTime));
-        object->regeneratePolygon();
+        
+        if (object->isAlive)
+        {
+            
+            object->move(static_cast<float>(deltaTime));
+            object->regeneratePolygon();
+        }
     }
 
     Projectile* projectile = player->shoot();
@@ -227,11 +235,16 @@ void YasEngine::render(double& deltaTime)
     pixelsTable->clearColor(BLACK);
     mathPlay->clearColor(BLACK);
 
+
+
     for (auto object : objectsToDraw)
     {
-        drawPolygon(object, *pixelsTable);
+        if (object->isAlive)
+        {
+            drawPolygon(object, *pixelsTable);
+        }
     }
-    drawHudElements(deltaTime);
+    
 
     int vertical = static_cast<int>(-WINDOW_WIDTH * 0.25F);
     int horizontal = static_cast<int>(-WINDOW_HEIGHT * 0.25F);
@@ -249,14 +262,39 @@ void YasEngine::render(double& deltaTime)
 
     mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
 
-    verticalLineOnScreen(*pixelsTable, 0, GREEN);
-    horizontalLineOnScreen(*pixelsTable, 0, RED);
+    verticalLineOnWholeScreen(*pixelsTable, 0, GREEN);
+    horizontalLineOnWholeScreen(*pixelsTable, 0, RED);
 
-    //mathPlay->
+    drawHudElements(deltaTime);
 
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
     SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);
     SDL_RenderPresent(renderer);
+}
+
+void YasEngine::handlePhysics()
+{
+    for (int i = 0; i < objectsToDraw.size(); i++)
+    {
+        for (int j = 0; j < objectsToDraw.size(); j++)
+        {
+            if(!(objectsToDraw[i] == objectsToDraw[j]))
+            {
+	            if(Collider::isCollidingWithWall(objectsToDraw[i]->collider))
+	            {
+                    objectsToDraw[i]->isAlive = false;
+	            }
+                else
+                {
+	                if(Collider::isInCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
+	                {
+                        objectsToDraw[i]->isAlive = false;
+                        objectsToDraw[j]->isAlive = false;
+	                }
+                }
+            }
+        }
+    }
 }
 
 void YasEngine::prepareGameWorld()

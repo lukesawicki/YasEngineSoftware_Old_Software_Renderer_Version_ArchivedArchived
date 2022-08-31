@@ -82,6 +82,7 @@ class YasEngine
 		void drawMathArt();
 		void prepareRendering();
 		void prepareBasicSettings();
+		void handlePhysics();
 		void prepareGameWorld();
 		void preparePlayer();
 		void handleInput(SDL_Event& event);
