@@ -10,7 +10,7 @@ class Collider
 		float y = 0.0F;
 		Collider(float radius, float x, float y);
 		static bool isInCollision(const Collider& object1,const Collider& object2);
-		static bool isCollidingWithWall(const Collider& object1);
+		static bool isCollidingWithWall(const Collider& object0, Vector2D<int> worldSizes);
 };
 
 #endif

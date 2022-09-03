@@ -9,8 +9,6 @@
 
 class PixelsTable;
 
-
-
 const float PI = 3.141592F;
 const Uint8 NUMBER_OF_COLORS = 4;
 const Uint8 RGB_FORMAT = 3;
