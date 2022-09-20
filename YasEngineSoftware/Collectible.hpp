@@ -5,6 +5,7 @@
 class Collectible: public GameObject
 {
 public:
+	Collectible();
 	~Collectible();
 	void generate() override;
 	void generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) override;

@@ -2,6 +2,11 @@
 
 Player::Player(float x, float y)
 {
+
+	collider.x = x;
+	collider.y = y;
+	collider.radius = 20;
+	iAm = WhoAmI::PROTAGONIST;
 	position.x = x;
 	position.y = y;
 
@@ -100,6 +105,8 @@ void Player::move(float deltaTime)
 	{
 		position.y = position.y + deltaTime * (-speed);
 	}
+
+	moveCollider();
 
 	// SPACE
 	if (input->shoot || mouse->leftMouseButton)

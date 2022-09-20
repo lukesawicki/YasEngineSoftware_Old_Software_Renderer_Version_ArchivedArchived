@@ -1,5 +1,9 @@
 #include "Collectible.hpp"
 
+Collectible::Collectible()
+{
+}
+
 Collectible::~Collectible()
 {
 }

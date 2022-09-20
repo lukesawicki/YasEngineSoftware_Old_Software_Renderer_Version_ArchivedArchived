@@ -2,14 +2,13 @@
 #define YASGRAPHICSLIBRARY_HPP
 #include<vector>
 #include<SDL.h>
+#include"GameObject.hpp"
 #include"Vector2D.hpp"
 #include"Vector4D.hpp"
 #include"PixelsTable.hpp"
-#include"GameObject.hpp"
 
 class PixelsTable;
-
-
+class GameObject;
 
 const float PI = 3.141592F;
 const Uint8 NUMBER_OF_COLORS = 4;

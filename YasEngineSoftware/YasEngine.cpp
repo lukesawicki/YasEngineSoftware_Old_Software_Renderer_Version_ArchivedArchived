@@ -276,21 +276,31 @@ void YasEngine::handlePhysics()
 {
     for (int i = 0; i < objectsToDraw.size(); i++)
     {
+        if(!objectsToDraw[i]->isAlive || objectsToDraw[i]->iAm == GameObject::PROTAGONIST)
+        {
+            continue;
+        }
+
+        if (Collider::isCollidingWithWall(objectsToDraw[i]->collider, *windowDimensions))
+        {
+            objectsToDraw[i]->isAlive = false;
+            continue;
+        }
+
         for (int j = 0; j < objectsToDraw.size(); j++)
         {
-            if(!(objectsToDraw[i] == objectsToDraw[j]))
+            if (objectsToDraw[j]->iAm == GameObject::PROTAGONIST)
             {
-	            if(Collider::isCollidingWithWall(objectsToDraw[i]->collider))
-	            {
-                    objectsToDraw[i]->isAlive = false;
-	            }
-                else
+                continue;
+            }
+
+            if(!(objectsToDraw[i] == objectsToDraw[j]) && objectsToDraw[i]->isAlive && objectsToDraw[j]->isAlive)
+            {
+                if(Collider::isInCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
                 {
-	                if(Collider::isInCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
-	                {
-                        objectsToDraw[i]->isAlive = false;
-                        objectsToDraw[j]->isAlive = false;
-	                }
+                    objectsToDraw[i]->isAlive = false;
+                    objectsToDraw[j]->isAlive = false;
+                    std::cout << "HIT" << std::endl;
                 }
             }
         }

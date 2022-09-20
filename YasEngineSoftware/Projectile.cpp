@@ -2,6 +2,9 @@
 
 Projectile::Projectile(float radius, float x, float y, Vector2D<float> direction)
 {
+	isAlive = true;
+	iAm = WhoAmI::PROJECTILE;
+	collider.radius = radius;
 	directionSwitched = false;
 	speed = 200;
 	Vector2D<float> position(x, y);
@@ -20,6 +23,7 @@ void Projectile::move(float deltaTime)
 {
 	position.x = position.x + deltaTime * velocity.x;
 	position.y = position.y + deltaTime * velocity.y;
+	moveCollider();
 	regeneratePolygon();
 }
 

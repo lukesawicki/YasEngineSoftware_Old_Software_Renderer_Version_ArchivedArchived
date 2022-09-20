@@ -2,14 +2,18 @@
 #define GAMEOBJECT_HPP
 #include<SDL.h>
 
-#include "Collider.hpp"
+#include"Collider.hpp"
 #include"Vector2D.hpp"
 #include"Vector4D.hpp"
 
 class GameObject
 {
 	public:
-		//virtual ~GameObject() = 0;
+		//vXXXXXirtual ~GameObject() = 0;
+
+		enum WhoAmI { DEFAULT_VALUE, PROTAGONIST, PROJECTILE, COLLECTIBLE };
+
+		WhoAmI iAm;
 		bool isAlive = true;
 		Collider collider;
 		Vector2D<float>* localVertices = nullptr;
@@ -43,6 +47,12 @@ class GameObject
 		}
 		
 		virtual void move(float deltaTime) = 0;
+
+		virtual void moveCollider()
+		{
+			collider.x = position.x;
+			collider.y = position.y;
+		}
 
 		virtual void setColor(const Vector4D<Uint8>& color)
 		{
