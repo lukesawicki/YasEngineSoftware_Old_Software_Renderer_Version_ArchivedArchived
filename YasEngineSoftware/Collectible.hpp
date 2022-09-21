@@ -5,7 +5,7 @@
 class Collectible: public GameObject
 {
 public:
-	Collectible();
+	Collectible(float radius, float x, float y, Vector2D<float> direction);
 	~Collectible();
 	void generate() override;
 	void generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) override;
@@ -14,6 +14,8 @@ public:
 	void setPosition(const Vector2D<float>& position) override;
 	void move(float deltaTime) override;
 	void setColor(const Vector4D<Uint8>& color) override;
+	void setRandomColor();
+	Vector2D<float> velocity;
 };
 
 #endif

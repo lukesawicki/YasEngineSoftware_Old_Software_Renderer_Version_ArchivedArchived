@@ -161,6 +161,7 @@
     <ClInclude Include="Collider.hpp" />
     <ClInclude Include="SinusPointsGenerator.hpp" />
     <ClInclude Include="TimePicker.hpp" />
+    <ClInclude Include="Timer.hpp" />
     <ClInclude Include="VariousTools.hpp" />
     <ClInclude Include="ViewPort.hpp" />
     <ClInclude Include="YasEngine.hpp" />

@@ -2,6 +2,7 @@
 #define PROJECTILE_HPP
 #include"YasGraphicsLibrary.hpp"
 #include"GameObject.hpp"
+#include "Timer.hpp"
 
 
 class Projectile : public GameObject
@@ -9,6 +10,7 @@ class Projectile : public GameObject
 	private:
 		bool directionSwitched = false;
 	public:
+		Timer timer;
 		Vector2D<float> velocity;
 		Projectile(float radius, float x, float y, Vector2D<float> direction);
 		~Projectile();

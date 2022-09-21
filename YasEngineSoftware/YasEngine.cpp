@@ -284,12 +284,13 @@ void YasEngine::handlePhysics()
         if (Collider::isCollidingWithWall(objectsToDraw[i]->collider, *windowDimensions))
         {
             objectsToDraw[i]->isAlive = false;
+            std::cout << "HIT" << std::endl;
             continue;
         }
 
         for (int j = 0; j < objectsToDraw.size(); j++)
         {
-            if (objectsToDraw[j]->iAm == GameObject::PROTAGONIST)
+            if (objectsToDraw[j]->iAm == GameObject::PROTAGONIST || (objectsToDraw[i]->iAm == GameObject::PROJECTILE && objectsToDraw[j]->iAm == GameObject::PROJECTILE) )
             {
                 continue;
             }
@@ -300,7 +301,7 @@ void YasEngine::handlePhysics()
                 {
                     objectsToDraw[i]->isAlive = false;
                     objectsToDraw[j]->isAlive = false;
-                    std::cout << "HIT" << std::endl;
+                    
                 }
             }
         }
