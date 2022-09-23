@@ -10,6 +10,8 @@ Destroyable::Destroyable(float radius, float x, float y, Vector2D<float> directi
 	speed = 200;
 	this->position.x = x;
 	this->position.y = y;
+	this->collider.x = x;
+	this->collider.y = y;
 	Vector2D<float> position(x, y);
 	velocity.x = speed * direction.x;
 	velocity.y = speed * direction.y;

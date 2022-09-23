@@ -10,6 +10,9 @@ Projectile::Projectile(float radius, float x, float y, Vector2D<float> direction
 	Vector2D<float> position(x, y);
 	this->position.x = x;
 	this->position.y = y;
+	this->collider.x = x;
+	this->collider.y = y;
+
 	velocity.x = speed * direction.x;
 	velocity.y = speed * direction.y;
 	color = BLUE;
