@@ -37,9 +37,12 @@ void Spawner::spawnObject(GameObject*& gameObject)
 		gameObject = new Destroyable(16, position.x + dirX*xPos, position.y + dirY*yPos, Vector2D<float>(0.0F, 0.0F), 5);
 		if(gameObject != nullptr)
 		{
-			std::cout << "is not null" << std::endl;
+			//std::cout << "is not null" << std::endl;
 		}
-		std::cout << "AAAAAAAAAA" << std::endl;
+
+
+		//std::cout << "AAAAAAAAAA" << std::endl;
+
 		}, 500);
 
 	//return gameObject;

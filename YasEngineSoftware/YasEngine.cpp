@@ -223,7 +223,7 @@ void YasEngine::update(double& deltaTime)
     if(go != nullptr)
     {
         objectsToDraw.push_back(go);
-        std::cout << "spawning" << std::endl;
+        //std::cout << "spawning" << std::endl;
         //go = nullptr;
     }
 
@@ -288,16 +288,18 @@ void YasEngine::handlePhysics()
             continue;
         }
 
-        if (Collider::isCollidingWithWall(objectsToDraw[i]->collider, *windowDimensions))
+        if (!objectsToDraw[i]->iAm == GameObject::COLLECTIBLE && Collider::isCollidingWithWall(objectsToDraw[i]->collider, *windowDimensions))
         {
             objectsToDraw[i]->isAlive = false;
-            std::cout << "HIT" << std::endl;
+            //std::cout << "HIT" << std::endl;
             continue;
         }
 
         for (int j = 0; j < objectsToDraw.size(); j++)
         {
-            if (objectsToDraw[j]->iAm == GameObject::PROTAGONIST || (objectsToDraw[i]->iAm == GameObject::PROJECTILE && objectsToDraw[j]->iAm == GameObject::PROJECTILE) )
+            if (!objectsToDraw[j]->isAlive || objectsToDraw[j]->iAm == GameObject::PROTAGONIST ||
+                (objectsToDraw[i]->iAm == GameObject::PROJECTILE && objectsToDraw[j]->iAm == GameObject::PROJECTILE) ||
+                (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE && objectsToDraw[j]->iAm == GameObject::COLLECTIBLE) )
             {
                 continue;
             }
