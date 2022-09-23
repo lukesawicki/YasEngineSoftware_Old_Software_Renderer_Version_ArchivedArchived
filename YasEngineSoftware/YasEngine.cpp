@@ -203,6 +203,10 @@ void YasEngine::preparePlayer()
 
 void YasEngine::update(double& deltaTime)
 {
+    int numberOfOobj = objectsToDraw.size();
+
+    int testttt = numberOfOobj;
+
     handlePhysics();
     for (auto object : objectsToDraw)
     {
@@ -223,8 +227,6 @@ void YasEngine::update(double& deltaTime)
     if(go != nullptr)
     {
         objectsToDraw.push_back(go);
-        //std::cout << "spawning" << std::endl;
-        //go = nullptr;
     }
 
     if (mousePositionChangeInformation->mouseMoved || input->up || input->down || input->left || input->right)
@@ -281,37 +283,38 @@ void YasEngine::render(double& deltaTime)
 
 void YasEngine::handlePhysics()
 {
-    for (int i = 0; i < static_cast<int>(objectsToDraw.size()); i++)
+    if (objectsToDraw.size() >= 3)
     {
-        if(!objectsToDraw[i]->isAlive || objectsToDraw[i]->iAm == GameObject::PROTAGONIST)
+        for (int i = 0; i < static_cast<int>(objectsToDraw.size() - 2); i++)
         {
-            continue;
-        }
-
-        if (Collider::isCollidingWithWall(objectsToDraw[i]->collider, *windowDimensions))
-        {
-            objectsToDraw[i]->isAlive = false;
-            //std::cout << "HIT" << std::endl;
-            continue;
-        }
-
-
-
-        for (int j = 0; j < static_cast<int>(objectsToDraw.size()); j++)
-        {
-            if (!objectsToDraw[j]->isAlive || objectsToDraw[j]->iAm == GameObject::PROTAGONIST ||
-                (objectsToDraw[i]->iAm == GameObject::PROJECTILE && objectsToDraw[j]->iAm == GameObject::PROJECTILE) ||
-                (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE && objectsToDraw[j]->iAm == GameObject::COLLECTIBLE) )
+            if (!objectsToDraw[i]->isAlive || objectsToDraw[i]->iAm == GameObject::PROTAGONIST)
             {
                 continue;
             }
 
-            if(!(objectsToDraw[i] == objectsToDraw[j]) && objectsToDraw[i]->isAlive && objectsToDraw[j]->isAlive)
+            if (Collider::isCollidingWithWall(objectsToDraw[i]->collider, *windowDimensions))
             {
-                if(Collider::isInCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
+                objectsToDraw[i]->isAlive = false;
+                //std::cout << "HIT" << std::endl;
+                continue;
+            }
+
+            for (int j = i; j < static_cast<int>(objectsToDraw.size()); j++)
+            {
+                if (!objectsToDraw[j]->isAlive || objectsToDraw[j]->iAm == GameObject::PROTAGONIST ||
+                    (objectsToDraw[i]->iAm == GameObject::PROJECTILE && objectsToDraw[j]->iAm == GameObject::PROJECTILE) ||
+                    (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE && objectsToDraw[j]->iAm == GameObject::COLLECTIBLE))
                 {
-                    objectsToDraw[i]->isAlive = false;
-                    objectsToDraw[j]->isAlive = false;
+                    continue;
+                }
+
+                if (!(objectsToDraw[i] == objectsToDraw[j]) && objectsToDraw[i]->isAlive && objectsToDraw[j]->isAlive)
+                {
+                    if (Collider::isInCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
+                    {
+                        objectsToDraw[i]->isAlive = false;
+                        objectsToDraw[j]->isAlive = false;
+                    }
                 }
             }
         }

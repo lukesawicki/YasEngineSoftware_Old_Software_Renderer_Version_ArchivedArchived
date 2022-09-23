@@ -5,6 +5,8 @@
 //GameObject* 
 void Spawner::spawnObject(GameObject*& gameObject)
 {
+	int oldTargetPositionX = 0;
+	int oldTargetPositionY = 0;
 	//liveTime;
 	timer.setInterval([&]() {
 		srand(clock());
@@ -34,16 +36,23 @@ void Spawner::spawnObject(GameObject*& gameObject)
 		{
 			dirY = 1;
 		}
-		gameObject = new Destroyable(16, position.x + dirX*xPos, position.y + dirY*yPos, Vector2D<float>(0.0F, 0.0F), 5);
-		if(gameObject != nullptr)
-		{
-			//std::cout << "is not null" << std::endl;
-		}
 
+		int targetPositionX = position.x + dirX * xPos;
+		int targetPositionY = position.y + dirY * yPos;
+
+		if (oldTargetPositionX != targetPositionX || oldTargetPositionY != targetPositionY)
+		{
+
+			gameObject = new Destroyable(16, targetPositionX, targetPositionY, Vector2D<float>(0.0F, 0.0F), 5);
+			if (gameObject != nullptr)
+			{
+				//std::cout << "is not null" << std::endl;
+			}
+		}
 
 		//std::cout << "AAAAAAAAAA" << std::endl;
 
-		}, 500);
+		}, 2000);
 
 	//return gameObject;
 }
