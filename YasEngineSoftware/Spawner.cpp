@@ -52,7 +52,7 @@ void Spawner::spawnObject(GameObject*& gameObject)
 
 		//std::cout << "AAAAAAAAAA" << std::endl;
 
-		}, 2000);
+		}, 750);
 
 	//return gameObject;
 }

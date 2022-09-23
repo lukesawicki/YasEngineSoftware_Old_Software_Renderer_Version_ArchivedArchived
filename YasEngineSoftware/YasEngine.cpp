@@ -203,9 +203,9 @@ void YasEngine::preparePlayer()
 
 void YasEngine::update(double& deltaTime)
 {
-    int numberOfOobj = objectsToDraw.size();
+    //int numberOfPhysicalObjects = objectsToDraw.size();
 
-    int testttt = numberOfOobj;
+    //std::cout << numberOfPhysicalObjects << std::endl;
 
     handlePhysics();
     for (auto object : objectsToDraw)
