@@ -2,11 +2,11 @@
 #define COLLECTIBLE_HPP
 #include "GameObject.hpp"
 
-class Collectible: public GameObject
+class Destroyable: public GameObject
 {
 public:
-	Collectible(float radius, float x, float y, Vector2D<float> direction);
-	~Collectible();
+	Destroyable(float radius, float x, float y, Vector2D<float> direction, int numberOfVertices);
+	~Destroyable();
 	void generate() override;
 	void generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) override;
 	void regeneratePolygon() override;

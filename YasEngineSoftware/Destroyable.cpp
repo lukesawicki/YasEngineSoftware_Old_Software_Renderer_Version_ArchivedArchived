@@ -1,8 +1,8 @@
-#include "Collectible.hpp"
+#include "Destroyable.hpp"
 #include "YasGraphicsLibrary.hpp"
 #include<cstdlib>     /* srand, rand */
 
-Collectible::Collectible(float radius, float x, float y, Vector2D<float> direction)
+Destroyable::Destroyable(float radius, float x, float y, Vector2D<float> direction, int numberOfVertices)
 {
 	isAlive = true;
 	iAm = GameObject::COLLECTIBLE;
@@ -12,14 +12,15 @@ Collectible::Collectible(float radius, float x, float y, Vector2D<float> directi
 	velocity.x = speed * direction.x;
 	velocity.y = speed * direction.y;
 	setRandomColor();
-	generateRegularPolygonVertices(position, radius, 4);
+	generateRegularPolygonVertices(position, radius, numberOfVertices);
 }
 
-Collectible::~Collectible()
+Destroyable::~Destroyable()
 {
+	delete[] worldVertices;
 }
 
-void Collectible::generate()
+void Destroyable::generate()
 {
 	for (int i = 0; i < numberOfVertices; i++)
 	{
@@ -28,7 +29,7 @@ void Collectible::generate()
 	}
 }
 
-void Collectible::generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices)
+void Destroyable::generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices)
 {
 	this->circumscribedCircleRadius = circumscribedCircleRadius;
 	this->numberOfVertices = numberOfVertices;
@@ -48,35 +49,35 @@ void Collectible::generateRegularPolygonVertices(const Vector2D<float>& position
 	generate();
 }
 
-void Collectible::regeneratePolygon()
+void Destroyable::regeneratePolygon()
 {
 	generate();
 }
 
-void Collectible::setPosition(float x, float y)
+void Destroyable::setPosition(float x, float y)
 {
 	GameObject::setPosition(x, y);
 }
 
-void Collectible::setPosition(const Vector2D<float>& position)
+void Destroyable::setPosition(const Vector2D<float>& position)
 {
 	GameObject::setPosition(position);
 }
 
-void Collectible::move(float deltaTime)
+void Destroyable::move(float deltaTime)
 {
-	position.x = position.x + deltaTime * velocity.x;
-	position.y = position.y + deltaTime * velocity.y;
-	moveCollider();
-	regeneratePolygon();
+	//position.x = position.x + deltaTime * velocity.x;
+	//position.y = position.y + deltaTime * velocity.y;
+	//moveCollider();
+	//regeneratePolygon();
 }
 
-void Collectible::setColor(const Vector4D<Uint8>& color)
+void Destroyable::setColor(const Vector4D<Uint8>& color)
 {
 	GameObject::setColor(color);
 }
 
-void Collectible::setRandomColor()
+void Destroyable::setRandomColor()
 {
 	srand(clock());
 	int col = rand() % 5;

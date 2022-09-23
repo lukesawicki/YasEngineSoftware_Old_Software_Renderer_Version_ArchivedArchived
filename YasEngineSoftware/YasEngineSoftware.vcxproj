@@ -146,7 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Circle.hpp" />
-    <ClInclude Include="Collectible.hpp" />
+    <ClInclude Include="Destroyable.hpp" />
     <ClInclude Include="CosinusPointsGenerator.hpp" />
     <ClInclude Include="FibonacciPointsGenerator.hpp" />
     <ClInclude Include="InputOutputHandler.hpp" />
@@ -160,6 +160,7 @@
     <ClInclude Include="Projectile.hpp" />
     <ClInclude Include="Collider.hpp" />
     <ClInclude Include="SinusPointsGenerator.hpp" />
+    <ClInclude Include="Spawner.hpp" />
     <ClInclude Include="TimePicker.hpp" />
     <ClInclude Include="Timer.hpp" />
     <ClInclude Include="VariousTools.hpp" />
@@ -173,7 +174,7 @@
   <ItemGroup>
     <ClCompile Include="BackupCpp.cpp" />
     <ClCompile Include="Circle.cpp" />
-    <ClCompile Include="Collectible.cpp" />
+    <ClCompile Include="Destroyable.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CosinusPointsGenerator.cpp" />
     <ClCompile Include="FibonacciPointsGenerator.cpp" />
@@ -185,6 +186,7 @@
     <ClCompile Include="PrimeNumbersPointsGenerator.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="SinusPointsGenerator.cpp" />
+    <ClCompile Include="Spawner.cpp" />
     <ClCompile Include="temporary.cpp" />
     <ClCompile Include="TimePicker.cpp" />
     <ClCompile Include="YasEngine.cpp" />

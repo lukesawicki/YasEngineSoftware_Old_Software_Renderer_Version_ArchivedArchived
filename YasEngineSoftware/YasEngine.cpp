@@ -10,10 +10,12 @@
 #include"Math.hpp"
 #include "PrimeNumbersPointsGenerator.hpp"
 #include "SinusPointsGenerator.hpp"
+
 YasEngine* YasEngine::instance = nullptr;
 
 void YasEngine::initialize()
 {
+    //spawner.spawnObject(go);
     prepareBasicSettings();
     prepareRendering();
     prepareGameWorld();
@@ -51,6 +53,8 @@ void YasEngine::YasEnginStart()
     time = timePicker.getSeconds();
     fpsTime = 0.0F;
     frames = 0;
+
+    spawner.spawnObject(go);
 
     while (!quit)
     {
@@ -202,10 +206,8 @@ void YasEngine::update(double& deltaTime)
     handlePhysics();
     for (auto object : objectsToDraw)
     {
-        
         if (object->isAlive)
         {
-            
             object->move(static_cast<float>(deltaTime));
             object->regeneratePolygon();
         }
@@ -215,6 +217,14 @@ void YasEngine::update(double& deltaTime)
     if (projectile != nullptr)
     {
         objectsToDraw.push_back(projectile);
+    }
+
+
+    if(go != nullptr)
+    {
+        objectsToDraw.push_back(go);
+        std::cout << "spawning" << std::endl;
+        //go = nullptr;
     }
 
     if (mousePositionChangeInformation->mouseMoved || input->up || input->down || input->left || input->right)
@@ -235,8 +245,6 @@ void YasEngine::render(double& deltaTime)
     pixelsTable->clearColor(BLACK);
     mathPlay->clearColor(BLACK);
 
-
-
     for (auto object : objectsToDraw)
     {
         if (object->isAlive)
@@ -245,7 +253,6 @@ void YasEngine::render(double& deltaTime)
         }
     }
     
-
     int vertical = static_cast<int>(-WINDOW_WIDTH * 0.25F);
     int horizontal = static_cast<int>(-WINDOW_HEIGHT * 0.25F);
 
@@ -301,7 +308,6 @@ void YasEngine::handlePhysics()
                 {
                     objectsToDraw[i]->isAlive = false;
                     objectsToDraw[j]->isAlive = false;
-                    
                 }
             }
         }
@@ -324,4 +330,9 @@ void YasEngine::prepareGameWorld()
         cosinusPoints = cosinusPointsGenerator.generatePoints();
         fibonacciePoints = fibonacciPointsGenerator.generatePoints();
         primeNumbersPoints = primeNumberPointsGenerator.generatePoints();
+
+        
+        spawner.position.x = -200;
+        spawner.position.y = 0;
+
 }

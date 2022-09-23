@@ -10,6 +10,7 @@ class Projectile : public GameObject
 	private:
 		bool directionSwitched = false;
 	public:
+		int liveTime = 2000;
 		Timer timer;
 		Vector2D<float> velocity;
 		Projectile(float radius, float x, float y, Vector2D<float> direction);

@@ -13,6 +13,7 @@
 #include"MathematicsFunSurface.hpp"
 #include "PointsGenerator.hpp"
 #include "PointsSet.hpp"
+#include "Spawner.hpp"
 
 //#define DEBUG_DRAWINGS
 
@@ -20,6 +21,8 @@
 class YasEngine
 {	
 	public:
+
+		GameObject* go;
 
 		static YasEngine* GetInstance()
 		{
@@ -72,6 +75,8 @@ class YasEngine
 		PointsSet* cosinusPoints;
 		PointsSet* fibonacciePoints;
 		PointsSet* primeNumbersPoints;
+
+		Spawner spawner;
 
 		YasEngine() {};
 		bool shouldApplicationStopRunning = false;

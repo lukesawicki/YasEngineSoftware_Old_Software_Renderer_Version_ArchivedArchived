@@ -12,17 +12,17 @@ Projectile::Projectile(float radius, float x, float y, Vector2D<float> direction
 	velocity.y = speed * direction.y;
 	color = BLUE;
 	generateRegularPolygonVertices(position, radius, 4);
-	//timer = Timer();
-
+	timer = Timer();
+	//liveTime;
 	//timer.setInterval([&]() {
-	//	//cout << "Hey.. After each 1s..." << endl;
-	//	}, 1000);
+	//	std::cout << "HELLO" << std::endl;
+	//	}, 500);
 
-	//timer.setTimeout([&]() {
-	//	//cout << "Hey.. After 5.2s. But I will stop the timer!" << endl;
-	//	timer.stop();
-	//	this->isAlive = false;
-	//	}, 1200);
+	timer.setTimeout([&]() {
+		//cout << "Hey.. After 5.2s. But I will stop the timer!" << endl;
+		timer.stop();
+		this->isAlive = false;
+		}, liveTime);
 }
 
 Projectile::~Projectile()
