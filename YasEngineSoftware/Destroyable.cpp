@@ -8,11 +8,13 @@ Destroyable::Destroyable(float radius, float x, float y, Vector2D<float> directi
 	iAm = GameObject::COLLECTIBLE;
 	collider.radius = radius;
 	speed = 200;
+	this->position.x = x;
+	this->position.y = y;
 	Vector2D<float> position(x, y);
 	velocity.x = speed * direction.x;
 	velocity.y = speed * direction.y;
 	setRandomColor();
-	generateRegularPolygonVertices(position, radius, numberOfVertices);
+	generateRegularPolygonVertices(radius, numberOfVertices);
 }
 
 Destroyable::~Destroyable()
@@ -29,12 +31,10 @@ void Destroyable::generate()
 	}
 }
 
-void Destroyable::generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices)
+void Destroyable::generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices)
 {
 	this->circumscribedCircleRadius = circumscribedCircleRadius;
 	this->numberOfVertices = numberOfVertices;
-	this->position.x = position.x;
-	this->position.y = position.y;
 	this->worldVertices = new Vector2D<float>[numberOfVertices];
 	this->localVertices = new Vector2D<float>[numberOfVertices];
 

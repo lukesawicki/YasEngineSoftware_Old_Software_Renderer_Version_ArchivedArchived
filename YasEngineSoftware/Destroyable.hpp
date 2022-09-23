@@ -8,7 +8,7 @@ public:
 	Destroyable(float radius, float x, float y, Vector2D<float> direction, int numberOfVertices);
 	~Destroyable();
 	void generate() override;
-	void generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) override;
+	void generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices) override;
 	void regeneratePolygon() override;
 	void setPosition(float x, float y) override;
 	void setPosition(const Vector2D<float>& position) override;

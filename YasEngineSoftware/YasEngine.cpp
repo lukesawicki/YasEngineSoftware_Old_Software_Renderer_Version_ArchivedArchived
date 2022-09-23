@@ -281,21 +281,23 @@ void YasEngine::render(double& deltaTime)
 
 void YasEngine::handlePhysics()
 {
-    for (int i = 0; i < objectsToDraw.size(); i++)
+    for (int i = 0; i < static_cast<int>(objectsToDraw.size()); i++)
     {
         if(!objectsToDraw[i]->isAlive || objectsToDraw[i]->iAm == GameObject::PROTAGONIST)
         {
             continue;
         }
 
-        if (!objectsToDraw[i]->iAm == GameObject::COLLECTIBLE && Collider::isCollidingWithWall(objectsToDraw[i]->collider, *windowDimensions))
+        if (Collider::isCollidingWithWall(objectsToDraw[i]->collider, *windowDimensions))
         {
             objectsToDraw[i]->isAlive = false;
             //std::cout << "HIT" << std::endl;
             continue;
         }
 
-        for (int j = 0; j < objectsToDraw.size(); j++)
+
+
+        for (int j = 0; j < static_cast<int>(objectsToDraw.size()); j++)
         {
             if (!objectsToDraw[j]->isAlive || objectsToDraw[j]->iAm == GameObject::PROTAGONIST ||
                 (objectsToDraw[i]->iAm == GameObject::PROJECTILE && objectsToDraw[j]->iAm == GameObject::PROJECTILE) ||

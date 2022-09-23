@@ -232,7 +232,7 @@ void Player::generate()
 
 }
 
-void Player::generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices)
+void Player::generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices)
 {
 
 }

@@ -469,10 +469,11 @@
         }
         else
         {
-            drawHorizontalLine(pixelsTable, x - 15, x - 5, y, GREEN);
-            drawHorizontalLine(pixelsTable, x + 5, x + 15, y, GREEN);
-            drawVerticalLine(pixelsTable, y - 15, y - 5, x, GREEN);
-            drawVerticalLine(pixelsTable, y + 5, y + 15, x, GREEN);
+            // TODO refactor methods drawHor... and drawVer... should have float arguments and then round and cast
+            drawHorizontalLine(pixelsTable, static_cast<int>(round(x) - 15), static_cast<int>(round(x) - 5), static_cast<int>(round(y)), GREEN);
+            drawHorizontalLine(pixelsTable, static_cast<int>(round(x) + 5), static_cast<int>(round(x) + 15), static_cast<int>(round(y)), GREEN);
+            drawVerticalLine(pixelsTable, static_cast<int>(round(y) - 15), static_cast<int>(round(y) - 5), static_cast<int>(round(x)), GREEN);
+            drawVerticalLine(pixelsTable, static_cast<int>(round(y) + 5), static_cast<int>(round(y) + 15), static_cast<int>(round(x)), GREEN);
         }
     }
 

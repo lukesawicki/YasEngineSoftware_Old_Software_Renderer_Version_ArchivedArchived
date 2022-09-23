@@ -17,7 +17,7 @@ class Projectile : public GameObject
 		~Projectile();
 		void move(float deltaTime) override;
 		void generate() override;
-		void generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) override;
+		void generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices) override;
 		void regeneratePolygon() override;
 
 };

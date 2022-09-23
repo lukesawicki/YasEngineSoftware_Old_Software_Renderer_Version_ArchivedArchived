@@ -30,7 +30,7 @@ class Player : public GameObject
 		void rotateToMousePositionInLocalCoordinateSystem(float x, float y, Vector2D<int>* windowDimensions);
 		void setDirection(float x, float y);
 		void generate() override;
-		void generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices) override;
+		void generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices) override;
 		void regeneratePolygon() override;
 		void setInput(YasInOut::Input* input);
 		void setInput(YasInOut::MousePositionChangeInformation* mouse);

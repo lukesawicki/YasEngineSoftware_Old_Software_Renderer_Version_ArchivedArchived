@@ -4,9 +4,9 @@ Circle::Circle(float radius, float x, float y)
 {
 	directionSwitched = false;
 	speed = 200;
-
-	Vector2D<float> position(x, y);
-	generateRegularPolygonVertices(position, radius, 64);
+	this->position.x = x;
+	this->position.y = y;
+	generateRegularPolygonVertices(radius, 64);
 }
 
 Circle::~Circle()
@@ -41,12 +41,10 @@ void Circle::generate()
 	}
 }
 
-void Circle::generateRegularPolygonVertices(const Vector2D<float>& position, float circumscribedCircleRadius, int numberOfVertices)
+void Circle::generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices)
 {
 	this->circumscribedCircleRadius = circumscribedCircleRadius;
 	this->numberOfVertices = numberOfVertices;
-	this->position.x = position.x;
-	this->position.y = position.y;
 	this->worldVertices = new Vector2D<float>[numberOfVertices];
 	this->localVertices = new Vector2D<float>[numberOfVertices];
 
