@@ -48,7 +48,12 @@ class YasEngine
 		SDL_Window* window;
 		SDL_Renderer* renderer;
 		SDL_Texture* screenTexture;
-		
+
+		SDL_AudioDeviceID deviceId;
+		SDL_AudioSpec wavSpecification;
+		Uint32 wavLength;
+		Uint8* wavBuffer;
+
 		PixelsTable* pixelsTable;
 		Vector2D<int>* windowDimensions;
 		SDL_Event event;

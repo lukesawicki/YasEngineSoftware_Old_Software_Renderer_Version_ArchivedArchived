@@ -1,15 +1,16 @@
-#include "YasEngine.hpp"
-#include <cstdlib>     /* srand, rand */
-#include <ctime> 
+#include"YasEngine.hpp"
+#include<cstdlib>     /* srand, rand */
+#include<ctime> 
 #include<SDL_endian.h>
+#include<SDL_audio.h>
 #include"VariousTools.hpp"
 #include"Circle.hpp"
-#include "Collider.hpp"
-#include "CosinusPointsGenerator.hpp"
-#include "FibonacciPointsGenerator.hpp"
+#include"Collider.hpp"
+#include"CosinusPointsGenerator.hpp"
+#include"FibonacciPointsGenerator.hpp"
 #include"Math.hpp"
-#include "PrimeNumbersPointsGenerator.hpp"
-#include "SinusPointsGenerator.hpp"
+#include"PrimeNumbersPointsGenerator.hpp"
+#include"SinusPointsGenerator.hpp"
 
 YasEngine* YasEngine::instance = nullptr;
 
@@ -20,6 +21,32 @@ void YasEngine::initialize()
     prepareRendering();
     prepareGameWorld();
     preparePlayer();
+
+    ///
+    // SOUND
+
+    //SDL_LoadWAV("shoot.wav");
+
+    
+
+	// lukesawicki
+
+    if (SDL_LoadWAV("shoot.wav", &wavSpecification, &wavBuffer, &wavLength) == NULL) {
+       // EXCEPTION
+        std::cout << "ERROR NIE MA AUDIO" << std::endl;
+    }
+    else {
+       
+        
+        deviceId = SDL_OpenAudioDevice(NULL, 0, &wavSpecification, NULL, 0);
+        //int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
+        //int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
+        //SDL_PauseAudioDevice(deviceId, 0);
+    }
+
+	
+
+    ///
 
     mathPlay = new MathematicsFunSurface(0, 0, static_cast<int>(windowDimensions->x * 0.5F), static_cast<int>(windowDimensions->y * 0.5F), BLACK);
 
@@ -43,6 +70,7 @@ void YasEngine::clean()
     delete windowDimensions;
     SDL_DestroyTexture(screenTexture);
     SDL_DestroyRenderer(renderer);
+    SDL_FreeWAV(wavBuffer);
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
@@ -184,6 +212,15 @@ void YasEngine::handleInput(SDL_Event& event)
         if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
         {
             player->isShooting      = true;
+
+            // lukesawicki
+            //SDL_LoadWAV("shoot.wav", &wavSpecification, &wavBuffer, &wavLength);
+            int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
+            SDL_PauseAudioDevice(deviceId, 0);
+			//SDL_FreeWAV(wavBuffer);
+            //extern DECLSPEC void SDLCALL SDL_PauseAudio(int pause_on);
+            //SDL_PauseAudio(deviceId);
+            
         }
         if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
         {
@@ -221,6 +258,7 @@ void YasEngine::update(double& deltaTime)
     if (projectile != nullptr)
     {
         objectsToDraw.push_back(projectile);
+
     }
 
 
