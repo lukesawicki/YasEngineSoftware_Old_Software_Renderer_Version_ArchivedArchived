@@ -41,7 +41,7 @@ void YasEngine::initialize()
         deviceId = SDL_OpenAudioDevice(NULL, 0, &wavSpecification, NULL, 0);
         //int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
         //int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
-        //SDL_PauseAudioDevice(deviceId, 0);
+        SDL_PauseAudioDevice(deviceId, 0);
     }
 
 	
@@ -213,13 +213,8 @@ void YasEngine::handleInput(SDL_Event& event)
         {
             player->isShooting      = true;
 
-            // lukesawicki
-            //SDL_LoadWAV("shoot.wav", &wavSpecification, &wavBuffer, &wavLength);
-            int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
-            SDL_PauseAudioDevice(deviceId, 0);
-			//SDL_FreeWAV(wavBuffer);
-            //extern DECLSPEC void SDLCALL SDL_PauseAudio(int pause_on);
-            //SDL_PauseAudio(deviceId);
+				SDL_ClearQueuedAudio(deviceId);
+                SDL_QueueAudio(deviceId, wavBuffer, wavLength);
             
         }
         if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
