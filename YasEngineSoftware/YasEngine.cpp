@@ -1,8 +1,7 @@
 #include"YasEngine.hpp"
 #include<cstdlib>     /* srand, rand */
 #include<ctime> 
-#include<SDL_endian.h>
-#include<SDL_audio.h>
+//#include<SDL_endian.h>
 #include"VariousTools.hpp"
 #include"Circle.hpp"
 #include"Collider.hpp"
@@ -22,31 +21,50 @@ void YasEngine::initialize()
     prepareGameWorld();
     preparePlayer();
 
-    ///
-    // SOUND
+    //music.wav
+	//shoot.wav
 
-    //SDL_LoadWAV("shoot.wav");
-
-    
-
-	// lukesawicki
-
-    if (SDL_LoadWAV("shoot.wav", &wavSpecification, &wavBuffer, &wavLength) == NULL) {
-       // EXCEPTION
-        std::cout << "ERROR NIE MA AUDIO" << std::endl;
-    }
-    else {
-       
-        
-        deviceId = SDL_OpenAudioDevice(NULL, 0, &wavSpecification, NULL, 0);
-        //int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
-        //int success = SDL_QueueAudio(deviceId, wavBuffer, wavLength);
-        SDL_PauseAudioDevice(deviceId, 0);
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
+    {
+        std::cout << "Error cannot open music file" << std::endl;
     }
 
-	
+    std::string basePath = SDL_GetBasePath();
 
-    ///
+    std::cout << "Base path is: " << basePath << std::endl;
+    // C:\development\workspace\YasEngineSoftware\Debug
+    std::string file;
+    file.append(basePath);
+    file.append("\\music.wav");
+    std::cout << "Full file path: " << file << std::endl;
+    // "C:/development/workspace/YasEngineSoftware/YasEngineSoftware/Debug/music.wav"
+    // "C:\\development\\workspace\\YasEngineSoftware\\YasEngineSoftware\\Debug\\music.wav"
+    Mix_Init(MIX_DEFAULT_FORMAT);
+    //music = Mix_LoadMUS("C:\music\\music.wav");// file.c_str());
+
+	music = Mix_LoadMUS("C:\\music\\music.wav");// file.c_str());
+    if(music == NULL)
+    {
+        std::cout << "Error while loading music. Cannot load music." << std::endl;
+        std::cout << "SDL message: " << SDL_GetError() << std::endl << " | Mix library error: " << Mix_GetError() << std::endl;
+        quit = true;
+    }
+
+
+    shootSound = Mix_LoadWAV("C:\\music\\shoot.wav");
+    if (shootSound == NULL)
+    {
+        std::cout << "Error while loading sound. Cannot load sound." << std::endl;
+        std::cout << "SDL message: " << SDL_GetError() << std::endl << " | Mix library error: " << Mix_GetError() << std::endl;
+        quit = true;
+    }
+
+//  if (Mix_PlayChannel(-1, shootSound, 0) == -1)
+//      quit = true;
+	Mix_PlayMusic(music, 999);
+
+
+    //Mix_PlayMusic(music, 2);
 
     mathPlay = new MathematicsFunSurface(0, 0, static_cast<int>(windowDimensions->x * 0.5F), static_cast<int>(windowDimensions->y * 0.5F), BLACK);
 
@@ -68,9 +86,9 @@ void YasEngine::clean()
     delete mathPlay;
     delete pixelsTable;
     delete windowDimensions;
+    Mix_Quit();
     SDL_DestroyTexture(screenTexture);
     SDL_DestroyRenderer(renderer);
-    SDL_FreeWAV(wavBuffer);
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
@@ -212,9 +230,6 @@ void YasEngine::handleInput(SDL_Event& event)
         if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
         {
             player->isShooting      = true;
-
-				SDL_ClearQueuedAudio(deviceId);
-                SDL_QueueAudio(deviceId, wavBuffer, wavLength);
             
         }
         if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
@@ -235,10 +250,6 @@ void YasEngine::preparePlayer()
 
 void YasEngine::update(double& deltaTime)
 {
-    //int numberOfPhysicalObjects = objectsToDraw.size();
-
-    //std::cout << numberOfPhysicalObjects << std::endl;
-
     handlePhysics();
     for (auto object : objectsToDraw)
     {
@@ -252,10 +263,9 @@ void YasEngine::update(double& deltaTime)
     Projectile* projectile = player->shoot();
     if (projectile != nullptr)
     {
+        Mix_PlayChannel(-1, shootSound, 0);
         objectsToDraw.push_back(projectile);
-
     }
-
 
     if(go != nullptr)
     {
@@ -328,7 +338,6 @@ void YasEngine::handlePhysics()
             if (Collider::isCollidingWithWall(objectsToDraw[i]->collider, *windowDimensions))
             {
                 objectsToDraw[i]->isAlive = false;
-                //std::cout << "HIT" << std::endl;
                 continue;
             }
 
@@ -371,8 +380,6 @@ void YasEngine::prepareGameWorld()
         fibonacciePoints = fibonacciPointsGenerator.generatePoints();
         primeNumbersPoints = primeNumberPointsGenerator.generatePoints();
 
-        
         spawner.position.x = -200;
         spawner.position.y = 0;
-
 }

@@ -14,9 +14,9 @@
 #include "PointsGenerator.hpp"
 #include "PointsSet.hpp"
 #include "Spawner.hpp"
+#include "SDL_mixer.h"
 
 //#define DEBUG_DRAWINGS
-
 
 class YasEngine
 {	
@@ -48,12 +48,7 @@ class YasEngine
 		SDL_Window* window;
 		SDL_Renderer* renderer;
 		SDL_Texture* screenTexture;
-
-		SDL_AudioDeviceID deviceId;
-		SDL_AudioSpec wavSpecification;
-		Uint32 wavLength;
-		Uint8* wavBuffer;
-
+	
 		PixelsTable* pixelsTable;
 		Vector2D<int>* windowDimensions;
 		SDL_Event event;
@@ -75,7 +70,10 @@ class YasEngine
 		std::vector<GameObject*> objectsToDraw;
 		Player* player;
 		MathematicsFunSurface* mathPlay;
-		
+
+		Mix_Music* music;
+		Mix_Chunk* shootSound;
+
 		PointsSet* sinusPoints;
 		PointsSet* cosinusPoints;
 		PointsSet* fibonacciePoints;
