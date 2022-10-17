@@ -1,7 +1,6 @@
 #include"YasEngine.hpp"
 #include<cstdlib>     /* srand, rand */
 #include<ctime> 
-//#include<SDL_endian.h>
 #include"VariousTools.hpp"
 #include"Circle.hpp"
 #include"Collider.hpp"
@@ -15,57 +14,11 @@ YasEngine* YasEngine::instance = nullptr;
 
 void YasEngine::initialize()
 {
-    //spawner.spawnObject(go);
     prepareBasicSettings();
     prepareRendering();
     prepareGameWorld();
     preparePlayer();
-
-    //music.wav
-	//shoot.wav
-
-    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
-    {
-        std::cout << "Error cannot open music file" << std::endl;
-    }
-
-    std::string basePath = SDL_GetBasePath();
-
-    std::cout << "Base path is: " << basePath << std::endl;
-    // C:\development\workspace\YasEngineSoftware\Debug
-    std::string file;
-    file.append(basePath);
-    file.append("\\music.wav");
-    std::cout << "Full file path: " << file << std::endl;
-    // "C:/development/workspace/YasEngineSoftware/YasEngineSoftware/Debug/music.wav"
-    // "C:\\development\\workspace\\YasEngineSoftware\\YasEngineSoftware\\Debug\\music.wav"
-    Mix_Init(MIX_DEFAULT_FORMAT);
-    //music = Mix_LoadMUS("C:\music\\music.wav");// file.c_str());
-
-	music = Mix_LoadMUS("C:\\music\\music.wav");// file.c_str());
-    if(music == NULL)
-    {
-        std::cout << "Error while loading music. Cannot load music." << std::endl;
-        std::cout << "SDL message: " << SDL_GetError() << std::endl << " | Mix library error: " << Mix_GetError() << std::endl;
-        quit = true;
-    }
-
-
-    shootSound = Mix_LoadWAV("C:\\music\\shoot.wav");
-    hitSound = Mix_LoadWAV("C:\\music\\hit.wav");
-    if (shootSound == NULL || hitSound == NULL)
-    {
-        std::cout << "Error while loading sound. Cannot load sound." << std::endl;
-        std::cout << "SDL message: " << SDL_GetError() << std::endl << " | Mix library error: " << Mix_GetError() << std::endl;
-        quit = true;
-    }
-
-//  if (Mix_PlayChannel(-1, shootSound, 0) == -1)
-//      quit = true;
-	Mix_PlayMusic(music, 999);
-
-
-    //Mix_PlayMusic(music, 2);
+    prepareSoundAndMusic();
 
     mathPlay = new MathematicsFunSurface(0, 0, static_cast<int>(windowDimensions->x * 0.5F), static_cast<int>(windowDimensions->y * 0.5F), BLACK);
 
@@ -87,7 +40,13 @@ void YasEngine::clean()
     delete mathPlay;
     delete pixelsTable;
     delete windowDimensions;
-    Mix_Quit();
+
+    // clean up our resources
+    Mix_FreeChunk(shootSound);
+    Mix_FreeChunk(hitSound);
+    Mix_FreeMusic(music);
+    Mix_CloseAudio();
+	Mix_Quit();
     SDL_DestroyTexture(screenTexture);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
@@ -363,6 +322,50 @@ void YasEngine::handlePhysics()
             }
         }
     }
+}
+
+void YasEngine::prepareSoundAndMusic()
+{
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
+    {
+        std::cout << "Error cannot open audio device" << std::endl;
+    }
+
+    std::string basePath = SDL_GetBasePath();
+
+    std::string musicFilePath;
+    musicFilePath.append(basePath);
+    musicFilePath.append("\music.wav");
+
+    std::string shootSoundFilePath;
+    shootSoundFilePath.append(basePath);
+    shootSoundFilePath.append("\shoot.wav");
+
+    std::string hitSoundFilePath;
+    hitSoundFilePath.append(basePath);
+    hitSoundFilePath.append("\hit.wav");
+    std::cout << "hit.wav path: -> " << hitSoundFilePath << std::endl;
+
+    Mix_Init(MIX_DEFAULT_FORMAT);
+
+    music = Mix_LoadMUS(musicFilePath.c_str());
+    if (music == NULL)
+    {
+        std::cout << "Error while loading music. Cannot load music." << std::endl;
+        std::cout << "SDL message: " << SDL_GetError() << std::endl << " | Mix library error: " << Mix_GetError() << std::endl;
+        quit = true;
+    }
+
+    shootSound = Mix_LoadWAV(shootSoundFilePath.c_str());
+    hitSound = Mix_LoadWAV(hitSoundFilePath.c_str());
+
+    if (shootSound == NULL || hitSound == NULL)
+    {
+        std::cout << "Error while loading sounds. Cannot load sounds." << std::endl;
+        std::cout << "SDL message: " << SDL_GetError() << std::endl << " | Mix library error: " << Mix_GetError() << std::endl;
+        quit = true;
+    }
+    Mix_PlayMusic(music, 999);
 }
 
 void YasEngine::prepareGameWorld()
