@@ -73,6 +73,7 @@ class YasEngine
 
 		Mix_Music* music;
 		Mix_Chunk* shootSound;
+		Mix_Chunk* hitSound;
 
 		PointsSet* sinusPoints;
 		PointsSet* cosinusPoints;

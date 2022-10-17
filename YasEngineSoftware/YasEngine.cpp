@@ -52,7 +52,8 @@ void YasEngine::initialize()
 
 
     shootSound = Mix_LoadWAV("C:\\music\\shoot.wav");
-    if (shootSound == NULL)
+    hitSound = Mix_LoadWAV("C:\\music\\hit.wav");
+    if (shootSound == NULL || hitSound == NULL)
     {
         std::cout << "Error while loading sound. Cannot load sound." << std::endl;
         std::cout << "SDL message: " << SDL_GetError() << std::endl << " | Mix library error: " << Mix_GetError() << std::endl;
@@ -356,6 +357,7 @@ void YasEngine::handlePhysics()
                     {
                         objectsToDraw[i]->isAlive = false;
                         objectsToDraw[j]->isAlive = false;
+                        Mix_PlayChannel(-1, hitSound, 0);
                     }
                 }
             }
