@@ -3,6 +3,8 @@
 #include<stdio.h>
 #include<iostream>
 #include<vector>
+#include<SDL_mixer.h>
+#include<SDL_image.h>
 #include"Vector2D.hpp"
 #include"YasGraphicsLibrary.hpp"
 #include"TimePicker.hpp"
@@ -14,7 +16,6 @@
 #include "PointsGenerator.hpp"
 #include "PointsSet.hpp"
 #include "Spawner.hpp"
-#include "SDL_mixer.h"
 
 //#define DEBUG_DRAWINGS
 
@@ -44,10 +45,17 @@ class YasEngine
 		Vector2D<float> B = Vector2D<float>(100, -350);
 
 		static YasEngine* instance;
-		
+
+		const bool endianness = std::endian::native == std::endian::big;
+
 		SDL_Window* window;
 		SDL_Renderer* renderer;
 		SDL_Texture* screenTexture;
+		SDL_Surface* windowSurface;
+		SDL_Surface* customImageSurface;
+		SDL_Surface* optimizedSurface;
+		SDL_Rect* pictureRect;
+
 	
 		PixelsTable* pixelsTable;
 		Vector2D<int>* windowDimensions;

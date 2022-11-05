@@ -9,3 +9,8 @@ i.e. Version: 1.0.15.2
     Revision: Minor alterations on existing features, small bug fixes, etc.
 
     Package: Your code stays the same, external library changes or asset file update.
+
+
+    Type:
+
+    A - 5 points: 0,99; 49,0; 99,99; 25,50; 74,50

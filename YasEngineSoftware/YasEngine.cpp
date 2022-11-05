@@ -1,6 +1,8 @@
 #include"YasEngine.hpp"
 #include<cstdlib>     /* srand, rand */
-#include<ctime> 
+#include<ctime>
+#include<bit>
+#include<SDL_endian.h>
 #include"VariousTools.hpp"
 #include"Circle.hpp"
 #include"Collider.hpp"
@@ -9,6 +11,7 @@
 #include"Math.hpp"
 #include"PrimeNumbersPointsGenerator.hpp"
 #include"SinusPointsGenerator.hpp"
+
 
 YasEngine* YasEngine::instance = nullptr;
 
@@ -104,10 +107,67 @@ void YasEngine::prepareRendering()
     SDL_RenderSetIntegerScale(renderer, SDL_TRUE);
 
     screenTexture   =   SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
+
+
+    if (!IMG_Init(IMG_INIT_PNG))
+    {
+        std::cout << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << std::endl;
+
+    }
+
+    //
+    std::string basePath = SDL_GetBasePath();
+
+    std::string pictureFilePath;
+    pictureFilePath.append(basePath);
+    pictureFilePath.append("\\somePicture.png");
+    //
+
+    customImageSurface = IMG_Load(pictureFilePath.c_str());
+
+    if(customImageSurface == NULL)
+    {
+        std::cout << "Error during loading image file: " << SDL_GetError() << std::endl;
+    }
+
+    windowSurface = SDL_GetWindowSurface(window);
+    SDL_PixelFormat* windowsSurfaceFormat = windowSurface->format;//SDL_AllocFormat(SDL_PIXELFORMAT_ABGR8888);
+    
+
+    SDL_Palette* palette = new SDL_Palette();
+
+    optimizedSurface = SDL_ConvertSurface(customImageSurface, windowsSurfaceFormat, 0);
+
+	if (optimizedSurface != NULL)
+    {
+
+        
+        SDL_FreeSurface(customImageSurface);
+
+        pictureRect = new SDL_Rect();
+        pictureRect->x = 50;
+        pictureRect->y = 50;
+        pictureRect->w = 480;
+        pictureRect->h = 360;
+
+    }
+    else
+    {
+        std::cout << "Unable to optimize image SDL Error-> " << SDL_GetError() << std::endl;
+    }
 }
 
 void YasEngine::prepareBasicSettings()
 {
+    if (endianness)
+    {
+        std::cout << "BIG ENDIAN" << std::endl;
+    }
+    else
+    {
+        std::cout << "LITTLE ENDIAN" << std::endl;
+    }
+
     SDL_Init(SDL_INIT_EVERYTHING);
 
     windowDimensions    =   new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -282,6 +342,16 @@ void YasEngine::render(double& deltaTime)
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
     SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);
     SDL_RenderPresent(renderer);
+
+    ///////////////
+
+                    //Apply the PNG image
+    SDL_BlitSurface(optimizedSurface, NULL, windowSurface, pictureRect);
+
+    //Update the surface
+     SDL_UpdateWindowSurface(window);
+
+    ///////////////
 }
 
 void YasEngine::handlePhysics()
