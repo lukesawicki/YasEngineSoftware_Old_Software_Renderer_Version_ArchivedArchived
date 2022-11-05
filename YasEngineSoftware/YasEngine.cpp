@@ -115,14 +115,16 @@ void YasEngine::prepareRendering()
 
     }
 
-    //
+    
     std::string basePath = SDL_GetBasePath();
 
     std::string pictureFilePath;
     pictureFilePath.append(basePath);
     pictureFilePath.append("\\somePicture.png");
-    //
+    
 
+
+    ////////////////////
     customImageSurface = IMG_Load(pictureFilePath.c_str());
 
     if(customImageSurface == NULL)
@@ -133,15 +135,12 @@ void YasEngine::prepareRendering()
     windowSurface = SDL_GetWindowSurface(window);
     SDL_PixelFormat* windowsSurfaceFormat = windowSurface->format;//SDL_AllocFormat(SDL_PIXELFORMAT_ABGR8888);
     
-
-    SDL_Palette* palette = new SDL_Palette();
-
     optimizedSurface = SDL_ConvertSurface(customImageSurface, windowsSurfaceFormat, 0);
+
+    //timizedSurface->pixels
 
 	if (optimizedSurface != NULL)
     {
-
-        
         SDL_FreeSurface(customImageSurface);
 
         pictureRect = new SDL_Rect();
@@ -155,6 +154,11 @@ void YasEngine::prepareRendering()
     {
         std::cout << "Unable to optimize image SDL Error-> " << SDL_GetError() << std::endl;
     }
+
+    SDL_Color rgb;
+    Uint32 data = getpixel(optimizedSurface, 200, 200);
+    SDL_GetRGBA(data, optimizedSurface->format, &rgb.r, &rgb.g, &rgb.b, &rgb.a);
+
 }
 
 void YasEngine::prepareBasicSettings()
@@ -339,6 +343,8 @@ void YasEngine::render(double& deltaTime)
 
     drawHudElements(deltaTime);
 
+    SDL_BlitSurface(optimizedSurface, NULL, windowSurface, pictureRect);
+
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
     SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);
     SDL_RenderPresent(renderer);
@@ -346,7 +352,7 @@ void YasEngine::render(double& deltaTime)
     ///////////////
 
                     //Apply the PNG image
-    SDL_BlitSurface(optimizedSurface, NULL, windowSurface, pictureRect);
+    
 
     //Update the surface
      SDL_UpdateWindowSurface(window);
@@ -405,15 +411,15 @@ void YasEngine::prepareSoundAndMusic()
 
     std::string musicFilePath;
     musicFilePath.append(basePath);
-    musicFilePath.append("\music.wav");
+    musicFilePath.append("\\music.wav");
 
     std::string shootSoundFilePath;
     shootSoundFilePath.append(basePath);
-    shootSoundFilePath.append("\shoot.wav");
+    shootSoundFilePath.append("\\shoot.wav");
 
     std::string hitSoundFilePath;
     hitSoundFilePath.append(basePath);
-    hitSoundFilePath.append("\hit.wav");
+    hitSoundFilePath.append("\\hit.wav");
     std::cout << "hit.wav path: -> " << hitSoundFilePath << std::endl;
 
     Mix_Init(MIX_DEFAULT_FORMAT);
@@ -458,3 +464,39 @@ void YasEngine::prepareGameWorld()
         spawner.position.x = -200;
         spawner.position.y = 0;
 }
+
+
+Uint32 YasEngine::getpixel(SDL_Surface* surface, int x, int y)
+{
+    int bpp = surface->format->BytesPerPixel;
+    /* Here p is the address to the pixel we want to retrieve */
+    Uint8* p = (Uint8*)surface->pixels + y * surface->pitch + x * bpp;
+
+    switch (bpp)
+    {
+    case 1:
+        return *p;
+        break;
+
+    case 2:
+        return *(Uint16*)p;
+        break;
+
+    case 3:
+        if (SDL_BYTEORDER == SDL_BIG_ENDIAN)
+            return p[0] << 16 | p[1] << 8 | p[2];
+        else
+            return p[0] | p[1] << 8 | p[2] << 16;
+        break;
+
+    case 4:
+        return *(Uint32*)p;
+        break;
+
+    default:
+        return 0;       /* shouldn't happen, but avoids warnings */
+    }
+}
+
+
+

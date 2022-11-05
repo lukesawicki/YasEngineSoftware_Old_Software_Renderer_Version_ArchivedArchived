@@ -72,8 +72,11 @@ class YasEngine
 		float mouseX;
 		float mouseY;
 
-		int WINDOW_WIDTH = 1280;
-		int WINDOW_HEIGHT = 800;
+		//int WINDOW_WIDTH = 1280;
+		//int WINDOW_HEIGHT = 800;
+
+		int WINDOW_WIDTH = 1024;
+		int WINDOW_HEIGHT = 768;
 
 		std::vector<GameObject*> objectsToDraw;
 		Player* player;
@@ -106,6 +109,8 @@ class YasEngine
 		void update(double& deltaTime);
 		void drawHudElements(double& deltaTime);
 		void render(double& deltaTime);
+		Uint32 getpixel(SDL_Surface* surface, int x, int y);
+
 		void prepareSoundAndMusic();
 };
 
