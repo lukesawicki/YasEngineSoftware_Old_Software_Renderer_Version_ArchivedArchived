@@ -142,7 +142,7 @@ void Player::rotateToMousePosition(float x, float y, Vector2D<int>* windowDimens
 		windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
 
 		Vector2D<float> mousePositionVector(static_cast<float>(currentX), static_cast<float>(currentY));
-		Vector2D<float>::normalizedVector(mousePositionVector);
+		//Vector2D<float>::normalizedVector(mousePositionVector);
 
 		float angleBetweenCurrentAndMouse = Vector2D<float>::angleBetweenVectors(direction, mousePositionVector);
 		rotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
