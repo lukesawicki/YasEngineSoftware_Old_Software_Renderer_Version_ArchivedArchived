@@ -1,5 +1,6 @@
 #include"Projectile.hpp"
 
+
 Projectile::Projectile(float radius, float x, float y, Vector2D<float> direction)
 {
 	isAlive = true;

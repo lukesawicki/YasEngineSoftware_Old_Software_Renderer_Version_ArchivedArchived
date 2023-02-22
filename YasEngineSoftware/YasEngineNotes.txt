@@ -1,3 +1,8 @@
+﻿//-----------------------------------------------------------------------------|---------------------------------------|
+//                                                                            80                                     120
+
+// VERSIONING SOFTWARE
+
 [Major build number].[Minor build number].[Revision].[Package]
 
 i.e. Version: 1.0.15.2
@@ -9,3 +14,56 @@ i.e. Version: 1.0.15.2
     Revision: Minor alterations on existing features, small bug fixes, etc.
 
     Package: Your code stays the same, external library changes or asset file update.
+
+//                                                                            80                                     120
+
+//-----------------------------------------------------------------------------|---------------------------------------|
+
+
+
+//-----------------------------------------------------------------------------|---------------------------------------|
+//                                                                            80                                     120
+YasEngine game TheBeautyOfMath work in progress 2023-02-22
+
+*Read rules of displaying nice mathematical drawing (from code(hard coded) or file(configurable in file))
+
+* Collecting points for hit/destroyed shape object
+{
+    * Checking how many object have been hit
+    * Checking what objects have been hit
+}
+
+{
+    * Writing how many object have been hit
+    * Writing what objects have been hit
+}
+
+*Render mathematical drawing when condition(defined by rule) is met.
+{
+    To implement that I think I need Observer design pattern
+
+    *Implement triangles appearing on screen in few imiliseconds( from invisible(transparent) to full opacity(PL nieprzezroczystość))
+    *Implement triangles disappearing on screen in few miloseconds (From full opacity to invisible)
+}
+
+
+I - implementation minimal:
+    
+    1 rule (Showing sinus when hit more than 33 triangles)
+    {
+        what objects: triangles
+        how many: 33
+    }
+    2 get Observer design pattern
+
+
+
+
+
+
+
+
+
+
+
+
