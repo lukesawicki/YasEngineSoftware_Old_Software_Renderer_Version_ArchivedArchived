@@ -1,0 +1,69 @@
+\hypertarget{_yas_graphics_library_8hpp_source}{}\doxysection{Yas\+Graphics\+Library.\+hpp}
+\mbox{\hyperlink{_yas_graphics_library_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ YASGRAPHICSLIBRARY\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ YASGRAPHICSLIBRARY\_HPP}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include<vector>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include<SDL.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_game_object_8hpp}{GameObject.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_vector2_d_8hpp}{Vector2D.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_vector4_d_8hpp}{Vector4D.hpp}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_pixels_table_8hpp}{PixelsTable.hpp}}"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_pixels_table}{PixelsTable}};}
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_object}{GameObject}};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_aa08a577393243b86dfd2a97e61443673}{PI}}\ =\ 3.141592F;}
+\DoxyCodeLine{00014\ \textcolor{keyword}{const}\ Uint8\ \mbox{\hyperlink{_yas_graphics_library_8hpp_a296ac0ad32a18576db71000e7a6d0f29}{NUMBER\_OF\_COLORS}}\ =\ 4;}
+\DoxyCodeLine{00015\ \textcolor{keyword}{const}\ Uint8\ \mbox{\hyperlink{_yas_graphics_library_8hpp_ad9f3d32f50a365134cead6f2df15de5a}{RGB\_FORMAT}}\ =\ 3;}
+\DoxyCodeLine{00016\ \textcolor{keyword}{const}\ Uint8\ \mbox{\hyperlink{_yas_graphics_library_8hpp_ae7448e0070e77ee1ee8d973c6a780650}{RGBA\_FORMAT}}\ =\ 4;}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{const}\ Uint8\ \mbox{\hyperlink{_yas_graphics_library_8hpp_a8c420427d029095286081eaecb05ffa6}{RED\_POSITION}}\ =\ 0;}
+\DoxyCodeLine{00019\ \textcolor{keyword}{const}\ Uint8\ \mbox{\hyperlink{_yas_graphics_library_8hpp_a2e15169fadb433263c9c17ecfbdb2c04}{GREEN\_POSITION}}\ =\ 1;}
+\DoxyCodeLine{00020\ \textcolor{keyword}{const}\ Uint8\ \mbox{\hyperlink{_yas_graphics_library_8hpp_a27f65c016f88ba2aadb8267dec64599c}{BLUE\_POSITION}}\ =\ 2;}
+\DoxyCodeLine{00021\ \textcolor{keyword}{const}\ Uint8\ \mbox{\hyperlink{_yas_graphics_library_8hpp_ad47fcf38c465f1da97d95166316d7b52}{ALPHA\_POSITION}}\ =\ 3;}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_aca90a3542eb207f44bf06e642e65b6ee}{RED}}(255,\ 0,\ 0,\ 0);}
+\DoxyCodeLine{00024\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_a0b8393169fed247a90b91c18295bb4b1}{GREEN}}(0,\ 255,\ 0,\ 0);}
+\DoxyCodeLine{00025\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_af483ec2288a1c6aa02fb0af5a1af55f2}{BLUE}}(0,\ 0,\ 255,\ 0);}
+\DoxyCodeLine{00026\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_a2629cedf324ddaf2c126dd04ec85d1d5}{BLACK}}(0,\ 0,\ 0,\ 255);}
+\DoxyCodeLine{00027\ \textcolor{comment}{//const\ Vector4D<Uint8>\ ALT\_BLACK(0,\ 0,\ 0,\ 0);}}
+\DoxyCodeLine{00028\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_ac97f9366e4c6f191117081d7554b312c}{WHITE}}(255,\ 255,\ 255,\ 255);}
+\DoxyCodeLine{00029\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_a95e22909fa47ab8a036113a34ae930c8}{YELLOW}}(255,\ 255,\ 0,\ 255);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_af7161f1bb136cffd82230611e7fc9d4b}{drawLine}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}\&\ point0,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}\&\ point1,\ \mbox{\hyperlink{class_pixels_table}{PixelsTable}}\&\ pixelsTable,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\&\ drawingColor);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_a2fc0aab7b5fa96ce78fef424033b77ad}{drawPolygon}}(\mbox{\hyperlink{class_game_object}{GameObject}}*\ polygon,\ \mbox{\hyperlink{class_pixels_table}{PixelsTable}}\&\ pixelsTable);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}*\ \mbox{\hyperlink{_yas_graphics_library_8hpp_a35cd3365b1c84db4626e5a4beced8658}{generateVerticesFromNumbers}}(\textcolor{keyword}{const}\ std::vector<int>\&\ numbers);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_ac0c45d756850ceeafae2e1d81df1df38}{drawNumbersAsGroupOfLines}}(\mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}*\ vertices,\ \textcolor{keywordtype}{int}\ maximumNumberOfVertices,\ \mbox{\hyperlink{class_pixels_table}{PixelsTable}}\&\ pixelsTable);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_a591075d21cb13e7d1ef4418b4f3ee541}{drawNumbersAsPolyline}}(\mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}*\ vertices,\ \textcolor{keywordtype}{int}\ maximumNumberOfVertices,\ \mbox{\hyperlink{class_pixels_table}{PixelsTable}}\&\ pixelsTable);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_a3faff1657f80bbd3e832e0cf4d5db370}{drawPolygonDirection}}(\mbox{\hyperlink{class_game_object}{GameObject}}*\ polygon,\ \mbox{\hyperlink{class_pixels_table}{PixelsTable}}\&\ pixelsTable);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_a8ff2a2054511d069ae8b2c0811e4585a}{swapVectors}}(\mbox{\hyperlink{class_vector2_d}{Vector2D<int>}}\&\ point0,\ \mbox{\hyperlink{class_vector2_d}{Vector2D<int>}}\&\ point1);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_a7088834f8dd3b3152e6c28a2311dea58}{horizontalLineOnWholeScreen}}(\mbox{\hyperlink{class_pixels_table}{PixelsTable}}\&\ pixelsTable,\ \textcolor{keywordtype}{int}\ y,\ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\ \mbox{\hyperlink{class_game_object_a5803166f13b9514258d7852084fd63e1}{color}});}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_a9112bba8b71d4a4dc8bf5ff9dd4e166c}{verticalLineOnWholeScreen}}(\mbox{\hyperlink{class_pixels_table}{PixelsTable}}\&\ pixelsTable,\ \textcolor{keywordtype}{int}\ x,\ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\ \mbox{\hyperlink{class_game_object_a5803166f13b9514258d7852084fd63e1}{color}});}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_aab0c3c25cad18771ec5df8fe0c62c8cf}{drawCartesianAxies}}(\mbox{\hyperlink{class_pixels_table}{PixelsTable}}\&\ pixelsTable);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_a054fb72969f7a40a928341b19e22d5b7}{drawCrossHair}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \mbox{\hyperlink{class_pixels_table}{PixelsTable}}\&\ pixelsTable,\ \textcolor{keywordtype}{bool}\ isFullScreen);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_ab2b6c87241c33273e86df3cc860d5670}{drawHorizontalLine}}(\mbox{\hyperlink{class_pixels_table}{PixelsTable}}\&\ pixelsTable,\ \textcolor{keywordtype}{int}\ x0,\ \textcolor{keywordtype}{int}\ x1,\ \textcolor{keywordtype}{int}\ y,\ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\ \mbox{\hyperlink{class_game_object_a5803166f13b9514258d7852084fd63e1}{color}});}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_a5876d367b654ec70ecdbdec2118cee08}{drawVerticalLine}}(\mbox{\hyperlink{class_pixels_table}{PixelsTable}}\&\ pixelsTable,\ \textcolor{keywordtype}{int}\ y0,\ \textcolor{keywordtype}{int}\ y1,\ \textcolor{keywordtype}{int}\ x,\ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\ \mbox{\hyperlink{class_game_object_a5803166f13b9514258d7852084fd63e1}{color}});}
+\DoxyCodeLine{00056\ \ \ \ \ }
+\DoxyCodeLine{00057\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_ac941192b9a2b83d6c031f48b7334ccd6}{xyPixelToArrayPosition}}(\mbox{\hyperlink{class_vector2_d}{Vector2D<int>}}\&\ point,\ \textcolor{keywordtype}{int}\ windowWidth);}
+\DoxyCodeLine{00058\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_ac941192b9a2b83d6c031f48b7334ccd6}{xyPixelToArrayPosition}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keywordtype}{int}\ windowWidth);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_a7727ad1bfd623006af22d14f41a4f011}{windowPositionToCartesianPosition}}(\textcolor{keywordtype}{float}\&\ x,\ \textcolor{keywordtype}{float}\&\ y,\ \mbox{\hyperlink{class_vector2_d}{Vector2D<int>}}*\ windowDimensions);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{_yas_graphics_library_8hpp_ac72cefe79e9231fafd21377cc33ac03d}{drawMandelbrotSet}}();}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

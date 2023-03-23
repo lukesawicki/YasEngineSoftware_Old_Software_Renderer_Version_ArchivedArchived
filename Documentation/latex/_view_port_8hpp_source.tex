@@ -1,0 +1,29 @@
+\hypertarget{_view_port_8hpp_source}{}\doxysection{View\+Port.\+hpp}
+\mbox{\hyperlink{_view_port_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ VIEWPORT\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ VIEWPORT\_HPP}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_vector2_d_8hpp}{Vector2D.hpp}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_vector4_d_8hpp}{Vector4D.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_game_object_8hpp}{GameObject.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include<SDL.h>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_view_port}{ViewPort}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector2_d}{Vector2D<int>}}\ \mbox{\hyperlink{class_view_port_a215c6ddf7a4a7496c6b002a746aed85c}{position}};\ \textcolor{comment}{//\ Point\ of\ origin\ is\ on\ bottom\ left}}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector2_d}{Vector2D<int>}}\ \mbox{\hyperlink{class_view_port_a84fab3f325ec68accdeb1fbb942d7423}{viewPortSizes}};}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ Uint8*\ \mbox{\hyperlink{class_view_port_a957bc34b5f4ef5e1164a7ffbf77ce04f}{pixels}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_view_port_aa3cf305ad5dec7a7c268fa0b87d7ffc3}{clearColor}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\&\ drawingColor)\ =\ 0;}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_view_port_a51db22d641df9aa8bd564bd6421a0ae2}{drawPoint}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\&\ drawingColor)\ =\ 0;}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_view_port_a424a6e483af6def09ecfc0e3b540ad58}{drawLine}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}\&\ point0,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}\&\ point1,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\&\ drawingColor)\ =\ 0;}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_view_port_a1e7e9386b6be44f5be5842c786f9eb17}{drawPolygon}}(\mbox{\hyperlink{class_game_object}{GameObject}}*\ polygon)\ =\ 0;}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{comment}{//wywolac\ rysowanie\ lini\ czy\ punktu\ dla\ view\ portu\ czyli\ na\ swojej\ pozycji\ +\ pozycja\ view\ portu\ (pozycja\ LEFT\ TOP\ point\ i\ RIGHT\ BOTTOM\ POINT(wyliczony\ na\ podstawie\ rozmiarow))}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

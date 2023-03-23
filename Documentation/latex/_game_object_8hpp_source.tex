@@ -1,0 +1,77 @@
+\hypertarget{_game_object_8hpp_source}{}\doxysection{Game\+Object.\+hpp}
+\mbox{\hyperlink{_game_object_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ GAMEOBJECT\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ GAMEOBJECT\_HPP}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include<SDL.h>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_collider_8hpp}{Collider.hpp}}"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_vector2_d_8hpp}{Vector2D.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_vector4_d_8hpp}{Vector4D.hpp}}"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_object}{GameObject}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \textcolor{comment}{//vXXXXXirtual\ \string~GameObject()\ =\ 0;}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keyword}{enum}\ \mbox{\hyperlink{class_game_object_ace530779a33a946a13f42b0f2cb8118d}{WhoAmI}}\ \{\ \mbox{\hyperlink{class_game_object_ace530779a33a946a13f42b0f2cb8118dab19e21ae85d6f3cc679d99b43168cb28}{DEFAULT\_VALUE}},\ \mbox{\hyperlink{class_game_object_ace530779a33a946a13f42b0f2cb8118daccb6332e371b7308d90bc42c22fcbfea}{PROTAGONIST}},\ \mbox{\hyperlink{class_game_object_ace530779a33a946a13f42b0f2cb8118da3c36a9a42fdf8a197336231abfa3d282}{PROJECTILE}},\ \mbox{\hyperlink{class_game_object_ace530779a33a946a13f42b0f2cb8118da3db5dfd5f501fc5928bde2993ce05d4d}{COLLECTIBLE}}\ \};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_object_ace530779a33a946a13f42b0f2cb8118d}{WhoAmI}}\ \mbox{\hyperlink{class_game_object_ae70c229cc4a080e87662f3e3ee497e19}{iAm}};}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_game_object_a8fb2ac236e1b7ae2ad8eb16111bad492}{isAlive}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_collider}{Collider}}\ \mbox{\hyperlink{class_game_object_ac211c3e7aef8e68b4e2566e2dd24fae8}{collider}};}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}*\ \mbox{\hyperlink{class_game_object_a97edc3248ba9d7aeeb79b54cdfd4c467}{localVertices}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}*\ \mbox{\hyperlink{class_game_object_a7ac9ca27876f172bc15e90926015459c}{worldVertices}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}\ \mbox{\hyperlink{class_game_object_abce641107e19bc947d20cee6824c3b18}{vectorZero}};}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}\ \mbox{\hyperlink{class_game_object_abfd1a99d650ee9744c96426dd1d4c8d0}{direction}};}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\ \mbox{\hyperlink{class_game_object_a5803166f13b9514258d7852084fd63e1}{color}};}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_object_a46274bba1b356f0d6f9cb9c51467b1b1}{numberOfVertices}};}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_object_af2c1d154ec52b3d4943e874988585387}{rotationSpeed}};}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_object_a31820152846046a77528d072e4abcb31}{circumscribedCircleRadius}};}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_object_a7d74d23c97c2a0d20084e7f819a40aab}{angleForGenerateInIsoscelesPolygons}};}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_object_a9f0c137be24bb21b2baa61fd198f5079}{startAngle}}\ =\ 0.0F;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_object_a13498eaed1a345c4e77c367570e107de}{stepAngle}};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_object_a44a31cfe9d14200b898955a0ff7ff064}{directionMouseAngle}}\ =\ 0;}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \ \mbox{\hyperlink{class_game_object_a938272352e22e9418514d618758511d5}{speed}}\ =\ 0.0F;}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_object_a5534cb25b7ecfa8d19b686c405ffec33}{generate}}()\ =\ 0;}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_object_a3c4a66cba7e3c6eb7d31d1ff1b906c63}{generateRegularPolygonVertices}}(\textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_object_a31820152846046a77528d072e4abcb31}{circumscribedCircleRadius}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_object_a46274bba1b356f0d6f9cb9c51467b1b1}{numberOfVertices}})\ =\ 0;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_object_a66002d38871120ee28e17f46ea22f258}{regeneratePolygon}}()\ =\ 0;}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_object_afe7d1bfba90bc8fb9b330e1130f6d987}{setPosition}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y)}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_object_ab976edfa4e257fae56c61f6ba81ded73}{position}}.\mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}}\ =\ x;}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_object_ab976edfa4e257fae56c61f6ba81ded73}{position}}.\mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}}\ =\ y;}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_object_ad61a20903bec608fd3402d3367da05ef}{setPosition}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}\&\ \mbox{\hyperlink{class_game_object_ab976edfa4e257fae56c61f6ba81ded73}{position}})}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>position.\mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}}\ =\ \mbox{\hyperlink{class_game_object_ab976edfa4e257fae56c61f6ba81ded73}{position}}.\mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}};}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>position.\mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}}\ =\ \mbox{\hyperlink{class_game_object_ab976edfa4e257fae56c61f6ba81ded73}{position}}.\mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}};}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_object_aecbc88f4df8a4f972a9c79fd246c8ae1}{move}}(\textcolor{keywordtype}{float}\ deltaTime)\ =\ 0;}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_object_a93dcb9f74166ae571beb6a1d7aefc48b}{moveCollider}}()}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_object_ac211c3e7aef8e68b4e2566e2dd24fae8}{collider}}.\mbox{\hyperlink{class_collider_a9cc77b9cb8f497d66a7f41108ef7df12}{x}}\ =\ \mbox{\hyperlink{class_game_object_ab976edfa4e257fae56c61f6ba81ded73}{position}}.\mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}};}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_object_ac211c3e7aef8e68b4e2566e2dd24fae8}{collider}}.\mbox{\hyperlink{class_collider_a577f7c36acab9bee3aed8b4f0d1289f5}{y}}\ =\ \mbox{\hyperlink{class_game_object_ab976edfa4e257fae56c61f6ba81ded73}{position}}.\mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}};}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_object_afc2b76fcf495c4ee1e16367a33000282}{setColor}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\&\ \mbox{\hyperlink{class_game_object_a5803166f13b9514258d7852084fd63e1}{color}})}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>color.\mbox{\hyperlink{class_vector4_d_a5012f47335b9ee4d0c7d7fbe92e8759a}{x}}\ =\ \mbox{\hyperlink{class_game_object_a5803166f13b9514258d7852084fd63e1}{color}}.\mbox{\hyperlink{class_vector4_d_a5012f47335b9ee4d0c7d7fbe92e8759a}{x}};}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>color.\mbox{\hyperlink{class_vector4_d_a80b6aed84109a1417f41812df6bdf48c}{y}}\ =\ \mbox{\hyperlink{class_game_object_a5803166f13b9514258d7852084fd63e1}{color}}.\mbox{\hyperlink{class_vector4_d_a80b6aed84109a1417f41812df6bdf48c}{y}};}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>color.\mbox{\hyperlink{class_vector4_d_ae6a751daeb17765bc726554ee719e1e8}{z}}\ =\ \mbox{\hyperlink{class_game_object_a5803166f13b9514258d7852084fd63e1}{color}}.\mbox{\hyperlink{class_vector4_d_ae6a751daeb17765bc726554ee719e1e8}{z}};}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>color.\mbox{\hyperlink{class_vector4_d_ab18dc79952a20e384127eb3b4fe93de1}{w}}\ =\ \mbox{\hyperlink{class_game_object_a5803166f13b9514258d7852084fd63e1}{color}}.\mbox{\hyperlink{class_vector4_d_ab18dc79952a20e384127eb3b4fe93de1}{w}};}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}\ \mbox{\hyperlink{class_game_object_ab976edfa4e257fae56c61f6ba81ded73}{position}};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

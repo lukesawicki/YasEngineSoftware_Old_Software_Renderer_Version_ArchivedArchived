@@ -1,0 +1,91 @@
+\hypertarget{class_pixels_table}{}\doxysection{Pixels\+Table Class Reference}
+\label{class_pixels_table}\index{PixelsTable@{PixelsTable}}
+
+
+{\ttfamily \#include $<$Pixels\+Table.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_pixels_table_ade78927d563b8b99780b215829f8b4cd}{Pixels\+Table}} (int width, int height, const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&default\+Color)
+\item 
+\mbox{\hyperlink{class_pixels_table_aba319bdceba3174bb6afd0dac4a4ba50}{Pixels\+Table}} (const \mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&original\+Pixels\+Table, const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&default\+Color)
+\item 
+\mbox{\hyperlink{class_pixels_table_a57919a8ec32d2927fbdd0091965fcc9b}{$\sim$\+Pixels\+Table}} ()
+\item 
+void \mbox{\hyperlink{class_pixels_table_aaf475bf465b9da2491d2c024ba50d681}{clear\+Color}} (const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&drawing\+Color)
+\item 
+void \mbox{\hyperlink{class_pixels_table_a5d7c97f814db7dbd6fc14a41a96838b4}{draw\+Point}} (int x, int y, const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&drawing\+Color)
+\item 
+void \mbox{\hyperlink{class_pixels_table_a5a14562b003c7701ab6ade98c5c24157}{cartesian\+Position\+To\+Window}} (int \&x, int \&y)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Uint8 $\ast$ \mbox{\hyperlink{class_pixels_table_a9679fac60a9add38f9613a62017de1a7}{pixels}} = nullptr
+\item 
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ \mbox{\hyperlink{class_pixels_table_aa8fc14c07fd8930a81e733a99ed5e208}{window\+Dimensions}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_pixels_table_ade78927d563b8b99780b215829f8b4cd}\label{class_pixels_table_ade78927d563b8b99780b215829f8b4cd}} 
+\index{PixelsTable@{PixelsTable}!PixelsTable@{PixelsTable}}
+\index{PixelsTable@{PixelsTable}!PixelsTable@{PixelsTable}}
+\doxysubsubsection{\texorpdfstring{PixelsTable()}{PixelsTable()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Pixels\+Table\+::\+Pixels\+Table (\begin{DoxyParamCaption}\item[{int}]{width,  }\item[{int}]{height,  }\item[{const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&}]{default\+Color }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_pixels_table_aba319bdceba3174bb6afd0dac4a4ba50}\label{class_pixels_table_aba319bdceba3174bb6afd0dac4a4ba50}} 
+\index{PixelsTable@{PixelsTable}!PixelsTable@{PixelsTable}}
+\index{PixelsTable@{PixelsTable}!PixelsTable@{PixelsTable}}
+\doxysubsubsection{\texorpdfstring{PixelsTable()}{PixelsTable()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Pixels\+Table\+::\+Pixels\+Table (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{original\+Pixels\+Table,  }\item[{const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&}]{default\+Color }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_pixels_table_a57919a8ec32d2927fbdd0091965fcc9b}\label{class_pixels_table_a57919a8ec32d2927fbdd0091965fcc9b}} 
+\index{PixelsTable@{PixelsTable}!````~PixelsTable@{$\sim$PixelsTable}}
+\index{````~PixelsTable@{$\sim$PixelsTable}!PixelsTable@{PixelsTable}}
+\doxysubsubsection{\texorpdfstring{$\sim$PixelsTable()}{~PixelsTable()}}
+{\footnotesize\ttfamily Pixels\+Table\+::$\sim$\+Pixels\+Table (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_pixels_table_a5a14562b003c7701ab6ade98c5c24157}\label{class_pixels_table_a5a14562b003c7701ab6ade98c5c24157}} 
+\index{PixelsTable@{PixelsTable}!cartesianPositionToWindow@{cartesianPositionToWindow}}
+\index{cartesianPositionToWindow@{cartesianPositionToWindow}!PixelsTable@{PixelsTable}}
+\doxysubsubsection{\texorpdfstring{cartesianPositionToWindow()}{cartesianPositionToWindow()}}
+{\footnotesize\ttfamily void Pixels\+Table\+::cartesian\+Position\+To\+Window (\begin{DoxyParamCaption}\item[{int \&}]{x,  }\item[{int \&}]{y }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_pixels_table_aaf475bf465b9da2491d2c024ba50d681}\label{class_pixels_table_aaf475bf465b9da2491d2c024ba50d681}} 
+\index{PixelsTable@{PixelsTable}!clearColor@{clearColor}}
+\index{clearColor@{clearColor}!PixelsTable@{PixelsTable}}
+\doxysubsubsection{\texorpdfstring{clearColor()}{clearColor()}}
+{\footnotesize\ttfamily void Pixels\+Table\+::clear\+Color (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&}]{drawing\+Color }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_pixels_table_a5d7c97f814db7dbd6fc14a41a96838b4}\label{class_pixels_table_a5d7c97f814db7dbd6fc14a41a96838b4}} 
+\index{PixelsTable@{PixelsTable}!drawPoint@{drawPoint}}
+\index{drawPoint@{drawPoint}!PixelsTable@{PixelsTable}}
+\doxysubsubsection{\texorpdfstring{drawPoint()}{drawPoint()}}
+{\footnotesize\ttfamily void Pixels\+Table\+::draw\+Point (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&}]{drawing\+Color }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_pixels_table_a9679fac60a9add38f9613a62017de1a7}\label{class_pixels_table_a9679fac60a9add38f9613a62017de1a7}} 
+\index{PixelsTable@{PixelsTable}!pixels@{pixels}}
+\index{pixels@{pixels}!PixelsTable@{PixelsTable}}
+\doxysubsubsection{\texorpdfstring{pixels}{pixels}}
+{\footnotesize\ttfamily Uint8$\ast$ Pixels\+Table\+::pixels = nullptr}
+
+\mbox{\Hypertarget{class_pixels_table_aa8fc14c07fd8930a81e733a99ed5e208}\label{class_pixels_table_aa8fc14c07fd8930a81e733a99ed5e208}} 
+\index{PixelsTable@{PixelsTable}!windowDimensions@{windowDimensions}}
+\index{windowDimensions@{windowDimensions}!PixelsTable@{PixelsTable}}
+\doxysubsubsection{\texorpdfstring{windowDimensions}{windowDimensions}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$int$>$ Pixels\+Table\+::window\+Dimensions}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_pixels_table_8hpp}{Pixels\+Table.\+hpp}}\item 
+\mbox{\hyperlink{_pixels_table_8cpp}{Pixels\+Table.\+cpp}}\end{DoxyCompactItemize}

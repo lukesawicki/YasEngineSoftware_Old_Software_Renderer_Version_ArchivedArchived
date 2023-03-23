@@ -1,0 +1,296 @@
+\hypertarget{class_game_object}{}\doxysection{Game\+Object Class Reference}
+\label{class_game_object}\index{GameObject@{GameObject}}
+
+
+{\ttfamily \#include $<$Game\+Object.\+hpp$>$}
+
+Inheritance diagram for Game\+Object\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_game_object}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_game_object_ace530779a33a946a13f42b0f2cb8118d}{Who\+AmI}} \{ \mbox{\hyperlink{class_game_object_ace530779a33a946a13f42b0f2cb8118dab19e21ae85d6f3cc679d99b43168cb28}{DEFAULT\+\_\+\+VALUE}}
+, \mbox{\hyperlink{class_game_object_ace530779a33a946a13f42b0f2cb8118daccb6332e371b7308d90bc42c22fcbfea}{PROTAGONIST}}
+, \mbox{\hyperlink{class_game_object_ace530779a33a946a13f42b0f2cb8118da3c36a9a42fdf8a197336231abfa3d282}{PROJECTILE}}
+, \mbox{\hyperlink{class_game_object_ace530779a33a946a13f42b0f2cb8118da3db5dfd5f501fc5928bde2993ce05d4d}{COLLECTIBLE}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_game_object_a5534cb25b7ecfa8d19b686c405ffec33}{generate}} ()=0
+\item 
+virtual void \mbox{\hyperlink{class_game_object_a3c4a66cba7e3c6eb7d31d1ff1b906c63}{generate\+Regular\+Polygon\+Vertices}} (float \mbox{\hyperlink{class_game_object_a31820152846046a77528d072e4abcb31}{circumscribed\+Circle\+Radius}}, int \mbox{\hyperlink{class_game_object_a46274bba1b356f0d6f9cb9c51467b1b1}{number\+Of\+Vertices}})=0
+\item 
+virtual void \mbox{\hyperlink{class_game_object_a66002d38871120ee28e17f46ea22f258}{regenerate\+Polygon}} ()=0
+\item 
+virtual void \mbox{\hyperlink{class_game_object_afe7d1bfba90bc8fb9b330e1130f6d987}{set\+Position}} (float x, float y)
+\item 
+virtual void \mbox{\hyperlink{class_game_object_ad61a20903bec608fd3402d3367da05ef}{set\+Position}} (const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&\mbox{\hyperlink{class_game_object_ab976edfa4e257fae56c61f6ba81ded73}{position}})
+\item 
+virtual void \mbox{\hyperlink{class_game_object_aecbc88f4df8a4f972a9c79fd246c8ae1}{move}} (float delta\+Time)=0
+\item 
+virtual void \mbox{\hyperlink{class_game_object_a93dcb9f74166ae571beb6a1d7aefc48b}{move\+Collider}} ()
+\item 
+virtual void \mbox{\hyperlink{class_game_object_afc2b76fcf495c4ee1e16367a33000282}{set\+Color}} (const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&\mbox{\hyperlink{class_game_object_a5803166f13b9514258d7852084fd63e1}{color}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_game_object_ace530779a33a946a13f42b0f2cb8118d}{Who\+AmI}} \mbox{\hyperlink{class_game_object_ae70c229cc4a080e87662f3e3ee497e19}{i\+Am}}
+\item 
+bool \mbox{\hyperlink{class_game_object_a8fb2ac236e1b7ae2ad8eb16111bad492}{is\+Alive}} = true
+\item 
+\mbox{\hyperlink{class_collider}{Collider}} \mbox{\hyperlink{class_game_object_ac211c3e7aef8e68b4e2566e2dd24fae8}{collider}}
+\item 
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ $\ast$ \mbox{\hyperlink{class_game_object_a97edc3248ba9d7aeeb79b54cdfd4c467}{local\+Vertices}} = nullptr
+\item 
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ $\ast$ \mbox{\hyperlink{class_game_object_a7ac9ca27876f172bc15e90926015459c}{world\+Vertices}} = nullptr
+\item 
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \mbox{\hyperlink{class_game_object_abce641107e19bc947d20cee6824c3b18}{vector\+Zero}}
+\item 
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \mbox{\hyperlink{class_game_object_abfd1a99d650ee9744c96426dd1d4c8d0}{direction}}
+\item 
+\mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \mbox{\hyperlink{class_game_object_a5803166f13b9514258d7852084fd63e1}{color}}
+\item 
+int \mbox{\hyperlink{class_game_object_a46274bba1b356f0d6f9cb9c51467b1b1}{number\+Of\+Vertices}}
+\item 
+float \mbox{\hyperlink{class_game_object_af2c1d154ec52b3d4943e874988585387}{rotation\+Speed}}
+\item 
+float \mbox{\hyperlink{class_game_object_a31820152846046a77528d072e4abcb31}{circumscribed\+Circle\+Radius}}
+\item 
+float \mbox{\hyperlink{class_game_object_a7d74d23c97c2a0d20084e7f819a40aab}{angle\+For\+Generate\+In\+Isosceles\+Polygons}}
+\item 
+float \mbox{\hyperlink{class_game_object_a9f0c137be24bb21b2baa61fd198f5079}{start\+Angle}} = 0.\+0F
+\item 
+float \mbox{\hyperlink{class_game_object_a13498eaed1a345c4e77c367570e107de}{step\+Angle}}
+\item 
+float \mbox{\hyperlink{class_game_object_a44a31cfe9d14200b898955a0ff7ff064}{direction\+Mouse\+Angle}} = 0
+\item 
+float \mbox{\hyperlink{class_game_object_a938272352e22e9418514d618758511d5}{speed}} = 0.\+0F
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \mbox{\hyperlink{class_game_object_ab976edfa4e257fae56c61f6ba81ded73}{position}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Enumeration Documentation}
+\mbox{\Hypertarget{class_game_object_ace530779a33a946a13f42b0f2cb8118d}\label{class_game_object_ace530779a33a946a13f42b0f2cb8118d}} 
+\index{GameObject@{GameObject}!WhoAmI@{WhoAmI}}
+\index{WhoAmI@{WhoAmI}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{WhoAmI}{WhoAmI}}
+{\footnotesize\ttfamily enum \mbox{\hyperlink{class_game_object_ace530779a33a946a13f42b0f2cb8118d}{Game\+Object\+::\+Who\+AmI}}}
+
+\begin{DoxyEnumFields}{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DEFAULT\_VALUE@{DEFAULT\_VALUE}!GameObject@{GameObject}}\index{GameObject@{GameObject}!DEFAULT\_VALUE@{DEFAULT\_VALUE}}}\mbox{\Hypertarget{class_game_object_ace530779a33a946a13f42b0f2cb8118dab19e21ae85d6f3cc679d99b43168cb28}\label{class_game_object_ace530779a33a946a13f42b0f2cb8118dab19e21ae85d6f3cc679d99b43168cb28}} 
+DEFAULT\+\_\+\+VALUE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PROTAGONIST@{PROTAGONIST}!GameObject@{GameObject}}\index{GameObject@{GameObject}!PROTAGONIST@{PROTAGONIST}}}\mbox{\Hypertarget{class_game_object_ace530779a33a946a13f42b0f2cb8118daccb6332e371b7308d90bc42c22fcbfea}\label{class_game_object_ace530779a33a946a13f42b0f2cb8118daccb6332e371b7308d90bc42c22fcbfea}} 
+PROTAGONIST&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PROJECTILE@{PROJECTILE}!GameObject@{GameObject}}\index{GameObject@{GameObject}!PROJECTILE@{PROJECTILE}}}\mbox{\Hypertarget{class_game_object_ace530779a33a946a13f42b0f2cb8118da3c36a9a42fdf8a197336231abfa3d282}\label{class_game_object_ace530779a33a946a13f42b0f2cb8118da3c36a9a42fdf8a197336231abfa3d282}} 
+PROJECTILE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COLLECTIBLE@{COLLECTIBLE}!GameObject@{GameObject}}\index{GameObject@{GameObject}!COLLECTIBLE@{COLLECTIBLE}}}\mbox{\Hypertarget{class_game_object_ace530779a33a946a13f42b0f2cb8118da3db5dfd5f501fc5928bde2993ce05d4d}\label{class_game_object_ace530779a33a946a13f42b0f2cb8118da3db5dfd5f501fc5928bde2993ce05d4d}} 
+COLLECTIBLE&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_game_object_a5534cb25b7ecfa8d19b686c405ffec33}\label{class_game_object_a5534cb25b7ecfa8d19b686c405ffec33}} 
+\index{GameObject@{GameObject}!generate@{generate}}
+\index{generate@{generate}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{generate()}{generate()}}
+{\footnotesize\ttfamily virtual void Game\+Object\+::generate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_circle_a9dd6bc2e12de0f48dc0ad4c1e0023764}{Circle}}, \mbox{\hyperlink{class_destroyable_ac96ba138cc44eb58ae12dc59fcb27ddf}{Destroyable}}, \mbox{\hyperlink{class_player_af9416e3087743d0b513ae586a3d71c54}{Player}}, and \mbox{\hyperlink{class_projectile_af200ef8d6d44a9f1cdef328ed054c0d7}{Projectile}}.
+
+\mbox{\Hypertarget{class_game_object_a3c4a66cba7e3c6eb7d31d1ff1b906c63}\label{class_game_object_a3c4a66cba7e3c6eb7d31d1ff1b906c63}} 
+\index{GameObject@{GameObject}!generateRegularPolygonVertices@{generateRegularPolygonVertices}}
+\index{generateRegularPolygonVertices@{generateRegularPolygonVertices}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{generateRegularPolygonVertices()}{generateRegularPolygonVertices()}}
+{\footnotesize\ttfamily virtual void Game\+Object\+::generate\+Regular\+Polygon\+Vertices (\begin{DoxyParamCaption}\item[{float}]{circumscribed\+Circle\+Radius,  }\item[{int}]{number\+Of\+Vertices }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_circle_a79eaf519e6bfbca525615e988d9ba0dc}{Circle}}, \mbox{\hyperlink{class_destroyable_ac79fddaacb75361ba3c6a8953c183f16}{Destroyable}}, \mbox{\hyperlink{class_player_a35d62633888c5b0a763cd6346fe73bec}{Player}}, and \mbox{\hyperlink{class_projectile_ac8d8cc03bb35bc30f93d9d49c8eedd77}{Projectile}}.
+
+\mbox{\Hypertarget{class_game_object_aecbc88f4df8a4f972a9c79fd246c8ae1}\label{class_game_object_aecbc88f4df8a4f972a9c79fd246c8ae1}} 
+\index{GameObject@{GameObject}!move@{move}}
+\index{move@{move}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily virtual void Game\+Object\+::move (\begin{DoxyParamCaption}\item[{float}]{delta\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_circle_af74cf8118641a8f85b76050d3916392a}{Circle}}, \mbox{\hyperlink{class_destroyable_ab04132c3a0f3c42db2f1368a2fc0908f}{Destroyable}}, \mbox{\hyperlink{class_player_a60ed4851cb84ac4faed024e0dba4edf8}{Player}}, and \mbox{\hyperlink{class_projectile_a83094d56221512ea9d8779ae511ffb0e}{Projectile}}.
+
+\mbox{\Hypertarget{class_game_object_a93dcb9f74166ae571beb6a1d7aefc48b}\label{class_game_object_a93dcb9f74166ae571beb6a1d7aefc48b}} 
+\index{GameObject@{GameObject}!moveCollider@{moveCollider}}
+\index{moveCollider@{moveCollider}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{moveCollider()}{moveCollider()}}
+{\footnotesize\ttfamily virtual void Game\+Object\+::move\+Collider (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+\mbox{\Hypertarget{class_game_object_a66002d38871120ee28e17f46ea22f258}\label{class_game_object_a66002d38871120ee28e17f46ea22f258}} 
+\index{GameObject@{GameObject}!regeneratePolygon@{regeneratePolygon}}
+\index{regeneratePolygon@{regeneratePolygon}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{regeneratePolygon()}{regeneratePolygon()}}
+{\footnotesize\ttfamily virtual void Game\+Object\+::regenerate\+Polygon (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_circle_ad2f9cc4568d01487c513f7bbe9856774}{Circle}}, \mbox{\hyperlink{class_destroyable_aa8cda3b4a11f1202f3fbf3689b98b303}{Destroyable}}, \mbox{\hyperlink{class_player_a694626f19d460432243069c0492ebc2e}{Player}}, and \mbox{\hyperlink{class_projectile_a4d1b2f6b319aecb0b9427a7bf8eab1bf}{Projectile}}.
+
+\mbox{\Hypertarget{class_game_object_afc2b76fcf495c4ee1e16367a33000282}\label{class_game_object_afc2b76fcf495c4ee1e16367a33000282}} 
+\index{GameObject@{GameObject}!setColor@{setColor}}
+\index{setColor@{setColor}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{setColor()}{setColor()}}
+{\footnotesize\ttfamily virtual void Game\+Object\+::set\+Color (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{class_destroyable_a4692910bbb231f5e79cf317bc5551c75}{Destroyable}}.
+
+\mbox{\Hypertarget{class_game_object_ad61a20903bec608fd3402d3367da05ef}\label{class_game_object_ad61a20903bec608fd3402d3367da05ef}} 
+\index{GameObject@{GameObject}!setPosition@{setPosition}}
+\index{setPosition@{setPosition}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{setPosition()}{setPosition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily virtual void Game\+Object\+::set\+Position (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{class_destroyable_a50830851e26f56f63de8e1376ffd86b9}{Destroyable}}.
+
+\mbox{\Hypertarget{class_game_object_afe7d1bfba90bc8fb9b330e1130f6d987}\label{class_game_object_afe7d1bfba90bc8fb9b330e1130f6d987}} 
+\index{GameObject@{GameObject}!setPosition@{setPosition}}
+\index{setPosition@{setPosition}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{setPosition()}{setPosition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily virtual void Game\+Object\+::set\+Position (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented in \mbox{\hyperlink{class_destroyable_afbcb82ef6a3356c7384e68f994e1319f}{Destroyable}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_game_object_a7d74d23c97c2a0d20084e7f819a40aab}\label{class_game_object_a7d74d23c97c2a0d20084e7f819a40aab}} 
+\index{GameObject@{GameObject}!angleForGenerateInIsoscelesPolygons@{angleForGenerateInIsoscelesPolygons}}
+\index{angleForGenerateInIsoscelesPolygons@{angleForGenerateInIsoscelesPolygons}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{angleForGenerateInIsoscelesPolygons}{angleForGenerateInIsoscelesPolygons}}
+{\footnotesize\ttfamily float Game\+Object\+::angle\+For\+Generate\+In\+Isosceles\+Polygons}
+
+\mbox{\Hypertarget{class_game_object_a31820152846046a77528d072e4abcb31}\label{class_game_object_a31820152846046a77528d072e4abcb31}} 
+\index{GameObject@{GameObject}!circumscribedCircleRadius@{circumscribedCircleRadius}}
+\index{circumscribedCircleRadius@{circumscribedCircleRadius}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{circumscribedCircleRadius}{circumscribedCircleRadius}}
+{\footnotesize\ttfamily float Game\+Object\+::circumscribed\+Circle\+Radius}
+
+\mbox{\Hypertarget{class_game_object_ac211c3e7aef8e68b4e2566e2dd24fae8}\label{class_game_object_ac211c3e7aef8e68b4e2566e2dd24fae8}} 
+\index{GameObject@{GameObject}!collider@{collider}}
+\index{collider@{collider}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{collider}{collider}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_collider}{Collider}} Game\+Object\+::collider}
+
+\mbox{\Hypertarget{class_game_object_a5803166f13b9514258d7852084fd63e1}\label{class_game_object_a5803166f13b9514258d7852084fd63e1}} 
+\index{GameObject@{GameObject}!color@{color}}
+\index{color@{color}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{color}{color}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$Uint8$>$ Game\+Object\+::color}
+
+\mbox{\Hypertarget{class_game_object_abfd1a99d650ee9744c96426dd1d4c8d0}\label{class_game_object_abfd1a99d650ee9744c96426dd1d4c8d0}} 
+\index{GameObject@{GameObject}!direction@{direction}}
+\index{direction@{direction}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{direction}{direction}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$float$>$ Game\+Object\+::direction}
+
+\mbox{\Hypertarget{class_game_object_a44a31cfe9d14200b898955a0ff7ff064}\label{class_game_object_a44a31cfe9d14200b898955a0ff7ff064}} 
+\index{GameObject@{GameObject}!directionMouseAngle@{directionMouseAngle}}
+\index{directionMouseAngle@{directionMouseAngle}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{directionMouseAngle}{directionMouseAngle}}
+{\footnotesize\ttfamily float Game\+Object\+::direction\+Mouse\+Angle = 0}
+
+\mbox{\Hypertarget{class_game_object_ae70c229cc4a080e87662f3e3ee497e19}\label{class_game_object_ae70c229cc4a080e87662f3e3ee497e19}} 
+\index{GameObject@{GameObject}!iAm@{iAm}}
+\index{iAm@{iAm}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{iAm}{iAm}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_game_object_ace530779a33a946a13f42b0f2cb8118d}{Who\+AmI}} Game\+Object\+::i\+Am}
+
+\mbox{\Hypertarget{class_game_object_a8fb2ac236e1b7ae2ad8eb16111bad492}\label{class_game_object_a8fb2ac236e1b7ae2ad8eb16111bad492}} 
+\index{GameObject@{GameObject}!isAlive@{isAlive}}
+\index{isAlive@{isAlive}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{isAlive}{isAlive}}
+{\footnotesize\ttfamily bool Game\+Object\+::is\+Alive = true}
+
+\mbox{\Hypertarget{class_game_object_a97edc3248ba9d7aeeb79b54cdfd4c467}\label{class_game_object_a97edc3248ba9d7aeeb79b54cdfd4c467}} 
+\index{GameObject@{GameObject}!localVertices@{localVertices}}
+\index{localVertices@{localVertices}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{localVertices}{localVertices}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$float$>$$\ast$ Game\+Object\+::local\+Vertices = nullptr}
+
+\mbox{\Hypertarget{class_game_object_a46274bba1b356f0d6f9cb9c51467b1b1}\label{class_game_object_a46274bba1b356f0d6f9cb9c51467b1b1}} 
+\index{GameObject@{GameObject}!numberOfVertices@{numberOfVertices}}
+\index{numberOfVertices@{numberOfVertices}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{numberOfVertices}{numberOfVertices}}
+{\footnotesize\ttfamily int Game\+Object\+::number\+Of\+Vertices}
+
+\mbox{\Hypertarget{class_game_object_ab976edfa4e257fae56c61f6ba81ded73}\label{class_game_object_ab976edfa4e257fae56c61f6ba81ded73}} 
+\index{GameObject@{GameObject}!position@{position}}
+\index{position@{position}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{position}{position}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$float$>$ Game\+Object\+::position\hspace{0.3cm}{\ttfamily [protected]}}
+
+\mbox{\Hypertarget{class_game_object_af2c1d154ec52b3d4943e874988585387}\label{class_game_object_af2c1d154ec52b3d4943e874988585387}} 
+\index{GameObject@{GameObject}!rotationSpeed@{rotationSpeed}}
+\index{rotationSpeed@{rotationSpeed}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{rotationSpeed}{rotationSpeed}}
+{\footnotesize\ttfamily float Game\+Object\+::rotation\+Speed}
+
+\mbox{\Hypertarget{class_game_object_a938272352e22e9418514d618758511d5}\label{class_game_object_a938272352e22e9418514d618758511d5}} 
+\index{GameObject@{GameObject}!speed@{speed}}
+\index{speed@{speed}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{speed}{speed}}
+{\footnotesize\ttfamily float Game\+Object\+::speed = 0.\+0F}
+
+\mbox{\Hypertarget{class_game_object_a9f0c137be24bb21b2baa61fd198f5079}\label{class_game_object_a9f0c137be24bb21b2baa61fd198f5079}} 
+\index{GameObject@{GameObject}!startAngle@{startAngle}}
+\index{startAngle@{startAngle}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{startAngle}{startAngle}}
+{\footnotesize\ttfamily float Game\+Object\+::start\+Angle = 0.\+0F}
+
+\mbox{\Hypertarget{class_game_object_a13498eaed1a345c4e77c367570e107de}\label{class_game_object_a13498eaed1a345c4e77c367570e107de}} 
+\index{GameObject@{GameObject}!stepAngle@{stepAngle}}
+\index{stepAngle@{stepAngle}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{stepAngle}{stepAngle}}
+{\footnotesize\ttfamily float Game\+Object\+::step\+Angle}
+
+\mbox{\Hypertarget{class_game_object_abce641107e19bc947d20cee6824c3b18}\label{class_game_object_abce641107e19bc947d20cee6824c3b18}} 
+\index{GameObject@{GameObject}!vectorZero@{vectorZero}}
+\index{vectorZero@{vectorZero}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{vectorZero}{vectorZero}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$float$>$ Game\+Object\+::vector\+Zero}
+
+\mbox{\Hypertarget{class_game_object_a7ac9ca27876f172bc15e90926015459c}\label{class_game_object_a7ac9ca27876f172bc15e90926015459c}} 
+\index{GameObject@{GameObject}!worldVertices@{worldVertices}}
+\index{worldVertices@{worldVertices}!GameObject@{GameObject}}
+\doxysubsubsection{\texorpdfstring{worldVertices}{worldVertices}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$float$>$$\ast$ Game\+Object\+::world\+Vertices = nullptr}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_game_object_8hpp}{Game\+Object.\+hpp}}\end{DoxyCompactItemize}

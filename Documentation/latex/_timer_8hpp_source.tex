@@ -1,0 +1,81 @@
+\hypertarget{_timer_8hpp_source}{}\doxysection{Timer.\+hpp}
+\mbox{\hyperlink{_timer_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Original\ code\ from\ github:\ 99x}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ https://github.com/99x}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ Changes\ made\ according\ to:}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ https://www.fluentcpp.com/2018/12/28/timer-\/cpp/}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifndef\ TIMER\_HPP}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#define\ TIMER\_HPP}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_timer}{Timer}}\ \{}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{bool}\ clear\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Function>}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_timer_aa236f7e5d652f5d255617659d6cd5e98}{setTimeout}}(Function\ function,\ \textcolor{keywordtype}{int}\ delay)\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ this-\/>clear\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ std::thread\ t([=]()\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (this-\/>clear)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ std::this\_thread::sleep\_for(std::chrono::milliseconds(delay));}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (this-\/>clear)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ function();}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ t.detach();}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Function>}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_timer_a354414c715e743b71e4ebcafc02a6f6c}{setInterval}}(Function\ function,\ \textcolor{keywordtype}{int}\ interval)\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ this-\/>clear\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ std::thread\ t([=]()\ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\textcolor{keyword}{true})\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (this-\/>clear)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::this\_thread::sleep\_for(std::chrono::milliseconds(interval));}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (this-\/>clear)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ function();}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ t.detach();}
+\DoxyCodeLine{00038\ \ \ \ \ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_timer_a63f0eb44b27402196590a03781515dba}{stop}}()\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ this-\/>clear\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00042\ \ \ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{comment}{//template<typename\ Function>}}
+\DoxyCodeLine{00047\ \textcolor{comment}{//void\ Timer::setTimeout(Function\ function,\ int\ delay)\ \{}}
+\DoxyCodeLine{00048\ \textcolor{comment}{//\ \ \ \ this-\/>clear\ =\ false;}}
+\DoxyCodeLine{00049\ \textcolor{comment}{//\ \ \ \ std::thread\ t([=]()\ \{}}
+\DoxyCodeLine{00050\ \textcolor{comment}{//\ \ \ \ \ \ \ \ if\ (this-\/>clear)\ return;}}
+\DoxyCodeLine{00051\ \textcolor{comment}{//\ \ \ \ \ \ \ \ std::this\_thread::sleep\_for(std::chrono::milliseconds(delay));}}
+\DoxyCodeLine{00052\ \textcolor{comment}{//\ \ \ \ \ \ \ \ if\ (this-\/>clear)\ return;}}
+\DoxyCodeLine{00053\ \textcolor{comment}{//\ \ \ \ \ \ \ \ function();}}
+\DoxyCodeLine{00054\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \});}}
+\DoxyCodeLine{00055\ \textcolor{comment}{//\ \ \ \ t.detach();}}
+\DoxyCodeLine{00056\ \textcolor{comment}{//\}}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{comment}{//template<typename\ Function>}}
+\DoxyCodeLine{00059\ \textcolor{comment}{//void\ Timer::setInterval(Function\ function,\ int\ interval)\ \{}}
+\DoxyCodeLine{00060\ \textcolor{comment}{//\ \ \ \ this-\/>clear\ =\ false;}}
+\DoxyCodeLine{00061\ \textcolor{comment}{//\ \ \ \ std::thread\ t([=]()\ \{}}
+\DoxyCodeLine{00062\ \textcolor{comment}{//\ \ \ \ \ \ \ \ while\ (true)\ \{}}
+\DoxyCodeLine{00063\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ if\ (this-\/>clear)\ return;}}
+\DoxyCodeLine{00064\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ std::this\_thread::sleep\_for(std::chrono::milliseconds(interval));}}
+\DoxyCodeLine{00065\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ if\ (this-\/>clear)\ return;}}
+\DoxyCodeLine{00066\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \ \ \ \ function();}}
+\DoxyCodeLine{00067\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \}}}
+\DoxyCodeLine{00068\ \textcolor{comment}{//\ \ \ \ \ \ \ \ \});}}
+\DoxyCodeLine{00069\ \textcolor{comment}{//\ \ \ \ t.detach();}}
+\DoxyCodeLine{00070\ \textcolor{comment}{//\}}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{comment}{//void\ Timer::stop()\ \{}}
+\DoxyCodeLine{00073\ \textcolor{comment}{//\ \ \ \ this-\/>clear\ =\ true;}}
+\DoxyCodeLine{00074\ \textcolor{comment}{//\}}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

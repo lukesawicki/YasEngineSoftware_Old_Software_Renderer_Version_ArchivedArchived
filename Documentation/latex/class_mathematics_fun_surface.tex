@@ -1,0 +1,175 @@
+\hypertarget{class_mathematics_fun_surface}{}\doxysection{Mathematics\+Fun\+Surface Class Reference}
+\label{class_mathematics_fun_surface}\index{MathematicsFunSurface@{MathematicsFunSurface}}
+
+
+{\ttfamily \#include $<$Mathematics\+Fun\+Surface.\+hpp$>$}
+
+Inheritance diagram for Mathematics\+Fun\+Surface\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_mathematics_fun_surface}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_mathematics_fun_surface_a59fbd8f6141a728137b41d1ccfda2ab0}{cartesian\+Position\+To\+Window}} (int \&x, int \&y) const
+\item 
+\mbox{\hyperlink{class_mathematics_fun_surface_a7875cc6a9bed7007d74964428c481b09}{Mathematics\+Fun\+Surface}} (int x, int y, int width, int height, const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&default\+Color)
+\item 
+\mbox{\hyperlink{class_mathematics_fun_surface_aed02aa5bff790ae35164c2a5b299f161}{Mathematics\+Fun\+Surface}} (\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ \mbox{\hyperlink{class_view_port_a215c6ddf7a4a7496c6b002a746aed85c}{position}}, int width, int height, const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&default\+Color)
+\item 
+virtual \mbox{\hyperlink{class_mathematics_fun_surface_ac9bcfd7ecbbf9e32d6b6cdbf74f4b5b8}{$\sim$\+Mathematics\+Fun\+Surface}} ()
+\item 
+void \mbox{\hyperlink{class_mathematics_fun_surface_a4f42fef17ce3c2623aacea470b664b7a}{clear\+Color}} (const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&drawing\+Color) override
+\item 
+void \mbox{\hyperlink{class_mathematics_fun_surface_a6b6f8bd0d711e878e6d59e888de7bdeb}{draw\+Point}} (int x, int y, const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&drawing\+Color) override
+\item 
+void \mbox{\hyperlink{class_mathematics_fun_surface_ad47e2ee53915f3ecb2f3959b94e9d030}{draw\+Line}} (const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&point0, const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&point1, const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&drawing\+Color) override
+\item 
+void \mbox{\hyperlink{class_mathematics_fun_surface_a105e61109b992d8922436ba13f6620f3}{draw\+Polygon}} (\mbox{\hyperlink{class_game_object}{Game\+Object}} $\ast$polygon) override
+\item 
+void \mbox{\hyperlink{class_mathematics_fun_surface_a187adf7bed8f5bc811c48afdff85c370}{copy\+Pixels\+In\+To\+PIxel\+Table}} (\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table)
+\item 
+unsigned int \mbox{\hyperlink{class_mathematics_fun_surface_a35549d8204999946655d8b31baba6d02}{calculate\+Maximum\+Number\+Of\+Elements\+To\+Process}} (const unsigned int \&primary\+Maximum, bool connected\+Lines)
+\item 
+void \mbox{\hyperlink{class_mathematics_fun_surface_ac713f1b056fb6ce91eb6311f8c4691ea}{draw\+Numbers\+As\+Group\+Of\+Lines}} (\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ $\ast$vertices, int maximum\+Number\+Of\+Vertices, const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&color, bool are\+Lines\+Continuos)
+\item 
+void \mbox{\hyperlink{class_mathematics_fun_surface_a75a0b5797ec7e3a058004eaeebdf5c7e}{horizontal\+Line\+On\+Screen}} (int y, \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ color)
+\item 
+void \mbox{\hyperlink{class_mathematics_fun_surface_a1dc0f8c834c74f3a0b6f5d5e6e00e4be}{vertical\+Line\+On\+Screen}} (int x, \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ color)
+\item 
+void \mbox{\hyperlink{class_mathematics_fun_surface_a392995aaeed025bb4b3acb52a961bc37}{draw\+Cartesian\+Axies}} ()
+\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_view_port_aa3cf305ad5dec7a7c268fa0b87d7ffc3}{clear\+Color}} (const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&drawing\+Color)=0
+\item 
+virtual void \mbox{\hyperlink{class_view_port_a51db22d641df9aa8bd564bd6421a0ae2}{draw\+Point}} (int x, int y, const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&drawing\+Color)=0
+\item 
+virtual void \mbox{\hyperlink{class_view_port_a424a6e483af6def09ecfc0e3b540ad58}{draw\+Line}} (const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&point0, const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&point1, const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&drawing\+Color)=0
+\item 
+virtual void \mbox{\hyperlink{class_view_port_a1e7e9386b6be44f5be5842c786f9eb17}{draw\+Polygon}} (\mbox{\hyperlink{class_game_object}{Game\+Object}} $\ast$polygon)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Public Attributes inherited from \mbox{\hyperlink{class_view_port}{View\+Port}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ \mbox{\hyperlink{class_view_port_a215c6ddf7a4a7496c6b002a746aed85c}{position}}
+\item 
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ \mbox{\hyperlink{class_view_port_a84fab3f325ec68accdeb1fbb942d7423}{view\+Port\+Sizes}}
+\item 
+Uint8 $\ast$ \mbox{\hyperlink{class_view_port_a957bc34b5f4ef5e1164a7ffbf77ce04f}{pixels}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_mathematics_fun_surface_a7875cc6a9bed7007d74964428c481b09}\label{class_mathematics_fun_surface_a7875cc6a9bed7007d74964428c481b09}} 
+\index{MathematicsFunSurface@{MathematicsFunSurface}!MathematicsFunSurface@{MathematicsFunSurface}}
+\index{MathematicsFunSurface@{MathematicsFunSurface}!MathematicsFunSurface@{MathematicsFunSurface}}
+\doxysubsubsection{\texorpdfstring{MathematicsFunSurface()}{MathematicsFunSurface()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Mathematics\+Fun\+Surface\+::\+Mathematics\+Fun\+Surface (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{width,  }\item[{int}]{height,  }\item[{const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&}]{default\+Color }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_mathematics_fun_surface_aed02aa5bff790ae35164c2a5b299f161}\label{class_mathematics_fun_surface_aed02aa5bff790ae35164c2a5b299f161}} 
+\index{MathematicsFunSurface@{MathematicsFunSurface}!MathematicsFunSurface@{MathematicsFunSurface}}
+\index{MathematicsFunSurface@{MathematicsFunSurface}!MathematicsFunSurface@{MathematicsFunSurface}}
+\doxysubsubsection{\texorpdfstring{MathematicsFunSurface()}{MathematicsFunSurface()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Mathematics\+Fun\+Surface\+::\+Mathematics\+Fun\+Surface (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$}]{position,  }\item[{int}]{width,  }\item[{int}]{height,  }\item[{const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&}]{default\+Color }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_mathematics_fun_surface_ac9bcfd7ecbbf9e32d6b6cdbf74f4b5b8}\label{class_mathematics_fun_surface_ac9bcfd7ecbbf9e32d6b6cdbf74f4b5b8}} 
+\index{MathematicsFunSurface@{MathematicsFunSurface}!````~MathematicsFunSurface@{$\sim$MathematicsFunSurface}}
+\index{````~MathematicsFunSurface@{$\sim$MathematicsFunSurface}!MathematicsFunSurface@{MathematicsFunSurface}}
+\doxysubsubsection{\texorpdfstring{$\sim$MathematicsFunSurface()}{~MathematicsFunSurface()}}
+{\footnotesize\ttfamily Mathematics\+Fun\+Surface\+::$\sim$\+Mathematics\+Fun\+Surface (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_mathematics_fun_surface_a35549d8204999946655d8b31baba6d02}\label{class_mathematics_fun_surface_a35549d8204999946655d8b31baba6d02}} 
+\index{MathematicsFunSurface@{MathematicsFunSurface}!calculateMaximumNumberOfElementsToProcess@{calculateMaximumNumberOfElementsToProcess}}
+\index{calculateMaximumNumberOfElementsToProcess@{calculateMaximumNumberOfElementsToProcess}!MathematicsFunSurface@{MathematicsFunSurface}}
+\doxysubsubsection{\texorpdfstring{calculateMaximumNumberOfElementsToProcess()}{calculateMaximumNumberOfElementsToProcess()}}
+{\footnotesize\ttfamily unsigned int Mathematics\+Fun\+Surface\+::calculate\+Maximum\+Number\+Of\+Elements\+To\+Process (\begin{DoxyParamCaption}\item[{const unsigned int \&}]{primary\+Maximum,  }\item[{bool}]{connected\+Lines }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_mathematics_fun_surface_a59fbd8f6141a728137b41d1ccfda2ab0}\label{class_mathematics_fun_surface_a59fbd8f6141a728137b41d1ccfda2ab0}} 
+\index{MathematicsFunSurface@{MathematicsFunSurface}!cartesianPositionToWindow@{cartesianPositionToWindow}}
+\index{cartesianPositionToWindow@{cartesianPositionToWindow}!MathematicsFunSurface@{MathematicsFunSurface}}
+\doxysubsubsection{\texorpdfstring{cartesianPositionToWindow()}{cartesianPositionToWindow()}}
+{\footnotesize\ttfamily void Mathematics\+Fun\+Surface\+::cartesian\+Position\+To\+Window (\begin{DoxyParamCaption}\item[{int \&}]{x,  }\item[{int \&}]{y }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_mathematics_fun_surface_a4f42fef17ce3c2623aacea470b664b7a}\label{class_mathematics_fun_surface_a4f42fef17ce3c2623aacea470b664b7a}} 
+\index{MathematicsFunSurface@{MathematicsFunSurface}!clearColor@{clearColor}}
+\index{clearColor@{clearColor}!MathematicsFunSurface@{MathematicsFunSurface}}
+\doxysubsubsection{\texorpdfstring{clearColor()}{clearColor()}}
+{\footnotesize\ttfamily void Mathematics\+Fun\+Surface\+::clear\+Color (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&}]{drawing\+Color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_view_port_aa3cf305ad5dec7a7c268fa0b87d7ffc3}{View\+Port}}.
+
+\mbox{\Hypertarget{class_mathematics_fun_surface_a187adf7bed8f5bc811c48afdff85c370}\label{class_mathematics_fun_surface_a187adf7bed8f5bc811c48afdff85c370}} 
+\index{MathematicsFunSurface@{MathematicsFunSurface}!copyPixelsInToPIxelTable@{copyPixelsInToPIxelTable}}
+\index{copyPixelsInToPIxelTable@{copyPixelsInToPIxelTable}!MathematicsFunSurface@{MathematicsFunSurface}}
+\doxysubsubsection{\texorpdfstring{copyPixelsInToPIxelTable()}{copyPixelsInToPIxelTable()}}
+{\footnotesize\ttfamily void Mathematics\+Fun\+Surface\+::copy\+Pixels\+In\+To\+PIxel\+Table (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_mathematics_fun_surface_a392995aaeed025bb4b3acb52a961bc37}\label{class_mathematics_fun_surface_a392995aaeed025bb4b3acb52a961bc37}} 
+\index{MathematicsFunSurface@{MathematicsFunSurface}!drawCartesianAxies@{drawCartesianAxies}}
+\index{drawCartesianAxies@{drawCartesianAxies}!MathematicsFunSurface@{MathematicsFunSurface}}
+\doxysubsubsection{\texorpdfstring{drawCartesianAxies()}{drawCartesianAxies()}}
+{\footnotesize\ttfamily void Mathematics\+Fun\+Surface\+::draw\+Cartesian\+Axies (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_mathematics_fun_surface_ad47e2ee53915f3ecb2f3959b94e9d030}\label{class_mathematics_fun_surface_ad47e2ee53915f3ecb2f3959b94e9d030}} 
+\index{MathematicsFunSurface@{MathematicsFunSurface}!drawLine@{drawLine}}
+\index{drawLine@{drawLine}!MathematicsFunSurface@{MathematicsFunSurface}}
+\doxysubsubsection{\texorpdfstring{drawLine()}{drawLine()}}
+{\footnotesize\ttfamily void Mathematics\+Fun\+Surface\+::draw\+Line (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&}]{point0,  }\item[{const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&}]{point1,  }\item[{const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&}]{drawing\+Color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_view_port_a424a6e483af6def09ecfc0e3b540ad58}{View\+Port}}.
+
+\mbox{\Hypertarget{class_mathematics_fun_surface_ac713f1b056fb6ce91eb6311f8c4691ea}\label{class_mathematics_fun_surface_ac713f1b056fb6ce91eb6311f8c4691ea}} 
+\index{MathematicsFunSurface@{MathematicsFunSurface}!drawNumbersAsGroupOfLines@{drawNumbersAsGroupOfLines}}
+\index{drawNumbersAsGroupOfLines@{drawNumbersAsGroupOfLines}!MathematicsFunSurface@{MathematicsFunSurface}}
+\doxysubsubsection{\texorpdfstring{drawNumbersAsGroupOfLines()}{drawNumbersAsGroupOfLines()}}
+{\footnotesize\ttfamily void Mathematics\+Fun\+Surface\+::draw\+Numbers\+As\+Group\+Of\+Lines (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ $\ast$}]{vertices,  }\item[{int}]{maximum\+Number\+Of\+Vertices,  }\item[{const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&}]{color,  }\item[{bool}]{are\+Lines\+Continuos }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_mathematics_fun_surface_a6b6f8bd0d711e878e6d59e888de7bdeb}\label{class_mathematics_fun_surface_a6b6f8bd0d711e878e6d59e888de7bdeb}} 
+\index{MathematicsFunSurface@{MathematicsFunSurface}!drawPoint@{drawPoint}}
+\index{drawPoint@{drawPoint}!MathematicsFunSurface@{MathematicsFunSurface}}
+\doxysubsubsection{\texorpdfstring{drawPoint()}{drawPoint()}}
+{\footnotesize\ttfamily void Mathematics\+Fun\+Surface\+::draw\+Point (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&}]{drawing\+Color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_view_port_a51db22d641df9aa8bd564bd6421a0ae2}{View\+Port}}.
+
+\mbox{\Hypertarget{class_mathematics_fun_surface_a105e61109b992d8922436ba13f6620f3}\label{class_mathematics_fun_surface_a105e61109b992d8922436ba13f6620f3}} 
+\index{MathematicsFunSurface@{MathematicsFunSurface}!drawPolygon@{drawPolygon}}
+\index{drawPolygon@{drawPolygon}!MathematicsFunSurface@{MathematicsFunSurface}}
+\doxysubsubsection{\texorpdfstring{drawPolygon()}{drawPolygon()}}
+{\footnotesize\ttfamily void Mathematics\+Fun\+Surface\+::draw\+Polygon (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_object}{Game\+Object}} $\ast$}]{polygon }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_view_port_a1e7e9386b6be44f5be5842c786f9eb17}{View\+Port}}.
+
+\mbox{\Hypertarget{class_mathematics_fun_surface_a75a0b5797ec7e3a058004eaeebdf5c7e}\label{class_mathematics_fun_surface_a75a0b5797ec7e3a058004eaeebdf5c7e}} 
+\index{MathematicsFunSurface@{MathematicsFunSurface}!horizontalLineOnScreen@{horizontalLineOnScreen}}
+\index{horizontalLineOnScreen@{horizontalLineOnScreen}!MathematicsFunSurface@{MathematicsFunSurface}}
+\doxysubsubsection{\texorpdfstring{horizontalLineOnScreen()}{horizontalLineOnScreen()}}
+{\footnotesize\ttfamily void Mathematics\+Fun\+Surface\+::horizontal\+Line\+On\+Screen (\begin{DoxyParamCaption}\item[{int}]{y,  }\item[{\mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_mathematics_fun_surface_a1dc0f8c834c74f3a0b6f5d5e6e00e4be}\label{class_mathematics_fun_surface_a1dc0f8c834c74f3a0b6f5d5e6e00e4be}} 
+\index{MathematicsFunSurface@{MathematicsFunSurface}!verticalLineOnScreen@{verticalLineOnScreen}}
+\index{verticalLineOnScreen@{verticalLineOnScreen}!MathematicsFunSurface@{MathematicsFunSurface}}
+\doxysubsubsection{\texorpdfstring{verticalLineOnScreen()}{verticalLineOnScreen()}}
+{\footnotesize\ttfamily void Mathematics\+Fun\+Surface\+::vertical\+Line\+On\+Screen (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{\mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_mathematics_fun_surface_8hpp}{Mathematics\+Fun\+Surface.\+hpp}}\item 
+\mbox{\hyperlink{_mathematics_fun_surface_8cpp}{Mathematics\+Fun\+Surface.\+cpp}}\end{DoxyCompactItemize}

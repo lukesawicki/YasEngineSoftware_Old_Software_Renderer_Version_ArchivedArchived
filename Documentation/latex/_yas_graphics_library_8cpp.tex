@@ -1,0 +1,178 @@
+\hypertarget{_yas_graphics_library_8cpp}{}\doxysection{Yas\+Graphics\+Library.\+cpp File Reference}
+\label{_yas_graphics_library_8cpp}\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+{\ttfamily \#include $<$bitset$>$}\newline
+{\ttfamily \#include \char`\"{}Yas\+Graphics\+Library.\+hpp\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8cpp_af7161f1bb136cffd82230611e7fc9d4b}{draw\+Line}} (const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&point0, const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&point1, \mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table, const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&drawing\+Color)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8cpp_a2fc0aab7b5fa96ce78fef424033b77ad}{draw\+Polygon}} (\mbox{\hyperlink{class_game_object}{Game\+Object}} $\ast$polygon, \mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table)
+\item 
+unsigned int \mbox{\hyperlink{_yas_graphics_library_8cpp_a2c5c448f28dfe806af0d8ee9629b3722}{calculate\+Maximum\+Number\+Of\+Elements\+To\+Process}} (const unsigned int \&primary\+Maximum)
+\item 
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ $\ast$ \mbox{\hyperlink{_yas_graphics_library_8cpp_a35cd3365b1c84db4626e5a4beced8658}{generate\+Vertices\+From\+Numbers}} (const std\+::vector$<$ int $>$ \&numbers)
+\item 
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ $\ast$ \mbox{\hyperlink{_yas_graphics_library_8cpp_a0cf5befcf4cbc6f4d5717698af4619c0}{generate\+Vertices\+From\+Numbers\+As\+Vertical\+Lines}} (const std\+::vector$<$ int $>$ \&numbers)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8cpp_ac0c45d756850ceeafae2e1d81df1df38}{draw\+Numbers\+As\+Group\+Of\+Lines}} (\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ $\ast$vertices, int maximum\+Number\+Of\+Vertices, \mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8cpp_a591075d21cb13e7d1ef4418b4f3ee541}{draw\+Numbers\+As\+Polyline}} (\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ $\ast$vertices, int maximum\+Number\+Of\+Vertices, \mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8cpp_a24b4429efa614b9be8e0acb34e3b250d}{draw\+Binary\+Representation\+Of\+Fixed\+Numbers}} (std\+::vector$<$ int $>$ numbers, \mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8cpp_a3faff1657f80bbd3e832e0cf4d5db370}{draw\+Polygon\+Direction}} (\mbox{\hyperlink{class_game_object}{Game\+Object}} $\ast$polygon, \mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8cpp_a8ff2a2054511d069ae8b2c0811e4585a}{swap\+Vectors}} (\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ \&point0, \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ \&point1)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8cpp_aeec68324438bd5be109a915a76be3e08}{swap\+Vectors}} (\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&point0, \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&point1)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8cpp_aab0c3c25cad18771ec5df8fe0c62c8cf}{draw\+Cartesian\+Axies}} (\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8cpp_a054fb72969f7a40a928341b19e22d5b7}{draw\+Cross\+Hair}} (float x, float y, \mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table, bool is\+Full\+Screen)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8cpp_ab2b6c87241c33273e86df3cc860d5670}{draw\+Horizontal\+Line}} (\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table, int x0, int x1, int y, \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ color)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8cpp_a5876d367b654ec70ecdbdec2118cee08}{draw\+Vertical\+Line}} (\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table, int y0, int y1, int x, \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ color)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8cpp_a7088834f8dd3b3152e6c28a2311dea58}{horizontal\+Line\+On\+Whole\+Screen}} (\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table, int y, \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ color)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8cpp_a9112bba8b71d4a4dc8bf5ff9dd4e166c}{vertical\+Line\+On\+Whole\+Screen}} (\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table, int x, \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ color)
+\item 
+int \mbox{\hyperlink{_yas_graphics_library_8cpp_adb8f3f84ca2c5cbc2011d5a3861471d7}{xy\+Pixel\+To\+Array\+Position}} (int x, int y, int window\+Width)
+\item 
+int \mbox{\hyperlink{_yas_graphics_library_8cpp_ac941192b9a2b83d6c031f48b7334ccd6}{xy\+Pixel\+To\+Array\+Position}} (\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ \&point, int window\+Width)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8cpp_a7727ad1bfd623006af22d14f41a4f011}{window\+Position\+To\+Cartesian\+Position}} (float \&x, float \&y, \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ $\ast$window\+Dimensions)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8cpp_ac72cefe79e9231fafd21377cc33ac03d}{draw\+Mandelbrot\+Set}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_a2c5c448f28dfe806af0d8ee9629b3722}\label{_yas_graphics_library_8cpp_a2c5c448f28dfe806af0d8ee9629b3722}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!calculateMaximumNumberOfElementsToProcess@{calculateMaximumNumberOfElementsToProcess}}
+\index{calculateMaximumNumberOfElementsToProcess@{calculateMaximumNumberOfElementsToProcess}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{calculateMaximumNumberOfElementsToProcess()}{calculateMaximumNumberOfElementsToProcess()}}
+{\footnotesize\ttfamily unsigned int calculate\+Maximum\+Number\+Of\+Elements\+To\+Process (\begin{DoxyParamCaption}\item[{const unsigned int \&}]{primary\+Maximum }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_a24b4429efa614b9be8e0acb34e3b250d}\label{_yas_graphics_library_8cpp_a24b4429efa614b9be8e0acb34e3b250d}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!drawBinaryRepresentationOfFixedNumbers@{drawBinaryRepresentationOfFixedNumbers}}
+\index{drawBinaryRepresentationOfFixedNumbers@{drawBinaryRepresentationOfFixedNumbers}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{drawBinaryRepresentationOfFixedNumbers()}{drawBinaryRepresentationOfFixedNumbers()}}
+{\footnotesize\ttfamily void draw\+Binary\+Representation\+Of\+Fixed\+Numbers (\begin{DoxyParamCaption}\item[{std\+::vector$<$ int $>$}]{numbers,  }\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_aab0c3c25cad18771ec5df8fe0c62c8cf}\label{_yas_graphics_library_8cpp_aab0c3c25cad18771ec5df8fe0c62c8cf}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!drawCartesianAxies@{drawCartesianAxies}}
+\index{drawCartesianAxies@{drawCartesianAxies}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{drawCartesianAxies()}{drawCartesianAxies()}}
+{\footnotesize\ttfamily void draw\+Cartesian\+Axies (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_a054fb72969f7a40a928341b19e22d5b7}\label{_yas_graphics_library_8cpp_a054fb72969f7a40a928341b19e22d5b7}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!drawCrossHair@{drawCrossHair}}
+\index{drawCrossHair@{drawCrossHair}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{drawCrossHair()}{drawCrossHair()}}
+{\footnotesize\ttfamily void draw\+Cross\+Hair (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table,  }\item[{bool}]{is\+Full\+Screen }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_ab2b6c87241c33273e86df3cc860d5670}\label{_yas_graphics_library_8cpp_ab2b6c87241c33273e86df3cc860d5670}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!drawHorizontalLine@{drawHorizontalLine}}
+\index{drawHorizontalLine@{drawHorizontalLine}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{drawHorizontalLine()}{drawHorizontalLine()}}
+{\footnotesize\ttfamily void draw\+Horizontal\+Line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table,  }\item[{int}]{x0,  }\item[{int}]{x1,  }\item[{int}]{y,  }\item[{\mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$}]{color }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_af7161f1bb136cffd82230611e7fc9d4b}\label{_yas_graphics_library_8cpp_af7161f1bb136cffd82230611e7fc9d4b}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!drawLine@{drawLine}}
+\index{drawLine@{drawLine}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{drawLine()}{drawLine()}}
+{\footnotesize\ttfamily void draw\+Line (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&}]{point0,  }\item[{const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&}]{point1,  }\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table,  }\item[{const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&}]{drawing\+Color }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_ac72cefe79e9231fafd21377cc33ac03d}\label{_yas_graphics_library_8cpp_ac72cefe79e9231fafd21377cc33ac03d}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!drawMandelbrotSet@{drawMandelbrotSet}}
+\index{drawMandelbrotSet@{drawMandelbrotSet}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{drawMandelbrotSet()}{drawMandelbrotSet()}}
+{\footnotesize\ttfamily void draw\+Mandelbrot\+Set (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_ac0c45d756850ceeafae2e1d81df1df38}\label{_yas_graphics_library_8cpp_ac0c45d756850ceeafae2e1d81df1df38}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!drawNumbersAsGroupOfLines@{drawNumbersAsGroupOfLines}}
+\index{drawNumbersAsGroupOfLines@{drawNumbersAsGroupOfLines}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{drawNumbersAsGroupOfLines()}{drawNumbersAsGroupOfLines()}}
+{\footnotesize\ttfamily void draw\+Numbers\+As\+Group\+Of\+Lines (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ $\ast$}]{vertices,  }\item[{int}]{maximum\+Number\+Of\+Vertices,  }\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_a591075d21cb13e7d1ef4418b4f3ee541}\label{_yas_graphics_library_8cpp_a591075d21cb13e7d1ef4418b4f3ee541}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!drawNumbersAsPolyline@{drawNumbersAsPolyline}}
+\index{drawNumbersAsPolyline@{drawNumbersAsPolyline}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{drawNumbersAsPolyline()}{drawNumbersAsPolyline()}}
+{\footnotesize\ttfamily void draw\+Numbers\+As\+Polyline (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ $\ast$}]{vertices,  }\item[{int}]{maximum\+Number\+Of\+Vertices,  }\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_a2fc0aab7b5fa96ce78fef424033b77ad}\label{_yas_graphics_library_8cpp_a2fc0aab7b5fa96ce78fef424033b77ad}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!drawPolygon@{drawPolygon}}
+\index{drawPolygon@{drawPolygon}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{drawPolygon()}{drawPolygon()}}
+{\footnotesize\ttfamily void draw\+Polygon (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_object}{Game\+Object}} $\ast$}]{polygon,  }\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_a3faff1657f80bbd3e832e0cf4d5db370}\label{_yas_graphics_library_8cpp_a3faff1657f80bbd3e832e0cf4d5db370}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!drawPolygonDirection@{drawPolygonDirection}}
+\index{drawPolygonDirection@{drawPolygonDirection}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{drawPolygonDirection()}{drawPolygonDirection()}}
+{\footnotesize\ttfamily void draw\+Polygon\+Direction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_object}{Game\+Object}} $\ast$}]{polygon,  }\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_a5876d367b654ec70ecdbdec2118cee08}\label{_yas_graphics_library_8cpp_a5876d367b654ec70ecdbdec2118cee08}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!drawVerticalLine@{drawVerticalLine}}
+\index{drawVerticalLine@{drawVerticalLine}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{drawVerticalLine()}{drawVerticalLine()}}
+{\footnotesize\ttfamily void draw\+Vertical\+Line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table,  }\item[{int}]{y0,  }\item[{int}]{y1,  }\item[{int}]{x,  }\item[{\mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$}]{color }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_a35cd3365b1c84db4626e5a4beced8658}\label{_yas_graphics_library_8cpp_a35cd3365b1c84db4626e5a4beced8658}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!generateVerticesFromNumbers@{generateVerticesFromNumbers}}
+\index{generateVerticesFromNumbers@{generateVerticesFromNumbers}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{generateVerticesFromNumbers()}{generateVerticesFromNumbers()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ $\ast$ generate\+Vertices\+From\+Numbers (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ int $>$ \&}]{numbers }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_a0cf5befcf4cbc6f4d5717698af4619c0}\label{_yas_graphics_library_8cpp_a0cf5befcf4cbc6f4d5717698af4619c0}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!generateVerticesFromNumbersAsVerticalLines@{generateVerticesFromNumbersAsVerticalLines}}
+\index{generateVerticesFromNumbersAsVerticalLines@{generateVerticesFromNumbersAsVerticalLines}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{generateVerticesFromNumbersAsVerticalLines()}{generateVerticesFromNumbersAsVerticalLines()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ $\ast$ generate\+Vertices\+From\+Numbers\+As\+Vertical\+Lines (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ int $>$ \&}]{numbers }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_a7088834f8dd3b3152e6c28a2311dea58}\label{_yas_graphics_library_8cpp_a7088834f8dd3b3152e6c28a2311dea58}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!horizontalLineOnWholeScreen@{horizontalLineOnWholeScreen}}
+\index{horizontalLineOnWholeScreen@{horizontalLineOnWholeScreen}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{horizontalLineOnWholeScreen()}{horizontalLineOnWholeScreen()}}
+{\footnotesize\ttfamily void horizontal\+Line\+On\+Whole\+Screen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table,  }\item[{int}]{y,  }\item[{\mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$}]{color }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_aeec68324438bd5be109a915a76be3e08}\label{_yas_graphics_library_8cpp_aeec68324438bd5be109a915a76be3e08}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!swapVectors@{swapVectors}}
+\index{swapVectors@{swapVectors}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{swapVectors()}{swapVectors()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void swap\+Vectors (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&}]{point0,  }\item[{\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&}]{point1 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_a8ff2a2054511d069ae8b2c0811e4585a}\label{_yas_graphics_library_8cpp_a8ff2a2054511d069ae8b2c0811e4585a}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!swapVectors@{swapVectors}}
+\index{swapVectors@{swapVectors}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{swapVectors()}{swapVectors()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void swap\+Vectors (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ \&}]{point0,  }\item[{\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ \&}]{point1 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_a9112bba8b71d4a4dc8bf5ff9dd4e166c}\label{_yas_graphics_library_8cpp_a9112bba8b71d4a4dc8bf5ff9dd4e166c}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!verticalLineOnWholeScreen@{verticalLineOnWholeScreen}}
+\index{verticalLineOnWholeScreen@{verticalLineOnWholeScreen}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{verticalLineOnWholeScreen()}{verticalLineOnWholeScreen()}}
+{\footnotesize\ttfamily void vertical\+Line\+On\+Whole\+Screen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table,  }\item[{int}]{x,  }\item[{\mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$}]{color }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_a7727ad1bfd623006af22d14f41a4f011}\label{_yas_graphics_library_8cpp_a7727ad1bfd623006af22d14f41a4f011}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!windowPositionToCartesianPosition@{windowPositionToCartesianPosition}}
+\index{windowPositionToCartesianPosition@{windowPositionToCartesianPosition}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{windowPositionToCartesianPosition()}{windowPositionToCartesianPosition()}}
+{\footnotesize\ttfamily void window\+Position\+To\+Cartesian\+Position (\begin{DoxyParamCaption}\item[{float \&}]{x,  }\item[{float \&}]{y,  }\item[{\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ $\ast$}]{window\+Dimensions }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_adb8f3f84ca2c5cbc2011d5a3861471d7}\label{_yas_graphics_library_8cpp_adb8f3f84ca2c5cbc2011d5a3861471d7}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!xyPixelToArrayPosition@{xyPixelToArrayPosition}}
+\index{xyPixelToArrayPosition@{xyPixelToArrayPosition}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{xyPixelToArrayPosition()}{xyPixelToArrayPosition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int xy\+Pixel\+To\+Array\+Position (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{window\+Width }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8cpp_ac941192b9a2b83d6c031f48b7334ccd6}\label{_yas_graphics_library_8cpp_ac941192b9a2b83d6c031f48b7334ccd6}} 
+\index{YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}!xyPixelToArrayPosition@{xyPixelToArrayPosition}}
+\index{xyPixelToArrayPosition@{xyPixelToArrayPosition}!YasGraphicsLibrary.cpp@{YasGraphicsLibrary.cpp}}
+\doxysubsubsection{\texorpdfstring{xyPixelToArrayPosition()}{xyPixelToArrayPosition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily int xy\+Pixel\+To\+Array\+Position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ \&}]{point,  }\item[{int}]{window\+Width }\end{DoxyParamCaption})}
+

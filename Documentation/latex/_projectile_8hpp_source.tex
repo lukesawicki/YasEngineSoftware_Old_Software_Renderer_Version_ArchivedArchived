@@ -1,0 +1,30 @@
+\hypertarget{_projectile_8hpp_source}{}\doxysection{Projectile.\+hpp}
+\mbox{\hyperlink{_projectile_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PROJECTILE\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PROJECTILE\_HPP}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_yas_graphics_library_8hpp}{YasGraphicsLibrary.hpp}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_game_object_8hpp}{GameObject.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_timer_8hpp}{Timer.hpp}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_projectile}{Projectile}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_game_object}{GameObject}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ directionSwitched\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_projectile_a7fe4439f5c42ddb455eb2531615fb316}{liveTime}}\ =\ 2000;}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_timer}{Timer}}\ \mbox{\hyperlink{class_projectile_a5459b5db0f9b9277ef6492e723269722}{timer}};}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}\ \mbox{\hyperlink{class_projectile_a9da64ccd9879479f1a93acf05b8ed778}{velocity}};}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_projectile}{Projectile}}(\textcolor{keywordtype}{float}\ radius,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}\ \mbox{\hyperlink{class_game_object_abfd1a99d650ee9744c96426dd1d4c8d0}{direction}});}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_projectile_a94903e021fa2edab60ba3836ca0b937d}{\string~Projectile}}();}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_projectile_a83094d56221512ea9d8779ae511ffb0e}{move}}(\textcolor{keywordtype}{float}\ deltaTime)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_projectile_af200ef8d6d44a9f1cdef328ed054c0d7}{generate}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_projectile_ac8d8cc03bb35bc30f93d9d49c8eedd77}{generateRegularPolygonVertices}}(\textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_object_a31820152846046a77528d072e4abcb31}{circumscribedCircleRadius}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_object_a46274bba1b356f0d6f9cb9c51467b1b1}{numberOfVertices}})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_projectile_a4d1b2f6b319aecb0b9427a7bf8eab1bf}{regeneratePolygon}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

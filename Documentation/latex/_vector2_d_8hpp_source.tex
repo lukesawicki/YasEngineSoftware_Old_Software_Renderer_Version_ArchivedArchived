@@ -1,0 +1,81 @@
+\hypertarget{_vector2_d_8hpp_source}{}\doxysection{Vector2\+D.\+hpp}
+\mbox{\hyperlink{_vector2_d_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ VECTOR2D\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ VECTOR2D\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include<iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include<cmath>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Type>}
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_vector2_d}{Vector2D}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ Type\ \mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}};}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ Type\ \mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector2_d_ac41599f96f083773d5f33e946a0e9498}{Vector2D}}()}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>x\ =\ 0;}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>y\ =\ 0;}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector2_d_a02d0bd70779e657c0e8100f6cb5535b0}{Vector2D}}(Type\ \mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}},\ Type\ \mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}})}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>x\ =\ \mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}};}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ this-\/>y\ =\ \mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}};}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_vector2_d_ac2071664afc9a6523c75c946591d6c46}{normalizedVector}}(\mbox{\hyperlink{class_vector2_d}{Vector2D<Type>}}\&\ vector)}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ magnitude\ =\ \mbox{\hyperlink{class_vector2_d_a8575788ff26ef8271f7af289ceb87580}{getVectorMagnitude}}(vector);}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}}\ =\ vector.\mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}}\ /\ magnitude;}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}}\ =\ vector.\mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}}\ /\ magnitude;}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ vector.\mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}}\ =\ \textcolor{keyword}{static\_cast<}Type\textcolor{keyword}{>}(\mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}});}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ vector.\mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}}\ =\ \textcolor{keyword}{static\_cast<}Type\textcolor{keyword}{>}(\mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}});}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ Type\ \mbox{\hyperlink{class_vector2_d_a8575788ff26ef8271f7af289ceb87580}{getVectorMagnitude}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector2_d}{Vector2D<Type>}}\&\ vector)}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}Type\textcolor{keyword}{>}(sqrt(pow(vector.\mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}},\ 2.0)\ +\ pow(vector.\mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}},\ 2.0)));}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ Type\ \mbox{\hyperlink{class_vector2_d_ac356ed83e4798ef1c3cb1e67f69f6273}{getVectorMagnitude}}(Type\ x0,\ Type\ y0,\ Type\ x1,\ Type\ y1)}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}Type\textcolor{keyword}{>}(sqrt(pow(x1\ -\/\ x0,\ 2.0)\ +\ pow(y1\ -\/\ y0,\ 2.0)));}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ Type\ \mbox{\hyperlink{class_vector2_d_a0b6b55bcf801c370d4fafa1f6ef326ec}{crossProduct}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector2_d}{Vector2D<Type>}}\&\ u,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector2_d}{Vector2D}}\&\ v)}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ u.\mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}}\ *\ v.\mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}}\ -\/\ u.\mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}}\ *\ v.\mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}};}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ Type\ \mbox{\hyperlink{class_vector2_d_a597669da740c523975b103146feeb95d}{dotProduct}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector2_d}{Vector2D<Type>}}\&\ u,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector2_d}{Vector2D}}\&\ v)}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ u.\mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}}\ *\ v.\mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}}\ +\ u.\mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}}\ *\ v.\mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}};}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ Type\ \mbox{\hyperlink{class_vector2_d_a390bfd67e64cc4089821a782f0cc8682}{angleBetweenVectors}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector2_d}{Vector2D<Type>}}\&\ u,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector2_d}{Vector2D}}\&\ v)}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ atan2(\mbox{\hyperlink{class_vector2_d_a0b6b55bcf801c370d4fafa1f6ef326ec}{crossProduct}}(u,\ v),\ \mbox{\hyperlink{class_vector2_d_a597669da740c523975b103146feeb95d}{dotProduct}}(u,\ v));}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_vector2_d_a19222dae7392b851609ce7f7ca99a6a8}{rotateVectorOverTheAngle}}(\mbox{\hyperlink{class_vector2_d}{Vector2D<Type>}}*\ v,\ \textcolor{keywordtype}{float}\ angle)}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ modifiedX\ =\ v-\/>\mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}}\ *\ cos(angle)\ -\/\ v-\/>\mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}}\ *\ sin(angle);}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ modifiedY\ =\ v-\/>\mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}}\ *\ sin(angle)\ +\ v-\/>\mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}}\ *\ cos(angle);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ v-\/>\mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}}\ =\ modifiedX;}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ v-\/>\mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}}\ =\ modifiedY;}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_vector2_d}{Vector2D<Type>}}\ \mbox{\hyperlink{class_vector2_d_a06d284771a2f4e48927c6f50a67d52f9}{createUnitVectorFromBoundVector}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector2_d}{Vector2D<Type>}}\&\ u,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector2_d}{Vector2D}}\&\ v)}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector2_d}{Vector2D<Type>}}\ w\ =\ \mbox{\hyperlink{class_vector2_d}{Vector2D<Type>}}(u.\mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}}\ -\/\ v.\mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}},\ u.\mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}}\ -\/\ v.\mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}});}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector2_d_ac2071664afc9a6523c75c946591d6c46}{Vector2D::normalizedVector}}(w);}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ w;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00074\ \};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

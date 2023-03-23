@@ -1,0 +1,268 @@
+\hypertarget{_yas_graphics_library_8hpp}{}\doxysection{Yas\+Graphics\+Library.\+hpp File Reference}
+\label{_yas_graphics_library_8hpp}\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$SDL.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}Game\+Object.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Vector2\+D.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Vector4\+D.\+hpp\char`\"{}}\newline
+{\ttfamily \#include \char`\"{}Pixels\+Table.\+hpp\char`\"{}}\newline
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8hpp_af7161f1bb136cffd82230611e7fc9d4b}{draw\+Line}} (const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&point0, const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&point1, \mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table, const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&drawing\+Color)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8hpp_a2fc0aab7b5fa96ce78fef424033b77ad}{draw\+Polygon}} (\mbox{\hyperlink{class_game_object}{Game\+Object}} $\ast$polygon, \mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table)
+\item 
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ $\ast$ \mbox{\hyperlink{_yas_graphics_library_8hpp_a35cd3365b1c84db4626e5a4beced8658}{generate\+Vertices\+From\+Numbers}} (const std\+::vector$<$ int $>$ \&numbers)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8hpp_ac0c45d756850ceeafae2e1d81df1df38}{draw\+Numbers\+As\+Group\+Of\+Lines}} (\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ $\ast$vertices, int maximum\+Number\+Of\+Vertices, \mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8hpp_a591075d21cb13e7d1ef4418b4f3ee541}{draw\+Numbers\+As\+Polyline}} (\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ $\ast$vertices, int maximum\+Number\+Of\+Vertices, \mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8hpp_a3faff1657f80bbd3e832e0cf4d5db370}{draw\+Polygon\+Direction}} (\mbox{\hyperlink{class_game_object}{Game\+Object}} $\ast$polygon, \mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8hpp_a8ff2a2054511d069ae8b2c0811e4585a}{swap\+Vectors}} (\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ \&point0, \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ \&point1)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8hpp_a7088834f8dd3b3152e6c28a2311dea58}{horizontal\+Line\+On\+Whole\+Screen}} (\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table, int y, \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ color)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8hpp_a9112bba8b71d4a4dc8bf5ff9dd4e166c}{vertical\+Line\+On\+Whole\+Screen}} (\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table, int x, \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ color)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8hpp_aab0c3c25cad18771ec5df8fe0c62c8cf}{draw\+Cartesian\+Axies}} (\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8hpp_a054fb72969f7a40a928341b19e22d5b7}{draw\+Cross\+Hair}} (float x, float y, \mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table, bool is\+Full\+Screen)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8hpp_ab2b6c87241c33273e86df3cc860d5670}{draw\+Horizontal\+Line}} (\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table, int x0, int x1, int y, \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ color)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8hpp_a5876d367b654ec70ecdbdec2118cee08}{draw\+Vertical\+Line}} (\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&pixels\+Table, int y0, int y1, int x, \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ color)
+\item 
+int \mbox{\hyperlink{_yas_graphics_library_8hpp_ac941192b9a2b83d6c031f48b7334ccd6}{xy\+Pixel\+To\+Array\+Position}} (\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ \&point, int window\+Width)
+\item 
+int \mbox{\hyperlink{_yas_graphics_library_8hpp_adb8f3f84ca2c5cbc2011d5a3861471d7}{xy\+Pixel\+To\+Array\+Position}} (int x, int y, int window\+Width)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8hpp_a7727ad1bfd623006af22d14f41a4f011}{window\+Position\+To\+Cartesian\+Position}} (float \&x, float \&y, \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ $\ast$window\+Dimensions)
+\item 
+void \mbox{\hyperlink{_yas_graphics_library_8hpp_ac72cefe79e9231fafd21377cc33ac03d}{draw\+Mandelbrot\+Set}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+const float \mbox{\hyperlink{_yas_graphics_library_8hpp_aa08a577393243b86dfd2a97e61443673}{PI}} = 3.\+141592F
+\item 
+const Uint8 \mbox{\hyperlink{_yas_graphics_library_8hpp_a296ac0ad32a18576db71000e7a6d0f29}{NUMBER\+\_\+\+OF\+\_\+\+COLORS}} = 4
+\item 
+const Uint8 \mbox{\hyperlink{_yas_graphics_library_8hpp_ad9f3d32f50a365134cead6f2df15de5a}{RGB\+\_\+\+FORMAT}} = 3
+\item 
+const Uint8 \mbox{\hyperlink{_yas_graphics_library_8hpp_ae7448e0070e77ee1ee8d973c6a780650}{RGBA\+\_\+\+FORMAT}} = 4
+\item 
+const Uint8 \mbox{\hyperlink{_yas_graphics_library_8hpp_a8c420427d029095286081eaecb05ffa6}{RED\+\_\+\+POSITION}} = 0
+\item 
+const Uint8 \mbox{\hyperlink{_yas_graphics_library_8hpp_a2e15169fadb433263c9c17ecfbdb2c04}{GREEN\+\_\+\+POSITION}} = 1
+\item 
+const Uint8 \mbox{\hyperlink{_yas_graphics_library_8hpp_a27f65c016f88ba2aadb8267dec64599c}{BLUE\+\_\+\+POSITION}} = 2
+\item 
+const Uint8 \mbox{\hyperlink{_yas_graphics_library_8hpp_ad47fcf38c465f1da97d95166316d7b52}{ALPHA\+\_\+\+POSITION}} = 3
+\item 
+const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \mbox{\hyperlink{_yas_graphics_library_8hpp_aca90a3542eb207f44bf06e642e65b6ee}{RED}} (255, 0, 0, 0)
+\item 
+const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \mbox{\hyperlink{_yas_graphics_library_8hpp_a0b8393169fed247a90b91c18295bb4b1}{GREEN}} (0, 255, 0, 0)
+\item 
+const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \mbox{\hyperlink{_yas_graphics_library_8hpp_af483ec2288a1c6aa02fb0af5a1af55f2}{BLUE}} (0, 0, 255, 0)
+\item 
+const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \mbox{\hyperlink{_yas_graphics_library_8hpp_a2629cedf324ddaf2c126dd04ec85d1d5}{BLACK}} (0, 0, 0, 255)
+\item 
+const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \mbox{\hyperlink{_yas_graphics_library_8hpp_ac97f9366e4c6f191117081d7554b312c}{WHITE}} (255, 255, 255, 255)
+\item 
+const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \mbox{\hyperlink{_yas_graphics_library_8hpp_a95e22909fa47ab8a036113a34ae930c8}{YELLOW}} (255, 255, 0, 255)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_aab0c3c25cad18771ec5df8fe0c62c8cf}\label{_yas_graphics_library_8hpp_aab0c3c25cad18771ec5df8fe0c62c8cf}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!drawCartesianAxies@{drawCartesianAxies}}
+\index{drawCartesianAxies@{drawCartesianAxies}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{drawCartesianAxies()}{drawCartesianAxies()}}
+{\footnotesize\ttfamily void draw\+Cartesian\+Axies (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_a054fb72969f7a40a928341b19e22d5b7}\label{_yas_graphics_library_8hpp_a054fb72969f7a40a928341b19e22d5b7}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!drawCrossHair@{drawCrossHair}}
+\index{drawCrossHair@{drawCrossHair}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{drawCrossHair()}{drawCrossHair()}}
+{\footnotesize\ttfamily void draw\+Cross\+Hair (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table,  }\item[{bool}]{is\+Full\+Screen }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_ab2b6c87241c33273e86df3cc860d5670}\label{_yas_graphics_library_8hpp_ab2b6c87241c33273e86df3cc860d5670}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!drawHorizontalLine@{drawHorizontalLine}}
+\index{drawHorizontalLine@{drawHorizontalLine}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{drawHorizontalLine()}{drawHorizontalLine()}}
+{\footnotesize\ttfamily void draw\+Horizontal\+Line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table,  }\item[{int}]{x0,  }\item[{int}]{x1,  }\item[{int}]{y,  }\item[{\mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$}]{color }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_af7161f1bb136cffd82230611e7fc9d4b}\label{_yas_graphics_library_8hpp_af7161f1bb136cffd82230611e7fc9d4b}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!drawLine@{drawLine}}
+\index{drawLine@{drawLine}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{drawLine()}{drawLine()}}
+{\footnotesize\ttfamily void draw\+Line (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&}]{point0,  }\item[{const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&}]{point1,  }\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table,  }\item[{const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&}]{drawing\+Color }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_ac72cefe79e9231fafd21377cc33ac03d}\label{_yas_graphics_library_8hpp_ac72cefe79e9231fafd21377cc33ac03d}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!drawMandelbrotSet@{drawMandelbrotSet}}
+\index{drawMandelbrotSet@{drawMandelbrotSet}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{drawMandelbrotSet()}{drawMandelbrotSet()}}
+{\footnotesize\ttfamily void draw\+Mandelbrot\+Set (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_ac0c45d756850ceeafae2e1d81df1df38}\label{_yas_graphics_library_8hpp_ac0c45d756850ceeafae2e1d81df1df38}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!drawNumbersAsGroupOfLines@{drawNumbersAsGroupOfLines}}
+\index{drawNumbersAsGroupOfLines@{drawNumbersAsGroupOfLines}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{drawNumbersAsGroupOfLines()}{drawNumbersAsGroupOfLines()}}
+{\footnotesize\ttfamily void draw\+Numbers\+As\+Group\+Of\+Lines (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ $\ast$}]{vertices,  }\item[{int}]{maximum\+Number\+Of\+Vertices,  }\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_a591075d21cb13e7d1ef4418b4f3ee541}\label{_yas_graphics_library_8hpp_a591075d21cb13e7d1ef4418b4f3ee541}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!drawNumbersAsPolyline@{drawNumbersAsPolyline}}
+\index{drawNumbersAsPolyline@{drawNumbersAsPolyline}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{drawNumbersAsPolyline()}{drawNumbersAsPolyline()}}
+{\footnotesize\ttfamily void draw\+Numbers\+As\+Polyline (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ $\ast$}]{vertices,  }\item[{int}]{maximum\+Number\+Of\+Vertices,  }\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_a2fc0aab7b5fa96ce78fef424033b77ad}\label{_yas_graphics_library_8hpp_a2fc0aab7b5fa96ce78fef424033b77ad}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!drawPolygon@{drawPolygon}}
+\index{drawPolygon@{drawPolygon}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{drawPolygon()}{drawPolygon()}}
+{\footnotesize\ttfamily void draw\+Polygon (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_object}{Game\+Object}} $\ast$}]{polygon,  }\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_a3faff1657f80bbd3e832e0cf4d5db370}\label{_yas_graphics_library_8hpp_a3faff1657f80bbd3e832e0cf4d5db370}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!drawPolygonDirection@{drawPolygonDirection}}
+\index{drawPolygonDirection@{drawPolygonDirection}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{drawPolygonDirection()}{drawPolygonDirection()}}
+{\footnotesize\ttfamily void draw\+Polygon\+Direction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_object}{Game\+Object}} $\ast$}]{polygon,  }\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_a5876d367b654ec70ecdbdec2118cee08}\label{_yas_graphics_library_8hpp_a5876d367b654ec70ecdbdec2118cee08}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!drawVerticalLine@{drawVerticalLine}}
+\index{drawVerticalLine@{drawVerticalLine}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{drawVerticalLine()}{drawVerticalLine()}}
+{\footnotesize\ttfamily void draw\+Vertical\+Line (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table,  }\item[{int}]{y0,  }\item[{int}]{y1,  }\item[{int}]{x,  }\item[{\mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$}]{color }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_a35cd3365b1c84db4626e5a4beced8658}\label{_yas_graphics_library_8hpp_a35cd3365b1c84db4626e5a4beced8658}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!generateVerticesFromNumbers@{generateVerticesFromNumbers}}
+\index{generateVerticesFromNumbers@{generateVerticesFromNumbers}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{generateVerticesFromNumbers()}{generateVerticesFromNumbers()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ $\ast$ generate\+Vertices\+From\+Numbers (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ int $>$ \&}]{numbers }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_a7088834f8dd3b3152e6c28a2311dea58}\label{_yas_graphics_library_8hpp_a7088834f8dd3b3152e6c28a2311dea58}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!horizontalLineOnWholeScreen@{horizontalLineOnWholeScreen}}
+\index{horizontalLineOnWholeScreen@{horizontalLineOnWholeScreen}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{horizontalLineOnWholeScreen()}{horizontalLineOnWholeScreen()}}
+{\footnotesize\ttfamily void horizontal\+Line\+On\+Whole\+Screen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table,  }\item[{int}]{y,  }\item[{\mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$}]{color }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_a8ff2a2054511d069ae8b2c0811e4585a}\label{_yas_graphics_library_8hpp_a8ff2a2054511d069ae8b2c0811e4585a}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!swapVectors@{swapVectors}}
+\index{swapVectors@{swapVectors}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{swapVectors()}{swapVectors()}}
+{\footnotesize\ttfamily void swap\+Vectors (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ \&}]{point0,  }\item[{\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ \&}]{point1 }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_a9112bba8b71d4a4dc8bf5ff9dd4e166c}\label{_yas_graphics_library_8hpp_a9112bba8b71d4a4dc8bf5ff9dd4e166c}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!verticalLineOnWholeScreen@{verticalLineOnWholeScreen}}
+\index{verticalLineOnWholeScreen@{verticalLineOnWholeScreen}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{verticalLineOnWholeScreen()}{verticalLineOnWholeScreen()}}
+{\footnotesize\ttfamily void vertical\+Line\+On\+Whole\+Screen (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_pixels_table}{Pixels\+Table}} \&}]{pixels\+Table,  }\item[{int}]{x,  }\item[{\mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$}]{color }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_a7727ad1bfd623006af22d14f41a4f011}\label{_yas_graphics_library_8hpp_a7727ad1bfd623006af22d14f41a4f011}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!windowPositionToCartesianPosition@{windowPositionToCartesianPosition}}
+\index{windowPositionToCartesianPosition@{windowPositionToCartesianPosition}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{windowPositionToCartesianPosition()}{windowPositionToCartesianPosition()}}
+{\footnotesize\ttfamily void window\+Position\+To\+Cartesian\+Position (\begin{DoxyParamCaption}\item[{float \&}]{x,  }\item[{float \&}]{y,  }\item[{\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ $\ast$}]{window\+Dimensions }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_adb8f3f84ca2c5cbc2011d5a3861471d7}\label{_yas_graphics_library_8hpp_adb8f3f84ca2c5cbc2011d5a3861471d7}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!xyPixelToArrayPosition@{xyPixelToArrayPosition}}
+\index{xyPixelToArrayPosition@{xyPixelToArrayPosition}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{xyPixelToArrayPosition()}{xyPixelToArrayPosition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int xy\+Pixel\+To\+Array\+Position (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{int}]{window\+Width }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_ac941192b9a2b83d6c031f48b7334ccd6}\label{_yas_graphics_library_8hpp_ac941192b9a2b83d6c031f48b7334ccd6}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!xyPixelToArrayPosition@{xyPixelToArrayPosition}}
+\index{xyPixelToArrayPosition@{xyPixelToArrayPosition}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{xyPixelToArrayPosition()}{xyPixelToArrayPosition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily int xy\+Pixel\+To\+Array\+Position (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ \&}]{point,  }\item[{int}]{window\+Width }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_ad47fcf38c465f1da97d95166316d7b52}\label{_yas_graphics_library_8hpp_ad47fcf38c465f1da97d95166316d7b52}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!ALPHA\_POSITION@{ALPHA\_POSITION}}
+\index{ALPHA\_POSITION@{ALPHA\_POSITION}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{ALPHA\_POSITION}{ALPHA\_POSITION}}
+{\footnotesize\ttfamily const Uint8 ALPHA\+\_\+\+POSITION = 3}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_a2629cedf324ddaf2c126dd04ec85d1d5}\label{_yas_graphics_library_8hpp_a2629cedf324ddaf2c126dd04ec85d1d5}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!BLACK@{BLACK}}
+\index{BLACK@{BLACK}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{BLACK}{BLACK}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ BLACK(0, 0, 0, 255) (\begin{DoxyParamCaption}\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{255}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_af483ec2288a1c6aa02fb0af5a1af55f2}\label{_yas_graphics_library_8hpp_af483ec2288a1c6aa02fb0af5a1af55f2}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!BLUE@{BLUE}}
+\index{BLUE@{BLUE}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{BLUE}{BLUE}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ BLUE(0, 0, 255, 0) (\begin{DoxyParamCaption}\item[{0}]{,  }\item[{0}]{,  }\item[{255}]{,  }\item[{0}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_a27f65c016f88ba2aadb8267dec64599c}\label{_yas_graphics_library_8hpp_a27f65c016f88ba2aadb8267dec64599c}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!BLUE\_POSITION@{BLUE\_POSITION}}
+\index{BLUE\_POSITION@{BLUE\_POSITION}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{BLUE\_POSITION}{BLUE\_POSITION}}
+{\footnotesize\ttfamily const Uint8 BLUE\+\_\+\+POSITION = 2}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_a0b8393169fed247a90b91c18295bb4b1}\label{_yas_graphics_library_8hpp_a0b8393169fed247a90b91c18295bb4b1}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!GREEN@{GREEN}}
+\index{GREEN@{GREEN}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{GREEN}{GREEN}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ GREEN(0, 255, 0, 0) (\begin{DoxyParamCaption}\item[{0}]{,  }\item[{255}]{,  }\item[{0}]{,  }\item[{0}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_a2e15169fadb433263c9c17ecfbdb2c04}\label{_yas_graphics_library_8hpp_a2e15169fadb433263c9c17ecfbdb2c04}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!GREEN\_POSITION@{GREEN\_POSITION}}
+\index{GREEN\_POSITION@{GREEN\_POSITION}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{GREEN\_POSITION}{GREEN\_POSITION}}
+{\footnotesize\ttfamily const Uint8 GREEN\+\_\+\+POSITION = 1}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_a296ac0ad32a18576db71000e7a6d0f29}\label{_yas_graphics_library_8hpp_a296ac0ad32a18576db71000e7a6d0f29}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!NUMBER\_OF\_COLORS@{NUMBER\_OF\_COLORS}}
+\index{NUMBER\_OF\_COLORS@{NUMBER\_OF\_COLORS}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{NUMBER\_OF\_COLORS}{NUMBER\_OF\_COLORS}}
+{\footnotesize\ttfamily const Uint8 NUMBER\+\_\+\+OF\+\_\+\+COLORS = 4}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_aa08a577393243b86dfd2a97e61443673}\label{_yas_graphics_library_8hpp_aa08a577393243b86dfd2a97e61443673}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!PI@{PI}}
+\index{PI@{PI}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{PI}{PI}}
+{\footnotesize\ttfamily const float PI = 3.\+141592F}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_aca90a3542eb207f44bf06e642e65b6ee}\label{_yas_graphics_library_8hpp_aca90a3542eb207f44bf06e642e65b6ee}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!RED@{RED}}
+\index{RED@{RED}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{RED}{RED}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ RED(255, 0, 0, 0) (\begin{DoxyParamCaption}\item[{255}]{,  }\item[{0}]{,  }\item[{0}]{,  }\item[{0}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_a8c420427d029095286081eaecb05ffa6}\label{_yas_graphics_library_8hpp_a8c420427d029095286081eaecb05ffa6}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!RED\_POSITION@{RED\_POSITION}}
+\index{RED\_POSITION@{RED\_POSITION}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{RED\_POSITION}{RED\_POSITION}}
+{\footnotesize\ttfamily const Uint8 RED\+\_\+\+POSITION = 0}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_ad9f3d32f50a365134cead6f2df15de5a}\label{_yas_graphics_library_8hpp_ad9f3d32f50a365134cead6f2df15de5a}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!RGB\_FORMAT@{RGB\_FORMAT}}
+\index{RGB\_FORMAT@{RGB\_FORMAT}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{RGB\_FORMAT}{RGB\_FORMAT}}
+{\footnotesize\ttfamily const Uint8 RGB\+\_\+\+FORMAT = 3}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_ae7448e0070e77ee1ee8d973c6a780650}\label{_yas_graphics_library_8hpp_ae7448e0070e77ee1ee8d973c6a780650}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!RGBA\_FORMAT@{RGBA\_FORMAT}}
+\index{RGBA\_FORMAT@{RGBA\_FORMAT}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{RGBA\_FORMAT}{RGBA\_FORMAT}}
+{\footnotesize\ttfamily const Uint8 RGBA\+\_\+\+FORMAT = 4}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_ac97f9366e4c6f191117081d7554b312c}\label{_yas_graphics_library_8hpp_ac97f9366e4c6f191117081d7554b312c}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!WHITE@{WHITE}}
+\index{WHITE@{WHITE}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{WHITE}{WHITE}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ WHITE(255, 255, 255, 255) (\begin{DoxyParamCaption}\item[{255}]{,  }\item[{255}]{,  }\item[{255}]{,  }\item[{255}]{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{_yas_graphics_library_8hpp_a95e22909fa47ab8a036113a34ae930c8}\label{_yas_graphics_library_8hpp_a95e22909fa47ab8a036113a34ae930c8}} 
+\index{YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}!YELLOW@{YELLOW}}
+\index{YELLOW@{YELLOW}!YasGraphicsLibrary.hpp@{YasGraphicsLibrary.hpp}}
+\doxysubsubsection{\texorpdfstring{YELLOW}{YELLOW}}
+{\footnotesize\ttfamily const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ YELLOW(255, 255, 0, 255) (\begin{DoxyParamCaption}\item[{255}]{,  }\item[{255}]{,  }\item[{0}]{,  }\item[{255}]{ }\end{DoxyParamCaption})}
+

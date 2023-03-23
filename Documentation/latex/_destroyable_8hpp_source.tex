@@ -1,0 +1,26 @@
+\hypertarget{_destroyable_8hpp_source}{}\doxysection{Destroyable.\+hpp}
+\mbox{\hyperlink{_destroyable_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ COLLECTIBLE\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ COLLECTIBLE\_HPP}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_game_object_8hpp}{GameObject.hpp}}"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_destroyable}{Destroyable}}:\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_game_object}{GameObject}}}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00008\ \ \ \ \ \mbox{\hyperlink{class_destroyable}{Destroyable}}(\textcolor{keywordtype}{float}\ radius,\ \textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}\ \mbox{\hyperlink{class_game_object_abfd1a99d650ee9744c96426dd1d4c8d0}{direction}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_object_a46274bba1b356f0d6f9cb9c51467b1b1}{numberOfVertices}});}
+\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{class_destroyable_acf381054886a2c6bc8a02a3b8de1c554}{\string~Destroyable}}();}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_destroyable_ac96ba138cc44eb58ae12dc59fcb27ddf}{generate}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_destroyable_ac79fddaacb75361ba3c6a8953c183f16}{generateRegularPolygonVertices}}(\textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_object_a31820152846046a77528d072e4abcb31}{circumscribedCircleRadius}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_object_a46274bba1b356f0d6f9cb9c51467b1b1}{numberOfVertices}})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_destroyable_aa8cda3b4a11f1202f3fbf3689b98b303}{regeneratePolygon}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_destroyable_afbcb82ef6a3356c7384e68f994e1319f}{setPosition}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_destroyable_afbcb82ef6a3356c7384e68f994e1319f}{setPosition}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}\&\ \mbox{\hyperlink{class_game_object_ab976edfa4e257fae56c61f6ba81ded73}{position}})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_destroyable_ab04132c3a0f3c42db2f1368a2fc0908f}{move}}(\textcolor{keywordtype}{float}\ deltaTime)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_destroyable_a4692910bbb231f5e79cf317bc5551c75}{setColor}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\&\ \mbox{\hyperlink{class_game_object_a5803166f13b9514258d7852084fd63e1}{color}})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_destroyable_a49ebe444334a97c2f45dcda782230345}{setRandomColor}}();}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}\ \mbox{\hyperlink{class_destroyable_a3f2ca6c230614931a2565d268e1b2778}{velocity}};}
+\DoxyCodeLine{00019\ \};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

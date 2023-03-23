@@ -1,0 +1,32 @@
+\hypertarget{_various_tools_8hpp_source}{}\doxysection{Various\+Tools.\+hpp}
+\mbox{\hyperlink{_various_tools_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ VARIOUSTOOLS\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ VARIOUSTOOLS\_HPP}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include<vector>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include<SDL.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ listRenderersInformation()}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ \ \ \ \ \textcolor{keywordtype}{int}\ renderDriversNumber\ =\ SDL\_GetNumRenderDrivers();}
+\DoxyCodeLine{00009\ \ \ \ \ std::vector<SDL\_RendererInfo*>\ renderersDriversInformations;}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ renderDriversNumber;\ i++)}
+\DoxyCodeLine{00012\ \ \ \ \ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ renderersDriversInformations.push\_back(\textcolor{keyword}{new}\ SDL\_RendererInfo);}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ SDL\_GetRenderDriverInfo(i,\ renderersDriversInformations.at(i));}
+\DoxyCodeLine{00015\ \ \ \ \ \}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 0;\ i\ <\ renderDriversNumber;\ i++)}
+\DoxyCodeLine{00018\ \ \ \ \ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ std::cout\ <<\ renderersDriversInformations[i]-\/>name\ <<\ std::endl;}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (Uint32\ j\ =\ 0;\ j\ <\ renderersDriversInformations[i]-\/>num\_texture\_formats;\ j++)}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ SDL\_GetPixelFormatName(renderersDriversInformations[i]-\/>texture\_formats[j])\ <<\ std::endl;}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00024\ \ \ \ \ \}}
+\DoxyCodeLine{00025\ \}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

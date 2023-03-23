@@ -1,0 +1,101 @@
+\hypertarget{class_view_port}{}\doxysection{View\+Port Class Reference}
+\label{class_view_port}\index{ViewPort@{ViewPort}}
+
+
+{\ttfamily \#include $<$View\+Port.\+hpp$>$}
+
+Inheritance diagram for View\+Port\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_view_port}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_view_port_aa3cf305ad5dec7a7c268fa0b87d7ffc3}{clear\+Color}} (const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&drawing\+Color)=0
+\item 
+virtual void \mbox{\hyperlink{class_view_port_a51db22d641df9aa8bd564bd6421a0ae2}{draw\+Point}} (int x, int y, const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&drawing\+Color)=0
+\item 
+virtual void \mbox{\hyperlink{class_view_port_a424a6e483af6def09ecfc0e3b540ad58}{draw\+Line}} (const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&point0, const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&point1, const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&drawing\+Color)=0
+\item 
+virtual void \mbox{\hyperlink{class_view_port_a1e7e9386b6be44f5be5842c786f9eb17}{draw\+Polygon}} (\mbox{\hyperlink{class_game_object}{Game\+Object}} $\ast$polygon)=0
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ \mbox{\hyperlink{class_view_port_a215c6ddf7a4a7496c6b002a746aed85c}{position}}
+\item 
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ int $>$ \mbox{\hyperlink{class_view_port_a84fab3f325ec68accdeb1fbb942d7423}{view\+Port\+Sizes}}
+\item 
+Uint8 $\ast$ \mbox{\hyperlink{class_view_port_a957bc34b5f4ef5e1164a7ffbf77ce04f}{pixels}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_view_port_aa3cf305ad5dec7a7c268fa0b87d7ffc3}\label{class_view_port_aa3cf305ad5dec7a7c268fa0b87d7ffc3}} 
+\index{ViewPort@{ViewPort}!clearColor@{clearColor}}
+\index{clearColor@{clearColor}!ViewPort@{ViewPort}}
+\doxysubsubsection{\texorpdfstring{clearColor()}{clearColor()}}
+{\footnotesize\ttfamily virtual void View\+Port\+::clear\+Color (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&}]{drawing\+Color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_mathematics_fun_surface_a4f42fef17ce3c2623aacea470b664b7a}{Mathematics\+Fun\+Surface}}.
+
+\mbox{\Hypertarget{class_view_port_a424a6e483af6def09ecfc0e3b540ad58}\label{class_view_port_a424a6e483af6def09ecfc0e3b540ad58}} 
+\index{ViewPort@{ViewPort}!drawLine@{drawLine}}
+\index{drawLine@{drawLine}!ViewPort@{ViewPort}}
+\doxysubsubsection{\texorpdfstring{drawLine()}{drawLine()}}
+{\footnotesize\ttfamily virtual void View\+Port\+::draw\+Line (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&}]{point0,  }\item[{const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&}]{point1,  }\item[{const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&}]{drawing\+Color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_mathematics_fun_surface_ad47e2ee53915f3ecb2f3959b94e9d030}{Mathematics\+Fun\+Surface}}.
+
+\mbox{\Hypertarget{class_view_port_a51db22d641df9aa8bd564bd6421a0ae2}\label{class_view_port_a51db22d641df9aa8bd564bd6421a0ae2}} 
+\index{ViewPort@{ViewPort}!drawPoint@{drawPoint}}
+\index{drawPoint@{drawPoint}!ViewPort@{ViewPort}}
+\doxysubsubsection{\texorpdfstring{drawPoint()}{drawPoint()}}
+{\footnotesize\ttfamily virtual void View\+Port\+::draw\+Point (\begin{DoxyParamCaption}\item[{int}]{x,  }\item[{int}]{y,  }\item[{const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&}]{drawing\+Color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_mathematics_fun_surface_a6b6f8bd0d711e878e6d59e888de7bdeb}{Mathematics\+Fun\+Surface}}.
+
+\mbox{\Hypertarget{class_view_port_a1e7e9386b6be44f5be5842c786f9eb17}\label{class_view_port_a1e7e9386b6be44f5be5842c786f9eb17}} 
+\index{ViewPort@{ViewPort}!drawPolygon@{drawPolygon}}
+\index{drawPolygon@{drawPolygon}!ViewPort@{ViewPort}}
+\doxysubsubsection{\texorpdfstring{drawPolygon()}{drawPolygon()}}
+{\footnotesize\ttfamily virtual void View\+Port\+::draw\+Polygon (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_game_object}{Game\+Object}} $\ast$}]{polygon }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Implemented in \mbox{\hyperlink{class_mathematics_fun_surface_a105e61109b992d8922436ba13f6620f3}{Mathematics\+Fun\+Surface}}.
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_view_port_a957bc34b5f4ef5e1164a7ffbf77ce04f}\label{class_view_port_a957bc34b5f4ef5e1164a7ffbf77ce04f}} 
+\index{ViewPort@{ViewPort}!pixels@{pixels}}
+\index{pixels@{pixels}!ViewPort@{ViewPort}}
+\doxysubsubsection{\texorpdfstring{pixels}{pixels}}
+{\footnotesize\ttfamily Uint8$\ast$ View\+Port\+::pixels = nullptr}
+
+\mbox{\Hypertarget{class_view_port_a215c6ddf7a4a7496c6b002a746aed85c}\label{class_view_port_a215c6ddf7a4a7496c6b002a746aed85c}} 
+\index{ViewPort@{ViewPort}!position@{position}}
+\index{position@{position}!ViewPort@{ViewPort}}
+\doxysubsubsection{\texorpdfstring{position}{position}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$int$>$ View\+Port\+::position}
+
+\mbox{\Hypertarget{class_view_port_a84fab3f325ec68accdeb1fbb942d7423}\label{class_view_port_a84fab3f325ec68accdeb1fbb942d7423}} 
+\index{ViewPort@{ViewPort}!viewPortSizes@{viewPortSizes}}
+\index{viewPortSizes@{viewPortSizes}!ViewPort@{ViewPort}}
+\doxysubsubsection{\texorpdfstring{viewPortSizes}{viewPortSizes}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$int$>$ View\+Port\+::view\+Port\+Sizes}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_view_port_8hpp}{View\+Port.\+hpp}}\end{DoxyCompactItemize}

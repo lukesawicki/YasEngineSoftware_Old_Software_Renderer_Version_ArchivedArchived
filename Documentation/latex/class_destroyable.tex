@@ -1,0 +1,218 @@
+\hypertarget{class_destroyable}{}\doxysection{Destroyable Class Reference}
+\label{class_destroyable}\index{Destroyable@{Destroyable}}
+
+
+{\ttfamily \#include $<$Destroyable.\+hpp$>$}
+
+Inheritance diagram for Destroyable\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_destroyable}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_destroyable_a7678ceb755a7eee3f053b7612b407915}{Destroyable}} (float radius, float x, float y, \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \mbox{\hyperlink{class_game_object_abfd1a99d650ee9744c96426dd1d4c8d0}{direction}}, int \mbox{\hyperlink{class_game_object_a46274bba1b356f0d6f9cb9c51467b1b1}{number\+Of\+Vertices}})
+\item 
+\mbox{\hyperlink{class_destroyable_acf381054886a2c6bc8a02a3b8de1c554}{$\sim$\+Destroyable}} ()
+\item 
+void \mbox{\hyperlink{class_destroyable_ac96ba138cc44eb58ae12dc59fcb27ddf}{generate}} () override
+\item 
+void \mbox{\hyperlink{class_destroyable_ac79fddaacb75361ba3c6a8953c183f16}{generate\+Regular\+Polygon\+Vertices}} (float \mbox{\hyperlink{class_game_object_a31820152846046a77528d072e4abcb31}{circumscribed\+Circle\+Radius}}, int \mbox{\hyperlink{class_game_object_a46274bba1b356f0d6f9cb9c51467b1b1}{number\+Of\+Vertices}}) override
+\item 
+void \mbox{\hyperlink{class_destroyable_aa8cda3b4a11f1202f3fbf3689b98b303}{regenerate\+Polygon}} () override
+\item 
+void \mbox{\hyperlink{class_destroyable_afbcb82ef6a3356c7384e68f994e1319f}{set\+Position}} (float x, float y) override
+\item 
+void \mbox{\hyperlink{class_destroyable_a50830851e26f56f63de8e1376ffd86b9}{set\+Position}} (const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&\mbox{\hyperlink{class_game_object_ab976edfa4e257fae56c61f6ba81ded73}{position}}) override
+\item 
+void \mbox{\hyperlink{class_destroyable_ab04132c3a0f3c42db2f1368a2fc0908f}{move}} (float delta\+Time) override
+\item 
+void \mbox{\hyperlink{class_destroyable_a4692910bbb231f5e79cf317bc5551c75}{set\+Color}} (const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&\mbox{\hyperlink{class_game_object_a5803166f13b9514258d7852084fd63e1}{color}}) override
+\item 
+void \mbox{\hyperlink{class_destroyable_a49ebe444334a97c2f45dcda782230345}{set\+Random\+Color}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_game_object}{Game\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_game_object_a5534cb25b7ecfa8d19b686c405ffec33}{generate}} ()=0
+\item 
+virtual void \mbox{\hyperlink{class_game_object_a3c4a66cba7e3c6eb7d31d1ff1b906c63}{generate\+Regular\+Polygon\+Vertices}} (float \mbox{\hyperlink{class_game_object_a31820152846046a77528d072e4abcb31}{circumscribed\+Circle\+Radius}}, int \mbox{\hyperlink{class_game_object_a46274bba1b356f0d6f9cb9c51467b1b1}{number\+Of\+Vertices}})=0
+\item 
+virtual void \mbox{\hyperlink{class_game_object_a66002d38871120ee28e17f46ea22f258}{regenerate\+Polygon}} ()=0
+\item 
+virtual void \mbox{\hyperlink{class_game_object_afe7d1bfba90bc8fb9b330e1130f6d987}{set\+Position}} (float x, float y)
+\item 
+virtual void \mbox{\hyperlink{class_game_object_ad61a20903bec608fd3402d3367da05ef}{set\+Position}} (const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&\mbox{\hyperlink{class_game_object_ab976edfa4e257fae56c61f6ba81ded73}{position}})
+\item 
+virtual void \mbox{\hyperlink{class_game_object_aecbc88f4df8a4f972a9c79fd246c8ae1}{move}} (float delta\+Time)=0
+\item 
+virtual void \mbox{\hyperlink{class_game_object_a93dcb9f74166ae571beb6a1d7aefc48b}{move\+Collider}} ()
+\item 
+virtual void \mbox{\hyperlink{class_game_object_afc2b76fcf495c4ee1e16367a33000282}{set\+Color}} (const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&\mbox{\hyperlink{class_game_object_a5803166f13b9514258d7852084fd63e1}{color}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \mbox{\hyperlink{class_destroyable_a3f2ca6c230614931a2565d268e1b2778}{velocity}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes inherited from \mbox{\hyperlink{class_game_object}{Game\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_game_object_ace530779a33a946a13f42b0f2cb8118d}{Who\+AmI}} \mbox{\hyperlink{class_game_object_ae70c229cc4a080e87662f3e3ee497e19}{i\+Am}}
+\item 
+bool \mbox{\hyperlink{class_game_object_a8fb2ac236e1b7ae2ad8eb16111bad492}{is\+Alive}} = true
+\item 
+\mbox{\hyperlink{class_collider}{Collider}} \mbox{\hyperlink{class_game_object_ac211c3e7aef8e68b4e2566e2dd24fae8}{collider}}
+\item 
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ $\ast$ \mbox{\hyperlink{class_game_object_a97edc3248ba9d7aeeb79b54cdfd4c467}{local\+Vertices}} = nullptr
+\item 
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ $\ast$ \mbox{\hyperlink{class_game_object_a7ac9ca27876f172bc15e90926015459c}{world\+Vertices}} = nullptr
+\item 
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \mbox{\hyperlink{class_game_object_abce641107e19bc947d20cee6824c3b18}{vector\+Zero}}
+\item 
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \mbox{\hyperlink{class_game_object_abfd1a99d650ee9744c96426dd1d4c8d0}{direction}}
+\item 
+\mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \mbox{\hyperlink{class_game_object_a5803166f13b9514258d7852084fd63e1}{color}}
+\item 
+int \mbox{\hyperlink{class_game_object_a46274bba1b356f0d6f9cb9c51467b1b1}{number\+Of\+Vertices}}
+\item 
+float \mbox{\hyperlink{class_game_object_af2c1d154ec52b3d4943e874988585387}{rotation\+Speed}}
+\item 
+float \mbox{\hyperlink{class_game_object_a31820152846046a77528d072e4abcb31}{circumscribed\+Circle\+Radius}}
+\item 
+float \mbox{\hyperlink{class_game_object_a7d74d23c97c2a0d20084e7f819a40aab}{angle\+For\+Generate\+In\+Isosceles\+Polygons}}
+\item 
+float \mbox{\hyperlink{class_game_object_a9f0c137be24bb21b2baa61fd198f5079}{start\+Angle}} = 0.\+0F
+\item 
+float \mbox{\hyperlink{class_game_object_a13498eaed1a345c4e77c367570e107de}{step\+Angle}}
+\item 
+float \mbox{\hyperlink{class_game_object_a44a31cfe9d14200b898955a0ff7ff064}{direction\+Mouse\+Angle}} = 0
+\item 
+float \mbox{\hyperlink{class_game_object_a938272352e22e9418514d618758511d5}{speed}} = 0.\+0F
+\end{DoxyCompactItemize}
+\doxysubsection*{Additional Inherited Members}
+\doxysubsubsection*{Public Types inherited from \mbox{\hyperlink{class_game_object}{Game\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+enum \mbox{\hyperlink{class_game_object_ace530779a33a946a13f42b0f2cb8118d}{Who\+AmI}} \{ \mbox{\hyperlink{class_game_object_ace530779a33a946a13f42b0f2cb8118dab19e21ae85d6f3cc679d99b43168cb28}{DEFAULT\+\_\+\+VALUE}}
+, \mbox{\hyperlink{class_game_object_ace530779a33a946a13f42b0f2cb8118daccb6332e371b7308d90bc42c22fcbfea}{PROTAGONIST}}
+, \mbox{\hyperlink{class_game_object_ace530779a33a946a13f42b0f2cb8118da3c36a9a42fdf8a197336231abfa3d282}{PROJECTILE}}
+, \mbox{\hyperlink{class_game_object_ace530779a33a946a13f42b0f2cb8118da3db5dfd5f501fc5928bde2993ce05d4d}{COLLECTIBLE}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_game_object}{Game\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \mbox{\hyperlink{class_game_object_ab976edfa4e257fae56c61f6ba81ded73}{position}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_destroyable_a7678ceb755a7eee3f053b7612b407915}\label{class_destroyable_a7678ceb755a7eee3f053b7612b407915}} 
+\index{Destroyable@{Destroyable}!Destroyable@{Destroyable}}
+\index{Destroyable@{Destroyable}!Destroyable@{Destroyable}}
+\doxysubsubsection{\texorpdfstring{Destroyable()}{Destroyable()}}
+{\footnotesize\ttfamily Destroyable\+::\+Destroyable (\begin{DoxyParamCaption}\item[{float}]{radius,  }\item[{float}]{x,  }\item[{float}]{y,  }\item[{\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$}]{direction,  }\item[{int}]{number\+Of\+Vertices }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_destroyable_acf381054886a2c6bc8a02a3b8de1c554}\label{class_destroyable_acf381054886a2c6bc8a02a3b8de1c554}} 
+\index{Destroyable@{Destroyable}!````~Destroyable@{$\sim$Destroyable}}
+\index{````~Destroyable@{$\sim$Destroyable}!Destroyable@{Destroyable}}
+\doxysubsubsection{\texorpdfstring{$\sim$Destroyable()}{~Destroyable()}}
+{\footnotesize\ttfamily Destroyable\+::$\sim$\+Destroyable (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_destroyable_ac96ba138cc44eb58ae12dc59fcb27ddf}\label{class_destroyable_ac96ba138cc44eb58ae12dc59fcb27ddf}} 
+\index{Destroyable@{Destroyable}!generate@{generate}}
+\index{generate@{generate}!Destroyable@{Destroyable}}
+\doxysubsubsection{\texorpdfstring{generate()}{generate()}}
+{\footnotesize\ttfamily void Destroyable\+::generate (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_game_object_a5534cb25b7ecfa8d19b686c405ffec33}{Game\+Object}}.
+
+\mbox{\Hypertarget{class_destroyable_ac79fddaacb75361ba3c6a8953c183f16}\label{class_destroyable_ac79fddaacb75361ba3c6a8953c183f16}} 
+\index{Destroyable@{Destroyable}!generateRegularPolygonVertices@{generateRegularPolygonVertices}}
+\index{generateRegularPolygonVertices@{generateRegularPolygonVertices}!Destroyable@{Destroyable}}
+\doxysubsubsection{\texorpdfstring{generateRegularPolygonVertices()}{generateRegularPolygonVertices()}}
+{\footnotesize\ttfamily void Destroyable\+::generate\+Regular\+Polygon\+Vertices (\begin{DoxyParamCaption}\item[{float}]{circumscribed\+Circle\+Radius,  }\item[{int}]{number\+Of\+Vertices }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_game_object_a3c4a66cba7e3c6eb7d31d1ff1b906c63}{Game\+Object}}.
+
+\mbox{\Hypertarget{class_destroyable_ab04132c3a0f3c42db2f1368a2fc0908f}\label{class_destroyable_ab04132c3a0f3c42db2f1368a2fc0908f}} 
+\index{Destroyable@{Destroyable}!move@{move}}
+\index{move@{move}!Destroyable@{Destroyable}}
+\doxysubsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily void Destroyable\+::move (\begin{DoxyParamCaption}\item[{float}]{delta\+Time }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_game_object_aecbc88f4df8a4f972a9c79fd246c8ae1}{Game\+Object}}.
+
+\mbox{\Hypertarget{class_destroyable_aa8cda3b4a11f1202f3fbf3689b98b303}\label{class_destroyable_aa8cda3b4a11f1202f3fbf3689b98b303}} 
+\index{Destroyable@{Destroyable}!regeneratePolygon@{regeneratePolygon}}
+\index{regeneratePolygon@{regeneratePolygon}!Destroyable@{Destroyable}}
+\doxysubsubsection{\texorpdfstring{regeneratePolygon()}{regeneratePolygon()}}
+{\footnotesize\ttfamily void Destroyable\+::regenerate\+Polygon (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_game_object_a66002d38871120ee28e17f46ea22f258}{Game\+Object}}.
+
+\mbox{\Hypertarget{class_destroyable_a4692910bbb231f5e79cf317bc5551c75}\label{class_destroyable_a4692910bbb231f5e79cf317bc5551c75}} 
+\index{Destroyable@{Destroyable}!setColor@{setColor}}
+\index{setColor@{setColor}!Destroyable@{Destroyable}}
+\doxysubsubsection{\texorpdfstring{setColor()}{setColor()}}
+{\footnotesize\ttfamily void Destroyable\+::set\+Color (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector4_d}{Vector4D}}$<$ Uint8 $>$ \&}]{color }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_game_object_afc2b76fcf495c4ee1e16367a33000282}{Game\+Object}}.
+
+\mbox{\Hypertarget{class_destroyable_a50830851e26f56f63de8e1376ffd86b9}\label{class_destroyable_a50830851e26f56f63de8e1376ffd86b9}} 
+\index{Destroyable@{Destroyable}!setPosition@{setPosition}}
+\index{setPosition@{setPosition}!Destroyable@{Destroyable}}
+\doxysubsubsection{\texorpdfstring{setPosition()}{setPosition()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Destroyable\+::set\+Position (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ float $>$ \&}]{position }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_game_object_ad61a20903bec608fd3402d3367da05ef}{Game\+Object}}.
+
+\mbox{\Hypertarget{class_destroyable_afbcb82ef6a3356c7384e68f994e1319f}\label{class_destroyable_afbcb82ef6a3356c7384e68f994e1319f}} 
+\index{Destroyable@{Destroyable}!setPosition@{setPosition}}
+\index{setPosition@{setPosition}!Destroyable@{Destroyable}}
+\doxysubsubsection{\texorpdfstring{setPosition()}{setPosition()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Destroyable\+::set\+Position (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_game_object_afe7d1bfba90bc8fb9b330e1130f6d987}{Game\+Object}}.
+
+\mbox{\Hypertarget{class_destroyable_a49ebe444334a97c2f45dcda782230345}\label{class_destroyable_a49ebe444334a97c2f45dcda782230345}} 
+\index{Destroyable@{Destroyable}!setRandomColor@{setRandomColor}}
+\index{setRandomColor@{setRandomColor}!Destroyable@{Destroyable}}
+\doxysubsubsection{\texorpdfstring{setRandomColor()}{setRandomColor()}}
+{\footnotesize\ttfamily void Destroyable\+::set\+Random\+Color (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_destroyable_a3f2ca6c230614931a2565d268e1b2778}\label{class_destroyable_a3f2ca6c230614931a2565d268e1b2778}} 
+\index{Destroyable@{Destroyable}!velocity@{velocity}}
+\index{velocity@{velocity}!Destroyable@{Destroyable}}
+\doxysubsubsection{\texorpdfstring{velocity}{velocity}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$float$>$ Destroyable\+::velocity}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_destroyable_8hpp}{Destroyable.\+hpp}}\item 
+\mbox{\hyperlink{_destroyable_8cpp}{Destroyable.\+cpp}}\end{DoxyCompactItemize}

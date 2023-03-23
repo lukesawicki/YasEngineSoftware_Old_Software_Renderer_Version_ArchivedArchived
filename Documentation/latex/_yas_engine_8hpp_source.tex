@@ -1,0 +1,109 @@
+\hypertarget{_yas_engine_8hpp_source}{}\doxysection{Yas\+Engine.\+hpp}
+\mbox{\hyperlink{_yas_engine_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ YASENGINE\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ YASENGINE\_HPP}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include<stdio.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include<iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include<vector>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_vector2_d_8hpp}{Vector2D.hpp}}"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_yas_graphics_library_8hpp}{YasGraphicsLibrary.hpp}}"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_time_picker_8hpp}{TimePicker.hpp}}"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_pixels_table_8hpp}{PixelsTable.hpp}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_game_object_8hpp}{GameObject.hpp}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_player_8hpp}{Player.hpp}}"{}}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_input_output_handler_8hpp}{InputOutputHandler.hpp}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_mathematics_fun_surface_8hpp}{MathematicsFunSurface.hpp}}"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_points_generator_8hpp}{PointsGenerator.hpp}}"{}}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_points_set_8hpp}{PointsSet.hpp}}"{}}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_spawner_8hpp}{Spawner.hpp}}"{}}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ "{}SDL\_mixer.h"{}}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{comment}{//\#define\ DEBUG\_DRAWINGS}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_yas_engine}{YasEngine}}}
+\DoxyCodeLine{00022\ \{\ \ \ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_game_object}{GameObject}}*\ \mbox{\hyperlink{class_yas_engine_abb6663e7f90c8a0a66f518e7fe627ca8}{go}};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_yas_engine}{YasEngine}}*\ \mbox{\hyperlink{class_yas_engine_ac8d4a9051098b714dc0dcd67c6de1205}{GetInstance}}()}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (instance\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \}\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ instance\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{class_yas_engine}{YasEngine}}();}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_yas_engine_ae3546227afa89a8a5ab61419c385f5cb}{initialize}}();}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_yas_engine_a085ff244b97cae0ee9b579006dd87430}{YasEnginStart}}();}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_yas_engine_a523ac3260569095250fcfe6788d78c31}{clean}}();}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}\ A\ =\ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}(-\/300,\ 200);}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}\ B\ =\ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}(100,\ -\/350);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_yas_engine}{YasEngine}}*\ instance;}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ SDL\_Window*\ window;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ SDL\_Renderer*\ renderer;}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ SDL\_Texture*\ screenTexture;}
+\DoxyCodeLine{00051\ \ \ \ \ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_pixels_table}{PixelsTable}}*\ pixelsTable;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector2_d}{Vector2D<int>}}*\ windowDimensions;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ SDL\_Event\ event;}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ quit\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ time;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ newTime;}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ deltaTime;}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ fps;}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ fpsTime;}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{unsigned}\ \textcolor{keywordtype}{int}\ frames;}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ mouseX;}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ mouseY;}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ WINDOW\_WIDTH\ =\ 1280;}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ WINDOW\_HEIGHT\ =\ 800;}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ std::vector<GameObject*>\ objectsToDraw;}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}*\ player;}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_mathematics_fun_surface}{MathematicsFunSurface}}*\ mathPlay;}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ Mix\_Music*\ music;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ Mix\_Chunk*\ shootSound;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ Mix\_Chunk*\ hitSound;}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_points_set}{PointsSet}}*\ sinusPoints;}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_points_set}{PointsSet}}*\ cosinusPoints;}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_points_set}{PointsSet}}*\ fibonacciePoints;}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_points_set}{PointsSet}}*\ primeNumbersPoints;}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_spawner}{Spawner}}\ spawner;}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_yas_engine}{YasEngine}}()\ \{\};}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ shouldApplicationStopRunning\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_yas_in_out_1_1_input}{YasInOut::Input}}*\ input\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{struct_yas_in_out_1_1_input}{YasInOut::Input}}();}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_yas_in_out_1_1_mouse_position_change_information}{YasInOut::MousePositionChangeInformation}}*\ mousePositionChangeInformation\ =\ \textcolor{keyword}{new}\ \mbox{\hyperlink{struct_yas_in_out_1_1_mouse_position_change_information}{YasInOut::MousePositionChangeInformation}}();}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ engineInstantiated\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ drawMathArt();}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ prepareRendering();}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ prepareBasicSettings();}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ handlePhysics();}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ prepareGameWorld();}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ preparePlayer();}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ handleInput(SDL\_Event\&\ event);}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ update(\textcolor{keywordtype}{double}\&\ deltaTime);}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ drawHudElements(\textcolor{keywordtype}{double}\&\ deltaTime);}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ render(\textcolor{keywordtype}{double}\&\ deltaTime);}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ prepareSoundAndMusic();}
+\DoxyCodeLine{00102\ \};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

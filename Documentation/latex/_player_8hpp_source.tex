@@ -1,0 +1,47 @@
+\hypertarget{_player_8hpp_source}{}\doxysection{Player.\+hpp}
+\mbox{\hyperlink{_player_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PLAYER\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PLAYER\_HPP}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_input_output_handler_8hpp}{InputOutputHandler.hpp}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_game_object_8hpp}{GameObject.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_projectile_8hpp}{Projectile.hpp}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player}{Player}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_game_object}{GameObject}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_player_a08258ba5b32ea8f54ad07050374507d2}{isShooting}};}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_player_a1fac2c185e585ba3a33c74301880ef67}{projectilePositionShift}}\ =\ 22;}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_yas_in_out_1_1_input}{YasInOut::Input}}*\ \mbox{\hyperlink{class_player_af3bf6787dd64f2adf9e298612665aad9}{input}};}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_yas_in_out_1_1_mouse_position_change_information}{YasInOut::MousePositionChangeInformation}}*\ \mbox{\hyperlink{class_player_a536f465769afdac35c3a6728ad0e3268}{mouse}};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_player_a951339f5da4ef900266d8fb364548c47}{playerDirectionAngle}}\ =\ 90.0F\ *\ (3.141592F\ /\ 180.0F);}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_player_a1f7eac0e4ea2177ae3d4d8cd49234f4a}{playerCurrentDirectionAngle}}\ =\ 0.0F;}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}\ \mbox{\hyperlink{class_player_a1743a7205221be5c14da36ce3acc7356}{xDirectionVector}}\ =\ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}(1.0F,\ 0.0F);}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}\ \mbox{\hyperlink{class_player_ae69972f8caa23ce80448e86dedbb430e}{lookAt}}\ =\ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}(1.0F,\ 0.0F);}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector2_d}{Vector2D<float>}}\ \mbox{\hyperlink{class_player_afd57fa29e1cd195e449c5f4603646da1}{currentMouseAngleVector}};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player}{Player}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y);}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_a749d2c00e1fe0f5c2746f7505a58c062}{\string~Player}}();}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a60ed4851cb84ac4faed024e0dba4edf8}{move}}(\textcolor{keywordtype}{float}\ deltaTime)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a340d6c277c5a61693816b475e348c545}{rotateAllVerticesOverAnAngle}}(\textcolor{keywordtype}{float}\ angle);}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_abcfe356dcd26ddef6885c72276b6e16a}{rotate}}(\textcolor{keywordtype}{float}\ deltaTime);}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a8cb959d7b30e1dee052e54a372b7d29d}{rotateToMousePosition}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \mbox{\hyperlink{class_vector2_d}{Vector2D<int>}}*\ windowDimensions);}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_afd75704e839beae3f22462795c0828ac}{rotateToMousePositionInLocalCoordinateSystem}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \mbox{\hyperlink{class_vector2_d}{Vector2D<int>}}*\ windowDimensions);}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a487619bfd2ce8131150335e8b7cec87d}{setDirection}}(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y);}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_af9416e3087743d0b513ae586a3d71c54}{generate}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a35d62633888c5b0a763cd6346fe73bec}{generateRegularPolygonVertices}}(\textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_object_a31820152846046a77528d072e4abcb31}{circumscribedCircleRadius}},\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_game_object_a46274bba1b356f0d6f9cb9c51467b1b1}{numberOfVertices}})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a694626f19d460432243069c0492ebc2e}{regeneratePolygon}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_acccff5f744ddb70ad7bb42726ee92e09}{setInput}}(\mbox{\hyperlink{struct_yas_in_out_1_1_input}{YasInOut::Input}}*\ \mbox{\hyperlink{class_player_af3bf6787dd64f2adf9e298612665aad9}{input}});}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_acccff5f744ddb70ad7bb42726ee92e09}{setInput}}(\mbox{\hyperlink{struct_yas_in_out_1_1_mouse_position_change_information}{YasInOut::MousePositionChangeInformation}}*\ \mbox{\hyperlink{class_player_a536f465769afdac35c3a6728ad0e3268}{mouse}});}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_projectile}{Projectile}}*\ \mbox{\hyperlink{class_player_a7cca80fd12e5065a3189637c1c64122e}{shoot}}();}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

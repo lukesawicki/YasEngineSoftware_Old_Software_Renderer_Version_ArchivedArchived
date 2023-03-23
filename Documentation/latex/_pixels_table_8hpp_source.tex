@@ -1,0 +1,26 @@
+\hypertarget{_pixels_table_8hpp_source}{}\doxysection{Pixels\+Table.\+hpp}
+\mbox{\hyperlink{_pixels_table_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PIXELSTABLE\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PIXELSTABLE\_HPP}}
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include<SDL.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_vector2_d_8hpp}{Vector2D.hpp}}"{}}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include"{}\mbox{\hyperlink{_vector4_d_8hpp}{Vector4D.hpp}}"{}}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_pixels_table}{PixelsTable}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00011\ \ \ \ \ \ \ \ \ Uint8*\ \mbox{\hyperlink{class_pixels_table_a9679fac60a9add38f9613a62017de1a7}{pixels}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_vector2_d}{Vector2D<int>}}\ \mbox{\hyperlink{class_pixels_table_aa8fc14c07fd8930a81e733a99ed5e208}{windowDimensions}};}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_pixels_table}{PixelsTable}}(\textcolor{keywordtype}{int}\ width,\ \textcolor{keywordtype}{int}\ height,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\&\ defaultColor);}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_pixels_table}{PixelsTable}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_pixels_table}{PixelsTable}}\&\ originalPixelsTable,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\&\ defaultColor);}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_pixels_table_a57919a8ec32d2927fbdd0091965fcc9b}{\string~PixelsTable}}();}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pixels_table_aaf475bf465b9da2491d2c024ba50d681}{clearColor}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\&\ drawingColor);}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pixels_table_a5d7c97f814db7dbd6fc14a41a96838b4}{drawPoint}}(\textcolor{keywordtype}{int}\ x,\ \textcolor{keywordtype}{int}\ y,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{class_vector4_d}{Vector4D<Uint8>}}\&\ drawingColor);}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pixels_table_a5a14562b003c7701ab6ade98c5c24157}{cartesianPositionToWindow}}(\textcolor{keywordtype}{int}\&\ x,\ \textcolor{keywordtype}{int}\&\ y);}
+\DoxyCodeLine{00019\ \};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

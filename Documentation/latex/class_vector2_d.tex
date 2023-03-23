@@ -1,0 +1,137 @@
+\hypertarget{class_vector2_d}{}\doxysection{Vector2D\texorpdfstring{$<$}{<} Type \texorpdfstring{$>$}{>} Class Template Reference}
+\label{class_vector2_d}\index{Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}}
+
+
+{\ttfamily \#include $<$Vector2\+D.\+hpp$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_vector2_d_ac41599f96f083773d5f33e946a0e9498}{Vector2D}} ()
+\item 
+\mbox{\hyperlink{class_vector2_d_a02d0bd70779e657c0e8100f6cb5535b0}{Vector2D}} (Type \mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}}, Type \mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}})
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{class_vector2_d_ac2071664afc9a6523c75c946591d6c46}{normalized\+Vector}} (\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$ \&vector)
+\item 
+static Type \mbox{\hyperlink{class_vector2_d_a8575788ff26ef8271f7af289ceb87580}{get\+Vector\+Magnitude}} (const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$ \&vector)
+\item 
+static Type \mbox{\hyperlink{class_vector2_d_ac356ed83e4798ef1c3cb1e67f69f6273}{get\+Vector\+Magnitude}} (Type x0, Type y0, Type x1, Type y1)
+\item 
+static Type \mbox{\hyperlink{class_vector2_d_a0b6b55bcf801c370d4fafa1f6ef326ec}{cross\+Product}} (const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$ \&u, const \mbox{\hyperlink{class_vector2_d}{Vector2D}} \&v)
+\item 
+static Type \mbox{\hyperlink{class_vector2_d_a597669da740c523975b103146feeb95d}{dot\+Product}} (const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$ \&u, const \mbox{\hyperlink{class_vector2_d}{Vector2D}} \&v)
+\item 
+static Type \mbox{\hyperlink{class_vector2_d_a390bfd67e64cc4089821a782f0cc8682}{angle\+Between\+Vectors}} (const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$ \&u, const \mbox{\hyperlink{class_vector2_d}{Vector2D}} \&v)
+\item 
+static void \mbox{\hyperlink{class_vector2_d_a19222dae7392b851609ce7f7ca99a6a8}{rotate\+Vector\+Over\+The\+Angle}} (\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$ $\ast$v, float angle)
+\item 
+static \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$ \mbox{\hyperlink{class_vector2_d_a06d284771a2f4e48927c6f50a67d52f9}{create\+Unit\+Vector\+From\+Bound\+Vector}} (const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$ \&u, const \mbox{\hyperlink{class_vector2_d}{Vector2D}} \&v)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Type \mbox{\hyperlink{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}{x}}
+\item 
+Type \mbox{\hyperlink{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}{y}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_vector2_d_ac41599f96f083773d5f33e946a0e9498}\label{class_vector2_d_ac41599f96f083773d5f33e946a0e9498}} 
+\index{Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}!Vector2D@{Vector2D}}
+\index{Vector2D@{Vector2D}!Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{Vector2D()}{Vector2D()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$\mbox{\hyperlink{class_vector2_d}{\+::\+Vector2D}} (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_vector2_d_a02d0bd70779e657c0e8100f6cb5535b0}\label{class_vector2_d_a02d0bd70779e657c0e8100f6cb5535b0}} 
+\index{Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}!Vector2D@{Vector2D}}
+\index{Vector2D@{Vector2D}!Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{Vector2D()}{Vector2D()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$\mbox{\hyperlink{class_vector2_d}{\+::\+Vector2D}} (\begin{DoxyParamCaption}\item[{Type}]{x,  }\item[{Type}]{y }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_vector2_d_a390bfd67e64cc4089821a782f0cc8682}\label{class_vector2_d_a390bfd67e64cc4089821a782f0cc8682}} 
+\index{Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}!angleBetweenVectors@{angleBetweenVectors}}
+\index{angleBetweenVectors@{angleBetweenVectors}!Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{angleBetweenVectors()}{angleBetweenVectors()}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+static Type \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$\+::angle\+Between\+Vectors (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$ \&}]{u,  }\item[{const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$ \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\Hypertarget{class_vector2_d_a06d284771a2f4e48927c6f50a67d52f9}\label{class_vector2_d_a06d284771a2f4e48927c6f50a67d52f9}} 
+\index{Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}!createUnitVectorFromBoundVector@{createUnitVectorFromBoundVector}}
+\index{createUnitVectorFromBoundVector@{createUnitVectorFromBoundVector}!Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{createUnitVectorFromBoundVector()}{createUnitVectorFromBoundVector()}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+static \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$ \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$\+::create\+Unit\+Vector\+From\+Bound\+Vector (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$ \&}]{u,  }\item[{const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$ \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\Hypertarget{class_vector2_d_a0b6b55bcf801c370d4fafa1f6ef326ec}\label{class_vector2_d_a0b6b55bcf801c370d4fafa1f6ef326ec}} 
+\index{Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}!crossProduct@{crossProduct}}
+\index{crossProduct@{crossProduct}!Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{crossProduct()}{crossProduct()}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+static Type \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$\+::cross\+Product (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$ \&}]{u,  }\item[{const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$ \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\Hypertarget{class_vector2_d_a597669da740c523975b103146feeb95d}\label{class_vector2_d_a597669da740c523975b103146feeb95d}} 
+\index{Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}!dotProduct@{dotProduct}}
+\index{dotProduct@{dotProduct}!Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{dotProduct()}{dotProduct()}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+static Type \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$\+::dot\+Product (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$ \&}]{u,  }\item[{const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$ \&}]{v }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\Hypertarget{class_vector2_d_a8575788ff26ef8271f7af289ceb87580}\label{class_vector2_d_a8575788ff26ef8271f7af289ceb87580}} 
+\index{Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}!getVectorMagnitude@{getVectorMagnitude}}
+\index{getVectorMagnitude@{getVectorMagnitude}!Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{getVectorMagnitude()}{getVectorMagnitude()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+static Type \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$\+::get\+Vector\+Magnitude (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$ \&}]{vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\Hypertarget{class_vector2_d_ac356ed83e4798ef1c3cb1e67f69f6273}\label{class_vector2_d_ac356ed83e4798ef1c3cb1e67f69f6273}} 
+\index{Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}!getVectorMagnitude@{getVectorMagnitude}}
+\index{getVectorMagnitude@{getVectorMagnitude}!Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{getVectorMagnitude()}{getVectorMagnitude()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+static Type \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$\+::get\+Vector\+Magnitude (\begin{DoxyParamCaption}\item[{Type}]{x0,  }\item[{Type}]{y0,  }\item[{Type}]{x1,  }\item[{Type}]{y1 }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\Hypertarget{class_vector2_d_ac2071664afc9a6523c75c946591d6c46}\label{class_vector2_d_ac2071664afc9a6523c75c946591d6c46}} 
+\index{Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}!normalizedVector@{normalizedVector}}
+\index{normalizedVector@{normalizedVector}!Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{normalizedVector()}{normalizedVector()}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+static void \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$\+::normalized\+Vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$ \&}]{vector }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\Hypertarget{class_vector2_d_a19222dae7392b851609ce7f7ca99a6a8}\label{class_vector2_d_a19222dae7392b851609ce7f7ca99a6a8}} 
+\index{Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}!rotateVectorOverTheAngle@{rotateVectorOverTheAngle}}
+\index{rotateVectorOverTheAngle@{rotateVectorOverTheAngle}!Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{rotateVectorOverTheAngle()}{rotateVectorOverTheAngle()}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+static void \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$\+::rotate\+Vector\+Over\+The\+Angle (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$ $\ast$}]{v,  }\item[{float}]{angle }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}\label{class_vector2_d_a050c7f7f50354cd91b89871b76dc63bb}} 
+\index{Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}!x@{x}}
+\index{x@{x}!Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+Type \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$\+::x}
+
+\mbox{\Hypertarget{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}\label{class_vector2_d_a63e107a1dd43e1f84c91d6e98ec22c7a}} 
+\index{Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}!y@{y}}
+\index{y@{y}!Vector2D$<$ Type $>$@{Vector2D$<$ Type $>$}}
+\doxysubsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily template$<$typename Type $>$ \\
+Type \mbox{\hyperlink{class_vector2_d}{Vector2D}}$<$ Type $>$\+::y}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_vector2_d_8hpp}{Vector2\+D.\+hpp}}\end{DoxyCompactItemize}
