@@ -109,6 +109,10 @@ class YasEngine
 		void update(double& deltaTime);
 		void drawHudElements(double& deltaTime);
 		void render(double& deltaTime);
+
+		// old SDL_Image
+		Uint32 getpixel(SDL_Surface* surface, int x, int y);
+
 		void prepareSoundAndMusic();
 };
 

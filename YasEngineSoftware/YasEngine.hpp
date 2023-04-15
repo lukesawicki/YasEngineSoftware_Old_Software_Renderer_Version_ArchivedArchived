@@ -76,7 +76,7 @@ class YasEngine
 		float mouseY;
 
 		int WINDOW_WIDTH = 1280;
-		int WINDOW_HEIGHT = 800;
+		int WINDOW_HEIGHT = 720;
 
 		std::vector<GameObject*> objectsToDraw;
 		Player* player;

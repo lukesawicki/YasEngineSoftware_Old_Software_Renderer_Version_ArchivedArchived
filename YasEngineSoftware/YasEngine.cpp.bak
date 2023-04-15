@@ -143,8 +143,8 @@ void YasEngine::prepareRendering()
         SDL_FreeSurface(customImageSurface);
 
         pictureRect = new SDL_Rect();
-        pictureRect->x = 50;
-        pictureRect->y = 50;
+        pictureRect->x = 0;
+        pictureRect->y = 0;
         pictureRect->w = 480;
         pictureRect->h = 360;
 
@@ -347,6 +347,7 @@ void YasEngine::render(double& deltaTime)
 
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
     SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);
+	SDL_RenderPresent(renderer);
 
 	// old SDL_Image
     ///////////////
@@ -499,6 +500,6 @@ Uint32 YasEngine::getpixel(SDL_Surface* surface, int x, int y)
         return 0;       /* shouldn't happen, but avoids warnings */
     }
 }
-// old SDL_Image
+// End old SDL_Image
 
 

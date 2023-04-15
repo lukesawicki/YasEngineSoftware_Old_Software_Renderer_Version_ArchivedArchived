@@ -143,8 +143,8 @@ void YasEngine::prepareRendering()
         SDL_FreeSurface(customImageSurface);
 
         pictureRect = new SDL_Rect();
-        pictureRect->x = 50;
-        pictureRect->y = 50;
+        pictureRect->x = 1;
+        pictureRect->y = 1;
         pictureRect->w = 480;
         pictureRect->h = 360;
 
@@ -155,7 +155,7 @@ void YasEngine::prepareRendering()
     }
 
     SDL_Color rgb;
-    Uint32 data = getpixel(optimizedSurface, 200, 200);
+    Uint32 data = getpixel(optimizedSurface, 1, 1);
     SDL_GetRGBA(data, optimizedSurface->format, &rgb.r, &rgb.g, &rgb.b, &rgb.a);
 	// end old SDL_Image
 }
@@ -335,7 +335,7 @@ void YasEngine::render(double& deltaTime)
 
     mathPlay->drawNumbersAsGroupOfLines(primeNumbersPoints->points, primeNumbersPoints->pointsNumber, YELLOW, false);
 
-    mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
+    //mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
 
     verticalLineOnWholeScreen(*pixelsTable, 0, GREEN);
     horizontalLineOnWholeScreen(*pixelsTable, 0, RED);
@@ -347,6 +347,7 @@ void YasEngine::render(double& deltaTime)
 
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
     SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);
+	SDL_RenderPresent(renderer);
 
 	// old SDL_Image
     ///////////////
