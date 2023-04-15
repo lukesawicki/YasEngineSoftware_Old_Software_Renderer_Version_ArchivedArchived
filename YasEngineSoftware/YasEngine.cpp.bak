@@ -499,6 +499,6 @@ Uint32 YasEngine::getpixel(SDL_Surface* surface, int x, int y)
         return 0;       /* shouldn't happen, but avoids warnings */
     }
 }
-// End old SDL_Image
+// old SDL_Image
 
 
