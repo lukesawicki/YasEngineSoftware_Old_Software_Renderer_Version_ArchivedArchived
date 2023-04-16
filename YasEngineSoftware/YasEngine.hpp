@@ -80,6 +80,12 @@ class YasEngine
 		int WINDOW_WIDTH = 1280;
 		int WINDOW_HEIGHT = 720;
 
+		enum MovingMonsters
+		{
+			HORIZONTALLY,
+			VERTICALLY
+		};
+
 		std::vector<GameObject*> objectsToDraw;
 		Player* player;
 		MathematicsFunSurface* mathPlay;
@@ -109,11 +115,13 @@ class YasEngine
 		void preparePlayer();
 
 
+		int levelNumber = 0;
+
 		std::vector<std::string> monstersFilenames;
 		std::vector<SDL_Surface*> tmpMonsterSurface;
 		std::vector<SDL_Surface*> optimizedMonstersSurfaces;
-
-		SDL_Rect* monsterRectangle;
+		std::vector<SDL_Rect*> monstersRectangles;
+		std::vector<SDL_Rect*> monstersEndMovingPositions;
 
 		void loadMonsters()
 		{
@@ -139,26 +147,41 @@ class YasEngine
 				SDL_FreeSurface(tmpMonsterSurface.at(i));
 			}
 
-			monsterRectangle = new SDL_Rect();
-			monsterRectangle->x = 0;
-			monsterRectangle->y = 0;
-			monsterRectangle->w = 76;
-			monsterRectangle->h = 81;
+			for (int i = 0; i < 3; i++)
+			{
 
+				monstersRectangles.push_back(new SDL_Rect());
+				monstersRectangles.at(i)->x = 0;
+				monstersRectangles.at(i)->y = 0;
+				monstersRectangles.at(i)->w = 76;
+				monstersRectangles.at(i)->h = 81;
+			}
+
+			for (int i = 0; i < 3; i++)
+			{
+
+				monstersEndMovingPositions.push_back(new SDL_Rect());
+				monstersEndMovingPositions.at(i)->x = 0;
+				monstersEndMovingPositions.at(i)->y = 0;
+				monstersEndMovingPositions.at(i)->w = 76;
+				monstersEndMovingPositions.at(i)->h = 81;
+			}
 
 			SDL_Color rgb;
 			for (int i = 0; i < 3; i++)
 			{
 				Uint32 data = getpixel(optimizedMonstersSurfaces.at(i), 1, 1);
 				SDL_GetRGBA(data, optimizedMonstersSurfaces.at(i)->format, &rgb.r, &rgb.g, &rgb.b, &rgb.a);
+				SDL_SetSurfaceBlendMode(optimizedMonstersSurfaces.at(i), SDL_BLENDMODE_BLEND);
+				SDL_SetSurfaceAlphaMod(optimizedMonstersSurfaces.at(i), 255);
 			}
 		}
 
 		std::vector<std::string> trashFilenames;
 		std::vector<SDL_Surface*> tmpTrashSurface;
 		std::vector<SDL_Surface*> optimizedTrashsSurfaces;
+		std::vector<SDL_Rect*> trashRectangles;
 
-		SDL_Rect* trashRectangle;
 
 		void loadTrashs()
 		{
@@ -184,12 +207,14 @@ class YasEngine
 				SDL_FreeSurface(tmpTrashSurface.at(i));
 			}
 
-			trashRectangle = new SDL_Rect();
-			trashRectangle->x = 0;
-			trashRectangle->y = 0;
-			trashRectangle->w = 74;
-			trashRectangle->h = 75;
-
+			for (int i = 0; i < 3; i++)
+			{
+				trashRectangles.push_back(new SDL_Rect());
+				trashRectangles.at(i)->x = 0;
+				trashRectangles.at(i)->y = 0;
+				trashRectangles.at(i)->w = 74;
+				trashRectangles.at(i)->h = 75;
+			}
 
 			SDL_Color rgb;
 			for (int i = 0; i < 3; i++)
@@ -199,9 +224,157 @@ class YasEngine
 			}
 		}
 
-		void loadBuildings();
+		std::vector<std::string> buildingFilenames;
+		std::vector<SDL_Surface*> tmpBuildingurface;
+		std::vector<SDL_Surface*> optimizedBuildingSurfaces;
+		std::vector<SDL_Rect*> buildingRectangles;
+ 
+
+		void loadBuildings()
+		{
+			std::string basePath = SDL_GetBasePath();
+			for (int i = 0; i < 3; i++)
+			{
+				std::string monsterFile;
+				buildingFilenames.push_back(monsterFile.append(basePath).append("building_").append(std::to_string(i)).append(".png"));
+			}
+
+			for (int i = 0; i < 3; i++)
+			{
+				tmpBuildingurface.push_back(IMG_Load(buildingFilenames.at(i).c_str()));
+			}
+
+			for (int i = 0; i < 3; i++)
+			{
+				optimizedBuildingSurfaces.push_back(SDL_ConvertSurface(tmpBuildingurface.at(i), windowsSurfaceFormat, 0));
+			}
+
+			for (int i = 0; i < 3; i++)
+			{
+				SDL_FreeSurface(tmpBuildingurface.at(i));
+			}
+
+			for (int i = 0; i < 3; i++)
+			{
+				buildingRectangles.push_back(new SDL_Rect());
+				buildingRectangles.at(i)->x = 0;
+				buildingRectangles.at(i)->y = 0;
+				buildingRectangles.at(i)->w = 76;
+				buildingRectangles.at(i)->h = 81;
+			}
+
+			SDL_Color rgb;
+			for (int i = 0; i < 3; i++)
+			{
+				Uint32 data = getpixel(optimizedBuildingSurfaces.at(i), 1, 1);
+				SDL_GetRGBA(data, optimizedBuildingSurfaces.at(i)->format, &rgb.r, &rgb.g, &rgb.b, &rgb.a);
+			}
+		}
+
+		void changeLevel()
+		{
+
+		}
+
+		void setBuildingsPositions()
+		{
+			switch (levelNumber)
+			{
+			case 0:
+				buildingRectangles.at(0)->x = 50;
+				buildingRectangles.at(0)->y = 110;
+				//280
+				//110
+				break;
+			case 1:
+				break;
+			case 2:
+				break;
+
+			}
+		}
+
+		void setupMonsters()
+		{
+			switch (levelNumber)
+			{
+			case 0:
+				//162x
+				//159y
+
+				monstersRectangles.at(0)->x = 10;
+				monstersRectangles.at(0)->y = 10;
+				
+				monstersEndMovingPositions.at(0)->x = 255;
+				monstersEndMovingPositions.at(0)->y = 10;
+				monstersEndMovingPositions.at(0)->w = 10;// start position
+				monstersEndMovingPositions.at(0)->h = 10;// start position
+
+
+				break;
+			case 1:
+				break;
+			case 2:
+				break;
+
+			}
+		}
+
+
 		void loadProjectile();
 		void loadTruck();
+
+		void handeGamePhysics()
+		{
+			switch (levelNumber)
+			{
+			case 0:
+				break;
+			case 1:
+				break;
+			case 2:
+				break;
+
+			}
+		}
+
+		void handleGameLogic()
+		{
+			switch (levelNumber)
+			{
+			case 0:
+				break;
+			case 1:
+				break;
+			case 2:
+				break;
+
+			}
+		}
+
+		int monstersSpeed = 200;
+		boolean monsterDirectionSwitched = false;
+
+	// monstersRectangles.at(i)->
+	// monstersEndMovingPositions
+		void moveMonsters()
+		{
+			for(int i=0; i<3; i++)
+			{
+				monstersRectangles.at(i)->x = monstersRectangles.at(i)->x + static_cast<float>(deltaTime) * monstersSpeed;
+				if (monstersRectangles.at(i)->x < 37 && !monsterDirectionSwitched)
+				{
+					monstersSpeed = monstersSpeed * -1;
+					monstersRectangles.at(i)->x = 37;
+				}
+
+				if (monstersRectangles.at(i)->x > 512 - 37)
+				{
+					monstersSpeed = monstersSpeed * -1;
+					monstersRectangles.at(i)->x = 512 - 37;
+				}
+			}
+		}
 
 		void handleInput(SDL_Event& event);
 		void update(double& deltaTime);

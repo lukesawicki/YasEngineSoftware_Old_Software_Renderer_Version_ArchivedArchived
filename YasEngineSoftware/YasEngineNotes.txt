@@ -653,3 +653,174 @@ To avoid this issue, make sure to lock the surfaces before calling SDL_BlitSurfa
 
 It is also possible that the issue is related to the timing of the blitting operation, such as the rate at which it is called or the synchronization with the display refresh rate. In this case, you may need to adjust the timing or use double-buffering techniques to ensure that the display is updated smoothly and without flickering.
 
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+void YasEngine::render(double& deltaTime)
+{
+    pixelsTable->clearColor(BLACK);
+    mathPlay->clearColor(BLACK);
+
+    SDL_RenderClear(renderer);
+
+
+
+    for (auto object : objectsToDraw)
+    {
+        if (object->isAlive)
+        {
+            drawPolygon(object, *pixelsTable);
+        }
+    }
+    
+    int vertical = static_cast<int>(-WINDOW_WIDTH * 0.25F);
+    int horizontal = static_cast<int>(-WINDOW_HEIGHT * 0.25F);
+
+    mathPlay->verticalLineOnScreen(0, GREEN);
+    mathPlay->horizontalLineOnScreen(0, RED);//-WINDOW_HEIGHT * 0.25F
+
+	// mathPlay->drawNumbersAsGroupOfNotConnectedLines(sinusPoints, 100, YELLOW);
+
+    mathPlay->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, YELLOW, true);
+    mathPlay->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, BLUE, false);
+    mathPlay->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, RED, false);
+
+    mathPlay->drawNumbersAsGroupOfLines(primeNumbersPoints->points, primeNumbersPoints->pointsNumber, YELLOW, false);
+
+    //mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
+
+    verticalLineOnWholeScreen(*pixelsTable, 0, GREEN);
+    horizontalLineOnWholeScreen(*pixelsTable, 0, RED);
+
+    drawHudElements(deltaTime);
+    //SDL_SetSurfaceAlphaMod(optimizedMonstersSurfaces.at(0), 0);
+    //SDL_BLENDMODE_NONE
+    // SDL_SetSurfaceAlphaMod(optimizedMonstersSurfaces.at(0), 64);
+
+	SDL_BlitSurface(optimizedMonstersSurfaces.at(0), NULL, windowSurface, monstersRectangles.at(0));
+
+	// SDL_FreeSurface(optimizedMonstersSurfaces.at(0));
+    //lukesawickiR
+ //   SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
+ //   SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);
+	//SDL_RenderPresent(renderer);
+    
+	SDL_UpdateWindowSurface(window);
+
+
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+void YasEngine::prepareRendering()
+{
+    pixelsTable     =   new PixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, BLACK);
+    renderer        =   SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+
+    SDL_RenderSetLogicalSize(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
+    SDL_RenderSetIntegerScale(renderer, SDL_TRUE);
+
+    screenTexture   =   SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
+	// old SDL_Image
+
+    if (!IMG_Init(IMG_INIT_PNG))
+    {
+        std::cout << "SDL_image could not initialize! SDL_image Error: " << IMG_GetError() << std::endl;
+
+    }
+
+    
+    std::string basePath = SDL_GetBasePath();
+
+    std::string pictureFilePath;
+    pictureFilePath.append(basePath);
+    pictureFilePath.append("\\map00.png");
+    
+
+
+    ////////////////////
+    customImageSurface = IMG_Load(pictureFilePath.c_str());
+
+
+    if(customImageSurface == NULL)
+    {
+        std::cout << "Error during loading image file: " << SDL_GetError() << std::endl;
+    }
+
+    windowSurface = SDL_GetWindowSurface(window);
+    windowsSurfaceFormat = windowSurface->format;//SDL_AllocFormat(SDL_PIXELFORMAT_ABGR8888);
+    
+    optimizedSurface = SDL_ConvertSurface(customImageSurface, windowsSurfaceFormat, 0);
+
+
+    // HERE WRZUCIC LADOWANIE OBRAZKOW bo jest po pobraniu windowsSurfaceFormat
+
+
+    //timizedSurface->pixels
+
+	if (optimizedSurface != NULL)
+    {
+        SDL_FreeSurface(customImageSurface);
+
+        map = new SDL_Rect();
+        map->x = 0;
+        map->y = 0;
+        map->w = WINDOW_WIDTH;
+        map->h = WINDOW_HEIGHT;
+
+    }
+    else
+    {
+        std::cout << "Unable to optimize image SDL Error-> " << SDL_GetError() << std::endl;
+    }
+
+    SDL_Color rgb;
+    Uint32 data = getpixel(optimizedSurface, 0, 0);
+    SDL_GetRGBA(data, optimizedSurface->format, &rgb.r, &rgb.g, &rgb.b, &rgb.a);
+	// end old SDL_Image
+
+    SDL_SetSurfaceBlendMode(windowSurface, SDL_BLENDMODE_BLEND);
+
+
+
+
+ //   SDL_SetAlpha
+
+    // lukesawicki
+    loadMonsters();
+    loadTrashs();
+    loadBuildings();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
