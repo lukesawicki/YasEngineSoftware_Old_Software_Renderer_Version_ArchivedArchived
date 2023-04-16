@@ -1,4 +1,4 @@
-#ifndef YASENGINE_HPP
+﻿#ifndef YASENGINE_HPP
 #define YASENGINE_HPP
 #include<stdio.h>
 #include<iostream>
@@ -172,8 +172,13 @@ class YasEngine
 			{
 				Uint32 data = getpixel(optimizedMonstersSurfaces.at(i), 1, 1);
 				SDL_GetRGBA(data, optimizedMonstersSurfaces.at(i)->format, &rgb.r, &rgb.g, &rgb.b, &rgb.a);
-				SDL_SetSurfaceBlendMode(optimizedMonstersSurfaces.at(i), SDL_BLENDMODE_BLEND);
-				SDL_SetSurfaceAlphaMod(optimizedMonstersSurfaces.at(i), 255);
+				//SDL_SetSurfaceBlendMode(optimizedMonstersSurfaces.at(i), SDL_BLENDMODE_BLEND);// Monster fully visible and backgroun unfortunatelly visible too.
+				SDL_SetSurfaceBlendMode(optimizedMonstersSurfaces.at(i), SDL_BLENDMODE_ADD); //not working and background on monster picture is white and monster is half transparent
+				//SDL_SetSurfaceBlendMode(optimizedMonstersSurfaces.at(i), SDL_BLENDMODE_MOD); // background on monster picture is invisible(success)but monster is half visible
+				//SDL_SetSurfaceBlendMode(optimizedMonstersSurfaces.at(i), SDL_BLENDMODE_MUL); // to samo co wyżej
+				// SDL_SetSurfaceBlendMode(optimizedMonstersSurfaces.at(i), SDL_BLENDMODE_INVALID); // Monster fully visible and backgroun unfortunatelly visible too.
+
+				//SDL_SetSurfaceAlphaMod(optimizedMonstersSurfaces.at(i), 255);
 			}
 		}
 

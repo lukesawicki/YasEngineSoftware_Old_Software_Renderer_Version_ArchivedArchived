@@ -26,8 +26,6 @@ void YasEngine::initialize()
 
     SinusPointsGenerator sinusPointsGenerator;
     CosinusPointsGenerator cosinusPointsGenerator;
-
-
 }
 
 void YasEngine::clean()
@@ -167,7 +165,6 @@ void YasEngine::prepareRendering()
     SDL_GetRGBA(data, optimizedSurface->format, &rgb.r, &rgb.g, &rgb.b, &rgb.a);
 	// end old SDL_Image
 
-    SDL_SetSurfaceBlendMode(windowSurface, SDL_BLENDMODE_BLEND);
 
 
 
@@ -360,23 +357,21 @@ void YasEngine::render(double& deltaTime)
 
     mathPlay->drawNumbersAsGroupOfLines(primeNumbersPoints->points, primeNumbersPoints->pointsNumber, YELLOW, false);
 
-    //mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
+    mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
 
     verticalLineOnWholeScreen(*pixelsTable, 0, GREEN);
     horizontalLineOnWholeScreen(*pixelsTable, 0, RED);
 
     drawHudElements(deltaTime);
-    //SDL_SetSurfaceAlphaMod(optimizedMonstersSurfaces.at(0), 0);
-    //SDL_BLENDMODE_NONE
-    // SDL_SetSurfaceAlphaMod(optimizedMonstersSurfaces.at(0), 64);
 
+    SDL_FillRect(windowSurface, NULL, SDL_MapRGB(windowSurface->format, 0, 0, 0));
+    SDL_BlitSurface(optimizedSurface, NULL, windowSurface, NULL);
 	SDL_BlitSurface(optimizedMonstersSurfaces.at(0), NULL, windowSurface, monstersRectangles.at(0));
 
-	// SDL_FreeSurface(optimizedMonstersSurfaces.at(0));
-    //lukesawickiR
- //   SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
- //   SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);
-	//SDL_RenderPresent(renderer);
+
+ //    SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
+ //    SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);
+	// SDL_RenderPresent(renderer);
     
 	SDL_UpdateWindowSurface(window);
 

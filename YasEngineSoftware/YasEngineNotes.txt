@@ -791,8 +791,98 @@ void YasEngine::prepareRendering()
     loadTrashs();
     loadBuildings();
 }
+//////////////////////////////////////////////////////////
+
+#include"YasEngine.hpp"
+#define SDL_MAIN_HANDLED
+
+int main(int argc, char* argv[])
+{
+
+    // SDL_BLENDMODE_NONE = 0x00000000,     /**< no blending
+    //                                       dstRGBA = srcRGBA */
+    //     SDL_BLENDMODE_BLEND = 0x00000001,    /**< alpha blending
+    //                                               dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA))
+    //                                               dstA = srcA + (dstA * (1-srcA)) */
+    //     SDL_BLENDMODE_ADD = 0x00000002,      /**< additive blending
+    //                                               dstRGB = (srcRGB * srcA) + dstRGB
+    //                                               dstA = dstA */
+    //     SDL_BLENDMODE_MOD = 0x00000004,      /**< color modulate
+    //                                               dstRGB = srcRGB * dstRGB
+    //                                               dstA = dstA */
+    //     SDL_BLENDMODE_MUL = 0x00000008,      /**< color multiply
+    //                                               dstRGB = (srcRGB * dstRGB) + (dstRGB * (1-srcA))
+    //                                               dstA = (srcA * dstA) + (dstA * (1-srcA)) */
+    //     SDL_BLENDMODE_INVALID = 0x7FFFFFFF
 
 
+
+    SDL_Init(SDL_INIT_VIDEO);
+
+    SDL_Window* window = SDL_CreateWindow("SDL BlitSurface Alpha Blending Real Time Example", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 480, 0);
+    SDL_Surface* surface = SDL_GetWindowSurface(window);
+
+    // Create a destination surface with an alpha channel
+    SDL_Surface* destSurface = SDL_CreateRGBSurface(0, 640, 480, 32, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
+    SDL_FillRect(destSurface, NULL, SDL_MapRGBA(destSurface->format, 0, 0, 0, 0)); // Fill with transparent black
+
+    // Set the blending mode to alpha blending
+    SDL_SetSurfaceBlendMode(destSurface, SDL_BLENDMODE_INVALID);
+
+    // Create a source surface with a semi-transparent red color
+    SDL_Surface* sourceSurface = SDL_CreateRGBSurface(0, 100, 100, 32, 0x000000ff, 0x0000ff00, 0x00ff0000, 0xff000000);
+    SDL_FillRect(sourceSurface, NULL, SDL_MapRGBA(sourceSurface->format, 255, 0, 0, 128)); // Fill with semi-transparent red
+
+    // Set the alpha value for the source surface
+    Uint8 alpha = 128;
+    SDL_SetSurfaceAlphaMod(sourceSurface, alpha);
+
+    // Set the initial position of the object
+    int x = 270;
+    int y = 190;
+
+    // Create a flag for the main loop
+    bool quit = false;
+    int stop = 0;
+    while (!quit) {
+        // Handle events
+        if (! (x >= 300) || !(y >= 300))
+        {
+        SDL_Event event;
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
+                quit = true;
+            }
+        }
+        SDL_FillRect(destSurface, NULL, SDL_MapRGB(surface->format, 0, 0, 0));
+        // Move the object
+        x += 2;
+        y += 1;
+
+        // Copy the source surface to the destination surface with alpha blending at the new position
+        SDL_Rect destRect = { x, y, 100, 100 };
+        SDL_BlitSurface(sourceSurface, NULL, destSurface, &destRect);
+
+        // Update the window surface with the destination surface
+        SDL_BlitSurface(destSurface, NULL, surface, NULL);
+        SDL_UpdateWindowSurface(window);
+        
+            
+        }
+    }
+
+    // Cleanup
+    SDL_FreeSurface(sourceSurface);
+    SDL_FreeSurface(destSurface);
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
+    return 0;
+	return 0;
+}
+
+//                                                                            80                                     120
+//-----------------------------------------------------------------------------|---------------------------------------|
 
 
 
