@@ -134,17 +134,17 @@ class YasEngine
 
 			for(int i=0; i<3; i++)
 			{
-				tmpMonsterSurface.push_back(IMG_Load(monstersFilenames.at(i).c_str()));
+				optimizedMonstersSurfaces.push_back(IMG_Load(monstersFilenames.at(i).c_str()));
 			}
 
 			for(int i=0; i<3; i++)
 			{
-				optimizedMonstersSurfaces.push_back(SDL_ConvertSurface(tmpMonsterSurface.at(i), windowsSurfaceFormat, 0));
+				//optimizedMonstersSurfaces.push_back(SDL_ConvertSurface(tmpMonsterSurface.at(i), windowsSurfaceFormat, 0));
 			}
 
 			for(int i=0; i<3; i++)
 			{
-				SDL_FreeSurface(tmpMonsterSurface.at(i));
+				//SDL_FreeSurface(tmpMonsterSurface.at(i));
 			}
 
 			for (int i = 0; i < 3; i++)
@@ -170,15 +170,7 @@ class YasEngine
 			SDL_Color rgb;
 			for (int i = 0; i < 3; i++)
 			{
-				Uint32 data = getpixel(optimizedMonstersSurfaces.at(i), 1, 1);
-				SDL_GetRGBA(data, optimizedMonstersSurfaces.at(i)->format, &rgb.r, &rgb.g, &rgb.b, &rgb.a);
-				//SDL_SetSurfaceBlendMode(optimizedMonstersSurfaces.at(i), SDL_BLENDMODE_BLEND);// Monster fully visible and backgroun unfortunatelly visible too.
-				SDL_SetSurfaceBlendMode(optimizedMonstersSurfaces.at(i), SDL_BLENDMODE_ADD); //not working and background on monster picture is white and monster is half transparent
-				//SDL_SetSurfaceBlendMode(optimizedMonstersSurfaces.at(i), SDL_BLENDMODE_MOD); // background on monster picture is invisible(success)but monster is half visible
-				//SDL_SetSurfaceBlendMode(optimizedMonstersSurfaces.at(i), SDL_BLENDMODE_MUL); // to samo co wyżej
-				// SDL_SetSurfaceBlendMode(optimizedMonstersSurfaces.at(i), SDL_BLENDMODE_INVALID); // Monster fully visible and backgroun unfortunatelly visible too.
-
-				//SDL_SetSurfaceAlphaMod(optimizedMonstersSurfaces.at(i), 255);
+				SDL_SetSurfaceBlendMode(optimizedMonstersSurfaces.at(i), SDL_BLENDMODE_BLEND);
 			}
 		}
 
