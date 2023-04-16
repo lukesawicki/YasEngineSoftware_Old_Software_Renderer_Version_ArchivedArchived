@@ -118,7 +118,6 @@ class YasEngine
 		int levelNumber = 0;
 
 		std::vector<std::string> monstersFilenames;
-		std::vector<SDL_Surface*> tmpMonsterSurface;
 		std::vector<SDL_Surface*> optimizedMonstersSurfaces;
 		std::vector<SDL_Rect*> monstersRectangles;
 		std::vector<SDL_Rect*> monstersEndMovingPositions;
@@ -135,16 +134,6 @@ class YasEngine
 			for(int i=0; i<3; i++)
 			{
 				optimizedMonstersSurfaces.push_back(IMG_Load(monstersFilenames.at(i).c_str()));
-			}
-
-			for(int i=0; i<3; i++)
-			{
-				//optimizedMonstersSurfaces.push_back(SDL_ConvertSurface(tmpMonsterSurface.at(i), windowsSurfaceFormat, 0));
-			}
-
-			for(int i=0; i<3; i++)
-			{
-				//SDL_FreeSurface(tmpMonsterSurface.at(i));
 			}
 
 			for (int i = 0; i < 3; i++)
@@ -191,24 +180,15 @@ class YasEngine
 
 			for (int i = 0; i < 3; i++)
 			{
-				tmpTrashSurface.push_back(IMG_Load(trashFilenames.at(i).c_str()));
+				optimizedTrashsSurfaces.push_back(IMG_Load(trashFilenames.at(i).c_str()));
 			}
 
-			for (int i = 0; i < 3; i++)
-			{
-				optimizedTrashsSurfaces.push_back(SDL_ConvertSurface(tmpTrashSurface.at(i), windowsSurfaceFormat, 0));
-			}
-
-			for (int i = 0; i < 3; i++)
-			{
-				SDL_FreeSurface(tmpTrashSurface.at(i));
-			}
 
 			for (int i = 0; i < 3; i++)
 			{
 				trashRectangles.push_back(new SDL_Rect());
-				trashRectangles.at(i)->x = 0;
-				trashRectangles.at(i)->y = 0;
+				trashRectangles.at(i)->x = 500;
+				trashRectangles.at(i)->y = 500;
 				trashRectangles.at(i)->w = 74;
 				trashRectangles.at(i)->h = 75;
 			}
@@ -216,8 +196,7 @@ class YasEngine
 			SDL_Color rgb;
 			for (int i = 0; i < 3; i++)
 			{
-				Uint32 data = getpixel(optimizedTrashsSurfaces.at(i), 1, 1);
-				SDL_GetRGBA(data, optimizedTrashsSurfaces.at(i)->format, &rgb.r, &rgb.g, &rgb.b, &rgb.a);
+				SDL_SetSurfaceBlendMode(optimizedTrashsSurfaces.at(i), SDL_BLENDMODE_BLEND);
 			}
 		}
 
@@ -238,24 +217,15 @@ class YasEngine
 
 			for (int i = 0; i < 3; i++)
 			{
-				tmpBuildingurface.push_back(IMG_Load(buildingFilenames.at(i).c_str()));
+				optimizedBuildingSurfaces.push_back(IMG_Load(buildingFilenames.at(i).c_str()));
 			}
 
-			for (int i = 0; i < 3; i++)
-			{
-				optimizedBuildingSurfaces.push_back(SDL_ConvertSurface(tmpBuildingurface.at(i), windowsSurfaceFormat, 0));
-			}
-
-			for (int i = 0; i < 3; i++)
-			{
-				SDL_FreeSurface(tmpBuildingurface.at(i));
-			}
 
 			for (int i = 0; i < 3; i++)
 			{
 				buildingRectangles.push_back(new SDL_Rect());
-				buildingRectangles.at(i)->x = 0;
-				buildingRectangles.at(i)->y = 0;
+				buildingRectangles.at(i)->x = i * 240;
+				buildingRectangles.at(i)->y = i * 210 + 200;
 				buildingRectangles.at(i)->w = 76;
 				buildingRectangles.at(i)->h = 81;
 			}
@@ -263,8 +233,7 @@ class YasEngine
 			SDL_Color rgb;
 			for (int i = 0; i < 3; i++)
 			{
-				Uint32 data = getpixel(optimizedBuildingSurfaces.at(i), 1, 1);
-				SDL_GetRGBA(data, optimizedBuildingSurfaces.at(i)->format, &rgb.r, &rgb.g, &rgb.b, &rgb.a);
+				SDL_SetSurfaceBlendMode(optimizedBuildingSurfaces.at(i), SDL_BLENDMODE_BLEND);
 			}
 		}
 
@@ -278,8 +247,8 @@ class YasEngine
 			switch (levelNumber)
 			{
 			case 0:
-				buildingRectangles.at(0)->x = 50;
-				buildingRectangles.at(0)->y = 110;
+				// buildingRectangles.at(0)->x = 50;
+				// buildingRectangles.at(0)->y = 330;
 				//280
 				//110
 				break;
@@ -293,9 +262,7 @@ class YasEngine
 
 		void setupMonsters()
 		{
-			switch (levelNumber)
-			{
-			case 0:
+
 				//162x
 				//159y
 
@@ -308,13 +275,28 @@ class YasEngine
 				monstersEndMovingPositions.at(0)->h = 10;// start position
 
 
-				break;
-			case 1:
-				break;
-			case 2:
-				break;
 
-			}
+				monstersRectangles.at(1)->x = 10;
+				monstersRectangles.at(1)->y = 100;
+
+				monstersEndMovingPositions.at(1)->x = 255;
+				monstersEndMovingPositions.at(1)->y = 10;
+				monstersEndMovingPositions.at(1)->w = 10;// start position
+				monstersEndMovingPositions.at(1)->h = 100;// start position
+
+
+
+
+				monstersRectangles.at(2)->x = 10;
+				monstersRectangles.at(2)->y = 200;
+
+				monstersEndMovingPositions.at(2)->x = 255;
+				monstersEndMovingPositions.at(2)->y = 10;
+				monstersEndMovingPositions.at(2)->w = 10;// start position
+				monstersEndMovingPositions.at(2)->h = 200;// start position
+
+
+			
 		}
 
 

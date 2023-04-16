@@ -366,9 +366,15 @@ void YasEngine::render(double& deltaTime)
 
     SDL_FillRect(windowSurface, NULL, SDL_MapRGB(windowSurface->format, 0, 0, 0));
     SDL_BlitSurface(optimizedSurface, NULL, windowSurface, NULL);
+
 	SDL_BlitSurface(optimizedMonstersSurfaces.at(0), NULL, windowSurface, monstersRectangles.at(0));
-
-
+    SDL_BlitSurface(optimizedMonstersSurfaces.at(1), NULL, windowSurface, monstersRectangles.at(1));
+    SDL_BlitSurface(optimizedMonstersSurfaces.at(2), NULL, windowSurface, monstersRectangles.at(2));
+    for (int i = 0; i < 3; i++)
+    {
+        SDL_BlitSurface(optimizedBuildingSurfaces.at(i), NULL, windowSurface, buildingRectangles.at(i));
+    }
+    SDL_BlitSurface(optimizedTrashsSurfaces.at(0), NULL, windowSurface, trashRectangles.at(0));
  //    SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
  //    SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);
 	// SDL_RenderPresent(renderer);
