@@ -109,7 +109,7 @@ class YasEngine
 		void preparePlayer();
 
 
-		std::vector<std::string> filenames;
+		std::vector<std::string> monstersFilenames;
 		std::vector<SDL_Surface*> tmpMonsterSurface;
 		std::vector<SDL_Surface*> optimizedMonstersSurfaces;
 
@@ -121,12 +121,12 @@ class YasEngine
 			for(int i=0; i < 3; i++)
 			{
 				std::string monsterFile;
-				filenames.push_back(monsterFile.append(basePath).append("monster_v").append(std::to_string(i)).append(".png"));
+				monstersFilenames.push_back(monsterFile.append(basePath).append("monster_v").append(std::to_string(i)).append(".png"));
 			}
 
 			for(int i=0; i<3; i++)
 			{
-				tmpMonsterSurface.push_back(IMG_Load(filenames.at(i).c_str()));
+				tmpMonsterSurface.push_back(IMG_Load(monstersFilenames.at(i).c_str()));
 			}
 
 			for(int i=0; i<3; i++)
@@ -153,6 +153,52 @@ class YasEngine
 				SDL_GetRGBA(data, optimizedMonstersSurfaces.at(i)->format, &rgb.r, &rgb.g, &rgb.b, &rgb.a);
 			}
 		}
+
+		std::vector<std::string> trashFilenames;
+		std::vector<SDL_Surface*> tmpTrashSurface;
+		std::vector<SDL_Surface*> optimizedTrashsSurfaces;
+
+		SDL_Rect* trashRectangle;
+
+		void loadTrashs()
+		{
+			std::string basePath = SDL_GetBasePath();
+			for (int i = 0; i < 3; i++)
+			{
+				std::string TrashFile;
+				trashFilenames.push_back(TrashFile.append(basePath).append("trash_v").append(std::to_string(i)).append(".png"));
+			}
+
+			for (int i = 0; i < 3; i++)
+			{
+				tmpTrashSurface.push_back(IMG_Load(trashFilenames.at(i).c_str()));
+			}
+
+			for (int i = 0; i < 3; i++)
+			{
+				optimizedTrashsSurfaces.push_back(SDL_ConvertSurface(tmpTrashSurface.at(i), windowsSurfaceFormat, 0));
+			}
+
+			for (int i = 0; i < 3; i++)
+			{
+				SDL_FreeSurface(tmpTrashSurface.at(i));
+			}
+
+			trashRectangle = new SDL_Rect();
+			trashRectangle->x = 0;
+			trashRectangle->y = 0;
+			trashRectangle->w = 74;
+			trashRectangle->h = 75;
+
+
+			SDL_Color rgb;
+			for (int i = 0; i < 3; i++)
+			{
+				Uint32 data = getpixel(optimizedTrashsSurfaces.at(i), 1, 1);
+				SDL_GetRGBA(data, optimizedTrashsSurfaces.at(i)->format, &rgb.r, &rgb.g, &rgb.b, &rgb.a);
+			}
+		}
+
 		void loadBuildings();
 		void loadProjectile();
 		void loadTruck();

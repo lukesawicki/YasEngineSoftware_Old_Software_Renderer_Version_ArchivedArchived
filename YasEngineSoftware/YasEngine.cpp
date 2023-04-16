@@ -57,6 +57,7 @@ void YasEngine::clean()
 
 void YasEngine::YasEnginStart()
 {
+
     TimePicker timePicker = TimePicker();
     time = timePicker.getSeconds();
     fpsTime = 0.0F;
@@ -126,6 +127,7 @@ void YasEngine::prepareRendering()
     ////////////////////
     customImageSurface = IMG_Load(pictureFilePath.c_str());
 
+
     if(customImageSurface == NULL)
     {
         std::cout << "Error during loading image file: " << SDL_GetError() << std::endl;
@@ -159,11 +161,12 @@ void YasEngine::prepareRendering()
     }
 
     SDL_Color rgb;
-    Uint32 data = getpixel(optimizedSurface, 1, 1);
+    Uint32 data = getpixel(optimizedSurface, 0, 0);
     SDL_GetRGBA(data, optimizedSurface->format, &rgb.r, &rgb.g, &rgb.b, &rgb.a);
 	// end old SDL_Image
 
     loadMonsters();
+    loadTrashs();
 }
 
 void YasEngine::prepareBasicSettings()
@@ -351,7 +354,8 @@ void YasEngine::render(double& deltaTime)
 	// old SDL_Image
     //SDL_BlitSurface(optimizedSurface, NULL, windowSurface, pictureRect);
 
-    SDL_BlitSurface(optimizedMonstersSurfaces.at(2), NULL, windowSurface, monsterRectangle);
+    SDL_BlitSurface(optimizedMonstersSurfaces.at(1), NULL, windowSurface, monsterRectangle);
+    //SDL_BlitSurface(optimizedTrashsSurfaces.at(1), NULL, windowSurface, monsterRectangle);
 
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
     SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);
