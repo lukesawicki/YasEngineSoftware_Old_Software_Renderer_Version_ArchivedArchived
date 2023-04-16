@@ -119,7 +119,7 @@ void YasEngine::prepareRendering()
 
     std::string pictureFilePath;
     pictureFilePath.append(basePath);
-    pictureFilePath.append("\\somePicture.png");
+    pictureFilePath.append("\\map00.png");
     
 
 
@@ -132,9 +132,13 @@ void YasEngine::prepareRendering()
     }
 
     windowSurface = SDL_GetWindowSurface(window);
-    SDL_PixelFormat* windowsSurfaceFormat = windowSurface->format;//SDL_AllocFormat(SDL_PIXELFORMAT_ABGR8888);
+    windowsSurfaceFormat = windowSurface->format;//SDL_AllocFormat(SDL_PIXELFORMAT_ABGR8888);
     
     optimizedSurface = SDL_ConvertSurface(customImageSurface, windowsSurfaceFormat, 0);
+
+
+    // HERE WRZUCIC LADOWANIE OBRAZKOW bo jest po pobraniu windowsSurfaceFormat
+
 
     //timizedSurface->pixels
 
@@ -142,11 +146,11 @@ void YasEngine::prepareRendering()
     {
         SDL_FreeSurface(customImageSurface);
 
-        pictureRect = new SDL_Rect();
-        pictureRect->x = 1;
-        pictureRect->y = 1;
-        pictureRect->w = 480;
-        pictureRect->h = 360;
+        map = new SDL_Rect();
+        map->x = 0;
+        map->y = 0;
+        map->w = WINDOW_WIDTH;
+        map->h = WINDOW_HEIGHT;
 
     }
     else
@@ -158,6 +162,8 @@ void YasEngine::prepareRendering()
     Uint32 data = getpixel(optimizedSurface, 1, 1);
     SDL_GetRGBA(data, optimizedSurface->format, &rgb.r, &rgb.g, &rgb.b, &rgb.a);
 	// end old SDL_Image
+
+    loadMonsters();
 }
 
 void YasEngine::prepareBasicSettings()
@@ -343,7 +349,9 @@ void YasEngine::render(double& deltaTime)
     drawHudElements(deltaTime);
 
 	// old SDL_Image
-    SDL_BlitSurface(optimizedSurface, NULL, windowSurface, pictureRect);
+    //SDL_BlitSurface(optimizedSurface, NULL, windowSurface, pictureRect);
+
+    SDL_BlitSurface(optimizedMonstersSurfaces.at(2), NULL, windowSurface, monsterRectangle);
 
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
     SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);

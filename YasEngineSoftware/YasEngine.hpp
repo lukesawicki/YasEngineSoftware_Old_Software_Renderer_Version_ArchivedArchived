@@ -58,7 +58,9 @@ class YasEngine
 		SDL_Surface* customImageSurface;
 		SDL_Surface* optimizedSurface;
 		SDL_Rect* pictureRect;
+		SDL_Rect* map;
 
+		SDL_PixelFormat* windowsSurfaceFormat;
 	
 		PixelsTable* pixelsTable;
 		Vector2D<int>* windowDimensions;
@@ -105,6 +107,56 @@ class YasEngine
 		void handlePhysics();
 		void prepareGameWorld();
 		void preparePlayer();
+
+
+		std::vector<std::string> filenames;
+		std::vector<SDL_Surface*> tmpMonsterSurface;
+		std::vector<SDL_Surface*> optimizedMonstersSurfaces;
+
+		SDL_Rect* monsterRectangle;
+
+		void loadMonsters()
+		{
+			std::string basePath = SDL_GetBasePath();
+			for(int i=0; i < 3; i++)
+			{
+				std::string monsterFile;
+				filenames.push_back(monsterFile.append(basePath).append("monster_v").append(std::to_string(i)).append(".png"));
+			}
+
+			for(int i=0; i<3; i++)
+			{
+				tmpMonsterSurface.push_back(IMG_Load(filenames.at(i).c_str()));
+			}
+
+			for(int i=0; i<3; i++)
+			{
+				optimizedMonstersSurfaces.push_back(SDL_ConvertSurface(tmpMonsterSurface.at(i), windowsSurfaceFormat, 0));
+			}
+
+			for(int i=0; i<3; i++)
+			{
+				SDL_FreeSurface(tmpMonsterSurface.at(i));
+			}
+
+			monsterRectangle = new SDL_Rect();
+			monsterRectangle->x = 0;
+			monsterRectangle->y = 0;
+			monsterRectangle->w = 76;
+			monsterRectangle->h = 81;
+
+
+			SDL_Color rgb;
+			for (int i = 0; i < 3; i++)
+			{
+				Uint32 data = getpixel(optimizedMonstersSurfaces.at(i), 1, 1);
+				SDL_GetRGBA(data, optimizedMonstersSurfaces.at(i)->format, &rgb.r, &rgb.g, &rgb.b, &rgb.a);
+			}
+		}
+		void loadBuildings();
+		void loadProjectile();
+		void loadTruck();
+
 		void handleInput(SDL_Event& event);
 		void update(double& deltaTime);
 		void drawHudElements(double& deltaTime);
