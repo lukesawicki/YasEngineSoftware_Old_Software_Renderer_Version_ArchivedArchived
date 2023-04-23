@@ -1,15 +1,16 @@
-#include "YasEngine.hpp"
-#include <cstdlib>     /* srand, rand */
-#include <ctime> 
-#include<SDL_endian.h>
+#include"YasEngine.hpp"
+#include<cstdlib>     /* srand, rand */
+#include<ctime>
+#include<bit>
+#include<SDL2/SDL_endian.h>
 #include"VariousTools.hpp"
 #include"Circle.hpp"
-#include "Collider.hpp"
-#include "CosinusPointsGenerator.hpp"
-#include "FibonacciPointsGenerator.hpp"
+#include"Collider.hpp"
+#include"CosinusPointsGenerator.hpp"
+#include"FibonacciPointsGenerator.hpp"
 #include"Math.hpp"
-#include "PrimeNumbersPointsGenerator.hpp"
-#include "SinusPointsGenerator.hpp"
+#include"PrimeNumbersPointsGenerator.hpp"
+#include"SinusPointsGenerator.hpp"
 
 YasEngine* YasEngine::instance = nullptr;
 
@@ -20,6 +21,7 @@ void YasEngine::initialize()
     prepareRendering();
     prepareGameWorld();
     preparePlayer();
+    prepareSoundAndMusic();
 
     mathPlay = new MathematicsFunSurface(0, 0, static_cast<int>(windowDimensions->x * 0.5F), static_cast<int>(windowDimensions->y * 0.5F), BLACK);
 
@@ -41,6 +43,13 @@ void YasEngine::clean()
     delete mathPlay;
     delete pixelsTable;
     delete windowDimensions;
+
+    // clean up our resources
+    Mix_FreeChunk(shootSound);
+    Mix_FreeChunk(hitSound);
+    Mix_FreeMusic(music);
+    Mix_CloseAudio();
+	Mix_Quit();
     SDL_DestroyTexture(screenTexture);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
@@ -98,10 +107,29 @@ void YasEngine::prepareRendering()
     SDL_RenderSetIntegerScale(renderer, SDL_TRUE);
 
     screenTexture   =   SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
+///////////////////
+
+    std::string basePath = SDL_GetBasePath();
+
+    std::string pictureFilePath;
+    pictureFilePath.append(basePath);
+
+    //timizedSurface->pixels
+
+////////////////
 }
 
 void YasEngine::prepareBasicSettings()
 {
+    if (endianness)
+    {
+        std::cout << "BIG ENDIAN" << std::endl;
+    }
+    else
+    {
+        std::cout << "LITTLE ENDIAN" << std::endl;
+    }
+
     SDL_Init(SDL_INIT_EVERYTHING);
 
     windowDimensions    =   new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -220,9 +248,9 @@ void YasEngine::update(double& deltaTime)
     Projectile* projectile = player->shoot();
     if (projectile != nullptr)
     {
+        Mix_PlayChannel(-1, shootSound, 0);
         objectsToDraw.push_back(projectile);
     }
-
 
     if(go != nullptr)
     {
@@ -314,11 +342,56 @@ void YasEngine::handlePhysics()
                     {
                         objectsToDraw[i]->isAlive = false;
                         objectsToDraw[j]->isAlive = false;
+                        Mix_PlayChannel(-1, hitSound, 0);
                     }
                 }
             }
         }
     }
+}
+
+void YasEngine::prepareSoundAndMusic()
+{
+    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
+    {
+        std::cout << "Error cannot open audio device" << std::endl;
+    }
+
+    std::string basePath = SDL_GetBasePath();
+
+    std::string musicFilePath;
+    musicFilePath.append(basePath);
+    musicFilePath.append("\\music.wav");
+
+    std::string shootSoundFilePath;
+    shootSoundFilePath.append(basePath);
+    shootSoundFilePath.append("\\shoot.wav");
+
+    std::string hitSoundFilePath;
+    hitSoundFilePath.append(basePath);
+    hitSoundFilePath.append("\\hit.wav");
+    std::cout << "hit.wav path: -> " << hitSoundFilePath << std::endl;
+
+    Mix_Init(MIX_DEFAULT_FORMAT);
+
+    music = Mix_LoadMUS(musicFilePath.c_str());
+    if (music == NULL)
+    {
+        std::cout << "Error while loading music. Cannot load music." << std::endl;
+        std::cout << "SDL message: " << SDL_GetError() << std::endl << " | Mix library error: " << Mix_GetError() << std::endl;
+        quit = true;
+    }
+
+    shootSound = Mix_LoadWAV(shootSoundFilePath.c_str());
+    hitSound = Mix_LoadWAV(hitSoundFilePath.c_str());
+
+    if (shootSound == NULL || hitSound == NULL)
+    {
+        std::cout << "Error while loading sounds. Cannot load sounds." << std::endl;
+        std::cout << "SDL message: " << SDL_GetError() << std::endl << " | Mix library error: " << Mix_GetError() << std::endl;
+        quit = true;
+    }
+    Mix_PlayMusic(music, 999);
 }
 
 void YasEngine::prepareGameWorld()

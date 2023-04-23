@@ -1,6 +1,6 @@
 #ifndef PIXELSTABLE_HPP
 #define PIXELSTABLE_HPP
-#include<SDL.h>
+#include<SDL2/SDL.h>
 #include"Vector2D.hpp"
 #include"Vector4D.hpp"
 

@@ -3,7 +3,7 @@
 #include"Vector2D.hpp"
 #include"Vector4D.hpp"
 #include"GameObject.hpp"
-#include<SDL.h>
+#include<SDL2/SDL.h>
 
 class ViewPort
 {

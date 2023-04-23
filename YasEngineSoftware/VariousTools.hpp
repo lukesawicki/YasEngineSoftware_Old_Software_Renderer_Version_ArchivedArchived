@@ -1,7 +1,7 @@
 #ifndef VARIOUSTOOLS_HPP
 #define VARIOUSTOOLS_HPP
 #include<vector>
-#include<SDL.h>
+#include<SDL2/SDL.h>
 
 static void listRenderersInformation()
 {

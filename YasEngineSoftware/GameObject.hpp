@@ -1,6 +1,6 @@
 #ifndef GAMEOBJECT_HPP
 #define GAMEOBJECT_HPP
-#include<SDL.h>
+#include<SDL2/SDL.h>
 
 #include"Collider.hpp"
 #include"Vector2D.hpp"

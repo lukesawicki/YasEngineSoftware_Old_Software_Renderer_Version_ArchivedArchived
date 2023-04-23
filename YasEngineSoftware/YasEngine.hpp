@@ -3,6 +3,7 @@
 #include<stdio.h>
 #include<iostream>
 #include<vector>
+#include<SDL_mixer.h>
 #include"Vector2D.hpp"
 #include"YasGraphicsLibrary.hpp"
 #include"TimePicker.hpp"
@@ -16,7 +17,6 @@
 #include "Spawner.hpp"
 
 //#define DEBUG_DRAWINGS
-
 
 class YasEngine
 {	
@@ -44,7 +44,9 @@ class YasEngine
 		Vector2D<float> B = Vector2D<float>(100, -350);
 
 		static YasEngine* instance;
-		
+
+		const bool endianness = std::endian::native == std::endian::big;
+
 		SDL_Window* window;
 		SDL_Renderer* renderer;
 		SDL_Texture* screenTexture;
@@ -70,7 +72,11 @@ class YasEngine
 		std::vector<GameObject*> objectsToDraw;
 		Player* player;
 		MathematicsFunSurface* mathPlay;
-		
+
+		Mix_Music* music;
+		Mix_Chunk* shootSound;
+		Mix_Chunk* hitSound;
+
 		PointsSet* sinusPoints;
 		PointsSet* cosinusPoints;
 		PointsSet* fibonacciePoints;
@@ -94,6 +100,8 @@ class YasEngine
 		void update(double& deltaTime);
 		void drawHudElements(double& deltaTime);
 		void render(double& deltaTime);
+
+		void prepareSoundAndMusic();
 };
 
 #endif

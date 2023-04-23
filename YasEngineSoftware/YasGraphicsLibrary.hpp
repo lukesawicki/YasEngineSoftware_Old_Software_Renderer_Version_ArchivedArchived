@@ -1,7 +1,7 @@
 #ifndef YASGRAPHICSLIBRARY_HPP
 #define YASGRAPHICSLIBRARY_HPP
 #include<vector>
-#include<SDL.h>
+#include<SDL2/SDL.h>
 #include"GameObject.hpp"
 #include"Vector2D.hpp"
 #include"Vector4D.hpp"
