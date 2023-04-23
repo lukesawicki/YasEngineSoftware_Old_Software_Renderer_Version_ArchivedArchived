@@ -110,10 +110,6 @@ void YasEngine::prepareRendering()
 ///////////////////
 
     std::string basePath = SDL_GetBasePath();
-
-    std::string pictureFilePath;
-    pictureFilePath.append(basePath);
-
     //timizedSurface->pixels
 
 ////////////////
