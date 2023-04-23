@@ -1,5 +1,11 @@
 #include"Projectile.hpp"
 
+static Uint32 kill(Projectile* projectileToKill, Uint32 interval, void* param)
+{
+	projectileToKill->isAlive = false;
+	return 0;
+}
+
 Projectile::Projectile(float radius, float x, float y, Vector2D<float> direction)
 {
 	isAlive = true;
