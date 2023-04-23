@@ -299,6 +299,8 @@ void YasEngine::render(double& deltaTime)
 
     mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
 
+    drawRectangle(*pixelsTable, -110, -110, 32, 32,YELLOW);
+
     verticalLineOnWholeScreen(*pixelsTable, 0, GREEN);
     horizontalLineOnWholeScreen(*pixelsTable, 0, RED);
 
@@ -411,8 +413,6 @@ void YasEngine::prepareGameWorld()
         fibonacciePoints = fibonacciPointsGenerator.generatePoints();
         primeNumbersPoints = primeNumberPointsGenerator.generatePoints();
 
-        
         spawner.position.x = -200;
         spawner.position.y = 0;
-
 }

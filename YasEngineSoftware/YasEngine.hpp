@@ -15,6 +15,7 @@
 #include "PointsGenerator.hpp"
 #include "PointsSet.hpp"
 #include "Spawner.hpp"
+#include "SDL_mixer.h"
 
 //#define DEBUG_DRAWINGS
 

@@ -61,4 +61,5 @@ void windowPositionToCartesianPosition(float& x, float& y, Vector2D<int>* window
 
 void drawMandelbrotSet();
 
+void drawRectangle(PixelsTable& pixelsTable, int x, int y, int width, int height, Vector4D<Uint8> color);
 #endif
