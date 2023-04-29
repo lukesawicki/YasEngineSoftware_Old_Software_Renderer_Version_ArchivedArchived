@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.25)
 project(YasEngineSoftware)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 20)
 
 include_directories(.)
 find_package(SDL2 REQUIRED SDL2)
@@ -52,15 +52,5 @@ add_executable(YasEngineSoftware
         YasGraphicsLibrary.hpp)
 target_link_libraries(YasEngineSoftware
         PRIVATE SDL2
+        PRIVATE libSDL2_mixer.so
         )
-
-#cmake_minimum_required(VERSION 3.25)
-#project(SDLdemo)
-#
-#set(CMAKE_CXX_STANDARD 20)
-##set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -lSDL2")
-#find_package(SDL2 REQUIRED SDL2)
-#add_executable(SDLdemo main.cpp)
-#target_link_libraries(SDLdemo
-#        PRIVATE SDL2
-#        )

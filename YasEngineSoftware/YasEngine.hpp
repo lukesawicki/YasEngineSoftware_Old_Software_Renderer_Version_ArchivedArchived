@@ -3,7 +3,8 @@
 #include<stdio.h>
 #include<iostream>
 #include<vector>
-#include<SDL_mixer.h>
+#include<SDL2/SDL_mixer.h>
+#include<bit>
 #include"Vector2D.hpp"
 #include"YasGraphicsLibrary.hpp"
 #include"TimePicker.hpp"
@@ -12,12 +13,11 @@
 #include"Player.hpp"
 #include"InputOutputHandler.hpp"
 #include"MathematicsFunSurface.hpp"
-#include "PointsGenerator.hpp"
-#include "PointsSet.hpp"
-#include "Spawner.hpp"
-#include "SDL_mixer.h"
+#include"PointsGenerator.hpp"
+#include"PointsSet.hpp"
+#include"Spawner.hpp"
 
-//#define DEBUG_DRAWINGS
+//using namespace std;
 
 class YasEngine
 {	

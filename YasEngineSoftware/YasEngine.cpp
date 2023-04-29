@@ -1,8 +1,8 @@
 #include"YasEngine.hpp"
-#include<cstdlib>     /* srand, rand */
+//#include<cstdlib>     /* srand, rand */
 #include<ctime>
-#include<bit>
-#include<SDL2/SDL_endian.h>
+//#include<bit>
+//#include<SDL2/SDL_endian.h>
 #include"VariousTools.hpp"
 #include"Circle.hpp"
 #include"Collider.hpp"
@@ -109,8 +109,8 @@ void YasEngine::prepareRendering()
     screenTexture   =   SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
 ///////////////////
 
-    std::string basePath = SDL_GetBasePath();
-    //timizedSurface->pixels
+//    std::string basePath = SDL_GetBasePath();
+//    timizedSurface->pixels
 
 ////////////////
 }
@@ -356,18 +356,19 @@ void YasEngine::prepareSoundAndMusic()
     }
 
     std::string basePath = SDL_GetBasePath();
+    std::cout << "Base path is: " << basePath << std::endl;
 
     std::string musicFilePath;
     musicFilePath.append(basePath);
-    musicFilePath.append("\\music.wav");
+    musicFilePath.append("music.wav");
 
     std::string shootSoundFilePath;
     shootSoundFilePath.append(basePath);
-    shootSoundFilePath.append("\\shoot.wav");
+    shootSoundFilePath.append("shoot.wav");
 
     std::string hitSoundFilePath;
     hitSoundFilePath.append(basePath);
-    hitSoundFilePath.append("\\hit.wav");
+    hitSoundFilePath.append("hit.wav");
     std::cout << "hit.wav path: -> " << hitSoundFilePath << std::endl;
 
     Mix_Init(MIX_DEFAULT_FORMAT);
