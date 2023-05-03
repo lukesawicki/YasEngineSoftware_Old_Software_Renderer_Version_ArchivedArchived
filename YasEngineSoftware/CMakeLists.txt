@@ -49,7 +49,10 @@ add_executable(YasEngineSoftware
         YasEngine.cpp
         YasEngine.hpp
         YasGraphicsLibrary.cpp
-        YasGraphicsLibrary.hpp)
+        YasGraphicsLibrary.hpp
+        ScreenWriter.hpp
+        ScreenWriter.cpp
+        FontObject.cpp FontObject.hpp FontSurface.hpp FontSurface.cpp)
 target_link_libraries(YasEngineSoftware
         PRIVATE SDL2
         PRIVATE libSDL2_mixer.so

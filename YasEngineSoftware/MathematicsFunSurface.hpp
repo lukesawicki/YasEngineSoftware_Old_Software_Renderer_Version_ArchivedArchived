@@ -25,7 +25,7 @@ class MathematicsFunSurface final : public ViewPort
 		// void drawNumbersAsGroupOfNotConnectedLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color);
 		void drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos);
 
-		void horizontalLineOnScreen(int y, Vector4D<Uint8> color)
+		void horizontalLineOnSurface(int y, Vector4D<Uint8> color)
 		{
 			int maxX = static_cast<int>(0.5F * viewPortSizes.x);
 			for (int i = -maxX; i < maxX; i++) //X
@@ -34,7 +34,7 @@ class MathematicsFunSurface final : public ViewPort
 			}
 		}
 
-		void verticalLineOnScreen(int x, Vector4D<Uint8> color)
+		void verticalLineOnSurface(int x, Vector4D<Uint8> color)
 		{
 			int maxY = static_cast<int>(0.5F * viewPortSizes.y);
 			for (int i = -maxY; i < maxY; i++) //X

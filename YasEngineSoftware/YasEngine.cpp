@@ -282,8 +282,8 @@ void YasEngine::render(double& deltaTime)
     int vertical = static_cast<int>(-WINDOW_WIDTH * 0.25F);
     int horizontal = static_cast<int>(-WINDOW_HEIGHT * 0.25F);
 
-    mathPlay->verticalLineOnScreen(0, GREEN);
-    mathPlay->horizontalLineOnScreen(0, RED);//-WINDOW_HEIGHT * 0.25F
+    mathPlay->verticalLineOnSurface(0, GREEN);
+    mathPlay->horizontalLineOnSurface(0, RED);//-WINDOW_HEIGHT * 0.25F
 
 	// mathPlay->drawNumbersAsGroupOfNotConnectedLines(sinusPoints, 100, YELLOW);
 
