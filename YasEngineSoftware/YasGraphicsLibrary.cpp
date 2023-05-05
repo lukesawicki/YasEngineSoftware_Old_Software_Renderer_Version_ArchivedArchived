@@ -376,6 +376,28 @@
         return vertices;
     }
 
+    void drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos, PixelsTable& pixelsTable)
+    {
+        int step = 1;
+        if(!areLinesContinuos)
+        {
+            step = 2;
+        }
+        if (maximumNumberOfVertices > 1)
+        {
+            if (maximumNumberOfVertices <= 3) {
+                drawLine(vertices[0], vertices[1], pixelsTable, color);
+            }
+            else
+            {
+                for (int i = 0; i < maximumNumberOfVertices -1; i += step)
+                {
+                    drawLine(vertices[i], vertices[i + 1], pixelsTable, color);
+                }
+            }
+        }
+    }
+
     void drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable)
     {
         if (maximumNumberOfVertices <= 3)

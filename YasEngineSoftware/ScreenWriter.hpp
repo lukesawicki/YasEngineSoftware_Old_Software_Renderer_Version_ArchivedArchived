@@ -8,17 +8,17 @@
 #include "FontObject.hpp"
 #include "FontSurface.hpp"
 
-class ScreenWriter final : public ViewPort
+class ScreenWriter final
 {
     public:
         static const int NUMBER_OF_CHARACTERS = 37;
         struct Font {
             Font()
             {
-                vertisecBaseData = new FontObject();
+                verticesBaseData = new FontObject();
                 surface = new FontSurface();
             }
-            FontObject* vertisecBaseData;
+            FontObject* verticesBaseData;
             FontSurface* surface;
         };
         std::vector<Font*> fonts;
@@ -28,6 +28,7 @@ class ScreenWriter final : public ViewPort
         void initializeFontObjects();
         void initializeFontSurfaces();
         void prepareFontVertices();
+        void write(int x, int y, std::string text,  PixelsTable& pixelsTable);
         void write(int x, int y, const char * text, SDL_Surface *na_czym);
         void write(int x, int y, std::string text, SDL_Surface *na_czym);
         void write(int x, int y, short integers, SDL_Surface *na_czym);

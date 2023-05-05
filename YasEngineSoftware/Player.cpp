@@ -179,57 +179,11 @@ void Player::setDirection(float x, float y)
 
 void Player::generate()
 {
-	worldVertices[0].x = position.x + localVertices[0].x;
-	worldVertices[0].y = position.y + localVertices[0].y;
-
-	worldVertices[1].x = position.x + localVertices[1].x;
-	worldVertices[1].y = position.y + localVertices[1].y;
-
-	worldVertices[2].x = position.x + localVertices[2].x;
-	worldVertices[2].y = position.y + localVertices[2].y;
-
-	worldVertices[3].x = position.x + localVertices[3].x;
-	worldVertices[3].y = position.y + localVertices[3].y;
-
-	worldVertices[4].x = position.x + localVertices[4].x;
-	worldVertices[4].y = position.y + localVertices[4].y;
-
-	worldVertices[5].x = position.x + localVertices[5].x;
-	worldVertices[5].y = position.y + localVertices[5].y;
-
-	worldVertices[6].x = position.x + localVertices[6].x;
-	worldVertices[6].y = position.y + localVertices[6].y;
-
-	worldVertices[7].x = position.x + localVertices[7].x;
-	worldVertices[7].y = position.y + localVertices[7].y;
-
-	worldVertices[8].x = position.x + localVertices[8].x;
-	worldVertices[8].y = position.y + localVertices[8].y;
-
-	worldVertices[9].x = position.x + localVertices[9].x;
-	worldVertices[9].y = position.y + localVertices[9].y;
-
-	worldVertices[10].x = position.x + localVertices[10].x;
-	worldVertices[10].y = position.y + localVertices[10].y;
-
-	worldVertices[11].x = position.x + localVertices[11].x;
-	worldVertices[11].y = position.y + localVertices[11].y;
-
-	worldVertices[12].x = position.x + localVertices[12].x;
-	worldVertices[12].y = position.y + localVertices[12].y;
-
-	worldVertices[13].x = position.x + localVertices[13].x;
-	worldVertices[13].y = position.y + localVertices[13].y;
-
-	worldVertices[14].x = position.x + localVertices[14].x;
-	worldVertices[14].y = position.y + localVertices[14].y;
-
-	worldVertices[15].x = position.x + localVertices[15].x;
-	worldVertices[15].y = position.y + localVertices[15].y;
-
-	worldVertices[16].x = position.x + localVertices[16].x;
-	worldVertices[16].y = position.y + localVertices[16].y;
-
+    for (int i = 0; i < numberOfVertices; i++)
+    {
+        worldVertices[i].x = position.x + localVertices[i].x;
+        worldVertices[i].y = position.y + localVertices[i].y;
+    }
 }
 
 void Player::generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices)

@@ -16,6 +16,7 @@
 #include"PointsGenerator.hpp"
 #include"PointsSet.hpp"
 #include"Spawner.hpp"
+#include "ScreenWriter.hpp"
 
 //using namespace std;
 
@@ -84,6 +85,8 @@ class YasEngine
 		PointsSet* primeNumbersPoints;
 
 		Spawner spawner;
+
+        ScreenWriter writer;
 
 		YasEngine() {};
 		bool shouldApplicationStopRunning = false;

@@ -23,6 +23,9 @@ void YasEngine::initialize()
     preparePlayer();
     prepareSoundAndMusic();
 
+    writer.initialize();
+
+
     mathPlay = new MathematicsFunSurface(0, windowDimensions->y * 0.5F, static_cast<int>(windowDimensions->x * 0.5F), static_cast<int>(windowDimensions->y * 0.5F), BLACK);
 
     SinusPointsGenerator sinusPointsGenerator;
@@ -301,6 +304,8 @@ void YasEngine::render(double& deltaTime)
     horizontalLineOnWholeScreen(*pixelsTable, 0, RED);
 
     drawHudElements(deltaTime);
+
+    writer.write(0, 0, "A", *pixelsTable);
 
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
     SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);
