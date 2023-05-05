@@ -27,6 +27,7 @@ class ScreenWriter final : public ViewPort
         void initialize();
         void initializeFontObjects();
         void initializeFontSurfaces();
+        void prepareFontVertices();
         void write(int x, int y, const char * text, SDL_Surface *na_czym);
         void write(int x, int y, std::string text, SDL_Surface *na_czym);
         void write(int x, int y, short integers, SDL_Surface *na_czym);
