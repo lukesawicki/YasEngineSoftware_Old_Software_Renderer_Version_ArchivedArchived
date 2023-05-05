@@ -527,32 +527,32 @@ void ScreenWriter::prepareFontVertices()
 
     fonts[10]->verticesBaseData->numberOfVertices = 8;
 
-    fonts[10]->verticesBaseData->localVertices[8].x = -5;
-    fonts[10]->verticesBaseData->localVertices[8].y = -7;
+    fonts[10]->verticesBaseData->localVertices[0].x = -5;
+    fonts[10]->verticesBaseData->localVertices[0].y = -7;
 
-    fonts[10]->verticesBaseData->localVertices[9].x = -5;
-    fonts[10]->verticesBaseData->localVertices[9].y = 0;
-
-
-    fonts[10]->verticesBaseData->localVertices[10].x = -5;
-    fonts[10]->verticesBaseData->localVertices[10].y = 0;
-
-    fonts[10]->verticesBaseData->localVertices[11].x = -5;
-    fonts[10]->verticesBaseData->localVertices[11].y = 7;
+    fonts[10]->verticesBaseData->localVertices[1].x = -5;
+    fonts[10]->verticesBaseData->localVertices[1].y = 0;
 
 
-    fonts[10]->verticesBaseData->localVertices[12].x = -5;
-    fonts[10]->verticesBaseData->localVertices[12].y = 0;
+    fonts[10]->verticesBaseData->localVertices[2].x = -5;
+    fonts[10]->verticesBaseData->localVertices[2].y = 0;
 
-    fonts[10]->verticesBaseData->localVertices[13].x = 5;
-    fonts[10]->verticesBaseData->localVertices[13].y = 7;
+    fonts[10]->verticesBaseData->localVertices[3].x = -5;
+    fonts[10]->verticesBaseData->localVertices[3].y = 7;
 
 
-    fonts[10]->verticesBaseData->localVertices[14].x = -5;
-    fonts[10]->verticesBaseData->localVertices[14].y = 0;
+    fonts[10]->verticesBaseData->localVertices[4].x = -5;
+    fonts[10]->verticesBaseData->localVertices[4].y = 0;
 
-    fonts[10]->verticesBaseData->localVertices[15].x = 5;
-    fonts[10]->verticesBaseData->localVertices[15].y = -7;
+    fonts[10]->verticesBaseData->localVertices[5].x = 5;
+    fonts[10]->verticesBaseData->localVertices[5].y = 7;
+
+
+    fonts[10]->verticesBaseData->localVertices[6].x = -5;
+    fonts[10]->verticesBaseData->localVertices[6].y = 0;
+
+    fonts[10]->verticesBaseData->localVertices[7].x = 5;
+    fonts[10]->verticesBaseData->localVertices[7].y = -7;
 
     // L 4
     fonts[11]->verticesBaseData->localVertices = new Vector2D<float>[4];
@@ -732,10 +732,10 @@ void ScreenWriter::prepareFontVertices()
     fonts[16]->verticesBaseData->localVertices[5].y = -7;
 
 
-    fonts[16]->verticesBaseData->localVertices[6].x = -5;
-    fonts[14]->verticesBaseData->localVertices[6].y = -7;
+    fonts[16]->verticesBaseData->localVertices[6].x =  5;
+    fonts[16]->verticesBaseData->localVertices[6].y = -7;
 
-    fonts[16]->verticesBaseData->localVertices[7].x = 5;
+    fonts[16]->verticesBaseData->localVertices[7].x = -5;
     fonts[16]->verticesBaseData->localVertices[7].y = -7;
 
 
@@ -743,7 +743,7 @@ void ScreenWriter::prepareFontVertices()
     fonts[16]->verticesBaseData->localVertices[8].y = -5;
 
     fonts[16]->verticesBaseData->localVertices[9].x = 7;
-    fonts[16]->verticesBaseData->localVertices[9].y = -7;
+    fonts[16]->verticesBaseData->localVertices[9].y = -8;
 
     // R 12
     fonts[17]->verticesBaseData->localVertices = new Vector2D<float>[12];
@@ -1380,7 +1380,7 @@ void ScreenWriter::prepareFontVertices()
 
     //   SPACE (PL SPACJA)
     fonts[36]->verticesBaseData->localVertices = new Vector2D<float>[2];
-    fonts[36]->verticesBaseData->worldVertices = new Vector2D<float>[10];
+    fonts[36]->verticesBaseData->worldVertices = new Vector2D<float>[2];
 
     fonts[36]->verticesBaseData->numberOfVertices = 2;
 
