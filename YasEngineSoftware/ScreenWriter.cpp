@@ -157,8 +157,6 @@ void ScreenWriter::initializeFontSurfaces()
 
 void ScreenWriter::prepareFontVertices()
 {
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[6];
-
     //A 6
     fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[6];
 
@@ -223,7 +221,7 @@ void ScreenWriter::prepareFontVertices()
     fonts[1]->vertisecBaseData->localVertices[12].y = ;
 
     fonts[1]->vertisecBaseData->localVertices[13].x = ;
-    fonts[]->vertisecBaseData->localVertices[13].y = ;
+    fonts[1]->vertisecBaseData->localVertices[13].y = ;
 
     fonts[1]->vertisecBaseData->localVertices[14].x = ;
     fonts[1]->vertisecBaseData->localVertices[14].y = ;
@@ -233,917 +231,940 @@ void ScreenWriter::prepareFontVertices()
 
 
     //C 6
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[6];
+    fonts[2]->vertisecBaseData->localVertices = new Vector2D<float>[6];
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[2]->vertisecBaseData->localVertices[0].x = ;
+    fonts[2]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[2]->vertisecBaseData->localVertices[1].x = ;
+    fonts[2]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[2]->vertisecBaseData->localVertices[2].x = ;
+    fonts[2]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[2]->vertisecBaseData->localVertices[3].x = ;
+    fonts[2]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[2]->vertisecBaseData->localVertices[4].x = ;
+    fonts[2]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    fonts[2]->vertisecBaseData->localVertices[5].x = ;
+    fonts[2]->vertisecBaseData->localVertices[5].y = ;
 
-    //D 8
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    // D 8
+    fonts[3]->vertisecBaseData->localVertices = new Vector2D<float>[8];
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[3]->vertisecBaseData->localVertices[0].x = ;
+    fonts[3]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[3]->vertisecBaseData->localVertices[1].x = ;
+    fonts[3]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[3]->vertisecBaseData->localVertices[2].x = ;
+    fonts[3]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[3]->vertisecBaseData->localVertices[3].x = ;
+    fonts[3]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    fonts[3]->vertisecBaseData->localVertices[4].x = ;
+    fonts[3]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[6].x = ;
-    fonts[]->vertisecBaseData->localVertices[6].y = ;
+    fonts[3]->vertisecBaseData->localVertices[5].x = ;
+    fonts[3]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[7].x = ;
-    fonts[]->vertisecBaseData->localVertices[7].y = ;
+    fonts[3]->vertisecBaseData->localVertices[6].x = ;
+    fonts[3]->vertisecBaseData->localVertices[6].y = ;
 
-    E 10
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[10];
+    fonts[3]->vertisecBaseData->localVertices[7].x = ;
+    fonts[3]->vertisecBaseData->localVertices[7].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    // E 10
+    fonts[4]->vertisecBaseData->localVertices = new Vector2D<float>[10];
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[4]->vertisecBaseData->localVertices[0].x = ;
+    fonts[4]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[4]->vertisecBaseData->localVertices[1].x = ;
+    fonts[4]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[4]->vertisecBaseData->localVertices[2].x = ;
+    fonts[4]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[4]->vertisecBaseData->localVertices[3].x = ;
+    fonts[4]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    fonts[4]->vertisecBaseData->localVertices[4].x = ;
+    fonts[4]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[6].x = ;
-    fonts[]->vertisecBaseData->localVertices[6].y = ;
+    fonts[4]->vertisecBaseData->localVertices[5].x = ;
+    fonts[4]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[7].x = ;
-    fonts[]->vertisecBaseData->localVertices[7].y = ;
+    fonts[4]->vertisecBaseData->localVertices[6].x = ;
+    fonts[4]->vertisecBaseData->localVertices[6].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[8].x = ;
-    fonts[]->vertisecBaseData->localVertices[8].y = ;
+    fonts[4]->vertisecBaseData->localVertices[7].x = ;
+    fonts[4]->vertisecBaseData->localVertices[7].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[9].x = ;
-    fonts[]->vertisecBaseData->localVertices[9].y = ;
+    fonts[4]->vertisecBaseData->localVertices[8].x = ;
+    fonts[4]->vertisecBaseData->localVertices[8].y = ;
 
+    fonts[4]->vertisecBaseData->localVertices[9].x = ;
+    fonts[4]->vertisecBaseData->localVertices[9].y = ;
 
-    F 8
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[8];
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    // F 8
+    fonts[5]->vertisecBaseData->localVertices = new Vector2D<float>[8];
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[5]->vertisecBaseData->localVertices[0].x = ;
+    fonts[5]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[5]->vertisecBaseData->localVertices[1].x = ;
+    fonts[5]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[5]->vertisecBaseData->localVertices[2].x = ;
+    fonts[5]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[5]->vertisecBaseData->localVertices[3].x = ;
+    fonts[5]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    fonts[5]->vertisecBaseData->localVertices[4].x = ;
+    fonts[5]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[6].x = ;
-    fonts[]->vertisecBaseData->localVertices[6].y = ;
+    fonts[5]->vertisecBaseData->localVertices[5].x = ;
+    fonts[5]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[7].x = ;
-    fonts[]->vertisecBaseData->localVertices[7].y = ;
+    fonts[5]->vertisecBaseData->localVertices[6].x = ;
+    fonts[5]->vertisecBaseData->localVertices[6].y = ;
 
-    G 10
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[10];
+    fonts[5]->vertisecBaseData->localVertices[7].x = ;
+    fonts[5]->vertisecBaseData->localVertices[7].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    // G 10
+    fonts[6]->vertisecBaseData->localVertices = new Vector2D<float>[10];
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[6]->vertisecBaseData->localVertices[0].x = ;
+    fonts[6]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[6]->vertisecBaseData->localVertices[1].x = ;
+    fonts[6]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[6]->vertisecBaseData->localVertices[2].x = ;
+    fonts[6]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[6]->vertisecBaseData->localVertices[3].x = ;
+    fonts[6]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    fonts[6]->vertisecBaseData->localVertices[4].x = ;
+    fonts[6]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[6].x = ;
-    fonts[]->vertisecBaseData->localVertices[6].y = ;
+    fonts[6]->vertisecBaseData->localVertices[5].x = ;
+    fonts[6]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[7].x = ;
-    fonts[]->vertisecBaseData->localVertices[7].y = ;
+    fonts[6]->vertisecBaseData->localVertices[6].x = ;
+    fonts[6]->vertisecBaseData->localVertices[6].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[8].x = ;
-    fonts[]->vertisecBaseData->localVertices[8].y = ;
+    fonts[6]->vertisecBaseData->localVertices[7].x = ;
+    fonts[6]->vertisecBaseData->localVertices[7].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[9].x = ;
-    fonts[]->vertisecBaseData->localVertices[9].y = ;
+    fonts[6]->vertisecBaseData->localVertices[8].x = ;
+    fonts[6]->vertisecBaseData->localVertices[8].y = ;
 
-    H 10
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[10];
+    fonts[6]->vertisecBaseData->localVertices[9].x = ;
+    fonts[6]->vertisecBaseData->localVertices[9].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    // H 10
+    fonts[7]->vertisecBaseData->localVertices = new Vector2D<float>[10];
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[7]->vertisecBaseData->localVertices[0].x = ;
+    fonts[7]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[7]->vertisecBaseData->localVertices[1].x = ;
+    fonts[7]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[7]->vertisecBaseData->localVertices[2].x = ;
+    fonts[7]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[7]->vertisecBaseData->localVertices[3].x = ;
+    fonts[7]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    fonts[7]->vertisecBaseData->localVertices[4].x = ;
+    fonts[7]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[6].x = ;
-    fonts[]->vertisecBaseData->localVertices[6].y = ;
+    fonts[7]->vertisecBaseData->localVertices[5].x = ;
+    fonts[7]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[7].x = ;
-    fonts[]->vertisecBaseData->localVertices[7].y = ;
+    fonts[7]->vertisecBaseData->localVertices[6].x = ;
+    fonts[7]->vertisecBaseData->localVertices[6].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[8].x = ;
-    fonts[]->vertisecBaseData->localVertices[8].y = ;
+    fonts[7]->vertisecBaseData->localVertices[7].x = ;
+    fonts[7]->vertisecBaseData->localVertices[7].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[9].x = ;
-    fonts[]->vertisecBaseData->localVertices[9].y = ;
+    fonts[7]->vertisecBaseData->localVertices[8].x = ;
+    fonts[7]->vertisecBaseData->localVertices[8].y = ;
 
-    J 12
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[12];
+    fonts[7]->vertisecBaseData->localVertices[9].x = ;
+    fonts[7]->vertisecBaseData->localVertices[9].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    // I 6
+    fonts[8]->vertisecBaseData->localVertices = new Vector2D<float>[6];
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[8]->vertisecBaseData->localVertices[0].x = ;
+    fonts[8]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[8]->vertisecBaseData->localVertices[1].x = ;
+    fonts[8]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[8]->vertisecBaseData->localVertices[2].x = ;
+    fonts[8]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[8]->vertisecBaseData->localVertices[3].x = ;
+    fonts[8]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    fonts[8]->vertisecBaseData->localVertices[4].x = ;
+    fonts[8]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[6].x = ;
-    fonts[]->vertisecBaseData->localVertices[6].y = ;
+    fonts[8]->vertisecBaseData->localVertices[5].x = ;
+    fonts[8]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[7].x = ;
-    fonts[]->vertisecBaseData->localVertices[7].y = ;
+    // J 10
+    fonts[9]->vertisecBaseData->localVertices = new Vector2D<float>[10];
 
-    fonts[]->vertisecBaseData->localVertices[8].x = ;
-    fonts[]->vertisecBaseData->localVertices[8].y = ;
+    fonts[9]->vertisecBaseData->localVertices[0].x = ;
+    fonts[9]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[9].x = ;
-    fonts[]->vertisecBaseData->localVertices[9].y = ;
+    fonts[9]->vertisecBaseData->localVertices[1].x = ;
+    fonts[9]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[10].x = ;
-    fonts[]->vertisecBaseData->localVertices[10].y = ;
+    fonts[9]->vertisecBaseData->localVertices[2].x = ;
+    fonts[9]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[11].x = ;
-    fonts[]->vertisecBaseData->localVertices[11].y = ;
+    fonts[9]->vertisecBaseData->localVertices[3].x = ;
+    fonts[9]->vertisecBaseData->localVertices[3].y = ;
 
-    K 8
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[8];
+    fonts[9]->vertisecBaseData->localVertices[4].x = ;
+    fonts[9]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[8].x = ;
-    fonts[]->vertisecBaseData->localVertices[8].y = ;
+    fonts[9]->vertisecBaseData->localVertices[5].x = ;
+    fonts[9]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[9].x = ;
-    fonts[]->vertisecBaseData->localVertices[9].y = ;
+    fonts[9]->vertisecBaseData->localVertices[6].x = ;
+    fonts[9]->vertisecBaseData->localVertices[6].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[10].x = ;
-    fonts[]->vertisecBaseData->localVertices[10].y = ;
+    fonts[9]->vertisecBaseData->localVertices[7].x = ;
+    fonts[9]->vertisecBaseData->localVertices[7].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[11].x = ;
-    fonts[]->vertisecBaseData->localVertices[11].y = ;
+    fonts[9]->vertisecBaseData->localVertices[8].x = ;
+    fonts[9]->vertisecBaseData->localVertices[8].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[12].x = ;
-    fonts[]->vertisecBaseData->localVertices[12].y = ;
+    fonts[9]->vertisecBaseData->localVertices[9].x = ;
+    fonts[9]->vertisecBaseData->localVertices[9].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[13].x = ;
-    fonts[]->vertisecBaseData->localVertices[13].y = ;
+    // K 8
+    fonts[10]->vertisecBaseData->localVertices = new Vector2D<float>[8];
 
-    fonts[]->vertisecBaseData->localVertices[14].x = ;
-    fonts[]->vertisecBaseData->localVertices[14].y = ;
+    fonts[10]->vertisecBaseData->localVertices[8].x = ;
+    fonts[10]->vertisecBaseData->localVertices[8].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[15].x = ;
-    fonts[]->vertisecBaseData->localVertices[15].y = ;
+    fonts[10]->vertisecBaseData->localVertices[9].x = ;
+    fonts[10]->vertisecBaseData->localVertices[9].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[16].x = ;
-    fonts[]->vertisecBaseData->localVertices[16].y = ;
+    fonts[10]->vertisecBaseData->localVertices[10].x = ;
+    fonts[10]->vertisecBaseData->localVertices[10].y = ;
 
-    L 4
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[4];
+    fonts[10]->vertisecBaseData->localVertices[11].x = ;
+    fonts[10]->vertisecBaseData->localVertices[11].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[10]->vertisecBaseData->localVertices[12].x = ;
+    fonts[10]->vertisecBaseData->localVertices[12].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[10]->vertisecBaseData->localVertices[13].x = ;
+    fonts[10]->vertisecBaseData->localVertices[13].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[10]->vertisecBaseData->localVertices[14].x = ;
+    fonts[10]->vertisecBaseData->localVertices[14].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[10]->vertisecBaseData->localVertices[15].x = ;
+    fonts[10]->vertisecBaseData->localVertices[15].y = ;
 
-    M 8
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[8];
+    fonts[10]->vertisecBaseData->localVertices[16].x = ;
+    fonts[10]->vertisecBaseData->localVertices[16].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    // L 4
+    fonts[11]->vertisecBaseData->localVertices = new Vector2D<float>[4];
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[11]->vertisecBaseData->localVertices[0].x = ;
+    fonts[11]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[11]->vertisecBaseData->localVertices[1].x = ;
+    fonts[11]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[11]->vertisecBaseData->localVertices[2].x = ;
+    fonts[11]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[11]->vertisecBaseData->localVertices[3].x = ;
+    fonts[11]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    // M 8
+    fonts[12]->vertisecBaseData->localVertices = new Vector2D<float>[8];
 
-    fonts[]->vertisecBaseData->localVertices[6].x = ;
-    fonts[]->vertisecBaseData->localVertices[6].y = ;
+    fonts[12]->vertisecBaseData->localVertices[0].x = ;
+    fonts[12]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[7].x = ;
-    fonts[]->vertisecBaseData->localVertices[7].y = ;
+    fonts[12]->vertisecBaseData->localVertices[1].x = ;
+    fonts[12]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[8].x = ;
-    fonts[]->vertisecBaseData->localVertices[8].y = ;
+    fonts[12]->vertisecBaseData->localVertices[2].x = ;
+    fonts[12]->vertisecBaseData->localVertices[2].y = ;
 
-    N 6
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[6];
+    fonts[12]->vertisecBaseData->localVertices[3].x = ;
+    fonts[12]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[12]->vertisecBaseData->localVertices[4].x = ;
+    fonts[12]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[12]->vertisecBaseData->localVertices[5].x = ;
+    fonts[12]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[12]->vertisecBaseData->localVertices[6].x = ;
+    fonts[12]->vertisecBaseData->localVertices[6].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[12]->vertisecBaseData->localVertices[7].x = ;
+    fonts[12]->vertisecBaseData->localVertices[7].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[12]->vertisecBaseData->localVertices[8].x = ;
+    fonts[12]->vertisecBaseData->localVertices[8].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    // N 6
+    fonts[13]->vertisecBaseData->localVertices = new Vector2D<float>[6];
 
-    O 8
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[8];
+    fonts[13]->vertisecBaseData->localVertices[0].x = ;
+    fonts[13]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[13]->vertisecBaseData->localVertices[1].x = ;
+    fonts[13]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[13]->vertisecBaseData->localVertices[2].x = ;
+    fonts[13]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[13]->vertisecBaseData->localVertices[3].x = ;
+    fonts[13]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[13]->vertisecBaseData->localVertices[4].x = ;
+    fonts[13]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[13]->vertisecBaseData->localVertices[5].x = ;
+    fonts[13]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    // O 8
+    fonts[14]->vertisecBaseData->localVertices = new Vector2D<float>[8];
 
-    fonts[]->vertisecBaseData->localVertices[6].x = ;
-    fonts[]->vertisecBaseData->localVertices[6].y = ;
+    fonts[14]->vertisecBaseData->localVertices[0].x = ;
+    fonts[14]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[7].x = ;
-    fonts[]->vertisecBaseData->localVertices[7].y = ;
+    fonts[14]->vertisecBaseData->localVertices[1].x = ;
+    fonts[14]->vertisecBaseData->localVertices[1].y = ;
 
-    P 10
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[10];
+    fonts[14]->vertisecBaseData->localVertices[2].x = ;
+    fonts[14]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[14]->vertisecBaseData->localVertices[3].x = ;
+    fonts[14]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[14]->vertisecBaseData->localVertices[4].x = ;
+    fonts[14]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[14]->vertisecBaseData->localVertices[5].x = ;
+    fonts[14]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[14]->vertisecBaseData->localVertices[6].x = ;
+    fonts[14]->vertisecBaseData->localVertices[6].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[14]->vertisecBaseData->localVertices[7].x = ;
+    fonts[14]->vertisecBaseData->localVertices[7].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    // P 10
+    fonts[15]->vertisecBaseData->localVertices = new Vector2D<float>[10];
 
-    fonts[]->vertisecBaseData->localVertices[6].x = ;
-    fonts[]->vertisecBaseData->localVertices[6].y = ;
+    fonts[15]->vertisecBaseData->localVertices[0].x = ;
+    fonts[15]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[7].x = ;
-    fonts[]->vertisecBaseData->localVertices[7].y = ;
+    fonts[15]->vertisecBaseData->localVertices[1].x = ;
+    fonts[15]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[8].x = ;
-    fonts[]->vertisecBaseData->localVertices[8].y = ;
+    fonts[15]->vertisecBaseData->localVertices[2].x = ;
+    fonts[15]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[9].x = ;
-    fonts[]->vertisecBaseData->localVertices[9].y = ;
+    fonts[15]->vertisecBaseData->localVertices[3].x = ;
+    fonts[15]->vertisecBaseData->localVertices[3].y = ;
 
-    Q 10
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[10];
+    fonts[15]->vertisecBaseData->localVertices[4].x = ;
+    fonts[15]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[15]->vertisecBaseData->localVertices[5].x = ;
+    fonts[15]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[15]->vertisecBaseData->localVertices[6].x = ;
+    fonts[15]->vertisecBaseData->localVertices[6].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[15]->vertisecBaseData->localVertices[7].x = ;
+    fonts[15]->vertisecBaseData->localVertices[7].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[15]->vertisecBaseData->localVertices[8].x = ;
+    fonts[15]->vertisecBaseData->localVertices[8].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[15]->vertisecBaseData->localVertices[9].x = ;
+    fonts[15]->vertisecBaseData->localVertices[9].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    // Q 10
+    fonts[16]->vertisecBaseData->localVertices = new Vector2D<float>[10];
 
-    fonts[]->vertisecBaseData->localVertices[6].x = ;
-    fonts[]->vertisecBaseData->localVertices[6].y = ;
+    fonts[16]->vertisecBaseData->localVertices[0].x = ;
+    fonts[16]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[7].x = ;
-    fonts[]->vertisecBaseData->localVertices[7].y = ;
+    fonts[16]->vertisecBaseData->localVertices[1].x = ;
+    fonts[16]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[8].x = ;
-    fonts[]->vertisecBaseData->localVertices[8].y = ;
+    fonts[16]->vertisecBaseData->localVertices[2].x = ;
+    fonts[16]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[9].x = ;
-    fonts[]->vertisecBaseData->localVertices[9].y = ;
+    fonts[16]->vertisecBaseData->localVertices[3].x = ;
+    fonts[16]->vertisecBaseData->localVertices[3].y = ;
 
-    R 12
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[12];
+    fonts[16]->vertisecBaseData->localVertices[4].x = ;
+    fonts[16]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[16]->vertisecBaseData->localVertices[5].x = ;
+    fonts[16]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[16]->vertisecBaseData->localVertices[6].x = ;
+    fonts[16]->vertisecBaseData->localVertices[6].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[16]->vertisecBaseData->localVertices[7].x = ;
+    fonts[16]->vertisecBaseData->localVertices[7].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[16]->vertisecBaseData->localVertices[8].x = ;
+    fonts[16]->vertisecBaseData->localVertices[8].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[16]->vertisecBaseData->localVertices[9].x = ;
+    fonts[16]->vertisecBaseData->localVertices[9].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    // R 12
+    fonts[17]->vertisecBaseData->localVertices = new Vector2D<float>[12];
 
-    fonts[]->vertisecBaseData->localVertices[6].x = ;
-    fonts[]->vertisecBaseData->localVertices[6].y = ;
+    fonts[17]->vertisecBaseData->localVertices[0].x = ;
+    fonts[17]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[7].x = ;
-    fonts[]->vertisecBaseData->localVertices[7].y = ;
+    fonts[17]->vertisecBaseData->localVertices[1].x = ;
+    fonts[17]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[8].x = ;
-    fonts[]->vertisecBaseData->localVertices[8].y = ;
+    fonts[17]->vertisecBaseData->localVertices[2].x = ;
+    fonts[17]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[9].x = ;
-    fonts[]->vertisecBaseData->localVertices[9].y = ;
+    fonts[17]->vertisecBaseData->localVertices[3].x = ;
+    fonts[17]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[10].x = ;
-    fonts[]->vertisecBaseData->localVertices[10].y = ;
+    fonts[17]->vertisecBaseData->localVertices[4].x = ;
+    fonts[17]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[11].x = ;
-    fonts[]->vertisecBaseData->localVertices[11].y = ;
+    fonts[17]->vertisecBaseData->localVertices[5].x = ;
+    fonts[17]->vertisecBaseData->localVertices[5].y = ;
 
-    S 10
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[10];
+    fonts[17]->vertisecBaseData->localVertices[6].x = ;
+    fonts[17]->vertisecBaseData->localVertices[6].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[17]->vertisecBaseData->localVertices[7].x = ;
+    fonts[17]->vertisecBaseData->localVertices[7].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[17]->vertisecBaseData->localVertices[8].x = ;
+    fonts[17]->vertisecBaseData->localVertices[8].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[17]->vertisecBaseData->localVertices[9].x = ;
+    fonts[17]->vertisecBaseData->localVertices[9].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[17]->vertisecBaseData->localVertices[10].x = ;
+    fonts[17]->vertisecBaseData->localVertices[10].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[17]->vertisecBaseData->localVertices[11].x = ;
+    fonts[17]->vertisecBaseData->localVertices[11].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    // S 10
+    fonts[18]->vertisecBaseData->localVertices = new Vector2D<float>[10];
 
-    fonts[]->vertisecBaseData->localVertices[6].x = ;
-    fonts[]->vertisecBaseData->localVertices[6].y = ;
+    fonts[18]->vertisecBaseData->localVertices[0].x = ;
+    fonts[18]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[7].x = ;
-    fonts[]->vertisecBaseData->localVertices[7].y = ;
+    fonts[18]->vertisecBaseData->localVertices[1].x = ;
+    fonts[18]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[8].x = ;
-    fonts[]->vertisecBaseData->localVertices[8].y = ;
+    fonts[18]->vertisecBaseData->localVertices[2].x = ;
+    fonts[18]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[9].x = ;
-    fonts[]->vertisecBaseData->localVertices[9].y = ;
+    fonts[18]->vertisecBaseData->localVertices[3].x = ;
+    fonts[18]->vertisecBaseData->localVertices[3].y = ;
 
-    T 2
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[2];
+    fonts[18]->vertisecBaseData->localVertices[4].x = ;
+    fonts[18]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[18]->vertisecBaseData->localVertices[5].x = ;
+    fonts[18]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[18]->vertisecBaseData->localVertices[6].x = ;
+    fonts[18]->vertisecBaseData->localVertices[6].y = ;
 
-    U 6
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[6];
+    fonts[18]->vertisecBaseData->localVertices[7].x = ;
+    fonts[18]->vertisecBaseData->localVertices[7].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[18]->vertisecBaseData->localVertices[8].x = ;
+    fonts[18]->vertisecBaseData->localVertices[8].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[18]->vertisecBaseData->localVertices[9].x = ;
+    fonts[18]->vertisecBaseData->localVertices[9].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    // T 2
+    fonts[19]->vertisecBaseData->localVertices = new Vector2D<float>[2];
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[19]->vertisecBaseData->localVertices[0].x = ;
+    fonts[19]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[19]->vertisecBaseData->localVertices[1].x = ;
+    fonts[19]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    // U 6
+    fonts[20]->vertisecBaseData->localVertices = new Vector2D<float>[6];
 
-    V 4
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[4];
+    fonts[20]->vertisecBaseData->localVertices[0].x = ;
+    fonts[20]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[20]->vertisecBaseData->localVertices[1].x = ;
+    fonts[20]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[20]->vertisecBaseData->localVertices[2].x = ;
+    fonts[20]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[20]->vertisecBaseData->localVertices[3].x = ;
+    fonts[20]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[20]->vertisecBaseData->localVertices[4].x = ;
+    fonts[20]->vertisecBaseData->localVertices[4].y = ;
 
-    W 8
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[8];
+    fonts[20]->vertisecBaseData->localVertices[5].x = ;
+    fonts[20]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    // V 4
+    fonts[21]->vertisecBaseData->localVertices = new Vector2D<float>[4];
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[21]->vertisecBaseData->localVertices[0].x = ;
+    fonts[21]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[21]->vertisecBaseData->localVertices[1].x = ;
+    fonts[21]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[21]->vertisecBaseData->localVertices[2].x = ;
+    fonts[21]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[21]->vertisecBaseData->localVertices[3].x = ;
+    fonts[21]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    // W 8
+    fonts[22]->vertisecBaseData->localVertices = new Vector2D<float>[8];
 
-    fonts[]->vertisecBaseData->localVertices[6].x = ;
-    fonts[]->vertisecBaseData->localVertices[6].y = ;
+    fonts[22]->vertisecBaseData->localVertices[0].x = ;
+    fonts[22]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[7].x = ;
-    fonts[]->vertisecBaseData->localVertices[7].y = ;
+    fonts[22]->vertisecBaseData->localVertices[1].x = ;
+    fonts[22]->vertisecBaseData->localVertices[1].y = ;
 
-    X 4
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[4];
+    fonts[22]->vertisecBaseData->localVertices[2].x = ;
+    fonts[22]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[22]->vertisecBaseData->localVertices[3].x = ;
+    fonts[22]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[22]->vertisecBaseData->localVertices[4].x = ;
+    fonts[22]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[22]->vertisecBaseData->localVertices[5].x = ;
+    fonts[22]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[22]->vertisecBaseData->localVertices[6].x = ;
+    fonts[22]->vertisecBaseData->localVertices[6].y = ;
 
-    Y 6
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[6];
+    fonts[22]->vertisecBaseData->localVertices[7].x = ;
+    fonts[22]->vertisecBaseData->localVertices[7].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    // X 4
+    fonts[23]->vertisecBaseData->localVertices = new Vector2D<float>[4];
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[23]->vertisecBaseData->localVertices[0].x = ;
+    fonts[23]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[23]->vertisecBaseData->localVertices[1].x = ;
+    fonts[23]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[23]->vertisecBaseData->localVertices[2].x = ;
+    fonts[23]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[23]->vertisecBaseData->localVertices[3].x = ;
+    fonts[23]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    // Y 6
+    fonts[24]->vertisecBaseData->localVertices = new Vector2D<float>[6];
 
-    Z 6
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[6];
+    fonts[24]->vertisecBaseData->localVertices[0].x = ;
+    fonts[24]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[24]->vertisecBaseData->localVertices[1].x = ;
+    fonts[24]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[24]->vertisecBaseData->localVertices[2].x = ;
+    fonts[24]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[24]->vertisecBaseData->localVertices[3].x = ;
+    fonts[24]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[24]->vertisecBaseData->localVertices[4].x = ;
+    fonts[24]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[24]->vertisecBaseData->localVertices[5].x = ;
+    fonts[24]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    // Z 6
+    fonts[25]->vertisecBaseData->localVertices = new Vector2D<float>[6];
 
-    0 10
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[10];
+    fonts[25]->vertisecBaseData->localVertices[0].x = ;
+    fonts[25]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[25]->vertisecBaseData->localVertices[1].x = ;
+    fonts[25]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[25]->vertisecBaseData->localVertices[2].x = ;
+    fonts[25]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[25]->vertisecBaseData->localVertices[3].x = ;
+    fonts[25]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[25]->vertisecBaseData->localVertices[4].x = ;
+    fonts[25]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[25]->vertisecBaseData->localVertices[5].x = ;
+    fonts[25]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    // 0 10
+    fonts[26]->vertisecBaseData->localVertices = new Vector2D<float>[10];
 
-    fonts[]->vertisecBaseData->localVertices[6].x = ;
-    fonts[]->vertisecBaseData->localVertices[6].y = ;
+    fonts[26]->vertisecBaseData->localVertices[0].x = ;
+    fonts[26]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[7].x = ;
-    fonts[]->vertisecBaseData->localVertices[7].y = ;
+    fonts[26]->vertisecBaseData->localVertices[1].x = ;
+    fonts[26]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[8].x = ;
-    fonts[]->vertisecBaseData->localVertices[8].y = ;
+    fonts[26]->vertisecBaseData->localVertices[2].x = ;
+    fonts[26]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[9].x = ;
-    fonts[]->vertisecBaseData->localVertices[9].y = ;
+    fonts[26]->vertisecBaseData->localVertices[3].x = ;
+    fonts[26]->vertisecBaseData->localVertices[3].y = ;
 
-    1 6
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[6];
+    fonts[26]->vertisecBaseData->localVertices[4].x = ;
+    fonts[26]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[26]->vertisecBaseData->localVertices[5].x = ;
+    fonts[26]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[26]->vertisecBaseData->localVertices[6].x = ;
+    fonts[26]->vertisecBaseData->localVertices[6].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[26]->vertisecBaseData->localVertices[7].x = ;
+    fonts[26]->vertisecBaseData->localVertices[7].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[26]->vertisecBaseData->localVertices[8].x = ;
+    fonts[26]->vertisecBaseData->localVertices[8].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[26]->vertisecBaseData->localVertices[9].x = ;
+    fonts[26]->vertisecBaseData->localVertices[9].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    // 1 6
+    fonts[27]->vertisecBaseData->localVertices = new Vector2D<float>[6];
 
-    2 10
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[10];
+    fonts[27]->vertisecBaseData->localVertices[0].x = ;
+    fonts[27]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[27]->vertisecBaseData->localVertices[1].x = ;
+    fonts[27]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[27]->vertisecBaseData->localVertices[2].x = ;
+    fonts[27]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[27]->vertisecBaseData->localVertices[3].x = ;
+    fonts[27]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[27]->vertisecBaseData->localVertices[4].x = ;
+    fonts[27]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[27]->vertisecBaseData->localVertices[5].x = ;
+    fonts[27]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    // 2 10
+    fonts[28]->vertisecBaseData->localVertices = new Vector2D<float>[10];
 
-    fonts[]->vertisecBaseData->localVertices[6].x = ;
-    fonts[]->vertisecBaseData->localVertices[6].y = ;
+    fonts[28]->vertisecBaseData->localVertices[0].x = ;
+    fonts[28]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[7].x = ;
-    fonts[]->vertisecBaseData->localVertices[7].y = ;
+    fonts[28]->vertisecBaseData->localVertices[1].x = ;
+    fonts[28]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[8].x = ;
-    fonts[]->vertisecBaseData->localVertices[8].y = ;
+    fonts[28]->vertisecBaseData->localVertices[2].x = ;
+    fonts[28]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[9].x = ;
-    fonts[]->vertisecBaseData->localVertices[9].y = ;
+    fonts[28]->vertisecBaseData->localVertices[3].x = ;
+    fonts[28]->vertisecBaseData->localVertices[3].y = ;
 
-    3 10
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[10];
+    fonts[28]->vertisecBaseData->localVertices[4].x = ;
+    fonts[28]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[28]->vertisecBaseData->localVertices[5].x = ;
+    fonts[28]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[28]->vertisecBaseData->localVertices[6].x = ;
+    fonts[28]->vertisecBaseData->localVertices[6].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[28]->vertisecBaseData->localVertices[7].x = ;
+    fonts[28]->vertisecBaseData->localVertices[7].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[28]->vertisecBaseData->localVertices[8].x = ;
+    fonts[28]->vertisecBaseData->localVertices[8].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[28]->vertisecBaseData->localVertices[9].x = ;
+    fonts[28]->vertisecBaseData->localVertices[9].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    // 3 10
+    fonts[29]->vertisecBaseData->localVertices = new Vector2D<float>[10];
 
-    fonts[]->vertisecBaseData->localVertices[6].x = ;
-    fonts[]->vertisecBaseData->localVertices[6].y = ;
+    fonts[29]->vertisecBaseData->localVertices[0].x = ;
+    fonts[29]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[7].x = ;
-    fonts[]->vertisecBaseData->localVertices[7].y = ;
+    fonts[29]->vertisecBaseData->localVertices[1].x = ;
+    fonts[29]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[8].x = ;
-    fonts[]->vertisecBaseData->localVertices[8].y = ;
+    fonts[29]->vertisecBaseData->localVertices[2].x = ;
+    fonts[29]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[9].x = ;
-    fonts[]->vertisecBaseData->localVertices[9].y = ;
+    fonts[29]->vertisecBaseData->localVertices[3].x = ;
+    fonts[29]->vertisecBaseData->localVertices[3].y = ;
 
-    4 6
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[6];
+    fonts[29]->vertisecBaseData->localVertices[4].x = ;
+    fonts[29]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[29]->vertisecBaseData->localVertices[5].x = ;
+    fonts[29]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[29]->vertisecBaseData->localVertices[6].x = ;
+    fonts[29]->vertisecBaseData->localVertices[6].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[29]->vertisecBaseData->localVertices[7].x = ;
+    fonts[29]->vertisecBaseData->localVertices[7].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[29]->vertisecBaseData->localVertices[8].x = ;
+    fonts[29]->vertisecBaseData->localVertices[8].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[29]->vertisecBaseData->localVertices[9].x = ;
+    fonts[29]->vertisecBaseData->localVertices[9].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    // 4 6
+    fonts[30]->vertisecBaseData->localVertices = new Vector2D<float>[6];
 
-    5 10
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[10];
+    fonts[30]->vertisecBaseData->localVertices[0].x = ;
+    fonts[30]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[30]->vertisecBaseData->localVertices[1].x = ;
+    fonts[30]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[30]->vertisecBaseData->localVertices[2].x = ;
+    fonts[30]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[30]->vertisecBaseData->localVertices[3].x = ;
+    fonts[30]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[30]->vertisecBaseData->localVertices[4].x = ;
+    fonts[30]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[30]->vertisecBaseData->localVertices[5].x = ;
+    fonts[30]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    // 5 10
+    fonts[31]->vertisecBaseData->localVertices = new Vector2D<float>[10];
 
-    fonts[]->vertisecBaseData->localVertices[6].x = ;
-    fonts[]->vertisecBaseData->localVertices[6].y = ;
+    fonts[31]->vertisecBaseData->localVertices[0].x = ;
+    fonts[31]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[7].x = ;
-    fonts[]->vertisecBaseData->localVertices[7].y = ;
+    fonts[31]->vertisecBaseData->localVertices[1].x = ;
+    fonts[31]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[8].x = ;
-    fonts[]->vertisecBaseData->localVertices[8].y = ;
+    fonts[31]->vertisecBaseData->localVertices[2].x = ;
+    fonts[31]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[9].x = ;
-    fonts[]->vertisecBaseData->localVertices[9].y = ;
+    fonts[31]->vertisecBaseData->localVertices[3].x = ;
+    fonts[31]->vertisecBaseData->localVertices[3].y = ;
 
-    6 12
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[12];
+    fonts[31]->vertisecBaseData->localVertices[4].x = ;
+    fonts[31]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[31]->vertisecBaseData->localVertices[5].x = ;
+    fonts[31]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[31]->vertisecBaseData->localVertices[6].x = ;
+    fonts[31]->vertisecBaseData->localVertices[6].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[31]->vertisecBaseData->localVertices[7].x = ;
+    fonts[31]->vertisecBaseData->localVertices[7].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[31]->vertisecBaseData->localVertices[8].x = ;
+    fonts[31]->vertisecBaseData->localVertices[8].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[31]->vertisecBaseData->localVertices[9].x = ;
+    fonts[31]->vertisecBaseData->localVertices[9].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    // 6 12
+    fonts[32]->vertisecBaseData->localVertices = new Vector2D<float>[12];
 
-    fonts[]->vertisecBaseData->localVertices[6].x = ;
-    fonts[]->vertisecBaseData->localVertices[6].y = ;
+    fonts[32]->vertisecBaseData->localVertices[0].x = ;
+    fonts[32]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[7].x = ;
-    fonts[]->vertisecBaseData->localVertices[7].y = ;
+    fonts[32]->vertisecBaseData->localVertices[1].x = ;
+    fonts[32]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[8].x = ;
-    fonts[]->vertisecBaseData->localVertices[8].y = ;
+    fonts[32]->vertisecBaseData->localVertices[2].x = ;
+    fonts[32]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[9].x = ;
-    fonts[]->vertisecBaseData->localVertices[9].y = ;
+    fonts[32]->vertisecBaseData->localVertices[3].x = ;
+    fonts[32]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[10].x = ;
-    fonts[]->vertisecBaseData->localVertices[10].y = ;
+    fonts[32]->vertisecBaseData->localVertices[4].x = ;
+    fonts[32]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[11].x = ;
-    fonts[]->vertisecBaseData->localVertices[11].y = ;
+    fonts[32]->vertisecBaseData->localVertices[5].x = ;
+    fonts[32]->vertisecBaseData->localVertices[5].y = ;
 
-    7 4
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[4];
+    fonts[32]->vertisecBaseData->localVertices[6].x = ;
+    fonts[32]->vertisecBaseData->localVertices[6].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[32]->vertisecBaseData->localVertices[7].x = ;
+    fonts[32]->vertisecBaseData->localVertices[7].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[32]->vertisecBaseData->localVertices[8].x = ;
+    fonts[32]->vertisecBaseData->localVertices[8].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[32]->vertisecBaseData->localVertices[9].x = ;
+    fonts[32]->vertisecBaseData->localVertices[9].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[32]->vertisecBaseData->localVertices[10].x = ;
+    fonts[32]->vertisecBaseData->localVertices[10].y = ;
 
-    8 14
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[14];
+    fonts[32]->vertisecBaseData->localVertices[11].x = ;
+    fonts[32]->vertisecBaseData->localVertices[11].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    // 7 4
+    fonts[33]->vertisecBaseData->localVertices = new Vector2D<float>[4];
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[33]->vertisecBaseData->localVertices[0].x = ;
+    fonts[33]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[33]->vertisecBaseData->localVertices[1].x = ;
+    fonts[33]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[33]->vertisecBaseData->localVertices[2].x = ;
+    fonts[33]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[33]->vertisecBaseData->localVertices[3].x = ;
+    fonts[33]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    // 8 14
+    fonts[34]->vertisecBaseData->localVertices = new Vector2D<float>[14];
 
-    fonts[]->vertisecBaseData->localVertices[6].x = ;
-    fonts[]->vertisecBaseData->localVertices[6].y = ;
+    fonts[34]->vertisecBaseData->localVertices[0].x = ;
+    fonts[34]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[7].x = ;
-    fonts[]->vertisecBaseData->localVertices[7].y = ;
+    fonts[34]->vertisecBaseData->localVertices[1].x = ;
+    fonts[34]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[8].x = ;
-    fonts[]->vertisecBaseData->localVertices[8].y = ;
+    fonts[34]->vertisecBaseData->localVertices[2].x = ;
+    fonts[34]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[9].x = ;
-    fonts[]->vertisecBaseData->localVertices[9].y = ;
+    fonts[34]->vertisecBaseData->localVertices[3].x = ;
+    fonts[34]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[10].x = ;
-    fonts[]->vertisecBaseData->localVertices[10].y = ;
+    fonts[34]->vertisecBaseData->localVertices[4].x = ;
+    fonts[34]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[11].x = ;
-    fonts[]->vertisecBaseData->localVertices[11].y = ;
+    fonts[34]->vertisecBaseData->localVertices[5].x = ;
+    fonts[34]->vertisecBaseData->localVertices[5].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[12].x = ;
-    fonts[]->vertisecBaseData->localVertices[12].y = ;
+    fonts[34]->vertisecBaseData->localVertices[6].x = ;
+    fonts[34]->vertisecBaseData->localVertices[6].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[13].x = ;
-    fonts[]->vertisecBaseData->localVertices[13].y = ;
+    fonts[34]->vertisecBaseData->localVertices[7].x = ;
+    fonts[34]->vertisecBaseData->localVertices[7].y = ;
 
-    9 12
-    fonts[0]->vertisecBaseData->localVertices = new Vector2D<float>[12];
+    fonts[34]->vertisecBaseData->localVertices[8].x = ;
+    fonts[34]->vertisecBaseData->localVertices[8].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[0].x = ;
-    fonts[]->vertisecBaseData->localVertices[0].y = ;
+    fonts[34]->vertisecBaseData->localVertices[9].x = ;
+    fonts[34]->vertisecBaseData->localVertices[9].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[1].x = ;
-    fonts[]->vertisecBaseData->localVertices[1].y = ;
+    fonts[34]->vertisecBaseData->localVertices[10].x = ;
+    fonts[34]->vertisecBaseData->localVertices[10].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[2].x = ;
-    fonts[]->vertisecBaseData->localVertices[2].y = ;
+    fonts[34]->vertisecBaseData->localVertices[11].x = ;
+    fonts[34]->vertisecBaseData->localVertices[11].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[3].x = ;
-    fonts[]->vertisecBaseData->localVertices[3].y = ;
+    fonts[34]->vertisecBaseData->localVertices[12].x = ;
+    fonts[34]->vertisecBaseData->localVertices[12].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[4].x = ;
-    fonts[]->vertisecBaseData->localVertices[4].y = ;
+    fonts[34]->vertisecBaseData->localVertices[13].x = ;
+    fonts[34]->vertisecBaseData->localVertices[13].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[5].x = ;
-    fonts[]->vertisecBaseData->localVertices[5].y = ;
+    // 9 12
+    fonts[35]->vertisecBaseData->localVertices = new Vector2D<float>[12];
 
-    fonts[]->vertisecBaseData->localVertices[6].x = ;
-    fonts[]->vertisecBaseData->localVertices[6].y = ;
+    fonts[35]->vertisecBaseData->localVertices[0].x = ;
+    fonts[35]->vertisecBaseData->localVertices[0].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[7].x = ;
-    fonts[]->vertisecBaseData->localVertices[7].y = ;
+    fonts[35]->vertisecBaseData->localVertices[1].x = ;
+    fonts[35]->vertisecBaseData->localVertices[1].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[8].x = ;
-    fonts[]->vertisecBaseData->localVertices[8].y = ;
+    fonts[35]->vertisecBaseData->localVertices[2].x = ;
+    fonts[35]->vertisecBaseData->localVertices[2].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[9].x = ;
-    fonts[]->vertisecBaseData->localVertices[9].y = ;
+    fonts[35]->vertisecBaseData->localVertices[3].x = ;
+    fonts[35]->vertisecBaseData->localVertices[3].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[10].x = ;
-    fonts[]->vertisecBaseData->localVertices[10].y = ;
+    fonts[35]->vertisecBaseData->localVertices[4].x = ;
+    fonts[35]->vertisecBaseData->localVertices[4].y = ;
 
-    fonts[]->vertisecBaseData->localVertices[11].x = ;
-    fonts[]->vertisecBaseData->localVertices[11].y = ;
+    fonts[35]->vertisecBaseData->localVertices[5].x = ;
+    fonts[35]->vertisecBaseData->localVertices[5].y = ;
 
+    fonts[35]->vertisecBaseData->localVertices[6].x = ;
+    fonts[35]->vertisecBaseData->localVertices[6].y = ;
+
+    fonts[35]->vertisecBaseData->localVertices[7].x = ;
+    fonts[35]->vertisecBaseData->localVertices[7].y = ;
+
+    fonts[35]->vertisecBaseData->localVertices[8].x = ;
+    fonts[35]->vertisecBaseData->localVertices[8].y = ;
+
+    fonts[35]->vertisecBaseData->localVertices[9].x = ;
+    fonts[35]->vertisecBaseData->localVertices[9].y = ;
+
+    fonts[35]->vertisecBaseData->localVertices[10].x = ;
+    fonts[35]->vertisecBaseData->localVertices[10].y = ;
+
+    fonts[35]->vertisecBaseData->localVertices[11].x = ;
+    fonts[35]->vertisecBaseData->localVertices[11].y = ;
+
+    //   SPACE (PL SPACJA)
+    fonts[36]->vertisecBaseData->localVertices[0].x = ;
+    fonts[36]->vertisecBaseData->localVertices[0].y = ;
+
+    fonts[36]->vertisecBaseData->localVertices[1].x = ;
+    fonts[36]->vertisecBaseData->localVertices[1].y = ;
 }
