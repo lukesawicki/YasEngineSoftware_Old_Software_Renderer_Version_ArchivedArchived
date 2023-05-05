@@ -23,7 +23,7 @@ void YasEngine::initialize()
     preparePlayer();
     prepareSoundAndMusic();
 
-    mathPlay = new MathematicsFunSurface(0, 0, static_cast<int>(windowDimensions->x * 0.5F), static_cast<int>(windowDimensions->y * 0.5F), BLACK);
+    mathPlay = new MathematicsFunSurface(0, windowDimensions->y * 0.5F, static_cast<int>(windowDimensions->x * 0.5F), static_cast<int>(windowDimensions->y * 0.5F), BLACK);
 
     SinusPointsGenerator sinusPointsGenerator;
     CosinusPointsGenerator cosinusPointsGenerator;

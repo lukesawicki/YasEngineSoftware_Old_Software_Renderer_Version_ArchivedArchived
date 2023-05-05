@@ -2,23 +2,18 @@
 #include "YasGraphicsLibrary.hpp"
 #include "FontSurface.hpp"
 
-FontSurface::FontSurface(int x, int y, int width, int height, const Vector4D<Uint8>& defaultColor)
+FontSurface::FontSurface()
+{
+
+}
+
+void FontSurface::initialize(int x, int y, int width, int height, const Vector4D<Uint8>& defaultColor)
 {
     position.x = x;
     position.y = y;
     viewPortSizes.x = width;
     viewPortSizes.y = height;
     pixels = new Uint8[viewPortSizes.x * viewPortSizes.y * NUMBER_OF_COLORS];
-    clearColor(defaultColor);
-}
-
-FontSurface::FontSurface(Vector2D<int> position, int width, int height, const Vector4D<Uint8>& defaultColor)
-{
-    this->position.x = position.x;
-    this->position.y = position.y;
-    viewPortSizes.x = width;
-    viewPortSizes.y = height;
-    this->pixels = new Uint8[viewPortSizes.x * viewPortSizes.y * NUMBER_OF_COLORS];
     clearColor(defaultColor);
 }
 

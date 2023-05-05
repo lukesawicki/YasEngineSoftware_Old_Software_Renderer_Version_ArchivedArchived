@@ -11,14 +11,22 @@
 class ScreenWriter final : public ViewPort
 {
     public:
+        static const int NUMBER_OF_CHARACTERS = 37;
         struct Font {
+            Font()
+            {
+                vertisecBaseData = new FontObject();
+                surface = new FontSurface();
+            }
             FontObject* vertisecBaseData;
             FontSurface* surface;
         };
         std::vector<Font*> fonts;
-        char charactersTable[37];
+        char charactersTable[NUMBER_OF_CHARACTERS];
         ScreenWriter();
         void initialize();
+        void initializeFontObjects();
+        void initializeFontSurfaces();
         void write(int x, int y, const char * text, SDL_Surface *na_czym);
         void write(int x, int y, std::string text, SDL_Surface *na_czym);
         void write(int x, int y, short integers, SDL_Surface *na_czym);

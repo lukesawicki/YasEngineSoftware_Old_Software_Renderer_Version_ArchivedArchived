@@ -18,6 +18,11 @@ ScreenWriter::ScreenWriter()
     }
     charactersTable[36]=' ';
     //Tablica znakow jest w celu wymowania z znakow z pliku graficznego na podstawie indeksu w tablicy znakow
+
+    for(int i=0; i<NUMBER_OF_CHARACTERS; i++)
+    {
+        fonts.push_back(new Font());
+    }
 }
 void ScreenWriter::initialize()
 {
@@ -25,10 +30,6 @@ void ScreenWriter::initialize()
     position.y=0;
     viewPortSizes.x=21;
     viewPortSizes.y=32;
-
-
-
-
 //    charactersVertices = IMG_Load("charactersVertices.png");
 }
 void ScreenWriter::initialize(int szerokosc_znaku, int wysokosc_znaku, const char* plik_znakow)
@@ -132,5 +133,24 @@ void ScreenWriter::write(int x, int y, short integers, SDL_Surface *na_czym)
             }
 
         }
+    }
+}
+
+void ScreenWriter::initializeFontObjects()
+{
+    Vector2D<float> direction(0, 1);
+    for(int i=0; i<NUMBER_OF_CHARACTERS; i++)
+    {
+        fonts.at(i)->vertisecBaseData->initialize(17, 0, 0, direction, -1);
+    }
+
+}
+
+void ScreenWriter::initializeFontSurfaces()
+{
+    for(int i=0; i<NUMBER_OF_CHARACTERS; i++)
+    {
+        //void initialize(int x, int y, int width, int height, const Vector4D<Uint8>& defaultColor);
+        //fonts.at(i)->surface->initialize(i*17, 0);
     }
 }

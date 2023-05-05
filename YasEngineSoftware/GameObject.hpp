@@ -11,7 +11,7 @@ class GameObject
 	public:
 		//vXXXXXirtual ~GameObject() = 0;
 
-		enum WhoAmI { DEFAULT_VALUE, PROTAGONIST, PROJECTILE, COLLECTIBLE };
+		enum WhoAmI { DEFAULT_VALUE, PROTAGONIST, PROJECTILE, COLLECTIBLE, GUI_ELEMENT };
 
 		WhoAmI iAm;
 		bool isAlive = true;

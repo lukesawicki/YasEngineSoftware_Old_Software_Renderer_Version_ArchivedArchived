@@ -444,7 +444,7 @@ void MathematicsFunSurface::drawPolygon(GameObject* polygon)
 void MathematicsFunSurface::copyPixelsInToPIxelTable(PixelsTable& pixelsTable)
 {
     int posX = position.x;
-    int posY = position.y + viewPortSizes.y;
+    int posY = position.y; // + viewPortSizes.y;
 
     pixelsTable.cartesianPositionToWindow(posX, posY);
 

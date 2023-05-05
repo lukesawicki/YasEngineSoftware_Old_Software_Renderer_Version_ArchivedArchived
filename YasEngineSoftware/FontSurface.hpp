@@ -11,8 +11,8 @@ public:
         x = x + static_cast<int>(0.5F * viewPortSizes.x);
         y = -y + static_cast<int>(0.5F * viewPortSizes.y);
     }
-    FontSurface(int x, int y, int width, int height, const Vector4D<Uint8>& defaultColor);
-    FontSurface(Vector2D<int> position, int width, int height, const Vector4D<Uint8>& defaultColor);
+    FontSurface();
+    void initialize(int x, int y, int width, int height, const Vector4D<Uint8>& defaultColor);
     virtual ~FontSurface();
     void clearColor(const Vector4D<Uint8>& drawingColor) override;
     void drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor) override;

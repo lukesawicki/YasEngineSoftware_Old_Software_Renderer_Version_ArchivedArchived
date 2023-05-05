@@ -2,21 +2,27 @@
 #include "YasGraphicsLibrary.hpp"
 #include<cstdlib>     /* srand, rand */
 
-FontObject::FontObject(float radius, float x, float y, Vector2D<float> direction, int numberOfVertices)
+FontObject::FontObject()
+{
+
+}
+
+void FontObject::initialize(float radius, float x, float y, const Vector2D<float>& direction, int numberOfVertices)
 {
     isAlive = true;
-    iAm = GameObject::COLLECTIBLE;
-    collider.radius = radius;
+    iAm = GameObject::GUI_ELEMENT;
+    collider.radius = 17;
     speed = 200;
+    this->direction.x = direction.x;
+    this->direction.y = direction.y;
     this->position.x = x;
     this->position.y = y;
     this->collider.x = x;
     this->collider.y = y;
-    Vector2D<float> position(x, y);
+    startAngle = 90;
     velocity.x = speed * direction.x;
     velocity.y = speed * direction.y;
     setRandomColor();
-    generateRegularPolygonVertices(radius, numberOfVertices);
 }
 
 FontObject::~FontObject()
