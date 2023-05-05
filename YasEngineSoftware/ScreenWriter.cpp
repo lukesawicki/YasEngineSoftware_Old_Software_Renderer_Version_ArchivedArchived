@@ -109,14 +109,9 @@ void ScreenWriter::write(int x, int y, string text, PixelsTable& pixelsTable)
         {
             if(text.at(i) == charactersTable[j])
             {
-                //position.x=docelowe.w*j;
-//                docelowe.x=x+i*docelowe.w;
-//                SDL_BlitSurface(charactersVertices , &pozycja, na_czym, &docelowe );
-//void rawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos, PixelsTable& pixelsTable)
+                fonts.at(j)->verticesBaseData->setPosition(x + i*FONT_WIDTH, y);
                 fonts.at(j)->verticesBaseData->generate();
                 drawNumbersAsGroupOfLines(fonts.at(j)->verticesBaseData->worldVertices, fonts.at(j)->verticesBaseData->numberOfVertices, RED, false, pixelsTable);
-
-
             }
 
         }
@@ -176,7 +171,6 @@ void ScreenWriter::prepareFontVertices()
     //A 6
     fonts[0]->verticesBaseData->localVertices = new Vector2D<float>[6];
     fonts[0]->verticesBaseData->worldVertices = new Vector2D<float>[6];
-
     fonts[0]->verticesBaseData->numberOfVertices = 6;
 
     fonts[0]->verticesBaseData->localVertices[0].x = -5;
@@ -396,6 +390,8 @@ void ScreenWriter::prepareFontVertices()
 
     // G 10
     fonts[6]->verticesBaseData->localVertices = new Vector2D<float>[10];
+    fonts[6]->verticesBaseData->worldVertices = new Vector2D<float>[10];
+
     fonts[6]->verticesBaseData->numberOfVertices = 10;
 
     fonts[6]->verticesBaseData->localVertices[0].x = 1;
@@ -434,6 +430,8 @@ void ScreenWriter::prepareFontVertices()
 
     // H 6
     fonts[7]->verticesBaseData->localVertices = new Vector2D<float>[6];
+    fonts[7]->verticesBaseData->worldVertices = new Vector2D<float>[6];
+
     fonts[7]->verticesBaseData->numberOfVertices = 6;
 
     fonts[7]->verticesBaseData->localVertices[0].x = -5;
@@ -459,6 +457,8 @@ void ScreenWriter::prepareFontVertices()
 
     // I 6
     fonts[8]->verticesBaseData->localVertices = new Vector2D<float>[6];
+    fonts[8]->verticesBaseData->worldVertices = new Vector2D<float>[6];
+
     fonts[8]->verticesBaseData->numberOfVertices = 6;
 
     fonts[8]->verticesBaseData->localVertices[0].x = -1;
@@ -483,6 +483,8 @@ void ScreenWriter::prepareFontVertices()
 
     // J 10
     fonts[9]->verticesBaseData->localVertices = new Vector2D<float>[10];
+    fonts[9]->verticesBaseData->worldVertices = new Vector2D<float>[10];
+
     fonts[9]->verticesBaseData->numberOfVertices = 10;
 
     fonts[9]->verticesBaseData->localVertices[0].x = -2;
@@ -521,6 +523,8 @@ void ScreenWriter::prepareFontVertices()
 
     // K 8
     fonts[10]->verticesBaseData->localVertices = new Vector2D<float>[8];
+    fonts[10]->verticesBaseData->worldVertices = new Vector2D<float>[8];
+
     fonts[10]->verticesBaseData->numberOfVertices = 8;
 
     fonts[10]->verticesBaseData->localVertices[8].x = -5;
@@ -552,6 +556,8 @@ void ScreenWriter::prepareFontVertices()
 
     // L 4
     fonts[11]->verticesBaseData->localVertices = new Vector2D<float>[4];
+    fonts[11]->verticesBaseData->worldVertices = new Vector2D<float>[4];
+
     fonts[11]->verticesBaseData->numberOfVertices = 4;
 
     fonts[11]->verticesBaseData->localVertices[0].x = -5;
@@ -569,6 +575,8 @@ void ScreenWriter::prepareFontVertices()
 
     // M 8
     fonts[12]->verticesBaseData->localVertices = new Vector2D<float>[8];
+    fonts[12]->verticesBaseData->worldVertices = new Vector2D<float>[8];
+
     fonts[12]->verticesBaseData->numberOfVertices = 8;
 
     fonts[12]->verticesBaseData->localVertices[0].x = -5;
@@ -600,6 +608,8 @@ void ScreenWriter::prepareFontVertices()
 
     // N 6
     fonts[13]->verticesBaseData->localVertices = new Vector2D<float>[6];
+    fonts[13]->verticesBaseData->worldVertices = new Vector2D<float>[6];
+
     fonts[13]->verticesBaseData->numberOfVertices = 6;
 
     fonts[13]->verticesBaseData->localVertices[0].x = -5;
@@ -624,6 +634,8 @@ void ScreenWriter::prepareFontVertices()
 
     // O 8
     fonts[14]->verticesBaseData->localVertices = new Vector2D<float>[8];
+    fonts[14]->verticesBaseData->worldVertices = new Vector2D<float>[8];
+
     fonts[14]->verticesBaseData->numberOfVertices = 8;
 
     fonts[14]->verticesBaseData->localVertices[0].x = -5;
@@ -655,6 +667,8 @@ void ScreenWriter::prepareFontVertices()
 
     // P 10
     fonts[15]->verticesBaseData->localVertices = new Vector2D<float>[10];
+    fonts[15]->verticesBaseData->worldVertices = new Vector2D<float>[10];
+
     fonts[15]->verticesBaseData->numberOfVertices = 10;
 
     fonts[15]->verticesBaseData->localVertices[0].x = -5;
@@ -693,6 +707,8 @@ void ScreenWriter::prepareFontVertices()
 
     // Q 10
     fonts[16]->verticesBaseData->localVertices = new Vector2D<float>[10];
+    fonts[16]->verticesBaseData->worldVertices = new Vector2D<float>[10];
+
     fonts[16]->verticesBaseData->numberOfVertices = 10;
 
     fonts[16]->verticesBaseData->localVertices[0].x = -5;
@@ -731,6 +747,8 @@ void ScreenWriter::prepareFontVertices()
 
     // R 12
     fonts[17]->verticesBaseData->localVertices = new Vector2D<float>[12];
+    fonts[17]->verticesBaseData->worldVertices = new Vector2D<float>[12];
+
     fonts[17]->verticesBaseData->numberOfVertices = 12;
 
     fonts[17]->verticesBaseData->localVertices[0].x = -5;
@@ -776,6 +794,8 @@ void ScreenWriter::prepareFontVertices()
 
     // S 10
     fonts[18]->verticesBaseData->localVertices = new Vector2D<float>[10];
+    fonts[18]->verticesBaseData->worldVertices = new Vector2D<float>[10];
+
     fonts[18]->verticesBaseData->numberOfVertices = 10;
 
     fonts[18]->verticesBaseData->localVertices[0].x = -5;
@@ -814,6 +834,8 @@ void ScreenWriter::prepareFontVertices()
 
     // T 4
     fonts[19]->verticesBaseData->localVertices = new Vector2D<float>[4];
+    fonts[19]->verticesBaseData->worldVertices = new Vector2D<float>[4];
+
     fonts[19]->verticesBaseData->numberOfVertices = 4;
 
     fonts[19]->verticesBaseData->localVertices[0].x = -5;
@@ -830,6 +852,8 @@ void ScreenWriter::prepareFontVertices()
 
     // U 6
     fonts[20]->verticesBaseData->localVertices = new Vector2D<float>[6];
+    fonts[20]->verticesBaseData->worldVertices = new Vector2D<float>[6];
+
     fonts[20]->verticesBaseData->numberOfVertices = 6;
 
     fonts[20]->verticesBaseData->localVertices[0].x = -5;
@@ -854,6 +878,8 @@ void ScreenWriter::prepareFontVertices()
 
     // V 4
     fonts[21]->verticesBaseData->localVertices = new Vector2D<float>[4];
+    fonts[21]->verticesBaseData->worldVertices = new Vector2D<float>[4];
+
     fonts[21]->verticesBaseData->numberOfVertices = 4;
 
     fonts[21]->verticesBaseData->localVertices[0].x = -5;
@@ -871,6 +897,8 @@ void ScreenWriter::prepareFontVertices()
 
     // W 8
     fonts[22]->verticesBaseData->localVertices = new Vector2D<float>[8];
+    fonts[22]->verticesBaseData->worldVertices = new Vector2D<float>[8];
+
     fonts[22]->verticesBaseData->numberOfVertices = 8;
 
     fonts[22]->verticesBaseData->localVertices[0].x = -5;
@@ -902,6 +930,8 @@ void ScreenWriter::prepareFontVertices()
 
     // X 4
     fonts[23]->verticesBaseData->localVertices = new Vector2D<float>[4];
+    fonts[23]->verticesBaseData->worldVertices = new Vector2D<float>[4];
+
     fonts[23]->verticesBaseData->numberOfVertices = 4;
 
     fonts[23]->verticesBaseData->localVertices[0].x = -5;
@@ -919,6 +949,8 @@ void ScreenWriter::prepareFontVertices()
 
     // Y 6
     fonts[24]->verticesBaseData->localVertices = new Vector2D<float>[6];
+    fonts[24]->verticesBaseData->worldVertices = new Vector2D<float>[6];
+
     fonts[24]->verticesBaseData->numberOfVertices = 6;
 
     fonts[24]->verticesBaseData->localVertices[0].x = -5;
@@ -943,6 +975,8 @@ void ScreenWriter::prepareFontVertices()
 
     // Z 6
     fonts[25]->verticesBaseData->localVertices = new Vector2D<float>[6];
+    fonts[25]->verticesBaseData->worldVertices = new Vector2D<float>[6];
+
     fonts[25]->verticesBaseData->numberOfVertices = 6;
 
     fonts[25]->verticesBaseData->localVertices[0].x = -5;
@@ -967,6 +1001,8 @@ void ScreenWriter::prepareFontVertices()
 
     // 0 10
     fonts[26]->verticesBaseData->localVertices = new Vector2D<float>[10];
+    fonts[26]->verticesBaseData->worldVertices = new Vector2D<float>[10];
+
     fonts[26]->verticesBaseData->numberOfVertices = 10;
 
     fonts[26]->verticesBaseData->localVertices[0].x = -5;
@@ -1005,6 +1041,8 @@ void ScreenWriter::prepareFontVertices()
 
     // 1 6
     fonts[27]->verticesBaseData->localVertices = new Vector2D<float>[6];
+    fonts[27]->verticesBaseData->worldVertices = new Vector2D<float>[6];
+
     fonts[27]->verticesBaseData->numberOfVertices = 6;
 
     fonts[27]->verticesBaseData->localVertices[0].x = -1;
@@ -1029,6 +1067,8 @@ void ScreenWriter::prepareFontVertices()
 
     // 2 10
     fonts[28]->verticesBaseData->localVertices = new Vector2D<float>[10];
+    fonts[28]->verticesBaseData->worldVertices = new Vector2D<float>[10];
+
     fonts[28]->verticesBaseData->numberOfVertices = 10;
 
     fonts[28]->verticesBaseData->localVertices[0].x = -5;
@@ -1067,6 +1107,8 @@ void ScreenWriter::prepareFontVertices()
 
     // 3 10
     fonts[29]->verticesBaseData->localVertices = new Vector2D<float>[10];
+    fonts[29]->verticesBaseData->worldVertices = new Vector2D<float>[10];
+
     fonts[29]->verticesBaseData->numberOfVertices = 10;
 
     fonts[29]->verticesBaseData->localVertices[0].x = -5;
@@ -1105,6 +1147,8 @@ void ScreenWriter::prepareFontVertices()
 
     // 4 6
     fonts[30]->verticesBaseData->localVertices = new Vector2D<float>[6];
+    fonts[30]->verticesBaseData->worldVertices = new Vector2D<float>[6];
+
     fonts[30]->verticesBaseData->numberOfVertices = 6;
 
     fonts[30]->verticesBaseData->localVertices[0].x = -5;
@@ -1129,6 +1173,8 @@ void ScreenWriter::prepareFontVertices()
 
     // 5 10
     fonts[31]->verticesBaseData->localVertices = new Vector2D<float>[10];
+    fonts[31]->verticesBaseData->worldVertices = new Vector2D<float>[10];
+
     fonts[31]->verticesBaseData->numberOfVertices = 10;
 
     fonts[31]->verticesBaseData->localVertices[0].x = -5;
@@ -1167,6 +1213,8 @@ void ScreenWriter::prepareFontVertices()
 
     // 6 12
     fonts[32]->verticesBaseData->localVertices = new Vector2D<float>[12];
+    fonts[32]->verticesBaseData->worldVertices = new Vector2D<float>[12];
+
     fonts[32]->verticesBaseData->numberOfVertices = 12;
 
     fonts[32]->verticesBaseData->localVertices[0].x = -5;
@@ -1212,6 +1260,8 @@ void ScreenWriter::prepareFontVertices()
 
     // 7 4
     fonts[33]->verticesBaseData->localVertices = new Vector2D<float>[4];
+    fonts[33]->verticesBaseData->worldVertices = new Vector2D<float>[4];
+
     fonts[33]->verticesBaseData->numberOfVertices = 4;
 
     fonts[33]->verticesBaseData->localVertices[0].x = -2;
@@ -1229,6 +1279,8 @@ void ScreenWriter::prepareFontVertices()
 
     // 8 14
     fonts[34]->verticesBaseData->localVertices = new Vector2D<float>[14];
+    fonts[34]->verticesBaseData->worldVertices = new Vector2D<float>[14];
+
     fonts[34]->verticesBaseData->numberOfVertices = 14;
 
     fonts[34]->verticesBaseData->localVertices[0].x = -5;
@@ -1281,6 +1333,8 @@ void ScreenWriter::prepareFontVertices()
 
     // 9 12
     fonts[35]->verticesBaseData->localVertices = new Vector2D<float>[12];
+    fonts[35]->verticesBaseData->worldVertices = new Vector2D<float>[12];
+
     fonts[35]->verticesBaseData->numberOfVertices = 12;
 
     fonts[35]->verticesBaseData->localVertices[0].x = -5;
@@ -1326,6 +1380,8 @@ void ScreenWriter::prepareFontVertices()
 
     //   SPACE (PL SPACJA)
     fonts[36]->verticesBaseData->localVertices = new Vector2D<float>[2];
+    fonts[36]->verticesBaseData->worldVertices = new Vector2D<float>[10];
+
     fonts[36]->verticesBaseData->numberOfVertices = 2;
 
     fonts[36]->verticesBaseData->localVertices[0].x = -5;

@@ -87,6 +87,7 @@ class YasEngine
 		Spawner spawner;
 
         ScreenWriter writer;
+        int step = 0;
 
 		YasEngine() {};
 		bool shouldApplicationStopRunning = false;

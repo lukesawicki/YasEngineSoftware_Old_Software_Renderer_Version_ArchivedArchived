@@ -28,7 +28,7 @@ class GameObject
 		float startAngle = 0.0F;
 		float stepAngle;
 		float directionMouseAngle = 0;
-		float  speed = 0.0F;
+		float speed = 0.0F;
 
 		virtual void generate() = 0;
 		virtual void generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices) = 0;
