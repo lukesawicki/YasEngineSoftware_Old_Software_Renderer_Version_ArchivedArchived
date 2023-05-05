@@ -41,7 +41,6 @@ add_executable(YasEngineSoftware
         temporary.cpp
         TimePicker.cpp
         TimePicker.hpp
-        Timer.hpp
         VariousTools.hpp
         Vector2D.hpp
         Vector4D.hpp

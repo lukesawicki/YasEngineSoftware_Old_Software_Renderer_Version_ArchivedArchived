@@ -23,17 +23,7 @@ Projectile::Projectile(float radius, float x, float y, Vector2D<float> direction
 	velocity.y = speed * direction.y;
 	color = BLUE;
 	generateRegularPolygonVertices(radius, 4);
-	timer = Timer();
-	//liveTime;
-	//timer.setInterval([&]() {
-	//	std::cout << "HELLO" << std::endl;
-	//	}, 500);
-
-	timer.setTimeout([&]() {
-		//cout << "Hey.. After 5.2s. But I will stop the timer!" << endl;
-		timer.stop();
-		this->isAlive = false;
-		}, liveTime);
+	startTime = timePicker.getMiliseconds();
 }
 
 Projectile::~Projectile()
@@ -43,6 +33,10 @@ Projectile::~Projectile()
 
 void Projectile::move(float deltaTime)
 {
+    if(timePicker.getMiliseconds() - startTime >= 2000)
+    {
+        this->isAlive = false;
+    }
 	position.x = position.x + deltaTime * velocity.x;
 	position.y = position.y + deltaTime * velocity.y;
 	moveCollider();

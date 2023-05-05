@@ -305,8 +305,8 @@ void YasEngine::render(double& deltaTime)
 
     drawHudElements(deltaTime);
 
-    writer.write(-620, 100, "ABCDEFGHIJKLMNOPQRSTUVWXYZ 0123456789", *pixelsTable);
-    writer.write(-620, -100, "HOLY SHIIIIIIIT IT IS WORKING FINALLY", *pixelsTable);
+    writer.write(-620, 100, "HALF LIFE DOOM UNREAL WOLFENSTEIN CALL OF DUTY CARMAGEDDON ", *pixelsTable);
+    writer.write(-620, -100, "HOLY SHIT IT IS WORKING FINALLY", *pixelsTable);
 
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
     SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);

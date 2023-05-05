@@ -2,7 +2,7 @@
 #define PROJECTILE_HPP
 #include"YasGraphicsLibrary.hpp"
 #include"GameObject.hpp"
-#include "Timer.hpp"
+#include "TimePicker.hpp"
 
 
 class Projectile : public GameObject
@@ -10,8 +10,13 @@ class Projectile : public GameObject
 	private:
 		bool directionSwitched = false;
 	public:
-		int liveTime = 2000;
-		Timer timer;
+		int liveTime = 500;
+        TimePicker timePicker;
+//		Timer timer;
+
+        double startTime = 0;
+        double currentTime = 0;
+
 		Vector2D<float> velocity;
 		Projectile(float radius, float x, float y, Vector2D<float> direction);
 		~Projectile();

@@ -8,6 +8,7 @@ class TimePicker
     public:
         TimePicker();
         double getSeconds();
+        double getMiliseconds();
 };
 
 #endif

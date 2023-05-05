@@ -10,8 +10,12 @@
 
     double TimePicker::getSeconds()
     {
-            return SDL_GetTicks() / 1000.0;
+        return SDL_GetTicks() / 1000.0;
     }
 
+    double TimePicker::getMiliseconds()
+    {
+        return SDL_GetTicks();
+    }
 //                                                                            80                                     120
 //-----------------------------------------------------------------------------|---------------------------------------|
