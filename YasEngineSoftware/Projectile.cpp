@@ -37,6 +37,7 @@ void Projectile::move(float deltaTime)
     {
         this->isAlive = false;
     }
+
 	position.x = position.x + deltaTime * velocity.x;
 	position.y = position.y + deltaTime * velocity.y;
 	moveCollider();
