@@ -66,7 +66,7 @@ void YasEngine::YasEnginStart()
     fpsTime = 0.0F;
     frames = 0;
 
-    spawner.spawnObject(go);
+    //spawner.spawnObject(go);
 
     while (!quit)
     {
@@ -120,13 +120,23 @@ void YasEngine::prepareRendering()
 
 void YasEngine::prepareBasicSettings()
 {
-    if (endianness)
+    if constexpr (std::endian::native == std::endian::big)
     {
         std::cout << "BIG ENDIAN" << std::endl;
+        endianness = 0;
     }
     else
     {
-        std::cout << "LITTLE ENDIAN" << std::endl;
+        if (std::endian::native == std::endian::little)
+        {
+            std::cout << "LITTLE ENDIAN" << std::endl;
+            endianness = 1;
+        }
+        else
+        {
+            std::cout << "MIXED ENDIAN" << std::endl;
+            endianness = 2;
+        }
     }
 
     SDL_Init(SDL_INIT_EVERYTHING);
@@ -233,7 +243,11 @@ void YasEngine::update(double& deltaTime)
     //int numberOfPhysicalObjects = objectsToDraw.size();
 
     //std::cout << numberOfPhysicalObjects << std::endl;
-
+    spawner.spawnObject(go);
+    if(go != nullptr)
+    {
+        objectsToDraw.push_back(go);
+    }
     handlePhysics();
     for (auto object : objectsToDraw)
     {
@@ -251,10 +265,7 @@ void YasEngine::update(double& deltaTime)
         objectsToDraw.push_back(projectile);
     }
 
-    if(go != nullptr)
-    {
-        objectsToDraw.push_back(go);
-    }
+
 
     if (mousePositionChangeInformation->mouseMoved || input->up || input->down || input->left || input->right)
     {
@@ -305,8 +316,8 @@ void YasEngine::render(double& deltaTime)
 
     drawHudElements(deltaTime);
 
-    writer.write(-620, 100, "HALF LIFE DOOM UNREAL WOLFENSTEIN CALL OF DUTY CARMAGEDDON ", *pixelsTable);
-    writer.write(-620, -100, "HOLY SHIT IT IS WORKING FINALLY", *pixelsTable);
+    writer.write(-620, 100, RESTART_BUTTON, *pixelsTable);
+    writer.write(-620, -100, "HOLY SHIT IT IS WORKING FINALLY 0.1.2.3.4.5.6.7.8.9", *pixelsTable);
 
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
     SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);

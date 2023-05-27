@@ -3,6 +3,7 @@
 #include<stdio.h>
 #include<iostream>
 #include<vector>
+#include<string>
 #include<SDL2/SDL_mixer.h>
 #include<bit>
 #include"Vector2D.hpp"
@@ -25,6 +26,19 @@ class YasEngine
 	public:
 
 		GameObject* go;
+        enum GameState
+        {
+            INTRO,
+            MAIN_MENU_RESTART,
+            GAMEPLAY,
+            OUTRO
+        };
+
+        const std::string RESTART_BUTTON = "RESTART/START";
+        const std::string QUIT_BUTTON = "QUIT";
+        std::vector<std::string> introTexts;
+        std::vector<std::string> outroTexts;
+        std::vector<std::string> inGameTexts;
 
 		static YasEngine* GetInstance()
 		{
@@ -47,7 +61,7 @@ class YasEngine
 
 		static YasEngine* instance;
 
-		const bool endianness = std::endian::native == std::endian::big;
+		int endianness;// = std::endian::native == std::endian::big;
 
 		SDL_Window* window;
 		SDL_Renderer* renderer;

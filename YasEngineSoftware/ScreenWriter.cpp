@@ -56,50 +56,29 @@ void ScreenWriter::writeNew(int x, int y, string text, SDL_Surface *na_czym, int
         }
     }
 }
-void ScreenWriter::write(int x, int y, const char * text, SDL_Surface *na_czym)
-{
-
-    string napis = text;
-    SDL_Rect docelowe;
-    docelowe.x=x;
-    docelowe.y=y;
-//    docelowe.w=this->pozycja.w;
-//    docelowe.h=this->pozycja.h;
-    for(int i=0; i<static_cast<int>(napis.size()); i++)
-    {
-        for(int j=0; j<63; j++)
-        {
-            if(napis.at(i) == charactersTable[j])
-            {
-                //position.x=docelowe.w*j;
-                docelowe.x=x+i*docelowe.w;
-//                SDL_BlitSurface(charactersVertices , &pozycja, na_czym, &docelowe );
-            }
-
-        }
-    }
-}
-void ScreenWriter::write(int x, int y, string text, SDL_Surface *na_czym)
-{
-    SDL_Rect docelowe;
-    docelowe.x=x;
-    docelowe.y=y;
-//    docelowe.w=this->pozycja.w;
-//    docelowe.h=this->pozycja.h;
-    for(int i=0; i<static_cast<int>(text.size()); i++)
-    {
-        for(int j=0; j<63; j++)
-        {
-            if(text.at(i) == charactersTable[j])
-            {
-                //position.x=docelowe.w*j;
-                docelowe.x=x+i*docelowe.w;
-//                SDL_BlitSurface(charactersVertices , &pozycja, na_czym, &docelowe );
-            }
-
-        }
-    }
-}
+//void ScreenWriter::write(int x, int y, const char * text, SDL_Surface *na_czym)
+//{
+//
+//    string napis = text;
+//    SDL_Rect docelowe;
+//    docelowe.x=x;
+//    docelowe.y=y;
+////    docelowe.w=this->pozycja.w;
+////    docelowe.h=this->pozycja.h;
+//    for(int i=0; i<static_cast<int>(napis.size()); i++)
+//    {
+//        for(int j=0; j<63; j++)
+//        {
+//            if(napis.at(i) == charactersTable[j])
+//            {
+//                //position.x=docelowe.w*j;
+//                docelowe.x=x+i*docelowe.w;
+////                SDL_BlitSurface(charactersVertices , &pozycja, na_czym, &docelowe );
+//            }
+//
+//        }
+//    }
+//}
 
 void ScreenWriter::write(int x, int y, string text, PixelsTable& pixelsTable)
 {
@@ -118,34 +97,34 @@ void ScreenWriter::write(int x, int y, string text, PixelsTable& pixelsTable)
     }
 }
 
-void ScreenWriter::write(int x, int y, short integers, SDL_Surface *na_czym)
-{
-    ostringstream oss_wyjsciowy;
-
-    oss_wyjsciowy << integers;
-
-    string napis="";
-    napis = oss_wyjsciowy.str();
-    SDL_Rect docelowe;
-    int pom_w=0, pom_h=0;
-    docelowe.x=x;
-    docelowe.y=y;
-//    docelowe.w=this->pozycja.w;
-//    docelowe.h=this->pozycja.h;
-    for(int i=0; i<static_cast<int>(napis.size()); i++)
-    {
-        for(int j=0; j<63; j++)
-        {
-            if(napis.at(i) == charactersTable[j])
-            {
-                //position.x=docelowe.w*j;
-                docelowe.x=x+i*docelowe.w;
-//                SDL_BlitSurface(charactersVertices , &pozycja, na_czym, &docelowe );
-            }
-
-        }
-    }
-}
+//void ScreenWriter::write(int x, int y, short integers, SDL_Surface *na_czym)
+//{
+//    ostringstream oss_wyjsciowy;
+//
+//    oss_wyjsciowy << integers;
+//
+//    string napis="";
+//    napis = oss_wyjsciowy.str();
+//    SDL_Rect docelowe;
+//    int pom_w=0, pom_h=0;
+//    docelowe.x=x;
+//    docelowe.y=y;
+////    docelowe.w=this->pozycja.w;
+////    docelowe.h=this->pozycja.h;
+//    for(int i=0; i<static_cast<int>(napis.size()); i++)
+//    {
+//        for(int j=0; j<63; j++)
+//        {
+//            if(napis.at(i) == charactersTable[j])
+//            {
+//                //position.x=docelowe.w*j;
+//                docelowe.x=x+i*docelowe.w;
+////                SDL_BlitSurface(charactersVertices , &pozycja, na_czym, &docelowe );
+//            }
+//
+//        }
+//    }
+//}
 
 void ScreenWriter::initializeFontObjects()
 {
