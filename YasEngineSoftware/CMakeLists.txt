@@ -51,7 +51,7 @@ add_executable(YasEngineSoftware
         YasGraphicsLibrary.hpp
         ScreenWriter.hpp
         ScreenWriter.cpp
-        FontObject.cpp FontObject.hpp FontSurface.hpp FontSurface.cpp)
+        FontObject.cpp FontObject.hpp FontSurface.hpp FontSurface.cpp Button.cpp Button.hpp)
 target_link_libraries(YasEngineSoftware
         PRIVATE SDL2
         PRIVATE libSDL2_mixer.so

@@ -34,8 +34,10 @@ class YasEngine
             OUTRO
         };
 
-        const std::string RESTART_BUTTON = "RESTART/START";
-        const std::string QUIT_BUTTON = "QUIT";
+        GameState gameState;
+
+
+        std::vector<std::string> mainMenuTexts;
         std::vector<std::string> introTexts;
         std::vector<std::string> outroTexts;
         std::vector<std::string> inGameTexts;

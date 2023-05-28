@@ -243,6 +243,7 @@ void YasEngine::update(double& deltaTime)
     //int numberOfPhysicalObjects = objectsToDraw.size();
 
     //std::cout << numberOfPhysicalObjects << std::endl;
+    // TODO switch with handling different things
     spawner.spawnObject(go);
     if(go != nullptr)
     {
@@ -265,8 +266,6 @@ void YasEngine::update(double& deltaTime)
         objectsToDraw.push_back(projectile);
     }
 
-
-
     if (mousePositionChangeInformation->mouseMoved || input->up || input->down || input->left || input->right)
     {
         player->rotateToMousePositionInLocalCoordinateSystem(static_cast<float>(mousePositionChangeInformation->x), static_cast<float>(mousePositionChangeInformation->y), windowDimensions);
@@ -274,6 +273,8 @@ void YasEngine::update(double& deltaTime)
 
     mouseX = static_cast<float>(mousePositionChangeInformation->x);
     mouseY = static_cast<float>(mousePositionChangeInformation->y);
+
+    // TODO sprawdzenie ktory Button zostal klikniety i obsluga tego
 
     windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
 
@@ -285,39 +286,48 @@ void YasEngine::render(double& deltaTime)
     pixelsTable->clearColor(BLACK);
     mathPlay->clearColor(BLACK);
 
+
     for (auto object : objectsToDraw)
     {
-        if (object->isAlive)
+        if (object->isAlive && ) // TODO if gamestate == gameplay
         {
             drawPolygon(object, *pixelsTable);
+        } else {
+            if(true) // TODO if type is button -> #include <typeinfo> cout<<typeid(obj).name()<<endl;
+            {
+                // TODO drawPolygon(object, *pixelsTable);
+            }
         }
     }
-    
-    int vertical = static_cast<int>(-WINDOW_WIDTH * 0.25F);
-    int horizontal = static_cast<int>(-WINDOW_HEIGHT * 0.25F);
 
-    mathPlay->verticalLineOnSurface(0, GREEN);
-    mathPlay->horizontalLineOnSurface(0, RED);//-WINDOW_HEIGHT * 0.25F
+    if(true) // TODO if is gameplay
+    {
+        mathPlay->verticalLineOnSurface(0, GREEN);
+        mathPlay->horizontalLineOnSurface(0, RED);//-WINDOW_HEIGHT * 0.25F
 
-	// mathPlay->drawNumbersAsGroupOfNotConnectedLines(sinusPoints, 100, YELLOW);
+        // mathPlay->drawNumbersAsGroupOfNotConnectedLines(sinusPoints, 100, YELLOW);
 
-    mathPlay->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, YELLOW, true);
-    mathPlay->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, BLUE, false);
-    mathPlay->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, RED, false);
+        mathPlay->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, YELLOW, true);
+        mathPlay->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, BLUE, false);
+        mathPlay->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, RED, false);
 
-    mathPlay->drawNumbersAsGroupOfLines(primeNumbersPoints->points, primeNumbersPoints->pointsNumber, YELLOW, false);
+        mathPlay->drawNumbersAsGroupOfLines(primeNumbersPoints->points, primeNumbersPoints->pointsNumber, YELLOW,
+                                            false);
 
-    mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
+        mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
 
-    drawRectangle(*pixelsTable, -110, -110, 32, 32,YELLOW);
+        drawRectangle(*pixelsTable, -110, -110, 32, 32, YELLOW);
 
-    verticalLineOnWholeScreen(*pixelsTable, 0, GREEN);
-    horizontalLineOnWholeScreen(*pixelsTable, 0, RED);
-
+        verticalLineOnWholeScreen(*pixelsTable, 0, GREEN);
+        horizontalLineOnWholeScreen(*pixelsTable, 0, RED);
+    }
+    else
+    {
+        // TOD DRAW STRINGS FOR MENU
+    }
     drawHudElements(deltaTime);
 
-    writer.write(-620, 100, RESTART_BUTTON, *pixelsTable);
-    writer.write(-620, -100, "HOLY SHIT IT IS WORKING FINALLY 0.1.2.3.4.5.6.7.8.9", *pixelsTable);
+
 
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
     SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);
