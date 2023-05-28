@@ -1,5 +1,5 @@
-#ifndef YASENGINESOFTWARE_SCREENWRITER_HPP
-#define YASENGINESOFTWARE_SCREENWRITER_HPP
+#ifndef SCREENWRITER_HPP
+#define SCREENWRITER_HPP
 #include<string>
 #include<vector>
 #include<SDL2/SDL_surface.h>
@@ -35,4 +35,4 @@ class ScreenWriter final
         void writeNew(int x, int y, std::string text, SDL_Surface *na_czym, int width, int height);
 };
 
-#endif //YASENGINESOFTWARE_SCREENWRITER_HPP
+#endif //SCREENWRITER_HPP

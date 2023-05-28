@@ -13,6 +13,8 @@ class Button: public GameObject
         };
 
         std::string text;
+        int verticalMargin;
+        int horizontalMargin;
 
         ButtonId buttonId;
 

@@ -223,10 +223,11 @@ void YasEngine::handleInput(SDL_Event& event)
         {
             player->isShooting      = true;
             // TODO checking if cursor is in space of button and this is the button
-            for(int i=0; i<3; i++)
-            if()
+            for(int i=0; i<buttons.size(); i++)
             {
-                ;
+                if (true)
+                { ;
+                }
             }
         }
         if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
@@ -295,7 +296,7 @@ void YasEngine::render(double& deltaTime)
 
     for (auto object : objectsToDraw)
     {
-        if (object->isAlive && ) // TODO if gamestate == gameplay
+        if (object->isAlive && true) // TODO if gamestate == gameplay
         {
             drawPolygon(object, *pixelsTable);
         } else {
@@ -452,4 +453,10 @@ void YasEngine::prepareInterface()
     buttons.push_back(new Button(Button::RESTART_START, "START RESTART"));
     buttons.push_back(new Button(Button::QUIT, "QUIT"));
 
+    // windowDimensions.
+
+//    static const int NUMBER_OF_CHARACTERS = 37;
+//    static const int FONT_WIDTH = 17;
 }
+
+
