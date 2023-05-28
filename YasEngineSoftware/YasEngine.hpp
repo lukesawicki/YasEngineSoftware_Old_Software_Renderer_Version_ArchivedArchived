@@ -36,6 +36,7 @@ class YasEngine
 
         GameState gameState;
 
+        std::vector<GameObject*> buttons;
 
         std::vector<std::string> mainMenuTexts;
         std::vector<std::string> introTexts;
@@ -117,6 +118,7 @@ class YasEngine
 		void handlePhysics();
 		void prepareGameWorld();
 		void preparePlayer();
+        void prepareInterface();
 		void handleInput(SDL_Event& event);
 		void update(double& deltaTime);
 		void drawHudElements(double& deltaTime);

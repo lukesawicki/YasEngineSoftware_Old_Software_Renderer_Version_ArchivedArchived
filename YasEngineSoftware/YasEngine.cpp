@@ -6,6 +6,7 @@
 #include"VariousTools.hpp"
 #include"Circle.hpp"
 #include"Collider.hpp"
+#include"Button.hpp"
 #include"CosinusPointsGenerator.hpp"
 #include"FibonacciPointsGenerator.hpp"
 #include"Math.hpp"
@@ -22,9 +23,9 @@ void YasEngine::initialize()
     prepareGameWorld();
     preparePlayer();
     prepareSoundAndMusic();
+    prepareInterface();
 
     writer.initialize();
-
 
     mathPlay = new MathematicsFunSurface(0, windowDimensions->y * 0.5F, static_cast<int>(windowDimensions->x * 0.5F), static_cast<int>(windowDimensions->y * 0.5F), BLACK);
 
@@ -221,6 +222,12 @@ void YasEngine::handleInput(SDL_Event& event)
         if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
         {
             player->isShooting      = true;
+            // TODO checking if cursor is in space of button and this is the button
+            for(int i=0; i<3; i++)
+            if()
+            {
+                ;
+            }
         }
         if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
         {
@@ -285,7 +292,6 @@ void YasEngine::render(double& deltaTime)
 {
     pixelsTable->clearColor(BLACK);
     mathPlay->clearColor(BLACK);
-
 
     for (auto object : objectsToDraw)
     {
@@ -439,4 +445,11 @@ void YasEngine::prepareGameWorld()
 
         spawner.position.x = -200;
         spawner.position.y = 0;
+}
+
+void YasEngine::prepareInterface()
+{
+    buttons.push_back(new Button(Button::RESTART_START, "START RESTART"));
+    buttons.push_back(new Button(Button::QUIT, "QUIT"));
+
 }
