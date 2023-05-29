@@ -13,14 +13,17 @@ class Button: public GameObject
         };
 
         std::string text;
+        int buttonWidth;
+        int buttonTextWidth;
+        int buttonHeight;
         int verticalMargin;
         int horizontalMargin;
 
         ButtonId buttonId;
 
-            Button(const ButtonId& buttonId, std::string text);
+        Button(const ButtonId& buttonId, std::string text);
 
-    void generate() override;
+        void generate() override;
         void generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices) override;
         void regeneratePolygon() override;
         void move(float deltaTime) override;

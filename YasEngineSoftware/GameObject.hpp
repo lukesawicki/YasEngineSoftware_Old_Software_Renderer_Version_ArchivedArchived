@@ -40,6 +40,12 @@ class GameObject
 			position.y = y;
 		}
 
+        virtual Vector2D<float> getPosition()
+        {
+            return position;
+        }
+
+
 		virtual void setPosition(const Vector2D<float>& position)
 		{
 			this->position.x = position.x;
