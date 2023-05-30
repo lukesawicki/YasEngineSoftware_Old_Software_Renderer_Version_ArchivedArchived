@@ -173,6 +173,8 @@ void YasEngine::handleInput(SDL_Event& event)
                 case SDLK_ESCAPE:
                     handleGameStateWhenESCbuttonPushed();
                     break;
+                case SDLK_SPACE:
+                    handleGameStateWhenSPACEbuttonPushed();
                 case SDLK_w:
                     input->up = true;
                     break;
@@ -228,6 +230,12 @@ void YasEngine::handleInput(SDL_Event& event)
                     break;
                 case MAIN_MENU_RESTART:
                     handleClickedButtons();
+                    break;
+                case INTRO:
+                    gameState = GameState::MAIN_MENU_RESTART;
+                    break;
+                case OUTRO:
+                    quit = true;
                     break;
                 default:
                     ;
@@ -289,6 +297,11 @@ void YasEngine::update(double& deltaTime)
         {
             player->rotateToMousePositionInLocalCoordinateSystem(static_cast<float>(mousePositionChangeInformation->x), static_cast<float>(mousePositionChangeInformation->y), windowDimensions);
         }
+        
+        if(projectile != nullptr)
+        {
+            projectile = nullptr;
+        }
     }
 
     mouseX = static_cast<float>(mousePositionChangeInformation->x);
@@ -297,10 +310,7 @@ void YasEngine::update(double& deltaTime)
     // TODO sprawdzenie ktory Button zostal klikniety i obsluga tego
 
     windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
-    if(projectile != nullptr)
-    {
-        projectile = nullptr;
-    }
+
 }
 
 void YasEngine::render(double& deltaTime)
@@ -348,20 +358,18 @@ void YasEngine::render(double& deltaTime)
         {
             if(gameState == GameState::INTRO)
             {
-                ; // TODO write title and version and tha game is powered by YasEngine
+                writer.write(0, 100, "THE BEOUTY OF MATH       POWERED BY YASENGINE",YELLOW, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
             }
             else
             {
                 if(gameState == GameState::OUTRO)
                 {
-                    ; // TODO Write creators, thank you for playing and see you in other games
+                    writer.write(0, 100, "CREDITS       CODE DESIGN LUKASZ LUKE SAWICKI       SOUND AND MUSIC FROM INTERNET WITH FRE LICENSE", BLUE, *pixelsTable); // TODO Write creators, thank you for playing and see you in other games
                 }
             }
         }
     }
     drawHudElements(deltaTime);
-
-
 
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
     SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);
@@ -526,34 +534,39 @@ void YasEngine::drawButtons()
     }
 }
 
-ButtonId YasEngine::checkWhichButtonClicked()
+Button::ButtonId YasEngine::checkWhichButtonClicked()
 {
+    //windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
+    float x = mousePositionChangeInformation->x;
+    float y = mousePositionChangeInformation->y;
+    windowPositionToCartesianPosition(x, y, windowDimensions);
     for(int i=0; i<buttons.size(); i++)
     {
         if(
         // kursor ponizej gornego Y
-        mousePositionChangeInformation->y <= (buttons.at(i).getPosition().y + dynamic_cast<Button*>(buttons.at(i))->buttonHeight * 0.5F) &&
+        y <= (buttons.at(i)->getPosition().y + dynamic_cast<Button*>(buttons.at(i))->buttonHeight * 0.5F) &&
         // kursor powyzej dolnego y
-        mousePositionChangeInformation->y >= (buttons.at(i).getPosition().y - dynamic_cast<Button*>(buttons.at(i))->buttonHeight * 0.5F) &&
+        y >= (buttons.at(i)->getPosition().y - dynamic_cast<Button*>(buttons.at(i))->buttonHeight * 0.5F) &&
         // kursor na prawo od lewego x
-        mousePositionChangeInformation->x >= (buttons.at(i).getPosition().x - dynamic_cast<Button*>(buttons.at(i))->buttonWidth * 0.5F) &&
+        x >= (buttons.at(i)->getPosition().x - dynamic_cast<Button*>(buttons.at(i))->buttonWidth * 0.5F) &&
         // kursor na lewo od prawego x
-        mousePositionChangeInformation->x <= (buttons.at(i).getPosition().x + dynamic_cast<Button*>(buttons.at(i))->buttonWidth * 0.5F) 
+        x <= (buttons.at(i)->getPosition().x + dynamic_cast<Button*>(buttons.at(i))->buttonWidth * 0.5F)
         )
         {
             return dynamic_cast<Button*>(buttons.at(i))-> buttonId;
         }
     }
+    return Button::NONE;
 }
 
 void YasEngine::handleClickedButtons()
 {
     switch(checkWhichButtonClicked())
-    {            
-        case RESTART_START:
+    {
+        case Button::RESTART_START:
             gameState = GameState::GAMEPLAY;
             break;
-        case QUIT:
+        case Button::QUIT:
             gameState = GameState::OUTRO;
             break;
         default:
@@ -563,15 +576,30 @@ void YasEngine::handleClickedButtons()
 
 void YasEngine::handleGameStateWhenESCbuttonPushed()
 {
-        switch(gameState)
+    switch(gameState)
     {            
         case INTRO:
-            gameState = GameState::GAMEPLAY;
+            gameState = GameState::MAIN_MENU_RESTART;
             break;
         case MAIN_MENU_RESTART:
             gameState = GameState::OUTRO;
             break;
         case GAMEPLAY:
+            gameState = GameState::MAIN_MENU_RESTART;
+            break;
+        case OUTRO:
+            quit = true;
+            break;
+        default:
+            ;
+    }
+}
+
+void YasEngine::handleGameStateWhenSPACEbuttonPushed()
+{
+    switch(gameState)
+    {
+        case INTRO:
             gameState = GameState::MAIN_MENU_RESTART;
             break;
         case OUTRO:

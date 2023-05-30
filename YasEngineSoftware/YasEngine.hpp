@@ -17,8 +17,8 @@
 #include"PointsGenerator.hpp"
 #include"PointsSet.hpp"
 #include"Spawner.hpp"
-#include "ScreenWriter.hpp"
-
+#include"ScreenWriter.hpp"
+#include"Button.hpp"
 //using namespace std;
 
 class YasEngine
@@ -34,7 +34,7 @@ class YasEngine
             OUTRO
         };
 
-        GameState gameState = GAMEPLAY;
+        GameState gameState = GameState::INTRO;
 
         std::vector<GameObject*> buttons;
 
@@ -123,8 +123,10 @@ class YasEngine
 		void update(double& deltaTime);
 		void drawHudElements(double& deltaTime);
 		void render(double& deltaTime);
-        ButtonId buttonClicked();
-
+        Button::ButtonId checkWhichButtonClicked();
+        void handleClickedButtons();
+        void handleGameStateWhenESCbuttonPushed();
+        void handleGameStateWhenSPACEbuttonPushed();
 		void prepareSoundAndMusic();
         void drawButtons();
 };

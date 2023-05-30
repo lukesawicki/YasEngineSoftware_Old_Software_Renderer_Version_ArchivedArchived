@@ -9,7 +9,8 @@ class Button: public GameObject
         enum ButtonId
         {
             RESTART_START,
-            QUIT
+            QUIT,
+            NONE
         };
 
         std::string text;
