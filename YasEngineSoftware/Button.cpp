@@ -25,10 +25,11 @@ void Button::move(float deltaTime)
 
 }
 
-Button::Button(const ButtonId& buttonId, std::string text)
+Button::Button(const ButtonId& buttonId, std::string text, const Vector4D<Uint8>& color)
 {
     this->buttonId = buttonId;
     this->text.assign(text);
     this->buttonTextWidth = ScreenWriter::FONT_WIDTH * text.size();
+    this->color = color;
     numberOfVertices = 4;
 }

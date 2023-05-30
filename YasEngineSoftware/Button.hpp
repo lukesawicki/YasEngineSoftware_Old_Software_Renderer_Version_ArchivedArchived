@@ -21,12 +21,22 @@ class Button: public GameObject
 
         ButtonId buttonId;
 
-        Button(const ButtonId& buttonId, std::string text);
+        Button(const ButtonId& buttonId, std::string text, const Vector4D<Uint8>& color);
 
         void generate() override;
         void generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices) override;
         void regeneratePolygon() override;
         void move(float deltaTime) override;
+
+    void setPosition(float x, float y)
+    {
+        GameObject::setPosition(x, y);
+    }
+
+    void setPosition(const Vector2D<float>& position)
+    {
+        GameObject::setPosition(position);
+    }
 };
 
 #endif //BUTTON_HPP

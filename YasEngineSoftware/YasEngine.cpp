@@ -454,28 +454,15 @@ void YasEngine::prepareGameWorld()
 
 void YasEngine::prepareInterface()
 {
-    buttons.push_back(new Button(Button::RESTART_START, "START RESTART"));
-    buttons.at(0)->setPosition(0, 0);
+    //Button 1
+    buttons.push_back(new Button(Button::RESTART_START, "START RESTART", RED));
+    buttons.at(0)->setPosition(-100, 100);
     dynamic_cast<Button*>(buttons.at(0))->horizontalMargin = 10;
     dynamic_cast<Button*>(buttons.at(0))->verticalMargin = 5;
-
-    buttons.push_back(new Button(Button::QUIT, "QUIT"));
-    buttons.at(1)->setPosition(0, 0);
-    dynamic_cast<Button*>(buttons.at(1))->horizontalMargin = 10;
-    dynamic_cast<Button*>(buttons.at(1))->verticalMargin = 5;
-
     dynamic_cast<Button*>(buttons.at(0))->buttonWidth = writer.FONT_WIDTH * dynamic_cast<Button*>(buttons.at(0))->text.size() + 2*dynamic_cast<Button*>(buttons.at(0))->horizontalMargin;
     dynamic_cast<Button*>(buttons.at(0))->buttonHeight = writer.FONT_HEIGHT + 2*dynamic_cast<Button*>(buttons.at(0))->verticalMargin;
-
-    dynamic_cast<Button*>(buttons.at(1))->buttonWidth = writer.FONT_WIDTH * dynamic_cast<Button*>(buttons.at(1))->text.size() + 2*dynamic_cast<Button*>(buttons.at(1))->horizontalMargin;
-    dynamic_cast<Button*>(buttons.at(1))->buttonHeight = writer.FONT_HEIGHT + 2*dynamic_cast<Button*>(buttons.at(1))->verticalMargin;
-
     buttons.at(0)->localVertices = new Vector2D<float>[4];
     buttons.at(0)->worldVertices = new Vector2D<float>[4];
-
-    buttons.at(1)->localVertices = new Vector2D<float>[4];
-    buttons.at(1)->worldVertices = new Vector2D<float>[4];
-
     buttons.at(0)->localVertices[0].x = buttons.at(0)->getPosition().x - dynamic_cast<Button*>(buttons.at(0))->buttonWidth * 0.5F;
     buttons.at(0)->localVertices[0].y = buttons.at(0)->getPosition().y + dynamic_cast<Button*>(buttons.at(0))->buttonHeight * 0.5F;
     buttons.at(0)->localVertices[1].x = buttons.at(0)->getPosition().x + dynamic_cast<Button*>(buttons.at(0))->buttonWidth * 0.5F;
@@ -484,9 +471,18 @@ void YasEngine::prepareInterface()
     buttons.at(0)->localVertices[2].y = buttons.at(0)->getPosition().y - dynamic_cast<Button*>(buttons.at(0))->buttonHeight * 0.5F;
     buttons.at(0)->localVertices[3].x = buttons.at(0)->getPosition().x - dynamic_cast<Button*>(buttons.at(0))->buttonWidth * 0.5F;
     buttons.at(0)->localVertices[3].y = buttons.at(0)->getPosition().y - dynamic_cast<Button*>(buttons.at(0))->buttonHeight * 0.5F;
-
     buttons.at(0)->generate();
 
+
+    //Button 2
+    buttons.push_back(new Button(Button::QUIT, "QUIT", YELLOW));
+    buttons.at(1)->setPosition(-100, 50);
+    dynamic_cast<Button*>(buttons.at(1))->horizontalMargin = 10;
+    dynamic_cast<Button*>(buttons.at(1))->verticalMargin = 5;
+    dynamic_cast<Button*>(buttons.at(1))->buttonWidth = writer.FONT_WIDTH * dynamic_cast<Button*>(buttons.at(1))->text.size() + 2*dynamic_cast<Button*>(buttons.at(1))->horizontalMargin;
+    dynamic_cast<Button*>(buttons.at(1))->buttonHeight = writer.FONT_HEIGHT + 2*dynamic_cast<Button*>(buttons.at(1))->verticalMargin;
+    buttons.at(1)->localVertices = new Vector2D<float>[4];
+    buttons.at(1)->worldVertices = new Vector2D<float>[4];
     buttons.at(1)->localVertices[0].x = buttons.at(1)->getPosition().x - dynamic_cast<Button*>(buttons.at(1))->buttonWidth * 0.5F;
     buttons.at(1)->localVertices[0].y = buttons.at(1)->getPosition().y + dynamic_cast<Button*>(buttons.at(1))->buttonHeight * 0.5F;
     buttons.at(1)->localVertices[1].x = buttons.at(1)->getPosition().x + dynamic_cast<Button*>(buttons.at(1))->buttonWidth * 0.5F;
@@ -495,26 +491,14 @@ void YasEngine::prepareInterface()
     buttons.at(1)->localVertices[2].y = buttons.at(1)->getPosition().y - dynamic_cast<Button*>(buttons.at(1))->buttonHeight * 0.5F;
     buttons.at(1)->localVertices[3].x = buttons.at(1)->getPosition().x - dynamic_cast<Button*>(buttons.at(1))->buttonWidth * 0.5F;
     buttons.at(1)->localVertices[3].y = buttons.at(1)->getPosition().y - dynamic_cast<Button*>(buttons.at(1))->buttonHeight * 0.5F;
-
     buttons.at(1)->generate();
-
-//    this->worldVertices = new Vector2D<float>[numberOfVertices];
-//    this->localVertices = new Vector2D<float>[numberOfVertices];
-    // TODO calculate all BUTTON FRAME vertices position (have to have in mind margin)
-    // TODO calculate first character position (have to have in mind margin
-
-    // windowDimensions.
-
-//    static const int NUMBER_OF_CHARACTERS = 37;
-//    static const int FONT_WIDTH = 17;
 }
-
 
 void YasEngine::drawButtons()
 {
     for(int i=0; i<buttons.size(); i++)
     {
         drawPolygon(buttons.at(i), *pixelsTable);
-        writer.write(buttons.at(i)->getPosition().x - dynamic_cast<Button*>(buttons.at(i))->buttonTextWidth * 0.5F + ScreenWriter::FONT_WIDTH * 0.5F, buttons.at(i)->getPosition().y + i*100, dynamic_cast<Button*>(buttons.at(i))->text, *pixelsTable);
+        writer.write(buttons.at(i)->getPosition().x - dynamic_cast<Button*>(buttons.at(i))->buttonTextWidth * 0.5F + ScreenWriter::FONT_WIDTH * 0.5F, buttons.at(i)->getPosition().y, dynamic_cast<Button*>(buttons.at(i))->text, *pixelsTable);
     }
 }
