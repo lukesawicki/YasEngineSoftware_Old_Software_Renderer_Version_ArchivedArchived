@@ -31,7 +31,7 @@ class ScreenWriter final
         void initializeFontObjects();
         void initializeFontSurfaces();
         void prepareFontVertices();
-        void write(int x, int y, std::string text,  PixelsTable& pixelsTable);
+        void write(int x, int y, std::string text, const Vector4D<Uint8>& color, PixelsTable& pixelsTable);
         void initialize(int characterWidth, int characterHeight, const char* plik_znakow);
         void writeNew(int x, int y, std::string text, SDL_Surface *na_czym, int width, int height);
 };

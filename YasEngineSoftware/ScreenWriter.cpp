@@ -80,7 +80,7 @@ void ScreenWriter::writeNew(int x, int y, string text, SDL_Surface *na_czym, int
 //    }
 //}
 
-void ScreenWriter::write(int x, int y, string text, PixelsTable& pixelsTable)
+void ScreenWriter::write(int x, int y, string text, const Vector4D<Uint8>& color, PixelsTable& pixelsTable)
 {
     for(int i=0; i<static_cast<int>(text.size()); i++)
     {
@@ -90,7 +90,7 @@ void ScreenWriter::write(int x, int y, string text, PixelsTable& pixelsTable)
             {
                 fonts.at(j)->verticesBaseData->setPosition(x + i*FONT_WIDTH, y);
                 fonts.at(j)->verticesBaseData->generate();
-                drawNumbersAsGroupOfLines(fonts.at(j)->verticesBaseData->worldVertices, fonts.at(j)->verticesBaseData->numberOfVertices, RED, false, pixelsTable);
+                drawNumbersAsGroupOfLines(fonts.at(j)->verticesBaseData->worldVertices, fonts.at(j)->verticesBaseData->numberOfVertices, color, false, pixelsTable);
             }
 
         }

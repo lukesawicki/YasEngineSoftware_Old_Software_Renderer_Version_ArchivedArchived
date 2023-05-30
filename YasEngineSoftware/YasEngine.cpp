@@ -463,14 +463,14 @@ void YasEngine::prepareInterface()
     dynamic_cast<Button*>(buttons.at(0))->buttonHeight = writer.FONT_HEIGHT + 2*dynamic_cast<Button*>(buttons.at(0))->verticalMargin;
     buttons.at(0)->localVertices = new Vector2D<float>[4];
     buttons.at(0)->worldVertices = new Vector2D<float>[4];
-    buttons.at(0)->localVertices[0].x = buttons.at(0)->getPosition().x - dynamic_cast<Button*>(buttons.at(0))->buttonWidth * 0.5F;
-    buttons.at(0)->localVertices[0].y = buttons.at(0)->getPosition().y + dynamic_cast<Button*>(buttons.at(0))->buttonHeight * 0.5F;
-    buttons.at(0)->localVertices[1].x = buttons.at(0)->getPosition().x + dynamic_cast<Button*>(buttons.at(0))->buttonWidth * 0.5F;
-    buttons.at(0)->localVertices[1].y = buttons.at(0)->getPosition().y + dynamic_cast<Button*>(buttons.at(0))->buttonHeight * 0.5F;
-    buttons.at(0)->localVertices[2].x = buttons.at(0)->getPosition().x + dynamic_cast<Button*>(buttons.at(0))->buttonWidth * 0.5F;
-    buttons.at(0)->localVertices[2].y = buttons.at(0)->getPosition().y - dynamic_cast<Button*>(buttons.at(0))->buttonHeight * 0.5F;
-    buttons.at(0)->localVertices[3].x = buttons.at(0)->getPosition().x - dynamic_cast<Button*>(buttons.at(0))->buttonWidth * 0.5F;
-    buttons.at(0)->localVertices[3].y = buttons.at(0)->getPosition().y - dynamic_cast<Button*>(buttons.at(0))->buttonHeight * 0.5F;
+    buttons.at(0)->localVertices[0].x = 0 - dynamic_cast<Button*>(buttons.at(0))->buttonWidth * 0.5F;
+    buttons.at(0)->localVertices[0].y = 0 + dynamic_cast<Button*>(buttons.at(0))->buttonHeight * 0.5F;
+    buttons.at(0)->localVertices[1].x = 0 + dynamic_cast<Button*>(buttons.at(0))->buttonWidth * 0.5F;
+    buttons.at(0)->localVertices[1].y = 0 + dynamic_cast<Button*>(buttons.at(0))->buttonHeight * 0.5F;
+    buttons.at(0)->localVertices[2].x = 0 + dynamic_cast<Button*>(buttons.at(0))->buttonWidth * 0.5F;
+    buttons.at(0)->localVertices[2].y = 0 - dynamic_cast<Button*>(buttons.at(0))->buttonHeight * 0.5F;
+    buttons.at(0)->localVertices[3].x = 0 - dynamic_cast<Button*>(buttons.at(0))->buttonWidth * 0.5F;
+    buttons.at(0)->localVertices[3].y = 0 - dynamic_cast<Button*>(buttons.at(0))->buttonHeight * 0.5F;
     buttons.at(0)->generate();
 
 
@@ -483,14 +483,14 @@ void YasEngine::prepareInterface()
     dynamic_cast<Button*>(buttons.at(1))->buttonHeight = writer.FONT_HEIGHT + 2*dynamic_cast<Button*>(buttons.at(1))->verticalMargin;
     buttons.at(1)->localVertices = new Vector2D<float>[4];
     buttons.at(1)->worldVertices = new Vector2D<float>[4];
-    buttons.at(1)->localVertices[0].x = buttons.at(1)->getPosition().x - dynamic_cast<Button*>(buttons.at(1))->buttonWidth * 0.5F;
-    buttons.at(1)->localVertices[0].y = buttons.at(1)->getPosition().y + dynamic_cast<Button*>(buttons.at(1))->buttonHeight * 0.5F;
-    buttons.at(1)->localVertices[1].x = buttons.at(1)->getPosition().x + dynamic_cast<Button*>(buttons.at(1))->buttonWidth * 0.5F;
-    buttons.at(1)->localVertices[1].y = buttons.at(1)->getPosition().y + dynamic_cast<Button*>(buttons.at(1))->buttonHeight * 0.5F;
-    buttons.at(1)->localVertices[2].x = buttons.at(1)->getPosition().x + dynamic_cast<Button*>(buttons.at(1))->buttonWidth * 0.5F;
-    buttons.at(1)->localVertices[2].y = buttons.at(1)->getPosition().y - dynamic_cast<Button*>(buttons.at(1))->buttonHeight * 0.5F;
-    buttons.at(1)->localVertices[3].x = buttons.at(1)->getPosition().x - dynamic_cast<Button*>(buttons.at(1))->buttonWidth * 0.5F;
-    buttons.at(1)->localVertices[3].y = buttons.at(1)->getPosition().y - dynamic_cast<Button*>(buttons.at(1))->buttonHeight * 0.5F;
+    buttons.at(1)->localVertices[0].x = 0 - dynamic_cast<Button*>(buttons.at(1))->buttonWidth * 0.5F;
+    buttons.at(1)->localVertices[0].y = 0 + dynamic_cast<Button*>(buttons.at(1))->buttonHeight * 0.5F;
+    buttons.at(1)->localVertices[1].x = 0 + dynamic_cast<Button*>(buttons.at(1))->buttonWidth * 0.5F;
+    buttons.at(1)->localVertices[1].y = 0 + dynamic_cast<Button*>(buttons.at(1))->buttonHeight * 0.5F;
+    buttons.at(1)->localVertices[2].x = 0 + dynamic_cast<Button*>(buttons.at(1))->buttonWidth * 0.5F;
+    buttons.at(1)->localVertices[2].y = 0 - dynamic_cast<Button*>(buttons.at(1))->buttonHeight * 0.5F;
+    buttons.at(1)->localVertices[3].x = 0 - dynamic_cast<Button*>(buttons.at(1))->buttonWidth * 0.5F;
+    buttons.at(1)->localVertices[3].y = 0 - dynamic_cast<Button*>(buttons.at(1))->buttonHeight * 0.5F;
     buttons.at(1)->generate();
 }
 
@@ -499,6 +499,6 @@ void YasEngine::drawButtons()
     for(int i=0; i<buttons.size(); i++)
     {
         drawPolygon(buttons.at(i), *pixelsTable);
-        writer.write(buttons.at(i)->getPosition().x - dynamic_cast<Button*>(buttons.at(i))->buttonTextWidth * 0.5F + ScreenWriter::FONT_WIDTH * 0.5F, buttons.at(i)->getPosition().y, dynamic_cast<Button*>(buttons.at(i))->text, *pixelsTable);
+        writer.write(buttons.at(i)->getPosition().x - dynamic_cast<Button*>(buttons.at(i))->buttonTextWidth * 0.5F + ScreenWriter::FONT_WIDTH * 0.5F, buttons.at(i)->getPosition().y, dynamic_cast<Button*>(buttons.at(i))->text,dynamic_cast<Button*>(buttons.at(i))->color, *pixelsTable);
     }
 }
