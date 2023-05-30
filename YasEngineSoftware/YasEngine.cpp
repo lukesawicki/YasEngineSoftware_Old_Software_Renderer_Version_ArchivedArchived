@@ -17,7 +17,7 @@ YasEngine* YasEngine::instance = nullptr;
 
 void YasEngine::initialize()
 {
-    //spawner.spawnObject(go);
+    spawner.spawnObject(go);
     prepareBasicSettings();
     prepareRendering();
     prepareGameWorld();
@@ -170,23 +170,23 @@ void YasEngine::handleInput(SDL_Event& event)
         {
             switch (event.key.keysym.sym)
             {
-            case SDLK_ESCAPE:
-                quit = true;
-                break;
-            case SDLK_w:
-                input->up = true;
-                break;
-            case SDLK_s:
-                input->down = true;
-                break;
-            case SDLK_a:
-                input->left = true;
-                break;
-            case SDLK_d:
-                input->right = true;
-                break;
-            default:
-                ;
+                case SDLK_ESCAPE:
+                    handleGameStateWhenESCbuttonPushed();
+                    break;
+                case SDLK_w:
+                    input->up = true;
+                    break;
+                case SDLK_s:
+                    input->down = true;
+                    break;
+                case SDLK_a:
+                    input->left = true;
+                    break;
+                case SDLK_d:
+                    input->right = true;
+                    break;
+                default:
+                    ;
             }
         }
         if (event.type == SDL_KEYUP)
@@ -227,22 +227,13 @@ void YasEngine::handleInput(SDL_Event& event)
                     player->isShooting = true;
                     break;
                 case MAIN_MENU_RESTART:
-//                    for(int i=0; i<buttons.size(); i++)
-//                    {
-//                        if (true)
-//                        {
-//                            ;
-//                        }
-//                        switch
-//                    }
+                    handleClickedButtons();
                     break;
                 default:
                     ;
             }
-
-            // TODO checking if cursor is in space of button and this is the button
-
         }
+
         if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
         {
             switch(gameState)
@@ -270,31 +261,34 @@ void YasEngine::update(double& deltaTime)
 
     //std::cout << numberOfPhysicalObjects << std::endl;
     // TODO switch with handling different things
-    spawner.spawnObject(go);
-    if(go != nullptr)
-    {
-        objectsToDraw.push_back(go);
-    }
-    handlePhysics();
-    for (auto object : objectsToDraw)
-    {
-        if (object->isAlive)
+    if(gameState==GameState::GAMEPLAY) {
+
+        spawner.spawnObject(go);
+        if(go != nullptr)
         {
-            object->move(static_cast<float>(deltaTime));
-            object->regeneratePolygon();
+            objectsToDraw.push_back(go);
         }
-    }
+        handlePhysics();
+        for (auto object : objectsToDraw)
+        {
+            if (object->isAlive)
+            {
+                object->move(static_cast<float>(deltaTime));
+                object->regeneratePolygon();
+            }
+        }
 
-    Projectile* projectile = player->shoot();
-    if (projectile != nullptr)
-    {
-        Mix_PlayChannel(-1, shootSound, 0);
-        objectsToDraw.push_back(projectile);
-    }
+        Projectile* projectile = player->shoot();
+        if (projectile != nullptr)
+        {
+            Mix_PlayChannel(-1, shootSound, 0);
+            objectsToDraw.push_back(projectile);
+        }
 
-    if (mousePositionChangeInformation->mouseMoved || input->up || input->down || input->left || input->right)
-    {
-        player->rotateToMousePositionInLocalCoordinateSystem(static_cast<float>(mousePositionChangeInformation->x), static_cast<float>(mousePositionChangeInformation->y), windowDimensions);
+        if (mousePositionChangeInformation->mouseMoved || input->up || input->down || input->left || input->right)
+        {
+            player->rotateToMousePositionInLocalCoordinateSystem(static_cast<float>(mousePositionChangeInformation->x), static_cast<float>(mousePositionChangeInformation->y), windowDimensions);
+        }
     }
 
     mouseX = static_cast<float>(mousePositionChangeInformation->x);
@@ -303,8 +297,10 @@ void YasEngine::update(double& deltaTime)
     // TODO sprawdzenie ktory Button zostal klikniety i obsluga tego
 
     windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
-
-    projectile = nullptr;
+    if(projectile != nullptr)
+    {
+        projectile = nullptr;
+    }
 }
 
 void YasEngine::render(double& deltaTime)
@@ -337,8 +333,6 @@ void YasEngine::render(double& deltaTime)
 //        writer.write(0, 0, "RESTART_BUTTON", *pixelsTable);
 //        writer.write(-620, -100, "HOLY SHIT IT IS WORKING FINALLY 0.1.2.3.4.5.6.7.8.9", *pixelsTable);
 
-
-
         drawRectangle(*pixelsTable, -110, -110, 32, 32, YELLOW);
 
         verticalLineOnWholeScreen(*pixelsTable, 0, GREEN);
@@ -346,7 +340,24 @@ void YasEngine::render(double& deltaTime)
     }
     else
     {
-        drawButtons();// TODO drawPolygon(object, *pixelsTable);
+        if(gameState == GameState::MAIN_MENU_RESTART)
+        {
+            drawButtons();// TODO drawPolygon(object, *pixelsTable);
+        }
+        else
+        {
+            if(gameState == GameState::INTRO)
+            {
+                ; // TODO write title and version and tha game is powered by YasEngine
+            }
+            else
+            {
+                if(gameState == GameState::OUTRO)
+                {
+                    ; // TODO Write creators, thank you for playing and see you in other games
+                }
+            }
+        }
     }
     drawHudElements(deltaTime);
 
@@ -515,14 +526,68 @@ void YasEngine::drawButtons()
     }
 }
 
-void YasEngine::handleMenuEvents()
+ButtonId YasEngine::checkWhichButtonClicked()
 {
     for(int i=0; i<buttons.size(); i++)
     {
-        if(dynamic_cast<Button*>(buttons.at(i))->worldVertices[0].y
+        if(
         // kursor ponizej gornego Y
+        mousePositionChangeInformation->y <= (buttons.at(i).getPosition().y + dynamic_cast<Button*>(buttons.at(i))->buttonHeight * 0.5F) &&
         // kursor powyzej dolnego y
+        mousePositionChangeInformation->y >= (buttons.at(i).getPosition().y - dynamic_cast<Button*>(buttons.at(i))->buttonHeight * 0.5F) &&
         // kursor na prawo od lewego x
+        mousePositionChangeInformation->x >= (buttons.at(i).getPosition().x - dynamic_cast<Button*>(buttons.at(i))->buttonWidth * 0.5F) &&
         // kursor na lewo od prawego x
+        mousePositionChangeInformation->x <= (buttons.at(i).getPosition().x + dynamic_cast<Button*>(buttons.at(i))->buttonWidth * 0.5F) 
+        )
+        {
+            return dynamic_cast<Button*>(buttons.at(i))-> buttonId;
+        }
     }
 }
+
+void YasEngine::handleClickedButtons()
+{
+    switch(checkWhichButtonClicked())
+    {            
+        case RESTART_START:
+            gameState = GameState::GAMEPLAY;
+            break;
+        case QUIT:
+            gameState = GameState::OUTRO;
+            break;
+        default:
+            ;
+    }
+}
+
+void YasEngine::handleGameStateWhenESCbuttonPushed()
+{
+        switch(gameState)
+    {            
+        case INTRO:
+            gameState = GameState::GAMEPLAY;
+            break;
+        case MAIN_MENU_RESTART:
+            gameState = GameState::OUTRO;
+            break;
+        case GAMEPLAY:
+            gameState = GameState::MAIN_MENU_RESTART;
+            break;
+        case OUTRO:
+            quit = true;
+            break;
+        default:
+            ;
+    }
+}
+            // mousePositionChangeInformation->x = x;
+            // mousePositionChangeInformation->y = y;
+
+        //             enum GameState
+        // {
+        //     INTRO,
+        //     MAIN_MENU_RESTART,
+        //     GAMEPLAY,
+        //     OUTRO
+        // };

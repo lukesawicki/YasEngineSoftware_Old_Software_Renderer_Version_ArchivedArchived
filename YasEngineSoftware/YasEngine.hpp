@@ -123,7 +123,7 @@ class YasEngine
 		void update(double& deltaTime);
 		void drawHudElements(double& deltaTime);
 		void render(double& deltaTime);
-        void handleMenuEvents();
+        ButtonId buttonClicked();
 
 		void prepareSoundAndMusic();
         void drawButtons();
