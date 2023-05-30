@@ -34,7 +34,7 @@ class YasEngine
             OUTRO
         };
 
-        GameState gameState = GameState::GAMEPLAY;
+        GameState gameState = GAMEPLAY;
 
         std::vector<GameObject*> buttons;
 
@@ -123,6 +123,7 @@ class YasEngine
 		void update(double& deltaTime);
 		void drawHudElements(double& deltaTime);
 		void render(double& deltaTime);
+        void handleMenuEvents();
 
 		void prepareSoundAndMusic();
         void drawButtons();

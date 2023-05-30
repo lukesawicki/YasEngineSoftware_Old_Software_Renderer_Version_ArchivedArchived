@@ -221,18 +221,36 @@ void YasEngine::handleInput(SDL_Event& event)
         }
         if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
         {
-            player->isShooting      = true;
-            // TODO checking if cursor is in space of button and this is the button
-            for(int i=0; i<buttons.size(); i++)
+            switch(gameState)
             {
-                if (true)
-                { ;
-                }
+                case GAMEPLAY:
+                    player->isShooting = true;
+                    break;
+                case MAIN_MENU_RESTART:
+//                    for(int i=0; i<buttons.size(); i++)
+//                    {
+//                        if (true)
+//                        {
+//                            ;
+//                        }
+//                        switch
+//                    }
+                    break;
+                default:
+                    ;
             }
+
+            // TODO checking if cursor is in space of button and this is the button
+
         }
         if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
         {
-            player->isShooting      = false;
+            switch(gameState)
+            {
+                case GAMEPLAY:
+                    player->isShooting = false;
+                    break;
+            }
         }
     }
 }
@@ -294,21 +312,15 @@ void YasEngine::render(double& deltaTime)
     pixelsTable->clearColor(BLACK);
     mathPlay->clearColor(BLACK);
 
-    for (auto object : objectsToDraw)
+    if(gameState == GameState::GAMEPLAY) // TODO if is gameplay
     {
-        if (object->isAlive && gameState == GameState::GAMEPLAY) // TODO if gamestate == gameplay
+        for (auto object : objectsToDraw)
         {
-            drawPolygon(object, *pixelsTable);
-        } else {
-            if(true) // TODO if type is button -> #include <typeinfo> cout<<typeid(obj).name()<<endl;
+            if (object->isAlive) // TODO if gamestate == gameplay
             {
-                // TODO drawPolygon(object, *pixelsTable);
+                drawPolygon(object, *pixelsTable);
             }
         }
-    }
-
-    if(true) // TODO if is gameplay
-    {
         mathPlay->verticalLineOnSurface(0, GREEN);
         mathPlay->horizontalLineOnSurface(0, RED);//-WINDOW_HEIGHT * 0.25F
 
@@ -325,7 +337,7 @@ void YasEngine::render(double& deltaTime)
 //        writer.write(0, 0, "RESTART_BUTTON", *pixelsTable);
 //        writer.write(-620, -100, "HOLY SHIT IT IS WORKING FINALLY 0.1.2.3.4.5.6.7.8.9", *pixelsTable);
 
-        drawButtons();
+
 
         drawRectangle(*pixelsTable, -110, -110, 32, 32, YELLOW);
 
@@ -334,7 +346,7 @@ void YasEngine::render(double& deltaTime)
     }
     else
     {
-        // TOD DRAW STRINGS FOR MENU
+        drawButtons();// TODO drawPolygon(object, *pixelsTable);
     }
     drawHudElements(deltaTime);
 
@@ -500,5 +512,17 @@ void YasEngine::drawButtons()
     {
         drawPolygon(buttons.at(i), *pixelsTable);
         writer.write(buttons.at(i)->getPosition().x - dynamic_cast<Button*>(buttons.at(i))->buttonTextWidth * 0.5F + ScreenWriter::FONT_WIDTH * 0.5F, buttons.at(i)->getPosition().y, dynamic_cast<Button*>(buttons.at(i))->text,dynamic_cast<Button*>(buttons.at(i))->color, *pixelsTable);
+    }
+}
+
+void YasEngine::handleMenuEvents()
+{
+    for(int i=0; i<buttons.size(); i++)
+    {
+        if(dynamic_cast<Button*>(buttons.at(i))->worldVertices[0].y
+        // kursor ponizej gornego Y
+        // kursor powyzej dolnego y
+        // kursor na prawo od lewego x
+        // kursor na lewo od prawego x
     }
 }
