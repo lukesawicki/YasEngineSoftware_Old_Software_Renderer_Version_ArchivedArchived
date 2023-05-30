@@ -175,6 +175,7 @@ void YasEngine::handleInput(SDL_Event& event)
                     break;
                 case SDLK_SPACE:
                     handleGameStateWhenSPACEbuttonPushed();
+                    break;
                 case SDLK_w:
                     input->up = true;
                     break;
@@ -387,7 +388,7 @@ void YasEngine::handlePhysics()
                 continue;
             }
 
-            if (Collider::isCollidingWithWall(objectsToDraw[i]->collider, *windowDimensions))
+                       if (Collider::isCollidingWithWall(objectsToDraw[i]->collider, *windowDimensions))
             {
                 objectsToDraw[i]->isAlive = false;
                 //std::cout << "HIT" << std::endl;
@@ -609,13 +610,3 @@ void YasEngine::handleGameStateWhenSPACEbuttonPushed()
             ;
     }
 }
-            // mousePositionChangeInformation->x = x;
-            // mousePositionChangeInformation->y = y;
-
-        //             enum GameState
-        // {
-        //     INTRO,
-        //     MAIN_MENU_RESTART,
-        //     GAMEPLAY,
-        //     OUTRO
-        // };
