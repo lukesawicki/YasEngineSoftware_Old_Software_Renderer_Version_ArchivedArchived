@@ -383,14 +383,42 @@ void YasEngine::handlePhysics()
     {
         for (int i = 0; i < static_cast<int>(objectsToDraw.size() - 2); i++)
         {
-            if (!objectsToDraw[i]->isAlive || objectsToDraw[i]->iAm == GameObject::PROTAGONIST)
+            if((objectsToDraw[i]->iAm == GameObject::PROTAGONIST) && Collider::isCollidingWithWall(objectsToDraw[i]->collider, *windowDimensions))
+            {
+                float leftWall = -static_cast<float>(windowDimensions->x) * 0.5F;
+                float rightWall = static_cast<float>(windowDimensions->x) * 0.5F;
+                float topWall = static_cast<float>(windowDimensions->y) * 0.5F;
+                float bottomWall = -static_cast<float>(windowDimensions->y) * 0.5F;
+                if(objectsToDraw[i]->getPosition().x - objectsToDraw[i]->collider.radius <  leftWall)
+                {
+                    objectsToDraw[i]->setX(leftWall + objectsToDraw[i]->collider.radius + 1);
+                }
+                if(objectsToDraw[i]->getPosition().x + objectsToDraw[i]->collider.radius >  rightWall)
+                {
+                    objectsToDraw[i]->setX(rightWall - objectsToDraw[i]->collider.radius - 1);
+                }
+                if(objectsToDraw[i]->getPosition().y + objectsToDraw[i]->collider.radius > topWall)
+                {
+                    objectsToDraw[i]->setY(topWall - objectsToDraw[i]->collider.radius - 1);
+                }
+                if(objectsToDraw[i]->getPosition().y - objectsToDraw[i]->collider.radius < bottomWall)
+                {
+                    objectsToDraw[i]->setY(bottomWall + objectsToDraw[i]->collider.radius + 1);
+                }
+            }
+
+            if (!objectsToDraw[i]->isAlive || (objectsToDraw[i]->iAm == GameObject::PROTAGONIST))
             {
                 continue;
             }
 
-                       if (Collider::isCollidingWithWall(objectsToDraw[i]->collider, *windowDimensions))
+           if (Collider::isCollidingWithWall(objectsToDraw[i]->collider, *windowDimensions))
             {
                 objectsToDraw[i]->isAlive = false;
+                if(objectsToDraw[i]->iAm == GameObject::PROTAGONIST)
+                {
+                    writer.write(0, 0, "PLAYER COLLIDING",BLUE, *pixelsTable);
+                }
                 //std::cout << "HIT" << std::endl;
                 continue;
             }

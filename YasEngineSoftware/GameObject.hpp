@@ -38,7 +38,20 @@ class GameObject
 		{
 			position.x = x;
 			position.y = y;
+            moveCollider();
 		}
+
+        virtual void setX(float x)
+        {
+            position.x = x;
+            moveCollider();
+        }
+
+        virtual void setY(float y)
+        {
+            position.y = y;
+            moveCollider();
+        }
 
         virtual Vector2D<float> getPosition()
         {
@@ -50,6 +63,7 @@ class GameObject
 		{
 			this->position.x = position.x;
 			this->position.y = position.y;
+            moveCollider();
 		}
 		
 		virtual void move(float deltaTime) = 0;
