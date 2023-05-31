@@ -314,15 +314,13 @@ void YasEngine::update(double& deltaTime)
 
 }
 
-void YasEngine::render(double& deltaTime)
-{
+void YasEngine::render(double& deltaTime) {
     pixelsTable->clearColor(BLACK);
     mathPlay->clearColor(BLACK);
 
-    if(gameState == GameState::GAMEPLAY) // TODO if is gameplay
+    if (gameState == GameState::GAMEPLAY) // TODO if is gameplay
     {
-        for (auto object : objectsToDraw)
-        {
+        for (auto object: objectsToDraw) {
             if (object->isAlive) // TODO if gamestate == gameplay
             {
                 drawPolygon(object, *pixelsTable);
@@ -337,7 +335,8 @@ void YasEngine::render(double& deltaTime)
         mathPlay->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, BLUE, false);
         mathPlay->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, RED, false);
 
-        mathPlay->drawNumbersAsGroupOfLines(primeNumbersPoints->points, primeNumbersPoints->pointsNumber, YELLOW,false);
+        mathPlay->drawNumbersAsGroupOfLines(primeNumbersPoints->points, primeNumbersPoints->pointsNumber, YELLOW,
+                                            false);
 
         mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
 
@@ -348,28 +347,29 @@ void YasEngine::render(double& deltaTime)
 
         verticalLineOnWholeScreen(*pixelsTable, 0, GREEN);
         horizontalLineOnWholeScreen(*pixelsTable, 0, RED);
-    }
-    else
-    {
-        if(gameState == GameState::MAIN_MENU_RESTART)
-        {
+    } else {
+        if (gameState == GameState::MAIN_MENU_RESTART) {
             drawButtons();// TODO drawPolygon(object, *pixelsTable);
-        }
-        else
-        {
-            if(gameState == GameState::INTRO)
-            {
-                writer.write(0, 100, "THE BEOUTY OF MATH       POWERED BY YASENGINE",YELLOW, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
-            }
-            else
-            {
-                if(gameState == GameState::OUTRO)
-                {
-                    writer.write(0, 100, "CREDITS       CODE DESIGN LUKASZ LUKE SAWICKI       SOUND AND MUSIC FROM INTERNET WITH FRE LICENSE", BLUE, *pixelsTable); // TODO Write creators, thank you for playing and see you in other games
+        } else {
+            if (gameState == GameState::INTRO) {
+                writer.write(0, 100, "THE BEOUTY OF MATH       POWERED BY YASENGINE", YELLOW,
+                             *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
+            } else {
+                if (gameState == GameState::OUTRO) {
+                    writer.write(0, 100,
+                                 "CREDITS       CODE DESIGN LUKASZ LUKE SAWICKI       SOUND AND MUSIC FROM INTERNET WITH FRE LICENSE",
+                                 BLUE,
+                                 *pixelsTable); // TODO Write creators, thank you for playing and see you in other games
                 }
             }
         }
     }
+//    if (collided)
+//    {
+//        writer.write(0, 0, "PLAYER COLLIDING", BLUE, *pixelsTable);
+//        collided = false;
+//    }
+
     drawHudElements(deltaTime);
 
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
@@ -405,6 +405,7 @@ void YasEngine::handlePhysics()
                 {
                     objectsToDraw[i]->setY(bottomWall + objectsToDraw[i]->collider.radius + 1);
                 }
+                //collided = true;
             }
 
 //              DO NOT DELETE IT IS COLLISION WITH NORMAL WALLS WHICH MEANS WINDOWS BOUNDRIES

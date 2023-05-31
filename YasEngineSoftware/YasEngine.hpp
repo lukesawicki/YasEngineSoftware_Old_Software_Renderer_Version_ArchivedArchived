@@ -24,7 +24,7 @@
 class YasEngine
 {	
 	public:
-
+        bool collided = false;
 		GameObject* go;
         enum GameState
         {
