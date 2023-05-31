@@ -369,7 +369,7 @@ void YasEngine::render(double& deltaTime) {
 //        writer.write(0, 0, "PLAYER COLLIDING", BLUE, *pixelsTable);
 //        collided = false;
 //    }
-
+    writer.write(0 - (4*17)/2.0F, 0, "ABCD", BLUE, *pixelsTable);
     drawHudElements(deltaTime);
 
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
@@ -536,13 +536,36 @@ void YasEngine::prepareGameWorld()
 
         spawner.position.x = -200;
         spawner.position.y = 0;
+
+        numberOfGivenColors.insert({"RED", 0});
+        numberOfGivenColors.insert({"GREEN", 0});
+        numberOfGivenColors.insert({"BLUE", 0});
+
+        std::map<std::string, int> numberOfGivenColors;
+        std::map<float, int> sinusNumbers;
+        std::map<float, int> cosinusNumbers;
+        std::map<float, int> fibonacciNumbers;
+        std::map<float, int> primeNumbers;
+
+        for(int i=0; i<100; i++)
+        {
+            //sinusNumbers.insert()
+        }
+        for(int i=0; i<100; i++)
+        {
+
+        }
+        for(int i=0; i<100; i++)
+        {
+
+        }
 }
 
 void YasEngine::prepareInterface()
 {
     //Button 1
     buttons.push_back(new Button(Button::RESTART_START, "START RESTART", RED));
-    buttons.at(0)->setPosition(-100, 100);
+    buttons.at(0)->setPosition(0, 0);
     dynamic_cast<Button*>(buttons.at(0))->horizontalMargin = 10;
     dynamic_cast<Button*>(buttons.at(0))->verticalMargin = 5;
     dynamic_cast<Button*>(buttons.at(0))->buttonWidth = writer.FONT_WIDTH * dynamic_cast<Button*>(buttons.at(0))->text.size() + 2*dynamic_cast<Button*>(buttons.at(0))->horizontalMargin;
@@ -562,7 +585,7 @@ void YasEngine::prepareInterface()
 
     //Button 2
     buttons.push_back(new Button(Button::QUIT, "QUIT", YELLOW));
-    buttons.at(1)->setPosition(-100, 50);
+    buttons.at(1)->setPosition(0, 0);
     dynamic_cast<Button*>(buttons.at(1))->horizontalMargin = 10;
     dynamic_cast<Button*>(buttons.at(1))->verticalMargin = 5;
     dynamic_cast<Button*>(buttons.at(1))->buttonWidth = writer.FONT_WIDTH * dynamic_cast<Button*>(buttons.at(1))->text.size() + 2*dynamic_cast<Button*>(buttons.at(1))->horizontalMargin;

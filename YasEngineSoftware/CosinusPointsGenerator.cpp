@@ -1,5 +1,6 @@
 #include"CosinusPointsGenerator.hpp"
 
+std::vector<float> CosinusPointsGenerator::numbers;
 
 PointsSet* CosinusPointsGenerator::generatePoints()
 {
@@ -23,5 +24,6 @@ PointsSet* CosinusPointsGenerator::generatePoints()
 	PointsSet* pointsSet = new PointsSet();
 	pointsSet->points = points;
 	pointsSet->pointsNumber = pointsNumber;
+
 	return pointsSet;
 }

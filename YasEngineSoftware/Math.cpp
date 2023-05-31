@@ -44,6 +44,7 @@ std::vector<int> generatePrimeNumbersLessThanN(int n)
             primeNumbers.push_back(i);
         }
     }
+
     return primeNumbers;
 }
 

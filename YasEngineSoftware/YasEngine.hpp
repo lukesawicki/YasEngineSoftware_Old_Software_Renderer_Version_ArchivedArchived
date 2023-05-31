@@ -6,6 +6,7 @@
 #include<string>
 #include<SDL2/SDL_mixer.h>
 #include<bit>
+#include<map>
 #include"Vector2D.hpp"
 #include"YasGraphicsLibrary.hpp"
 #include"TimePicker.hpp"
@@ -85,7 +86,7 @@ class YasEngine
 		float mouseX;
 		float mouseY;
 
-		int WINDOW_WIDTH = 1280;
+		int WINDOW_WIDTH = 1600;
 		int WINDOW_HEIGHT = 800;
 
 		std::vector<GameObject*> objectsToDraw;
@@ -101,6 +102,12 @@ class YasEngine
 		PointsSet* fibonacciePoints;
 		PointsSet* primeNumbersPoints;
 
+        std::map<std::string, int> numberOfGivenColors;
+        std::map<float, int> sinusNumbers;
+        std::map<float, int> cosinusNumbers;
+        std::map<float, int> fibonacciNumbers;
+        std::map<float, int> primeNumbers;
+
 		Spawner spawner;
 
         ScreenWriter writer;
@@ -110,6 +117,16 @@ class YasEngine
 		bool shouldApplicationStopRunning = false;
 		YasInOut::Input* input = new YasInOut::Input();
 		YasInOut::MousePositionChangeInformation* mousePositionChangeInformation = new YasInOut::MousePositionChangeInformation();
+
+        int redShotDowns = 0;
+        int greenShotdowns = 0;
+        int blueShotdowns = 0;
+
+//        mathPlay->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, YELLOW, true);
+//        mathPlay->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, BLUE, false);
+//        mathPlay->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, RED, false);
+//
+//        mathPlay->drawNumbersAsGroupOfLines(primeNumbersPoints->points, primeNumbersPoints->pointsNumber, YELLOW,
 
 		bool engineInstantiated = false;
 		void drawMathArt();

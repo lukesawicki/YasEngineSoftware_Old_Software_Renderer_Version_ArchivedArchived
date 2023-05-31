@@ -1,6 +1,6 @@
 #include"SinusPointsGenerator.hpp"
 
-
+std::vector<float> SinusPointsGenerator::numbers;
 PointsSet* SinusPointsGenerator::generatePoints()
 {
 	pointsNumber = 100;
@@ -14,7 +14,7 @@ PointsSet* SinusPointsGenerator::generatePoints()
 	{
 		float x = i * step;
 		float y = sin(x);
-
+		numbers.push_back(y);
 		points[i].x = x * additionalFactor; // round(x * additionalFactor);
 		points[i].y = y * additionalFactor; // round(y * additionalFactor);
 	}

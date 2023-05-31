@@ -1,5 +1,6 @@
 #ifndef POINTSGENERATOR_HPP
 #define POINTSGENERATOR_HPP
+#include<vector>
 #include "PointsSet.hpp"
 #include "Vector2D.hpp"
 
