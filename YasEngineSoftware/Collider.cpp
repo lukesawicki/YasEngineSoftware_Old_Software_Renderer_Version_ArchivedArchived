@@ -26,6 +26,14 @@ bool Collider::isCollidingWithWall(const Collider& object0, const Vector2D<int>&
 		object0.y - object0.radius < -static_cast<float>(worldSizes.y) * 0.5F;          // BOTTOM
 }
 
+bool Collider::isCollidingWithCustomWalls(const Collider& object0, const Vector2D<int>& worldSizes)
+{
+    return object0.x - object0.radius < -static_cast<float>(worldSizes.x) * 0.5F ||    // LEFT
+           object0.x + object0.radius > static_cast<float>(worldSizes.x) * 0.0F ||        // RIGHT
+           object0.y + object0.radius > static_cast<float>(worldSizes.y) * 0.5F ||       // TOP
+           object0.y - object0.radius < -static_cast<float>(worldSizes.y) * 0.5F ;          // BOTTOM
+}
+
 //if(objectsToDraw[i]->getPosition().x - objectsToDraw[i]->collider.radius <  leftWall)
 //{
 //objectsToDraw[i]->setX(leftWall + 1);

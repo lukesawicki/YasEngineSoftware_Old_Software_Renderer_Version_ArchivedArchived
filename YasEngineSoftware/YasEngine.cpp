@@ -257,7 +257,7 @@ void YasEngine::handleInput(SDL_Event& event)
 
 void YasEngine::preparePlayer()
 {
-    player = new Player(0, 0);
+    player = new Player(-windowDimensions->x * 0.25F, 0);
     player->setColor(YELLOW);
     player->setInput(input);
     player->setInput(mousePositionChangeInformation);
@@ -383,10 +383,10 @@ void YasEngine::handlePhysics()
     {
         for (int i = 0; i < static_cast<int>(objectsToDraw.size() - 2); i++)
         {
-            if((objectsToDraw[i]->iAm == GameObject::PROTAGONIST) && Collider::isCollidingWithWall(objectsToDraw[i]->collider, *windowDimensions))
+            if((objectsToDraw[i]->iAm == GameObject::PROTAGONIST) && Collider::isCollidingWithCustomWalls(objectsToDraw[i]->collider, *windowDimensions))
             {
                 float leftWall = -static_cast<float>(windowDimensions->x) * 0.5F;
-                float rightWall = static_cast<float>(windowDimensions->x) * 0.5F;
+                float rightWall = static_cast<float>(windowDimensions->x) * 0.0F;
                 float topWall = static_cast<float>(windowDimensions->y) * 0.5F;
                 float bottomWall = -static_cast<float>(windowDimensions->y) * 0.5F;
                 if(objectsToDraw[i]->getPosition().x - objectsToDraw[i]->collider.radius <  leftWall)
@@ -407,12 +407,37 @@ void YasEngine::handlePhysics()
                 }
             }
 
+//              DO NOT DELETE IT IS COLLISION WITH NORMAL WALLS WHICH MEANS WINDOWS BOUNDRIES
+//            if((objectsToDraw[i]->iAm == GameObject::PROTAGONIST) && Collider::isCollidingWithWall(objectsToDraw[i]->collider, *windowDimensions))
+//            {
+//                float leftWall = -static_cast<float>(windowDimensions->x) * 0.5F;
+//                float rightWall = static_cast<float>(windowDimensions->x) * 0.5F;
+//                float topWall = static_cast<float>(windowDimensions->y) * 0.5F;
+//                float bottomWall = -static_cast<float>(windowDimensions->y) * 0.5F;
+//                if(objectsToDraw[i]->getPosition().x - objectsToDraw[i]->collider.radius <  leftWall)
+//                {
+//                    objectsToDraw[i]->setX(leftWall + objectsToDraw[i]->collider.radius + 1);
+//                }
+//                if(objectsToDraw[i]->getPosition().x + objectsToDraw[i]->collider.radius >  rightWall)
+//                {
+//                    objectsToDraw[i]->setX(rightWall - objectsToDraw[i]->collider.radius - 1);
+//                }
+//                if(objectsToDraw[i]->getPosition().y + objectsToDraw[i]->collider.radius > topWall)
+//                {
+//                    objectsToDraw[i]->setY(topWall - objectsToDraw[i]->collider.radius - 1);
+//                }
+//                if(objectsToDraw[i]->getPosition().y - objectsToDraw[i]->collider.radius < bottomWall)
+//                {
+//                    objectsToDraw[i]->setY(bottomWall + objectsToDraw[i]->collider.radius + 1);
+//                }
+//            }
+
             if (!objectsToDraw[i]->isAlive || (objectsToDraw[i]->iAm == GameObject::PROTAGONIST))
             {
                 continue;
             }
 
-           if (Collider::isCollidingWithWall(objectsToDraw[i]->collider, *windowDimensions))
+           if (Collider::isCollidingWithCustomWalls(objectsToDraw[i]->collider, *windowDimensions))
             {
                 objectsToDraw[i]->isAlive = false;
                 if(objectsToDraw[i]->iAm == GameObject::PROTAGONIST)
