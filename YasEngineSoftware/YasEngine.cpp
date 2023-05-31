@@ -547,15 +547,19 @@ void YasEngine::prepareGameWorld()
         std::map<float, int> fibonacciNumbers;
         std::map<float, int> primeNumbers;
 
-        for(int i=0; i<100; i++)
+        for(int i=0; i<sinusPointsGenerator.numbers.size(); i++)
         {
-            //sinusNumbers.insert()
+            sinusNumbers.insert({,});
         }
-        for(int i=0; i<100; i++)
+        for(int i=0; i<cosinusPointsGenerator.numbers.size(); i++)
         {
-
+            cosinusNumbers.insert({,});
         }
-        for(int i=0; i<100; i++)
+        for(int i=0; i<fibonacciPointsGenerator.numbers.size(); i++)
+        {
+            fibonacciPointsGenerator
+        }
+        for(int i=0; i<primeNumberPointsGenerator.numbers.size(): i++)
         {
 
         }

@@ -14,7 +14,10 @@ PointsSet* CosinusPointsGenerator::generatePoints()
 	for (int i = 0; i < pointsNumber; i++)
 	{
 		float x = i * step;
-		float y = cos(x * 4.5F);
+        float tempY = cos(x);
+		float y = cos(tempY * 4.5F);
+
+        numbers.push_back(tempY);
 
 		points[i].x = round(x * additionalFactor);
 		points[i].y = round(y * additionalFactor);
