@@ -1,5 +1,6 @@
 #include"Math.hpp"
-#include <map>
+#include<cmath>
+#include<map>
 
 std::vector<int> generatePrimeNumbersLessThanN(int n)
 {
@@ -43,6 +44,7 @@ std::vector<int> generatePrimeNumbersLessThanN(int n)
             primeNumbers.push_back(i);
         }
     }
+
     return primeNumbers;
 }
 

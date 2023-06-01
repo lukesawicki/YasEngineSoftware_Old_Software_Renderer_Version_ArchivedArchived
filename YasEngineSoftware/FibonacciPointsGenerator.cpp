@@ -1,5 +1,7 @@
 ﻿#include"FibonacciPointsGenerator.hpp"
 
+std::vector<int> FibonacciPointsGenerator::numbers;
+
 PointsSet* FibonacciPointsGenerator::generatePoints()
 {
 	pointsNumber = 40;
@@ -7,6 +9,10 @@ PointsSet* FibonacciPointsGenerator::generatePoints()
 	Vector2D<float>* points = new Vector2D<float>[pointsNumber*2];
 	std::vector<int> fibonacci = generateNfibonaccinumbers(pointsNumber);
 
+    for(int i=0; i<static_cast<int>(fibonacci.size()); i++)
+    {
+        numbers.push_back((fibonacci.at(i)));
+    }
 
 	// Point constructor setting x and y to 0;
 	// This loop creates pairs of points = ( (0,0) ; (fibonacci(i) ,y=0) )

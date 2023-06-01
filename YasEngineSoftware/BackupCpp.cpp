@@ -536,3 +536,67 @@
 //	direction.x = directionX;
 //	direction.y = directionY;
 //}
+
+
+
+////////////////////
+/// OLD GENERATED TILES
+// switch (pattern)
+// {
+// case 0:
+//     drawLeft();
+//     drawRight();
+//     break;
+// case 1:
+//     drawTop();
+//     drawBottom();
+//     break;
+// case 2:
+//     drawLeft();
+//     drawBottom();
+//     drawRightTopCorner();
+//     break;
+// case 3:
+//     drawLeft();
+//     drawTop();
+//     drawRightBottomCorner();
+//     break;
+// case 4:
+//     drawTop();
+//     drawRight();
+//     drawLeftBottomCorner();
+//     break;
+// case 5:
+//     drawRight();
+//     drawBottom();
+//     drawLeftTopCorner();
+//     break;
+// case 6:
+//     drawRight();
+//     drawBottom();
+//     drawLeft();
+//     break;
+// case 7:
+//     drawTop();
+//     drawBottom();
+//     drawLeft();
+//     break;
+// case 8:
+//     drawTop();
+//     drawRight();
+//     drawLeft();
+//     break;
+// case 9:
+//     drawTop();
+//     drawRight();
+//     drawBottom();
+//     break;
+// case 10:
+//     drawLeftTopCorner();
+//     drawRightTopCorner();
+//     drawLeftBottomCorner();
+//     drawRightBottomCorner();
+//     break;
+// default:
+//     ;
+// }

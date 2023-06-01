@@ -9,8 +9,8 @@
 class PrimeNumbersPointsGenerator : public PointsGenerator
 {
 public:
+	static std::vector<int> numbers;
 	virtual PointsSet* generatePoints() override;
-
 };
 
 #endif

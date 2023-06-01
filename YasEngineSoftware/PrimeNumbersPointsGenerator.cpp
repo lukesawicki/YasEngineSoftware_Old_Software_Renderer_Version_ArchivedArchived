@@ -1,10 +1,16 @@
 #include"PrimeNumbersPointsGenerator.hpp"
 
+std::vector<int> PrimeNumbersPointsGenerator::numbers;
+
 PointsSet* PrimeNumbersPointsGenerator::generatePoints()
 {
 	pointsNumber = 1000;
 
 	std::vector<int> primeNumbers = generatePrimeNumbersLessThanN(pointsNumber);
+    for(int i=0; i<static_cast<int>(primeNumbers.size()); i++)
+    {
+        numbers.push_back((primeNumbers.at(i)));
+    }
 
 	pointsNumber = primeNumbers.size();
 

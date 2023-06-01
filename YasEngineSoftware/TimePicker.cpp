@@ -1,26 +1,21 @@
 #include"TimePicker.hpp"
-
+#include<SDL.h>
 //-----------------------------------------------------------------------------|---------------------------------------|
 //                                                                            80                                     120
 
     TimePicker::TimePicker()
     {
-        isFrequencyOfThePerformanceCounterPickedUp = (QueryPerformanceFrequency(&frequency) != 0);
+        ;
     }
 
     double TimePicker::getSeconds()
     {
-        if(isFrequencyOfThePerformanceCounterPickedUp)
-        {
-            LARGE_INTEGER ticks;
-            QueryPerformanceCounter(&ticks);
-            return (ticks.QuadPart / (double)frequency.QuadPart);
-        }
-        else
-        {
-            return GetTickCount64() / 1000.0;
-        }
+        return SDL_GetTicks() / 1000.0;
     }
 
+    double TimePicker::getMiliseconds()
+        {
+        return SDL_GetTicks();
+        }
 //                                                                            80                                     120
 //-----------------------------------------------------------------------------|---------------------------------------|

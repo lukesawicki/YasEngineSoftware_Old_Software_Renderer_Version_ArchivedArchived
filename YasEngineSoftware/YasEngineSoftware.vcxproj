@@ -72,13 +72,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\development\libraries\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\development\libraries\SDL2-devel-2.0.22-VC\SDL2-2.0.22\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\development\libraries\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include;C:\development\libraries\SDL2_mixer-2.6.2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\development\libraries\SDL2-devel-2.0.22-VC\SDL2-2.0.22\lib\x86;C:\development\libraries\SDL2_mixer-2.6.2\lib;C:\development\libraries\SDL2_mixer-2.6.2\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\development\libraries\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\development\libraries\SDL2-devel-2.0.22-VC\SDL2-2.0.22\lib\x86;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\development\libraries\SDL2-devel-2.0.22-VC\SDL2-2.0.22\include;C:\development\libraries\SDL2_mixer-2.6.2\include;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\development\libraries\SDL2-devel-2.0.22-VC\SDL2-2.0.22\lib\x86;C:\development\libraries\SDL2_mixer-2.6.2\lib;C:\development\libraries\SDL2_mixer-2.6.2\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -92,12 +92,16 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -107,14 +111,18 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <ProjectReference>
+      <LinkLibraryDependencies>false</LinkLibraryDependencies>
+    </ProjectReference>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -145,10 +153,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Button.hpp" />
     <ClInclude Include="Circle.hpp" />
     <ClInclude Include="Destroyable.hpp" />
     <ClInclude Include="CosinusPointsGenerator.hpp" />
     <ClInclude Include="FibonacciPointsGenerator.hpp" />
+    <ClInclude Include="FontObject.hpp" />
+    <ClInclude Include="FontSurface.hpp" />
     <ClInclude Include="InputOutputHandler.hpp" />
     <ClInclude Include="Math.hpp" />
     <ClInclude Include="MathematicsFunSurface.hpp" />
@@ -159,10 +170,10 @@
     <ClInclude Include="PrimeNumbersPointsGenerator.hpp" />
     <ClInclude Include="Projectile.hpp" />
     <ClInclude Include="Collider.hpp" />
+    <ClInclude Include="ScreenWriter.hpp" />
     <ClInclude Include="SinusPointsGenerator.hpp" />
     <ClInclude Include="Spawner.hpp" />
     <ClInclude Include="TimePicker.hpp" />
-    <ClInclude Include="Timer.hpp" />
     <ClInclude Include="VariousTools.hpp" />
     <ClInclude Include="ViewPort.hpp" />
     <ClInclude Include="YasEngine.hpp" />
@@ -173,11 +184,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BackupCpp.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Destroyable.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CosinusPointsGenerator.cpp" />
     <ClCompile Include="FibonacciPointsGenerator.cpp" />
+    <ClCompile Include="FontObject.cpp" />
+    <ClCompile Include="FontSurface.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Math.cpp" />
     <ClCompile Include="MathematicsFunSurface.cpp" />
@@ -185,6 +199,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PrimeNumbersPointsGenerator.cpp" />
     <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="ScreenWriter.cpp" />
     <ClCompile Include="SinusPointsGenerator.cpp" />
     <ClCompile Include="Spawner.cpp" />
     <ClCompile Include="temporary.cpp" />

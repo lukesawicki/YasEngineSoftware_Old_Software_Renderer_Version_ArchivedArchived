@@ -376,6 +376,28 @@
         return vertices;
     }
 
+    void drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos, PixelsTable& pixelsTable)
+    {
+        int step = 1;
+        if(!areLinesContinuos)
+        {
+            step = 2;
+        }
+        if (maximumNumberOfVertices > 1)
+        {
+            if (maximumNumberOfVertices <= 3) {
+                drawLine(vertices[0], vertices[1], pixelsTable, color);
+            }
+            else
+            {
+                for (int i = 0; i < maximumNumberOfVertices -1; i += step)
+                {
+                    drawLine(vertices[i], vertices[i + 1], pixelsTable, color);
+                }
+            }
+        }
+    }
+
     void drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable)
     {
         if (maximumNumberOfVertices <= 3)
@@ -531,3 +553,26 @@
     {
 
     }
+
+void drawRectangle(PixelsTable& pixelsTable, int x, int y, int width, int height, Vector4D<Uint8> color)
+{
+    int posX = x;
+    int posY = y ;
+
+    pixelsTable.cartesianPositionToWindow(posX, posY);
+
+    int startPoint = NUMBER_OF_COLORS * (posY * pixelsTable.windowDimensions.x + posX);
+    int viewportIndex = 0;
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            pixelsTable.pixels[NUMBER_OF_COLORS * ((posY + i) * pixelsTable.windowDimensions.x + posX + j) + RED_POSITION] = color.x;// + RED_POSITION];
+            pixelsTable.pixels[NUMBER_OF_COLORS * ((posY + i) * pixelsTable.windowDimensions.x + posX + j) + GREEN_POSITION] = color.y;// + GREEN_POSITION];
+            pixelsTable.pixels[NUMBER_OF_COLORS * ((posY + i) * pixelsTable.windowDimensions.x + posX + j) + BLUE_POSITION] = color.z;// + BLUE_POSITION];
+            pixelsTable.pixels[NUMBER_OF_COLORS * ((posY + i) * pixelsTable.windowDimensions.x + posX + j) + ALPHA_POSITION] = color.w;// + ALPHA_POSITION];
+            viewportIndex = viewportIndex + 1;
+        }
+        startPoint = startPoint + width;
+    }
+}

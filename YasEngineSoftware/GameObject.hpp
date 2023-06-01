@@ -11,7 +11,7 @@ class GameObject
 	public:
 		//vXXXXXirtual ~GameObject() = 0;
 
-		enum WhoAmI { DEFAULT_VALUE, PROTAGONIST, PROJECTILE, COLLECTIBLE };
+		enum WhoAmI { DEFAULT_VALUE, PROTAGONIST, PROJECTILE, COLLECTIBLE, GUI_ELEMENT };
 
 		WhoAmI iAm;
 		bool isAlive = true;
@@ -38,12 +38,32 @@ class GameObject
 		{
 			position.x = x;
 			position.y = y;
+            moveCollider();
 		}
+
+        virtual void setX(float x)
+        {
+            position.x = x;
+            moveCollider();
+        }
+
+        virtual void setY(float y)
+        {
+            position.y = y;
+            moveCollider();
+        }
+
+        virtual Vector2D<float> getPosition()
+        {
+            return position;
+        }
+
 
 		virtual void setPosition(const Vector2D<float>& position)
 		{
 			this->position.x = position.x;
 			this->position.y = position.y;
+            moveCollider();
 		}
 		
 		virtual void move(float deltaTime) = 0;
