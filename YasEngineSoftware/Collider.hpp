@@ -1,8 +1,6 @@
 #ifndef COLLIDER_HPP
 #define COLLIDER_HPP
 #include "Vector2D.hpp"
-//#include"YasGraphicsLibrary.hpp"
-
 
 class Collider
 {

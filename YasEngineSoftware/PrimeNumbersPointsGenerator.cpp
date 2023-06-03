@@ -1,4 +1,5 @@
 #include"PrimeNumbersPointsGenerator.hpp"
+#include "YasGraphicsLibrary.hpp"
 
 std::vector<int> PrimeNumbersPointsGenerator::numbers;
 

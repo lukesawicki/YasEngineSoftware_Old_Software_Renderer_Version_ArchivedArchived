@@ -88,7 +88,7 @@ void ScreenWriter::write(int x, int y, string text, const Vector4D<Uint8>& color
         {
             if(text.at(i) == charactersTable[j])
             {
-                fonts.at(j)->verticesBaseData->setPosition(static_cast<int>(x + i*FONT_WIDTH), static_cast<int>(y));
+                fonts.at(j)->verticesBaseData->setPosition(static_cast<float>(x + i*FONT_WIDTH), static_cast<float>(y));
                 fonts.at(j)->verticesBaseData->generate();
                 drawNumbersAsGroupOfLines(fonts.at(j)->verticesBaseData->worldVertices, fonts.at(j)->verticesBaseData->numberOfVertices, color, false, pixelsTable);
             }

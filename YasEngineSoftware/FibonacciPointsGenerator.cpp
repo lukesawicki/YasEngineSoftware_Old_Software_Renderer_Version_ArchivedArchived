@@ -1,4 +1,5 @@
 ﻿#include"FibonacciPointsGenerator.hpp"
+#include "Math.hpp"
 
 std::vector<int> FibonacciPointsGenerator::numbers;
 

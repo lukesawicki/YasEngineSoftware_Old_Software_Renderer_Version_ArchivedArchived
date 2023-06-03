@@ -4,7 +4,6 @@
 #include"PointsSet.hpp"
 #include"Math.hpp"
 #include"Vector2D.hpp"
-#include "YasGraphicsLibrary.hpp"
 
 class PrimeNumbersPointsGenerator : public PointsGenerator
 {

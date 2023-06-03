@@ -1,7 +1,4 @@
 #include"YasEngine.hpp"
-//#include<cstdlib>     /* srand, rand */
-#include<ctime>
-//#include<bit>
 #include<SDL_endian.h>
 #include<SDL_mixer.h>
 #include"VariousTools.hpp"
@@ -9,7 +6,6 @@
 #include "Collider.hpp"
 #include "CosinusPointsGenerator.hpp"
 #include "FibonacciPointsGenerator.hpp"
-#include"Math.hpp"
 #include"PrimeNumbersPointsGenerator.hpp"
 #include"SinusPointsGenerator.hpp"
 
@@ -17,7 +13,6 @@ YasEngine* YasEngine::instance = nullptr;
 
 void YasEngine::initialize()
 {
-    spawner.spawnObject(go);
     prepareBasicSettings();
     prepareRendering();
     prepareGameWorld();
@@ -67,8 +62,6 @@ void YasEngine::YasEnginStart()
     fpsTime = 0.0F;
     frames = 0;
 
-    //spawner.spawnObject(go);
-
     while (!quit)
     {
         while (SDL_PollEvent(&event))
@@ -111,12 +104,6 @@ void YasEngine::prepareRendering()
     SDL_RenderSetIntegerScale(renderer, SDL_TRUE);
 
     screenTexture   =   SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
-///////////////////
-
-//    std::string basePath = SDL_GetBasePath();
-//    timizedSurface->pixels
-
-////////////////
 }
 
 void YasEngine::prepareBasicSettings()
@@ -151,10 +138,7 @@ void YasEngine::prepareBasicSettings()
 
 void YasEngine::drawHudElements(double& deltaTime)
 {
-    #ifdef DEBUG_DRAWINGS
-        // drawCartesianAxies(*pixelsTable);
-    #endif // DEBUG_DRAWINGS
-
+    drawCartesianAxies(*pixelsTable);
     drawCrossHair(mouseX, mouseY, *pixelsTable, false);
 }
 
@@ -166,92 +150,110 @@ void YasEngine::handleInput(SDL_Event& event)
     }
     else
     {
-        if (event.type == SDL_KEYDOWN)
-        {
-            switch (event.key.keysym.sym)
-            {
-            case SDLK_ESCAPE:
-                    handleGameStateWhenESCbuttonPushed();
-                    break;
-                case SDLK_SPACE:
-                    handleGameStateWhenSPACEbuttonPushed();
-                break;
-            case SDLK_w:
-                input->up = true;
-                break;
-            case SDLK_s:
-                input->down = true;
-                break;
-            case SDLK_a:
-                input->left = true;
-                break;
-            case SDLK_d:
-                input->right = true;
-                break;
-            default:
-                ;
-            }
-        }
-        if (event.type == SDL_KEYUP)
-        {
-            switch (event.key.keysym.sym)
-            {
-            case SDLK_w:
-                input->up = false;
-                break;
-            case SDLK_s:
-                input->down = false;
-                break;
-            case SDLK_a:
-                input->left = false;
-                break;
-            case SDLK_d:
-                input->right = false;
-                break;
-            default:
-                ;
-            }
-        }
-        if (event.type == SDL_MOUSEMOTION)
-        {
-            int x;
-            int y;
-            mousePositionChangeInformation->mouseMoved = true;
-            SDL_GetMouseState(&x, &y);
-            mousePositionChangeInformation->x = x;
-            mousePositionChangeInformation->y = y;
+        handleKeyboardInput(event);
+        handleMouseInput(event);
+    }
+}
 
-        }
-        if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
+void YasEngine::handleKeyboardInput(SDL_Event& event)
+{
+    if (event.type == SDL_KEYDOWN)
+    {
+        switch (event.key.keysym.sym)
         {
-            switch(gameState)
-            {
-                case GAMEPLAY:
-            player->isShooting      = true;
-                    break;
-                case MAIN_MENU_RESTART:
-                    handleClickedButtons();
-                    break;
-                case INTRO:
-                    gameState = GameState::MAIN_MENU_RESTART;
-                    break;
-                case OUTRO:
-                    quit = true;
-                    break;
-                default:
-                    ;
-            }
+        case SDLK_ESCAPE:
+            handleGameStateWhenESCbuttonPushed();
+            break;
+        case SDLK_SPACE:
+            handleGameStateWhenSPACEbuttonPushed();
+            break;
+        case SDLK_w:
+            input->up = true;
+            break;
+        case SDLK_s:
+            input->down = true;
+            break;
+        case SDLK_a:
+            input->left = true;
+            break;
+        case SDLK_d:
+            input->right = true;
+            break;
+        default:
+            ;
         }
+    }
+    if (event.type == SDL_KEYUP)
+    {
+        switch (event.key.keysym.sym)
+        {
+        case SDLK_w:
+            input->up = false;
+            break;
+        case SDLK_s:
+            input->down = false;
+            break;
+        case SDLK_a:
+            input->left = false;
+            break;
+        case SDLK_d:
+            input->right = false;
+            break;
+        default:
+            ;
+        }
+    }
+}
 
-        if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
+void YasEngine::handleMouseInput(SDL_Event& event)
+{
+    if (event.type == SDL_MOUSEMOTION)
+    {
+        int x;
+        int y;
+        SDL_GetMouseState(&x, &y);
+        mousePositionChangeInformation->mouseMoved = true;
+        mousePositionChangeInformation->x = x;
+        mousePositionChangeInformation->y = y;
+    }
+    if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
+    {
+        switch (gameState)
         {
-            switch(gameState)
-            {
-                case GAMEPLAY:
-					player->isShooting = false;
-                    break;
-            }
+        case GAMEPLAY:
+            player->isShooting = true;
+            break;
+        case MAIN_MENU_RESTART:
+            handleClickedButtons();
+            break;
+        case INTRO:
+            gameState = GameState::MAIN_MENU_RESTART;
+            break;
+        case OUTRO:
+            quit = true;
+            break;
+        default:
+            ;
         }
+    }
+
+    if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
+    {
+        switch (gameState)
+        {
+        case GAMEPLAY:
+            player->isShooting = false;
+            break;
+        }
+    }
+}
+
+void YasEngine::handleSpawningcollectibles()
+{
+    spawner.spawnObject(go);
+    if (go != nullptr)
+    {
+        objectsToDraw.push_back(go);
     }
 }
 
@@ -267,34 +269,33 @@ void YasEngine::preparePlayer()
 void YasEngine::update(double& deltaTime)
 {
     // TODO switch with handling different things
-    if(gameState==GameState::GAMEPLAY) {
-
-        spawner.spawnObject(go);
-        if(go != nullptr)
-        {
-            objectsToDraw.push_back(go);
-        }
-    handlePhysics();
-    for (auto object : objectsToDraw)
+    if(gameState==GameState::GAMEPLAY)
     {
-        if (object->isAlive)
-        {
-            object->move(static_cast<float>(deltaTime));
-            object->regeneratePolygon();
-        }
-    }
 
-    Projectile* projectile = player->shoot();
-    if (projectile != nullptr)
-    {
-        Mix_PlayChannel(-1, shootSound, 0);
-        objectsToDraw.push_back(projectile);
-    }
+        handleSpawningcollectibles();
 
-    if (mousePositionChangeInformation->mouseMoved || input->up || input->down || input->left || input->right)
-    {
-        player->rotateToMousePositionInLocalCoordinateSystem(static_cast<float>(mousePositionChangeInformation->x), static_cast<float>(mousePositionChangeInformation->y), windowDimensions);
-    }
+	    handlePhysics();
+	    for (auto object : objectsToDraw)
+	    {
+	        if (object->isAlive)
+	        {
+	            object->move(static_cast<float>(deltaTime));
+	            object->regeneratePolygon();
+	        }
+	    }
+
+	    Projectile* projectile = player->shoot();
+
+	    if (projectile != nullptr)
+	    {
+	        Mix_PlayChannel(-1, shootSound, 0);
+	        objectsToDraw.push_back(projectile);
+	    }
+
+	    if (mousePositionChangeInformation->mouseMoved || input->up || input->down || input->left || input->right)
+	    {
+	        player->rotateToMousePositionInLocalCoordinateSystem(static_cast<float>(mousePositionChangeInformation->x), static_cast<float>(mousePositionChangeInformation->y), windowDimensions);
+	    }
 
         if(projectile != nullptr)
         {
@@ -308,7 +309,6 @@ void YasEngine::update(double& deltaTime)
     // TODO sprawdzenie ktory Button zostal klikniety i obsluga tego
 
     windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
-
 }
 
 void YasEngine::render(double& deltaTime) {
@@ -326,8 +326,6 @@ void YasEngine::render(double& deltaTime) {
 
 	renderViewports(deltaTime);
 
-    // verticalLineOnWholeScreen(*pixelsTable, 0, GREEN);
-    // horizontalLineOnWholeScreen(*pixelsTable, 0, RED);
     } else {
         if (gameState == GameState::MAIN_MENU_RESTART) {
             drawButtons();// TODO drawPolygon(object, *pixelsTable);
@@ -346,7 +344,6 @@ void YasEngine::render(double& deltaTime) {
         }
     }
 
-    writer.write(static_cast<int>(0 - (4*17)/2.0F), 0, "ABCD", BLUE, *pixelsTable);
     drawHudElements(deltaTime);
 
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
@@ -393,7 +390,7 @@ void YasEngine::handlePhysics()
                 {
                     objectsToDraw[i]->setY(bottomWall + objectsToDraw[i]->collider.radius + 1);
                 }
-                //collided = true;
+                // collided = true;
             }
 
 //              DO NOT DELETE IT IS COLLISION WITH NORMAL WALLS WHICH MEANS WINDOWS BOUNDRIES
@@ -606,20 +603,19 @@ void YasEngine::drawButtons()
 
 Button::ButtonId YasEngine::checkWhichButtonClicked()
 {
-    //windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
     float x = static_cast<float>(mousePositionChangeInformation->x);
     float y = static_cast<float>(mousePositionChangeInformation->y);
     windowPositionToCartesianPosition(x, y, windowDimensions);
     for(unsigned int i=0; i<buttons.size(); i++)
     {
         if(
-        // kursor ponizej gornego Y
+        // mouse cursor under top Y
         y <= (buttons.at(i)->getPosition().y + dynamic_cast<Button*>(buttons.at(i))->buttonHeight * 0.5F) &&
-        // kursor powyzej dolnego y
+        // mouser cursor above bottom Y
         y >= (buttons.at(i)->getPosition().y - dynamic_cast<Button*>(buttons.at(i))->buttonHeight * 0.5F) &&
-        // kursor na prawo od lewego x
+        // cursor to the right of left X
         x >= (buttons.at(i)->getPosition().x - dynamic_cast<Button*>(buttons.at(i))->buttonWidth * 0.5F) &&
-        // kursor na lewo od prawego x
+        // cursor to the left of X
         x <= (buttons.at(i)->getPosition().x + dynamic_cast<Button*>(buttons.at(i))->buttonWidth * 0.5F)
         )
         {

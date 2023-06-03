@@ -5,24 +5,17 @@
 #include<vector>
 #include<string>
 #include<SDL_mixer.h>
-#include<bit>
 #include<map>
 #include"Vector2D.hpp"
-#include"YasGraphicsLibrary.hpp"
-#include"TimePicker.hpp"
 #include"PixelsTable.hpp"
 #include"GameObject.hpp"
 #include"Player.hpp"
 #include"InputOutputHandler.hpp"
 #include"MathematicsFunSurface.hpp"
-#include "PointsGenerator.hpp"
 #include "PointsSet.hpp"
 #include "Spawner.hpp"
 #include"ScreenWriter.hpp"
 #include"Button.hpp"
-//using namespace std;
-//#define DEBUG_DRAWINGS
-
 
 class YasEngine
 {	
@@ -67,7 +60,7 @@ class YasEngine
 
 		static YasEngine* instance;
 		
-		int endianness;// = std::endian::native == std::endian::big;
+		int endianness;
 
 		SDL_Window* window;
 		SDL_Renderer* renderer;
@@ -124,12 +117,6 @@ class YasEngine
         int greenShotdowns = 0;
         int blueShotdowns = 0;
 
-//        mathPlay->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, YELLOW, true);
-//        mathPlay->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, BLUE, false);
-//        mathPlay->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, RED, false);
-//
-//        mathPlay->drawNumbersAsGroupOfLines(primeNumbersPoints->points, primeNumbersPoints->pointsNumber, YELLOW,
-
 		bool engineInstantiated = false;
 		void drawMathArt();
 		void prepareRendering();
@@ -139,6 +126,9 @@ class YasEngine
 		void preparePlayer();
         void prepareInterface();
 		void handleInput(SDL_Event& event);
+		void handleKeyboardInput(SDL_Event& event);
+		void handleMouseInput(SDL_Event& event);
+		void handleSpawningcollectibles();
 		void update(double& deltaTime);
 		void drawHudElements(double& deltaTime);
 		void render(double& deltaTime);
