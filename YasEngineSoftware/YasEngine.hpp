@@ -131,9 +131,11 @@ class YasEngine
 		void handleMouseInput(SDL_Event& event);
 		void handleSpawningcollectibles();
 		void handleProjectiles();
+		void handlePlayer();
 		void update(double& deltaTime);
 		void drawHudElements(double& deltaTime);
 		void render(double& deltaTime);
+		void renderGameObjects(double& deltaTime);
 		void renderViewports(double& deltaTime);
         Button::ButtonId checkWhichButtonClicked();
         void handleClickedButtons();

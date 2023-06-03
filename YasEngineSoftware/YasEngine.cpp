@@ -246,6 +246,13 @@ void YasEngine::handleMouseInput(SDL_Event& event)
             break;
         }
     }
+
+    mouseX = static_cast<float>(mousePositionChangeInformation->x);
+    mouseY = static_cast<float>(mousePositionChangeInformation->y);
+
+    // TODO sprawdzenie ktory Button zostal klikniety i obsluga tego
+
+    windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
 }
 
 void YasEngine::handleSpawningcollectibles()
@@ -273,6 +280,14 @@ void YasEngine::handleProjectiles()
     }
 }
 
+void YasEngine::handlePlayer()
+{
+    if (mousePositionChangeInformation->mouseMoved || input->up || input->down || input->left || input->right)
+    {
+        player->rotateToMousePositionInLocalCoordinateSystem(static_cast<float>(mousePositionChangeInformation->x), static_cast<float>(mousePositionChangeInformation->y), windowDimensions);
+    }
+}
+
 void YasEngine::preparePlayer()
 {
     player = new Player(-windowDimensions->x * 0.25F, 0);
@@ -291,52 +306,31 @@ void YasEngine::update(double& deltaTime)
 	    handlePhysics();
         moveObjects();
         handleProjectiles();
-
-        if (mousePositionChangeInformation->mouseMoved || input->up || input->down || input->left || input->right)
-        {
-            player->rotateToMousePositionInLocalCoordinateSystem(static_cast<float>(mousePositionChangeInformation->x), static_cast<float>(mousePositionChangeInformation->y), windowDimensions);
-        }
+        handlePlayer();
     }
-
-    mouseX = static_cast<float>(mousePositionChangeInformation->x);
-    mouseY = static_cast<float>(mousePositionChangeInformation->y);
-
-    // TODO sprawdzenie ktory Button zostal klikniety i obsluga tego
-
-    windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
 }
 
 void YasEngine::render(double& deltaTime) {
     pixelsTable->clearColor(BLACK);
     mathPlay->clearColor(BLACK);
 
-    if (gameState == GameState::GAMEPLAY) // TODO if is gameplay
+    switch (gameState)
     {
-        for (auto object: objectsToDraw) {
-            if (object->isAlive) // TODO if gamestate == gameplay
-        {
-            drawPolygon(object, *pixelsTable);
-        }
-    }
-
-	renderViewports(deltaTime);
-
-    } else {
-        if (gameState == GameState::MAIN_MENU_RESTART) {
-            drawButtons();// TODO drawPolygon(object, *pixelsTable);
-        } else {
-            if (gameState == GameState::INTRO) {
-                writer.write(0, 100, "THE BEOUTY OF MATH       POWERED BY YASENGINE", YELLOW,
-                             *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
-            } else {
-                if (gameState == GameState::OUTRO) {
-                    writer.write(0, 100,
-                                 "CREDITS       CODE DESIGN LUKASZ LUKE SAWICKI       SOUND AND MUSIC FROM INTERNET WITH FRE LICENSE",
-                                 BLUE,
-                                 *pixelsTable); // TODO Write creators, thank you for playing and see you in other games
-                }
-            }
-        }
+    case INTRO:
+        writer.write(0, 100, "THE BEOUTY OF MATH       POWERED BY YASENGINE", YELLOW, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
+        break;
+    case MAIN_MENU_RESTART:
+        drawButtons();
+        break;
+    case GAMEPLAY:
+        renderGameObjects(deltaTime);
+        renderViewports(deltaTime);
+        break;
+    case OUTRO:
+        writer.write(0, 100, "CREDITS       CODE DESIGN LUKASZ LUKE SAWICKI       SOUND AND MUSIC FROM INTERNET WITH FRE LICENSE", BLUE, *pixelsTable); // TODO Write creators, thank you for playing and see you in other games
+        break;
+    default:
+        ;
     }
 
     drawHudElements(deltaTime);
@@ -344,6 +338,17 @@ void YasEngine::render(double& deltaTime) {
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
     SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);
     SDL_RenderPresent(renderer);
+}
+
+void YasEngine::renderGameObjects(double& deltaTime)
+{
+    for (auto object : objectsToDraw)
+    {
+        if (object->isAlive) // TODO if gamestate == gameplay
+        {
+            drawPolygon(object, *pixelsTable);
+        }
+    }
 }
 
 void YasEngine::renderViewports(double& deltaTime)
