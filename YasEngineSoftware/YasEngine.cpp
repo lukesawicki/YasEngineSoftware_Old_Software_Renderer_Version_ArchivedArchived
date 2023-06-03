@@ -108,6 +108,19 @@ void YasEngine::prepareRendering()
 
 void YasEngine::prepareBasicSettings()
 {
+    checkEndianness();
+
+    SDL_Init(SDL_INIT_EVERYTHING);
+
+    windowDimensions    =   new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
+    window              =   SDL_CreateWindow("YasEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE);
+
+    SDL_SetWindowMinimumSize(window, WINDOW_WIDTH, WINDOW_HEIGHT);
+    SDL_ShowCursor(SDL_DISABLE);
+}
+
+void YasEngine::checkEndianness()
+{
     if constexpr (std::endian::native == std::endian::big)
     {
         std::cout << "BIG ENDIAN" << std::endl;
@@ -126,14 +139,6 @@ void YasEngine::prepareBasicSettings()
             endianness = 2;
         }
     }
-
-    SDL_Init(SDL_INIT_EVERYTHING);
-
-    windowDimensions    =   new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
-    window              =   SDL_CreateWindow("YasEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE);
-
-    SDL_SetWindowMinimumSize(window, WINDOW_WIDTH, WINDOW_HEIGHT);
-    SDL_ShowCursor(SDL_DISABLE);
 }
 
 void YasEngine::drawHudElements(double& deltaTime)
@@ -209,12 +214,7 @@ void YasEngine::handleMouseInput(SDL_Event& event)
 {
     if (event.type == SDL_MOUSEMOTION)
     {
-        int x;
-        int y;
-        SDL_GetMouseState(&x, &y);
-        mousePositionChangeInformation->mouseMoved = true;
-        mousePositionChangeInformation->x = x;
-        mousePositionChangeInformation->y = y;
+        handleMouseMovement();
     }
     if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
     {
@@ -246,7 +246,16 @@ void YasEngine::handleMouseInput(SDL_Event& event)
             break;
         }
     }
+}
 
+void YasEngine::handleMouseMovement()
+{
+    int x;
+    int y;
+    SDL_GetMouseState(&x, &y);
+    mousePositionChangeInformation->mouseMoved = true;
+    mousePositionChangeInformation->x = x;
+    mousePositionChangeInformation->y = y;
     mouseX = static_cast<float>(mousePositionChangeInformation->x);
     mouseY = static_cast<float>(mousePositionChangeInformation->y);
 
@@ -255,7 +264,7 @@ void YasEngine::handleMouseInput(SDL_Event& event)
     windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
 }
 
-void YasEngine::handleSpawningcollectibles()
+void YasEngine::handleSpawningCollectibles()
 {
     spawner.spawnObject(go);
     if (go != nullptr)
@@ -302,7 +311,7 @@ void YasEngine::update(double& deltaTime)
     // TODO switch with handling different things
     if(gameState==GameState::GAMEPLAY)
     {
-        handleSpawningcollectibles();
+        handleSpawningCollectibles();
 	    handlePhysics();
         moveObjects();
         handleProjectiles();

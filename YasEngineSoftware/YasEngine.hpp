@@ -121,6 +121,7 @@ class YasEngine
 		void drawMathArt();
 		void prepareRendering();
 		void prepareBasicSettings();
+		void checkEndianness();
 		void handlePhysics();
 		void moveObjects();
 		void prepareGameWorld();
@@ -129,7 +130,8 @@ class YasEngine
 		void handleInput(SDL_Event& event);
 		void handleKeyboardInput(SDL_Event& event);
 		void handleMouseInput(SDL_Event& event);
-		void handleSpawningcollectibles();
+		void handleMouseMovement();
+		void handleSpawningCollectibles();
 		void handleProjectiles();
 		void handlePlayer();
 		void update(double& deltaTime);
