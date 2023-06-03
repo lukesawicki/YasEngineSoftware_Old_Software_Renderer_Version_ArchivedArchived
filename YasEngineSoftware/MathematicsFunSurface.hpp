@@ -6,6 +6,7 @@
 class MathematicsFunSurface final : public ViewPort
 {
 	public:
+		void render(double& deltaTime);
 		void cartesianPositionToWindow(int& x, int& y) const
 		{
 			x = x + static_cast<int>(0.5F * viewPortSizes.x);
@@ -22,7 +23,6 @@ class MathematicsFunSurface final : public ViewPort
 
 		unsigned int calculateMaximumNumberOfElementsToProcess(const unsigned int& primaryMaximum, bool connectedLines);
 
-		// void drawNumbersAsGroupOfNotConnectedLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color);
 		void drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos);
 
 		void horizontalLineOnSurface(int y, Vector4D<Uint8> color)

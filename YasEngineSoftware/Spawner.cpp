@@ -8,7 +8,6 @@ Spawner::Spawner() {
     timeBetweenSpawns = 800;
 }
 
-//GameObject* 
 void Spawner::spawnObject(GameObject*& gameObject)
 {
     currentTime = timePicker.getMiliseconds();
@@ -16,8 +15,7 @@ void Spawner::spawnObject(GameObject*& gameObject)
     {
 	int oldTargetPositionX = 0;
 	int oldTargetPositionY = 0;
-	//liveTime;
-        //{
+
 		srand(clock());
 		int xPos = rand() % 75 + 10;
 		int yPos = rand() % 75 + 10;
@@ -51,20 +49,9 @@ void Spawner::spawnObject(GameObject*& gameObject)
 
 		if (oldTargetPositionX != targetPositionX || oldTargetPositionY != targetPositionY)
 		{
-
-			gameObject = new Destroyable(16, static_cast<float>(targetPositionX), static_cast<float>(targetPositionY), Vector2D<float>(0.0F, 0.0F), 5);
-			if (gameObject != nullptr)
-			{
-				//std::cout << "is not null" << std::endl;
-			}
+			gameObject = new Destroyable(16, static_cast<float>(targetPositionX), static_cast<float>(targetPositionY), Vector2D<float>(0.0F, 0.0F), numberOfVertices);
 		}
 
-		//std::cout << "AAAAAAAAAA" << std::endl;
-
-        //}
-            // TIME OF WAIT ->, 750);
-
-	//return gameObject;
         previousTime = currentTime;
     }
 }

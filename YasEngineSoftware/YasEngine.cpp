@@ -152,7 +152,7 @@ void YasEngine::prepareBasicSettings()
 void YasEngine::drawHudElements(double& deltaTime)
 {
     #ifdef DEBUG_DRAWINGS
-        drawCartesianAxies(*pixelsTable);
+        // drawCartesianAxies(*pixelsTable);
     #endif // DEBUG_DRAWINGS
 
     drawCrossHair(mouseX, mouseY, *pixelsTable, false);
@@ -248,7 +248,7 @@ void YasEngine::handleInput(SDL_Event& event)
             switch(gameState)
             {
                 case GAMEPLAY:
-            player->isShooting      = false;
+					player->isShooting = false;
                     break;
             }
         }
@@ -266,9 +266,6 @@ void YasEngine::preparePlayer()
 
 void YasEngine::update(double& deltaTime)
 {
-    //int numberOfPhysicalObjects = objectsToDraw.size();
-
-    //std::cout << numberOfPhysicalObjects << std::endl;
     // TODO switch with handling different things
     if(gameState==GameState::GAMEPLAY) {
 
@@ -290,7 +287,7 @@ void YasEngine::update(double& deltaTime)
     Projectile* projectile = player->shoot();
     if (projectile != nullptr)
     {
-            Mix_PlayChannel(-1, shootSound, 0);
+        Mix_PlayChannel(-1, shootSound, 0);
         objectsToDraw.push_back(projectile);
     }
 
@@ -326,27 +323,11 @@ void YasEngine::render(double& deltaTime) {
             drawPolygon(object, *pixelsTable);
         }
     }
-        mathPlay->verticalLineOnSurface(0, GREEN);
-        mathPlay->horizontalLineOnSurface(0, RED);//-WINDOW_HEIGHT * 0.25F
 
-	// mathPlay->drawNumbersAsGroupOfNotConnectedLines(sinusPoints, 100, YELLOW);
+	renderViewports(deltaTime);
 
-    mathPlay->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, YELLOW, true);
-    mathPlay->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, BLUE, false);
-    mathPlay->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, RED, false);
-
-        mathPlay->drawNumbersAsGroupOfLines(primeNumbersPoints->points, primeNumbersPoints->pointsNumber, YELLOW,
-                                            false);
-
-    mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
-
-//        writer.write(0, 0, "RESTART_BUTTON", *pixelsTable);
-//        writer.write(-620, -100, "HOLY SHIT IT IS WORKING FINALLY 0.1.2.3.4.5.6.7.8.9", *pixelsTable);
-
-        drawRectangle(*pixelsTable, -110, -110, 32, 32, YELLOW);
-
-    verticalLineOnWholeScreen(*pixelsTable, 0, GREEN);
-    horizontalLineOnWholeScreen(*pixelsTable, 0, RED);
+    // verticalLineOnWholeScreen(*pixelsTable, 0, GREEN);
+    // horizontalLineOnWholeScreen(*pixelsTable, 0, RED);
     } else {
         if (gameState == GameState::MAIN_MENU_RESTART) {
             drawButtons();// TODO drawPolygon(object, *pixelsTable);
@@ -364,17 +345,24 @@ void YasEngine::render(double& deltaTime) {
             }
         }
     }
-//    if (collided)
-//    {
-//        writer.write(0, 0, "PLAYER COLLIDING", BLUE, *pixelsTable);
-//        collided = false;
-//    }
+
     writer.write(static_cast<int>(0 - (4*17)/2.0F), 0, "ABCD", BLUE, *pixelsTable);
     drawHudElements(deltaTime);
 
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
     SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);
     SDL_RenderPresent(renderer);
+}
+
+void YasEngine::renderViewports(double& deltaTime)
+{
+    mathPlay->verticalLineOnSurface(0, GREEN);
+    mathPlay->horizontalLineOnSurface(0, RED);//-WINDOW_HEIGHT * 0.25F
+    mathPlay->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, YELLOW, true);
+    mathPlay->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, BLUE, false);
+    mathPlay->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, RED, false);
+    mathPlay->drawNumbersAsGroupOfLines(primeNumbersPoints->points, primeNumbersPoints->pointsNumber, YELLOW, false);
+    mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
 }
 
 void YasEngine::handlePhysics()

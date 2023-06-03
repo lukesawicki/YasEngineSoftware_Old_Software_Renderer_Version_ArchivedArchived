@@ -15,7 +15,7 @@ PointsSet* CosinusPointsGenerator::generatePoints()
 	{
 		float x = i * step;
         float tempY = cos(x);
-		float y = cos(tempY * 4.5F);
+		float y = cos(pow(tempY, 2) * 4.5F);
 
         numbers.push_back(tempY);
 
