@@ -257,6 +257,22 @@ void YasEngine::handleSpawningcollectibles()
     }
 }
 
+void YasEngine::handleProjectiles()
+{
+    Projectile* projectile = player->shoot();
+
+    if (projectile != nullptr)
+    {
+        Mix_PlayChannel(-1, shootSound, 0);
+        objectsToDraw.push_back(projectile);
+    }
+
+    if (projectile != nullptr)
+    {
+        projectile = nullptr;
+    }
+}
+
 void YasEngine::preparePlayer()
 {
     player = new Player(-windowDimensions->x * 0.25F, 0);
@@ -271,35 +287,14 @@ void YasEngine::update(double& deltaTime)
     // TODO switch with handling different things
     if(gameState==GameState::GAMEPLAY)
     {
-
         handleSpawningcollectibles();
-
 	    handlePhysics();
-	    for (auto object : objectsToDraw)
-	    {
-	        if (object->isAlive)
-	        {
-	            object->move(static_cast<float>(deltaTime));
-	            object->regeneratePolygon();
-	        }
-	    }
+        moveObjects();
+        handleProjectiles();
 
-	    Projectile* projectile = player->shoot();
-
-	    if (projectile != nullptr)
-	    {
-	        Mix_PlayChannel(-1, shootSound, 0);
-	        objectsToDraw.push_back(projectile);
-	    }
-
-	    if (mousePositionChangeInformation->mouseMoved || input->up || input->down || input->left || input->right)
-	    {
-	        player->rotateToMousePositionInLocalCoordinateSystem(static_cast<float>(mousePositionChangeInformation->x), static_cast<float>(mousePositionChangeInformation->y), windowDimensions);
-	    }
-
-        if(projectile != nullptr)
+        if (mousePositionChangeInformation->mouseMoved || input->up || input->down || input->left || input->right)
         {
-            projectile = nullptr;
+            player->rotateToMousePositionInLocalCoordinateSystem(static_cast<float>(mousePositionChangeInformation->x), static_cast<float>(mousePositionChangeInformation->y), windowDimensions);
         }
     }
 
@@ -454,6 +449,18 @@ void YasEngine::handlePhysics()
 				}
 			}
 		}
+    }
+}
+
+void YasEngine::moveObjects()
+{
+    for (auto object : objectsToDraw)
+    {
+        if (object->isAlive)
+        {
+            object->move(static_cast<float>(deltaTime));
+            object->regeneratePolygon();
+        }
     }
 }
 
