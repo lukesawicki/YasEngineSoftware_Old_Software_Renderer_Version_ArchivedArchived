@@ -22,7 +22,7 @@ void YasEngine::initialize()
 
     writer.initialize();
 
-    mathPlay = new MathematicsFunSurface(0, static_cast<int>(windowDimensions->y * 0.5F), static_cast<int>(windowDimensions->x * 0.5F), static_cast<int>(windowDimensions->y), BLACK);
+    surfaceWithMathBasedEffects = new SurfaceWithMathBasedEffects(0, static_cast<int>(windowDimensions->y * 0.5F), static_cast<int>(windowDimensions->x * 0.5F), static_cast<int>(windowDimensions->y), BLACK);
 
     SinusPointsGenerator sinusPointsGenerator;
     CosinusPointsGenerator cosinusPointsGenerator;
@@ -39,7 +39,7 @@ void YasEngine::clean()
     delete cosinusPoints;
     delete fibonacciePoints;
     delete primeNumbersPoints;
-    delete mathPlay;
+    delete surfaceWithMathBasedEffects;
     delete pixelsTable;
     delete windowDimensions;
 
@@ -262,7 +262,9 @@ void YasEngine::handleMouseMovement()
 
 void YasEngine::handleSpawningCollectibles()
 {
-    spawner.spawnObject(go);
+    // TODO drawn spawner object
+    short randomSpawnerNumber = 0;
+    spawners.at(randomSpawnerNumber)->spawnObject(go);
     if (go != nullptr)
     {
         objectsToDraw.push_back(go);
@@ -317,7 +319,7 @@ void YasEngine::update(double& deltaTime)
 
 void YasEngine::render(double& deltaTime) {
     pixelsTable->clearColor(BLACK);
-    mathPlay->clearColor(BLACK);
+    surfaceWithMathBasedEffects->clearColor(BLACK);
 
     switch (gameState)
     {
@@ -358,14 +360,14 @@ void YasEngine::renderGameObjects(double& deltaTime)
 
 void YasEngine::renderViewports(double& deltaTime)
 {
-    mathPlay->verticalLineOnSurface(0, GREEN);
-    mathPlay->horizontalLineOnSurface(0, RED);//-WINDOW_HEIGHT * 0.25F
-    mathPlay->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, YELLOW, true);
-    mathPlay->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, BLUE, true);
-    mathPlay->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, RED, false);
-    // mathPlay->drawNumbersAsGroupOfLines(primeNumbersPoints->points, primeNumbersPoints->pointsNumber, YELLOW, false);
+    surfaceWithMathBasedEffects->verticalLineOnSurface(0, GREEN);
+    surfaceWithMathBasedEffects->horizontalLineOnSurface(0, RED);//-WINDOW_HEIGHT * 0.25F
+    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, YELLOW, true);
+    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, BLUE, true);
+    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, RED, false);
+    // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(primeNumbersPoints->points, primeNumbersPoints->pointsNumber, YELLOW, false);
 
-	mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
+	surfaceWithMathBasedEffects->copyPixelsInToPIxelTable(*pixelsTable);
 }
 
 void YasEngine::handlePhysics()
@@ -537,8 +539,9 @@ void YasEngine::prepareGameWorld()
         fibonacciePoints = fibonacciPointsGenerator.generatePoints();
         primeNumbersPoints = primeNumberPointsGenerator.generatePoints();
 
-        spawner.position.x = -200;
-        spawner.position.y = 0;
+        spawners.push_back(new Spawner());
+        spawners.at(0)->position.x = -200;
+        spawners.at(0)->position.y = 0;
 
         numberOfGivenColors.insert({"RED", 0});
         numberOfGivenColors.insert({"GREEN", 0});

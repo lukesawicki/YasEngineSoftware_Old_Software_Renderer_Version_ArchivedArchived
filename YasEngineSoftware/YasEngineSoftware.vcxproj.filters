@@ -48,7 +48,7 @@
     <ClCompile Include="Math.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MathematicsFunSurface.cpp">
+    <ClCompile Include="SurfaceWithMathBasedEffects.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="PixelsTable.cpp">
@@ -119,7 +119,7 @@
     <ClInclude Include="Math.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MathematicsFunSurface.hpp">
+    <ClInclude Include="SurfaceWithMathBasedEffects.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PixelsTable.hpp">

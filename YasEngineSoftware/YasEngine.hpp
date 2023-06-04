@@ -11,7 +11,7 @@
 #include"GameObject.hpp"
 #include"Player.hpp"
 #include"InputOutputHandler.hpp"
-#include"MathematicsFunSurface.hpp"
+#include"SurfaceWithMathBasedEffects.hpp"
 #include "PointsSet.hpp"
 #include "Spawner.hpp"
 #include"ScreenWriter.hpp"
@@ -86,7 +86,7 @@ class YasEngine
 
 		std::vector<GameObject*> objectsToDraw;
 		Player* player;
-		MathematicsFunSurface* mathPlay;
+		SurfaceWithMathBasedEffects* surfaceWithMathBasedEffects;
 		
 		Mix_Music* music;
 		Mix_Chunk* shootSound;
@@ -103,7 +103,7 @@ class YasEngine
         std::map<float, int> fibonacciNumbers;
         std::map<float, int> primeNumbers;
 
-		Spawner spawner;
+		std::vector<Spawner*> spawners;
 
         ScreenWriter writer;
         int step = 0;

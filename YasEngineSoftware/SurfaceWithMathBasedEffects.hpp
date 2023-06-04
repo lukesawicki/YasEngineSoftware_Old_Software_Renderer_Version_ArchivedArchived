@@ -3,7 +3,7 @@
 #include "PixelsTable.hpp"
 #include"ViewPort.hpp"
 
-class MathematicsFunSurface final : public ViewPort
+class SurfaceWithMathBasedEffects final : public ViewPort
 {
 	public:
 		void render(double& deltaTime);
@@ -12,9 +12,9 @@ class MathematicsFunSurface final : public ViewPort
 			x = x + static_cast<int>(0.5F * viewPortSizes.x);
 			y = -y + static_cast<int>(0.5F * viewPortSizes.y);
 		}
-		MathematicsFunSurface(int x, int y, int width, int height, const Vector4D<Uint8>& defaultColor);
-		MathematicsFunSurface(Vector2D<int> position, int width, int height, const Vector4D<Uint8>& defaultColor);
-		virtual ~MathematicsFunSurface();
+		SurfaceWithMathBasedEffects(int x, int y, int width, int height, const Vector4D<Uint8>& defaultColor);
+		SurfaceWithMathBasedEffects(Vector2D<int> position, int width, int height, const Vector4D<Uint8>& defaultColor);
+		virtual ~SurfaceWithMathBasedEffects();
 		void clearColor(const Vector4D<Uint8>& drawingColor) override;
 		void drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor) override;
 		void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, const Vector4D<Uint8>& drawingColor)  override;

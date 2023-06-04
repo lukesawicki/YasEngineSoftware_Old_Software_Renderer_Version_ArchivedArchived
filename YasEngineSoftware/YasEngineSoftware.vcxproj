@@ -30,7 +30,7 @@
     <ClCompile Include="FontSurface.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Math.cpp" />
-    <ClCompile Include="MathematicsFunSurface.cpp" />
+    <ClCompile Include="SurfaceWithMathBasedEffects.cpp" />
     <ClCompile Include="PixelsTable.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PrimeNumbersPointsGenerator.cpp" />
@@ -55,7 +55,7 @@
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="InputOutputHandler.hpp" />
     <ClInclude Include="Math.hpp" />
-    <ClInclude Include="MathematicsFunSurface.hpp" />
+    <ClInclude Include="SurfaceWithMathBasedEffects.hpp" />
     <ClInclude Include="PixelsTable.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="PointsGenerator.hpp" />

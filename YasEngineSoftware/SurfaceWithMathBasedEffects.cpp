@@ -1,12 +1,12 @@
-#include"MathematicsFunSurface.hpp"
+#include"SurfaceWithMathBasedEffects.hpp"
 #include "YasGraphicsLibrary.hpp"
 
-void MathematicsFunSurface::render(double& deltaTime)
+void SurfaceWithMathBasedEffects::render(double& deltaTime)
 {
 
 }
 
-MathematicsFunSurface::MathematicsFunSurface(int x, int y, int width, int height, const Vector4D<Uint8>& defaultColor)
+SurfaceWithMathBasedEffects::SurfaceWithMathBasedEffects(int x, int y, int width, int height, const Vector4D<Uint8>& defaultColor)
 {
 	position.x = x;
 	position.y = y;
@@ -16,7 +16,7 @@ MathematicsFunSurface::MathematicsFunSurface(int x, int y, int width, int height
 	clearColor(defaultColor);
 }
 
-MathematicsFunSurface::MathematicsFunSurface(Vector2D<int> position, int width, int height, const Vector4D<Uint8>& defaultColor)
+SurfaceWithMathBasedEffects::SurfaceWithMathBasedEffects(Vector2D<int> position, int width, int height, const Vector4D<Uint8>& defaultColor)
 {
 	this->position.x = position.x;
 	this->position.y = position.y;
@@ -26,12 +26,12 @@ MathematicsFunSurface::MathematicsFunSurface(Vector2D<int> position, int width, 
 	clearColor(defaultColor);
 }
 
-MathematicsFunSurface::~MathematicsFunSurface()
+SurfaceWithMathBasedEffects::~SurfaceWithMathBasedEffects()
 {
 	delete[] pixels;
 }
 
-void MathematicsFunSurface::clearColor(const Vector4D<Uint8>& drawingColor)
+void SurfaceWithMathBasedEffects::clearColor(const Vector4D<Uint8>& drawingColor)
 {
 	for (int y = 0; y < viewPortSizes.y; y++)
 	{
@@ -45,7 +45,7 @@ void MathematicsFunSurface::clearColor(const Vector4D<Uint8>& drawingColor)
 	}
 }
 
-void MathematicsFunSurface::drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor)
+void SurfaceWithMathBasedEffects::drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor)
 {
 	cartesianPositionToWindow(x, y);
 	if (x >= 0 && x < viewPortSizes.x && y >= 0 && y < viewPortSizes.y)
@@ -57,7 +57,7 @@ void MathematicsFunSurface::drawPoint(int x, int y, const Vector4D<Uint8>& drawi
 	}
 }
 
-void MathematicsFunSurface::drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, const Vector4D<Uint8>& drawingColor)
+void SurfaceWithMathBasedEffects::drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, const Vector4D<Uint8>& drawingColor)
 {
     int x0 = static_cast<int>(point0.x);
     int y0 = static_cast<int>(point0.y);
@@ -349,7 +349,7 @@ void MathematicsFunSurface::drawLine(const Vector2D<float>& point0, const Vector
     }
 }
 
-unsigned int MathematicsFunSurface::calculateMaximumNumberOfElementsToProcess(const unsigned int& primaryMaximum, bool connectedLines)
+unsigned int SurfaceWithMathBasedEffects::calculateMaximumNumberOfElementsToProcess(const unsigned int& primaryMaximum, bool connectedLines)
 {
     int maximum = 0;
     if (primaryMaximum % 2 == 0)
@@ -363,7 +363,7 @@ unsigned int MathematicsFunSurface::calculateMaximumNumberOfElementsToProcess(co
     return maximum;
 }
 
-void MathematicsFunSurface::drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos)
+void SurfaceWithMathBasedEffects::drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos)
 {
     int step = 1;
     if(!areLinesContinuos)
@@ -385,11 +385,11 @@ void MathematicsFunSurface::drawNumbersAsGroupOfLines(Vector2D<float>* vertices,
     }
 }
 
-void MathematicsFunSurface::drawPolygon(GameObject* polygon)
+void SurfaceWithMathBasedEffects::drawPolygon(GameObject* polygon)
 {
 }
 
-void MathematicsFunSurface::copyPixelsInToPIxelTable(PixelsTable& pixelsTable)
+void SurfaceWithMathBasedEffects::copyPixelsInToPIxelTable(PixelsTable& pixelsTable)
 {
     int posX = position.x;
     int posY = position.y; // + viewPortSizes.y;
@@ -412,7 +412,7 @@ void MathematicsFunSurface::copyPixelsInToPIxelTable(PixelsTable& pixelsTable)
     }
 }
 
-void MathematicsFunSurface::drawCartesianAxies()
+void SurfaceWithMathBasedEffects::drawCartesianAxies()
 {
     horizontalLineOnSurface(0, RED);
     verticalLineOnSurface(0, GREEN);
