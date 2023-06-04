@@ -1,32 +1,34 @@
 #include"CosinusPointsGenerator.hpp"
 
-std::vector<float> CosinusPointsGenerator::numbers;
+std::vector<double> CosinusPointsGenerator::numbers;
 
 PointsSet* CosinusPointsGenerator::generatePoints()
 {
 	pointsNumber = 100;
-	Vector2D<float>* points = new Vector2D<float>[100];
-	float divider = static_cast<float>(pointsNumber);
-	float maximumXvalue = 2.0F * PI;
-	float additionalFactor = 50.0F;
-	float step = (maximumXvalue / divider);
+	Vector2D<double>* points = new Vector2D<double>[pointsNumber];
+	double divider = static_cast<double>(pointsNumber);
+	double maximumXvalue = 2.0L * PI;
+	constexpr double additionalFactor = 50.0;
+	double step = (maximumXvalue / divider);
 
 	for (int i = 0; i < pointsNumber; i++)
 	{
-		float x = i * step;
-        float tempY = cos(x);
-
-		float y = static_cast<float>( cos(pow(tempY, 2) * 4.5F));
-
-        numbers.push_back(tempY);
-
-		points[i].x = round(x * additionalFactor);
-		points[i].y = round(y * additionalFactor);
+		double x = i * step;
+		double y = sin(x);
+		numbers.push_back(y); // FOR GAMEPLAY PURPOSE!!
+		points[i].x = x * additionalFactor; // round(x * additionalFactor);
+		points[i].y = y * additionalFactor; // round(y * additionalFactor);
 	}
 
-
 	PointsSet* pointsSet = new PointsSet();
-	pointsSet->points = points;
+	pointsSet->points = new Vector2D<float>[pointsNumber];
+	for (int i = 0; i < pointsNumber; i++)
+	{
+		pointsSet->points[i].x = static_cast<float>(points[i].x);
+		pointsSet->points[i].y = static_cast<float>(points[i].y);
+	}
+	// pointsSet->points = points;
+
 	pointsSet->pointsNumber = pointsNumber;
 	return pointsSet;
 }

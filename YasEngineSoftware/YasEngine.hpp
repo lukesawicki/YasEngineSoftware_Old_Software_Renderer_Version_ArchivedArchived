@@ -118,7 +118,6 @@ class YasEngine
         int blueShotdowns = 0;
 
 		bool engineInstantiated = false;
-		void drawMathArt();
 		void prepareRendering();
 		void prepareBasicSettings();
 		void checkEndianness();

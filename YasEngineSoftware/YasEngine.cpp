@@ -91,10 +91,6 @@ void YasEngine::YasEnginStart()
     return;
 }
 
-void YasEngine::drawMathArt()
-{
-}
-
 void YasEngine::prepareRendering()
 {
     pixelsTable     =   new PixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, BLACK);
@@ -365,10 +361,11 @@ void YasEngine::renderViewports(double& deltaTime)
     mathPlay->verticalLineOnSurface(0, GREEN);
     mathPlay->horizontalLineOnSurface(0, RED);//-WINDOW_HEIGHT * 0.25F
     mathPlay->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, YELLOW, true);
-    mathPlay->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, BLUE, false);
+    mathPlay->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, BLUE, true);
     mathPlay->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, RED, false);
-    mathPlay->drawNumbersAsGroupOfLines(primeNumbersPoints->points, primeNumbersPoints->pointsNumber, YELLOW, false);
-    mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
+    // mathPlay->drawNumbersAsGroupOfLines(primeNumbersPoints->points, primeNumbersPoints->pointsNumber, YELLOW, false);
+
+	mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
 }
 
 void YasEngine::handlePhysics()
