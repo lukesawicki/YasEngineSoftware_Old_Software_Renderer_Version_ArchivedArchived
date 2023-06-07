@@ -696,3 +696,11 @@ void YasEngine::handleGameStateWhenSPACEbuttonPushed()
             ;
     }
 }
+
+bool YasEngine::isPlaceForSpawner()
+{
+    for (int i = 0; i < spawners.size(); i++)
+    {
+        if()
+    }
+}

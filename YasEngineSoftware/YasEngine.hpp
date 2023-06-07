@@ -144,6 +144,7 @@ class YasEngine
         void handleGameStateWhenSPACEbuttonPushed();
 		void prepareSoundAndMusic();
         void drawButtons();
+		bool isPlaceForSpawner();
 };
 
 #endif
