@@ -7,9 +7,8 @@
 class SpawnersQuadTree
 {
 	public:
-		SpawnersQuadTree(Vector2D<int>* position, int size);
-		void calculageTwoLayersOfQuads();
-		Vector2D<int> position;
+		SpawnersQuadTree(Vector2D<int>* position, int size, SpawnersQuadTree* parent, int& levelInTree);
+		Vector2D<int>* position;
 		int size;
 		SpawnersQuadTree* childNodes[4];
 		Spawner* spawner;
