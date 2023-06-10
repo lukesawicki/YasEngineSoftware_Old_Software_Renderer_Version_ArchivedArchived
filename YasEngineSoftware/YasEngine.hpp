@@ -14,6 +14,7 @@
 #include"SurfaceWithMathBasedEffects.hpp"
 #include "PointsSet.hpp"
 #include "Spawner.hpp"
+#include "SpawnersQuadTree.hpp"
 #include"ScreenWriter.hpp"
 #include"Button.hpp"
 
@@ -103,7 +104,11 @@ class YasEngine
         std::map<float, int> fibonacciNumbers;
         std::map<float, int> primeNumbers;
 
-		std::vector<Spawner*> spawners;
+		//std::vector<Spawner*> spawners;
+		SpawnersQuadTree* spawners;
+		int quadTreeLevels = 0;
+		int iterationNumber;
+		std::vector<int> spawnerPositionNumber;
 
         ScreenWriter writer;
         int step = 0;

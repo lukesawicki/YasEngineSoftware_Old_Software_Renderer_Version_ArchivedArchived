@@ -263,12 +263,18 @@ void YasEngine::handleMouseMovement()
 void YasEngine::handleSpawningCollectibles()
 {
     // TODO drawn spawner object
-    short randomSpawnerNumber = 0;
-    spawners.at(randomSpawnerNumber)->spawnObject(go);
-    if (go != nullptr)
-    {
-        objectsToDraw.push_back(go);
-    }
+	short randomSpawnerNumber = 0;
+
+    // spawnerPositionNumber
+    
+	//spawners.at(randomSpawnerNumber)->spawnObject(go);
+	spawners->childNodes[spawnerPositionNumber.at(0)]->childNodes[spawnerPositionNumber.at(1)]->spawner->spawnObject(go);
+	if (go != nullptr)
+	{
+		objectsToDraw.push_back(go);
+	}
+     // spawners
+    //spawners->childNodes[2]->childNodes[1]->spawner = new Spawner();
 }
 
 void YasEngine::handleProjectiles()
@@ -539,9 +545,16 @@ void YasEngine::prepareGameWorld()
         fibonacciePoints = fibonacciPointsGenerator.generatePoints();
         primeNumbersPoints = primeNumberPointsGenerator.generatePoints();
 
-        spawners.push_back(new Spawner());
-        spawners.at(0)->position.x = -200;
-        spawners.at(0)->position.y = 0;
+
+        // spawners.push_back(new Spawner());
+        // spawners.at(0)->position.x = -200;
+        // spawners.at(0)->position.y = 0;
+
+        spawners = new SpawnersQuadTree(new Vector2D<int>(-(windowDimensions->x/4), 0), windowDimensions->x/2, nullptr, quadTreeLevels, iterationNumber);
+        spawnerPositionNumber.push_back(2); // 0->2
+        spawnerPositionNumber.push_back(1); // 1->1
+        spawners->createSpanwer(spawnerPositionNumber);
+
 
         numberOfGivenColors.insert({"RED", 0});
         numberOfGivenColors.insert({"GREEN", 0});
@@ -618,7 +631,6 @@ void YasEngine::drawButtons()
     {
         drawPolygon(buttons.at(i), *pixelsTable);
         writer.write(static_cast<int>(buttons.at(i)->getPosition().x - dynamic_cast<Button*>(buttons.at(i))->buttonTextWidth * 0.5F + ScreenWriter::FONT_WIDTH * 0.5F), static_cast<int>(buttons.at(i)->getPosition().y), dynamic_cast<Button*>(buttons.at(i))->text,dynamic_cast<Button*>(buttons.at(i))->color, *pixelsTable);
-        
     }
 }
 
@@ -699,8 +711,9 @@ void YasEngine::handleGameStateWhenSPACEbuttonPushed()
 
 bool YasEngine::isPlaceForSpawner()
 {
-    for (int i = 0; i < spawners.size(); i++)
-    {
-        if()
-    }
+    // for (int i = 0; i < spawners.size(); i++)
+    // {
+    //     ;//if()
+    // }
+    return false;
 }
