@@ -88,6 +88,7 @@ class YasEngine
 		std::vector<GameObject*> objectsToDraw;
 		Player* player;
 		SurfaceWithMathBasedEffects* surfaceWithMathBasedEffects;
+		std::vector<int> spawnerPositionNumber;
 		
 		Mix_Music* music;
 		Mix_Chunk* shootSound;
@@ -106,9 +107,9 @@ class YasEngine
 
 		//std::vector<Spawner*> spawners;
 		SpawnersQuadTree* spawners;
-		int quadTreeLevels = 0;
-		int iterationNumber;
-		std::vector<int> spawnerPositionNumber;
+
+		Vector2D<float> testPoint0;
+		Vector2D<float> testPoint1;
 
         ScreenWriter writer;
         int step = 0;
@@ -149,7 +150,6 @@ class YasEngine
         void handleGameStateWhenSPACEbuttonPushed();
 		void prepareSoundAndMusic();
         void drawButtons();
-		bool isPlaceForSpawner();
 };
 
 #endif

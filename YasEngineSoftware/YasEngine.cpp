@@ -264,17 +264,13 @@ void YasEngine::handleSpawningCollectibles()
 {
     // TODO drawn spawner object
 	short randomSpawnerNumber = 0;
-
-    // spawnerPositionNumber
     
-	//spawners.at(randomSpawnerNumber)->spawnObject(go);
-	spawners->childNodes[spawnerPositionNumber.at(0)]->childNodes[spawnerPositionNumber.at(1)]->spawner->spawnObject(go);
+    spawners->childNodes[spawnerPositionNumber.at(0)]->childNodes[spawnerPositionNumber.at(1)]->spawner->spawnObject(go);
 	if (go != nullptr)
 	{
 		objectsToDraw.push_back(go);
+        
 	}
-     // spawners
-    //spawners->childNodes[2]->childNodes[1]->spawner = new Spawner();
 }
 
 void YasEngine::handleProjectiles()
@@ -362,6 +358,8 @@ void YasEngine::renderGameObjects(double& deltaTime)
             drawPolygon(object, *pixelsTable);
         }
     }
+
+    drawLine(testPoint0, testPoint1, *pixelsTable, YELLOW);
 }
 
 void YasEngine::renderViewports(double& deltaTime)
@@ -545,16 +543,27 @@ void YasEngine::prepareGameWorld()
         fibonacciePoints = fibonacciPointsGenerator.generatePoints();
         primeNumbersPoints = primeNumberPointsGenerator.generatePoints();
 
+        spawners = new SpawnersQuadTree(new Vector2D<int>(-(windowDimensions->x/4), 0), windowDimensions->x/2, nullptr);
 
-        // spawners.push_back(new Spawner());
-        // spawners.at(0)->position.x = -200;
-        // spawners.at(0)->position.y = 0;
+        SpawnersQuadTree::addNodes(*spawners);
+		for(int i=0; i<4; i++)
+		{
+            SpawnersQuadTree::addNodes(*spawners->childNodes[i]);
+		}
 
-        spawners = new SpawnersQuadTree(new Vector2D<int>(-(windowDimensions->x/4), 0), windowDimensions->x/2, nullptr, quadTreeLevels, iterationNumber);
-        spawnerPositionNumber.push_back(2); // 0->2
-        spawnerPositionNumber.push_back(1); // 1->1
+        spawnerPositionNumber.push_back(3);
+        spawnerPositionNumber.push_back(3);
+
         spawners->createSpanwer(spawnerPositionNumber);
 
+        testPoint0.x = spawners->childNodes[0]->position->x;
+        testPoint0.y = spawners->childNodes[0]->position->y;
+
+        testPoint1.x = spawners->childNodes[spawnerPositionNumber.at(0)]->childNodes[spawnerPositionNumber.at(0)]->position->x;
+        testPoint1.y = spawners->childNodes[spawnerPositionNumber.at(0)]->childNodes[spawnerPositionNumber.at(0)]->position->y;
+
+        std::cout << "x: " << testPoint0.x << "y: " << testPoint0.y << "\n";
+        std::cout << "x: " << testPoint1.x << "y: " << testPoint1.y << "\n";
 
         numberOfGivenColors.insert({"RED", 0});
         numberOfGivenColors.insert({"GREEN", 0});
@@ -707,13 +716,4 @@ void YasEngine::handleGameStateWhenSPACEbuttonPushed()
         default:
             ;
     }
-}
-
-bool YasEngine::isPlaceForSpawner()
-{
-    // for (int i = 0; i < spawners.size(); i++)
-    // {
-    //     ;//if()
-    // }
-    return false;
 }
