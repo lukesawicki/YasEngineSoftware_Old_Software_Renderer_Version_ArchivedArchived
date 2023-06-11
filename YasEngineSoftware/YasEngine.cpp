@@ -263,9 +263,13 @@ void YasEngine::handleMouseMovement()
 void YasEngine::handleSpawningCollectibles()
 {
     // TODO drawn spawner object
-	short randomSpawnerNumber = 0;
+    //v1 = rand() % 100;         // v1 in the range 0 to 99
+	//v2 = rand() % 100 + 1;     // v2 in the range 1 to 100
+
+    spawnerPositionNumber[0] = rand() % 4;
+    spawnerPositionNumber[1] = rand() % 4;
     
-    spawners->childNodes[spawnerPositionNumber.at(0)]->childNodes[spawnerPositionNumber.at(1)]->spawner->spawnObject(go);
+    spawners->childNodes[spawnerPositionNumber[0]]->childNodes[spawnerPositionNumber[1]]->spawner->spawnObject(go);
 	if (go != nullptr)
 	{
 		objectsToDraw.push_back(go);
@@ -551,16 +555,102 @@ void YasEngine::prepareGameWorld()
             SpawnersQuadTree::addNodes(*spawners->childNodes[i]);
 		}
 
-        spawnerPositionNumber.push_back(3);
-        spawnerPositionNumber.push_back(3);
+        for(int i=0; i<4; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                spawnersPositions.push_back(new SpawnerNumberPosition(i, j));
+            }
+        }
+        int drawnNumbers=0;
+        int iteration = 0;
 
-        spawners->createSpanwer(spawnerPositionNumber);
+        
+        // if (iteration != 0)
+        // {
+        bool drawn = false;
+        SpawnerNumberPosition playerPosition;
 
-        testPoint0.x = spawners->childNodes[0]->position->x;
-        testPoint0.y = spawners->childNodes[0]->position->y;
+        for(int i=0; i<4; i++)
+        {
+	        if(
+                player->getPosition().x > (spawners->childNodes[i]->position->x - spawners->childNodes[i]->size * 0.5) &&
+                player->getPosition().x < (spawners->childNodes[i]->position->x + spawners->childNodes[i]->size * 0.5) &&
+                player->getPosition().y < (spawners->childNodes[i]->position->y + spawners->childNodes[i]->size * 0.5) &&
+                player->getPosition().y > (spawners->childNodes[i]->position->y - spawners->childNodes[i]->size * 0.5)
+                )
+	        {
+                for(int j=0; j<4; j++)
+                {
+                    if (
+                        player->getPosition().x > (spawners->childNodes[i]->childNodes[j]->position->x - spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
+                        player->getPosition().x < (spawners->childNodes[i]->childNodes[j]->position->x + spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
+                        player->getPosition().y < (spawners->childNodes[i]->childNodes[j]->position->y + spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
+                        player->getPosition().y > (spawners->childNodes[i]->childNodes[j]->position->y - spawners->childNodes[i]->childNodes[j]->size * 0.5)
+                        )
+                    {
+                        playerPosition.firstNode = i;
+                        playerPosition.secondNode = i;
+                        goto afterFor;
+                    }
+                }
+	        }
+        }
+        afterFor:
 
-        testPoint1.x = spawners->childNodes[spawnerPositionNumber.at(0)]->childNodes[spawnerPositionNumber.at(0)]->position->x;
-        testPoint1.y = spawners->childNodes[spawnerPositionNumber.at(0)]->childNodes[spawnerPositionNumber.at(0)]->position->y;
+        while (!drawn)
+        {
+            int number = rand() % 16;
+            if(!(playerPosition.firstNode == spawnersPositions.at(number)->firstNode &&
+                playerPosition.secondNode == spawnersPositions.at(number)->secondNode))
+            {
+                threeRandomPositions.push_back(spawnersPositions.at(number));
+            }
+        }
+			
+		bool foundNumber = false;
+        for(int i=0; i<threeRandomPositions.size(); i++)
+        {
+            while(!foundNumber)
+            {
+                if(
+                    (threeRandomPositions.at(i)->firstNode != spawnersPositions.at(j)->firstNode && threeRandomPositions.at(i)->secondNode && spawnersPositions.at(j)->secondNode) &&
+
+                    (spawners->childNodes[threeRandomPositions.at(i)->firstNode]->childNodes[threeRandomPositions.at(j)->secondNode]->position->x -
+                    spawners->childNodes[threeRandomPositions.at(number)->firstNode]->childNodes[threeRandomPositions.at(number)->secondNode]->size * 0.5) 
+                )
+                {
+                    ;
+                }
+
+                if()
+                {
+                    
+                }
+            }
+        }
+
+
+        for(int i=0; i<4; i++)
+        {
+	        for(int j=0; j<4; j++)
+	        {
+                spawners->childNodes[i]->childNodes[j]->spawner = new Spawner();
+                spawners->childNodes[i]->childNodes[j]->spawner->position.x = spawners->childNodes[i]->childNodes[j]->position->x;
+                spawners->childNodes[i]->childNodes[j]->spawner->position.y = spawners->childNodes[i]->childNodes[j]->position->y;
+	        }
+        }
+
+        // spawnerPositionNumber.push_back(3);
+        // spawnerPositionNumber.push_back(3);
+
+        // spawners->createSpanwer(spawnerPositionNumber);
+
+        // testPoint0.x = spawners->childNodes[0]->position->x;
+        // testPoint0.y = spawners->childNodes[0]->position->y;
+        //
+        // testPoint1.x = spawners->childNodes[spawnerPositionNumber.at(0)]->childNodes[spawnerPositionNumber.at(0)]->position->x;
+        // testPoint1.y = spawners->childNodes[spawnerPositionNumber.at(0)]->childNodes[spawnerPositionNumber.at(0)]->position->y;
 
         std::cout << "x: " << testPoint0.x << "y: " << testPoint0.y << "\n";
         std::cout << "x: " << testPoint1.x << "y: " << testPoint1.y << "\n";

@@ -13,6 +13,9 @@ class Spawner
         TimePicker timePicker;
 		Vector2D<int> position;
 		Vector2D<int> spawnPosition;
+		int spawningMaxRadius;
+		int spawningMinRadius;
+		int maxValueForDrawingSpawningDirection;
         double startTime = 0;
         double currentTime = 0;
         double previousTime = 0;

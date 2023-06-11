@@ -31,6 +31,22 @@ class YasEngine
             OUTRO
         };
 
+		struct SpawnerNumberPosition
+		{
+			SpawnerNumberPosition()
+			{
+				firstNode = 0;
+				secondNode = 0;
+			}
+			SpawnerNumberPosition(int first, int second)
+			{
+				this->firstNode = first;
+				this->secondNode = second;
+			}
+			int firstNode = 0;
+			int secondNode = 0;
+		};
+
         GameState gameState = GameState::INTRO;
 
         std::vector<GameObject*> buttons;
@@ -88,7 +104,8 @@ class YasEngine
 		std::vector<GameObject*> objectsToDraw;
 		Player* player;
 		SurfaceWithMathBasedEffects* surfaceWithMathBasedEffects;
-		std::vector<int> spawnerPositionNumber;
+		std::vector<SpawnerNumberPosition*> spawnersPositions;
+		std::vector<SpawnerNumberPosition*> threeRandomPositions;
 		
 		Mix_Music* music;
 		Mix_Chunk* shootSound;

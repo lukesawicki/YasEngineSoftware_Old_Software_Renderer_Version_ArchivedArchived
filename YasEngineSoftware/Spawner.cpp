@@ -13,33 +13,36 @@ void Spawner::spawnObject(GameObject*& gameObject)
     currentTime = timePicker.getMiliseconds();
     if( (currentTime - previousTime) >= timeBetweenSpawns)
     {
-	int oldTargetPositionX = 0;
-	int oldTargetPositionY = 0;
-
+		int oldTargetPositionX = 0;
+		int oldTargetPositionY = 0;
 		srand(clock());
-		int xPos = rand() % 75 + 10;
-		int yPos = rand() % 75 + 10;
-		int dirX = rand() % 10 + 1;
-		int dirY = rand() % 10 + 1;
+
+		// int spawningMaxRadius;
+		// int spawningMinRadius;
+
+		int xPos = rand() % spawningMaxRadius + spawningMinRadius;
+		int yPos = rand() % spawningMaxRadius + spawningMinRadius;
+		int dirX = rand() % maxValueForDrawingSpawningDirection + 1;
+		int dirY = rand() % maxValueForDrawingSpawningDirection + 1;
 
 		int numberOfVertices = rand() % 7 + 3;
 
-		if (dirX <= 5)
+		if (dirX <= maxValueForDrawingSpawningDirection*0.5)
 		{
 			dirX = -1;
 		}
 
-		if (dirX >= 5)
+		if (dirX >= maxValueForDrawingSpawningDirection * 0.5)
 		{
 			dirX = 1;
 		}
 
-		if (dirY <= 5)
+		if (dirY <= maxValueForDrawingSpawningDirection * 0.5)
 		{
 			dirY = -1;
 		}
 
-		if (dirY >= 5)
+		if (dirY >= maxValueForDrawingSpawningDirection * 0.5)
 		{
 			dirY = 1;
 		}
