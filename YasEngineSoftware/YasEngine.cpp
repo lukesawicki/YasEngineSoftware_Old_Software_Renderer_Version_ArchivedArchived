@@ -15,8 +15,8 @@ void YasEngine::initialize()
 {
     prepareBasicSettings();
     prepareRendering();
-    prepareGameWorld();
     preparePlayer();
+    prepareGameWorld();
     prepareSoundAndMusic();
     prepareInterface();
 
@@ -270,6 +270,7 @@ void YasEngine::handleSpawningCollectibles()
     // spawnerPositionNumber[1] = rand() % 4;
     for (int i = 0; i < 3; i++)
     {
+        //exception here lukesawicki
         spawners->childNodes[threeRandomPositions[i]->firstNode]->childNodes[threeRandomPositions[i]->secondNode]->spawner->spawnObject(go);
     }
 	if (go != nullptr)
@@ -628,7 +629,7 @@ void YasEngine::prepareGameWorld()
         int checksWithTrueResult = 1;
         int j = 0;
         double quadDiagonal = spawners->childNodes[threeRandomPositions.at(0)->firstNode]->childNodes[threeRandomPositions.at(0)->secondNode]->size * sqrt(2);
-        while(checksWithTrueResult >=3)
+        while(checksWithTrueResult <= 3)
         {
             int position = rand() % 16;
             for (int i = 0; i < threeRandomPositions.size(); i++)
@@ -636,14 +637,14 @@ void YasEngine::prepareGameWorld()
                 if( !(playerPosition.firstNode == spawnersPositions.at(i)->firstNode && playerPosition.secondNode == spawnersPositions.at(i)->secondNode) &&
 					(   
 				    (sqrt(pow((spawners->childNodes[threeRandomPositions.at(i)->firstNode]->childNodes[threeRandomPositions.at(i)->secondNode]->position->x -
-					spawners->childNodes[spawnersPositions.at(j)->firstNode]->childNodes[spawnersPositions.at(j)->secondNode]->position->x),2) +
+					spawners->childNodes[spawnersPositions.at(position)->firstNode]->childNodes[spawnersPositions.at(position)->secondNode]->position->x),2) +
 
 					pow((spawners->childNodes[threeRandomPositions.at(i)->firstNode]->childNodes[threeRandomPositions.at(i)->secondNode]->position->y -
-				    spawners->childNodes[spawnersPositions.at(j)->firstNode]->childNodes[spawnersPositions.at(j)->secondNode]->position->y), 2)) > quadDiagonal)
+				    spawners->childNodes[spawnersPositions.at(position)->firstNode]->childNodes[spawnersPositions.at(position)->secondNode]->position->y), 2)) > quadDiagonal)
 					)
                 )
                 {
-                    threeRandomPositions.push_back(spawnersPositions.at(j));
+                    threeRandomPositions.push_back(spawnersPositions.at(position));
                     checksWithTrueResult++;
                 }
 			}
