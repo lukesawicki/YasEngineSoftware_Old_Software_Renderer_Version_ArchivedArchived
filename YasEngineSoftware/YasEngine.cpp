@@ -586,6 +586,7 @@ void YasEngine::prepareGameWorld()
                 for(int j=0; j<4; j++)
                 {
                     if (
+                        // I THING IS NONSENS THAT HERE IS I AND J
                         player->getPosition().x > (spawners->childNodes[i]->childNodes[j]->position->x - spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
                         player->getPosition().x < (spawners->childNodes[i]->childNodes[j]->position->x + spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
                         player->getPosition().y < (spawners->childNodes[i]->childNodes[j]->position->y + spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
