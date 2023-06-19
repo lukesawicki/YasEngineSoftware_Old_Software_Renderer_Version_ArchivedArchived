@@ -628,7 +628,7 @@ void YasEngine::prepareGameWorld()
         // {
         int checksWithTrueResult = 1;
         int j = 0;
-        double quadDiagonal = spawners->childNodes[threeRandomPositions.at(0)->firstNode]->childNodes[threeRandomPositions.at(0)->secondNode]->size * sqrt(2);
+        double quadDiagonal = 80;//spawners->childNodes[threeRandomPositions.at(0)->firstNode]->childNodes[threeRandomPositions.at(0)->secondNode]->size * sqrt(2);
         while(checksWithTrueResult <= 3)
         {
             int position = rand() % 16;
