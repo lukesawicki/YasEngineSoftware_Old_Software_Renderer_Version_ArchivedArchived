@@ -5,22 +5,18 @@
 #include<vector>
 #include<string>
 #include<SDL2/SDL_mixer.h>
-#include<bit>
 #include<map>
 #include"Vector2D.hpp"
-#include"YasGraphicsLibrary.hpp"
-#include"TimePicker.hpp"
 #include"PixelsTable.hpp"
 #include"GameObject.hpp"
 #include"Player.hpp"
 #include"InputOutputHandler.hpp"
-#include"MathematicsFunSurface.hpp"
-#include"PointsGenerator.hpp"
-#include"PointsSet.hpp"
-#include"Spawner.hpp"
+#include"SurfaceWithMathBasedEffects.hpp"
+#include "PointsSet.hpp"
+#include "Spawner.hpp"
+#include "SpawnersQuadTree.hpp"
 #include"ScreenWriter.hpp"
 #include"Button.hpp"
-//using namespace std;
 
 class YasEngine
 {	
@@ -34,6 +30,22 @@ class YasEngine
             GAMEPLAY,
             OUTRO
         };
+
+		struct SpawnerNumberPosition
+		{
+			SpawnerNumberPosition()
+			{
+				firstNode = 0;
+				secondNode = 0;
+			}
+			SpawnerNumberPosition(int first, int second)
+			{
+				this->firstNode = first;
+				this->secondNode = second;
+			}
+			int firstNode = 0;
+			int secondNode = 0;
+		};
 
         GameState gameState = GameState::INTRO;
 
@@ -64,8 +76,8 @@ class YasEngine
 		Vector2D<float> B = Vector2D<float>(100, -350);
 
 		static YasEngine* instance;
-
-		int endianness;// = std::endian::native == std::endian::big;
+		
+		int endianness;
 
 		SDL_Window* window;
 		SDL_Renderer* renderer;
@@ -91,8 +103,10 @@ class YasEngine
 
 		std::vector<GameObject*> objectsToDraw;
 		Player* player;
-		MathematicsFunSurface* mathPlay;
-
+		SurfaceWithMathBasedEffects* surfaceWithMathBasedEffects;
+		std::vector<SpawnerNumberPosition*> spawnersPositions;
+		std::vector<SpawnerNumberPosition*> threeRandomPositions;
+		
 		Mix_Music* music;
 		Mix_Chunk* shootSound;
 		Mix_Chunk* hitSound;
@@ -108,7 +122,11 @@ class YasEngine
         std::map<float, int> fibonacciNumbers;
         std::map<float, int> primeNumbers;
 
-		Spawner spawner;
+		//std::vector<Spawner*> spawners;
+		SpawnersQuadTree* spawners;
+
+		Vector2D<float> testPoint0;
+		Vector2D<float> testPoint1;
 
         ScreenWriter writer;
         int step = 0;
@@ -122,24 +140,27 @@ class YasEngine
         int greenShotdowns = 0;
         int blueShotdowns = 0;
 
-//        mathPlay->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, YELLOW, true);
-//        mathPlay->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, BLUE, false);
-//        mathPlay->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, RED, false);
-//
-//        mathPlay->drawNumbersAsGroupOfLines(primeNumbersPoints->points, primeNumbersPoints->pointsNumber, YELLOW,
-
 		bool engineInstantiated = false;
-		void drawMathArt();
 		void prepareRendering();
 		void prepareBasicSettings();
+		void checkEndianness();
 		void handlePhysics();
+		void moveObjects();
 		void prepareGameWorld();
 		void preparePlayer();
         void prepareInterface();
 		void handleInput(SDL_Event& event);
+		void handleKeyboardInput(SDL_Event& event);
+		void handleMouseInput(SDL_Event& event);
+		void handleMouseMovement();
+		void handleSpawningCollectibles();
+		void handleProjectiles();
+		void handlePlayer();
 		void update(double& deltaTime);
 		void drawHudElements(double& deltaTime);
 		void render(double& deltaTime);
+		void renderGameObjects(double& deltaTime);
+		void renderViewports(double& deltaTime);
         Button::ButtonId checkWhichButtonClicked();
         void handleClickedButtons();
         void handleGameStateWhenESCbuttonPushed();

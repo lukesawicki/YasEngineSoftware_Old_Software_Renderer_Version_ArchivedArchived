@@ -4,13 +4,12 @@
 #include"PointsSet.hpp"
 #include"Math.hpp"
 #include"Vector2D.hpp"
-#include "YasGraphicsLibrary.hpp"
 
 class PrimeNumbersPointsGenerator : public PointsGenerator
 {
 public:
+	static std::vector<int> numbers;
 	virtual PointsSet* generatePoints() override;
-    static std::vector<float> numbers;
 };
 
 #endif

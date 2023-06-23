@@ -8,63 +8,60 @@ Spawner::Spawner() {
     timeBetweenSpawns = 800;
 }
 
-//GameObject* 
 void Spawner::spawnObject(GameObject*& gameObject)
 {
     currentTime = timePicker.getMiliseconds();
     if( (currentTime - previousTime) >= timeBetweenSpawns)
     {
-        int oldTargetPositionX = 0;
-        int oldTargetPositionY = 0;
-        //liveTime;
-        //{
-        srand(clock());
-        int xPos = rand() % 75 + 10;
-        int yPos = rand() % 75 + 10;
-        int dirX = rand() % 10 + 1;
-        int dirY = rand() % 10 + 1;
+		int oldTargetPositionX = 0;
+		int oldTargetPositionY = 0;
+		srand(clock());
 
-        int numberOfVertices = rand() % 7 + 3;
+		// int spawningMaxRadius;
+		// int spawningMinRadius;
 
-        if (dirX <= 5)
+        std::cout << " spawningMaxRadius " << spawningMaxRadius << " spawningMinRadius " << spawningMinRadius << "\n";
+
+        if(spawningMinRadius == 0 || spawningMinRadius ==0)
         {
-            dirX = -1;
+            exit(1);
         }
 
-        if (dirX >= 5)
-        {
-            dirX = 1;
-        }
+		int xPos = rand() % spawningMaxRadius + spawningMinRadius;
+		int yPos = rand() % spawningMaxRadius + spawningMinRadius;
+		int dirX = rand() % maxValueForDrawingSpawningDirection + 1;
+		int dirY = rand() % maxValueForDrawingSpawningDirection + 1;
 
-        if (dirY <= 5)
-        {
-            dirY = -1;
-        }
+		int numberOfVertices = rand() % 7 + 3;
 
-        if (dirY >= 5)
-        {
-            dirY = 1;
-        }
+		if (dirX <= maxValueForDrawingSpawningDirection*0.5)
+		{
+			dirX = -1;
+		}
 
-        int targetPositionX = position.x + dirX * xPos;
-        int targetPositionY = position.y + dirY * yPos;
+		if (dirX >= maxValueForDrawingSpawningDirection * 0.5)
+		{
+			dirX = 1;
+		}
 
-        if (oldTargetPositionX != targetPositionX || oldTargetPositionY != targetPositionY)
-        {
+		if (dirY <= maxValueForDrawingSpawningDirection * 0.5)
+		{
+			dirY = -1;
+		}
 
-            gameObject = new Destroyable(16, targetPositionX, targetPositionY, Vector2D<float>(0.0F, 0.0F), 5);
-            if (gameObject != nullptr)
-            {
-                //std::cout << "is not null" << std::endl;
-            }
-        }
+		if (dirY >= maxValueForDrawingSpawningDirection * 0.5)
+		{
+			dirY = 1;
+		}
 
-            //std::cout << "AAAAAAAAAA" << std::endl;
+		int targetPositionX = position.x + dirX * xPos;
+		int targetPositionY = position.y + dirY * yPos;
 
-        //}
-            // TIME OF WAIT ->, 750);
+		if (oldTargetPositionX != targetPositionX || oldTargetPositionY != targetPositionY)
+		{
+			gameObject = new Destroyable(16, static_cast<float>(targetPositionX), static_cast<float>(targetPositionY), Vector2D<float>(0.0F, 0.0F), numberOfVertices);
+		}
 
-        //return gameObject;
         previousTime = currentTime;
     }
 }

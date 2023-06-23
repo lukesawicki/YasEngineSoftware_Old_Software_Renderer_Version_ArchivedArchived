@@ -22,8 +22,6 @@ add_executable(YasEngineSoftware
         Main.cpp
         Math.cpp
         Math.hpp
-        MathematicsFunSurface.cpp
-        MathematicsFunSurface.hpp
         PixelsTable.cpp
         PixelsTable.hpp
         Player.cpp
@@ -38,6 +36,10 @@ add_executable(YasEngineSoftware
         SinusPointsGenerator.hpp
         Spawner.cpp
         Spawner.hpp
+        SpawnersQuadTree.cpp
+        SpawnersQuadTree.hpp
+        SurfaceWithMathBasedEffects.cpp
+        SurfaceWithMathBasedEffects.hpp
         temporary.cpp
         TimePicker.cpp
         TimePicker.hpp
@@ -51,7 +53,12 @@ add_executable(YasEngineSoftware
         YasGraphicsLibrary.hpp
         ScreenWriter.hpp
         ScreenWriter.cpp
-        FontObject.cpp FontObject.hpp FontSurface.hpp FontSurface.cpp Button.cpp Button.hpp)
+        FontObject.cpp
+        FontObject.hpp
+        FontSurface.hpp
+        FontSurface.cpp
+        Button.cpp
+        Button.hpp)
 target_link_libraries(YasEngineSoftware
         PRIVATE SDL2
         PRIVATE libSDL2_mixer.so

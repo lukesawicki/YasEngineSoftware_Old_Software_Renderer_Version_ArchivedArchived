@@ -1,4 +1,4 @@
-#include"MathematicsFunSurface.hpp"
+#include"SurfaceWithMathBasedEffects.hpp"
 #include "YasGraphicsLibrary.hpp"
 #include "FontSurface.hpp"
 

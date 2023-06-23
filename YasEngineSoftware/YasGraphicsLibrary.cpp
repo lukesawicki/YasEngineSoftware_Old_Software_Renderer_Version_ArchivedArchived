@@ -1,6 +1,8 @@
 #include<bitset>
 #include"YasGraphicsLibrary.hpp"
 
+// REFACTOR AFTER PUBLISHING FIRST GAME "THE BEAUTY OF MATHEMATICS"
+
     void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, PixelsTable& pixelsTable, const Vector4D<Uint8>& drawingColor)
     {
         int x0 = static_cast<int>(point0.x);

@@ -24,7 +24,6 @@ class Player : public GameObject
 		~Player();
 		void move(float deltaTime) override;
 		void rotateAllVerticesOverAnAngle(float angle);
-
 		void rotate(float deltaTime);
 		
 		void rotateToMousePosition(float x, float y, Vector2D<int>* windowDimensions);

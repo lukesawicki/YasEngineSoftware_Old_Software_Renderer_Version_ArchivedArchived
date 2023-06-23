@@ -1,15 +1,12 @@
 #include"YasEngine.hpp"
-//#include<cstdlib>     /* srand, rand */
-#include<ctime>
-//#include<bit>
-//#include<SDL2/SDL_endian.h>
+//#include<SDL_endian.h>
+#include<bit>
+#include<SDL2/SDL_mixer.h>
 #include"VariousTools.hpp"
 #include"Circle.hpp"
-#include"Collider.hpp"
-#include"Button.hpp"
-#include"CosinusPointsGenerator.hpp"
-#include"FibonacciPointsGenerator.hpp"
-#include"Math.hpp"
+#include "Collider.hpp"
+#include "CosinusPointsGenerator.hpp"
+#include "FibonacciPointsGenerator.hpp"
 #include"PrimeNumbersPointsGenerator.hpp"
 #include"SinusPointsGenerator.hpp"
 
@@ -17,17 +14,16 @@ YasEngine* YasEngine::instance = nullptr;
 
 void YasEngine::initialize()
 {
-    spawner.spawnObject(go);
     prepareBasicSettings();
     prepareRendering();
-    prepareGameWorld();
     preparePlayer();
+    prepareGameWorld();
     prepareSoundAndMusic();
     prepareInterface();
 
     writer.initialize();
 
-    mathPlay = new MathematicsFunSurface(0, windowDimensions->y * 0.5F, static_cast<int>(windowDimensions->x * 0.5F), static_cast<int>(windowDimensions->y * 0.5F), BLACK);
+    surfaceWithMathBasedEffects = new SurfaceWithMathBasedEffects(0, static_cast<int>(windowDimensions->y * 0.5F), static_cast<int>(windowDimensions->x * 0.5F), static_cast<int>(windowDimensions->y), BLACK);
 
     SinusPointsGenerator sinusPointsGenerator;
     CosinusPointsGenerator cosinusPointsGenerator;
@@ -37,14 +33,14 @@ void YasEngine::clean()
 {
     for (auto drawableObject : objectsToDraw)
     {
-        delete drawableObject;
+                delete drawableObject;
     }
 
     delete sinusPoints;
     delete cosinusPoints;
     delete fibonacciePoints;
     delete primeNumbersPoints;
-    delete mathPlay;
+    delete surfaceWithMathBasedEffects;
     delete pixelsTable;
     delete windowDimensions;
 
@@ -66,8 +62,6 @@ void YasEngine::YasEnginStart()
     time = timePicker.getSeconds();
     fpsTime = 0.0F;
     frames = 0;
-
-    //spawner.spawnObject(go);
 
     while (!quit)
     {
@@ -98,10 +92,6 @@ void YasEngine::YasEnginStart()
     return;
 }
 
-void YasEngine::drawMathArt()
-{
-}
-
 void YasEngine::prepareRendering()
 {
     pixelsTable     =   new PixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, BLACK);
@@ -111,15 +101,22 @@ void YasEngine::prepareRendering()
     SDL_RenderSetIntegerScale(renderer, SDL_TRUE);
 
     screenTexture   =   SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
-///////////////////
-
-//    std::string basePath = SDL_GetBasePath();
-//    timizedSurface->pixels
-
-////////////////
 }
 
 void YasEngine::prepareBasicSettings()
+{
+    checkEndianness();
+
+    SDL_Init(SDL_INIT_EVERYTHING);
+
+    windowDimensions    =   new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
+    window              =   SDL_CreateWindow("YasEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE);
+
+    SDL_SetWindowMinimumSize(window, WINDOW_WIDTH, WINDOW_HEIGHT);
+    SDL_ShowCursor(SDL_DISABLE);
+}
+
+void YasEngine::checkEndianness()
 {
     if constexpr (std::endian::native == std::endian::big)
     {
@@ -139,22 +136,11 @@ void YasEngine::prepareBasicSettings()
             endianness = 2;
         }
     }
-
-    SDL_Init(SDL_INIT_EVERYTHING);
-
-    windowDimensions    =   new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
-    window              =   SDL_CreateWindow("YasEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE);
-
-    SDL_SetWindowMinimumSize(window, WINDOW_WIDTH, WINDOW_HEIGHT);
-    SDL_ShowCursor(SDL_DISABLE);
 }
 
 void YasEngine::drawHudElements(double& deltaTime)
 {
-    #ifdef DEBUG_DRAWINGS
-        drawCartesianAxies(*pixelsTable);
-    #endif // DEBUG_DRAWINGS
-
+    drawCartesianAxies(*pixelsTable);
     drawCrossHair(mouseX, mouseY, *pixelsTable, false);
 }
 
@@ -166,92 +152,156 @@ void YasEngine::handleInput(SDL_Event& event)
     }
     else
     {
-        if (event.type == SDL_KEYDOWN)
-        {
-            switch (event.key.keysym.sym)
-            {
-                case SDLK_ESCAPE:
-                    handleGameStateWhenESCbuttonPushed();
-                    break;
-                case SDLK_SPACE:
-                    handleGameStateWhenSPACEbuttonPushed();
-                    break;
-                case SDLK_w:
-                    input->up = true;
-                    break;
-                case SDLK_s:
-                    input->down = true;
-                    break;
-                case SDLK_a:
-                    input->left = true;
-                    break;
-                case SDLK_d:
-                    input->right = true;
-                    break;
-                default:
-                    ;
-            }
-        }
-        if (event.type == SDL_KEYUP)
-        {
-            switch (event.key.keysym.sym)
-            {
-            case SDLK_w:
-                input->up = false;
-                break;
-            case SDLK_s:
-                input->down = false;
-                break;
-            case SDLK_a:
-                input->left = false;
-                break;
-            case SDLK_d:
-                input->right = false;
-                break;
-            default:
-                ;
-            }
-        }
-        if (event.type == SDL_MOUSEMOTION)
-        {
-            int x;
-            int y;
-            mousePositionChangeInformation->mouseMoved = true;
-            SDL_GetMouseState(&x, &y);
-            mousePositionChangeInformation->x = x;
-            mousePositionChangeInformation->y = y;
+        handleKeyboardInput(event);
+        handleMouseInput(event);
+    }
+}
 
-        }
-        if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
+void YasEngine::handleKeyboardInput(SDL_Event& event)
+{
+    if (event.type == SDL_KEYDOWN)
+    {
+        switch (event.key.keysym.sym)
         {
-            switch(gameState)
-            {
-                case GAMEPLAY:
-                    player->isShooting = true;
-                    break;
-                case MAIN_MENU_RESTART:
-                    handleClickedButtons();
-                    break;
-                case INTRO:
-                    gameState = GameState::MAIN_MENU_RESTART;
-                    break;
-                case OUTRO:
-                    quit = true;
-                    break;
-                default:
-                    ;
-            }
+        case SDLK_ESCAPE:
+            handleGameStateWhenESCbuttonPushed();
+            break;
+        case SDLK_SPACE:
+            handleGameStateWhenSPACEbuttonPushed();
+            break;
+        case SDLK_w:
+            input->up = true;
+            break;
+        case SDLK_s:
+            input->down = true;
+            break;
+        case SDLK_a:
+            input->left = true;
+            break;
+        case SDLK_d:
+            input->right = true;
+            break;
+        default:
+            ;
         }
+    }
+    if (event.type == SDL_KEYUP)
+    {
+        switch (event.key.keysym.sym)
+        {
+        case SDLK_w:
+            input->up = false;
+            break;
+        case SDLK_s:
+            input->down = false;
+            break;
+        case SDLK_a:
+            input->left = false;
+            break;
+        case SDLK_d:
+            input->right = false;
+            break;
+        default:
+            ;
+        }
+    }
+}
 
-        if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
+void YasEngine::handleMouseInput(SDL_Event& event)
+{
+    if (event.type == SDL_MOUSEMOTION)
+    {
+        handleMouseMovement();
+    }
+    if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
+    {
+        switch (gameState)
         {
-            switch(gameState)
-            {
-                case GAMEPLAY:
-                    player->isShooting = false;
-                    break;
-            }
+        case GAMEPLAY:
+            player->isShooting = true;
+            break;
+        case MAIN_MENU_RESTART:
+            handleClickedButtons();
+            break;
+        case INTRO:
+            gameState = GameState::MAIN_MENU_RESTART;
+            break;
+        case OUTRO:
+            quit = true;
+            break;
+        default:
+            ;
         }
+    }
+
+    if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
+    {
+        switch (gameState)
+        {
+        case GAMEPLAY:
+            player->isShooting = false;
+            break;
+        }
+    }
+}
+
+void YasEngine::handleMouseMovement()
+{
+    int x;
+    int y;
+    SDL_GetMouseState(&x, &y);
+    mousePositionChangeInformation->mouseMoved = true;
+    mousePositionChangeInformation->x = x;
+    mousePositionChangeInformation->y = y;
+    mouseX = static_cast<float>(mousePositionChangeInformation->x);
+    mouseY = static_cast<float>(mousePositionChangeInformation->y);
+
+    // TODO sprawdzenie ktory Button zostal klikniety i obsluga tego
+
+    windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
+}
+
+void YasEngine::handleSpawningCollectibles()
+{
+    // TODO drawn spawner object
+    //v1 = rand() % 100;         // v1 in the range 0 to 99
+	//v2 = rand() % 100 + 1;     // v2 in the range 1 to 100
+
+    // spawnerPositionNumber[0] = rand() % 4;
+    // spawnerPositionNumber[1] = rand() % 4;
+    for (int i = 0; i < 3; i++)
+    {
+        //exception here lukesawicki
+        spawners->childNodes[threeRandomPositions[i]->firstNode]->childNodes[threeRandomPositions[i]->secondNode]->spawner->spawnObject(go);
+    }
+	if (go != nullptr)
+	{
+		objectsToDraw.push_back(go);
+        
+	}
+}
+
+void YasEngine::handleProjectiles()
+{
+    Projectile* projectile = player->shoot();
+
+    if (projectile != nullptr)
+    {
+        Mix_PlayChannel(-1, shootSound, 0);
+        objectsToDraw.push_back(projectile);
+    }
+
+    if (projectile != nullptr)
+    {
+        projectile = nullptr;
+    }
+}
+
+void YasEngine::handlePlayer()
+{
+    if (mousePositionChangeInformation->mouseMoved || input->up || input->down || input->left || input->right)
+    {
+        player->rotateToMousePositionInLocalCoordinateSystem(static_cast<float>(mousePositionChangeInformation->x), static_cast<float>(mousePositionChangeInformation->y), windowDimensions);
     }
 }
 
@@ -266,115 +316,70 @@ void YasEngine::preparePlayer()
 
 void YasEngine::update(double& deltaTime)
 {
-    //int numberOfPhysicalObjects = objectsToDraw.size();
-
-    //std::cout << numberOfPhysicalObjects << std::endl;
     // TODO switch with handling different things
-    if(gameState==GameState::GAMEPLAY) {
-
-        spawner.spawnObject(go);
-        if(go != nullptr)
-        {
-            objectsToDraw.push_back(go);
-        }
-        handlePhysics();
-        for (auto object : objectsToDraw)
-        {
-            if (object->isAlive)
-            {
-                object->move(static_cast<float>(deltaTime));
-                object->regeneratePolygon();
-            }
-        }
-
-        Projectile* projectile = player->shoot();
-        if (projectile != nullptr)
-        {
-            Mix_PlayChannel(-1, shootSound, 0);
-            objectsToDraw.push_back(projectile);
-        }
-
-        if (mousePositionChangeInformation->mouseMoved || input->up || input->down || input->left || input->right)
-        {
-            player->rotateToMousePositionInLocalCoordinateSystem(static_cast<float>(mousePositionChangeInformation->x), static_cast<float>(mousePositionChangeInformation->y), windowDimensions);
-        }
-        
-        if(projectile != nullptr)
-        {
-            projectile = nullptr;
-        }
+    if(gameState==GameState::GAMEPLAY)
+    {
+        handleSpawningCollectibles();
+	    handlePhysics();
+        moveObjects();
+        handleProjectiles();
+        handlePlayer();
     }
-
-    mouseX = static_cast<float>(mousePositionChangeInformation->x);
-    mouseY = static_cast<float>(mousePositionChangeInformation->y);
-
-    // TODO sprawdzenie ktory Button zostal klikniety i obsluga tego
-
-    windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
-
 }
 
 void YasEngine::render(double& deltaTime) {
     pixelsTable->clearColor(BLACK);
-    mathPlay->clearColor(BLACK);
+    surfaceWithMathBasedEffects->clearColor(BLACK);
 
-    if (gameState == GameState::GAMEPLAY) // TODO if is gameplay
+    switch (gameState)
     {
-        for (auto object: objectsToDraw) {
-            if (object->isAlive) // TODO if gamestate == gameplay
-            {
-                drawPolygon(object, *pixelsTable);
-            }
-        }
-        mathPlay->verticalLineOnSurface(0, GREEN);
-        mathPlay->horizontalLineOnSurface(0, RED);//-WINDOW_HEIGHT * 0.25F
-
-        // mathPlay->drawNumbersAsGroupOfNotConnectedLines(sinusPoints, 100, YELLOW);
-
-        mathPlay->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, YELLOW, true);
-        mathPlay->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, BLUE, false);
-        mathPlay->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, RED, false);
-
-        mathPlay->drawNumbersAsGroupOfLines(primeNumbersPoints->points, primeNumbersPoints->pointsNumber, YELLOW,
-                                            false);
-
-        mathPlay->copyPixelsInToPIxelTable(*pixelsTable);
-
-//        writer.write(0, 0, "RESTART_BUTTON", *pixelsTable);
-//        writer.write(-620, -100, "HOLY SHIT IT IS WORKING FINALLY 0.1.2.3.4.5.6.7.8.9", *pixelsTable);
-
-        drawRectangle(*pixelsTable, -110, -110, 32, 32, YELLOW);
-
-        verticalLineOnWholeScreen(*pixelsTable, 0, GREEN);
-        horizontalLineOnWholeScreen(*pixelsTable, 0, RED);
-    } else {
-        if (gameState == GameState::MAIN_MENU_RESTART) {
-            drawButtons();// TODO drawPolygon(object, *pixelsTable);
-        } else {
-            if (gameState == GameState::INTRO) {
-                writer.write(0, 100, "THE BEOUTY OF MATH       POWERED BY YASENGINE", YELLOW,
-                             *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
-            } else {
-                if (gameState == GameState::OUTRO) {
-                    writer.write(0, 100,
-                                 "CREDITS       CODE DESIGN LUKASZ LUKE SAWICKI       SOUND AND MUSIC FROM INTERNET WITH FRE LICENSE",
-                                 BLUE,
-                                 *pixelsTable); // TODO Write creators, thank you for playing and see you in other games
-                }
-            }
-        }
+    case INTRO:
+        writer.write(0, 100, "THE BEOUTY OF MATH       POWERED BY YASENGINE", YELLOW, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
+        break;
+    case MAIN_MENU_RESTART:
+        drawButtons();
+        break;
+    case GAMEPLAY:
+        renderGameObjects(deltaTime);
+        renderViewports(deltaTime);
+        break;
+    case OUTRO:
+        writer.write(0, 100, "CREDITS       CODE DESIGN LUKASZ LUKE SAWICKI       SOUND AND MUSIC FROM INTERNET WITH FRE LICENSE", BLUE, *pixelsTable); // TODO Write creators, thank you for playing and see you in other games
+        break;
+    default:
+        ;
     }
-//    if (collided)
-//    {
-//        writer.write(0, 0, "PLAYER COLLIDING", BLUE, *pixelsTable);
-//        collided = false;
-//    }
-    writer.write(0 - (4*17)/2.0F, 0, "ABCD", BLUE, *pixelsTable);
+
     drawHudElements(deltaTime);
 
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
     SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);
     SDL_RenderPresent(renderer);
+}
+
+void YasEngine::renderGameObjects(double& deltaTime)
+{
+    for (auto object : objectsToDraw)
+    {
+        if (object->isAlive) // TODO if gamestate == gameplay
+        {
+            drawPolygon(object, *pixelsTable);
+        }
+    }
+
+    drawLine(testPoint0, testPoint1, *pixelsTable, YELLOW);
+}
+
+void YasEngine::renderViewports(double& deltaTime)
+{
+    surfaceWithMathBasedEffects->verticalLineOnSurface(0, GREEN);
+    surfaceWithMathBasedEffects->horizontalLineOnSurface(0, RED);//-WINDOW_HEIGHT * 0.25F
+    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, YELLOW, true);
+    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, BLUE, true);
+    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, RED, false);
+    // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(primeNumbersPoints->points, primeNumbersPoints->pointsNumber, YELLOW, false);
+
+	surfaceWithMathBasedEffects->copyPixelsInToPIxelTable(*pixelsTable);
 }
 
 void YasEngine::handlePhysics()
@@ -405,7 +410,7 @@ void YasEngine::handlePhysics()
                 {
                     objectsToDraw[i]->setY(bottomWall + objectsToDraw[i]->collider.radius + 1);
                 }
-                //collided = true;
+                // collided = true;
             }
 
 //              DO NOT DELETE IT IS COLLISION WITH NORMAL WALLS WHICH MEANS WINDOWS BOUNDRIES
@@ -465,9 +470,21 @@ void YasEngine::handlePhysics()
                         objectsToDraw[i]->isAlive = false;
                         objectsToDraw[j]->isAlive = false;
                         Mix_PlayChannel(-1, hitSound, 0);
-                    }
-                }
-            }
+					}
+				}
+			}
+		}
+    }
+}
+
+void YasEngine::moveObjects()
+{
+    for (auto object : objectsToDraw)
+    {
+        if (object->isAlive)
+        {
+            object->move(static_cast<float>(deltaTime));
+            object->regeneratePolygon();
         }
     }
 }
@@ -534,8 +551,120 @@ void YasEngine::prepareGameWorld()
         fibonacciePoints = fibonacciPointsGenerator.generatePoints();
         primeNumbersPoints = primeNumberPointsGenerator.generatePoints();
 
-        spawner.position.x = -200;
-        spawner.position.y = 0;
+        spawners = new SpawnersQuadTree(new Vector2D<int>(-(windowDimensions->x/4), 0), windowDimensions->x/2, nullptr);
+
+        SpawnersQuadTree::addNodes(*spawners);
+		for(int i=0; i<4; i++)
+		{
+            SpawnersQuadTree::addNodes(*spawners->childNodes[i]);
+		}
+
+        for(int i=0; i<4; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                spawnersPositions.push_back(new SpawnerNumberPosition(i, j));
+            }
+        }
+        int drawnNumbers=0;
+        int iteration = 0;
+
+        
+        // if (iteration != 0)
+        // {
+        bool drawn = false;
+        SpawnerNumberPosition playerPosition;
+
+        for(int i=0; i<4; i++)
+        {
+	        if(
+                player->getPosition().x >= (spawners->childNodes[i]->position->x - spawners->childNodes[i]->size * 0.5) &&
+                player->getPosition().x <= (spawners->childNodes[i]->position->x + spawners->childNodes[i]->size * 0.5) &&
+                player->getPosition().y <= (spawners->childNodes[i]->position->y + spawners->childNodes[i]->size * 0.5) &&
+                player->getPosition().y >= (spawners->childNodes[i]->position->y - spawners->childNodes[i]->size * 0.5)
+                )
+	        {
+                for(int j=0; j<4; j++)
+                {
+                    if (
+                        player->getPosition().x >= (spawners->childNodes[i]->childNodes[j]->position->x - spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
+                        player->getPosition().x <= (spawners->childNodes[i]->childNodes[j]->position->x + spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
+                        player->getPosition().y <= (spawners->childNodes[i]->childNodes[j]->position->y + spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
+                        player->getPosition().y >= (spawners->childNodes[i]->childNodes[j]->position->y - spawners->childNodes[i]->childNodes[j]->size * 0.5)
+                        )
+                    {
+                        playerPosition.firstNode = i;
+                        playerPosition.secondNode = j;
+                        goto afterFor;
+                    }
+                }
+	        }
+        }
+        afterFor:
+
+        while (!drawn)
+        {
+            int number = rand() % 16;
+            if(!(playerPosition.firstNode == spawnersPositions.at(number)->firstNode &&
+                playerPosition.secondNode == spawnersPositions.at(number)->secondNode))
+            {
+                threeRandomPositions.push_back(spawnersPositions.at(number));
+                break;
+            }
+
+        }
+
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 4; j++)
+            {
+                spawners->childNodes[i]->childNodes[j]->spawner = new Spawner();
+                spawners->childNodes[i]->childNodes[j]->spawner->position.x = spawners->childNodes[i]->childNodes[j]->position->x;
+                spawners->childNodes[i]->childNodes[j]->spawner->position.y = spawners->childNodes[i]->childNodes[j]->position->y;
+            }
+        }
+
+		bool foundNumber = false;
+        // for(int i=0; i<threeRandomPositions.size(); i++)
+        // {
+        int checksWithTrueResult = 1;
+        int j = 0;
+        double quadDiagonal = spawners->childNodes[threeRandomPositions.at(0)->firstNode]->childNodes[threeRandomPositions.at(0)->secondNode]->size * sqrt(2);
+        while(checksWithTrueResult <= 3)
+        {
+            int position = rand() % 16;
+            for (int i = 0; i < threeRandomPositions.size(); i++)
+            {
+                if( !(playerPosition.firstNode == spawnersPositions.at(i)->firstNode && playerPosition.secondNode == spawnersPositions.at(i)->secondNode) &&
+					(   
+				    (sqrt(pow((spawners->childNodes[threeRandomPositions.at(i)->firstNode]->childNodes[threeRandomPositions.at(i)->secondNode]->position->x -
+					spawners->childNodes[spawnersPositions.at(position)->firstNode]->childNodes[spawnersPositions.at(position)->secondNode]->position->x),2) +
+
+					pow((spawners->childNodes[threeRandomPositions.at(i)->firstNode]->childNodes[threeRandomPositions.at(i)->secondNode]->position->y -
+				    spawners->childNodes[spawnersPositions.at(position)->firstNode]->childNodes[spawnersPositions.at(position)->secondNode]->position->y), 2)) > quadDiagonal)
+					)
+                )
+                {
+                    threeRandomPositions.push_back(spawnersPositions.at(position));
+                    checksWithTrueResult++;
+                }
+			}
+            j++;
+		}
+        
+        // spawnerPositionNumber.push_back(3);
+        // spawnerPositionNumber.push_back(3);
+
+        // spawners->createSpanwer(spawnerPositionNumber);
+
+        // testPoint0.x = spawners->childNodes[0]->position->x;
+        // testPoint0.y = spawners->childNodes[0]->position->y;
+        //
+        // testPoint1.x = spawners->childNodes[spawnerPositionNumber.at(0)]->childNodes[spawnerPositionNumber.at(0)]->position->x;
+        // testPoint1.y = spawners->childNodes[spawnerPositionNumber.at(0)]->childNodes[spawnerPositionNumber.at(0)]->position->y;
+
+        std::cout << "x: " << testPoint0.x << "y: " << testPoint0.y << "\n";
+        std::cout << "x: " << testPoint1.x << "y: " << testPoint1.y << "\n";
 
         numberOfGivenColors.insert({"RED", 0});
         numberOfGivenColors.insert({"GREEN", 0});
@@ -544,24 +673,24 @@ void YasEngine::prepareGameWorld()
         std::map<std::string, int> numberOfGivenColors;
         std::map<float, int> sinusNumbers;
         std::map<float, int> cosinusNumbers;
-        std::map<float, int> fibonacciNumbers;
-        std::map<float, int> primeNumbers;
+        std::map<int, int> fibonacciNumbers;
+        std::map<int, int> primeNumbers;
 
-        for(int i=0; i<sinusPointsGenerator.numbers.size(); i++)
+        for(unsigned int i=0; i<SinusPointsGenerator::numbers.size(); i++)
         {
-            sinusNumbers.insert({,});
+            sinusNumbers.insert({SinusPointsGenerator::numbers.at(i),0});
         }
-        for(int i=0; i<cosinusPointsGenerator.numbers.size(); i++)
+        for(unsigned int i=0; i<CosinusPointsGenerator::numbers.size(); i++)
         {
-            cosinusNumbers.insert({,});
+            cosinusNumbers.insert({ CosinusPointsGenerator::numbers.at(i),0});
         }
-        for(int i=0; i<fibonacciPointsGenerator.numbers.size(); i++)
+        for(unsigned int i=0; i<FibonacciPointsGenerator::numbers.size(); i++)
         {
-            fibonacciPointsGenerator
+            fibonacciNumbers.insert({ FibonacciPointsGenerator::numbers.at(i), 0 });
         }
-        for(int i=0; i<primeNumberPointsGenerator.numbers.size(): i++)
+        for(unsigned int i=0; i<PrimeNumbersPointsGenerator::numbers.size(); i++)
         {
-
+            primeNumbers.insert({ PrimeNumbersPointsGenerator::numbers.at(i),0 });
         }
 }
 
@@ -569,7 +698,7 @@ void YasEngine::prepareInterface()
 {
     //Button 1
     buttons.push_back(new Button(Button::RESTART_START, "START RESTART", RED));
-    buttons.at(0)->setPosition(0, 0);
+    buttons.at(0)->setPosition(0, 50);
     dynamic_cast<Button*>(buttons.at(0))->horizontalMargin = 10;
     dynamic_cast<Button*>(buttons.at(0))->verticalMargin = 5;
     dynamic_cast<Button*>(buttons.at(0))->buttonWidth = writer.FONT_WIDTH * dynamic_cast<Button*>(buttons.at(0))->text.size() + 2*dynamic_cast<Button*>(buttons.at(0))->horizontalMargin;
@@ -586,10 +715,9 @@ void YasEngine::prepareInterface()
     buttons.at(0)->localVertices[3].y = 0 - dynamic_cast<Button*>(buttons.at(0))->buttonHeight * 0.5F;
     buttons.at(0)->generate();
 
-
     //Button 2
     buttons.push_back(new Button(Button::QUIT, "QUIT", YELLOW));
-    buttons.at(1)->setPosition(0, 0);
+    buttons.at(1)->setPosition(0, -50);
     dynamic_cast<Button*>(buttons.at(1))->horizontalMargin = 10;
     dynamic_cast<Button*>(buttons.at(1))->verticalMargin = 5;
     dynamic_cast<Button*>(buttons.at(1))->buttonWidth = writer.FONT_WIDTH * dynamic_cast<Button*>(buttons.at(1))->text.size() + 2*dynamic_cast<Button*>(buttons.at(1))->horizontalMargin;
@@ -609,29 +737,28 @@ void YasEngine::prepareInterface()
 
 void YasEngine::drawButtons()
 {
-    for(int i=0; i<buttons.size(); i++)
+    for(unsigned int i=0; i<buttons.size(); i++)
     {
         drawPolygon(buttons.at(i), *pixelsTable);
-        writer.write(buttons.at(i)->getPosition().x - dynamic_cast<Button*>(buttons.at(i))->buttonTextWidth * 0.5F + ScreenWriter::FONT_WIDTH * 0.5F, buttons.at(i)->getPosition().y, dynamic_cast<Button*>(buttons.at(i))->text,dynamic_cast<Button*>(buttons.at(i))->color, *pixelsTable);
+        writer.write(static_cast<int>(buttons.at(i)->getPosition().x - dynamic_cast<Button*>(buttons.at(i))->buttonTextWidth * 0.5F + ScreenWriter::FONT_WIDTH * 0.5F), static_cast<int>(buttons.at(i)->getPosition().y), dynamic_cast<Button*>(buttons.at(i))->text,dynamic_cast<Button*>(buttons.at(i))->color, *pixelsTable);
     }
 }
 
 Button::ButtonId YasEngine::checkWhichButtonClicked()
 {
-    //windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
-    float x = mousePositionChangeInformation->x;
-    float y = mousePositionChangeInformation->y;
+    float x = static_cast<float>(mousePositionChangeInformation->x);
+    float y = static_cast<float>(mousePositionChangeInformation->y);
     windowPositionToCartesianPosition(x, y, windowDimensions);
-    for(int i=0; i<buttons.size(); i++)
+    for(unsigned int i=0; i<buttons.size(); i++)
     {
         if(
-        // kursor ponizej gornego Y
+        // mouse cursor under top Y
         y <= (buttons.at(i)->getPosition().y + dynamic_cast<Button*>(buttons.at(i))->buttonHeight * 0.5F) &&
-        // kursor powyzej dolnego y
+        // mouser cursor above bottom Y
         y >= (buttons.at(i)->getPosition().y - dynamic_cast<Button*>(buttons.at(i))->buttonHeight * 0.5F) &&
-        // kursor na prawo od lewego x
+        // cursor to the right of left X
         x >= (buttons.at(i)->getPosition().x - dynamic_cast<Button*>(buttons.at(i))->buttonWidth * 0.5F) &&
-        // kursor na lewo od prawego x
+        // cursor to the left of X
         x <= (buttons.at(i)->getPosition().x + dynamic_cast<Button*>(buttons.at(i))->buttonWidth * 0.5F)
         )
         {

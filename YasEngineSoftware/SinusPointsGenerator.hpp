@@ -8,7 +8,7 @@
 class SinusPointsGenerator: public PointsGenerator
 {
 	public:
-        static std::vector<float> numbers;
+        static std::vector<float> numbers; // FOR GAMEPLAY PURPOSE!!
 		virtual PointsSet* generatePoints() override;
 };
 

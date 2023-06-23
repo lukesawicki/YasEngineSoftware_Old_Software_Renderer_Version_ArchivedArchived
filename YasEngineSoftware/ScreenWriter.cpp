@@ -48,37 +48,12 @@ void ScreenWriter::writeNew(int x, int y, string text, SDL_Surface *na_czym, int
         {
             if(text.at(i) == charactersTable[j])
             {
-                //position.x=docelowe.w*j;
                 docelowe.x=x+i*docelowe.w;
-//                SDL_BlitSurface(charactersVertices , &pozycja, na_czym, &docelowe );
             }
 
         }
     }
 }
-//void ScreenWriter::write(int x, int y, const char * text, SDL_Surface *na_czym)
-//{
-//
-//    string napis = text;
-//    SDL_Rect docelowe;
-//    docelowe.x=x;
-//    docelowe.y=y;
-////    docelowe.w=this->pozycja.w;
-////    docelowe.h=this->pozycja.h;
-//    for(int i=0; i<static_cast<int>(napis.size()); i++)
-//    {
-//        for(int j=0; j<63; j++)
-//        {
-//            if(napis.at(i) == charactersTable[j])
-//            {
-//                //position.x=docelowe.w*j;
-//                docelowe.x=x+i*docelowe.w;
-////                SDL_BlitSurface(charactersVertices , &pozycja, na_czym, &docelowe );
-//            }
-//
-//        }
-//    }
-//}
 
 void ScreenWriter::write(int x, int y, string text, const Vector4D<Uint8>& color, PixelsTable& pixelsTable)
 {
@@ -88,7 +63,7 @@ void ScreenWriter::write(int x, int y, string text, const Vector4D<Uint8>& color
         {
             if(text.at(i) == charactersTable[j])
             {
-                fonts.at(j)->verticesBaseData->setPosition(x + i*FONT_WIDTH, y);
+                fonts.at(j)->verticesBaseData->setPosition(static_cast<float>(x + i*FONT_WIDTH), static_cast<float>(y));
                 fonts.at(j)->verticesBaseData->generate();
                 drawNumbersAsGroupOfLines(fonts.at(j)->verticesBaseData->worldVertices, fonts.at(j)->verticesBaseData->numberOfVertices, color, false, pixelsTable);
             }
@@ -97,35 +72,6 @@ void ScreenWriter::write(int x, int y, string text, const Vector4D<Uint8>& color
     }
 }
 
-//void ScreenWriter::write(int x, int y, short integers, SDL_Surface *na_czym)
-//{
-//    ostringstream oss_wyjsciowy;
-//
-//    oss_wyjsciowy << integers;
-//
-//    string napis="";
-//    napis = oss_wyjsciowy.str();
-//    SDL_Rect docelowe;
-//    int pom_w=0, pom_h=0;
-//    docelowe.x=x;
-//    docelowe.y=y;
-////    docelowe.w=this->pozycja.w;
-////    docelowe.h=this->pozycja.h;
-//    for(int i=0; i<static_cast<int>(napis.size()); i++)
-//    {
-//        for(int j=0; j<63; j++)
-//        {
-//            if(napis.at(i) == charactersTable[j])
-//            {
-//                //position.x=docelowe.w*j;
-//                docelowe.x=x+i*docelowe.w;
-////                SDL_BlitSurface(charactersVertices , &pozycja, na_czym, &docelowe );
-//            }
-//
-//        }
-//    }
-//}
-
 void ScreenWriter::initializeFontObjects()
 {
     Vector2D<float> direction(0, 1);
@@ -133,14 +79,12 @@ void ScreenWriter::initializeFontObjects()
     {
         fonts.at(i)->verticesBaseData->initialize(17, 0, 0, direction, -1);
     }
-
 }
 
 void ScreenWriter::initializeFontSurfaces()
 {
     for(int i=0; i<NUMBER_OF_CHARACTERS; i++)
     {
-        //void initialize(int x, int y, int width, int height, const Vector4D<Uint8>& defaultColor);
         fonts.at(i)->surface->initialize(i*17, 0, 17, 17, GREEN);
     }
 }
