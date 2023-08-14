@@ -7,9 +7,7 @@
 class Spawner
 {
 	public:
-//		Timer timer = Timer();
         int timeBetweenSpawns;
-
         TimePicker timePicker;
 		Vector2D<int> position;
 		Vector2D<int> spawnPosition;
@@ -20,7 +18,6 @@ class Spawner
         double currentTime = 0;
         double previousTime = 0;
 
-		//GameObject* 
         Spawner();
 			void spawnObject(GameObject*& gameObject);
 	private:

@@ -147,6 +147,7 @@ class YasEngine
 		void handlePhysics();
 		void moveObjects();
 		void prepareGameWorld();
+        void prepareDataForDrawingGraphs();
 		void preparePlayer();
         void prepareInterface();
 		void handleInput(SDL_Event& event);

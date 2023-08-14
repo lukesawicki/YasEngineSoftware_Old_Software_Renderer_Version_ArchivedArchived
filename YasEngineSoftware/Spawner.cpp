@@ -5,7 +5,7 @@
 Spawner::Spawner() {
     currentTime = timePicker.getMiliseconds();
     previousTime = currentTime;
-    timeBetweenSpawns = 800;
+    timeBetweenSpawns = 3000;
 }
 
 void Spawner::spawnObject(GameObject*& gameObject)
@@ -16,16 +16,6 @@ void Spawner::spawnObject(GameObject*& gameObject)
 		int oldTargetPositionX = 0;
 		int oldTargetPositionY = 0;
 		srand(clock());
-
-		// int spawningMaxRadius;
-		// int spawningMinRadius;
-
-        std::cout << " spawningMaxRadius " << spawningMaxRadius << " spawningMinRadius " << spawningMinRadius << "\n";
-
-        if(spawningMinRadius == 0 || spawningMinRadius ==0)
-        {
-            exit(1);
-        }
 
 		int xPos = rand() % spawningMaxRadius + spawningMinRadius;
 		int yPos = rand() % spawningMaxRadius + spawningMinRadius;

@@ -267,18 +267,18 @@ void YasEngine::handleSpawningCollectibles()
     //v1 = rand() % 100;         // v1 in the range 0 to 99
 	//v2 = rand() % 100 + 1;     // v2 in the range 1 to 100
 
-    // spawnerPositionNumber[0] = rand() % 4;
-    // spawnerPositionNumber[1] = rand() % 4;
+//     spawnerPositionNumber[0] = rand() % 4;
+//     spawnerPositionNumber[1] = rand() % 4;
     for (int i = 0; i < 3; i++)
     {
         //exception here lukesawicki
         spawners->childNodes[threeRandomPositions[i]->firstNode]->childNodes[threeRandomPositions[i]->secondNode]->spawner->spawnObject(go);
+        if (go != nullptr)
+        {
+            objectsToDraw.push_back(go);
+        }
     }
-	if (go != nullptr)
-	{
-		objectsToDraw.push_back(go);
-        
-	}
+
 }
 
 void YasEngine::handleProjectiles()
@@ -348,6 +348,16 @@ void YasEngine::render(double& deltaTime) {
         break;
     default:
         ;
+    }
+
+    // lukesawicki 2023-08-14
+//    drawCrossHair(mouseX, mouseY, *pixelsTable, false);
+    for (int i = 0; i < 3; i++)
+    {
+        //exception here lukesawicki
+        int x = spawners->childNodes[threeRandomPositions[i]->firstNode]->childNodes[threeRandomPositions[i]->secondNode]->spawner->position.x;
+        int y = spawners->childNodes[threeRandomPositions[i]->firstNode]->childNodes[threeRandomPositions[i]->secondNode]->spawner->position.y;
+        drawCrossHair(x, y, *pixelsTable, false);
     }
 
     drawHudElements(deltaTime);
@@ -541,157 +551,161 @@ void YasEngine::prepareGameWorld()
         circle->setColor(BLUE);
         objectsToDraw.push_back(circle);
     #endif
-        SinusPointsGenerator sinusPointsGenerator;
-        CosinusPointsGenerator cosinusPointsGenerator;
-        FibonacciPointsGenerator fibonacciPointsGenerator;
-        PrimeNumbersPointsGenerator primeNumberPointsGenerator;
 
-        sinusPoints = sinusPointsGenerator.generatePoints();
-        cosinusPoints = cosinusPointsGenerator.generatePoints();
-        fibonacciePoints = fibonacciPointsGenerator.generatePoints();
-        primeNumbersPoints = primeNumberPointsGenerator.generatePoints();
+    srand(clock());
+    spawners = new SpawnersQuadTree(new Vector2D<int>(-(windowDimensions->x/4), 0), windowDimensions->x/2, nullptr);
 
-        spawners = new SpawnersQuadTree(new Vector2D<int>(-(windowDimensions->x/4), 0), windowDimensions->x/2, nullptr);
+    SpawnersQuadTree::addNodes(*spawners);
+    for(int i=0; i<4; i++)
+    {
+        SpawnersQuadTree::addNodes(*spawners->childNodes[i]);
+    }
 
-        SpawnersQuadTree::addNodes(*spawners);
-		for(int i=0; i<4; i++)
-		{
-            SpawnersQuadTree::addNodes(*spawners->childNodes[i]);
-		}
-
-        for(int i=0; i<4; i++)
+    for(int i=0; i<4; i++)
+    {
+        for (int j = 0; j < 4; j++)
         {
-            for (int j = 0; j < 4; j++)
-            {
-                spawnersPositions.push_back(new SpawnerNumberPosition(i, j));
-            }
+            spawnersPositions.push_back(new SpawnerNumberPosition(i, j));
         }
-        int drawnNumbers=0;
-        int iteration = 0;
+    }
+    int drawnNumbers=0;
+    int iteration = 0;
 
-        
-        // if (iteration != 0)
-        // {
-        bool drawn = false;
-        SpawnerNumberPosition playerPosition;
 
-        for(int i=0; i<4; i++)
+    // if (iteration != 0)
+    // {
+    bool drawn = false;
+    SpawnerNumberPosition playerPosition;
+
+    for(int i=0; i<4; i++)
+    {
+        if(
+            player->getPosition().x >= (spawners->childNodes[i]->position->x - spawners->childNodes[i]->size * 0.5) &&
+            player->getPosition().x <= (spawners->childNodes[i]->position->x + spawners->childNodes[i]->size * 0.5) &&
+            player->getPosition().y <= (spawners->childNodes[i]->position->y + spawners->childNodes[i]->size * 0.5) &&
+            player->getPosition().y >= (spawners->childNodes[i]->position->y - spawners->childNodes[i]->size * 0.5)
+            )
         {
-	        if(
-                player->getPosition().x >= (spawners->childNodes[i]->position->x - spawners->childNodes[i]->size * 0.5) &&
-                player->getPosition().x <= (spawners->childNodes[i]->position->x + spawners->childNodes[i]->size * 0.5) &&
-                player->getPosition().y <= (spawners->childNodes[i]->position->y + spawners->childNodes[i]->size * 0.5) &&
-                player->getPosition().y >= (spawners->childNodes[i]->position->y - spawners->childNodes[i]->size * 0.5)
-                )
-	        {
-                for(int j=0; j<4; j++)
+            for(int j=0; j<4; j++)
+            {
+                if (
+                    player->getPosition().x >= (spawners->childNodes[i]->childNodes[j]->position->x - spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
+                    player->getPosition().x <= (spawners->childNodes[i]->childNodes[j]->position->x + spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
+                    player->getPosition().y <= (spawners->childNodes[i]->childNodes[j]->position->y + spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
+                    player->getPosition().y >= (spawners->childNodes[i]->childNodes[j]->position->y - spawners->childNodes[i]->childNodes[j]->size * 0.5)
+                    )
                 {
-                    if (
-                        player->getPosition().x >= (spawners->childNodes[i]->childNodes[j]->position->x - spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
-                        player->getPosition().x <= (spawners->childNodes[i]->childNodes[j]->position->x + spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
-                        player->getPosition().y <= (spawners->childNodes[i]->childNodes[j]->position->y + spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
-                        player->getPosition().y >= (spawners->childNodes[i]->childNodes[j]->position->y - spawners->childNodes[i]->childNodes[j]->size * 0.5)
-                        )
-                    {
-                        playerPosition.firstNode = i;
-                        playerPosition.secondNode = j;
-                        goto afterFor;
-                    }
+                    playerPosition.firstNode = i;
+                    playerPosition.secondNode = j;
+                    goto afterFor;
                 }
-	        }
-        }
-        afterFor:
-
-        while (!drawn)
-        {
-            int number = rand() % 16;
-            if(!(playerPosition.firstNode == spawnersPositions.at(number)->firstNode &&
-                playerPosition.secondNode == spawnersPositions.at(number)->secondNode))
-            {
-                threeRandomPositions.push_back(spawnersPositions.at(number));
-                break;
-            }
-
-        }
-
-        for (int i = 0; i < 4; i++)
-        {
-            for (int j = 0; j < 4; j++)
-            {
-                spawners->childNodes[i]->childNodes[j]->spawner = new Spawner();
-                spawners->childNodes[i]->childNodes[j]->spawner->position.x = spawners->childNodes[i]->childNodes[j]->position->x;
-                spawners->childNodes[i]->childNodes[j]->spawner->position.y = spawners->childNodes[i]->childNodes[j]->position->y;
             }
         }
+    }
+    afterFor:
 
-		bool foundNumber = false;
-        // for(int i=0; i<threeRandomPositions.size(); i++)
-        // {
-        int checksWithTrueResult = 1;
-        int j = 0;
-        double quadDiagonal = spawners->childNodes[threeRandomPositions.at(0)->firstNode]->childNodes[threeRandomPositions.at(0)->secondNode]->size * sqrt(2);
-        while(checksWithTrueResult <= 3)
+    while (!drawn)
+    {
+        srand(clock());
+        int number = rand() % 16;
+        if(!(playerPosition.firstNode == spawnersPositions.at(number)->firstNode &&
+            playerPosition.secondNode == spawnersPositions.at(number)->secondNode))
         {
-            int position = rand() % 16;
-            for (int i = 0; i < threeRandomPositions.size(); i++)
-            {
-                if( !(playerPosition.firstNode == spawnersPositions.at(i)->firstNode && playerPosition.secondNode == spawnersPositions.at(i)->secondNode) &&
-					(   
-				    (sqrt(pow((spawners->childNodes[threeRandomPositions.at(i)->firstNode]->childNodes[threeRandomPositions.at(i)->secondNode]->position->x -
-					spawners->childNodes[spawnersPositions.at(position)->firstNode]->childNodes[spawnersPositions.at(position)->secondNode]->position->x),2) +
+            threeRandomPositions.push_back(spawnersPositions.at(number));
+            break;
+        }
 
-					pow((spawners->childNodes[threeRandomPositions.at(i)->firstNode]->childNodes[threeRandomPositions.at(i)->secondNode]->position->y -
-				    spawners->childNodes[spawnersPositions.at(position)->firstNode]->childNodes[spawnersPositions.at(position)->secondNode]->position->y), 2)) > quadDiagonal)
-					)
+    }
+
+    for (int i = 0; i < 4; i++)
+    {
+        for (int j = 0; j < 4; j++)
+        {
+            spawners->childNodes[i]->childNodes[j]->spawner = new Spawner();
+            spawners->childNodes[i]->childNodes[j]->spawner->position.x = spawners->childNodes[i]->childNodes[j]->position->x;
+            spawners->childNodes[i]->childNodes[j]->spawner->position.y = spawners->childNodes[i]->childNodes[j]->position->y;
+        }
+    }
+
+    bool foundNumber = false;
+//         for(int i=0; i<threeRandomPositions.size(); i++)
+//         {
+    int checksWithTrueResult = 1;
+    int j = 0;
+    double quadDiagonal = spawners->childNodes[threeRandomPositions.at(0)->firstNode]->childNodes[threeRandomPositions.at(0)->secondNode]->size * sqrt(2);
+    while(checksWithTrueResult <= 3)
+    {
+        srand(clock());
+        int position = rand() % 16;
+        for (int i = 0; i < threeRandomPositions.size(); i++)
+        {
+            if( !(playerPosition.firstNode == spawnersPositions.at(i)->firstNode && playerPosition.secondNode == spawnersPositions.at(i)->secondNode) &&
+                (
+                (sqrt(pow((spawners->childNodes[threeRandomPositions.at(i)->firstNode]->childNodes[threeRandomPositions.at(i)->secondNode]->position->x -
+                spawners->childNodes[spawnersPositions.at(position)->firstNode]->childNodes[spawnersPositions.at(position)->secondNode]->position->x),2) +
+
+                pow((spawners->childNodes[threeRandomPositions.at(i)->firstNode]->childNodes[threeRandomPositions.at(i)->secondNode]->position->y -
+                spawners->childNodes[spawnersPositions.at(position)->firstNode]->childNodes[spawnersPositions.at(position)->secondNode]->position->y), 2)) > quadDiagonal)
                 )
-                {
-                    threeRandomPositions.push_back(spawnersPositions.at(position));
-                    checksWithTrueResult++;
-                }
-			}
-            j++;
-		}
-        
-        // spawnerPositionNumber.push_back(3);
-        // spawnerPositionNumber.push_back(3);
-
-        // spawners->createSpanwer(spawnerPositionNumber);
-
-        // testPoint0.x = spawners->childNodes[0]->position->x;
-        // testPoint0.y = spawners->childNodes[0]->position->y;
-        //
-        // testPoint1.x = spawners->childNodes[spawnerPositionNumber.at(0)]->childNodes[spawnerPositionNumber.at(0)]->position->x;
-        // testPoint1.y = spawners->childNodes[spawnerPositionNumber.at(0)]->childNodes[spawnerPositionNumber.at(0)]->position->y;
-
-        std::cout << "x: " << testPoint0.x << "y: " << testPoint0.y << "\n";
-        std::cout << "x: " << testPoint1.x << "y: " << testPoint1.y << "\n";
-
-        numberOfGivenColors.insert({"RED", 0});
-        numberOfGivenColors.insert({"GREEN", 0});
-        numberOfGivenColors.insert({"BLUE", 0});
-
-        std::map<std::string, int> numberOfGivenColors;
-        std::map<float, int> sinusNumbers;
-        std::map<float, int> cosinusNumbers;
-        std::map<int, int> fibonacciNumbers;
-        std::map<int, int> primeNumbers;
-
-        for(unsigned int i=0; i<SinusPointsGenerator::numbers.size(); i++)
-        {
-            sinusNumbers.insert({SinusPointsGenerator::numbers.at(i),0});
+            )
+            {
+                threeRandomPositions.push_back(spawnersPositions.at(position));
+                checksWithTrueResult++;
+            }
         }
-        for(unsigned int i=0; i<CosinusPointsGenerator::numbers.size(); i++)
-        {
-            cosinusNumbers.insert({ CosinusPointsGenerator::numbers.at(i),0});
-        }
-        for(unsigned int i=0; i<FibonacciPointsGenerator::numbers.size(); i++)
-        {
-            fibonacciNumbers.insert({ FibonacciPointsGenerator::numbers.at(i), 0 });
-        }
-        for(unsigned int i=0; i<PrimeNumbersPointsGenerator::numbers.size(); i++)
-        {
-            primeNumbers.insert({ PrimeNumbersPointsGenerator::numbers.at(i),0 });
-        }
+        j++;
+    }
+
+//         spawnerPositionNumber.push_back(3);
+//         spawnerPositionNumber.push_back(3);
+
+    // spawners->createSpanwer(spawnerPositionNumber);
+
+    // testPoint0.x = spawners->childNodes[0]->position->x;
+    // testPoint0.y = spawners->childNodes[0]->position->y;
+    //
+    // testPoint1.x = spawners->childNodes[spawnerPositionNumber.at(0)]->childNodes[spawnerPositionNumber.at(0)]->position->x;
+    // testPoint1.y = spawners->childNodes[spawnerPositionNumber.at(0)]->childNodes[spawnerPositionNumber.at(0)]->position->y;
+
+//        std::cout << "x: " << testPoint0.x << "y: " << testPoint0.y << "\n";
+//        std::cout << "x: " << testPoint1.x << "y: " << testPoint1.y << "\n";
+
+    numberOfGivenColors.insert({"RED", 0});
+    numberOfGivenColors.insert({"GREEN", 0});
+    numberOfGivenColors.insert({"BLUE", 0});
+
+
+    prepareDataForDrawingGraphs();
+}
+
+void YasEngine::prepareDataForDrawingGraphs()
+{
+    SinusPointsGenerator sinusPointsGenerator;
+    CosinusPointsGenerator cosinusPointsGenerator;
+    FibonacciPointsGenerator fibonacciPointsGenerator;
+    PrimeNumbersPointsGenerator primeNumberPointsGenerator;
+
+    sinusPoints = sinusPointsGenerator.generatePoints();
+    cosinusPoints = cosinusPointsGenerator.generatePoints();
+    fibonacciePoints = fibonacciPointsGenerator.generatePoints();
+    primeNumbersPoints = primeNumberPointsGenerator.generatePoints();
+
+    for(unsigned int i=0; i<SinusPointsGenerator::numbers.size(); i++)
+    {
+        sinusNumbers.insert({SinusPointsGenerator::numbers.at(i),0});
+    }
+    for(unsigned int i=0; i<CosinusPointsGenerator::numbers.size(); i++)
+    {
+        cosinusNumbers.insert({ CosinusPointsGenerator::numbers.at(i),0});
+    }
+    for(unsigned int i=0; i<FibonacciPointsGenerator::numbers.size(); i++)
+    {
+        fibonacciNumbers.insert({ FibonacciPointsGenerator::numbers.at(i), 0 });
+    }
+    for(unsigned int i=0; i<PrimeNumbersPointsGenerator::numbers.size(); i++)
+    {
+        primeNumbers.insert({ PrimeNumbersPointsGenerator::numbers.at(i),0 });
+    }
 }
 
 void YasEngine::prepareInterface()
