@@ -263,12 +263,6 @@ void YasEngine::handleMouseMovement()
 
 void YasEngine::handleSpawningCollectibles()
 {
-    // TODO drawn spawner object
-    //v1 = rand() % 100;         // v1 in the range 0 to 99
-	//v2 = rand() % 100 + 1;     // v2 in the range 1 to 100
-
-//     spawnerPositionNumber[0] = rand() % 4;
-//     spawnerPositionNumber[1] = rand() % 4;
     for (int i = 0; i < 3; i++)
     {
         //exception here lukesawicki
@@ -278,7 +272,6 @@ void YasEngine::handleSpawningCollectibles()
             objectsToDraw.push_back(go);
         }
     }
-
 }
 
 void YasEngine::handleProjectiles()
@@ -307,6 +300,9 @@ void YasEngine::handlePlayer()
 
 void YasEngine::preparePlayer()
 {
+//    srand(clock());
+//    int number = rand() % 16;
+
     player = new Player(-windowDimensions->x * 0.25F, 0);
     player->setColor(YELLOW);
     player->setInput(input);
@@ -546,21 +542,20 @@ void YasEngine::prepareSoundAndMusic()
 
 void YasEngine::prepareGameWorld()
 {
-    #ifdef DEBUG_DRAWINGS
-        Circle* circle = new Circle(100, 0, 0);
-        circle->setColor(BLUE);
-        objectsToDraw.push_back(circle);
-    #endif
-
     srand(clock());
     spawners = new SpawnersQuadTree(new Vector2D<int>(-(windowDimensions->x/4), 0), windowDimensions->x/2, nullptr);
 
+    // adding nodes to head node
     SpawnersQuadTree::addNodes(*spawners);
     for(int i=0; i<4; i++)
     {
+        // adding nodes to nodes
         SpawnersQuadTree::addNodes(*spawners->childNodes[i]);
     }
 
+    // generate just simple position in nodes
+    // first level of child nodes  -> firstNode from left to right
+    // second level of child nodes -> secondNode from left to right
     for(int i=0; i<4; i++)
     {
         for (int j = 0; j < 4; j++)
@@ -568,15 +563,37 @@ void YasEngine::prepareGameWorld()
             spawnersPositions.push_back(new SpawnerNumberPosition(i, j));
         }
     }
-    int drawnNumbers=0;
+    int drawnNumbers=0; // PL - wylosowane a nie narysowane w tym kontekscie
     int iteration = 0;
-
-
-    // if (iteration != 0)
-    // {
-    bool drawn = false;
+    bool drawn = false; // PL - bylo wylosowane
     SpawnerNumberPosition playerPosition;
 
+//                   H
+//    0         1         2          3
+// 0 1 2 3   0 1 2 3___0 1 2 3   0 1 2 3
+
+//    |````` `````|
+//    |           |
+//    |     H     |
+//    |           |
+//    |           |
+//    |___________|
+//    |`````|`````|
+//    |  0  |  1  |
+//    |_____|_____|
+//    |     |     |
+//    |  2  |  3  |
+//    |_____|_____|
+//     ___________
+//    | 0|1 | 0|1 |
+//    |--|--|--|--|
+//    | 2|3 | 2|3 |
+//    -------------
+//    | 0|1 | 0|1 |
+//    |--|--|--|--|
+//    | 2|3 | 2|3 |
+//     ```````````
+    // calculate position of player on tree 1 - level of nodes and number of node and 2 level of node and number
     for(int i=0; i<4; i++)
     {
         if(
@@ -604,6 +621,9 @@ void YasEngine::prepareGameWorld()
     }
     afterFor:
 
+    std::cout << "Player, first node: " << playerPosition.firstNode << "\n";
+    std::cout << "Player, first node: " << playerPosition.secondNode << "\n";
+
     while (!drawn)
     {
         srand(clock());
@@ -614,7 +634,6 @@ void YasEngine::prepareGameWorld()
             threeRandomPositions.push_back(spawnersPositions.at(number));
             break;
         }
-
     }
 
     for (int i = 0; i < 4; i++)
