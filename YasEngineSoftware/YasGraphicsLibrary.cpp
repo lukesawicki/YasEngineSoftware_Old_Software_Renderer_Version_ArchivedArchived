@@ -486,6 +486,11 @@
 
     void drawCrossHair(float x, float y, PixelsTable& pixelsTable, bool isFullScreen)
     {
+        drawCrossHair(x, y, pixelsTable, isFullScreen, GREEN);
+    }
+
+    void drawCrossHair(float x, float y, PixelsTable& pixelsTable, bool isFullScreen, Vector4D<Uint8> color)
+    {
         if(isFullScreen)
         {
             horizontalLineOnWholeScreen(pixelsTable, static_cast<int>(y), BLUE);
@@ -494,10 +499,10 @@
         else
         {
             // TODO refactor methods drawHor... and drawVer... should have float arguments and then round and cast
-            drawHorizontalLine(pixelsTable, static_cast<int>(round(x) - 15), static_cast<int>(round(x) - 5), static_cast<int>(round(y)), GREEN);
-            drawHorizontalLine(pixelsTable, static_cast<int>(round(x) + 5), static_cast<int>(round(x) + 15), static_cast<int>(round(y)), GREEN);
-            drawVerticalLine(pixelsTable, static_cast<int>(round(y) - 15), static_cast<int>(round(y) - 5), static_cast<int>(round(x)), GREEN);
-            drawVerticalLine(pixelsTable, static_cast<int>(round(y) + 5), static_cast<int>(round(y) + 15), static_cast<int>(round(x)), GREEN);
+            drawHorizontalLine(pixelsTable, static_cast<int>(round(x) - 15), static_cast<int>(round(x) - 5), static_cast<int>(round(y)), color);
+            drawHorizontalLine(pixelsTable, static_cast<int>(round(x) + 5), static_cast<int>(round(x) + 15), static_cast<int>(round(y)), color);
+            drawVerticalLine(pixelsTable, static_cast<int>(round(y) - 15), static_cast<int>(round(y) - 5), static_cast<int>(round(x)), color);
+            drawVerticalLine(pixelsTable, static_cast<int>(round(y) + 5), static_cast<int>(round(y) + 15), static_cast<int>(round(x)), color);
         }
     }
 

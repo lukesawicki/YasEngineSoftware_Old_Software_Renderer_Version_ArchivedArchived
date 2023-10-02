@@ -47,6 +47,8 @@ class YasEngine
 			int secondNode = 0;
 		};
 
+        std::vector<Vector2D<int>*> testPositions;
+
         GameState gameState = GameState::INTRO;
 
         std::vector<GameObject*> buttons;

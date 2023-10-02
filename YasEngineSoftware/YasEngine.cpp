@@ -348,13 +348,20 @@ void YasEngine::render(double& deltaTime) {
 
     // lukesawicki 2023-08-14
 //    drawCrossHair(mouseX, mouseY, *pixelsTable, false);
-    for (int i = 0; i < 3; i++)
+//    for (int i = 0; i < 3; i++)
+//    {
+//        //exception here lukesawicki
+//        int x = spawners->childNodes[threeRandomPositions[i]->firstNode]->childNodes[threeRandomPositions[i]->secondNode]->spawner->position.x;
+//        int y = spawners->childNodes[threeRandomPositions[i]->firstNode]->childNodes[threeRandomPositions[i]->secondNode]->spawner->position.y;
+//        drawCrossHair(x, y, *pixelsTable, false);
+//    }
+
+    for(int i=0; i<testPositions.size(); i++)
     {
-        //exception here lukesawicki
-        int x = spawners->childNodes[threeRandomPositions[i]->firstNode]->childNodes[threeRandomPositions[i]->secondNode]->spawner->position.x;
-        int y = spawners->childNodes[threeRandomPositions[i]->firstNode]->childNodes[threeRandomPositions[i]->secondNode]->spawner->position.y;
-        drawCrossHair(x, y, *pixelsTable, false);
+        drawCrossHair(testPositions.at(i)->x, testPositions.at(i)->y, *pixelsTable, false, BLUE );
     }
+
+//    testPositions
 
     drawHudElements(deltaTime);
 
@@ -552,6 +559,9 @@ void YasEngine::prepareGameWorld()
         // adding nodes to nodes
         SpawnersQuadTree::addNodes(*spawners->childNodes[i]);
     }
+
+    //static std::vector<Vector2D<int>*> generateTestPositions()
+    testPositions = SpawnersQuadTree::generateTestPositions();
 
     // generate just simple position in nodes
     // first level of child nodes  -> firstNode from left to right

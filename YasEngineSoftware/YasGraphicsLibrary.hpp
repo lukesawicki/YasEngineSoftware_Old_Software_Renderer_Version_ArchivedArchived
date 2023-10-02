@@ -51,6 +51,8 @@ void drawCartesianAxies(PixelsTable& pixelsTable);
 
 void drawCrossHair(float x, float y, PixelsTable& pixelsTable, bool isFullScreen);
 
+void drawCrossHair(float x, float y, PixelsTable& pixelsTable, bool isFullScreen, Vector4D<Uint8> color);
+
 void drawHorizontalLine(PixelsTable& pixelsTable, int x0, int x1, int y, Vector4D<Uint8> color);
 
 void drawVerticalLine(PixelsTable& pixelsTable, int y0, int y1, int x, Vector4D<Uint8> color);
