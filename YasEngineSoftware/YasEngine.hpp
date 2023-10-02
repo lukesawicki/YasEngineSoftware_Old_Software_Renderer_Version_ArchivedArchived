@@ -14,7 +14,7 @@
 #include"SurfaceWithMathBasedEffects.hpp"
 #include "PointsSet.hpp"
 #include "Spawner.hpp"
-#include "SpawnersQuadTree.hpp"
+#include "Node.hpp"
 #include"ScreenWriter.hpp"
 #include"Button.hpp"
 
@@ -31,20 +31,20 @@ class YasEngine
             OUTRO
         };
 
-		struct SpawnerNumberPosition
+		struct NodeNumbersOnTwoProceedingLevels
 		{
-			SpawnerNumberPosition()
+            int firstLevelNode = 0;
+            int secondLevelNode = 0;
+			NodeNumbersOnTwoProceedingLevels()
 			{
-				firstNode = 0;
-				secondNode = 0;
+                firstLevelNode = 0;
+                secondLevelNode = 0;
 			}
-			SpawnerNumberPosition(int first, int second)
+			NodeNumbersOnTwoProceedingLevels(int first, int second)
 			{
-				this->firstNode = first;
-				this->secondNode = second;
+				this->firstLevelNode = first;
+				this->secondLevelNode = second;
 			}
-			int firstNode = 0;
-			int secondNode = 0;
 		};
 
         std::vector<Vector2D<int>*> testPositions;
@@ -106,8 +106,8 @@ class YasEngine
 		std::vector<GameObject*> objectsToDraw;
 		Player* player;
 		SurfaceWithMathBasedEffects* surfaceWithMathBasedEffects;
-		std::vector<SpawnerNumberPosition*> spawnersPositions;
-		std::vector<SpawnerNumberPosition*> threeRandomPositions;
+		std::vector<NodeNumbersOnTwoProceedingLevels*> spawnersPositions;
+		std::vector<NodeNumbersOnTwoProceedingLevels*> fourRandomPositions;
 		
 		Mix_Music* music;
 		Mix_Chunk* shootSound;
@@ -125,7 +125,7 @@ class YasEngine
         std::map<float, int> primeNumbers;
 
 		//std::vector<Spawner*> spawners;
-		SpawnersQuadTree* spawners;
+		Node* spawners;
 
 		Vector2D<float> testPoint0;
 		Vector2D<float> testPoint1;

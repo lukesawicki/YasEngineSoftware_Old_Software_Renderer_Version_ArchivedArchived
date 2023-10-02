@@ -263,10 +263,10 @@ void YasEngine::handleMouseMovement()
 
 void YasEngine::handleSpawningCollectibles()
 {
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 4; i++)
     {
         //exception here lukesawicki
-        spawners->childNodes[threeRandomPositions[i]->firstNode]->childNodes[threeRandomPositions[i]->secondNode]->spawner->spawnObject(go);
+        spawners->childNodes[fourRandomPositions[i]->firstLevelNode]->childNodes[fourRandomPositions[i]->secondLevelNode]->spawner->spawnObject(go);
         if (go != nullptr)
         {
             objectsToDraw.push_back(go);
@@ -351,8 +351,8 @@ void YasEngine::render(double& deltaTime) {
 //    for (int i = 0; i < 3; i++)
 //    {
 //        //exception here lukesawicki
-//        int x = spawners->childNodes[threeRandomPositions[i]->firstNode]->childNodes[threeRandomPositions[i]->secondNode]->spawner->position.x;
-//        int y = spawners->childNodes[threeRandomPositions[i]->firstNode]->childNodes[threeRandomPositions[i]->secondNode]->spawner->position.y;
+//        int x = spawners->childNodes[fourRandomPositions[i]->firstLevelNode]->childNodes[fourRandomPositions[i]->secondLevelNode]->spawner->position.x;
+//        int y = spawners->childNodes[fourRandomPositions[i]->firstLevelNode]->childNodes[fourRandomPositions[i]->secondLevelNode]->spawner->position.y;
 //        drawCrossHair(x, y, *pixelsTable, false);
 //    }
 
@@ -550,33 +550,34 @@ void YasEngine::prepareSoundAndMusic()
 void YasEngine::prepareGameWorld()
 {
     srand(clock());
-    spawners = new SpawnersQuadTree(new Vector2D<int>(-(windowDimensions->x/4), 0), windowDimensions->x/2, nullptr);
+    // zero level node (root)
+    spawners = new Node(new Vector2D<int>(-(windowDimensions->x / 4), 0), windowDimensions->x / 2, nullptr);
 
-    // adding nodes to head node
-    SpawnersQuadTree::addNodes(*spawners);
+    // adding nodes(first level) to head node
+    Node::addNodes(*spawners);
     for(int i=0; i<4; i++)
     {
-        // adding nodes to nodes
-        SpawnersQuadTree::addNodes(*spawners->childNodes[i]);
+        // adding nodes(second level) to nodes
+        Node::addNodes(*spawners->childNodes[i]);
     }
 
     //static std::vector<Vector2D<int>*> generateTestPositions()
-    testPositions = SpawnersQuadTree::generateTestPositions();
+    testPositions = Node::generateTestPositions();
 
     // generate just simple position in nodes
-    // first level of child nodes  -> firstNode from left to right
-    // second level of child nodes -> secondNode from left to right
+    // first level of child nodes  -> firstLevelNode from left to right
+    // second level of child nodes -> secondLevelNode from left to right
     for(int i=0; i<4; i++)
     {
         for (int j = 0; j < 4; j++)
         {
-            spawnersPositions.push_back(new SpawnerNumberPosition(i, j));
+            spawnersPositions.push_back(new NodeNumbersOnTwoProceedingLevels(i, j));
         }
     }
     int drawnNumbers=0; // PL - wylosowane a nie narysowane w tym kontekscie
     int iteration = 0;
     bool drawn = false; // PL - bylo wylosowane
-    SpawnerNumberPosition playerPosition;
+    NodeNumbersOnTwoProceedingLevels playerPosition;
 
 //                   H
 //    0         1         2          3
@@ -606,42 +607,43 @@ void YasEngine::prepareGameWorld()
     // calculate position of player on tree 1 - level of nodes and number of node and 2 level of node and number
     for(int i=0; i<4; i++)
     {
-        if(
-            player->getPosition().x >= (spawners->childNodes[i]->position->x - spawners->childNodes[i]->size * 0.5) &&
-            player->getPosition().x <= (spawners->childNodes[i]->position->x + spawners->childNodes[i]->size * 0.5) &&
-            player->getPosition().y <= (spawners->childNodes[i]->position->y + spawners->childNodes[i]->size * 0.5) &&
-            player->getPosition().y >= (spawners->childNodes[i]->position->y - spawners->childNodes[i]->size * 0.5)
-            )
-        {
+//        if(
+//            player->getPosition().x >= (spawners->childNodes[i]->position->x - spawners->childNodes[i]->size * 0.5) &&
+//            player->getPosition().x < (spawners->childNodes[i]->position->x + spawners->childNodes[i]->size * 0.5) &&
+//            player->getPosition().y <= (spawners->childNodes[i]->position->y + spawners->childNodes[i]->size * 0.5) &&
+//            player->getPosition().y > (spawners->childNodes[i]->position->y - spawners->childNodes[i]->size * 0.5)
+//            )
+//        {
             for(int j=0; j<4; j++)
             {
                 if (
                     player->getPosition().x >= (spawners->childNodes[i]->childNodes[j]->position->x - spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
-                    player->getPosition().x <= (spawners->childNodes[i]->childNodes[j]->position->x + spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
+                    player->getPosition().x < (spawners->childNodes[i]->childNodes[j]->position->x + spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
                     player->getPosition().y <= (spawners->childNodes[i]->childNodes[j]->position->y + spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
-                    player->getPosition().y >= (spawners->childNodes[i]->childNodes[j]->position->y - spawners->childNodes[i]->childNodes[j]->size * 0.5)
+                    player->getPosition().y > (spawners->childNodes[i]->childNodes[j]->position->y - spawners->childNodes[i]->childNodes[j]->size * 0.5)
                     )
                 {
-                    playerPosition.firstNode = i;
-                    playerPosition.secondNode = j;
+                    playerPosition.firstLevelNode = i;
+                    playerPosition.secondLevelNode = j;
                     goto afterFor;
                 }
             }
-        }
+//        }
     }
     afterFor:
 
-    std::cout << "Player, first node: " << playerPosition.firstNode << "\n";
-    std::cout << "Player, first node: " << playerPosition.secondNode << "\n";
+    std::cout << "Player, first node: " << playerPosition.firstLevelNode << "\n";
+    std::cout << "Player, first node: " << playerPosition.secondLevelNode << "\n";
 
-    while (!drawn)
+//    while (true)
+    for(int i=0; i<4; i++)
     {
         srand(clock());
         int number = rand() % 16;
-        if(!(playerPosition.firstNode == spawnersPositions.at(number)->firstNode &&
-            playerPosition.secondNode == spawnersPositions.at(number)->secondNode))
+        if(!(playerPosition.firstLevelNode == spawnersPositions.at(number)->firstLevelNode &&
+             playerPosition.secondLevelNode == spawnersPositions.at(number)->secondLevelNode))
         {
-            threeRandomPositions.push_back(spawnersPositions.at(number));
+            fourRandomPositions.push_back(spawnersPositions.at(number));
             break;
         }
     }
@@ -650,6 +652,8 @@ void YasEngine::prepareGameWorld()
     {
         for (int j = 0; j < 4; j++)
         {
+
+            // WHAT THE FUCK??
             spawners->childNodes[i]->childNodes[j]->spawner = new Spawner();
             spawners->childNodes[i]->childNodes[j]->spawner->position.x = spawners->childNodes[i]->childNodes[j]->position->x;
             spawners->childNodes[i]->childNodes[j]->spawner->position.y = spawners->childNodes[i]->childNodes[j]->position->y;
@@ -657,28 +661,28 @@ void YasEngine::prepareGameWorld()
     }
 
     bool foundNumber = false;
-//         for(int i=0; i<threeRandomPositions.size(); i++)
+//         for(int i=0; i<fourRandomPositions.size(); i++)
 //         {
     int checksWithTrueResult = 1;
     int j = 0;
-    double quadDiagonal = spawners->childNodes[threeRandomPositions.at(0)->firstNode]->childNodes[threeRandomPositions.at(0)->secondNode]->size * sqrt(2);
-    while(checksWithTrueResult <= 3)
+    double quadDiagonal = spawners->childNodes[fourRandomPositions.at(0)->firstLevelNode]->childNodes[fourRandomPositions.at(0)->secondLevelNode]->size * sqrt(2);
+    while(checksWithTrueResult <= 4)
     {
         srand(clock());
         int position = rand() % 16;
-        for (int i = 0; i < threeRandomPositions.size(); i++)
+        for (int i = 0; i < fourRandomPositions.size(); i++)
         {
-            if( !(playerPosition.firstNode == spawnersPositions.at(i)->firstNode && playerPosition.secondNode == spawnersPositions.at(i)->secondNode) &&
-                (
-                (sqrt(pow((spawners->childNodes[threeRandomPositions.at(i)->firstNode]->childNodes[threeRandomPositions.at(i)->secondNode]->position->x -
-                spawners->childNodes[spawnersPositions.at(position)->firstNode]->childNodes[spawnersPositions.at(position)->secondNode]->position->x),2) +
+            if(//!(playerPosition.firstLevelNode == spawnersPositions.at(i)->firstLevelNode && playerPosition.secondLevelNode == spawnersPositions.at(i)->secondLevelNode) &&
+               (
+                (sqrt(pow((spawners->childNodes[fourRandomPositions.at(i)->firstLevelNode]->childNodes[fourRandomPositions.at(i)->secondLevelNode]->position->x -
+                           spawners->childNodes[spawnersPositions.at(position)->firstLevelNode]->childNodes[spawnersPositions.at(position)->secondLevelNode]->position->x), 2) +
 
-                pow((spawners->childNodes[threeRandomPositions.at(i)->firstNode]->childNodes[threeRandomPositions.at(i)->secondNode]->position->y -
-                spawners->childNodes[spawnersPositions.at(position)->firstNode]->childNodes[spawnersPositions.at(position)->secondNode]->position->y), 2)) > quadDiagonal)
+                      pow((spawners->childNodes[fourRandomPositions.at(i)->firstLevelNode]->childNodes[fourRandomPositions.at(i)->secondLevelNode]->position->y -
+                           spawners->childNodes[spawnersPositions.at(position)->firstLevelNode]->childNodes[spawnersPositions.at(position)->secondLevelNode]->position->y), 2)) > quadDiagonal)
                 )
             )
             {
-                threeRandomPositions.push_back(spawnersPositions.at(position));
+                fourRandomPositions.push_back(spawnersPositions.at(position));
                 checksWithTrueResult++;
             }
         }
@@ -702,6 +706,7 @@ void YasEngine::prepareGameWorld()
     numberOfGivenColors.insert({"RED", 0});
     numberOfGivenColors.insert({"GREEN", 0});
     numberOfGivenColors.insert({"BLUE", 0});
+    numberOfGivenColors.insert({"YELLOW", 0});
 
 
     prepareDataForDrawingGraphs();
