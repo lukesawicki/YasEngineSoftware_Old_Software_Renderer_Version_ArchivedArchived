@@ -633,7 +633,7 @@ void YasEngine::prepareGameWorld()
     afterFor:
 
     std::cout << "Player, first node: " << playerPosition.firstLevelNode << "\n";
-    std::cout << "Player, first node: " << playerPosition.secondLevelNode << "\n";
+    std::cout << "Player, second node: " << playerPosition.secondLevelNode << "\n";
 
 //    while (true)
     for(int i=0; i<4; i++)
@@ -652,7 +652,6 @@ void YasEngine::prepareGameWorld()
     {
         for (int j = 0; j < 4; j++)
         {
-
             // WHAT THE FUCK??
             spawners->childNodes[i]->childNodes[j]->spawner = new Spawner();
             spawners->childNodes[i]->childNodes[j]->spawner->position.x = spawners->childNodes[i]->childNodes[j]->position->x;
@@ -664,9 +663,9 @@ void YasEngine::prepareGameWorld()
 //         for(int i=0; i<fourRandomPositions.size(); i++)
 //         {
     int checksWithTrueResult = 1;
-    int j = 0;
+//    int j = 0;
     double quadDiagonal = spawners->childNodes[fourRandomPositions.at(0)->firstLevelNode]->childNodes[fourRandomPositions.at(0)->secondLevelNode]->size * sqrt(2);
-    while(checksWithTrueResult <= 4)
+    while(fourRandomPositions.size() < 4) //checksWithTrueResult <= 4)
     {
         srand(clock());
         int position = rand() % 16;
@@ -681,12 +680,13 @@ void YasEngine::prepareGameWorld()
                            spawners->childNodes[spawnersPositions.at(position)->firstLevelNode]->childNodes[spawnersPositions.at(position)->secondLevelNode]->position->y), 2)) > quadDiagonal)
                 )
             )
-            {
+            { // TODO check if checksWithResult is 4 then break all loops
+                // TODO check if position is inside collection
                 fourRandomPositions.push_back(spawnersPositions.at(position));
                 checksWithTrueResult++;
             }
         }
-        j++;
+//        j++;
     }
 
 //         spawnerPositionNumber.push_back(3);

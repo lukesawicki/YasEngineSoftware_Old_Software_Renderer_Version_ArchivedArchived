@@ -36,8 +36,8 @@ add_executable(YasEngineSoftware
         SinusPointsGenerator.hpp
         Spawner.cpp
         Spawner.hpp
-        SpawnersQuadTree.cpp
-        SpawnersQuadTree.hpp
+        Node.cpp
+        Node.hpp
         SurfaceWithMathBasedEffects.cpp
         SurfaceWithMathBasedEffects.hpp
         temporary.cpp
