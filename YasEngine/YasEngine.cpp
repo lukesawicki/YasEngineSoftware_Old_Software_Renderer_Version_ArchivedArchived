@@ -300,10 +300,11 @@ void YasEngine::handlePlayer()
 
 void YasEngine::preparePlayer()
 {
-//    srand(clock());
-//    int number = rand() % 16;
+    srand(clock());
+    int x = rand() % 16;
+    int y = rand() % 16;
 
-    player = new Player(-windowDimensions->x * 0.25F, 0);
+    player = new Player(( - windowDimensions->x * 0.25F)+x, 0+y);
     player->setColor(YELLOW);
     player->setInput(input);
     player->setInput(mousePositionChangeInformation);
@@ -551,6 +552,12 @@ void YasEngine::prepareGameWorld()
 {
     srand(clock());
     // zero level node (root)
+    int mainNodeX = -(windowDimensions->x / 4);
+    int mainNodeY = 0;
+
+    std::cout << "Main node X: " << mainNodeX << "\n";
+    std::cout << "Main node Y: " << mainNodeY << "\n";
+
     spawners = new Node(new Vector2D<int>(-(windowDimensions->x / 4), 0), windowDimensions->x / 2, nullptr);
 
     // adding nodes(first level) to head node
@@ -560,6 +567,17 @@ void YasEngine::prepareGameWorld()
         // adding nodes(second level) to nodes
         Node::addNodes(*spawners->childNodes[i]);
     }
+
+    std::cout << "\nAll nodes positions: \n";
+
+    for(int i=0; i<4; i++)
+    {
+	    for(int j=0; j<4; j++)
+	    {
+            std::cout << "ParentNode_X= " << spawners->childNodes[i]->childNodes[j]->position->x << " | ParentNode_Y= " << spawners->childNodes[i]->childNodes[j]->position->y << "\n";
+	    }
+    }
+
 
     //static std::vector<Vector2D<int>*> generateTestPositions()
     testPositions = Node::generateTestPositions();
@@ -574,6 +592,17 @@ void YasEngine::prepareGameWorld()
             spawnersPositions.push_back(new NodeNumbersOnTwoProceedingLevels(i, j));
         }
     }
+
+    // TEST CONTROL PREVIEW
+
+    for (int i = 0; i < spawnersPositions.size(); i++)
+    {
+        std::cout << "firstLevelNode: " << spawnersPositions.at(i)->firstLevelNode << " secondLevelNode: " << spawnersPositions.at(i)->secondLevelNode << "\n";
+    }
+
+    // END TEST CONTROL PREVIEW
+
+
     int drawnNumbers=0; // PL - wylosowane a nie narysowane w tym kontekscie
     int iteration = 0;
     bool drawn = false; // PL - bylo wylosowane
@@ -607,58 +636,68 @@ void YasEngine::prepareGameWorld()
     // calculate position of player on tree 1 - level of nodes and number of node and 2 level of node and number
     for(int i=0; i<4; i++)
     {
-//        if(
-//            player->getPosition().x >= (spawners->childNodes[i]->position->x - spawners->childNodes[i]->size * 0.5) &&
-//            player->getPosition().x < (spawners->childNodes[i]->position->x + spawners->childNodes[i]->size * 0.5) &&
-//            player->getPosition().y <= (spawners->childNodes[i]->position->y + spawners->childNodes[i]->size * 0.5) &&
-//            player->getPosition().y > (spawners->childNodes[i]->position->y - spawners->childNodes[i]->size * 0.5)
-//            )
-//        {
+        std::cout << "\n" << "pos X: " << player->getPosition().x << " pos Y: " << player->getPosition().y << "\n";
 
-        std::cout << "pos X: " << player->getPosition().x << " pos Y: " << player->getPosition().y << "\n";
+        for(int j=0; j<4; j++)
+        {
+            std::cout << "i: " << i << "| j: " << j << "\n";
+            std::cout << " childNode of childNode position->X: " << spawners->childNodes[i]->childNodes[j]->position->x
+                << " childNode of childNode position->Y: " << spawners->childNodes[i]->childNodes[j]->position->y << "\n";
 
-            for(int j=0; j<4; j++)
+            if (
+                player->getPosition().x >= (spawners->childNodes[i]->childNodes[j]->position->x - spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
+                player->getPosition().x < (spawners->childNodes[i]->childNodes[j]->position->x + spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
+                player->getPosition().y <= (spawners->childNodes[i]->childNodes[j]->position->y + spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
+                player->getPosition().y > (spawners->childNodes[i]->childNodes[j]->position->y - spawners->childNodes[i]->childNodes[j]->size * 0.5)
+                )
             {
-                if (
-                    player->getPosition().x >= (spawners->childNodes[i]->childNodes[j]->position->x - spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
-                    player->getPosition().x < (spawners->childNodes[i]->childNodes[j]->position->x + spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
-                    player->getPosition().y <= (spawners->childNodes[i]->childNodes[j]->position->y + spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
-                    player->getPosition().y > (spawners->childNodes[i]->childNodes[j]->position->y - spawners->childNodes[i]->childNodes[j]->size * 0.5)
-                    )
-                {
-                    playerPosition.firstLevelNode = i;
-                    playerPosition.secondLevelNode = j;
-                    goto afterFor;
-                }
+                playerPosition.firstLevelNode = i;
+                playerPosition.secondLevelNode = j;
+                goto afterFor;
             }
-//        }
+        }
     }
     afterFor:
 
-    std::cout << "Player, first node: " << playerPosition.firstLevelNode << "\n";
+    std::cout << "\n\n Player, first node: " << playerPosition.firstLevelNode << "\n";
     std::cout << "Player, second node: " << playerPosition.secondLevelNode << "\n";
 
+    std::cout << "Player X: " << player->getPosition().x << " | " << player->getPosition().y << "\n";
+
 //    while (true)
-    for(int i=0; i<4; i++)
-    {
+    // for(int i=0; i<4; i++)
+
+    std::cout << "BEFORE PUTTING THERE fourRandomPositions size: " << fourRandomPositions.size() << "\n";
+
+    while(fourRandomPositions.size() < 4)
+	{
         srand(clock());
         int number = rand() % 16;
-        if(!(playerPosition.firstLevelNode == spawnersPositions.at(number)->firstLevelNode &&
-             playerPosition.secondLevelNode == spawnersPositions.at(number)->secondLevelNode))
+        //////////                         TUTAJ JEST BUG MUSZE ZAPISYWAC KTORE POZYCJE JUZ WPROWADZILEM
+        if(  playerPosition.firstLevelNode != spawnersPositions.at(number)->firstLevelNode &&
+             playerPosition.secondLevelNode != spawnersPositions.at(number)->secondLevelNode)
         {
             fourRandomPositions.push_back(spawnersPositions.at(number));
-            break;
+            // break;
         }
     }
+
+    std::cout << "fourRandomPositions size: " << fourRandomPositions.size() << "\n";
+    std::cout << "four random positions: " << "\n";
+    for(int i=0; i<4; i++)
+    {
+        std::cout << fourRandomPositions[i]->firstLevelNode << " | "  << fourRandomPositions[i]->secondLevelNode << "\n";
+    }
+
 
     for (int i = 0; i < 4; i++)
     {
         for (int j = 0; j < 4; j++)
         {
             // WHAT THE FUCK??
-            spawners->childNodes[i]->childNodes[j]->spawner = new Spawner();
-            spawners->childNodes[i]->childNodes[j]->spawner->position.x = spawners->childNodes[i]->childNodes[j]->position->x;
-            spawners->childNodes[i]->childNodes[j]->spawner->position.y = spawners->childNodes[i]->childNodes[j]->position->y;
+            spawners->childNodes[i]->childNodes[j]->spawner = new Spawner(spawners->childNodes[i]->childNodes[j]->position->x, spawners->childNodes[i]->childNodes[j]->position->y);
+            // spawners->childNodes[i]->childNodes[j]->spawner->position.x = spawners->childNodes[i]->childNodes[j]->position->x;
+            // spawners->childNodes[i]->childNodes[j]->spawner->position.y = spawners->childNodes[i]->childNodes[j]->position->y;
         }
     }
 
@@ -668,29 +707,30 @@ void YasEngine::prepareGameWorld()
     int checksWithTrueResult = 1;
 //    int j = 0;
     double quadDiagonal = spawners->childNodes[fourRandomPositions.at(0)->firstLevelNode]->childNodes[fourRandomPositions.at(0)->secondLevelNode]->size * sqrt(2);
-    while(fourRandomPositions.size() < 4) //checksWithTrueResult <= 4)
-    {
-        srand(clock());
-        int position = rand() % 16;
-        for (int i = 0; i < fourRandomPositions.size(); i++)
-        {
-            if(//!(playerPosition.firstLevelNode == spawnersPositions.at(i)->firstLevelNode && playerPosition.secondLevelNode == spawnersPositions.at(i)->secondLevelNode) &&
-               (
-                (sqrt(pow((spawners->childNodes[fourRandomPositions.at(i)->firstLevelNode]->childNodes[fourRandomPositions.at(i)->secondLevelNode]->position->x -
-                           spawners->childNodes[spawnersPositions.at(position)->firstLevelNode]->childNodes[spawnersPositions.at(position)->secondLevelNode]->position->x), 2) +
 
-                      pow((spawners->childNodes[fourRandomPositions.at(i)->firstLevelNode]->childNodes[fourRandomPositions.at(i)->secondLevelNode]->position->y -
-                           spawners->childNodes[spawnersPositions.at(position)->firstLevelNode]->childNodes[spawnersPositions.at(position)->secondLevelNode]->position->y), 2)) > quadDiagonal)
-                )
-            )
-            { // TODO check if checksWithResult is 4 then break all loops
-                // TODO check if position is inside collection
-                fourRandomPositions.push_back(spawnersPositions.at(position));
-                checksWithTrueResult++;
-            }
-        }
-//        j++;
-    }
+    // SECOND TIME I DO CREATING FOUR(4) RANDOM POSITIONS AND PUSH THERE SOME POSITIONS FROM LIST ALL POSITIONS 
+    // while(fourRandomPositions.size() < 4) //checksWithTrueResult <= 4)
+    // {
+    //     srand(clock());
+    //     int position = rand() % 16;
+    //     for (int i = 0; i < fourRandomPositions.size(); i++)
+    //     {
+    //         if(//!(playerPosition.firstLevelNode == spawnersPositions.at(i)->firstLevelNode && playerPosition.secondLevelNode == spawnersPositions.at(i)->secondLevelNode) &&
+    //            (
+    //             (sqrt(pow((spawners->childNodes[fourRandomPositions.at(i)->firstLevelNode]->childNodes[fourRandomPositions.at(i)->secondLevelNode]->position->x -
+    //                        spawners->childNodes[spawnersPositions.at(position)->firstLevelNode]->childNodes[spawnersPositions.at(position)->secondLevelNode]->position->x), 2) +
+    //
+    //                   pow((spawners->childNodes[fourRandomPositions.at(i)->firstLevelNode]->childNodes[fourRandomPositions.at(i)->secondLevelNode]->position->y -
+    //                        spawners->childNodes[spawnersPositions.at(position)->firstLevelNode]->childNodes[spawnersPositions.at(position)->secondLevelNode]->position->y), 2)) > quadDiagonal)
+    //             )
+    //         )
+    //         { // TODO check if checksWithResult is 4 then break all loops
+    //             // TODO check if position is inside collection
+    //             fourRandomPositions.push_back(spawnersPositions.at(position));
+    //             checksWithTrueResult++;
+    //         }
+    //     }
+    // }
 
 //         spawnerPositionNumber.push_back(3);
 //         spawnerPositionNumber.push_back(3);

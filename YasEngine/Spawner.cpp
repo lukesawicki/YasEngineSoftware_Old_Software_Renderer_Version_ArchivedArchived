@@ -8,6 +8,14 @@ Spawner::Spawner() {
     timeBetweenSpawns = 3000;
 }
 
+Spawner::Spawner(int x, int y) {
+	position.x = x;
+	position.y = y;
+	currentTime = timePicker.getMiliseconds();
+	previousTime = currentTime;
+	timeBetweenSpawns = 3000;
+}
+
 void Spawner::spawnObject(GameObject*& gameObject)
 {
     currentTime = timePicker.getMiliseconds();

@@ -19,6 +19,8 @@ class Spawner
         double previousTime = 0;
 
         Spawner();
+
+		Spawner(int x, int y);
 			void spawnObject(GameObject*& gameObject);
 	private:
 
