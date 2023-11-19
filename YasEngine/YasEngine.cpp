@@ -2,6 +2,8 @@
 //#include<SDL_endian.h>
 #include<bit>
 #include<SDL_mixer.h>
+#include <set>
+
 #include"VariousTools.hpp"
 #include"Circle.hpp"
 #include "Collider.hpp"
@@ -669,12 +671,15 @@ void YasEngine::prepareGameWorld()
 
     std::cout << "BEFORE PUTTING THERE fourRandomPositions size: " << fourRandomPositions.size() << "\n";
 
+    std::set<int> numberThatHasBeenDrawn;
+
     while(fourRandomPositions.size() < 4)
 	{
         srand(clock());
         int number = rand() % 16;
         //////////                         TUTAJ JEST BUG MUSZE ZAPISYWAC KTORE POZYCJE JUZ WPROWADZILEM
-        if(  playerPosition.firstLevelNode != spawnersPositions.at(number)->firstLevelNode &&
+        std::pair<std::set<int>::iterator, bool> iterator = numberThatHasBeenDrawn.insert(number);
+        if( iterator.second && playerPosition.firstLevelNode != spawnersPositions.at(number)->firstLevelNode &&
              playerPosition.secondLevelNode != spawnersPositions.at(number)->secondLevelNode)
         {
             fourRandomPositions.push_back(spawnersPositions.at(number));
