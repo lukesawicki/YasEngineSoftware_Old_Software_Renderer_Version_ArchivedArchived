@@ -2,6 +2,8 @@
 #include<cmath>
 #include<map>
 
+#include "Vector2D.hpp"
+
 std::vector<int> generatePrimeNumbersLessThanN(int n)
 {
     std::vector<int> primeNumbers;
@@ -99,4 +101,9 @@ std::vector<int> generateNfibonaccinumbers(int n)
         fibbonacciNumbers.push_back(newFib);
     }
     return fibbonacciNumbers;
+}
+
+double distanceBetweenPoints(const Vector2D<int>& vector0, const Vector2D<int>& vector1)
+{
+    return sqrt(pow((vector0.x - vector1.x), 2) + pow((vector0.y - vector1.y), 2));
 }

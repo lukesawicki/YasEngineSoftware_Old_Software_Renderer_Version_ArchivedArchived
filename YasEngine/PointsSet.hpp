@@ -22,6 +22,8 @@ class PointsSet
 		}
 		Vector2D<float>* points =  nullptr;
 		long pointsNumber;
+
+	
 };
 
 #endif
