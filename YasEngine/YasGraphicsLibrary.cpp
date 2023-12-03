@@ -3,24 +3,29 @@
 
 // REFACTOR AFTER PUBLISHING FIRST GAME "THE BEAUTY OF MATHEMATICS"
 
+// void drawLineV2(const Vector2D<float>& point0, const Vector2D<float>& point1, PixelsTable& pixelsTable, const Vector4D<Uint8>& drawingColor) {
+    /*
+    * Draws a line in octant 0 or 3 ( |DeltaX| >= DeltaY ).
+    */
+
     void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, PixelsTable& pixelsTable, const Vector4D<Uint8>& drawingColor)
     {
         int x0 = static_cast<int>(point0.x);
         int y0 = static_cast<int>(point0.y);
-
+    
         int originalPoint0X = static_cast<int>(point0.x);
         int originalPoint0Y = static_cast<int>(point0.y);
-
+    
         int originalPoint1X = static_cast<int>(point1.x);
         int originalPoint1Y = static_cast<int>(point1.y);
-
+    
         Vector2D<int> copyPoint0(static_cast<int>(point0.x), static_cast<int>(point0.y));
         Vector2D<int> copyPoint1(static_cast<int>(point1.x), static_cast<int>(point1.y));
-
+    
         int deltaX = static_cast<int>(point1.x - point0.x);
         int deltaY = static_cast<int>(point1.y - point0.y);
         int cumulativeError = 0;
-
+    
         if (abs(deltaX) != abs(deltaY))
         {
             // START GENTLE LINE IF
@@ -30,11 +35,11 @@
                 {
                     originalPoint0X = static_cast<int>(point1.x);
                     originalPoint1X = static_cast<int>(point0.x);
-
+    
                     // switch x for drawing
                     x0 = static_cast<int>(point1.x);
                     y0 = static_cast<int>(point1.y);
-
+    
                     // NEGATIVE SLOPE)
                     if (deltaY > 0) // && (DELTAS CONDITION DX > DY) && (DELTA X < 0 CONDITION) -> IT MEANS OCTAN 3(NEGATIVE SLOPE, POINTS IN "WRONG ORDER")
                     {
@@ -82,7 +87,7 @@
                 }
                 else  // DELTA X > 0 CONDITION  (IT MEANS CORRECT ORDER)
                 {
-
+    
                     if (deltaX != 0)
                     {
                         // POSITIVE SLOPE
@@ -122,7 +127,7 @@
                                 }
                             }
                         }
-
+    
                     }
                     else //if (deltaX == 0) // It is straight line where x is constant. So draw simple line from y0 to y1
                     {						
@@ -143,11 +148,11 @@
                 {
                     originalPoint0Y = static_cast<int>(point1.y);
                     originalPoint1Y = static_cast<int>(point0.y);
-
+    
                     // switch x for drawing
                     x0 = static_cast<int>(point1.x);
                     y0 = static_cast<int>(point1.y);
-
+    
                     // NEGATIVE SLOPE
                     if (deltaX > 0) // && (DELTAS CONDITION DX < DY) && (DELTA Y < 0 CONDITION) IT MEANS OCTAN 6(NEGATIVE SLOPE, POINTS IN "WRONG ORDER")
                     {
@@ -273,7 +278,7 @@
                         i++;
                     }
                 }
-
+    
                 // Negative line
                 if (copyPoint0.x < copyPoint1.x && copyPoint0.y > copyPoint1.y)
                 {

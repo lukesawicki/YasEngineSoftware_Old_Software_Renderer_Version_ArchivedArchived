@@ -383,7 +383,7 @@ void YasEngine::renderGameObjects(double& deltaTime)
         }
     }
 
-    drawLine(testPoint0, testPoint1, *pixelsTable, YELLOW);
+    // drawLine(testPoint0, testPoint1, *pixelsTable, YELLOW);
 }
 
 void YasEngine::renderViewports(double& deltaTime)
@@ -404,12 +404,21 @@ void YasEngine::handlePhysics()
     {
         for (int i = 0; i < static_cast<int>(objectsToDraw.size() - 2); i++)
         {
+
+            if (!objectsToDraw[i]->isAlive || (objectsToDraw[i]->iAm == GameObject::PROTAGONIST))
+            {
+                continue;
+            }
+
             if((objectsToDraw[i]->iAm == GameObject::PROTAGONIST) && Collider::isCollidingWithCustomWalls(objectsToDraw[i]->collider, *windowDimensions))
             {
                 float leftWall = -static_cast<float>(windowDimensions->x) * 0.5F;
                 float rightWall = static_cast<float>(windowDimensions->x) * 0.0F;
                 float topWall = static_cast<float>(windowDimensions->y) * 0.5F;
                 float bottomWall = -static_cast<float>(windowDimensions->y) * 0.5F;
+
+                // If there is size of PROTAGONIST < SIZE OF WORLD/SCREEN THEN you not have to check collision with to opposite walls
+
                 if(objectsToDraw[i]->getPosition().x - objectsToDraw[i]->collider.radius <  leftWall)
                 {
                     objectsToDraw[i]->setX(leftWall + objectsToDraw[i]->collider.radius + 1);
@@ -428,8 +437,42 @@ void YasEngine::handlePhysics()
                 }
                 // collided = true;
             }
+            // big comment COMMENT WAS HERE
 
-//              DO NOT DELETE IT IS COLLISION WITH NORMAL WALLS WHICH MEANS WINDOWS BOUNDRIES
+           // if (Collider::isCollidingWithCustomWalls(objectsToDraw[i]->collider, *windowDimensions))
+           //  {
+           //      objectsToDraw[i]->isAlive = false;
+           //      if(objectsToDraw[i]->iAm == GameObject::PROTAGONIST)
+           //      {
+           //          writer.write(0, 0, "PLAYER COLLIDING",BLUE, *pixelsTable);
+           //      }
+           //      //std::cout << "HIT" << std::endl;
+           //      continue;
+           //  }
+
+            for (int j = i; j < static_cast<int>(objectsToDraw.size()); j++)
+            {
+                if ((objectsToDraw[i]->iAm == GameObject::PROJECTILE && objectsToDraw[j]->iAm == GameObject::PROJECTILE) ||
+                    (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE && objectsToDraw[j]->iAm == GameObject::COLLECTIBLE))
+                {
+                    continue;
+                }
+
+                if (!(objectsToDraw[i] == objectsToDraw[j]) && objectsToDraw[i]->isAlive && objectsToDraw[j]->isAlive)
+                {
+                    if (Collider::isInCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
+                    {
+                        objectsToDraw[i]->isAlive = false;
+                        objectsToDraw[j]->isAlive = false;
+                        Mix_PlayChannel(-1, hitSound, 0);
+					}
+				}
+			}
+		}
+    }
+
+    //big comment luke
+    //              DO NOT DELETE IT IS COLLISION WITH NORMAL WALLS WHICH MEANS WINDOWS BOUNDRIES
 //            if((objectsToDraw[i]->iAm == GameObject::PROTAGONIST) && Collider::isCollidingWithWall(objectsToDraw[i]->collider, *windowDimensions))
 //            {
 //                float leftWall = -static_cast<float>(windowDimensions->x) * 0.5F;
@@ -453,44 +496,6 @@ void YasEngine::handlePhysics()
 //                    objectsToDraw[i]->setY(bottomWall + objectsToDraw[i]->collider.radius + 1);
 //                }
 //            }
-
-            if (!objectsToDraw[i]->isAlive || (objectsToDraw[i]->iAm == GameObject::PROTAGONIST))
-            {
-                continue;
-            }
-
-           if (Collider::isCollidingWithCustomWalls(objectsToDraw[i]->collider, *windowDimensions))
-            {
-                objectsToDraw[i]->isAlive = false;
-                if(objectsToDraw[i]->iAm == GameObject::PROTAGONIST)
-                {
-                    writer.write(0, 0, "PLAYER COLLIDING",BLUE, *pixelsTable);
-                }
-                //std::cout << "HIT" << std::endl;
-                continue;
-            }
-
-            for (int j = i; j < static_cast<int>(objectsToDraw.size()); j++)
-            {
-                if (!objectsToDraw[j]->isAlive || objectsToDraw[j]->iAm == GameObject::PROTAGONIST ||
-                    (objectsToDraw[i]->iAm == GameObject::PROJECTILE && objectsToDraw[j]->iAm == GameObject::PROJECTILE) ||
-                    (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE && objectsToDraw[j]->iAm == GameObject::COLLECTIBLE))
-                {
-                    continue;
-                }
-
-                if (!(objectsToDraw[i] == objectsToDraw[j]) && objectsToDraw[i]->isAlive && objectsToDraw[j]->isAlive)
-                {
-                    if (Collider::isInCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
-                    {
-                        objectsToDraw[i]->isAlive = false;
-                        objectsToDraw[j]->isAlive = false;
-                        Mix_PlayChannel(-1, hitSound, 0);
-					}
-				}
-			}
-		}
-    }
 }
 
 void YasEngine::moveObjects()
@@ -553,7 +558,7 @@ void YasEngine::prepareSoundAndMusic()
 void YasEngine::prepareGameWorld()
 {
     srand(clock());
-    // zero level node (root)
+
     int mainNodeX = -(windowDimensions->x / 4);
     int mainNodeY = 0;
 
@@ -580,13 +585,8 @@ void YasEngine::prepareGameWorld()
 	    }
     }
 
-
-    //static std::vector<Vector2D<int>*> generateTestPositions()
     testPositions = Node::generateTestPositions();
 
-    // generate just simple position in nodes
-    // first level of child nodes  -> firstLevelNode from left to right
-    // second level of child nodes -> secondLevelNode from left to right
     for(int i=0; i<4; i++)
     {
         for (int j = 0; j < 4; j++)
@@ -666,9 +666,6 @@ void YasEngine::prepareGameWorld()
 
     std::cout << "Player X: " << player->getPosition().x << " | " << player->getPosition().y << "\n";
 
-//    while (true)
-    // for(int i=0; i<4; i++)
-
     std::cout << "BEFORE PUTTING THERE fourRandomPositions size: " << fourRandomPositions.size() << "\n";
 
     std::set<int> numberThatHasBeenDrawn;
@@ -683,7 +680,7 @@ void YasEngine::prepareGameWorld()
              playerPosition.secondLevelNode != spawnersPositions.at(number)->secondLevelNode)
         {
             fourRandomPositions.push_back(spawnersPositions.at(number));
-            // break;
+
         }
     }
 
@@ -699,57 +696,15 @@ void YasEngine::prepareGameWorld()
     {
         for (int j = 0; j < 4; j++)
         {
-            // WHAT THE FUCK??
             spawners->childNodes[i]->childNodes[j]->spawner = new Spawner(spawners->childNodes[i]->childNodes[j]->position->x, spawners->childNodes[i]->childNodes[j]->position->y);
-            // spawners->childNodes[i]->childNodes[j]->spawner->position.x = spawners->childNodes[i]->childNodes[j]->position->x;
-            // spawners->childNodes[i]->childNodes[j]->spawner->position.y = spawners->childNodes[i]->childNodes[j]->position->y;
         }
     }
 
     bool foundNumber = false;
-//         for(int i=0; i<fourRandomPositions.size(); i++)
-//         {
+
     int checksWithTrueResult = 1;
-//    int j = 0;
+
     double quadDiagonal = spawners->childNodes[fourRandomPositions.at(0)->firstLevelNode]->childNodes[fourRandomPositions.at(0)->secondLevelNode]->size * sqrt(2);
-
-    // SECOND TIME I DO CREATING FOUR(4) RANDOM POSITIONS AND PUSH THERE SOME POSITIONS FROM LIST ALL POSITIONS 
-    // while(fourRandomPositions.size() < 4) //checksWithTrueResult <= 4)
-    // {
-    //     srand(clock());
-    //     int position = rand() % 16;
-    //     for (int i = 0; i < fourRandomPositions.size(); i++)
-    //     {
-    //         if(//!(playerPosition.firstLevelNode == spawnersPositions.at(i)->firstLevelNode && playerPosition.secondLevelNode == spawnersPositions.at(i)->secondLevelNode) &&
-    //            (
-    //             (sqrt(pow((spawners->childNodes[fourRandomPositions.at(i)->firstLevelNode]->childNodes[fourRandomPositions.at(i)->secondLevelNode]->position->x -
-    //                        spawners->childNodes[spawnersPositions.at(position)->firstLevelNode]->childNodes[spawnersPositions.at(position)->secondLevelNode]->position->x), 2) +
-    //
-    //                   pow((spawners->childNodes[fourRandomPositions.at(i)->firstLevelNode]->childNodes[fourRandomPositions.at(i)->secondLevelNode]->position->y -
-    //                        spawners->childNodes[spawnersPositions.at(position)->firstLevelNode]->childNodes[spawnersPositions.at(position)->secondLevelNode]->position->y), 2)) > quadDiagonal)
-    //             )
-    //         )
-    //         { // TODO check if checksWithResult is 4 then break all loops
-    //             // TODO check if position is inside collection
-    //             fourRandomPositions.push_back(spawnersPositions.at(position));
-    //             checksWithTrueResult++;
-    //         }
-    //     }
-    // }
-
-//         spawnerPositionNumber.push_back(3);
-//         spawnerPositionNumber.push_back(3);
-
-    // spawners->createSpanwer(spawnerPositionNumber);
-
-    // testPoint0.x = spawners->childNodes[0]->position->x;
-    // testPoint0.y = spawners->childNodes[0]->position->y;
-    //
-    // testPoint1.x = spawners->childNodes[spawnerPositionNumber.at(0)]->childNodes[spawnerPositionNumber.at(0)]->position->x;
-    // testPoint1.y = spawners->childNodes[spawnerPositionNumber.at(0)]->childNodes[spawnerPositionNumber.at(0)]->position->y;
-
-//        std::cout << "x: " << testPoint0.x << "y: " << testPoint0.y << "\n";
-//        std::cout << "x: " << testPoint1.x << "y: " << testPoint1.y << "\n";
 
     numberOfGivenColors.insert({"RED", 0});
     numberOfGivenColors.insert({"GREEN", 0});

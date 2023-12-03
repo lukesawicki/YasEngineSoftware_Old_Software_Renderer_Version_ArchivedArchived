@@ -186,7 +186,6 @@
     <ClCompile Include="SinusPointsGenerator.cpp" />
     <ClCompile Include="Spawner.cpp" />
     <ClCompile Include="SurfaceWithMathBasedEffects.cpp" />
-    <ClCompile Include="temporary.cpp" />
     <ClCompile Include="TimePicker.cpp" />
     <ClCompile Include="YasEngine.cpp" />
     <ClCompile Include="YasGraphicsLibrary.cpp" />

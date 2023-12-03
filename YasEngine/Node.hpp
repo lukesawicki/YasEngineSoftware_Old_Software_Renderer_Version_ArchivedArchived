@@ -70,7 +70,6 @@ class Node
 
             std::vector<Vector2D<int>*> positions;
 
-
             int zeroLevelQuadSize = 800;
             int zeroLevelQuadPosX = -400;
             int zeroLevelQuadPosY = 0;

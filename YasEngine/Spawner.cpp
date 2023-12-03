@@ -5,7 +5,7 @@
 Spawner::Spawner() {
     currentTime = timePicker.getMiliseconds();
     previousTime = currentTime;
-    timeBetweenSpawns = 3000;
+	timeBetweenSpawns = 3000 + rand() % 1000 + 250;
 }
 
 Spawner::Spawner(int x, int y) {
@@ -13,7 +13,7 @@ Spawner::Spawner(int x, int y) {
 	position.y = y;
 	currentTime = timePicker.getMiliseconds();
 	previousTime = currentTime;
-	timeBetweenSpawns = 3000;
+	timeBetweenSpawns = 3000 + rand() % 1000 + 250;;
 }
 
 void Spawner::spawnObject(GameObject*& gameObject)
