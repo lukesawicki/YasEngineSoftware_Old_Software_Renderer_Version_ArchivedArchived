@@ -2,6 +2,8 @@
 #include "YasGraphicsLibrary.hpp"
 #include<cstdlib>     /* srand, rand */
 
+#include "VariousTools.hpp"
+
 FontObject::FontObject()
 {
 
@@ -87,8 +89,7 @@ void FontObject::setColor(const Vector4D<Uint8>& color)
 
 void FontObject::setRandomColor()
 {
-    srand(clock());
-    int col = rand() % 5;
+    int col = randomizer.drawNumberClosedInterval(1, 4); //drawNumberClosedInterval(0, 5); //rand() % 5;
     switch(col)
     {
         case 0:

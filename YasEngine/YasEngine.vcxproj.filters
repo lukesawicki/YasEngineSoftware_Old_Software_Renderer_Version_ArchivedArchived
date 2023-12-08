@@ -126,6 +126,9 @@
     <ClInclude Include="TimePicker.hpp">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="Randomizer.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YasEngine.cpp">
@@ -196,6 +199,9 @@
     </ClCompile>
     <ClCompile Include="BackupCpp.cpp">
       <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Randomizer.cpp">
+      <Filter>Utils</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

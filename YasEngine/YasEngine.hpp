@@ -17,10 +17,13 @@
 #include "Node.hpp"
 #include"ScreenWriter.hpp"
 #include"Button.hpp"
+#include "Randomizer.hpp"
 
 class YasEngine
 {	
 	public:
+		Randomizer randomizer;
+
         bool collided = false;
 		GameObject* go;
         enum GameState
@@ -107,7 +110,7 @@ class YasEngine
 		Player* player;
 		SurfaceWithMathBasedEffects* surfaceWithMathBasedEffects;
 		std::vector<NodeNumbersOnTwoProceedingLevels*> spawnersPositions;
-		std::vector<NodeNumbersOnTwoProceedingLevels*> fourRandomPositions;
+		// std::vector<NodeNumbersOnTwoProceedingLevels*> fourRandomPositions;
 		
 		Mix_Music* music;
 		Mix_Chunk* shootSound;

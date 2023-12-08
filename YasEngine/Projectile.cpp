@@ -21,7 +21,7 @@ Projectile::Projectile(float radius, float x, float y, Vector2D<float> direction
 
 	velocity.x = speed * direction.x;
 	velocity.y = speed * direction.y;
-	color = BLUE;
+	color = YELLOW;
 	generateRegularPolygonVertices(radius, 4);
 	startTime = timePicker.getMiliseconds();
 }

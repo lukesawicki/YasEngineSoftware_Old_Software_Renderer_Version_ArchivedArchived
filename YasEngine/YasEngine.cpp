@@ -16,6 +16,9 @@ YasEngine* YasEngine::instance = nullptr;
 
 void YasEngine::initialize()
 {
+
+    srand(clock());
+
     prepareBasicSettings();
     prepareRendering();
     preparePlayer();
@@ -35,7 +38,7 @@ void YasEngine::clean()
 {
     for (auto drawableObject : objectsToDraw)
     {
-                delete drawableObject;
+        delete drawableObject;
     }
 
     delete sinusPoints;
@@ -267,8 +270,13 @@ void YasEngine::handleSpawningCollectibles()
 {
     for (int i = 0; i < 4; i++)
     {
-        //exception here lukesawicki
-        spawners->childNodes[fourRandomPositions[i]->firstLevelNode]->childNodes[fourRandomPositions[i]->secondLevelNode]->spawner->spawnObject(go);
+        // LOSUJ 4 razy liczbe z 16 spawnerPostions
+        int randomSpawner = randomizer.drawNumberClosedInterval(0, 15);
+
+        int firstLevelNodeIndex = spawnersPositions[randomSpawner]->firstLevelNode;
+        int secondLevelNodeIndex = spawnersPositions[randomSpawner]->secondLevelNode;
+
+        spawners->childNodes[firstLevelNodeIndex]->childNodes[secondLevelNodeIndex]->spawner->spawnObject(go);
         if (go != nullptr)
         {
             objectsToDraw.push_back(go);
@@ -303,10 +311,11 @@ void YasEngine::handlePlayer()
 void YasEngine::preparePlayer()
 {
     srand(clock());
-    int x = rand() % 16;
-    int y = rand() % 16;
+    int sizeOfGameplaySpace = windowDimensions->x * 0.25F;
+    int x = randomizer.drawNumberClosedInterval(0, sizeOfGameplaySpace) - 64;
+    int y = randomizer.drawNumberClosedInterval(0, sizeOfGameplaySpace) - 64;
 
-    player = new Player(( - windowDimensions->x * 0.25F)+x, 0+y);
+    player = new Player(( -sizeOfGameplaySpace)+x, 0+y);
     player->setColor(YELLOW);
     player->setInput(input);
     player->setInput(mousePositionChangeInformation);
@@ -359,10 +368,10 @@ void YasEngine::render(double& deltaTime) {
 //        drawCrossHair(x, y, *pixelsTable, false);
 //    }
 
-    for(int i=0; i<testPositions.size(); i++)
-    {
-        drawCrossHair(testPositions.at(i)->x, testPositions.at(i)->y, *pixelsTable, false, BLUE );
-    }
+    // for(int i=0; i<testPositions.size(); i++)
+    // {
+    //     drawCrossHair(testPositions.at(i)->x, testPositions.at(i)->y, *pixelsTable, false, BLUE );
+    // }
 
 //    testPositions
 
@@ -557,7 +566,7 @@ void YasEngine::prepareSoundAndMusic()
 
 void YasEngine::prepareGameWorld()
 {
-    srand(clock());
+    // srand(clock());
 
     int mainNodeX = -(windowDimensions->x / 4);
     int mainNodeY = 0;
@@ -575,18 +584,6 @@ void YasEngine::prepareGameWorld()
         Node::addNodes(*spawners->childNodes[i]);
     }
 
-    std::cout << "\nAll nodes positions: \n";
-
-    for(int i=0; i<4; i++)
-    {
-	    for(int j=0; j<4; j++)
-	    {
-            std::cout << "ParentNode_X= " << spawners->childNodes[i]->childNodes[j]->position->x << " | ParentNode_Y= " << spawners->childNodes[i]->childNodes[j]->position->y << "\n";
-	    }
-    }
-
-    testPositions = Node::generateTestPositions();
-
     for(int i=0; i<4; i++)
     {
         for (int j = 0; j < 4; j++)
@@ -594,16 +591,6 @@ void YasEngine::prepareGameWorld()
             spawnersPositions.push_back(new NodeNumbersOnTwoProceedingLevels(i, j));
         }
     }
-
-    // TEST CONTROL PREVIEW
-
-    for (int i = 0; i < spawnersPositions.size(); i++)
-    {
-        std::cout << "firstLevelNode: " << spawnersPositions.at(i)->firstLevelNode << " secondLevelNode: " << spawnersPositions.at(i)->secondLevelNode << "\n";
-    }
-
-    // END TEST CONTROL PREVIEW
-
 
     int drawnNumbers=0; // PL - wylosowane a nie narysowane w tym kontekscie
     int iteration = 0;
@@ -635,17 +622,13 @@ void YasEngine::prepareGameWorld()
 //    |--|--|--|--|
 //    | 2|3 | 2|3 |
 //     ```````````
+    // TO READ -----------> Latice
+
     // calculate position of player on tree 1 - level of nodes and number of node and 2 level of node and number
     for(int i=0; i<4; i++)
     {
-        std::cout << "\n" << "pos X: " << player->getPosition().x << " pos Y: " << player->getPosition().y << "\n";
-
         for(int j=0; j<4; j++)
         {
-            std::cout << "i: " << i << "| j: " << j << "\n";
-            std::cout << " childNode of childNode position->X: " << spawners->childNodes[i]->childNodes[j]->position->x
-                << " childNode of childNode position->Y: " << spawners->childNodes[i]->childNodes[j]->position->y << "\n";
-
             if (
                 player->getPosition().x >= (spawners->childNodes[i]->childNodes[j]->position->x - spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
                 player->getPosition().x < (spawners->childNodes[i]->childNodes[j]->position->x + spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
@@ -661,37 +644,6 @@ void YasEngine::prepareGameWorld()
     }
     afterFor:
 
-    std::cout << "\n\n Player, first node: " << playerPosition.firstLevelNode << "\n";
-    std::cout << "Player, second node: " << playerPosition.secondLevelNode << "\n";
-
-    std::cout << "Player X: " << player->getPosition().x << " | " << player->getPosition().y << "\n";
-
-    std::cout << "BEFORE PUTTING THERE fourRandomPositions size: " << fourRandomPositions.size() << "\n";
-
-    std::set<int> numberThatHasBeenDrawn;
-
-    while(fourRandomPositions.size() < 4)
-	{
-        srand(clock());
-        int number = rand() % 16;
-        //////////                         TUTAJ JEST BUG MUSZE ZAPISYWAC KTORE POZYCJE JUZ WPROWADZILEM
-        std::pair<std::set<int>::iterator, bool> iterator = numberThatHasBeenDrawn.insert(number);
-        if( iterator.second && playerPosition.firstLevelNode != spawnersPositions.at(number)->firstLevelNode &&
-             playerPosition.secondLevelNode != spawnersPositions.at(number)->secondLevelNode)
-        {
-            fourRandomPositions.push_back(spawnersPositions.at(number));
-
-        }
-    }
-
-    std::cout << "fourRandomPositions size: " << fourRandomPositions.size() << "\n";
-    std::cout << "four random positions: " << "\n";
-    for(int i=0; i<4; i++)
-    {
-        std::cout << fourRandomPositions[i]->firstLevelNode << " | "  << fourRandomPositions[i]->secondLevelNode << "\n";
-    }
-
-
     for (int i = 0; i < 4; i++)
     {
         for (int j = 0; j < 4; j++)
@@ -700,17 +652,10 @@ void YasEngine::prepareGameWorld()
         }
     }
 
-    bool foundNumber = false;
-
-    int checksWithTrueResult = 1;
-
-    double quadDiagonal = spawners->childNodes[fourRandomPositions.at(0)->firstLevelNode]->childNodes[fourRandomPositions.at(0)->secondLevelNode]->size * sqrt(2);
-
     numberOfGivenColors.insert({"RED", 0});
     numberOfGivenColors.insert({"GREEN", 0});
     numberOfGivenColors.insert({"BLUE", 0});
     numberOfGivenColors.insert({"YELLOW", 0});
-
 
     prepareDataForDrawingGraphs();
 }

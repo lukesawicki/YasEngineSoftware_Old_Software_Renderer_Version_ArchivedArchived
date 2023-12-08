@@ -153,6 +153,7 @@
     <ClInclude Include="PointsSet.hpp" />
     <ClInclude Include="PrimeNumbersPointsGenerator.hpp" />
     <ClInclude Include="Projectile.hpp" />
+    <ClInclude Include="Randomizer.hpp" />
     <ClInclude Include="ScreenWriter.hpp" />
     <ClInclude Include="SinusPointsGenerator.hpp" />
     <ClInclude Include="Spawner.hpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PrimeNumbersPointsGenerator.cpp" />
     <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="Randomizer.cpp" />
     <ClCompile Include="ScreenWriter.cpp" />
     <ClCompile Include="SinusPointsGenerator.cpp" />
     <ClCompile Include="Spawner.cpp" />

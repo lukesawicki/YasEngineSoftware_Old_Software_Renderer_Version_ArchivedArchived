@@ -1,10 +1,12 @@
 #ifndef COLLECTIBLE_HPP
 #define COLLECTIBLE_HPP
 #include "GameObject.hpp"
+#include "Randomizer.hpp"
 
 class Destroyable: public GameObject
 {
 public:
+	Randomizer randomizer;
 	Destroyable(float radius, float x, float y, Vector2D<float> direction, int numberOfVertices);
 	~Destroyable();
 	void generate() override;

@@ -81,8 +81,7 @@ void Destroyable::setColor(const Vector4D<Uint8>& color)
 
 void Destroyable::setRandomColor()
 {
-	srand(clock());
-	int col = rand() % 5;
+	int col = randomizer.drawNumberClosedInterval(1, 4); // rand() % 5;
 	switch(col)
 	{
 	case 0:

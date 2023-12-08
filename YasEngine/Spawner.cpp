@@ -1,11 +1,12 @@
 #include<cstdlib>
 #include"Spawner.hpp"
 #include "Destroyable.hpp"
+#include "VariousTools.hpp"
 
 Spawner::Spawner() {
     currentTime = timePicker.getMiliseconds();
     previousTime = currentTime;
-	timeBetweenSpawns = 3000 + rand() % 1000 + 250;
+	timeBetweenSpawns = 3000 + randomizer.drawNumberClosedInterval(6000, 10000);
 }
 
 Spawner::Spawner(int x, int y) {
@@ -13,7 +14,7 @@ Spawner::Spawner(int x, int y) {
 	position.y = y;
 	currentTime = timePicker.getMiliseconds();
 	previousTime = currentTime;
-	timeBetweenSpawns = 3000 + rand() % 1000 + 250;;
+	timeBetweenSpawns = 3000 + randomizer.drawNumberClosedInterval(6000, 10000);
 }
 
 void Spawner::spawnObject(GameObject*& gameObject)
@@ -23,14 +24,14 @@ void Spawner::spawnObject(GameObject*& gameObject)
     {
 		int oldTargetPositionX = 0;
 		int oldTargetPositionY = 0;
-		srand(clock());
+		// srand(clock());
 
-		int xPos = rand() % spawningMaxRadius + spawningMinRadius;
-		int yPos = rand() % spawningMaxRadius + spawningMinRadius;
-		int dirX = rand() % maxValueForDrawingSpawningDirection + 1;
-		int dirY = rand() % maxValueForDrawingSpawningDirection + 1;
+		int xPos = randomizer.drawNumberClosedInterval(spawningMinRadius, spawningMaxRadius); // % spawningMaxRadius + spawningMinRadius;
+		int yPos = randomizer.drawNumberClosedInterval(spawningMinRadius, spawningMaxRadius);
+		int dirX = randomizer.drawNumberClosedInterval(1, maxValueForDrawingSpawningDirection);
+		int dirY = randomizer.drawNumberClosedInterval(1, maxValueForDrawingSpawningDirection);
 
-		int numberOfVertices = rand() % 7 + 3;
+		int numberOfVertices = randomizer.drawNumberClosedInterval(3, 7); //rand() % 7 + 3;
 
 		if (dirX <= maxValueForDrawingSpawningDirection*0.5)
 		{
