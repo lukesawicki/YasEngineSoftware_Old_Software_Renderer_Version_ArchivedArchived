@@ -6,7 +6,7 @@
 Spawner::Spawner() {
     currentTime = timePicker.getMiliseconds();
     previousTime = currentTime;
-	timeBetweenSpawns = 3000 + randomizer.drawNumberClosedInterval(6000, 10000);
+	timeBetweenSpawns = 3000 + Randomizer::drawNumberClosedInterval(6000, 10000);
 }
 
 Spawner::Spawner(int x, int y) {
@@ -14,7 +14,7 @@ Spawner::Spawner(int x, int y) {
 	position.y = y;
 	currentTime = timePicker.getMiliseconds();
 	previousTime = currentTime;
-	timeBetweenSpawns = 3000 + randomizer.drawNumberClosedInterval(6000, 10000);
+	timeBetweenSpawns = 3000 + Randomizer::drawNumberClosedInterval(6000, 10000);
 }
 
 void Spawner::spawnObject(GameObject*& gameObject)
@@ -26,12 +26,12 @@ void Spawner::spawnObject(GameObject*& gameObject)
 		int oldTargetPositionY = 0;
 		// srand(clock());
 
-		int xPos = randomizer.drawNumberClosedInterval(spawningMinRadius, spawningMaxRadius); // % spawningMaxRadius + spawningMinRadius;
-		int yPos = randomizer.drawNumberClosedInterval(spawningMinRadius, spawningMaxRadius);
-		int dirX = randomizer.drawNumberClosedInterval(1, maxValueForDrawingSpawningDirection);
-		int dirY = randomizer.drawNumberClosedInterval(1, maxValueForDrawingSpawningDirection);
+		int xPos = Randomizer::drawNumberClosedInterval(spawningMinRadius, spawningMaxRadius); // % spawningMaxRadius + spawningMinRadius;
+		int yPos = Randomizer::drawNumberClosedInterval(spawningMinRadius, spawningMaxRadius);
+		int dirX = Randomizer::drawNumberClosedInterval(1, maxValueForDrawingSpawningDirection);
+		int dirY = Randomizer::drawNumberClosedInterval(1, maxValueForDrawingSpawningDirection);
 
-		int numberOfVertices = randomizer.drawNumberClosedInterval(3, 7); //rand() % 7 + 3;
+		int numberOfVertices = Randomizer::drawNumberClosedInterval(3, 7); //rand() % 7 + 3;
 
 		if (dirX <= maxValueForDrawingSpawningDirection*0.5)
 		{
@@ -58,7 +58,7 @@ void Spawner::spawnObject(GameObject*& gameObject)
 
 		if (oldTargetPositionX != targetPositionX || oldTargetPositionY != targetPositionY)
 		{
-			gameObject = new Destroyable(16, static_cast<float>(targetPositionX), static_cast<float>(targetPositionY), Vector2D<float>(0.0F, 0.0F), numberOfVertices);
+			gameObject = new Destroyable(16, static_cast<float>(targetPositionX), static_cast<float>(targetPositionY), numberOfVertices);
 		}
 
         previousTime = currentTime;

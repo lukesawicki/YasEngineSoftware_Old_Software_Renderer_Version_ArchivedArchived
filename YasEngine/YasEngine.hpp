@@ -22,7 +22,7 @@
 class YasEngine
 {	
 	public:
-		Randomizer randomizer;
+		// Randomizer randomizer;
 
         bool collided = false;
 		GameObject* go;

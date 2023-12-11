@@ -7,7 +7,7 @@
 class FontObject : public GameObject
 {
     public:
-        Randomizer randomizer;
+        // Randomizer randomizer;
         FontObject();
         void initialize(float radius, float x, float y, const Vector2D<float>& direction, int numberOfVertices);
         ~FontObject();

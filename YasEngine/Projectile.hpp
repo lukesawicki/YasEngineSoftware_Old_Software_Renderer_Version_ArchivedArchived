@@ -8,7 +8,7 @@
 class Projectile : public GameObject
 {
 	private:
-		bool directionSwitched = false;
+		// bool directionSwitched = false;
 	public:
 		int liveTime = 500;
         TimePicker timePicker;

@@ -2,22 +2,67 @@
 #include "YasGraphicsLibrary.hpp"
 #include<cstdlib>     /* srand, rand */
 
-Destroyable::Destroyable(float radius, float x, float y, Vector2D<float> direction, int numberOfVertices)
+Destroyable::Destroyable(float radius, float x, float y, int numberOfVertices)
 {
 	isAlive = true;
 	iAm = GameObject::COLLECTIBLE;
 	collider.radius = radius;
-	speed = 200;
+	speed = 20;
+	Vector2D<float> position(x, y);
 	this->position.x = x;
 	this->position.y = y;
 	this->collider.x = x;
 	this->collider.y = y;
-	Vector2D<float> position(x, y);
+	float angle = Randomizer::drawNumberClosedInterval(0, 360);
+	direction.x = 1;
+	direction.y = 0;
+	angle = angle * (PI / 180.0F); // PRZELICZYC NA RADIANY
+	Vector2D<float>::rotateVectorOverTheAngle(&direction, angle);
 	velocity.x = speed * direction.x;
 	velocity.y = speed * direction.y;
 	setRandomColor();
 	generateRegularPolygonVertices(radius, numberOfVertices);
 }
+
+// void Player::rotateToMousePositionInLocalCoordinateSystem(float x, float y, Vector2D<int>* windowDimensions)
+// {
+// 	if (x <= windowDimensions->x && y <= windowDimensions->y)
+// 	{
+// 		float currentX = x;
+// 		float currentY = y;
+//
+// 		windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
+//
+// 		Vector2D<float> currentMousePosition = Vector2D<float>(currentX, currentY);
+//
+// 		Vector2D<float> mouseDirectionInLocalCoordynationSystem = Vector2D<float>::createUnitVectorFromBoundVector(currentMousePosition, position);
+//
+// 		float angleBetweenCurrentAndMouse = Vector2D<float>::angleBetweenVectors(direction, mouseDirectionInLocalCoordynationSystem);
+//
+// 		rotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
+// 		Vector2D<float>::rotateVectorOverTheAngle(&direction, angleBetweenCurrentAndMouse);
+// 	}
+// }
+
+// Projectile::Projectile(float radius, float x, float y, Vector2D<float> direction)
+// {
+// 	isAlive = true;
+// 	iAm = WhoAmI::PROJECTILE;
+// 	collider.radius = radius;
+// 	directionSwitched = false;
+// 	speed = 200;
+// 	Vector2D<float> position(x, y);
+// 	this->position.x = x;
+// 	this->position.y = y;
+// 	this->collider.x = x;
+// 	this->collider.y = y;
+//
+// 	velocity.x = speed * direction.x;
+// 	velocity.y = speed * direction.y;
+// 	color = YELLOW;
+// 	generateRegularPolygonVertices(radius, 4);
+// 	startTime = timePicker.getMiliseconds();
+// }
 
 Destroyable::~Destroyable()
 {
@@ -32,7 +77,14 @@ void Destroyable::generate()
 		worldVertices[i].y = position.y + localVertices[i].y;
 	}
 }
-
+// void Projectile::generate()
+// {
+// 	for (int i = 0; i < numberOfVertices; i++)
+// 	{
+// 		worldVertices[i].x = position.x + localVertices[i].x;
+// 		worldVertices[i].y = position.y + localVertices[i].y;
+// 	}
+// }
 void Destroyable::generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices)
 {
 	this->circumscribedCircleRadius = circumscribedCircleRadius;
@@ -68,10 +120,25 @@ void Destroyable::setPosition(const Vector2D<float>& position)
 
 void Destroyable::move(float deltaTime)
 {
-	//position.x = position.x + deltaTime * velocity.x;
-	//position.y = position.y + deltaTime * velocity.y;
-	//moveCollider();
-	//regeneratePolygon();
+	position.x = position.x + deltaTime * velocity.x;
+	position.y = position.y + deltaTime * velocity.y;
+	moveCollider();
+	regeneratePolygon();
+
+
+
+	// void Projectile::move(float deltaTime)
+	// {
+	// 	if (timePicker.getMiliseconds() - startTime >= 2000)
+	// 	{
+	// 		this->isAlive = false;
+	// 	}
+	//
+	// 	position.x = position.x + deltaTime * velocity.x;
+	// 	position.y = position.y + deltaTime * velocity.y;
+	// 	moveCollider();
+	// 	regeneratePolygon();
+	// }
 }
 
 void Destroyable::setColor(const Vector4D<Uint8>& color)
@@ -81,7 +148,7 @@ void Destroyable::setColor(const Vector4D<Uint8>& color)
 
 void Destroyable::setRandomColor()
 {
-	int col = randomizer.drawNumberClosedInterval(1, 4); // rand() % 5;
+	int col = Randomizer::drawNumberClosedInterval(1, 4); // rand() % 5;
 	switch(col)
 	{
 	case 0:

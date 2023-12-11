@@ -8,7 +8,7 @@
 class Spawner
 {
 	public:
-		Randomizer randomizer;
+		// Randomizer randomizer;
         int timeBetweenSpawns;
         TimePicker timePicker;
 		Vector2D<int> position;

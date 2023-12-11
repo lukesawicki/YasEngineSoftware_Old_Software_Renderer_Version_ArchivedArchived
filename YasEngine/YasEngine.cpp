@@ -271,7 +271,7 @@ void YasEngine::handleSpawningCollectibles()
     for (int i = 0; i < 4; i++)
     {
         // LOSUJ 4 razy liczbe z 16 spawnerPostions
-        int randomSpawner = randomizer.drawNumberClosedInterval(0, 15);
+        int randomSpawner = Randomizer::drawNumberClosedInterval(0, 15);
 
         int firstLevelNodeIndex = spawnersPositions[randomSpawner]->firstLevelNode;
         int secondLevelNodeIndex = spawnersPositions[randomSpawner]->secondLevelNode;
@@ -312,8 +312,8 @@ void YasEngine::preparePlayer()
 {
     srand(clock());
     int sizeOfGameplaySpace = windowDimensions->x * 0.25F;
-    int x = randomizer.drawNumberClosedInterval(0, sizeOfGameplaySpace) - 64;
-    int y = randomizer.drawNumberClosedInterval(0, sizeOfGameplaySpace) - 64;
+    int x = Randomizer::drawNumberClosedInterval(0, sizeOfGameplaySpace) - 64;
+    int y = Randomizer::drawNumberClosedInterval(0, sizeOfGameplaySpace) - 64;
 
     player = new Player(( -sizeOfGameplaySpace)+x, 0+y);
     player->setColor(YELLOW);

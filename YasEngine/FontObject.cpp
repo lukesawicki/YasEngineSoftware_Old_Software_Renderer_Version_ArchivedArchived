@@ -89,7 +89,7 @@ void FontObject::setColor(const Vector4D<Uint8>& color)
 
 void FontObject::setRandomColor()
 {
-    int col = randomizer.drawNumberClosedInterval(1, 4); //drawNumberClosedInterval(0, 5); //rand() % 5;
+    int col = Randomizer::drawNumberClosedInterval(1, 4); //drawNumberClosedInterval(0, 5); //rand() % 5;
     switch(col)
     {
         case 0:

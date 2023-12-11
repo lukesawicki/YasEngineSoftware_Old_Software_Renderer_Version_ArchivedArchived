@@ -6,8 +6,8 @@
 class Destroyable: public GameObject
 {
 public:
-	Randomizer randomizer;
-	Destroyable(float radius, float x, float y, Vector2D<float> direction, int numberOfVertices);
+	// Randomizer randomizer;
+	Destroyable(float radius, float x, float y, int numberOfVertices);
 	~Destroyable();
 	void generate() override;
 	void generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices) override;
