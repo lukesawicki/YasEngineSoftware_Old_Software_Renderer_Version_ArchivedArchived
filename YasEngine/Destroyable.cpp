@@ -8,12 +8,11 @@ Destroyable::Destroyable(float radius, float x, float y, int numberOfVertices)
 	iAm = GameObject::COLLECTIBLE;
 	collider.radius = radius;
 	speed = 20;
-	Vector2D<float> position(x, y);
 	this->position.x = x;
 	this->position.y = y;
 	this->collider.x = x;
 	this->collider.y = y;
-	float angle = Randomizer::drawNumberClosedInterval(0, 360);
+	float angle = Randomizer::drawNumberClosedInterval(0, 180);
 	direction.x = 1;
 	direction.y = 0;
 	angle = angle * (PI / 180.0F); // PRZELICZYC NA RADIANY
@@ -124,8 +123,6 @@ void Destroyable::move(float deltaTime)
 	position.y = position.y + deltaTime * velocity.y;
 	moveCollider();
 	regeneratePolygon();
-
-
 
 	// void Projectile::move(float deltaTime)
 	// {

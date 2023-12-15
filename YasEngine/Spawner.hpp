@@ -19,12 +19,14 @@ class Spawner
         double startTime = 0;
         double currentTime = 0;
         double previousTime = 0;
+		bool firstSpawned=false;
 
         Spawner();
 
 		Spawner(int x, int y);
-			void spawnObject(GameObject*& gameObject);
+		void spawnObject(GameObject*& gameObject);
 	private:
+		void prepareObjectToSpawn(GameObject*& gameObject);
 
 };
 

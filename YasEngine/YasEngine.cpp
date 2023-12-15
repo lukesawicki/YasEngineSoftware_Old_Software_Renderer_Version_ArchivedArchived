@@ -268,6 +268,7 @@ void YasEngine::handleMouseMovement()
 
 void YasEngine::handleSpawningCollectibles()
 {
+    // timePicker.getMiliseconds();
     for (int i = 0; i < 4; i++)
     {
         // LOSUJ 4 razy liczbe z 16 spawnerPostions
@@ -280,6 +281,7 @@ void YasEngine::handleSpawningCollectibles()
         if (go != nullptr)
         {
             objectsToDraw.push_back(go);
+            go = nullptr;
         }
     }
 }
@@ -419,7 +421,7 @@ void YasEngine::handlePhysics()
                 continue;
             }
 
-            if((objectsToDraw[i]->iAm == GameObject::PROTAGONIST) && Collider::isCollidingWithCustomWalls(objectsToDraw[i]->collider, *windowDimensions))
+            if((objectsToDraw[i]->iAm == GameObject::PROTAGONIST || objectsToDraw[i]->iAm == GameObject::COLLECTIBLE) && Collider::isCollidingWithCustomWalls(objectsToDraw[i]->collider, *windowDimensions))
             {
                 float leftWall = -static_cast<float>(windowDimensions->x) * 0.5F;
                 float rightWall = static_cast<float>(windowDimensions->x) * 0.0F;
