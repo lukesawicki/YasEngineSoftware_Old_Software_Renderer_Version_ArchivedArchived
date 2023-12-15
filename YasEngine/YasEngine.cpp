@@ -269,7 +269,7 @@ void YasEngine::handleMouseMovement()
 void YasEngine::handleSpawningCollectibles()
 {
     // timePicker.getMiliseconds();
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 8; i++)
     {
         // LOSUJ 4 razy liczbe z 16 spawnerPostions
         int randomSpawner = Randomizer::drawNumberClosedInterval(0, 15);

@@ -7,7 +7,7 @@ Spawner::Spawner() {
     currentTime = timePicker.getMiliseconds();
     previousTime = currentTime;
 	// int timeShift = 1000;
-	timeBetweenSpawns = Randomizer::drawNumberClosedInterval(6000, 10000);
+	timeBetweenSpawns = Randomizer::drawNumberClosedInterval(2000, 6000);
 }
 
 Spawner::Spawner(int x, int y) {
@@ -16,7 +16,7 @@ Spawner::Spawner(int x, int y) {
 	// int timeShift = 1000;
 	currentTime = timePicker.getMiliseconds();
 	previousTime = currentTime;
-	timeBetweenSpawns = +Randomizer::drawNumberClosedInterval(6000, 10000);
+	timeBetweenSpawns = +Randomizer::drawNumberClosedInterval(2000, 6000);
 }
 
 void Spawner::spawnObject(GameObject*& gameObject)
@@ -31,12 +31,6 @@ void Spawner::spawnObject(GameObject*& gameObject)
 	}
 
     currentTime = timePicker.getMiliseconds();
-
-	// from projectile implementation
-	// if (timePicker.getMiliseconds() - startTime >= 2000)
-	// {
-	// 	this->isAlive = false;
-	// }
 
     if( (currentTime - previousTime) >= timeBetweenSpawns)
     {

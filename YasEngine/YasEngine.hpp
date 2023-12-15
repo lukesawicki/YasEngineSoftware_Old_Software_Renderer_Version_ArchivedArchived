@@ -109,6 +109,8 @@ class YasEngine
 		int WINDOW_HEIGHT = 800;
 
 		std::vector<GameObject*> objectsToDraw;
+		bool first16Spawned = false;
+		int howMany = 0;
 		Player* player;
 		SurfaceWithMathBasedEffects* surfaceWithMathBasedEffects;
 		std::vector<NodeNumbersOnTwoProceedingLevels*> spawnersPositions;

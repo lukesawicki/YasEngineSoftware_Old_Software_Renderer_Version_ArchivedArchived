@@ -17,8 +17,8 @@ class Spawner
 		int spawningMinRadius = 8;// 24;
 		int maxValueForDrawingSpawningDirection = 4;
         double startTime = 0;
-        double currentTime = 0;
-        double previousTime = 0;
+		double currentTime = 0;
+		double previousTime = 0;
 		bool firstSpawned=false;
 
         Spawner();
