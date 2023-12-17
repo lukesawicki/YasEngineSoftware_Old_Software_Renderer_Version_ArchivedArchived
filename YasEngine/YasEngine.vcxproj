@@ -145,6 +145,8 @@
     <ClInclude Include="FontSurface.hpp" />
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="InputOutputHandler.hpp" />
+    <ClInclude Include="LineSegment.hpp" />
+    <ClInclude Include="MapFrame.hpp" />
     <ClInclude Include="Math.hpp" />
     <ClInclude Include="Node.hpp" />
     <ClInclude Include="PixelsTable.hpp" />

@@ -521,7 +521,7 @@
 
     void drawVerticalLine(PixelsTable& pixelsTable, int y0, int y1, int x, Vector4D<Uint8> color)
     {
-        for (int i = y0; i < y1; i++)
+        for (int i = -y0; i < y1; i++)
         {
             pixelsTable.drawPoint(x, i, color);
         }

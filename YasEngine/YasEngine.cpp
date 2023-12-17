@@ -147,6 +147,15 @@ void YasEngine::drawHudElements(double& deltaTime)
 {
     drawCartesianAxies(*pixelsTable);
     drawCrossHair(mouseX, mouseY, *pixelsTable, false);
+
+    drawHorizontalLine(*pixelsTable, mapFrame.topLineSegment.point0.x, mapFrame.topLineSegment.point1.x, mapFrame.topLineSegment.point0.y, RED);
+    drawHorizontalLine(*pixelsTable, mapFrame.bottomLineSegment.point0.x, mapFrame.bottomLineSegment.point1.x, mapFrame.bottomLineSegment.point0.y, GREEN);
+
+    drawVerticalLine(*pixelsTable, mapFrame.leftLineSegment.point0.y, mapFrame.leftLineSegment.point1.y, mapFrame.leftLineSegment.point0.x, YELLOW);
+    drawVerticalLine(*pixelsTable, mapFrame.rightLineSegment.point0.y, mapFrame.rightLineSegment.point1.y, mapFrame.rightLineSegment.point0.x, YELLOW);
+
+
+    drawVerticalLine(*pixelsTable, 300, -300, -400, YELLOW);
 }
 
 void YasEngine::handleInput(SDL_Event& event)
@@ -662,6 +671,56 @@ void YasEngine::prepareGameWorld()
     prepareDataForDrawingGraphs();
 }
 
+void YasEngine::setFrameAroundGameplaySpace()
+{
+    // struct MapFrame
+    // {
+    //     LineSegment leftLineSegment;
+    //     LineSegment rightLineSegment;
+    //     LineSegment topLineSegment;
+    //     LineSegment bottomLineSegment;
+    // };
+    // lukesawicki
+
+    const int VERTHICAL_SHIFT=10;
+    const int HORIZONTAL_SHIFT=10;
+
+    // HORIZONTAL LINE SEGMENTS
+    // Top
+	// Left point
+    mapFrame.topLineSegment.point0.x = (-(windowDimensions->x / 2)) + HORIZONTAL_SHIFT;
+    mapFrame.topLineSegment.point0.y = (windowDimensions->y / 2) - HORIZONTAL_SHIFT;
+    // Right point
+    mapFrame.topLineSegment.point1.x = -1 - HORIZONTAL_SHIFT;
+    mapFrame.topLineSegment.point1.y = (windowDimensions->y / 2) - HORIZONTAL_SHIFT;
+
+    // Bottom
+    // Left point
+    mapFrame.bottomLineSegment.point0.x = (-(windowDimensions->x / 2)) + HORIZONTAL_SHIFT;
+    mapFrame.bottomLineSegment.point0.y = (-(windowDimensions->y / 2)) + HORIZONTAL_SHIFT;
+
+    // Right point
+    mapFrame.bottomLineSegment.point1.x = -HORIZONTAL_SHIFT;
+    mapFrame.bottomLineSegment.point1.y = (-(windowDimensions->y / 2)) + HORIZONTAL_SHIFT;
+
+    // VERTICAL LINE SEGMENTS
+	// Left
+    // Top point
+    mapFrame.leftLineSegment.point0.x = (-(windowDimensions->x / 2)) + VERTHICAL_SHIFT;
+    mapFrame.leftLineSegment.point0.y = (windowDimensions->y / 2) - VERTHICAL_SHIFT;
+    // Bottom point
+    mapFrame.leftLineSegment.point1.x = (-(windowDimensions->x / 2)) + VERTHICAL_SHIFT;
+    mapFrame.leftLineSegment.point1.y = (-(windowDimensions->y / 2)) + VERTHICAL_SHIFT;
+
+    // Right
+    // Top point
+    mapFrame.rightLineSegment.point0.x = -1 - VERTHICAL_SHIFT;
+    mapFrame.rightLineSegment.point0.y = (windowDimensions->y / 2) - VERTHICAL_SHIFT;
+    // Bottom point
+    mapFrame.rightLineSegment.point1.x = -1 - VERTHICAL_SHIFT;
+    mapFrame.rightLineSegment.point1.y = (-(windowDimensions->y / 2)) + VERTHICAL_SHIFT;
+}
+
 void YasEngine::prepareDataForDrawingGraphs()
 {
     SinusPointsGenerator sinusPointsGenerator;
@@ -731,6 +790,8 @@ void YasEngine::prepareInterface()
     buttons.at(1)->localVertices[3].x = 0 - dynamic_cast<Button*>(buttons.at(1))->buttonWidth * 0.5F;
     buttons.at(1)->localVertices[3].y = 0 - dynamic_cast<Button*>(buttons.at(1))->buttonHeight * 0.5F;
     buttons.at(1)->generate();
+
+    setFrameAroundGameplaySpace();
 }
 
 void YasEngine::drawButtons()

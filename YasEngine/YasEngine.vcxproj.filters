@@ -129,6 +129,12 @@
     <ClInclude Include="Randomizer.hpp">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="MapFrame.hpp">
+      <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="LineSegment.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YasEngine.cpp">

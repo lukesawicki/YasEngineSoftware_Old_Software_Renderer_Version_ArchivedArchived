@@ -17,6 +17,7 @@
 #include "Node.hpp"
 #include"ScreenWriter.hpp"
 #include"Button.hpp"
+#include "MapFrame.hpp"
 #include "Randomizer.hpp"
 
 class YasEngine
@@ -140,6 +141,8 @@ class YasEngine
         ScreenWriter writer;
         int step = 0;
 
+		MapFrame mapFrame;
+
 		YasEngine() {};
 		bool shouldApplicationStopRunning = false;
 		YasInOut::Input* input = new YasInOut::Input();
@@ -156,6 +159,7 @@ class YasEngine
 		void handlePhysics();
 		void moveObjects();
 		void prepareGameWorld();
+		void setFrameAroundGameplaySpace();
         void prepareDataForDrawingGraphs();
 		void preparePlayer();
         void prepareInterface();
