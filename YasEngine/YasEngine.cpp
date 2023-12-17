@@ -155,7 +155,7 @@ void YasEngine::drawHudElements(double& deltaTime)
     drawVerticalLine(*pixelsTable, mapFrame.rightLineSegment.point0.y, mapFrame.rightLineSegment.point1.y, mapFrame.rightLineSegment.point0.x, YELLOW);
 
 
-    drawVerticalLine(*pixelsTable, 300, -300, -400, YELLOW);
+    drawVerticalLine(*pixelsTable, 300, -20, -400, YELLOW);
 }
 
 void YasEngine::handleInput(SDL_Event& event)

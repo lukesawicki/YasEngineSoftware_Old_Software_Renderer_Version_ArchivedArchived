@@ -506,6 +506,7 @@
             // TODO refactor methods drawHor... and drawVer... should have float arguments and then round and cast
             drawHorizontalLine(pixelsTable, static_cast<int>(round(x) - 15), static_cast<int>(round(x) - 5), static_cast<int>(round(y)), color);
             drawHorizontalLine(pixelsTable, static_cast<int>(round(x) + 5), static_cast<int>(round(x) + 15), static_cast<int>(round(y)), color);
+
             drawVerticalLine(pixelsTable, static_cast<int>(round(y) - 15), static_cast<int>(round(y) - 5), static_cast<int>(round(x)), color);
             drawVerticalLine(pixelsTable, static_cast<int>(round(y) + 5), static_cast<int>(round(y) + 15), static_cast<int>(round(x)), color);
         }
@@ -521,7 +522,13 @@
 
     void drawVerticalLine(PixelsTable& pixelsTable, int y0, int y1, int x, Vector4D<Uint8> color)
     {
-        for (int i = -y0; i < y1; i++)
+        if (y0 > y1)
+        {
+            int tmp = y0;
+            y0 = y1;
+            y1 = tmp;
+        }
+        for (int i = y0; i < y1; i++)
         {
             pixelsTable.drawPoint(x, i, color);
         }

@@ -41,7 +41,7 @@ void PixelsTable::clearColor(const Vector4D<Uint8>& drawingColor)
 
 void PixelsTable::drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor)
 {
-	cartesianPositionToWindow(x, y);
+ 	cartesianPositionToWindow(x, y);
 	if (x >= 0 && x < windowDimensions.x && y >= 0 && y < windowDimensions.y)
 	{
 		pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + RED_POSITION] = drawingColor.x; // windowDimensions->x <- WINDOW WIDTH
