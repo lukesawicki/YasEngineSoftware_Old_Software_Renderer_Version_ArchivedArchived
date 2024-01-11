@@ -17,7 +17,7 @@ public:
 	void move(float deltaTime) override;
 	void setColor(const Vector4D<Uint8>& color) override;
 	void setRandomColor();
-	Vector2D<float> velocity;
+	// Vector2D<float> velocity;
 };
 
 #endif

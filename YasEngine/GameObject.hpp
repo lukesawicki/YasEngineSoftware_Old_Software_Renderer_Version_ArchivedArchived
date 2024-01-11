@@ -29,6 +29,8 @@ class GameObject
 		float directionMouseAngle = 0;
 		float speed = 0.0F;
 
+		Vector2D<float> velocity;
+
 		virtual void generate() = 0;
 		virtual void generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices) = 0;
 		virtual void regeneratePolygon() = 0;

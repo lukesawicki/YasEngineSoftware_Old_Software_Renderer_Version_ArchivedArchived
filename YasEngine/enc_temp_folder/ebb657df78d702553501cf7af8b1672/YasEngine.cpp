@@ -488,9 +488,6 @@ void YasEngine::handlePhysics()
 
                         // calculate angle betwen normal vector and velocity vector
                         // rotate velocity vector around that angle
-
-
-
                         Vector2D<float> normal(-1, 0);
                         float angle = Vector2D<float>::angleBetweenVectors(normal, objectsToDraw[i]->velocity);
                         Vector2D<float>::rotateVectorOverTheAngle(&objectsToDraw[i]->velocity, 1.5708+angle);
