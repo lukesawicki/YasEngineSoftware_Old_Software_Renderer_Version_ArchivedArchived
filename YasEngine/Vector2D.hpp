@@ -71,6 +71,20 @@ class Vector2D
 			Vector2D::normalizedVector(w);
 			return w;
 		}
+
+		//minued => odjemna  - subtrahed => odjemnik
+
+		static void substract(Vector2D<Type>* minued, const Vector2D<Type>& subtrahed)
+		{
+			minued->x = minued->x - subtrahed.x;
+			minued->y = minued->y - subtrahed.y;
+		}
+
+		static void multiplyByScalar(Vector2D<Type>* v, Type scalar)
+		{
+			v->x = v->x * scalar;
+			v->y = v->y * scalar;
+		}
 };
 
 #endif

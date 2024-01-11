@@ -430,103 +430,39 @@ void YasEngine::handlePhysics()
                 continue;
             }
 
-            // lukesawicki 2024-01-06_1027 here was error
-            // I was doing checking collision in if() in method isCollidingWithcustomWalls(...)
             if((objectsToDraw[i]->iAm == GameObject::PROTAGONIST || objectsToDraw[i]->iAm == GameObject::COLLECTIBLE) )// 2024-01-06_1027 && Collider::isCollidingWithCustomWalls(objectsToDraw[i]->collider, *windowDimensions))
             {
-                // float leftWall = -static_cast<float>(windowDimensions->x) * 0.5F;
-                // float rightWall = static_cast<float>(windowDimensions->x) * 0.0F;
-                // float topWall = static_cast<float>(windowDimensions->y) * 0.5F;
-                // float bottomWall = -static_cast<float>(windowDimensions->y) * 0.5F;
+
 
                 float leftWall = mapFrame.leftLineSegment.point0.x;//-static_cast<float>(windowDimensions->x) * 0.5F;
                 float rightWall = mapFrame.rightLineSegment.point0.x;//static_cast<float>(windowDimensions->x) * 0.0F;
                 float topWall = mapFrame.topLineSegment.point0.y;//static_cast<float>(windowDimensions->y) * 0.5F;
                 float bottomWall = mapFrame.bottomLineSegment.point0.y;//-static_cast<float>(windowDimensions->y) * 0.5F;
 
-                // If there is size of PROTAGONIST < SIZE OF WORLD/SCREEN THEN you not have to check collision with to opposite walls
-
-                // if(objectsToDraw[i]->getPosition().x - objectsToDraw[i]->collider.radius <  leftWall)
-                // {
-                //     objectsToDraw[i]->setX(leftWall + objectsToDraw[i]->collider.radius + 1);
-                // }
 
                 if(  static_cast<int>(objectsToDraw[i]->getPosition().x + objectsToDraw[i]->collider.radius) >  static_cast<int>(rightWall) ) //
                 {
-                    // if (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
-                    // {
-                    //     // objectsToDraw[i]->velocity.y *= -1;
-                    //     // objectsToDraw[i]->velocity.x *= -1;
-                    //     Vector2D<float> normalVector;
-                    //
-                    //     normalVector.x = 0;//objectsToDraw[i]->velocity.y * -1;
-                    //     normalVector.y = 0;//objectsToDraw[i]->velocity.x;
-                    //
-                    //         Vector2D<float>::normalizedVector(normalVector);
-                    //     // objectsToDraw[i]->velocity.x = objectsToDraw[i]->velocity.x * normalVector.x;
-                    //     // objectsToDraw[i]->velocity.y = objectsToDraw[i]->velocity.y * normalVector.y;
-                    //     //objectsToDraw[i]->velocity.x *= -1 * objectsToDraw[i]->velocity.y;
-                    //
-                    // }
-
                     if (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
                     {
-                        // // objectsToDraw[i]->velocity.y *= -1;
-                        // // objectsToDraw[i]->velocity.x *= -1;
-                        // Vector2D<float> normalVector;
-                        //
-                        // normalVector.x = 0;//objectsToDraw[i]->velocity.y * -1;
-                        // normalVector.y = 0;//objectsToDraw[i]->velocity.x;
-                        //
-                        //     Vector2D<float>::normalizedVector(normalVector);
-                        // // objectsToDraw[i]->velocity.x = objectsToDraw[i]->velocity.x * normalVector.x;
-                        // // objectsToDraw[i]->velocity.y = objectsToDraw[i]->velocity.y * normalVector.y;
-                        // //objectsToDraw[i]->velocity.x *= -1 * objectsToDraw[i]->velocity.y;
-
-                        // ********** There is no time for implementing calculating normal faster is to hard code it for now because these are simple cases
-                        // ********** so for right wall the normal vector is (-1, 0);
-
-                        // calculate angle betwen normal vector and velocity vector
-                        // rotate velocity vector around that angle
-
-
 
                         Vector2D<float> normal(-1, 0);
-                        float angle = Vector2D<float>::angleBetweenVectors(normal, objectsToDraw[i]->velocity);
-                        Vector2D<float>::rotateVectorOverTheAngle(&objectsToDraw[i]->velocity, 1.5708+angle);
+                        // float angle = Vector2D<float>::angleBetweenVectors(normal, objectsToDraw[i]->velocity);
+                        // Vector2D<float>::rotateVectorOverTheAngle(&objectsToDraw[i]->velocity, 1.5708+angle);
+
+                        float dotProduct = Vector2D<float>::dotProduct(objectsToDraw[i]->velocity, normal);
+                        Vector2D<float>::multiplyByScalar(&normal, dotProduct * 2.0f);
+                        Vector2D<float>::substract(&objectsToDraw[i]->velocity, normal);
+                        // vec3 Reflection(const vec3 & vec, const vec3 & normal) {
+                        //     float d = Dot(vec, normal);
+                        //     return sourceVector - normal * (d * 2.0f);
+                        // }
+
+                        objectsToDraw[i]->setX(rightWall - objectsToDraw[i]->collider.radius - 1);
                     }
 
-                    objectsToDraw[i]->setX(rightWall - objectsToDraw[i]->collider.radius-1);
-}
-                //
-                // if(objectsToDraw[i]->getPosition().y + objectsToDraw[i]->collider.radius > topWall)
-                                // {
-                //     objectsToDraw[i]->setY(topWall - objectsToDraw[i]->collider.radius - 1);
-                // }
-                //
-                // if(objectsToDraw[i]->getPosition().y - objectsToDraw[i]->collider.radius < bottomWall)
-                // {
-                //     objectsToDraw[i]->setY(bottomWall + objectsToDraw[i]->collider.radius + 1);
-                // }
-
-
-                // x' = -y
-                    // y' = +x
-
-                // collided = true;
+                    
+				}
             }
-            // big comment COMMENT WAS HERE
-
-           // if (Collider::isCollidingWithCustomWalls(objectsToDraw[i]->collider, *windowDimensions))
-           //  {
-           //      objectsToDraw[i]->isAlive = false;
-           //      if(objectsToDraw[i]->iAm == GameObject::PROTAGONIST)
-           //      {
-           //          writer.write(0, 0, "PLAYER COLLIDING",BLUE, *pixelsTable);
-           //      }
-           //      //std::cout << "HIT" << std::endl;
-           //      continue;
-           //  }
 
             for (int j = i; j < static_cast<int>(objectsToDraw.size()); j++)
             {
