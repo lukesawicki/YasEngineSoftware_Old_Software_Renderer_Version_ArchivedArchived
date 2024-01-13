@@ -369,23 +369,6 @@ void YasEngine::render(double& deltaTime) {
         ;
     }
 
-    // lukesawicki 2023-08-14
-//    drawCrossHair(mouseX, mouseY, *pixelsTable, false);
-//    for (int i = 0; i < 3; i++)
-//    {
-//        //exception here lukesawicki
-//        int x = spawners->childNodes[fourRandomPositions[i]->firstLevelNode]->childNodes[fourRandomPositions[i]->secondLevelNode]->spawner->position.x;
-//        int y = spawners->childNodes[fourRandomPositions[i]->firstLevelNode]->childNodes[fourRandomPositions[i]->secondLevelNode]->spawner->position.y;
-//        drawCrossHair(x, y, *pixelsTable, false);
-//    }
-
-    // for(int i=0; i<testPositions.size(); i++)
-    // {
-    //     drawCrossHair(testPositions.at(i)->x, testPositions.at(i)->y, *pixelsTable, false, BLUE );
-    // }
-
-//    testPositions
-
     drawHudElements(deltaTime);
 
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
@@ -402,8 +385,6 @@ void YasEngine::renderGameObjects(double& deltaTime)
             drawPolygon(object, *pixelsTable);
         }
     }
-
-    // drawLine(testPoint0, testPoint1, *pixelsTable, YELLOW);
 }
 
 void YasEngine::renderViewports(double& deltaTime)
@@ -413,7 +394,6 @@ void YasEngine::renderViewports(double& deltaTime)
     surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, YELLOW, true);
     surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, BLUE, true);
     surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, RED, false);
-    // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(primeNumbersPoints->points, primeNumbersPoints->pointsNumber, YELLOW, false);
 
 	surfaceWithMathBasedEffects->copyPixelsInToPIxelTable(*pixelsTable);
 }
@@ -430,37 +410,27 @@ void YasEngine::handlePhysics()
                 continue;
             }
 
-            if((objectsToDraw[i]->iAm == GameObject::PROTAGONIST || objectsToDraw[i]->iAm == GameObject::COLLECTIBLE) )// 2024-01-06_1027 && Collider::isCollidingWithCustomWalls(objectsToDraw[i]->collider, *windowDimensions))
+            if((objectsToDraw[i]->iAm == GameObject::PROTAGONIST || objectsToDraw[i]->iAm == GameObject::COLLECTIBLE) )
             {
-
-
                 float leftWall = mapFrame.leftLineSegment.point0.x;//-static_cast<float>(windowDimensions->x) * 0.5F;
                 float rightWall = mapFrame.rightLineSegment.point0.x;//static_cast<float>(windowDimensions->x) * 0.0F;
                 float topWall = mapFrame.topLineSegment.point0.y;//static_cast<float>(windowDimensions->y) * 0.5F;
                 float bottomWall = mapFrame.bottomLineSegment.point0.y;//-static_cast<float>(windowDimensions->y) * 0.5F;
 
+                if (static_cast<int>(objectsToDraw[i]->getPosition().x - objectsToDraw[i]->collider.radius) > static_cast<int>(leftWall)) //
+                {
+                    if (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
+                    {
+                        bounceCollectibles(objectsToDraw[i], LEFT);
+                    }
+                }
 
                 if(  static_cast<int>(objectsToDraw[i]->getPosition().x + objectsToDraw[i]->collider.radius) >  static_cast<int>(rightWall) ) //
                 {
                     if (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
                     {
-
-                        Vector2D<float> normal(-1, 0);
-                        // float angle = Vector2D<float>::angleBetweenVectors(normal, objectsToDraw[i]->velocity);
-                        // Vector2D<float>::rotateVectorOverTheAngle(&objectsToDraw[i]->velocity, 1.5708+angle);
-
-                        float dotProduct = Vector2D<float>::dotProduct(objectsToDraw[i]->velocity, normal);
-                        Vector2D<float>::multiplyByScalar(&normal, dotProduct * 2.0f);
-                        Vector2D<float>::substract(&objectsToDraw[i]->velocity, normal);
-                        // vec3 Reflection(const vec3 & vec, const vec3 & normal) {
-                        //     float d = Dot(vec, normal);
-                        //     return sourceVector - normal * (d * 2.0f);
-                        // }
-
-                        objectsToDraw[i]->setX(rightWall - objectsToDraw[i]->collider.radius - 1);
+                        bounceCollectibles(objectsToDraw[i], RIGHT);
                     }
-
-                    
 				}
             }
 
@@ -510,7 +480,42 @@ void YasEngine::handlePhysics()
 //                    objectsToDraw[i]->setY(bottomWall + objectsToDraw[i]->collider.radius + 1);
 //                }
 //            }
+} // END OF handlePhysics()
+
+void YasEngine::bounceCollectibles(GameObject* gameObject, Wall wall)
+{
+    Vector2D<float> normal;
+    switch (wall)
+    {
+    case LEFT:
+        normal.x = 1;
+        normal.y = 0;
+        break;
+    case RIGHT:
+        normal.x = -1;
+        normal.y = 0;
+        break;
+    case TOP:
+        normal.x = 0;
+        normal.y = -1;
+        break;
+    case BOTTOM:
+        normal.x = 0;
+        normal.y = 1;
+        break;
+    default:
+
+        break;
+    }
+
+    float dotProduct = Vector2D<float>::dotProduct(gameObject->velocity, normal);
+    Vector2D<float>::multiplyByScalar(&normal, dotProduct * 2.0f);
+    Vector2D<float>::substract(&gameObject->velocity, normal);
+
+    // TO PREVENT COLLECTIBLE STUCK IN THE WALL
+    // objectsToDraw[i]->setX(rightWall - objectsToDraw[i]->collider.radius - 1);
 }
+
 
 void YasEngine::moveObjects()
 {

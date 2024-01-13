@@ -60,6 +60,10 @@ class GameObject
         }
 
 
+
+		// if (static_cast<int>(objectsToDraw[i]->getPosition().x + objectsToDraw[i]->collider.radius) > static_cast<int>(rightWall)) //
+
+
 		virtual void setPosition(const Vector2D<float>& position)
 		{
 			this->position.x = position.x;

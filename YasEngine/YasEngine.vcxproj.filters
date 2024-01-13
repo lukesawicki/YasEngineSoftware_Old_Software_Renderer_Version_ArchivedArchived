@@ -117,7 +117,7 @@
     <ClInclude Include="InputOutputHandler.hpp">
       <Filter>HID</Filter>
     </ClInclude>
-    <ClInclude Include="Destroyable.hpp">
+    <ClInclude Include="Collectible.hpp">
       <Filter>Gameplay</Filter>
     </ClInclude>
     <ClInclude Include="Circle.hpp">
@@ -185,7 +185,7 @@
     <ClCompile Include="TimePicker.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="Destroyable.cpp">
+    <ClCompile Include="Collectible.cpp">
       <Filter>Gameplay</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">

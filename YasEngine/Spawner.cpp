@@ -1,6 +1,6 @@
 #include<cstdlib>
 #include"Spawner.hpp"
-#include "Destroyable.hpp"
+#include "Collectible.hpp"
 #include "VariousTools.hpp"
 
 Spawner::Spawner() {
@@ -77,7 +77,7 @@ void Spawner::prepareObjectToSpawn(GameObject*& gameObject)
 
 	if (oldTargetPositionX != targetPositionX || oldTargetPositionY != targetPositionY)
 	{
-		gameObject = new Destroyable(16, static_cast<float>(targetPositionX), static_cast<float>(targetPositionY), numberOfVertices);
+		gameObject = new Collectible(16, static_cast<float>(targetPositionX), static_cast<float>(targetPositionY), numberOfVertices);
 	}
 }
 

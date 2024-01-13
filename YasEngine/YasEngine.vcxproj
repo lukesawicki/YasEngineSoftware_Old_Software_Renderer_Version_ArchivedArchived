@@ -139,7 +139,7 @@
     <ClInclude Include="Circle.hpp" />
     <ClInclude Include="Collider.hpp" />
     <ClInclude Include="CosinusPointsGenerator.hpp" />
-    <ClInclude Include="Destroyable.hpp" />
+    <ClInclude Include="Collectible.hpp" />
     <ClInclude Include="FibonacciPointsGenerator.hpp" />
     <ClInclude Include="FontObject.hpp" />
     <ClInclude Include="FontSurface.hpp" />
@@ -174,7 +174,7 @@
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CosinusPointsGenerator.cpp" />
-    <ClCompile Include="Destroyable.cpp" />
+    <ClCompile Include="Collectible.cpp" />
     <ClCompile Include="FibonacciPointsGenerator.cpp" />
     <ClCompile Include="FontObject.cpp" />
     <ClCompile Include="FontSurface.cpp" />

@@ -1,8 +1,8 @@
-#include "Destroyable.hpp"
+#include "Collectible.hpp"
 #include "YasGraphicsLibrary.hpp"
 #include<cstdlib>     /* srand, rand */
 
-Destroyable::Destroyable(float radius, float x, float y, int numberOfVertices)
+Collectible::Collectible(float radius, float x, float y, int numberOfVertices)
 {
 	isAlive = true;
 	iAm = GameObject::COLLECTIBLE;
@@ -63,12 +63,12 @@ Destroyable::Destroyable(float radius, float x, float y, int numberOfVertices)
 // 	startTime = timePicker.getMiliseconds();
 // }
 
-Destroyable::~Destroyable()
+Collectible::~Collectible()
 {
 	delete[] worldVertices;
 }
 
-void Destroyable::generate()
+void Collectible::generate()
 {
 	for (int i = 0; i < numberOfVertices; i++)
 	{
@@ -84,7 +84,7 @@ void Destroyable::generate()
 // 		worldVertices[i].y = position.y + localVertices[i].y;
 // 	}
 // }
-void Destroyable::generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices)
+void Collectible::generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices)
 {
 	this->circumscribedCircleRadius = circumscribedCircleRadius;
 	this->numberOfVertices = numberOfVertices;
@@ -102,22 +102,22 @@ void Destroyable::generateRegularPolygonVertices(float circumscribedCircleRadius
 	generate();
 }
 
-void Destroyable::regeneratePolygon()
+void Collectible::regeneratePolygon()
 {
 	generate();
 }
 
-void Destroyable::setPosition(float x, float y)
+void Collectible::setPosition(float x, float y)
 {
 	GameObject::setPosition(x, y);
 }
 
-void Destroyable::setPosition(const Vector2D<float>& position)
+void Collectible::setPosition(const Vector2D<float>& position)
 {
 	GameObject::setPosition(position);
 }
 
-void Destroyable::move(float deltaTime)
+void Collectible::move(float deltaTime)
 {
 	position.x = position.x + deltaTime * velocity.x;
 	position.y = position.y + deltaTime * velocity.y;
@@ -138,12 +138,12 @@ void Destroyable::move(float deltaTime)
 	// }
 }
 
-void Destroyable::setColor(const Vector4D<Uint8>& color)
+void Collectible::setColor(const Vector4D<Uint8>& color)
 {
 	GameObject::setColor(color);
 }
 
-void Destroyable::setRandomColor()
+void Collectible::setRandomColor()
 {
 	int col = Randomizer::drawNumberClosedInterval(1, 4); // rand() % 5;
 	switch(col)

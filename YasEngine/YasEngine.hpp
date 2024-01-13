@@ -35,6 +35,14 @@ class YasEngine
             OUTRO
         };
 
+		enum Wall
+		{
+			LEFT,
+			RIGHT,
+			TOP,
+			BOTTOM
+		};
+
 		struct NodeNumbersOnTwoProceedingLevels
 		{
             int firstLevelNode = 0;
@@ -157,6 +165,7 @@ class YasEngine
 		void prepareBasicSettings();
 		void checkEndianness();
 		void handlePhysics();
+		void bounceCollectibles(GameObject* gameObject, Wall wall);
 		void moveObjects();
 		void prepareGameWorld();
 		void setFrameAroundGameplaySpace();
