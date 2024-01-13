@@ -405,27 +405,39 @@ void YasEngine::handlePhysics()
         for (int i = 0; i < static_cast<int>(objectsToDraw.size() - 2); i++)
         {
 
-            if (!objectsToDraw[i]->isAlive || (objectsToDraw[i]->iAm == GameObject::PROTAGONIST))
-            {
-                continue;
-            }
-
             if (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
             {
                 handleCollectiblesWithWallsCollisions(objectsToDraw[i]);
             }
 
+            // ****    SKIP HANDLING SHIP    ****
+            if (objectsToDraw[i]->iAm == GameObject::PROTAGONIST)// || objectsToDraw[j]->iAm == GameObject::PROTAGONIST)
+            {
+                continue;
+            }
+
             for (int j = i; j < static_cast<int>(objectsToDraw.size()); j++)
             {
-                if ((objectsToDraw[i]->iAm == GameObject::PROJECTILE && objectsToDraw[j]->iAm == GameObject::PROJECTILE) ||
-                    (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE && objectsToDraw[j]->iAm == GameObject::COLLECTIBLE))
+                if (
+					objectsToDraw[i] == objectsToDraw[j]                                                                    || 
+                    (objectsToDraw[i]->iAm == GameObject::PROJECTILE && objectsToDraw[j]->iAm == GameObject::PROJECTILE)    ||
+                    (objectsToDraw[i]->iAm == GameObject::PROJECTILE && objectsToDraw[j]->iAm == GameObject::PROTAGONIST)   ||
+                    (objectsToDraw[i]->iAm == GameObject::PROTAGONIST && objectsToDraw[j]->iAm == GameObject::PROJECTILE)   ||
+                    (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE && objectsToDraw[j]->iAm == GameObject::COLLECTIBLE)
+                    )
                 {
                     continue;
                 }
 
-                if (!(objectsToDraw[i] == objectsToDraw[j]) && objectsToDraw[i]->isAlive && objectsToDraw[j]->isAlive)
+                // LEFT Projectile <-> Collectible && Protagonist <-> Collectible)
+                if (objectsToDraw[i]->isAlive && objectsToDraw[j]->isAlive)
                 {
-                    if (Collider::isInCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
+                    bool isOneProtagonist = objectsToDraw[i]->iAm == GameObject::PROTAGONIST || objectsToDraw[j]->iAm == GameObject::PROTAGONIST;
+                    if(isOneProtagonist)
+                    {
+                        ;// do something
+                    }
+                    if ( (!isOneProtagonist) && Collider::isInCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
                     {
                         objectsToDraw[i]->isAlive = false;
                         objectsToDraw[j]->isAlive = false;
@@ -477,7 +489,6 @@ void YasEngine::handleCollectiblesWithWallsCollisions(GameObject* object)
         {
             bounceCollectibles(object, LEFT);
         }
-
 
         if (object->getColliderRightSide() > static_cast<int>(rightWall))
         {
