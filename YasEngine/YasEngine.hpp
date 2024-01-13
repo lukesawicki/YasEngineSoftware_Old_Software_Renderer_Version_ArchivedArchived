@@ -165,6 +165,7 @@ class YasEngine
 		void prepareBasicSettings();
 		void checkEndianness();
 		void handlePhysics();
+		void handleCollectiblesWithWallsCollisions(GameObject* object);
 		void bounceCollectibles(GameObject* gameObject, Wall wall);
 		void moveObjects();
 		void prepareGameWorld();

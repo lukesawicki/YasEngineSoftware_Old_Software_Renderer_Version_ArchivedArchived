@@ -410,28 +410,9 @@ void YasEngine::handlePhysics()
                 continue;
             }
 
-            if((objectsToDraw[i]->iAm == GameObject::PROTAGONIST || objectsToDraw[i]->iAm == GameObject::COLLECTIBLE) )
+            if (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
             {
-                float leftWall = mapFrame.leftLineSegment.point0.x;//-static_cast<float>(windowDimensions->x) * 0.5F;
-                float rightWall = mapFrame.rightLineSegment.point0.x;//static_cast<float>(windowDimensions->x) * 0.0F;
-                float topWall = mapFrame.topLineSegment.point0.y;//static_cast<float>(windowDimensions->y) * 0.5F;
-                float bottomWall = mapFrame.bottomLineSegment.point0.y;//-static_cast<float>(windowDimensions->y) * 0.5F;
-
-                if (static_cast<int>(objectsToDraw[i]->getPosition().x - objectsToDraw[i]->collider.radius) > static_cast<int>(leftWall)) //
-                {
-                    if (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
-                    {
-                        bounceCollectibles(objectsToDraw[i], LEFT);
-                    }
-                }
-
-                if(  static_cast<int>(objectsToDraw[i]->getPosition().x + objectsToDraw[i]->collider.radius) >  static_cast<int>(rightWall) ) //
-                {
-                    if (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
-                    {
-                        bounceCollectibles(objectsToDraw[i], RIGHT);
-                    }
-				}
+                handleCollectiblesWithWallsCollisions(objectsToDraw[i]);
             }
 
             for (int j = i; j < static_cast<int>(objectsToDraw.size()); j++)
@@ -481,6 +462,41 @@ void YasEngine::handlePhysics()
 //                }
 //            }
 } // END OF handlePhysics()
+void YasEngine::handleCollectiblesWithWallsCollisions(GameObject* object)
+{
+    float leftWall = mapFrame.leftLineSegment.point0.x;
+    float rightWall = mapFrame.rightLineSegment.point0.x;
+    float topWall = mapFrame.topLineSegment.point0.y;
+    float bottomWall = mapFrame.bottomLineSegment.point0.y;
+
+
+    if (object->iAm == GameObject::COLLECTIBLE)
+    {
+
+        if (object->getColliderLeftSide() < static_cast<int>(leftWall))
+        {
+            bounceCollectibles(object, LEFT);
+        }
+
+
+        if (object->getColliderRightSide() > static_cast<int>(rightWall))
+        {
+            bounceCollectibles(object, RIGHT);
+        }
+
+
+        if (object->getColliderTopSide() < static_cast<int>(topWall))
+        {
+            bounceCollectibles(object, TOP);
+        }
+
+        if (object->getColliderBottomSide() > static_cast<int>(bottomWall))
+        {
+            bounceCollectibles(object, BOTTOM);
+        }
+    }
+}
+
 
 void YasEngine::bounceCollectibles(GameObject* gameObject, Wall wall)
 {

@@ -59,10 +59,25 @@ class GameObject
             return position;
         }
 
+		virtual int getColliderLeftSide()
+		{
+			return static_cast<int>(position.x - collider.radius);
+		}
 
+		virtual int getColliderRightSide()
+		{
+			return static_cast<int>(position.x + collider.radius);
+		}
 
-		// if (static_cast<int>(objectsToDraw[i]->getPosition().x + objectsToDraw[i]->collider.radius) > static_cast<int>(rightWall)) //
+		virtual int getColliderTopSide()
+		{
+			return static_cast<int>(position.y + collider.radius);
+		}
 
+		virtual int getColliderBottomSide()
+		{
+			return static_cast<int>(position.y - collider.radius);
+		}
 
 		virtual void setPosition(const Vector2D<float>& position)
 		{
