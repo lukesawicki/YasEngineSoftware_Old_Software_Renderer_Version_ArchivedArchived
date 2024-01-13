@@ -166,6 +166,8 @@ class YasEngine
 		void checkEndianness();
 		void handlePhysics();
 		void handleCollectiblesWithWallsCollisions(GameObject* object);
+		void handleProtagonistWithWallsCollisions(GameObject* object);
+		void moveObjectToMapBoundries(GameObject* gameObject, Wall wall);
 		void bounceCollectibles(GameObject* gameObject, Wall wall);
 		void moveObjects();
 		void prepareGameWorld();

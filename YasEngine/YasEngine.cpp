@@ -410,11 +410,17 @@ void YasEngine::handlePhysics()
                 handleCollectiblesWithWallsCollisions(objectsToDraw[i]);
             }
 
-            // ****    SKIP HANDLING SHIP    ****
-            if (objectsToDraw[i]->iAm == GameObject::PROTAGONIST)// || objectsToDraw[j]->iAm == GameObject::PROTAGONIST)
+            if (objectsToDraw[i]->iAm == GameObject::PROTAGONIST)
             {
-                continue;
+                handleProtagonistWithWallsCollisions(objectsToDraw[i]);
+                //handleCollectiblesWithWallsCollisions(objectsToDraw[i]);
             }
+
+            // ****    SKIP HANDLING SHIP    ****
+            // if (objectsToDraw[i]->iAm == GameObject::PROTAGONIST)// || objectsToDraw[j]->iAm == GameObject::PROTAGONIST)
+            // {
+            //     continue;
+            // }
 
             for (int j = i; j < static_cast<int>(objectsToDraw.size()); j++)
             {
@@ -508,6 +514,37 @@ void YasEngine::handleCollectiblesWithWallsCollisions(GameObject* object)
     }
 }
 
+void YasEngine::handleProtagonistWithWallsCollisions(GameObject* object)
+{
+    float leftWall = mapFrame.leftLineSegment.point0.x;
+    float rightWall = mapFrame.rightLineSegment.point0.x;
+    float topWall = mapFrame.topLineSegment.point0.y;
+    float bottomWall = mapFrame.bottomLineSegment.point0.y;
+
+    if (object->getColliderLeftSide() < static_cast<int>(leftWall))
+    {
+        moveObjectToMapBoundries(object, LEFT);
+        // bounceCollectibles(object, LEFT);
+    }
+
+    if (object->getColliderRightSide() > static_cast<int>(rightWall))
+    {
+        moveObjectToMapBoundries(object, RIGHT);
+        // bounceCollectibles(object, RIGHT);
+    }
+
+    if (object->getColliderTopSide() < static_cast<int>(topWall))
+    {
+        moveObjectToMapBoundries(object, TOP);
+        // bounceCollectibles(object, TOP);
+    }
+
+    if (object->getColliderBottomSide() > static_cast<int>(bottomWall))
+    {
+        moveObjectToMapBoundries(object, BOTTOM);
+        // bounceCollectibles(object, BOTTOM);
+    }
+}
 
 void YasEngine::bounceCollectibles(GameObject* gameObject, Wall wall)
 {
@@ -531,7 +568,7 @@ void YasEngine::bounceCollectibles(GameObject* gameObject, Wall wall)
         normal.y = 1;
         break;
     default:
-
+        ;
         break;
     }
 
@@ -543,6 +580,27 @@ void YasEngine::bounceCollectibles(GameObject* gameObject, Wall wall)
     // objectsToDraw[i]->setX(rightWall - objectsToDraw[i]->collider.radius - 1);
 }
 
+void YasEngine::moveObjectToMapBoundries(GameObject* gameObject, Wall wall)
+{
+    switch (wall)
+    {
+    case LEFT:
+        gameObject->setX(mapFrame.leftLineSegment.point0.x + gameObject->collider.radius);
+        break;
+    case RIGHT:
+        gameObject->setX(mapFrame.leftLineSegment.point0.x - gameObject->collider.radius);
+        break;
+    case TOP:
+        gameObject->setY(mapFrame.topLineSegment.point0.y - gameObject->collider.radius);
+        break;
+    case BOTTOM:
+        gameObject->setY(mapFrame.bottomLineSegment.point0.y + gameObject->collider.radius);
+        break;
+    default:
+        ;
+        break;
+    }
+}
 
 void YasEngine::moveObjects()
 {
