@@ -21,6 +21,8 @@ class Spawner
 		double previousTime = 0;
 		bool firstSpawned=false;
 
+		static int numberOfSpawnedObjects;
+
         Spawner();
 
 		Spawner(int x, int y);

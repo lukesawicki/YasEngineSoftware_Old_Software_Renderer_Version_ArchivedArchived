@@ -3,6 +3,8 @@
 #include "Collectible.hpp"
 #include "VariousTools.hpp"
 
+int Spawner::numberOfSpawnedObjects = 0;
+
 Spawner::Spawner() {
     currentTime = timePicker.getMiliseconds();
     previousTime = currentTime;

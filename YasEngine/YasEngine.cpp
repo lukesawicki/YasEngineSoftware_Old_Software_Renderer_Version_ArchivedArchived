@@ -278,24 +278,27 @@ void YasEngine::handleMouseMovement()
 void YasEngine::handleSpawningCollectibles()
 {
     // timePicker.getMiliseconds();
-    for (int i = 0; i < 8; i++)
-    {
-        // LOSUJ 4 razy liczbe z 16 spawnerPostions
-        int randomSpawner = Randomizer::drawNumberClosedInterval(0, 15);
-
-        int firstLevelNodeIndex = spawnersPositions[randomSpawner]->firstLevelNode;
-        int secondLevelNodeIndex = spawnersPositions[randomSpawner]->secondLevelNode;
-
-        if (isObjectInSameQuarterAsProtagonist(randomSpawner))
+    if (Spawner::numberOfSpawnedObjects < MAX_COLLECTIBLES_TO_SPAWN) {
+        for (int i = 0; i < 8; i++)
         {
-            continue;
-        }
+            // LOSUJ 4 razy liczbe z 16 spawnerPostions
+            int randomSpawner = Randomizer::drawNumberClosedInterval(0, 15);
 
-        spawners->childNodes[firstLevelNodeIndex]->childNodes[secondLevelNodeIndex]->spawner->spawnObject(go);
-        if (go != nullptr)
-        {
-            objectsToDraw.push_back(go);
-            go = nullptr;
+            int firstLevelNodeIndex = spawnersPositions[randomSpawner]->firstLevelNode;
+            int secondLevelNodeIndex = spawnersPositions[randomSpawner]->secondLevelNode;
+
+            if (isObjectInSameQuarterAsProtagonist(randomSpawner))
+            {
+                continue;
+            }
+
+            spawners->childNodes[firstLevelNodeIndex]->childNodes[secondLevelNodeIndex]->spawner->spawnObject(go);
+            if (go != nullptr)
+            {
+                Spawner::numberOfSpawnedObjects++;
+                objectsToDraw.push_back(go);
+                go = nullptr;
+            }
         }
     }
 }
@@ -468,6 +471,14 @@ void YasEngine::handlePhysics()
                         objectsToDraw[i]->isAlive = false;
                         objectsToDraw[j]->isAlive = false;
                         Mix_PlayChannel(-1, hitSound, 0);
+                        if(objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
+                        {
+                            --Spawner::numberOfSpawnedObjects;
+                        }
+                        if (objectsToDraw[j]->iAm == GameObject::COLLECTIBLE)
+                        {
+                            --Spawner::numberOfSpawnedObjects;
+                        }
 					}
 				}
 			}
@@ -753,15 +764,6 @@ void YasEngine::prepareGameWorld()
 
 void YasEngine::setFrameAroundGameplaySpace()
 {
-    // struct MapFrame
-    // {
-    //     LineSegment leftLineSegment;
-    //     LineSegment rightLineSegment;
-    //     LineSegment topLineSegment;
-    //     LineSegment bottomLineSegment;
-    // };
-    // lukesawicki
-
     const int VERTHICAL_SHIFT=10;
     const int HORIZONTAL_SHIFT=10;
 

@@ -84,6 +84,7 @@ class YasEngine
 		void YasEnginStart();
 		void clean();
 
+
 	private:
 
 		TimePicker timePicker; // 2023-12-15
@@ -124,6 +125,8 @@ class YasEngine
 		SurfaceWithMathBasedEffects* surfaceWithMathBasedEffects;
 		std::vector<NodeNumbersOnTwoProceedingLevels*> spawnersPositions;
 		// std::vector<NodeNumbersOnTwoProceedingLevels*> fourRandomPositions;
+
+		const int MAX_COLLECTIBLES_TO_SPAWN = 64;
 		
 		Mix_Music* music;
 		Mix_Chunk* shootSound;
