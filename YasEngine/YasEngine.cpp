@@ -286,6 +286,11 @@ void YasEngine::handleSpawningCollectibles()
         int firstLevelNodeIndex = spawnersPositions[randomSpawner]->firstLevelNode;
         int secondLevelNodeIndex = spawnersPositions[randomSpawner]->secondLevelNode;
 
+        if (isObjectInSameQuarterAsProtagonist(randomSpawner))
+        {
+            continue;
+        }
+
         spawners->childNodes[firstLevelNodeIndex]->childNodes[secondLevelNodeIndex]->spawner->spawnObject(go);
         if (go != nullptr)
         {
@@ -293,6 +298,22 @@ void YasEngine::handleSpawningCollectibles()
             go = nullptr;
         }
     }
+}
+
+bool YasEngine::isObjectInSameQuarterAsProtagonist(int randomSpawner)
+{
+    int quarterSize = spawners->childNodes[spawnersPositions[randomSpawner]->firstLevelNode]->childNodes[spawnersPositions[randomSpawner]->secondLevelNode]->size;
+
+    return (
+        (player->getPosition().x < (spawners->childNodes[spawnersPositions[randomSpawner]->firstLevelNode]->childNodes[spawnersPositions[randomSpawner]->secondLevelNode]->position->x +
+        quarterSize / 2)) &&
+        (player->getPosition().x > (spawners->childNodes[spawnersPositions[randomSpawner]->firstLevelNode]->childNodes[spawnersPositions[randomSpawner]->secondLevelNode]->position->x -
+        quarterSize / 2)) &&
+        (player->getPosition().y < (spawners->childNodes[spawnersPositions[randomSpawner]->firstLevelNode]->childNodes[spawnersPositions[randomSpawner]->secondLevelNode]->position->y +
+        quarterSize / 2)) &&
+        (player->getPosition().y > (spawners->childNodes[spawnersPositions[randomSpawner]->firstLevelNode]->childNodes[spawnersPositions[randomSpawner]->secondLevelNode]->position->y -
+        quarterSize / 2)));
+	
 }
 
 void YasEngine::handleProjectiles()
@@ -413,7 +434,6 @@ void YasEngine::handlePhysics()
             if (objectsToDraw[i]->iAm == GameObject::PROTAGONIST)
             {
                 handleProtagonistWithWallsCollisions(objectsToDraw[i]);
-                //handleCollectiblesWithWallsCollisions(objectsToDraw[i]);
             }
 
             // ****    SKIP HANDLING SHIP    ****
@@ -453,33 +473,9 @@ void YasEngine::handlePhysics()
 			}
 		}
     }
-
-    //big comment luke
-    //              DO NOT DELETE IT IS COLLISION WITH NORMAL WALLS WHICH MEANS WINDOWS BOUNDRIES
-//            if((objectsToDraw[i]->iAm == GameObject::PROTAGONIST) && Collider::isCollidingWithWall(objectsToDraw[i]->collider, *windowDimensions))
-//            {
-//                float leftWall = -static_cast<float>(windowDimensions->x) * 0.5F;
-//                float rightWall = static_cast<float>(windowDimensions->x) * 0.5F;
-//                float topWall = static_cast<float>(windowDimensions->y) * 0.5F;
-//                float bottomWall = -static_cast<float>(windowDimensions->y) * 0.5F;
-//                if(objectsToDraw[i]->getPosition().x - objectsToDraw[i]->collider.radius <  leftWall)
-//                {
-//                    objectsToDraw[i]->setX(leftWall + objectsToDraw[i]->collider.radius + 1);
-//                }
-//                if(objectsToDraw[i]->getPosition().x + objectsToDraw[i]->collider.radius >  rightWall)
-//                {
-//                    objectsToDraw[i]->setX(rightWall - objectsToDraw[i]->collider.radius - 1);
-//                }
-//                if(objectsToDraw[i]->getPosition().y + objectsToDraw[i]->collider.radius > topWall)
-//                {
-//                    objectsToDraw[i]->setY(topWall - objectsToDraw[i]->collider.radius - 1);
-//                }
-//                if(objectsToDraw[i]->getPosition().y - objectsToDraw[i]->collider.radius < bottomWall)
-//                {
-//                    objectsToDraw[i]->setY(bottomWall + objectsToDraw[i]->collider.radius + 1);
-//                }
-//            }
 } // END OF handlePhysics()
+
+
 void YasEngine::handleCollectiblesWithWallsCollisions(GameObject* object)
 {
     float leftWall = mapFrame.leftLineSegment.point0.x;
@@ -533,13 +529,13 @@ void YasEngine::handleProtagonistWithWallsCollisions(GameObject* object)
         // bounceCollectibles(object, RIGHT);
     }
 
-    if (object->getColliderTopSide() < static_cast<int>(topWall))
+    if (object->getColliderTopSide() > static_cast<int>(topWall))
     {
         moveObjectToMapBoundries(object, TOP);
         // bounceCollectibles(object, TOP);
     }
 
-    if (object->getColliderBottomSide() > static_cast<int>(bottomWall))
+    if (object->getColliderBottomSide() < static_cast<int>(bottomWall))
     {
         moveObjectToMapBoundries(object, BOTTOM);
         // bounceCollectibles(object, BOTTOM);
@@ -588,7 +584,7 @@ void YasEngine::moveObjectToMapBoundries(GameObject* gameObject, Wall wall)
         gameObject->setX(mapFrame.leftLineSegment.point0.x + gameObject->collider.radius);
         break;
     case RIGHT:
-        gameObject->setX(mapFrame.leftLineSegment.point0.x - gameObject->collider.radius);
+        gameObject->setX(mapFrame.rightLineSegment.point0.x - gameObject->collider.radius);
         break;
     case TOP:
         gameObject->setY(mapFrame.topLineSegment.point0.y - gameObject->collider.radius);

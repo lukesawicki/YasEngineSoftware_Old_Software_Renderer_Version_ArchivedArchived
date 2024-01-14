@@ -180,6 +180,7 @@ class YasEngine
 		void handleMouseInput(SDL_Event& event);
 		void handleMouseMovement();
 		void handleSpawningCollectibles();
+		bool isObjectInSameQuarterAsProtagonist(int randomSpawner);
 		void handleProjectiles();
 		void handlePlayer();
 		void update(double& deltaTime);
