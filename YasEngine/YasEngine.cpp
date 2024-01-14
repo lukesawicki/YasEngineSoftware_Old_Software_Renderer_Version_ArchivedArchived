@@ -415,9 +415,9 @@ void YasEngine::renderViewports(double& deltaTime)
 {
     surfaceWithMathBasedEffects->verticalLineOnSurface(0, GREEN);
     surfaceWithMathBasedEffects->horizontalLineOnSurface(0, RED);//-WINDOW_HEIGHT * 0.25F
-    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, YELLOW, true);
-    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, BLUE, true);
-    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, RED, false);
+    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, verticesHarvested, YELLOW, true);
+    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, verticesHarvested, BLUE, true);
+    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, verticesHarvested, RED, false);
 
 	surfaceWithMathBasedEffects->copyPixelsInToPIxelTable(*pixelsTable);
 }
@@ -471,13 +471,16 @@ void YasEngine::handlePhysics()
                         objectsToDraw[i]->isAlive = false;
                         objectsToDraw[j]->isAlive = false;
                         Mix_PlayChannel(-1, hitSound, 0);
+
                         if(objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
                         {
                             --Spawner::numberOfSpawnedObjects;
+                            verticesHarvested += objectsToDraw[i]->numberOfVertices;
                         }
                         if (objectsToDraw[j]->iAm == GameObject::COLLECTIBLE)
                         {
                             --Spawner::numberOfSpawnedObjects;
+                            verticesHarvested += objectsToDraw[j]->numberOfVertices;
                         }
 					}
 				}

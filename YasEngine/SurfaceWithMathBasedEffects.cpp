@@ -363,21 +363,26 @@ unsigned int SurfaceWithMathBasedEffects::calculateMaximumNumberOfElementsToProc
     return maximum;
 }
 
-void SurfaceWithMathBasedEffects::drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos)
+void SurfaceWithMathBasedEffects::drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, int currentNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos)
 {
     int step = 1;
     if(!areLinesContinuos)
     {
         step = 2;
     }
-    if (maximumNumberOfVertices > 1)
+    
+    if (currentNumberOfVertices > 1)
     {
-        if (maximumNumberOfVertices <= 3) {
+        if (currentNumberOfVertices <= 3) {
             drawLine(vertices[0], vertices[1], color);
         }
 	    else
 	    {
-	        for (int i = 0; i < maximumNumberOfVertices -1; i += step)
+            if(!(currentNumberOfVertices <= maximumNumberOfVertices -1))
+            {
+                currentNumberOfVertices = maximumNumberOfVertices;
+            }
+	        for (int i = 0; i < currentNumberOfVertices -1; i += step)
 	        {
 	            drawLine(vertices[i], vertices[i + 1], color);
 	        }

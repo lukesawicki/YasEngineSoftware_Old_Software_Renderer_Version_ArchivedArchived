@@ -137,6 +137,8 @@ class YasEngine
 		PointsSet* fibonacciePoints;
 		PointsSet* primeNumbersPoints;
 
+		int verticesHarvested = 0;
+
         std::map<std::string, int> numberOfGivenColors;
         std::map<float, int> sinusNumbers;
         std::map<float, int> cosinusNumbers;
