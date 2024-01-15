@@ -671,6 +671,11 @@ void YasEngine::prepareSoundAndMusic()
         quit = true;
     }
 
+    std::cout << "MAX MUSIC VOLUME: " << MIX_MAX_VOLUME << std::endl;
+    std::cout << "Music volume = " << Mix_GetMusicVolume(music) << std::endl;
+    Mix_VolumeMusic(32);
+	// Mix_VolumeMusic
+
     shootSound = Mix_LoadWAV(shootSoundFilePath.c_str());
     hitSound = Mix_LoadWAV(hitSoundFilePath.c_str());
 
