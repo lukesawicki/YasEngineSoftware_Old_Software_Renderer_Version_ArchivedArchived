@@ -192,7 +192,7 @@ class YasEngine
 		void drawHudElements(double& deltaTime);
 		void render(double& deltaTime);
 		void renderGameObjects(double& deltaTime);
-		void renderViewports(double& deltaTime);
+		void renderOnViewports(double& deltaTime);
         Button::ButtonId checkWhichButtonClicked();
         void handleClickedButtons();
         void handleGameStateWhenESCbuttonPushed();

@@ -154,8 +154,6 @@ void YasEngine::drawHudElements(double& deltaTime)
     drawVerticalLine(*pixelsTable, mapFrame.leftLineSegment.point0.y, mapFrame.leftLineSegment.point1.y, mapFrame.leftLineSegment.point0.x, YELLOW);
     drawVerticalLine(*pixelsTable, mapFrame.rightLineSegment.point0.y, mapFrame.rightLineSegment.point1.y, mapFrame.rightLineSegment.point0.x, YELLOW);
 
-
-    drawVerticalLine(*pixelsTable, 300, -20, -400, YELLOW);
 }
 
 void YasEngine::handleInput(SDL_Event& event)
@@ -384,7 +382,7 @@ void YasEngine::render(double& deltaTime) {
         break;
     case GAMEPLAY:
         renderGameObjects(deltaTime);
-        renderViewports(deltaTime);
+        renderOnViewports(deltaTime);
         break;
     case OUTRO:
         writer.write(0, 100, "CREDITS       CODE DESIGN LUKASZ LUKE SAWICKI       SOUND AND MUSIC FROM INTERNET WITH FRE LICENSE", BLUE, *pixelsTable); // TODO Write creators, thank you for playing and see you in other games
@@ -411,13 +409,13 @@ void YasEngine::renderGameObjects(double& deltaTime)
     }
 }
 
-void YasEngine::renderViewports(double& deltaTime)
+void YasEngine::renderOnViewports(double& deltaTime)
 {
     surfaceWithMathBasedEffects->verticalLineOnSurface(0, GREEN);
     surfaceWithMathBasedEffects->horizontalLineOnSurface(0, RED);//-WINDOW_HEIGHT * 0.25F
-    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, verticesHarvested, YELLOW, true);
+    // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, verticesHarvested, YELLOW, true);
     surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, verticesHarvested, BLUE, true);
-    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, verticesHarvested, RED, false);
+    // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, verticesHarvested, RED, false);
 
 	surfaceWithMathBasedEffects->copyPixelsInToPIxelTable(*pixelsTable);
 }
