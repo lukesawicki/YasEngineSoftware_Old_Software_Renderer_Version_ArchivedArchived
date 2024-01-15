@@ -12,6 +12,16 @@
 #include"PrimeNumbersPointsGenerator.hpp"
 #include"SinusPointsGenerator.hpp"
 
+// In version 1.9.0.1:
+//
+// 1 : Major revision(new UI, lots of new features, conceptual change, etc.)
+//
+// 9 : Minor revision(maybe a change to a search box, 1 feature added, collection of bug fixes)
+//
+// 0 : Bug fix release
+//
+// 1 : Build number(if used) that's why you see the .NET framework using something like 2.0.4.2709
+
 YasEngine* YasEngine::instance = nullptr;
 
 void YasEngine::initialize()
@@ -145,7 +155,6 @@ void YasEngine::checkEndianness()
 
 void YasEngine::drawHudElements(double& deltaTime)
 {
-    drawCartesianAxies(*pixelsTable);
     drawCrossHair(mouseX, mouseY, *pixelsTable, false);
 
     drawHorizontalLine(*pixelsTable, mapFrame.topLineSegment.point0.x, mapFrame.topLineSegment.point1.x, mapFrame.topLineSegment.point0.y, RED);
@@ -274,9 +283,7 @@ void YasEngine::handleMouseMovement()
 }
 
 void YasEngine::handleSpawningCollectibles()
-{
-    // timePicker.getMiliseconds();
-    if (Spawner::numberOfSpawnedObjects < MAX_COLLECTIBLES_TO_SPAWN) {
+{    
         for (int i = 0; i < 8; i++)
         {
             // LOSUJ 4 razy liczbe z 16 spawnerPostions
@@ -284,21 +291,26 @@ void YasEngine::handleSpawningCollectibles()
 
             int firstLevelNodeIndex = spawnersPositions[randomSpawner]->firstLevelNode;
             int secondLevelNodeIndex = spawnersPositions[randomSpawner]->secondLevelNode;
-
-            if (isObjectInSameQuarterAsProtagonist(randomSpawner))
+            if (Spawner::numberOfSpawnedObjects < MAX_COLLECTIBLES_TO_SPAWN)
             {
-                continue;
+	            if (isObjectInSameQuarterAsProtagonist(randomSpawner))
+	            {
+	                continue;
+	            }
+	            
+	            spawners->childNodes[firstLevelNodeIndex]->childNodes[secondLevelNodeIndex]->spawner->spawnObject(go);
+	            if (go != nullptr)
+	            {
+	                Spawner::numberOfSpawnedObjects++;
+	                objectsToDraw.push_back(go);
+	                go = nullptr;
+				}
             }
-
-            spawners->childNodes[firstLevelNodeIndex]->childNodes[secondLevelNodeIndex]->spawner->spawnObject(go);
-            if (go != nullptr)
+            else
             {
-                Spawner::numberOfSpawnedObjects++;
-                objectsToDraw.push_back(go);
-                go = nullptr;
+                spawners->childNodes[firstLevelNodeIndex]->childNodes[secondLevelNodeIndex]->spawner->resetTimes();
             }
         }
-    }
 }
 
 bool YasEngine::isObjectInSameQuarterAsProtagonist(int randomSpawner)
@@ -411,8 +423,12 @@ void YasEngine::renderGameObjects(double& deltaTime)
 
 void YasEngine::renderOnViewports(double& deltaTime)
 {
-    surfaceWithMathBasedEffects->verticalLineOnSurface(0, GREEN);
-    surfaceWithMathBasedEffects->horizontalLineOnSurface(0, RED);//-WINDOW_HEIGHT * 0.25F
+    if (tests)
+    {
+        surfaceWithMathBasedEffects->drawCartesianAxies();
+    }
+    // surfaceWithMathBasedEffects->verticalLineOnSurface(0, GREEN);
+    // surfaceWithMathBasedEffects->horizontalLineOnSurface(0, RED);
     // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, verticesHarvested, YELLOW, true);
     surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, verticesHarvested, BLUE, true);
     // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, verticesHarvested, RED, false);

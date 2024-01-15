@@ -41,6 +41,11 @@ void Spawner::spawnObject(GameObject*& gameObject)
     }
 }
 
+void Spawner::resetTimes()
+{
+	previousTime = currentTime = timePicker.getMiliseconds();
+}
+
 void Spawner::prepareObjectToSpawn(GameObject*& gameObject)
 {
 	int oldTargetPositionX = 0;

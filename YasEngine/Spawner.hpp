@@ -27,6 +27,7 @@ class Spawner
 
 		Spawner(int x, int y);
 		void spawnObject(GameObject*& gameObject);
+		void resetTimes();
 	private:
 		void prepareObjectToSpawn(GameObject*& gameObject);
 

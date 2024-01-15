@@ -24,6 +24,8 @@ class YasEngine
 {	
 	public:
 		// Randomizer randomizer;
+		bool tests = false;
+		std::string engineVersion = "1.0.0.0";
 
         bool collided = false;
 		GameObject* go;
