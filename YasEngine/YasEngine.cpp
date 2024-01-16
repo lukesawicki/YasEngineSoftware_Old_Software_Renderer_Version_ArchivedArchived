@@ -1,5 +1,13 @@
 #include"YasEngine.hpp"
 //#include<SDL_endian.h>
+
+// #include "document.h"     // rapidjson's DOM-style API
+#include "prettywriter.h" // for stringify JSON
+
+#include <iostream>
+#include <fstream>
+#include <string>
+
 #include<bit>
 #include<SDL_mixer.h>
 #include <set>
@@ -26,6 +34,7 @@ YasEngine* YasEngine::instance = nullptr;
 
 void YasEngine::initialize()
 {
+    readSettingsFromFile();
 
     srand(clock());
 
@@ -107,6 +116,33 @@ void YasEngine::YasEnginStart()
     return;
 }
 
+void YasEngine::readSettingsFromFile()
+{
+    std::ifstream settingsFile("settings.json");
+    if (!settingsFile.is_open()) {
+        std::cerr << "Error opening JSON file" << std::endl;
+        exit(1);
+    }
+
+    std::string settingsString((std::istreambuf_iterator<char>(settingsFile)), std::istreambuf_iterator<char>());
+    settingsFile.close();
+
+    
+    settings.Parse(settingsString.c_str());
+
+    if (settings.HasParseError()) {
+        std::cerr << "Error parsing JSON" << std::endl;
+        exit(1);
+    }
+
+    const rapidjson::Value& soundSettings = settings["SOUND_MUSIC"];
+
+    musicVolume = soundSettings["MUSIC_VOLUME"].GetInt();
+    shootVolume = soundSettings["SHOOT_VOLUME"].GetInt();
+    hitVolume = soundSettings["HIT_VOLUME"].GetInt();
+    otherVolume = soundSettings["OTHER_VOLUME"].GetInt();
+}
+
 void YasEngine::prepareRendering()
 {
     pixelsTable     =   new PixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, BLACK);
@@ -125,7 +161,8 @@ void YasEngine::prepareBasicSettings()
     SDL_Init(SDL_INIT_EVERYTHING);
 
     windowDimensions    =   new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
-    window              =   SDL_CreateWindow("YasEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_RESIZABLE);
+    Uint32 windowFlags = SDL_WINDOW_RESIZABLE | SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_ALWAYS_ON_TOP;
+    window              =   SDL_CreateWindow("YasEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, windowFlags);
 
     SDL_SetWindowMinimumSize(window, WINDOW_WIDTH, WINDOW_HEIGHT);
     SDL_ShowCursor(SDL_DISABLE);
@@ -202,6 +239,9 @@ void YasEngine::handleKeyboardInput(SDL_Event& event)
         case SDLK_d:
             input->right = true;
             break;
+        case SDLK_o:
+            input->test_o_button = true;
+            break;
         default:
             ;
         }
@@ -221,6 +261,13 @@ void YasEngine::handleKeyboardInput(SDL_Event& event)
             break;
         case SDLK_d:
             input->right = false;
+            break;
+        case SDLK_o:
+            if(input->test_o_button == true)
+            {
+                Mix_PlayChannel(-1, otherSound, 0);
+                input->test_o_button = false;
+            }
             break;
         default:
             ;
@@ -431,7 +478,7 @@ void YasEngine::renderOnViewports(double& deltaTime)
     // surfaceWithMathBasedEffects->horizontalLineOnSurface(0, RED);
     // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, verticesHarvested, YELLOW, true);
     surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, verticesHarvested, BLUE, true);
-    // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, verticesHarvested, RED, false);
+    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, verticesHarvested, RED, false);
 
 	surfaceWithMathBasedEffects->copyPixelsInToPIxelTable(*pixelsTable);
 }
@@ -645,25 +692,9 @@ void YasEngine::prepareSoundAndMusic()
         std::cout << "Error cannot open audio device" << std::endl;
     }
 
-    std::string basePath = SDL_GetBasePath();
-    std::cout << "Base path is: " << basePath << std::endl;
-
-    std::string musicFilePath;
-    musicFilePath.append(basePath);
-    musicFilePath.append("music.wav");
-
-    std::string shootSoundFilePath;
-    shootSoundFilePath.append(basePath);
-    shootSoundFilePath.append("shoot.wav");
-
-    std::string hitSoundFilePath;
-    hitSoundFilePath.append(basePath);
-    hitSoundFilePath.append("hit.wav");
-    std::cout << "hit.wav path: -> " << hitSoundFilePath << std::endl;
-
     Mix_Init(MIX_DEFAULT_FORMAT);
 
-    music = Mix_LoadMUS(musicFilePath.c_str());
+    music = Mix_LoadMUS("music.wav");
     if (music == NULL)
     {
         std::cout << "Error while loading music. Cannot load music." << std::endl;
@@ -671,15 +702,20 @@ void YasEngine::prepareSoundAndMusic()
         quit = true;
     }
 
-    std::cout << "MAX MUSIC VOLUME: " << MIX_MAX_VOLUME << std::endl;
-    std::cout << "Music volume = " << Mix_GetMusicVolume(music) << std::endl;
-    Mix_VolumeMusic(32);
+    Mix_VolumeMusic(musicVolume);
 	// Mix_VolumeMusic
 
-    shootSound = Mix_LoadWAV(shootSoundFilePath.c_str());
-    hitSound = Mix_LoadWAV(hitSoundFilePath.c_str());
+    shootSound = Mix_LoadWAV("shoot.wav");
+    Mix_VolumeChunk(shootSound, shootVolume);
 
-    if (shootSound == NULL || hitSound == NULL)
+    hitSound = Mix_LoadWAV("hit.wav");
+    Mix_VolumeChunk(hitSound, hitVolume);
+
+    otherSound = Mix_LoadWAV("other.wav");
+    Mix_VolumeChunk(otherSound, otherVolume);
+
+
+    if (shootSound == NULL || hitSound == NULL || otherSound == NULL)
     {
         std::cout << "Error while loading sounds. Cannot load sounds." << std::endl;
         std::cout << "SDL message: " << SDL_GetError() << std::endl << " | Mix library error: " << Mix_GetError() << std::endl;

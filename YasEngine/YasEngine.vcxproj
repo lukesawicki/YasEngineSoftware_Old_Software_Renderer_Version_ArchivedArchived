@@ -105,7 +105,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\development\workspace\SDL2-devel-2.28.5-VC\SDL2-2.28.5\include;C:\development\workspace\SDL2_mixer-devel-2.6.3-VC\SDL2_mixer-2.6.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\development\workspace\SDL2-devel-2.28.5-VC\SDL2-2.28.5\include;C:\development\workspace\SDL2_mixer-devel-2.6.3-VC\SDL2_mixer-2.6.3\include;C:\development\workspace\YasEngineSoftware\YasEngine\additionalLibs\rapidjson;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -123,7 +123,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\development\workspace\SDL2-devel-2.28.5-VC\SDL2-2.28.5\include;C:\development\workspace\SDL2_mixer-devel-2.6.3-VC\SDL2_mixer-2.6.3\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\development\workspace\SDL2-devel-2.28.5-VC\SDL2-2.28.5\include;C:\development\workspace\SDL2_mixer-devel-2.6.3-VC\SDL2_mixer-2.6.3\include;C:\development\workspace\YasEngineSoftware\YasEngine\additionalLibs\rapidjson;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -148,6 +148,7 @@
     <ClInclude Include="LineSegment.hpp" />
     <ClInclude Include="MapFrame.hpp" />
     <ClInclude Include="Math.hpp" />
+    <ClInclude Include="MathPicture.hpp" />
     <ClInclude Include="Node.hpp" />
     <ClInclude Include="PixelsTable.hpp" />
     <ClInclude Include="Player.hpp" />
@@ -180,6 +181,7 @@
     <ClCompile Include="FontSurface.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Math.cpp" />
+    <ClCompile Include="MathPicture.cpp" />
     <ClCompile Include="Node.cpp" />
     <ClCompile Include="PixelsTable.cpp" />
     <ClCompile Include="Player.cpp" />

@@ -1,5 +1,6 @@
 #ifndef YASENGINE_HPP
 #define YASENGINE_HPP
+#include <document.h>
 #include<stdio.h>
 #include<iostream>
 #include<vector>
@@ -26,6 +27,12 @@ class YasEngine
 		// Randomizer randomizer;
 		bool tests = false;
 		std::string engineVersion = "1.0.0.0";
+
+		rapidjson::Document settings;
+		int musicVolume = MIX_MAX_VOLUME;
+		int shootVolume = MIX_MAX_VOLUME;
+		int hitVolume = MIX_MAX_VOLUME;
+		int otherVolume = MIX_MAX_VOLUME;
 
         bool collided = false;
 		GameObject* go;
@@ -66,6 +73,8 @@ class YasEngine
         GameState gameState = GameState::INTRO;
 
         std::vector<GameObject*> buttons;
+
+		int basePointsNumber = 64;
 
         std::vector<std::string> mainMenuTexts;
         std::vector<std::string> introTexts;
@@ -133,6 +142,7 @@ class YasEngine
 		Mix_Music* music;
 		Mix_Chunk* shootSound;
 		Mix_Chunk* hitSound;
+		Mix_Chunk* otherSound;
 
 		PointsSet* sinusPoints;
 		PointsSet* cosinusPoints;
@@ -168,6 +178,7 @@ class YasEngine
         int blueShotdowns = 0;
 
 		bool engineInstantiated = false;
+		void readSettingsFromFile();
 		void prepareRendering();
 		void prepareBasicSettings();
 		void checkEndianness();

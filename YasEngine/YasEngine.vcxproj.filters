@@ -135,6 +135,9 @@
     <ClInclude Include="LineSegment.hpp">
       <Filter>Utils</Filter>
     </ClInclude>
+    <ClInclude Include="MathPicture.hpp">
+      <Filter>Gameplay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="YasEngine.cpp">
@@ -208,6 +211,9 @@
     </ClCompile>
     <ClCompile Include="Randomizer.cpp">
       <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="MathPicture.cpp">
+      <Filter>Gameplay</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
