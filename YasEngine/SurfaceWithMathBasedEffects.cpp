@@ -349,21 +349,21 @@ void SurfaceWithMathBasedEffects::drawLine(const Vector2D<float>& point0, const 
     }
 }
 
-unsigned int SurfaceWithMathBasedEffects::calculateMaximumNumberOfElementsToProcess(const unsigned int& primaryMaximum, bool connectedLines)
-{
-    int maximum = 0;
-    if (primaryMaximum % 2 == 0)
-    {
-        maximum = primaryMaximum - 1;
-    }
-    else
-    {
-        maximum = primaryMaximum - 2;
-    }
-    return maximum;
-}
+// unsigned int SurfaceWithMathBasedEffects::calculateMaximumNumberOfElementsToProcess(const unsigned int& primaryMaximum, bool connectedLines)
+// {
+//     int maximum = 0;
+//     if (primaryMaximum % 2 == 0)
+//     {
+//         maximum = primaryMaximum - 1;
+//     }
+//     else
+//     {
+//         maximum = primaryMaximum - 2;
+//     }
+//     return maximum;
+// }
 
-void SurfaceWithMathBasedEffects::drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, int currentNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos)
+void SurfaceWithMathBasedEffects::drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, int& currentNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos)
 {
     int step = 1;
     if(!areLinesContinuos)

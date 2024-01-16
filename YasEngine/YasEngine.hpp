@@ -19,6 +19,7 @@
 #include"ScreenWriter.hpp"
 #include"Button.hpp"
 #include "MapFrame.hpp"
+#include "MathPicture.hpp"
 #include "Randomizer.hpp"
 
 class YasEngine
@@ -138,24 +139,37 @@ class YasEngine
 		// std::vector<NodeNumbersOnTwoProceedingLevels*> fourRandomPositions;
 
 		const int MAX_COLLECTIBLES_TO_SPAWN = 64;
-		
+
+		std::map<std::string, std::map<int, float>*> numbersMap;
+		std::map < std::string, std::map<int, std::map<float, float>>> pairNumbersMap;
+
+		// std::map<int, float>* numbers;
+
 		Mix_Music* music;
 		Mix_Chunk* shootSound;
 		Mix_Chunk* hitSound;
 		Mix_Chunk* otherSound;
 
-		PointsSet* sinusPoints;
-		PointsSet* cosinusPoints;
-		PointsSet* fibonacciePoints;
-		PointsSet* primeNumbersPoints;
+		MathPicture* sinusPicture;
+		MathPicture* cosinusPicture;
+		MathPicture* fibonacciePicture;
+		MathPicture* primeNumbersPicture;
 
-		int verticesHarvested = 0;
+		int sinPointsHarvested = 0;
+		int cosPointsHarvested = 0;
+		int primesPointsHarvested = 0;
+		int fibbPointsHarvested = 0;
+
+		int maxNtoCalculatePrimes = 1000;
+		int maxNtoCalculateFibonacci = 40;
+		int maxNtoCalculateSinus = 100;
+		int maxNtoCalculateCosinus = 100;
 
         std::map<std::string, int> numberOfGivenColors;
-        std::map<float, int> sinusNumbers;
-        std::map<float, int> cosinusNumbers;
-        std::map<float, int> fibonacciNumbers;
-        std::map<float, int> primeNumbers;
+        // std::map<int, float> sinusNumbers;
+        // std::map<int, float> cosinusNumbers;
+        // std::map<int, float> fibonacciNumbers;
+        // std::map<int, float> primeNumbers;
 
 		//std::vector<Spawner*> spawners;
 		Node* spawners;

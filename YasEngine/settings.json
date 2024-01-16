@@ -1,8 +1,8 @@
 {
     "SOUND_MUSIC": {
-        "MUSIC_VOLUME": 16,
-		"SHOOT_VOLUME": 96,
-        "HIT_VOLUME": 96,
+        "MUSIC_VOLUME": 40,
+		"SHOOT_VOLUME": 30,
+        "HIT_VOLUME": 100,
 		"OTHER_VOLUME": 96
     }
 }

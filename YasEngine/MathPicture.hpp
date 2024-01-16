@@ -4,14 +4,28 @@
 
 class MathPicture
 {
-	public: 
-		int basePointsNumber = 0;
-		int minimalPointsNumber = 0;//-64
-		int maximumPointsNumber = 0
+	public:
+		MathPicture(int maxNtoCalculateNumbers, std::map<int, float>* numbers, PointsGenerator* pointsGenerator, PointsSet* npointsSet)
+		{
+			this->basePointsFuel = numbers->size();
+			// this->minimalPointsFuel = minimalPointsFuel;
+			this->maximumPointsFuel = numbers->size();
+			this->pointsGenerator = pointsGenerator;
+			// this->pointsSet = pointsSet;
+			// this->numbers = numbers;
+			this->numbers = numbers;
+			generatePoints();
+		}
+		void generatePoints()
+		{
+			pointsSet = pointsGenerator->generatePoints(numbers->size(), numbers);
+		}
+		int basePointsFuel = 0;
+		int minimalPointsFuel = 0;
+		int maximumPointsFuel = 0;
 		PointsGenerator* pointsGenerator;
 		PointsSet* pointsSet;
-		
-
+		std::map<int, float>* numbers;
 };
 
 #endif

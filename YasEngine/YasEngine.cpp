@@ -49,8 +49,6 @@ void YasEngine::initialize()
 
     surfaceWithMathBasedEffects = new SurfaceWithMathBasedEffects(0, static_cast<int>(windowDimensions->y * 0.5F), static_cast<int>(windowDimensions->x * 0.5F), static_cast<int>(windowDimensions->y), BLACK);
 
-    SinusPointsGenerator sinusPointsGenerator;
-    CosinusPointsGenerator cosinusPointsGenerator;
 }
 
 void YasEngine::clean()
@@ -60,10 +58,10 @@ void YasEngine::clean()
         delete drawableObject;
     }
 
-    delete sinusPoints;
-    delete cosinusPoints;
-    delete fibonacciePoints;
-    delete primeNumbersPoints;
+    // delete sinusPoints;
+    // delete cosinusPoints;
+    // delete fibonacciePoints;
+    // delete primeNumbersPoints;
     delete surfaceWithMathBasedEffects;
     delete pixelsTable;
     delete windowDimensions;
@@ -161,7 +159,7 @@ void YasEngine::prepareBasicSettings()
     SDL_Init(SDL_INIT_EVERYTHING);
 
     windowDimensions    =   new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
-    Uint32 windowFlags = SDL_WINDOW_RESIZABLE | SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_ALWAYS_ON_TOP;
+    Uint32 windowFlags = SDL_WINDOW_RESIZABLE;// | SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_ALWAYS_ON_TOP;
     window              =   SDL_CreateWindow("YasEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, windowFlags);
 
     SDL_SetWindowMinimumSize(window, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -477,8 +475,9 @@ void YasEngine::renderOnViewports(double& deltaTime)
     // surfaceWithMathBasedEffects->verticalLineOnSurface(0, GREEN);
     // surfaceWithMathBasedEffects->horizontalLineOnSurface(0, RED);
     // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, verticesHarvested, YELLOW, true);
-    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, verticesHarvested, BLUE, true);
-    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(fibonacciePoints->points, fibonacciePoints->pointsNumber, verticesHarvested, RED, false);
+    // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, verticesHarvested, BLUE, true);
+    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(
+        primeNumbersPicture->pointsSet->points, primeNumbersPicture->basePointsFuel, primesPointsHarvested, RED, false);
 
 	surfaceWithMathBasedEffects->copyPixelsInToPIxelTable(*pixelsTable);
 }
@@ -523,9 +522,17 @@ void YasEngine::handlePhysics()
                 if (objectsToDraw[i]->isAlive && objectsToDraw[j]->isAlive)
                 {
                     bool isOneProtagonist = objectsToDraw[i]->iAm == GameObject::PROTAGONIST || objectsToDraw[j]->iAm == GameObject::PROTAGONIST;
-                    if(isOneProtagonist)
+                    if(isOneProtagonist && Collider::isInCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
                     {
-                        ;// do something
+                        if(objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
+                        {
+                            primesPointsHarvested -= 1; //objectsToDraw[i]->numberOfVertices;// do somethingv
+                        }
+                        if (objectsToDraw[j]->iAm == GameObject::COLLECTIBLE)
+                        {
+                            primesPointsHarvested -= 1;  //objectsToDraw[i]->numberOfVertices;// do something
+                        }
+                        
                     }
                     if ( (!isOneProtagonist) && Collider::isInCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
                     {
@@ -536,12 +543,12 @@ void YasEngine::handlePhysics()
                         if(objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
                         {
                             --Spawner::numberOfSpawnedObjects;
-                            verticesHarvested += objectsToDraw[i]->numberOfVertices;
+                            primesPointsHarvested += objectsToDraw[i]->numberOfVertices;
                         }
                         if (objectsToDraw[j]->iAm == GameObject::COLLECTIBLE)
                         {
                             --Spawner::numberOfSpawnedObjects;
-                            verticesHarvested += objectsToDraw[j]->numberOfVertices;
+                            primesPointsHarvested += objectsToDraw[j]->numberOfVertices;
                         }
 					}
 				}
@@ -864,32 +871,51 @@ void YasEngine::setFrameAroundGameplaySpace()
 
 void YasEngine::prepareDataForDrawingGraphs()
 {
-    SinusPointsGenerator sinusPointsGenerator;
-    CosinusPointsGenerator cosinusPointsGenerator;
-    FibonacciPointsGenerator fibonacciPointsGenerator;
-    PrimeNumbersPointsGenerator primeNumberPointsGenerator;
 
-    sinusPoints = sinusPointsGenerator.generatePoints();
-    cosinusPoints = cosinusPointsGenerator.generatePoints();
-    fibonacciePoints = fibonacciPointsGenerator.generatePoints();
-    primeNumbersPoints = primeNumberPointsGenerator.generatePoints();
+    // std::map<std::string, std::map<int, float>*> numbersMap;
+    // std::map < std::string, std::map<int, std::map<float, float>>> pairNumbersMap;
 
-    for(unsigned int i=0; i<SinusPointsGenerator::numbers.size(); i++)
+    // std::vector<int> fibonacciNumbers = generateNfibonaccinumbers(40);
+    // std::map<int, float>* fibbs = new std::map<int, float>;
+    // numbersMap.insert({ "Fibonacci",  fibbs });
+    // for(int i=0; i < fibonacciNumbers.size(); i++)
+    // {
+    //     numbersMap.at("Fibonacci")->insert(std::pair<int, float>(33, 33.44f));
+    // }
+
+    std::vector<int> primes = generatePrimeNumbersLessThanN(1000);
+    int numberOfPrimes = primes.size();
+    primesPointsHarvested = 0;
+
+    numbersMap.insert( std::pair<std::string, std::map<int, float>*> ("Primes", new std::map<int, float>));
+
+    for(int i=0; i<primes.size(); i++)
     {
-        sinusNumbers.insert({SinusPointsGenerator::numbers.at(i),0});
+        numbersMap.at("Primes")->insert(std::pair<int, int>(i, primes.at(i)));
     }
-    for(unsigned int i=0; i<CosinusPointsGenerator::numbers.size(); i++)
-    {
-        cosinusNumbers.insert({ CosinusPointsGenerator::numbers.at(i),0});
-    }
-    for(unsigned int i=0; i<FibonacciPointsGenerator::numbers.size(); i++)
-    {
-        fibonacciNumbers.insert({ FibonacciPointsGenerator::numbers.at(i), 0 });
-    }
-    for(unsigned int i=0; i<PrimeNumbersPointsGenerator::numbers.size(); i++)
-    {
-        primeNumbers.insert({ PrimeNumbersPointsGenerator::numbers.at(i),0 });
-    }
+
+    // std::vector<int> primeNumbers = generatePrimeNumbersLessThanN(1000);
+
+
+
+
+    // std::vector<int> generateNfibonaccinumbers(int n)
+
+    // std::vector<int> generatePrimeNumbersLessThanN(int n)
+
+
+
+    // sinusPicture = new MathPicture(100, 0, 100, new SinusPointsGenerator(), new PointsSet());
+    // cosinusPicture = new MathPicture(100, 0, 100, new CosinusPointsGenerator(), new PointsSet());
+    // fibonacciePicture = new MathPicture(40, 0, 40, numbersMap.at("Fibonacci"), new FibonacciPointsGenerator(), new PointsSet());
+    primeNumbersPicture = new MathPicture(maxNtoCalculatePrimes, numbersMap.at("Primes"), new PrimeNumbersPointsGenerator(), new PointsSet());
+
+
+    // sinusPicture->generatePoints();
+    // cosinusPicture->generatePoints();
+    // fibonacciePicture->generatePoints();
+    // primeNumbersPicture->generatePoints();
+
 }
 
 void YasEngine::prepareInterface()

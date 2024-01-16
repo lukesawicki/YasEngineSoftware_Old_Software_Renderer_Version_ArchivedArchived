@@ -1,10 +1,8 @@
 #include"SinusPointsGenerator.hpp"
 
-std::vector<float> SinusPointsGenerator::numbers;
-
-PointsSet* SinusPointsGenerator::generatePoints()
+PointsSet* SinusPointsGenerator::generatePoints(int numberOfNumbers, std::map<int, float>* numbers)
 {
-	pointsNumber = 100;
+	this->pointsNumber = numberOfNumbers;
 	Vector2D<float>* points = new Vector2D<float>[pointsNumber];
 	float divider = static_cast<float>(pointsNumber);
 	float maximumXvalue = 2.0F * PI;
@@ -16,7 +14,7 @@ PointsSet* SinusPointsGenerator::generatePoints()
 		float x = i * step;
 		float y = sin(x);
 
-		numbers.push_back(y);
+		// numbers.push_back(y);
 
 		points[i].x = x * additionalFactor; // round(x * additionalFactor);
 		points[i].y = y * additionalFactor; // round(y * additionalFactor);

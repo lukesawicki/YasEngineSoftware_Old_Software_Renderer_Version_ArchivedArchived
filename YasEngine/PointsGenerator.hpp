@@ -6,7 +6,7 @@ class PointsGenerator
 {
 	public:
 		int pointsNumber = 0;
-		virtual PointsSet* generatePoints() = 0;
+		virtual PointsSet* generatePoints(int numberOfNumbers, std::map<int, float>* numbers) = 0;
 		
 };
 

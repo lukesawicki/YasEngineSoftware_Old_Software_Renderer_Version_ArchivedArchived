@@ -1,5 +1,7 @@
 #ifndef SINUSPOINTSGENERATOR_HPP
 #define SINUSPOINTSGENERATOR_HPP
+#include <map>
+
 #include"PointsGenerator.hpp"
 #include"PointsSet.hpp"
 #include"Vector2D.hpp"
@@ -8,8 +10,7 @@
 class SinusPointsGenerator: public PointsGenerator
 {
 	public:
-        static std::vector<float> numbers; // FOR GAMEPLAY PURPOSE!!
-		virtual PointsSet* generatePoints() override;
+		virtual PointsSet* generatePoints(int numberOfNumbers, std::map<int, float>* numbers) override;
 };
 
 #endif

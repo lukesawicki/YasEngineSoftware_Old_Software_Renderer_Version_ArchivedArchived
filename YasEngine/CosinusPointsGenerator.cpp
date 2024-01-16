@@ -1,10 +1,8 @@
 #include"CosinusPointsGenerator.hpp"
 
-std::vector<float> CosinusPointsGenerator::numbers;
-
-PointsSet* CosinusPointsGenerator::generatePoints()
+PointsSet* CosinusPointsGenerator::generatePoints(int numberOfNumbers, std::map<int, float>* numbers)
 {
-	pointsNumber = 100;
+	this->pointsNumber = numberOfNumbers;
 	Vector2D<float>* points = new Vector2D<float>[pointsNumber];
 	float divider = static_cast<float>(pointsNumber);
 	float maximumXvalue = 2.0F * PI;
@@ -16,7 +14,7 @@ PointsSet* CosinusPointsGenerator::generatePoints()
 		float x = i * step;
 		float y = cos(x);
 
-		numbers.push_back(y);
+		// numbers.push_back(y);
 
 		points[i].x = round(x * additionalFactor);
 		points[i].y = round(y * additionalFactor);
