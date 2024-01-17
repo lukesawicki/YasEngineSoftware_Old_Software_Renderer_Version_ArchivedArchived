@@ -33,3 +33,8 @@ PointsSet* FibonacciPointsGenerator::generatePoints(int numberOfNumbers, std::ma
 
 	return pointsSet;
 }
+
+PointsSet* FibonacciPointsGenerator::generateFloatPoints(int numberOfNumbers, std::map<float, float>* numbers)
+{
+	return nullptr;
+}

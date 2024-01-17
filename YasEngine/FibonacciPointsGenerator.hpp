@@ -10,6 +10,7 @@ class FibonacciPointsGenerator : public PointsGenerator
 {
 	public:
 		virtual PointsSet* generatePoints(int numberOfNumbers, std::map<int, float>* numbers) override;
+		virtual PointsSet* generateFloatPoints(int numberOfNumbers, std::map<float, float>* numbers) override;
 
 };
 

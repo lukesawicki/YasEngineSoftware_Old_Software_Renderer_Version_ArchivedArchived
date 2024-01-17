@@ -25,3 +25,8 @@ PointsSet* PrimeNumbersPointsGenerator::generatePoints(int numberOfNumbers, std:
 	pointsSet->pointsNumber = pointsNumber;
 	return pointsSet;
 }
+
+PointsSet* PrimeNumbersPointsGenerator::generateFloatPoints(int numberOfNumbers, std::map<float, float>* numbers)
+{
+	return nullptr;
+}

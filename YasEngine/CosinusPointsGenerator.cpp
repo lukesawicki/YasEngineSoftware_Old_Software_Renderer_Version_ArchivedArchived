@@ -26,3 +26,22 @@ PointsSet* CosinusPointsGenerator::generatePoints(int numberOfNumbers, std::map<
 	pointsSet->pointsNumber = pointsNumber;
 	return pointsSet;
 }
+
+PointsSet* CosinusPointsGenerator::generateFloatPoints(int numberOfNumbers, std::map<float, float>* numbers)
+{
+	this->pointsNumber = numberOfNumbers;
+	Vector2D<float>* points = new Vector2D<float>[pointsNumber];
+	int additionalFactor = 50;
+	int i = 0;
+	for (std::pair<float, float> pair : *numbers)
+	{
+		points[i].x = pair.first * additionalFactor; // round(x * additionalFactor);
+		points[i].y = pair.second * additionalFactor; // round(y * additionalFactor);
+		i++;
+	}
+
+	PointsSet* pointsSet = new PointsSet();
+	pointsSet->points = points;
+	pointsSet->pointsNumber = pointsNumber;
+	return pointsSet;
+}

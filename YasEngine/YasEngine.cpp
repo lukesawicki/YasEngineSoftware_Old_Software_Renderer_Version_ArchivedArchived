@@ -881,6 +881,7 @@ void YasEngine::prepareDataForDrawingGraphs()
 
     preparePrimesDrawing();
     prepareFibonacciDrawing();
+    prepareSinusDrawing();
 
     // std::map<std::string, std::map<int, float>*> numbersMap;
     // std::map < std::string, std::map<int, std::map<float, float>>> pairNumbersMap;
@@ -910,14 +911,14 @@ void YasEngine::prepareDataForDrawingGraphs()
 
 
 
-    // sinusPicture->generatePoints();
-    // cosinusPicture->generatePoints();
-    // fibonacciePicture->generatePoints();
-    // primeNumbersPicture->generatePoints();
+    // sinusPicture->generateFloatPoints();
+    // cosinusPicture->generateFloatPoints();
+    // fibonacciePicture->generateFloatPoints();
+    // primeNumbersPicture->generateFloatPoints();
 
 }
 
-void YasEngine::sinusDrawing()
+void YasEngine::prepareSinusDrawing()
 {
     std::map<float, float>* sinuses = generateSinNumbers(100);//generatePrimeNumbersLessThanN(1000);
     int numberOfPrimes = sinuses->size();
@@ -932,16 +933,16 @@ void YasEngine::sinusDrawing()
     // for (int i = 0; i < sinuses->size(); i++)
     // {
     int i = 0;
-        for(std::pair<float, float> pair: sinuses)
-        {
-            std::map<float, float>* m = new std::map<float, float>();
-            m->insert(pair);
-            pairNumbersMap.at("Sines")->insert(std::pair<int, std::map<float, float>*>(i,m));
-        }
+    for(std::pair<float, float> pair: *sinuses)
+    {
+        std::map<float, float>* m = new std::map<float, float>();
+        m->insert(pair);
+        pairNumbersMap.at("Sines")->insert(std::pair<int, std::map<float, float>*>(i,m));
+    }
         
     // }
 
-    sinusPicture = new MathPicture(maxNtoCalculatePrimes, numbersMap.at("Sines"), new SinusPointsGenerator(), new PointsSet());
+    sinusPicture = new MathPicture(maxNtoCalculateSinus, sinuses, new SinusPointsGenerator(), new PointsSet());
 }
 
 void YasEngine::prepareFibonacciDrawing()

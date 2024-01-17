@@ -205,7 +205,7 @@ class YasEngine
 		void prepareGameWorld();
 		void setFrameAroundGameplaySpace();
         void prepareDataForDrawingGraphs();
-		void sinusDrawing();
+		void prepareSinusDrawing();
 		void prepareFibonacciDrawing();
 		void preparePrimesDrawing();
 		void preparePlayer();

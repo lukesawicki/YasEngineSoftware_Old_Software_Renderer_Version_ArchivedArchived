@@ -12,6 +12,7 @@ class PrimeNumbersPointsGenerator : public PointsGenerator
 public:
 	static std::vector<int> numbers;
 	virtual PointsSet* generatePoints(int numberOfNumbers, std::map<int, float>* numbers) override;
+	virtual PointsSet* generateFloatPoints(int numberOfNumbers, std::map<float, float>* numbers) override;
 };
 
 #endif
