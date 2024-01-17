@@ -1307,9 +1307,9 @@ void ScreenWriter::prepareFontVertices()
 
     fonts[36]->verticesBaseData->numberOfVertices = 2;
 
-    fonts[36]->verticesBaseData->localVertices[0].x = -5;
+    fonts[36]->verticesBaseData->localVertices[0].x = -1;
     fonts[36]->verticesBaseData->localVertices[0].y = -7;
 
-    fonts[36]->verticesBaseData->localVertices[1].x = 5;
+    fonts[36]->verticesBaseData->localVertices[1].x = 1;
     fonts[36]->verticesBaseData->localVertices[1].y = -7;
 }

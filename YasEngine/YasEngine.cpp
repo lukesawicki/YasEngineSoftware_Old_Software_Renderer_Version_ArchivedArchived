@@ -192,12 +192,17 @@ void YasEngine::drawHudElements(double& deltaTime)
 {
     drawCrossHair(mouseX, mouseY, *pixelsTable, false);
 
+
+
+}
+
+void YasEngine::drawFrame(double& deltaTime)
+{
     drawHorizontalLine(*pixelsTable, mapFrame.topLineSegment.point0.x, mapFrame.topLineSegment.point1.x, mapFrame.topLineSegment.point0.y, RED);
     drawHorizontalLine(*pixelsTable, mapFrame.bottomLineSegment.point0.x, mapFrame.bottomLineSegment.point1.x, mapFrame.bottomLineSegment.point0.y, GREEN);
 
     drawVerticalLine(*pixelsTable, mapFrame.leftLineSegment.point0.y, mapFrame.leftLineSegment.point1.y, mapFrame.leftLineSegment.point0.x, YELLOW);
     drawVerticalLine(*pixelsTable, mapFrame.rightLineSegment.point0.y, mapFrame.rightLineSegment.point1.y, mapFrame.rightLineSegment.point0.x, YELLOW);
-
 }
 
 void YasEngine::handleInput(SDL_Event& event)
@@ -432,7 +437,9 @@ void YasEngine::render(double& deltaTime) {
     switch (gameState)
     {
     case INTRO:
-        writer.write(0, 100, "THE BEOUTY OF MATH       POWERED BY YASENGINE", YELLOW, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
+        writer.write( (-238)/2, 200, "BEOUTY.OF.MATH", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
+        writer.write((-170)/2, 100, "POWERED.BY", RED, *pixelsTable);
+        writer.write((-170)/2, 0, "YAS.ENGINE", YELLOW, *pixelsTable);
         break;
     case MAIN_MENU_RESTART:
         drawButtons();
@@ -440,9 +447,25 @@ void YasEngine::render(double& deltaTime) {
     case GAMEPLAY:
         renderGameObjects(deltaTime);
         renderOnViewports(deltaTime);
+        drawFrame(deltaTime);
         break;
     case OUTRO:
-        writer.write(0, 100, "CREDITS       CODE DESIGN LUKASZ LUKE SAWICKI       SOUND AND MUSIC FROM INTERNET WITH FRE LICENSE", BLUE, *pixelsTable); // TODO Write creators, thank you for playing and see you in other games
+        writer.write(0, 350, "GAME.DESIGN.PROGRAMMING.AND.MARKETING", YELLOW, *pixelsTable);
+        writer.write(0, 325, "LUKASZ.SAWICKI", YELLOW, *pixelsTable);
+        writer.write(0, 275, "SOUND.DESIGN.AND.MUSIC", YELLOW, *pixelsTable);
+        writer.write(0, 250, "JAKUB.TWAROGOWSKI", YELLOW, *pixelsTable);
+        writer.write(0, 200, "QUALITY.ASSURANCE", YELLOW, *pixelsTable);
+        writer.write(0, 175, "BARTLOMIEJ.KAWA", YELLOW, *pixelsTable);
+        writer.write(0, 125, "SPECIAL.THANKS:", PURPLE, *pixelsTable);
+        writer.write(0, 75, "MY.DEAR.SISTER.IZABELA", YELLOW, *pixelsTable);
+        writer.write(0, 50, "MY.LOVE.MARIOLA", YELLOW, *pixelsTable);
+        writer.write(0, 0, "MY.FRIENDS.FROM.WARSAW.SCHOOL.OF.COMPUTER.SCIENCE:", YELLOW, *pixelsTable);
+        writer.write(0, -25, "LUKASZ.KRZYSZTOF.MICHAL.MAREK.TOMASZ", YELLOW, *pixelsTable);
+        writer.write(0, -75, "MY.FRENDS.FROM.GDS.4:", YELLOW, *pixelsTable);
+        writer.write(0, -100, "KASIA.AND.BARTOSZ", YELLOW, *pixelsTable);
+        writer.write(0, -150, "WHOLE.COMMUNITY.OF.KNTG.POLYGON", YELLOW, *pixelsTable);
+        writer.write(0, -200, "AND.ALL.MEMBERS.OF.TEAM.XPORTAL", YELLOW, *pixelsTable);
+
         break;
     default:
         ;
@@ -476,12 +499,12 @@ void YasEngine::renderOnViewports(double& deltaTime)
     // surfaceWithMathBasedEffects->horizontalLineOnSurface(0, RED);
     // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, verticesHarvested, YELLOW, true);
     surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinusPicture->pointsSet->points, sinusPicture->basePointsFuel , sinPointsHarvested, BLUE, true);
-    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPicture->pointsSet->points, sinusPicture->basePointsFuel, sinPointsHarvested, BLUE, true);
+    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPicture->pointsSet->points, sinusPicture->basePointsFuel, sinPointsHarvested, RED, true);
 
 	surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(
-	 primeNumbersPicture->pointsSet->points, primeNumbersPicture->basePointsFuel, primesPointsHarvested, RED, false);
-	 surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(
-	 fibonacciePicture->pointsSet->points, fibonacciePicture->basePointsFuel, fibbsPointsHarvested, BLUE, false);
+	 primeNumbersPicture->pointsSet->points, primeNumbersPicture->basePointsFuel, primesPointsHarvested, LIGHT_BLUE, false);
+	surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(
+	 fibonacciePicture->pointsSet->points, fibonacciePicture->basePointsFuel, fibbsPointsHarvested, PURPLE, false);
 
 
 	surfaceWithMathBasedEffects->copyPixelsInToPIxelTable(*pixelsTable);
@@ -1018,7 +1041,7 @@ void YasEngine::preparePrimesDrawing()
 void YasEngine::prepareInterface()
 {
     //Button 1
-    buttons.push_back(new Button(Button::RESTART_START, "START RESTART", RED));
+    buttons.push_back(new Button(Button::RESTART_START, "START", RED));
     buttons.at(0)->setPosition(0, 50);
     dynamic_cast<Button*>(buttons.at(0))->horizontalMargin = 10;
     dynamic_cast<Button*>(buttons.at(0))->verticalMargin = 5;
@@ -1141,3 +1164,20 @@ void YasEngine::handleGameStateWhenSPACEbuttonPushed()
             ;
     }
 }
+
+
+// writer.write(0, 350, "GAME DESIGN PROGRAMMING AND MARKETING", YELLOW, *pixelsTable);
+// writer.write(0, 325, "LUKASZ SAWICKI", YELLOW, *pixelsTable);
+// writer.write(0, 275, "SOUND DESIGN AND MUSIC", YELLOW, *pixelsTable);
+// writer.write(0, 250, "JAKUB TWAROGOWSKI", YELLOW, *pixelsTable);
+// writer.write(0, 200, "QUALITY ASSURANCE", YELLOW, *pixelsTable);
+// writer.write(0, 175, "BARTLOMIEJ KAWA", YELLOW, *pixelsTable);
+// writer.write(0, 125, "SPECIAL THANKS:", PURPLE, *pixelsTable);
+// writer.write(0, 75, "MY DEAR SISTER IZABELA", YELLOW, *pixelsTable);
+// writer.write(0, 50, "MY LOVE MARIOLA", YELLOW, *pixelsTable);
+// writer.write(0, 0, "MY FRIENDS FROM WARSAW SCHOOL OF COMPUTER SCIENCE:", YELLOW, *pixelsTable);
+// writer.write(0, -25, "LUKASZ KRZYSZTOF MICHAL MAREK TOMASZ", YELLOW, *pixelsTable);
+// writer.write(0, -75, "MY FRENDS FROM GDS 4:", YELLOW, *pixelsTable);
+// writer.write(0, -100, "KASIA AND BARTOSZ", YELLOW, *pixelsTable);
+// writer.write(0, -150, "WHOLE COMMUNITY OF KNTG POLYGON", YELLOW, *pixelsTable);
+// writer.write(0, -200, "AND ALL MEMBERS OF TEAM XPORTAL", YELLOW, *pixelsTable);

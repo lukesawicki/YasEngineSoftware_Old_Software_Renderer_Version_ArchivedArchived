@@ -25,8 +25,10 @@ const Vector4D<Uint8> GREEN(0, 255, 0, 0);
 const Vector4D<Uint8> BLUE(0, 0, 255, 0);
 const Vector4D<Uint8> BLACK(0, 0, 0, 255);
 //const Vector4D<Uint8> ALT_BLACK(0, 0, 0, 0);
-const Vector4D<Uint8> WHITE(255, 255, 255, 255);
-const Vector4D<Uint8> YELLOW(255, 255, 0, 255);
+const Vector4D<Uint8> WHITE(255, 255, 255, 0);
+const Vector4D<Uint8> YELLOW(255, 255, 0, 0);
+const Vector4D<Uint8> LIGHT_BLUE(0, 255, 255, 0);
+const Vector4D<Uint8> PURPLE(255, 0, 255, 0);
 
 void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, PixelsTable& pixelsTable, const Vector4D<Uint8>& drawingColor);
 
