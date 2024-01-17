@@ -59,6 +59,23 @@ std::map<float, float>* generateSinNumbers(int pointsNumber)
     return sinMap;
 }
 
+std::map<float, float>* generateCosNumbers(int pointsNumber)
+{
+    float divider = static_cast<float>(pointsNumber);
+    float maximumXvalue = 2.0F * PI;
+    float step = (maximumXvalue / divider);
+
+    std::map<float, float>* cosMap = new std::map<float, float>();
+
+    for (int i = 0; i < pointsNumber; i++)
+    {
+        float x = i * step;
+        float y = cos(x);
+        cosMap->insert(std::pair<float, float>(x, y));
+    }
+    return cosMap;
+}
+
 // std::vector<int> generatePrimeNumbersLessThanN(int n)
 // {
 //     std::vector<int> primeNumbers;

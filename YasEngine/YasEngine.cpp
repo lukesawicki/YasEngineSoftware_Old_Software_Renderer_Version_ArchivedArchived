@@ -476,10 +476,12 @@ void YasEngine::renderOnViewports(double& deltaTime)
     // surfaceWithMathBasedEffects->horizontalLineOnSurface(0, RED);
     // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, verticesHarvested, YELLOW, true);
     surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinusPicture->pointsSet->points, sinusPicture->basePointsFuel , sinPointsHarvested, BLUE, true);
-    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(
-        primeNumbersPicture->pointsSet->points, primeNumbersPicture->basePointsFuel, primesPointsHarvested, RED, false);
-    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(
-        fibonacciePicture->pointsSet->points, fibonacciePicture->basePointsFuel, fibbsPointsHarvested, BLUE, false);
+    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPicture->pointsSet->points, sinusPicture->basePointsFuel, sinPointsHarvested, BLUE, true);
+
+	surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(
+	 primeNumbersPicture->pointsSet->points, primeNumbersPicture->basePointsFuel, primesPointsHarvested, RED, false);
+	 surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(
+	 fibonacciePicture->pointsSet->points, fibonacciePicture->basePointsFuel, fibbsPointsHarvested, BLUE, false);
 
 
 	surfaceWithMathBasedEffects->copyPixelsInToPIxelTable(*pixelsTable);
@@ -531,11 +533,15 @@ void YasEngine::handlePhysics()
                         {
                             primesPointsHarvested -= 1; //objectsToDraw[i]->numberOfVertices;// do somethingv
                             fibbsPointsHarvested -= 1;
+                            sinPointsHarvested -= -1;
+                            cosPointsHarvested -= -1;
                         }
                         if (objectsToDraw[j]->iAm == GameObject::COLLECTIBLE)
                         {
                             primesPointsHarvested -= 1;  //objectsToDraw[i]->numberOfVertices;// do something
                             fibbsPointsHarvested -= 1;
+                            sinPointsHarvested -= -1;
+                            cosPointsHarvested -= -1;
                         }
                         
                     }
@@ -550,12 +556,16 @@ void YasEngine::handlePhysics()
                             --Spawner::numberOfSpawnedObjects;
                             primesPointsHarvested += objectsToDraw[i]->numberOfVertices;
                             fibbsPointsHarvested += objectsToDraw[i]->numberOfVertices;
+                            sinPointsHarvested += objectsToDraw[i]->numberOfVertices;
+                            cosPointsHarvested += objectsToDraw[i]->numberOfVertices;
                         }
                         if (objectsToDraw[j]->iAm == GameObject::COLLECTIBLE)
                         {
                             --Spawner::numberOfSpawnedObjects;
                             primesPointsHarvested += objectsToDraw[j]->numberOfVertices;
                             fibbsPointsHarvested += objectsToDraw[i]->numberOfVertices;
+                            sinPointsHarvested += objectsToDraw[i]->numberOfVertices;
+                            cosPointsHarvested += objectsToDraw[i]->numberOfVertices;
                         }
 					}
 				}
@@ -882,6 +892,7 @@ void YasEngine::prepareDataForDrawingGraphs()
     preparePrimesDrawing();
     prepareFibonacciDrawing();
     prepareSinusDrawing();
+    prepareCosinusDrawing();
 
     // std::map<std::string, std::map<int, float>*> numbersMap;
     // std::map < std::string, std::map<int, std::map<float, float>>> pairNumbersMap;
@@ -943,6 +954,33 @@ void YasEngine::prepareSinusDrawing()
     // }
 
     sinusPicture = new MathPicture(maxNtoCalculateSinus, sinuses, new SinusPointsGenerator(), new PointsSet());
+}
+
+void YasEngine::prepareCosinusDrawing()
+{
+    std::map<float, float>* cosine = generateCosNumbers(100);//generatePrimeNumbersLessThanN(1000);
+    int numberOfPrimes = cosine->size();
+    cosPointsHarvested = 0;
+
+    // std::map < std::string, std::map<int, std::map<float, float>>> pairNumbersMap;
+
+    std::map<int, std::map<float, float>> numberedSines;
+
+    pairNumbersMap.insert(std::pair < std::string, std::map<int, std::map<float, float>*>* >("Cosines", new std::map<int, std::map<float, float>* >));
+
+    // for (int i = 0; i < sinuses->size(); i++)
+    // {
+    int i = 0;
+    for (std::pair<float, float> pair : *cosine)
+    {
+        std::map<float, float>* m = new std::map<float, float>();
+        m->insert(pair);
+        pairNumbersMap.at("Cosines")->insert(std::pair<int, std::map<float, float>*>(i, m));
+    }
+
+    // }
+
+    cosinusPicture = new MathPicture(maxNtoCalculateCosinus, cosine, new CosinusPointsGenerator(), new PointsSet());
 }
 
 void YasEngine::prepareFibonacciDrawing()
