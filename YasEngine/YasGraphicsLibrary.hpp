@@ -29,6 +29,8 @@ const Vector4D<Uint8> WHITE(255, 255, 255, 0);
 const Vector4D<Uint8> YELLOW(255, 255, 0, 0);
 const Vector4D<Uint8> LIGHT_BLUE(0, 255, 255, 0);
 const Vector4D<Uint8> PURPLE(255, 0, 255, 0);
+const Vector4D<Uint8> XPORTAL(255, 77, 0, 0);
+const Vector4D<Uint8> POLYGON(250, 180, 10, 0);
 
 void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, PixelsTable& pixelsTable, const Vector4D<Uint8>& drawingColor);
 

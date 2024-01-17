@@ -449,22 +449,22 @@ void YasEngine::render(double& deltaTime) {
         renderOnViewports(deltaTime);
         drawFrame(deltaTime);
         break;
-    case OUTRO:
-        writer.write(0, 350, "GAME.DESIGN.PROGRAMMING.AND.MARKETING", YELLOW, *pixelsTable);
-        writer.write(0, 325, "LUKASZ.SAWICKI", YELLOW, *pixelsTable);
-        writer.write(0, 275, "SOUND.DESIGN.AND.MUSIC", YELLOW, *pixelsTable);
-        writer.write(0, 250, "JAKUB.TWAROGOWSKI", YELLOW, *pixelsTable);
-        writer.write(0, 200, "QUALITY.ASSURANCE", YELLOW, *pixelsTable);
-        writer.write(0, 175, "BARTLOMIEJ.KAWA", YELLOW, *pixelsTable);
-        writer.write(0, 125, "SPECIAL.THANKS:", PURPLE, *pixelsTable);
-        writer.write(0, 75, "MY.DEAR.SISTER.IZABELA", YELLOW, *pixelsTable);
-        writer.write(0, 50, "MY.LOVE.MARIOLA", YELLOW, *pixelsTable);
-        writer.write(0, 0, "MY.FRIENDS.FROM.WARSAW.SCHOOL.OF.COMPUTER.SCIENCE:", YELLOW, *pixelsTable);
-        writer.write(0, -25, "LUKASZ.KRZYSZTOF.MICHAL.MAREK.TOMASZ", YELLOW, *pixelsTable);
-        writer.write(0, -75, "MY.FRENDS.FROM.GDS.4:", YELLOW, *pixelsTable);
-        writer.write(0, -100, "KASIA.AND.BARTOSZ", YELLOW, *pixelsTable);
-        writer.write(0, -150, "WHOLE.COMMUNITY.OF.KNTG.POLYGON", YELLOW, *pixelsTable);
-        writer.write(0, -200, "AND.ALL.MEMBERS.OF.TEAM.XPORTAL", YELLOW, *pixelsTable);
+    case OUTRO://                                 123456789_123456789_123456789_123456789_123456789_123456789_
+        writer.write((-37 * 17) / 2, 350, "GAME.DESIGN.PROGRAMMING.AND.MARKETING", LIGHT_BLUE, *pixelsTable);
+        writer.write((-14 * 17) / 2, 325,               "LUKASZ.SAWICKI", PURPLE, *pixelsTable);
+        writer.write((-22 * 17) / 2, 275,               "SOUND.DESIGN.AND.MUSIC", LIGHT_BLUE, *pixelsTable);
+        writer.write((-17 * 17) / 2, 250,               "JAKUB.TWAROGOWSKI", PURPLE, *pixelsTable);
+        writer.write((-17 * 17) / 2, 200,               "QUALITY.ASSURANCE", LIGHT_BLUE, *pixelsTable);
+        writer.write((-15 * 17) / 2, 175,               "BARTLOMIEJ.KAWA", PURPLE, *pixelsTable);
+        writer.write((-15 * 17) / 2, 125,               "SPECIAL.THANKS:", GREEN, *pixelsTable);
+        writer.write((-22 * 17) / 2, 75,                "MY.DEAR.SISTER.IZABELA", YELLOW, *pixelsTable);
+        writer.write((-15 * 17) / 2, 50,                "MY.LOVE.MARIOLA", YELLOW, *pixelsTable);
+        writer.write((-50 * 17) / 2, 0,                 "MY.FRIENDS.FROM.WARSAW.SCHOOL.OF.COMPUTER.SCIENCE:", BLUE, *pixelsTable);
+        writer.write((-36 * 17) / 2, -25,               "LUKASZ.KRZYSZTOF.MICHAL.MAREK.TOMASZ", YELLOW, *pixelsTable);
+        writer.write((-21 * 17) / 2, -75,               "MY.FRENDS.FROM.GDS.4:", BLUE, *pixelsTable);
+        writer.write((-17 * 17) / 2, -100,              "KASIA.AND.BARTOSZ", YELLOW, *pixelsTable);
+        writer.write((-31 * 17) / 2, -150,              "WHOLE.COMMUNITY.OF.KNTG.POLYGON", POLYGON, *pixelsTable);
+        writer.write((-31 * 17) / 2, -200,              "AND.ALL.MEMBERS.OF.TEAM.XPORTAL", XPORTAL, *pixelsTable);
 
         break;
     default:
