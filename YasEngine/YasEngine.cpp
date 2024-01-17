@@ -478,6 +478,9 @@ void YasEngine::renderOnViewports(double& deltaTime)
     // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, verticesHarvested, BLUE, true);
     surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(
         primeNumbersPicture->pointsSet->points, primeNumbersPicture->basePointsFuel, primesPointsHarvested, RED, false);
+    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(
+        fibonacciePicture->pointsSet->points, fibonacciePicture->basePointsFuel, fibbsPointsHarvested, BLUE, false);
+
 
 	surfaceWithMathBasedEffects->copyPixelsInToPIxelTable(*pixelsTable);
 }
@@ -527,10 +530,12 @@ void YasEngine::handlePhysics()
                         if(objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
                         {
                             primesPointsHarvested -= 1; //objectsToDraw[i]->numberOfVertices;// do somethingv
+                            fibbsPointsHarvested -= 1;
                         }
                         if (objectsToDraw[j]->iAm == GameObject::COLLECTIBLE)
                         {
                             primesPointsHarvested -= 1;  //objectsToDraw[i]->numberOfVertices;// do something
+                            fibbsPointsHarvested -= 1;
                         }
                         
                     }
@@ -544,11 +549,13 @@ void YasEngine::handlePhysics()
                         {
                             --Spawner::numberOfSpawnedObjects;
                             primesPointsHarvested += objectsToDraw[i]->numberOfVertices;
+                            fibbsPointsHarvested += objectsToDraw[i]->numberOfVertices;
                         }
                         if (objectsToDraw[j]->iAm == GameObject::COLLECTIBLE)
                         {
                             --Spawner::numberOfSpawnedObjects;
                             primesPointsHarvested += objectsToDraw[j]->numberOfVertices;
+                            fibbsPointsHarvested += objectsToDraw[i]->numberOfVertices;
                         }
 					}
 				}
@@ -872,6 +879,9 @@ void YasEngine::setFrameAroundGameplaySpace()
 void YasEngine::prepareDataForDrawingGraphs()
 {
 
+    preparePrimesDrawing();
+    prepareFibonacciDrawing();
+
     // std::map<std::string, std::map<int, float>*> numbersMap;
     // std::map < std::string, std::map<int, std::map<float, float>>> pairNumbersMap;
 
@@ -882,17 +892,6 @@ void YasEngine::prepareDataForDrawingGraphs()
     // {
     //     numbersMap.at("Fibonacci")->insert(std::pair<int, float>(33, 33.44f));
     // }
-
-    std::vector<int> primes = generatePrimeNumbersLessThanN(1000);
-    int numberOfPrimes = primes.size();
-    primesPointsHarvested = 0;
-
-    numbersMap.insert( std::pair<std::string, std::map<int, float>*> ("Primes", new std::map<int, float>));
-
-    for(int i=0; i<primes.size(); i++)
-    {
-        numbersMap.at("Primes")->insert(std::pair<int, int>(i, primes.at(i)));
-    }
 
     // std::vector<int> primeNumbers = generatePrimeNumbersLessThanN(1000);
 
@@ -908,7 +907,7 @@ void YasEngine::prepareDataForDrawingGraphs()
     // sinusPicture = new MathPicture(100, 0, 100, new SinusPointsGenerator(), new PointsSet());
     // cosinusPicture = new MathPicture(100, 0, 100, new CosinusPointsGenerator(), new PointsSet());
     // fibonacciePicture = new MathPicture(40, 0, 40, numbersMap.at("Fibonacci"), new FibonacciPointsGenerator(), new PointsSet());
-    primeNumbersPicture = new MathPicture(maxNtoCalculatePrimes, numbersMap.at("Primes"), new PrimeNumbersPointsGenerator(), new PointsSet());
+
 
 
     // sinusPicture->generatePoints();
@@ -916,6 +915,38 @@ void YasEngine::prepareDataForDrawingGraphs()
     // fibonacciePicture->generatePoints();
     // primeNumbersPicture->generatePoints();
 
+}
+
+void YasEngine::prepareFibonacciDrawing()
+{
+    std::vector<int> fibbs = generateNfibonaccinumbers(40);
+
+    fibbsPointsHarvested = 0;
+
+    numbersMap.insert(std::pair<std::string, std::map<int, float>*>("Fibbs", new std::map<int, float>));
+
+    for (int i = 0; i < fibbs.size(); i++)
+    {
+        numbersMap.at("Fibbs")->insert(std::pair<int, int>(i, fibbs.at(i)));
+    }
+
+    fibonacciePicture = new MathPicture(maxNtoCalculateFibonacci, numbersMap.at("Fibbs"), new FibonacciPointsGenerator(), new PointsSet());
+}
+
+void YasEngine::preparePrimesDrawing()
+{
+    std::vector<int> primes = generatePrimeNumbersLessThanN(1000);
+    int numberOfPrimes = primes.size();
+    primesPointsHarvested = 0;
+
+    numbersMap.insert(std::pair<std::string, std::map<int, float>*>("Primes", new std::map<int, float>));
+
+    for (int i = 0; i < primes.size(); i++)
+    {
+        numbersMap.at("Primes")->insert(std::pair<int, int>(i, primes.at(i)));
+    }
+
+    primeNumbersPicture = new MathPicture(maxNtoCalculatePrimes, numbersMap.at("Primes"), new PrimeNumbersPointsGenerator(), new PointsSet());
 }
 
 void YasEngine::prepareInterface()

@@ -8,11 +8,8 @@ class MathPicture
 		MathPicture(int maxNtoCalculateNumbers, std::map<int, float>* numbers, PointsGenerator* pointsGenerator, PointsSet* npointsSet)
 		{
 			this->basePointsFuel = numbers->size();
-			// this->minimalPointsFuel = minimalPointsFuel;
 			this->maximumPointsFuel = numbers->size();
 			this->pointsGenerator = pointsGenerator;
-			// this->pointsSet = pointsSet;
-			// this->numbers = numbers;
 			this->numbers = numbers;
 			generatePoints();
 		}

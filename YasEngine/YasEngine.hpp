@@ -158,7 +158,7 @@ class YasEngine
 		int sinPointsHarvested = 0;
 		int cosPointsHarvested = 0;
 		int primesPointsHarvested = 0;
-		int fibbPointsHarvested = 0;
+		int fibbsPointsHarvested = 0;
 
 		int maxNtoCalculatePrimes = 1000;
 		int maxNtoCalculateFibonacci = 40;
@@ -205,6 +205,8 @@ class YasEngine
 		void prepareGameWorld();
 		void setFrameAroundGameplaySpace();
         void prepareDataForDrawingGraphs();
+		void prepareFibonacciDrawing();
+		void preparePrimesDrawing();
 		void preparePlayer();
         void prepareInterface();
 		void handleInput(SDL_Event& event);

@@ -31,7 +31,5 @@ PointsSet* FibonacciPointsGenerator::generatePoints(int numberOfNumbers, std::ma
 	
 	pointsSet->pointsNumber = pointsNumber;
 
-	std::cout << pointsSet->points[3333].x << std::endl;
-
 	return pointsSet;
 }
