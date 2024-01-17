@@ -41,6 +41,24 @@ std::vector<int> generatePrimeNumbersLessThanN(int n)
     return primeNumbers;
 }
 
+
+std::map<float, float>* generateSinNumbers(int pointsNumber)
+{
+    float divider = static_cast<float>(pointsNumber);
+    float maximumXvalue = 2.0F * PI;
+    float step = (maximumXvalue / divider);
+
+    std::map<float, float>* sinMap = new std::map<float, float>();
+
+    for (int i = 0; i < pointsNumber; i++)
+    {
+        float x = i * step;
+        float y = sin(x);
+        sinMap->insert(std::pair<float, float>(x, y));
+    }
+    return sinMap;
+}
+
 // std::vector<int> generatePrimeNumbersLessThanN(int n)
 // {
 //     std::vector<int> primeNumbers;

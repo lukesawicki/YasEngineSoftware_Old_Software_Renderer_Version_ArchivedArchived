@@ -475,7 +475,7 @@ void YasEngine::renderOnViewports(double& deltaTime)
     // surfaceWithMathBasedEffects->verticalLineOnSurface(0, GREEN);
     // surfaceWithMathBasedEffects->horizontalLineOnSurface(0, RED);
     // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, verticesHarvested, YELLOW, true);
-    // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, verticesHarvested, BLUE, true);
+    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinusPicture->pointsSet->points, sinusPicture->basePointsFuel , sinPointsHarvested, BLUE, true);
     surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(
         primeNumbersPicture->pointsSet->points, primeNumbersPicture->basePointsFuel, primesPointsHarvested, RED, false);
     surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(
@@ -915,6 +915,33 @@ void YasEngine::prepareDataForDrawingGraphs()
     // fibonacciePicture->generatePoints();
     // primeNumbersPicture->generatePoints();
 
+}
+
+void YasEngine::sinusDrawing()
+{
+    std::map<float, float>* sinuses = generateSinNumbers(100);//generatePrimeNumbersLessThanN(1000);
+    int numberOfPrimes = sinuses->size();
+    sinPointsHarvested = 0;
+
+    // std::map < std::string, std::map<int, std::map<float, float>>> pairNumbersMap;
+
+    std::map<int, std::map<float, float>> numberedSines;
+
+    pairNumbersMap.insert(std::pair < std::string, std::map<int, std::map<float, float>*>* > ("Sines", new std::map<int, std::map<float, float>* >));
+
+    // for (int i = 0; i < sinuses->size(); i++)
+    // {
+    int i = 0;
+        for(std::pair<float, float> pair: sinuses)
+        {
+            std::map<float, float>* m = new std::map<float, float>();
+            m->insert(pair);
+            pairNumbersMap.at("Sines")->insert(std::pair<int, std::map<float, float>*>(i,m));
+        }
+        
+    // }
+
+    sinusPicture = new MathPicture(maxNtoCalculatePrimes, numbersMap.at("Sines"), new SinusPointsGenerator(), new PointsSet());
 }
 
 void YasEngine::prepareFibonacciDrawing()

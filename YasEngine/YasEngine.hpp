@@ -141,7 +141,7 @@ class YasEngine
 		const int MAX_COLLECTIBLES_TO_SPAWN = 64;
 
 		std::map<std::string, std::map<int, float>*> numbersMap;
-		std::map < std::string, std::map<int, std::map<float, float>>> pairNumbersMap;
+		std::map < std::string, std::map<int, std::map<float, float>*>* > pairNumbersMap;
 
 		// std::map<int, float>* numbers;
 
@@ -205,6 +205,7 @@ class YasEngine
 		void prepareGameWorld();
 		void setFrameAroundGameplaySpace();
         void prepareDataForDrawingGraphs();
+		void sinusDrawing();
 		void prepareFibonacciDrawing();
 		void preparePrimesDrawing();
 		void preparePlayer();
