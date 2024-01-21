@@ -159,7 +159,7 @@ void YasEngine::prepareBasicSettings()
     SDL_Init(SDL_INIT_EVERYTHING);
 
     windowDimensions    =   new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
-    Uint32 windowFlags = SDL_WINDOW_RESIZABLE;// | SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_ALWAYS_ON_TOP;
+    Uint32 windowFlags = SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_ALWAYS_ON_TOP; // SDL_WINDOW_RESIZABLE;// | SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_ALWAYS_ON_TOP;
     window              =   SDL_CreateWindow("YasEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, windowFlags);
 
     SDL_SetWindowMinimumSize(window, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -554,17 +554,21 @@ void YasEngine::handlePhysics()
                     {
                         if(objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
                         {
-                            primesPointsHarvested -= 1; //objectsToDraw[i]->numberOfVertices;// do somethingv
-                            fibbsPointsHarvested -= 1;
-                            sinPointsHarvested -= -1;
-                            cosPointsHarvested -= -1;
+                            if (primesPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || sinPointsHarvested >= 0 || cosPointsHarvested >= 0) {
+                                primesPointsHarvested -= 1; //objectsToDraw[i]->numberOfVertices;// do somethingv
+                                fibbsPointsHarvested -= 1;
+                                sinPointsHarvested -= -1;
+                                cosPointsHarvested -= -1;
+                            }
                         }
                         if (objectsToDraw[j]->iAm == GameObject::COLLECTIBLE)
                         {
-                            primesPointsHarvested -= 1;  //objectsToDraw[i]->numberOfVertices;// do something
-                            fibbsPointsHarvested -= 1;
-                            sinPointsHarvested -= -1;
-                            cosPointsHarvested -= -1;
+                            if (primesPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || sinPointsHarvested >= 0 || cosPointsHarvested >= 0) {
+                                primesPointsHarvested -= 1;  //objectsToDraw[i]->numberOfVertices;// do something
+                                fibbsPointsHarvested -= 1;
+                                sinPointsHarvested -= -1;
+                                cosPointsHarvested -= -1;
+                            }
                         }
                         
                     }

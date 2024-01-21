@@ -145,7 +145,7 @@ void Collectible::setColor(const Vector4D<Uint8>& color)
 
 void Collectible::setRandomColor()
 {
-	int col = Randomizer::drawNumberClosedInterval(1, 4); // rand() % 5;
+	int col = Randomizer::drawNumberClosedInterval(0, 8); // rand() % 5;
 	switch(col)
 	{
 	case 0:
@@ -162,6 +162,17 @@ void Collectible::setRandomColor()
 		break;
 	case 4:
 		setColor(YELLOW);
+	case 5:
+		setColor(LIGHT_BLUE);
+		break;
+	case 6:
+		setColor(POLYGON);
+		break;
+	case 7:
+		setColor(XPORTAL);
+		break;
+	case 8:
+		setColor(PURPLE);
 		break;
 	default:
 		setColor(BLUE);
