@@ -82,6 +82,9 @@ class YasEngine
         std::vector<std::string> outroTexts;
         std::vector<std::string> inGameTexts;
 
+		int healthPoints = 100;
+		int points = 0;
+
 		static YasEngine* GetInstance()
 		{
 			if (instance != nullptr)
@@ -136,6 +139,7 @@ class YasEngine
 		Player* player;
 		SurfaceWithMathBasedEffects* surfaceWithMathBasedEffects;
 		std::vector<NodeNumbersOnTwoProceedingLevels*> spawnersPositions;
+		
 		// std::vector<NodeNumbersOnTwoProceedingLevels*> fourRandomPositions;
 
 		const int MAX_COLLECTIBLES_TO_SPAWN = 64;

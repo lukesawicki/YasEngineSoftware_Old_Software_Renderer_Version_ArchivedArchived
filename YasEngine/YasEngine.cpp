@@ -454,6 +454,10 @@ void YasEngine::render(double& deltaTime) {
         renderGameObjects(deltaTime);
         renderOnViewports(deltaTime);
         drawFrame(deltaTime);
+        writer.write(350, 375, "POINTS", LIGHT_BLUE, *pixelsTable);
+        writer.write(350, 350, std::to_string(points), LIGHT_BLUE, *pixelsTable);
+        writer.write(350, 275, "HEALTH POINTS", LIGHT_BLUE, *pixelsTable);
+        writer.write(350, 250, std::to_string(healthPoints), LIGHT_BLUE, *pixelsTable);
         break;
     case OUTRO://                                 123456789_123456789_123456789_123456789_123456789_123456789_
 
@@ -563,6 +567,11 @@ void YasEngine::handlePhysics()
                     }
                     if ( (!isOneProtagonist) && Collider::isInCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
                     {
+                        if (objectsToDraw[i]->isAlive && !objectsToDraw[i]->collider.isCollieded)
+                        {
+                            objectsToDraw[i]->collider.isCollieded = true;
+                            points += objectsToDraw[i]->numberOfVertices;
+                        }
                         objectsToDraw[i]->isAlive = false;
                         objectsToDraw[j]->isAlive = false;
                         Mix_PlayChannel(-1, hitSound, 0);

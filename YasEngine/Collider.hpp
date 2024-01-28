@@ -16,7 +16,7 @@ class Collider
 		Collider();
 		Collider(float radius, float x, float y);
 
-		static bool onCollisionEnter(const Collider& object0, const Collider& object1)
+		static bool onCollisionEnter(const Collider& object0, const Collider& object1);
 		static bool isInCollision(const Collider& object0, const Collider& object1);
 		static bool isCollidingWithWall(const Collider& object0, const Vector2D<int>& worldSizes);
         static bool isCollidingWithCustomWalls(const Collider& object0, const Vector2D<int>& worldSizes);
