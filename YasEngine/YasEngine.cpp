@@ -437,7 +437,7 @@ void YasEngine::render(double& deltaTime) {
     switch (gameState)
     {
     case INTRO:
-        writer.write( (-238)/2, 200, "BEOUTY.OF.MATH", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
+        writer.write( (-238)/2, 200, "THE.GLITCH", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
         writer.write((-170)/2, 100, "POWERED.BY", RED, *pixelsTable);
         writer.write((-170)/2, 0, "YAS.ENGINE", YELLOW, *pixelsTable);
         break;
@@ -450,21 +450,15 @@ void YasEngine::render(double& deltaTime) {
         drawFrame(deltaTime);
         break;
     case OUTRO://                                 123456789_123456789_123456789_123456789_123456789_123456789_
+
         writer.write((-37 * 17) / 2, 350, "GAME.DESIGN.PROGRAMMING.AND.MARKETING", LIGHT_BLUE, *pixelsTable);
-        writer.write((-14 * 17) / 2, 325,               "LUKASZ.SAWICKI", PURPLE, *pixelsTable);
+        writer.write((-14 * 17) / 2, 325,               "LUKE.AND.BEJPASTAN", PURPLE, *pixelsTable);
         writer.write((-22 * 17) / 2, 275,               "SOUND.DESIGN.AND.MUSIC", LIGHT_BLUE, *pixelsTable);
         writer.write((-17 * 17) / 2, 250,               "JAKUB.TWAROGOWSKI", PURPLE, *pixelsTable);
         writer.write((-17 * 17) / 2, 200,               "QUALITY.ASSURANCE", LIGHT_BLUE, *pixelsTable);
-        writer.write((-15 * 17) / 2, 175,               "BARTLOMIEJ.KAWA", PURPLE, *pixelsTable);
+        writer.write((-15 * 17) / 2, 175,               "....MY", PURPLE, *pixelsTable);
         writer.write((-15 * 17) / 2, 125,               "SPECIAL.THANKS:", GREEN, *pixelsTable);
-        writer.write((-22 * 17) / 2, 75,                "MY.DEAR.SISTER.IZABELA", YELLOW, *pixelsTable);
-        writer.write((-15 * 17) / 2, 50,                "MY.LOVE.MARIOLA", YELLOW, *pixelsTable);
-        writer.write((-50 * 17) / 2, 0,                 "MY.FRIENDS.FROM.WARSAW.SCHOOL.OF.COMPUTER.SCIENCE:", BLUE, *pixelsTable);
-        writer.write((-36 * 17) / 2, -25,               "LUKASZ.KRZYSZTOF.MICHAL.MAREK.TOMASZ", YELLOW, *pixelsTable);
-        writer.write((-21 * 17) / 2, -75,               "MY.FRENDS.FROM.GDS.4:", BLUE, *pixelsTable);
-        writer.write((-17 * 17) / 2, -100,              "KASIA.AND.BARTOSZ", YELLOW, *pixelsTable);
-        writer.write((-31 * 17) / 2, -150,              "WHOLE.COMMUNITY.OF.KNTG.POLYGON", POLYGON, *pixelsTable);
-        writer.write((-31 * 17) / 2, -200,              "AND.ALL.MEMBERS.OF.TEAM.XPORTAL", XPORTAL, *pixelsTable);
+        writer.write((-22 * 17) / 2, 75,                "...WY", YELLOW, *pixelsTable);
 
         break;
     default:
@@ -567,21 +561,15 @@ void YasEngine::handlePhysics()
                         objectsToDraw[j]->isAlive = false;
                         Mix_PlayChannel(-1, hitSound, 0);
 
+
                         if(objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
                         {
                             --Spawner::numberOfSpawnedObjects;
-                            primesPointsHarvested += objectsToDraw[i]->numberOfVertices;
-                            fibbsPointsHarvested += objectsToDraw[i]->numberOfVertices;
-                            sinPointsHarvested += objectsToDraw[i]->numberOfVertices;
-                            cosPointsHarvested += objectsToDraw[i]->numberOfVertices;
+
                         }
                         if (objectsToDraw[j]->iAm == GameObject::COLLECTIBLE)
                         {
                             --Spawner::numberOfSpawnedObjects;
-                            primesPointsHarvested += objectsToDraw[j]->numberOfVertices;
-                            fibbsPointsHarvested += objectsToDraw[i]->numberOfVertices;
-                            sinPointsHarvested += objectsToDraw[i]->numberOfVertices;
-                            cosPointsHarvested += objectsToDraw[i]->numberOfVertices;
                         }
 					}
 				}
