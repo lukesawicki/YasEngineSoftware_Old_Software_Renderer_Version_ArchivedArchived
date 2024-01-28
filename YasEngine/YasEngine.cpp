@@ -246,6 +246,9 @@ void YasEngine::handleKeyboardInput(SDL_Event& event)
         case SDLK_o:
             input->test_o_button = true;
             break;
+        case SDLK_k:
+            player->isAlive = false;
+            break;
         default:
             ;
         }
@@ -292,15 +295,13 @@ void YasEngine::handleMouseInput(SDL_Event& event)
         case GAMEPLAY:
         {
             player->isShooting = true;
+
             int randNumb = Randomizer::drawNumberClosedInterval(1, 8);
-            if (randNumb <= 4)\
+
+            if (randNumb <= 4)
         	{
                 changeAllCollectibleDirection(randNumb);
             }
-                if(player->wasHit)
-                {
-                    healthPoints--;
-                }
         }
             break;
         case MAIN_MENU_RESTART:
@@ -434,11 +435,25 @@ void YasEngine::update(double& deltaTime)
     // TODO switch with handling different things
     if(gameState==GameState::GAMEPLAY)
     {
-        handleSpawningCollectibles();
-	    handlePhysics();
-        moveObjects();
-        handleProjectiles();
-        handlePlayer();
+        if (!gameover)
+        {
+            handleSpawningCollectibles();
+            handlePhysics();
+            moveObjects();
+            handleProjectiles();
+            handlePlayer();
+        }
+        
+        if (!player->isAlive && !gameover)
+        {
+            for (int i = 0; i < objectsToDraw.size(); i++)
+            {
+                crashObjects(i);
+            }
+            gameover = true;
+        }
+
+
     }
 }
 
@@ -457,6 +472,7 @@ void YasEngine::render(double& deltaTime) {
         drawButtons();
         break;
     case GAMEPLAY:
+    {
         renderGameObjects(deltaTime);
         renderOnViewports(deltaTime);
         drawFrame(deltaTime);
@@ -464,6 +480,11 @@ void YasEngine::render(double& deltaTime) {
         writer.write(350, 350, std::to_string(points), LIGHT_BLUE, *pixelsTable);
         writer.write(350, 275, "HEALTH POINTS", LIGHT_BLUE, *pixelsTable);
         writer.write(350, 250, std::to_string(healthPoints), LIGHT_BLUE, *pixelsTable);
+        if (gameover)
+        {
+            writer.write(200, 200, "YOU FULLY GLITCHED", RED, *pixelsTable);
+        }
+    }
         break;
     case OUTRO://                                 123456789_123456789_123456789_123456789_123456789_123456789_
 
@@ -629,6 +650,58 @@ void YasEngine::handlePhysics()
 		}
     }
 } // END OF handlePhysics()
+void YasEngine::crashObjects(int i)
+{
+    // buttons.at(0)->localVertices[0].x = 0 - dynamic_cast<Button*>(buttons.at(0))->buttonWidth * 0.5F;
+    int crash = 0;
+    int verts = objectsToDraw[i]->numberOfVertices;
+    for(int j =0; j<verts; j++)
+    {
+        crash = Randomizer::drawNumberClosedInterval(1, 64);
+        int randDirection = Randomizer::drawNumberClosedInterval(1, 2);
+        int direction = 0;
+        if(randDirection ==1)
+        {
+            direction = -1;
+        }
+        else
+        {
+            direction = +1;
+        }
+        int changedX = objectsToDraw[i]->localVertices[j].x + crash*direction;
+        randDirection = Randomizer::drawNumberClosedInterval(1, 2);
+        direction = 0;
+        if (randDirection == 1)
+        {
+            direction = -1;
+        }
+        else
+        {
+            direction = +1;
+        }
+        int changedY = objectsToDraw[i]->localVertices[j].y + crash*direction;
+
+        if(changedX <= -380)
+        {
+            changedX = -380;
+        }
+        if(changedX >= -21)
+        {
+            changedX = -21;
+        }
+        if (changedY <= -380)
+        {
+            changedY = -380;
+        }    
+        if(changedY >= 380)
+        {
+            changedY = 380;
+        }
+        objectsToDraw[i]->localVertices[j].x = changedX;
+        objectsToDraw[i]->localVertices[j].y = changedY;
+    }
+    objectsToDraw[i]->regeneratePolygon();
+}
 
 
 void YasEngine::handleCollectiblesWithWallsCollisions(GameObject* object)
@@ -1198,7 +1271,12 @@ void YasEngine::handleClickedButtons()
     switch(checkWhichButtonClicked())
     {
         case Button::RESTART_START:
-            gameState = GameState::GAMEPLAY;
+        {
+            if (!gameover)
+            {
+                gameState = GameState::GAMEPLAY;
+            }
+        }
             break;
         case Button::QUIT:
             gameState = GameState::OUTRO;

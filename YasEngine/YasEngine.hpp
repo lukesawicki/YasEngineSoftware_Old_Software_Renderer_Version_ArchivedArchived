@@ -133,6 +133,8 @@ class YasEngine
 		int WINDOW_WIDTH = 1600;
 		int WINDOW_HEIGHT = 800;
 
+		bool gameover = false;
+
 		std::vector<GameObject*> objectsToDraw;
 		bool first16Spawned = false;
 		int howMany = 0;
@@ -201,6 +203,7 @@ class YasEngine
 		void prepareBasicSettings();
 		void checkEndianness();
 		void handlePhysics();
+		void crashObjects(int i);
 		void handleCollectiblesWithWallsCollisions(GameObject* object);
 		void handleProtagonistWithWallsCollisions(GameObject* object);
 		void moveObjectToMapBoundries(GameObject* gameObject, Wall wall);
