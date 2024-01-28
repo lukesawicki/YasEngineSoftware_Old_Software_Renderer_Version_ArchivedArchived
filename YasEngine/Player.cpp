@@ -1,5 +1,7 @@
 #include"Player.hpp"
 
+#include "Randomizer.hpp"
+
 Player::Player(float x, float y)
 {
 
@@ -221,7 +223,17 @@ Projectile* Player::shoot()
 		isShooting = false;
 		float projectileX = position.x + direction.x * projectilePositionShift;
 		float projectileY = position.y + direction.y * projectilePositionShift;
-		return new Projectile(8, projectileX, projectileY, direction);
+
+		int randNumber = Randomizer::drawNumberClosedInterval(0, 5);
+
+		int projectileSpeed = 200;
+
+		if(randNumber==3)
+		{
+			projectileSpeed = 0;
+		}
+
+		return new Projectile(8, projectileX, projectileY, direction, projectileSpeed);
 	}
 	else
 	{

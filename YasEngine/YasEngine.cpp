@@ -495,17 +495,6 @@ void YasEngine::renderOnViewports(double& deltaTime)
     {
         surfaceWithMathBasedEffects->drawCartesianAxies();
     }
-    // surfaceWithMathBasedEffects->verticalLineOnSurface(0, GREEN);
-    // surfaceWithMathBasedEffects->horizontalLineOnSurface(0, RED);
-    // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, verticesHarvested, YELLOW, true);
-    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinusPicture->pointsSet->points, sinusPicture->basePointsFuel , sinPointsHarvested, BLUE, true);
-    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPicture->pointsSet->points, sinusPicture->basePointsFuel, sinPointsHarvested, RED, true);
-
-	surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(
-	 primeNumbersPicture->pointsSet->points, primeNumbersPicture->basePointsFuel, primesPointsHarvested, LIGHT_BLUE, false);
-	surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(
-	 fibonacciePicture->pointsSet->points, fibonacciePicture->basePointsFuel, fibbsPointsHarvested, PURPLE, false);
-
 
 	surfaceWithMathBasedEffects->copyPixelsInToPIxelTable(*pixelsTable);
 }

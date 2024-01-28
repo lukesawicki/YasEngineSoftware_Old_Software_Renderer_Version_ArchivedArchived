@@ -6,13 +6,13 @@ static Uint32 kill(Projectile* projectileToKill, Uint32 interval, void* param)
 	return 0;
 }
 
-Projectile::Projectile(float radius, float x, float y, Vector2D<float> direction)
+Projectile::Projectile(float radius, float x, float y, Vector2D<float> direction, float speed)
 {
 	isAlive = true;
 	iAm = WhoAmI::PROJECTILE;
 	collider.radius = radius;
 	// directionSwitched = false;
-	speed = 200;
+	this->speed = speed;
 	Vector2D<float> position(x, y);
 	this->position.x = x;
 	this->position.y = y;

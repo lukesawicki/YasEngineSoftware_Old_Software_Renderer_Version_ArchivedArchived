@@ -18,7 +18,7 @@ class Projectile : public GameObject
         double currentTime = 0;
 
 		Vector2D<float> velocity;
-		Projectile(float radius, float x, float y, Vector2D<float> direction);
+		Projectile(float radius, float x, float y, Vector2D<float> direction, float speed = 200);
 		~Projectile();
 		void move(float deltaTime) override;
 		void generate() override;
