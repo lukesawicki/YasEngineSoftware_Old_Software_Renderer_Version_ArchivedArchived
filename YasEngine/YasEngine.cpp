@@ -7,6 +7,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <cstdlib>
 
 #include<bit>
 #include<SDL_mixer.h>
@@ -159,7 +160,7 @@ void YasEngine::prepareBasicSettings()
     SDL_Init(SDL_INIT_EVERYTHING);
 
     windowDimensions    =   new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
-    Uint32 windowFlags = SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_ALWAYS_ON_TOP; // SDL_WINDOW_RESIZABLE;// | SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_ALWAYS_ON_TOP;
+    Uint32 windowFlags = SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_ALWAYS_ON_TOP | SDL_WINDOW_RESIZABLE | SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_ALWAYS_ON_TOP;
     window              =   SDL_CreateWindow("YasEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, windowFlags);
 
     SDL_SetWindowMinimumSize(window, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -289,7 +290,10 @@ void YasEngine::handleMouseInput(SDL_Event& event)
         switch (gameState)
         {
         case GAMEPLAY:
+        {
             player->isShooting = true;
+            changeAllCollectibleDirection();
+        }
             break;
         case MAIN_MENU_RESTART:
             handleClickedButtons();
@@ -1089,6 +1093,29 @@ void YasEngine::drawButtons()
         drawPolygon(buttons.at(i), *pixelsTable);
         writer.write(static_cast<int>(buttons.at(i)->getPosition().x - dynamic_cast<Button*>(buttons.at(i))->buttonTextWidth * 0.5F + ScreenWriter::FONT_WIDTH * 0.5F), static_cast<int>(buttons.at(i)->getPosition().y), dynamic_cast<Button*>(buttons.at(i))->text,dynamic_cast<Button*>(buttons.at(i))->color, *pixelsTable);
     }
+}
+
+void YasEngine::changeAllCollectibleDirection()
+{
+    int randomNumber = 1;// Randomizer::drawNumberClosedInterval(1, 5);
+
+    if (randomNumber == 1)
+    {
+        std::cout << "Zmieniam" << std::endl;
+        for (int i = 0; i < objectsToDraw.size(); i++)
+        {
+            if (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
+            {
+                
+                objectsToDraw[i]->velocity.x = abs(objectsToDraw[i]->velocity.x);
+            }
+        }
+    }
+
+    // if (randNumber == 2)
+    // {
+    //
+    // }
 }
 
 Button::ButtonId YasEngine::checkWhichButtonClicked()
