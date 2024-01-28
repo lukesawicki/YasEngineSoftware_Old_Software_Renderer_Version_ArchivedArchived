@@ -226,11 +226,19 @@ Projectile* Player::shoot()
 
 		int randNumber = Randomizer::drawNumberClosedInterval(0, 5);
 
+
+
 		int projectileSpeed = 200;
 
 		if(randNumber==3)
 		{
 			projectileSpeed = 0;
+			speed = speed * -1;
+		}
+
+		if (randNumber == 2)
+		{
+			projectileSpeed *= -1;
 		}
 
 		return new Projectile(8, projectileX, projectileY, direction, projectileSpeed);
