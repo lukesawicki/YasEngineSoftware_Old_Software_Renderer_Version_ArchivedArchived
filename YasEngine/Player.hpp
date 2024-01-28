@@ -9,6 +9,7 @@ class Player : public GameObject
 	public:
 		
 		bool isShooting;
+		bool wasHit = false;
 		int projectilePositionShift = 22;
 		
 		YasInOut::Input* input;

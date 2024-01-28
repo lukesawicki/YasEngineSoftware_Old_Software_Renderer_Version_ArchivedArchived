@@ -293,8 +293,14 @@ void YasEngine::handleMouseInput(SDL_Event& event)
         {
             player->isShooting = true;
             int randNumb = Randomizer::drawNumberClosedInterval(1, 8);
-                if(randNumb<=4)
-                    changeAllCollectibleDirection(randNumb);
+            if (randNumb <= 4)\
+        	{
+                changeAllCollectibleDirection(randNumb);
+            }
+                if(player->wasHit)
+                {
+                    healthPoints--;
+                }
         }
             break;
         case MAIN_MENU_RESTART:
@@ -545,22 +551,37 @@ void YasEngine::handlePhysics()
                     bool isOneProtagonist = objectsToDraw[i]->iAm == GameObject::PROTAGONIST || objectsToDraw[j]->iAm == GameObject::PROTAGONIST;
                     if(isOneProtagonist && Collider::isInCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
                     {
+                        
                         if(objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
                         {
                             healthPoints -= objectsToDraw[i]->numberOfVertices;
-                            if (primesPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || sinPointsHarvested >= 0 || cosPointsHarvested >= 0)
-                            {
-                            }
+                            objectsToDraw[i]->isAlive = false;
+                            // healthPoints -= objectsToDraw[i]->numberOfVertices;
                         }
+
                         if (objectsToDraw[j]->iAm == GameObject::COLLECTIBLE)
                         {
+                            // healthPoints -= objectsToDraw[j]->numberOfVertices;
                             healthPoints -= objectsToDraw[j]->numberOfVertices;
-                            if (primesPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || sinPointsHarvested >= 0 || cosPointsHarvested >= 0)
-                            {
-                            }
+                            objectsToDraw[j]->isAlive = false;
                         }
-                        
+                        if(healthPoints<=0)
+                        {
+                            player->isAlive = false;
+                        }
+
                     }
+
+                    // if (player->wasHit && isOneProtagonist && !Collider::isInCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
+                    // {
+                    //     player->wasHit = false;
+                    // }
+
+                    // if (player->wasHit)
+                    // {
+                    //     player->wasHit = false;
+                    // }
+
                     if ( (!isOneProtagonist) && Collider::isInCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
                     {
                         if (objectsToDraw[i]->isAlive && !objectsToDraw[i]->collider.isCollieded)
