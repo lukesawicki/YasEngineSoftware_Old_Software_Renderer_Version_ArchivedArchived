@@ -292,7 +292,9 @@ void YasEngine::handleMouseInput(SDL_Event& event)
         case GAMEPLAY:
         {
             player->isShooting = true;
-            changeAllCollectibleDirection();
+            int randNumb = Randomizer::drawNumberClosedInterval(1, 8);
+                if(randNumb<=4)
+                    changeAllCollectibleDirection(randNumb);
         }
             break;
         case MAIN_MENU_RESTART:
@@ -1095,7 +1097,7 @@ void YasEngine::drawButtons()
     }
 }
 
-void YasEngine::changeAllCollectibleDirection()
+void YasEngine::changeAllCollectibleDirection(int dir)
 {
     int randomNumber = 1;// Randomizer::drawNumberClosedInterval(1, 5);
 
@@ -1106,8 +1108,31 @@ void YasEngine::changeAllCollectibleDirection()
         {
             if (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
             {
+	            switch (dir)
+	            {
+	            case 1:
+		            {
+                    objectsToDraw[i]->velocity.x = abs(objectsToDraw[i]->velocity.x);
+		            }
+                    break;
+	            case 2:
+	                {
+	                    objectsToDraw[i]->velocity.x = abs(objectsToDraw[i]->velocity.x)*-1;
+	                }
+	                break;
+	            case 3:
+	                {
+	                    objectsToDraw[i]->velocity.x = abs(objectsToDraw[i]->velocity.y);
+	                }
+	                break;
+	            case 4:
+	                {
+	                    objectsToDraw[i]->velocity.x = abs(objectsToDraw[i]->velocity.y)*-1;
+	                }
+	                break;
+
+	            }
                 
-                objectsToDraw[i]->velocity.x = abs(objectsToDraw[i]->velocity.x);
             }
         }
     }

@@ -231,7 +231,7 @@ class YasEngine
         void handleGameStateWhenSPACEbuttonPushed();
 		void prepareSoundAndMusic();
         void drawButtons();
-		void changeAllCollectibleDirection();
+		void changeAllCollectibleDirection(int dir);
 };
 
 #endif
