@@ -19,6 +19,7 @@ Player::Player(float x, float y)
 	rotationSpeed = 5;
 
 	numberOfVertices = 17;
+	numberOfVerticesCopy = 17;
 
 	worldVertices = new Vector2D<float>[numberOfVertices];
 	localVertices = new Vector2D<float>[numberOfVertices];
@@ -73,6 +74,8 @@ Player::Player(float x, float y)
 
 	localVertices[16].x = -8;
 	localVertices[16].y = -7;
+
+	localVerticesCopy = localVertices;
 
 	generate();
 }
@@ -190,8 +193,22 @@ void Player::generate()
 
 void Player::generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices)
 {
+	this->circumscribedCircleRadius = circumscribedCircleRadius;
+	this->numberOfVertices = numberOfVertices;
+	this->worldVertices = new Vector2D<float>[numberOfVertices];
+	this->localVertices = new Vector2D<float>[numberOfVertices];
 
+	angleForGenerateInIsoscelesPolygons = startAngle;
+	stepAngle = 360.0F / numberOfVertices;
+	for (int i = 0; i < numberOfVertices; i++)
+	{
+		localVertices[i].x = 0.0F + static_cast<int>(circumscribedCircleRadius * cos(angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
+		localVertices[i].y = 0.0F + static_cast<int>(circumscribedCircleRadius * sin(angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
+		angleForGenerateInIsoscelesPolygons += stepAngle;
+	}
+	generate();
 }
+
 
 void Player::regeneratePolygon()
 {
@@ -214,6 +231,11 @@ void Player::setInput(YasInOut::Input* input)
 void Player::setInput(YasInOut::MousePositionChangeInformation* mouse)
 {
 	this->mouse = mouse;
+}
+
+void Player::switchPolygon(int numberOfVertices, int collectibleRadius)
+{
+	generateRegularPolygonVertices(collectibleRadius, numberOfVertices);
 }
 
 Projectile* Player::shoot()

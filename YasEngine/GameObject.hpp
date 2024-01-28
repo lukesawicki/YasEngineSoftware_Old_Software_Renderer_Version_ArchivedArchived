@@ -16,11 +16,13 @@ class GameObject
 		bool isAlive = true;
 		Collider collider;
 		Vector2D<float>* localVertices = nullptr;
+		Vector2D<float>* localVerticesCopy = nullptr;
 		Vector2D<float>* worldVertices = nullptr;
 		Vector2D<float> vectorZero;
 		Vector2D<float> direction;
 		Vector4D<Uint8> color;
 		int numberOfVertices;
+		int numberOfVerticesCopy;
 		float rotationSpeed;
 		float circumscribedCircleRadius;
 		float angleForGenerateInIsoscelesPolygons;

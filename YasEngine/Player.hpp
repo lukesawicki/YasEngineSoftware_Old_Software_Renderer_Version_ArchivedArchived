@@ -34,6 +34,7 @@ class Player : public GameObject
 		void regeneratePolygon() override;
 		void setInput(YasInOut::Input* input);
 		void setInput(YasInOut::MousePositionChangeInformation* mouse);
+		void switchPolygon(int numberOfVertices, int collectibleRadius);
 		Projectile* shoot();
 	private:
 

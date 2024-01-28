@@ -564,11 +564,31 @@ void YasEngine::handlePhysics()
 
                         if(objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
                         {
+
+                            int randomnumber = Randomizer::drawNumberClosedInterval(1, 5);
+
+                            if(randomnumber == 4)
+                            {
+                                int vertex = objectsToDraw[i]->numberOfVertices;
+                                int radius = objectsToDraw[i]->circumscribedCircleRadius;
+                                player->switchPolygon(vertex, radius);
+	                            // podmieniamy
+                            }
+
                             --Spawner::numberOfSpawnedObjects;
 
                         }
                         if (objectsToDraw[j]->iAm == GameObject::COLLECTIBLE)
                         {
+                            int randomnumber = Randomizer::drawNumberClosedInterval(1, 5);
+
+                            if (randomnumber == 4)
+                            {
+                                int vertex = objectsToDraw[j]->numberOfVertices;
+                                int radius = objectsToDraw[j]->circumscribedCircleRadius;
+                                player->switchPolygon(vertex, radius);
+                                // podmieniamy
+                            }
                             --Spawner::numberOfSpawnedObjects;
                         }
 					}
