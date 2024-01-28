@@ -547,20 +547,16 @@ void YasEngine::handlePhysics()
                     {
                         if(objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
                         {
-                            if (primesPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || sinPointsHarvested >= 0 || cosPointsHarvested >= 0) {
-                                primesPointsHarvested -= 1; //objectsToDraw[i]->numberOfVertices;// do somethingv
-                                fibbsPointsHarvested -= 1;
-                                sinPointsHarvested -= -1;
-                                cosPointsHarvested -= -1;
+                            healthPoints -= objectsToDraw[i]->numberOfVertices;
+                            if (primesPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || sinPointsHarvested >= 0 || cosPointsHarvested >= 0)
+                            {
                             }
                         }
                         if (objectsToDraw[j]->iAm == GameObject::COLLECTIBLE)
                         {
-                            if (primesPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || sinPointsHarvested >= 0 || cosPointsHarvested >= 0) {
-                                primesPointsHarvested -= 1;  //objectsToDraw[i]->numberOfVertices;// do something
-                                fibbsPointsHarvested -= 1;
-                                sinPointsHarvested -= -1;
-                                cosPointsHarvested -= -1;
+                            healthPoints -= objectsToDraw[j]->numberOfVertices;
+                            if (primesPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || sinPointsHarvested >= 0 || cosPointsHarvested >= 0)
+                            {
                             }
                         }
                         

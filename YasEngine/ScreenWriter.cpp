@@ -17,6 +17,7 @@ ScreenWriter::ScreenWriter()
         charactersTable[i]=static_cast<char>(step++);
     }
     charactersTable[36]=' ';
+    charactersTable[37]='-';
     //Tablica znakow jest w celu wymowania z znakow z pliku graficznego na podstawie indeksu w tablicy znakow
 
     for(int i=0; i<NUMBER_OF_CHARACTERS; i++)
@@ -1213,8 +1214,8 @@ void ScreenWriter::prepareFontVertices()
     fonts[34]->verticesBaseData->localVertices[1].y = -7;
 
 
-    fonts[34]->verticesBaseData->localVertices[2].x = 5;
-    fonts[34]->verticesBaseData->localVertices[2].y = -5;
+    // fonts[34]->verticesBaseData->localVertices[2].x = 5;
+    // fonts[34]->verticesBaseData->localVertices[2].y = -5;
 
     fonts[34]->verticesBaseData->localVertices[3].x = 5;
     fonts[34]->verticesBaseData->localVertices[3].y = 0;
@@ -1312,4 +1313,16 @@ void ScreenWriter::prepareFontVertices()
 
     fonts[36]->verticesBaseData->localVertices[1].x = 1;
     fonts[36]->verticesBaseData->localVertices[1].y = -7;
+
+    //   MINUS (PL MINUS)
+    fonts[37]->verticesBaseData->localVertices = new Vector2D<float>[2];
+    fonts[37]->verticesBaseData->worldVertices = new Vector2D<float>[2];
+
+    fonts[37]->verticesBaseData->numberOfVertices = 2;
+
+    fonts[37]->verticesBaseData->localVertices[0].x = -5;
+    fonts[37]->verticesBaseData->localVertices[0].y = 0;
+
+    fonts[37]->verticesBaseData->localVertices[1].x = 5;
+    fonts[37]->verticesBaseData->localVertices[1].y = 0;
 }

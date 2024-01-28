@@ -11,7 +11,7 @@
 class ScreenWriter final
 {
     public:
-        static const int NUMBER_OF_CHARACTERS = 37;
+        static const int NUMBER_OF_CHARACTERS = 38;
         static const int FONT_WIDTH = 17;
         static const int FONT_HEIGHT = 17;
 
