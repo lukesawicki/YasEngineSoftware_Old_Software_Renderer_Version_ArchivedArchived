@@ -549,12 +549,17 @@ void YasEngine::handlePhysics()
                 // LEFT Projectile <-> Collectible && Protagonist <-> Collectible)
                 if (objectsToDraw[i]->isAlive && objectsToDraw[j]->isAlive)
                 {
-                    bool isOneProtagonist = objectsToDraw[i]->iAm == GameObject::PROTAGONIST || objectsToDraw[j]->iAm == GameObject::PROTAGONIST;
-                    if(isOneProtagonist && Collider::isInCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
+                    //bool isOneProtagonist = objectsToDraw[i]->iAm == GameObject::PROTAGONIST || objectsToDraw[j]->iAm == GameObject::PROTAGONIST;
+                    GameObject* protagonist = getProtagonist(objectsToDraw[i], objectsToDraw[j]);
+                    // if entered in to collision
+                    // I NEED TO CHECK IF  IT IS IN COLLISION WITH SAME OBJECT
+                    // OR JUST SET IS IN COLLISION WITH PLAYER ON OBJECT NOT ON PLAYER
+                    if((protagonist != nullptr) && !protagonist->collider.isInCollision && Collider::isCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
                     {
                         if(objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
                         {
-                            if (primesPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || sinPointsHarvested >= 0 || cosPointsHarvested >= 0) {
+                            if (primesPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || sinPointsHarvested >= 0 || cosPointsHarvested >= 0)
+                            {
                                 primesPointsHarvested -= 1; //objectsToDraw[i]->numberOfVertices;// do somethingv
                                 fibbsPointsHarvested -= 1;
                                 sinPointsHarvested -= -1;
@@ -563,16 +568,24 @@ void YasEngine::handlePhysics()
                         }
                         if (objectsToDraw[j]->iAm == GameObject::COLLECTIBLE)
                         {
-                            if (primesPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || sinPointsHarvested >= 0 || cosPointsHarvested >= 0) {
+                            if (primesPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || sinPointsHarvested >= 0 || cosPointsHarvested >= 0)
+                            {
                                 primesPointsHarvested -= 1;  //objectsToDraw[i]->numberOfVertices;// do something
                                 fibbsPointsHarvested -= 1;
                                 sinPointsHarvested -= -1;
                                 cosPointsHarvested -= -1;
                             }
                         }
-                        
+                        protagonist->collider.isInCollision = true;
                     }
-                    if ( (!isOneProtagonist) && Collider::isInCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
+
+                    // if exited from collision
+                    if ((protagonist != nullptr) && protagonist->collider.isInCollision && !Collider::isCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
+                    {
+                        protagonist->collider.isInCollision = false;
+                    }
+
+                    if ((protagonist == nullptr) && Collider::isCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
                     {
                         objectsToDraw[i]->isAlive = false;
                         objectsToDraw[j]->isAlive = false;
@@ -634,6 +647,33 @@ void YasEngine::handleCollectiblesWithWallsCollisions(GameObject* object)
             bounceCollectibles(object, BOTTOM);
         }
     }
+}
+
+bool YasEngine::isObjectProtagonist(GameObject* object)
+{
+    return object->iAm == GameObject::PROTAGONIST;
+}
+
+GameObject* YasEngine::getProtagonist(GameObject* object0, GameObject* object1)
+{
+    if (isObjectProtagonist(object0)) {
+        return object0;
+    }
+    if (isObjectProtagonist(object1)) {
+        return object1;
+    }
+    return nullptr;
+}
+
+GameObject* YasEngine::getNotProtagonist(GameObject* object0, GameObject* object1)
+{
+    if (!isObjectProtagonist(object0)) {
+        return object0;
+    }
+    if (!isObjectProtagonist(object1)) {
+        return object1;
+    }
+    return nullptr;
 }
 
 void YasEngine::handleProtagonistWithWallsCollisions(GameObject* object)

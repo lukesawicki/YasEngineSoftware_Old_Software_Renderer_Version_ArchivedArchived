@@ -127,8 +127,8 @@ class YasEngine
 		float mouseX;
 		float mouseY;
 
-		int WINDOW_WIDTH = 1600;
-		int WINDOW_HEIGHT = 800;
+		int WINDOW_WIDTH = 1024;
+		int WINDOW_HEIGHT = 512;
 
 		std::vector<GameObject*> objectsToDraw;
 		bool first16Spawned = false;
@@ -198,6 +198,9 @@ class YasEngine
 		void checkEndianness();
 		void handlePhysics();
 		void handleCollectiblesWithWallsCollisions(GameObject* object);
+		bool isObjectProtagonist(GameObject* object);
+		GameObject* getProtagonist(GameObject* object0, GameObject* object1);
+		GameObject* getNotProtagonist(GameObject* object0, GameObject* object1);
 		void handleProtagonistWithWallsCollisions(GameObject* object);
 		void moveObjectToMapBoundries(GameObject* gameObject, Wall wall);
 		void bounceCollectibles(GameObject* gameObject, Wall wall);

@@ -54,7 +54,7 @@ class Node
 					break;
 				}
 
-                int childNodeSize = parentNode.size * 0.5;
+                int childNodeSize = static_cast<int>(parentNode.size) * 0.5;
                 childNodePositionX = parentNode.position->x + (factorX * (childNodeSize * 0.5));
                 childNodePositionY = parentNode.position->y + (factorY * (childNodeSize * 0.5));
                 childNodePosition = new Vector2D<int>(childNodePositionX, childNodePositionY);

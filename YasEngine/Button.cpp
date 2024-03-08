@@ -29,7 +29,7 @@ Button::Button(const ButtonId& buttonId, std::string text, const Vector4D<Uint8>
 {
     this->buttonId = buttonId;
     this->text.assign(text);
-    this->buttonTextWidth = ScreenWriter::FONT_WIDTH * text.size();
+    this->buttonTextWidth = ScreenWriter::FONT_WIDTH * static_cast<int>(text.size());
     this->color = color;
     numberOfVertices = 4;
 }

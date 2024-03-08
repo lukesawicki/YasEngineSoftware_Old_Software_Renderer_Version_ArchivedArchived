@@ -13,7 +13,7 @@ Collider::Collider(float radius, float x, float y)
 	this->x = x;
 	this->y = y;
 }
-bool Collider::isInCollision(const Collider& object0, const Collider& object1)
+bool Collider::isCollision(const Collider& object0, const Collider& object1)
 {
 	return (sqrt(pow(object1.x - object0.x, 2.0) + pow(object1.y - object0.y, 2.0))) <= (static_cast<double>(object0.radius) + static_cast<double>(object1.radius));
 }
@@ -53,5 +53,5 @@ bool Collider::isCollidingWithCustomWalls(const Collider& object0, const Vector2
 
 //Collider();
 //Collider(float radius, float x, float y);
-//static bool isInCollision(const Collider& object0, const Collider& object1);
+//static bool isCollision(const Collider& object0, const Collider& object1);
 //static bool isCollidingWithWall(const Collider& object0, Vector2D<int> worldSizes);
