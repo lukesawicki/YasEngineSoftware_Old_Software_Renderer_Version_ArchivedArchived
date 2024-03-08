@@ -554,8 +554,14 @@ void YasEngine::handlePhysics()
                     // if entered in to collision
                     // I NEED TO CHECK IF  IT IS IN COLLISION WITH SAME OBJECT
                     // OR JUST SET IS IN COLLISION WITH PLAYER ON OBJECT NOT ON PLAYER
+                    // 1. refactor that do not use two if's to check if it is collectible
+                    // 2. change method getNotProtagonist() to return collectible or write specialized one
+                    // 3. set isInCollision on  every collectible object with which player colliding
+                    // 4. end probably do not set collision on  player
                     if((protagonist != nullptr) && !protagonist->collider.isInCollision && Collider::isCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
                     {
+
+                        // TODO REFACTOR if I new which object is Collectible I need to use this iff once
                         if(objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
                         {
                             if (primesPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || sinPointsHarvested >= 0 || cosPointsHarvested >= 0)
