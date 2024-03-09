@@ -551,6 +551,7 @@ void YasEngine::handlePhysics()
                 {
                     //bool isOneProtagonist = objectsToDraw[i]->iAm == GameObject::PROTAGONIST || objectsToDraw[j]->iAm == GameObject::PROTAGONIST;
                     GameObject* protagonist = getProtagonist(objectsToDraw[i], objectsToDraw[j]);
+                    GameObject* gameObj = getNotProtagonist(objectsToDraw[i], objectsToDraw[j]);
                     // if entered in to collision
                     // I NEED TO CHECK IF  IT IS IN COLLISION WITH SAME OBJECT
                     // OR JUST SET IS IN COLLISION WITH PLAYER ON OBJECT NOT ON PLAYER
@@ -558,37 +559,38 @@ void YasEngine::handlePhysics()
                     // 2. change method getNotProtagonist() to return collectible or write specialized one
                     // 3. set isInCollision on  every collectible object with which player colliding
                     // 4. end probably do not set collision on  player
-                    if((protagonist != nullptr) && !protagonist->collider.isInCollision && Collider::isCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
+                    if((protagonist != nullptr) && gameObj->iAm == GameObject::COLLECTIBLE && !gameObj->collider.isInCollision && Collider::isCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
                     {
 
                         // TODO REFACTOR if I new which object is Collectible I need to use this iff once
-                        if(objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
+                        //if(objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
+                        //{
+                        if (primesPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || sinPointsHarvested >= 0 || cosPointsHarvested >= 0)
                         {
-                            if (primesPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || sinPointsHarvested >= 0 || cosPointsHarvested >= 0)
-                            {
-                                primesPointsHarvested -= 1; //objectsToDraw[i]->numberOfVertices;// do somethingv
-                                fibbsPointsHarvested -= 1;
-                                sinPointsHarvested -= -1;
-                                cosPointsHarvested -= -1;
-                            }
+                            primesPointsHarvested -= 1; //objectsToDraw[i]->numberOfVertices;// do somethingv
+                            fibbsPointsHarvested -= 1;
+                            sinPointsHarvested -= -1;
+                            cosPointsHarvested -= -1;
                         }
-                        if (objectsToDraw[j]->iAm == GameObject::COLLECTIBLE)
-                        {
-                            if (primesPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || sinPointsHarvested >= 0 || cosPointsHarvested >= 0)
-                            {
-                                primesPointsHarvested -= 1;  //objectsToDraw[i]->numberOfVertices;// do something
-                                fibbsPointsHarvested -= 1;
-                                sinPointsHarvested -= -1;
-                                cosPointsHarvested -= -1;
-                            }
-                        }
-                        protagonist->collider.isInCollision = true;
+                        //}
+                        //if (objectsToDraw[j]->iAm == GameObject::COLLECTIBLE)
+                        //{
+                        //    if (primesPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || sinPointsHarvested >= 0 || cosPointsHarvested >= 0)
+                        //    {
+                        //        primesPointsHarvested -= 1;  //objectsToDraw[i]->numberOfVertices;// do something
+                        //        fibbsPointsHarvested -= 1;
+                        //        sinPointsHarvested -= -1;
+                        //        cosPointsHarvested -= -1;
+                        //    }
+                        //}
+                        //protagonist->collider.isInCollision = true;
+                        gameObj->collider.isInCollision = true;
                     }
 
                     // if exited from collision
-                    if ((protagonist != nullptr) && protagonist->collider.isInCollision && !Collider::isCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
+                    if ((protagonist != nullptr) && gameObj->iAm == GameObject::COLLECTIBLE && gameObj->collider.isInCollision && !Collider::isCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
                     {
-                        protagonist->collider.isInCollision = false;
+                        gameObj->collider.isInCollision = false;
                     }
 
                     if ((protagonist == nullptr) && Collider::isCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
