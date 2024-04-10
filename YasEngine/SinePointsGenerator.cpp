@@ -1,6 +1,6 @@
-#include"SinusPointsGenerator.hpp"
+#include"SinePointsGenerator.hpp"
 
-PointsSet* SinusPointsGenerator::generatePoints(int numberOfNumbers, std::map<int, float>* numbers)
+PointsSet* SinePointsGenerator::generatePoints(int numberOfNumbers, std::map<int, float>* numbers)
 {
 	this->pointsNumber = numberOfNumbers;
 	Vector2D<float>* points = new Vector2D<float>[pointsNumber];
@@ -26,7 +26,7 @@ PointsSet* SinusPointsGenerator::generatePoints(int numberOfNumbers, std::map<in
 	return pointsSet;
 }
 
-PointsSet* SinusPointsGenerator::generateFloatPoints(int numberOfNumbers, std::map<float, float>* numbers)
+PointsSet* SinePointsGenerator::generateFloatPoints(int numberOfNumbers, std::map<float, float>* numbers)
 {
 	this->pointsNumber = numberOfNumbers;
 	Vector2D<float>* points = new Vector2D<float>[pointsNumber];

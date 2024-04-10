@@ -5,7 +5,7 @@
 #include"PointsGenerator.hpp"
 #include "YasGraphicsLibrary.hpp"
 
-class CosinusPointsGenerator : public PointsGenerator
+class CosinePointsGenerator : public PointsGenerator
 {
 	public:
 		virtual PointsSet* generatePoints(int numberOfNumbers, std::map<int, float>* numbers) override;

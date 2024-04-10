@@ -15,10 +15,10 @@
 #include"VariousTools.hpp"
 #include"Circle.hpp"
 #include "Collider.hpp"
-#include "CosinusPointsGenerator.hpp"
+#include "CosinePointsGenerator.hpp"
 #include "FibonacciPointsGenerator.hpp"
 #include"PrimeNumbersPointsGenerator.hpp"
-#include"SinusPointsGenerator.hpp"
+#include"SinePointsGenerator.hpp"
 
 // In version 1.9.0.1:
 //
@@ -58,8 +58,8 @@ void YasEngine::clean()
         delete drawableObject;
     }
 
-    // delete sinusPoints;
-    // delete cosinusPoints;
+    // delete sinePoints;
+    // delete cosinePoints;
     // delete fibonacciePoints;
     // delete primeNumbersPoints;
     delete surfaceWithMathBasedEffects;
@@ -159,7 +159,7 @@ void YasEngine::prepareBasicSettings()
     SDL_Init(SDL_INIT_EVERYTHING);
 
     windowDimensions    =   new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
-    Uint32 windowFlags = SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_ALWAYS_ON_TOP; // SDL_WINDOW_RESIZABLE;// | SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_ALWAYS_ON_TOP;
+    Uint32 windowFlags = SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_RESIZABLE;// | SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_ALWAYS_ON_TOP;
     window              =   SDL_CreateWindow("YasEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, windowFlags);
 
     SDL_SetWindowMinimumSize(window, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -498,14 +498,13 @@ void YasEngine::renderOnViewports(double& deltaTime)
     // surfaceWithMathBasedEffects->verticalLineOnSurface(0, GREEN);
     // surfaceWithMathBasedEffects->horizontalLineOnSurface(0, RED);
     // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, verticesHarvested, YELLOW, true);
-    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinusPicture->pointsSet->points, sinusPicture->basePointsFuel , sinPointsHarvested, BLUE, true);
-    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPicture->pointsSet->points, sinusPicture->basePointsFuel, sinPointsHarvested, RED, true);
+    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinePicture->pointsSet->points, sinePicture->basePointsFuel , sinePointsHarvested, BLUE, true);
+    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinePicture->pointsSet->points, sinePicture->basePointsFuel, sinePointsHarvested, RED, true);
 
 	surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(
 	 primeNumbersPicture->pointsSet->points, primeNumbersPicture->basePointsFuel, primesPointsHarvested, LIGHT_BLUE, false);
-	surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(
-	 fibonacciePicture->pointsSet->points, fibonacciePicture->basePointsFuel, fibbsPointsHarvested, PURPLE, false);
-
+    //-------------------------------------------------------------------------------------------------------------------------------\./that the number ofvertices which will be drawn
+	surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(fibonacciePicture->pointsSet->points, fibonacciePicture->basePointsFuel, fibbsPointsHarvested, PURPLE, false);
 
 	surfaceWithMathBasedEffects->copyPixelsInToPIxelTable(*pixelsTable);
 }
@@ -549,41 +548,14 @@ void YasEngine::handlePhysics()
                 // LEFT Projectile <-> Collectible && Protagonist <-> Collectible)
                 if (objectsToDraw[i]->isAlive && objectsToDraw[j]->isAlive)
                 {
-                    //bool isOneProtagonist = objectsToDraw[i]->iAm == GameObject::PROTAGONIST || objectsToDraw[j]->iAm == GameObject::PROTAGONIST;
                     GameObject* protagonist = getProtagonist(objectsToDraw[i], objectsToDraw[j]);
                     GameObject* gameObj = getNotProtagonist(objectsToDraw[i], objectsToDraw[j]);
-                    // if entered in to collision
-                    // I NEED TO CHECK IF  IT IS IN COLLISION WITH SAME OBJECT
-                    // OR JUST SET IS IN COLLISION WITH PLAYER ON OBJECT NOT ON PLAYER
-                    // 1. refactor that do not use two if's to check if it is collectible
-                    // 2. change method getNotProtagonist() to return collectible or write specialized one
-                    // 3. set isInCollision on  every collectible object with which player colliding
-                    // 4. end probably do not set collision on  player
+
                     if((protagonist != nullptr) && gameObj->iAm == GameObject::COLLECTIBLE && !gameObj->collider.isInCollision && Collider::isCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
                     {
+                        // handleBuildingGraph
+                        handleDestroyingGraphs(gameObj);
 
-                        // TODO REFACTOR if I new which object is Collectible I need to use this iff once
-                        //if(objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
-                        //{
-                        if (primesPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || sinPointsHarvested >= 0 || cosPointsHarvested >= 0)
-                        {
-                            primesPointsHarvested -= 1; //objectsToDraw[i]->numberOfVertices;// do somethingv
-                            fibbsPointsHarvested -= 1;
-                            sinPointsHarvested -= -1;
-                            cosPointsHarvested -= -1;
-                        }
-                        //}
-                        //if (objectsToDraw[j]->iAm == GameObject::COLLECTIBLE)
-                        //{
-                        //    if (primesPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || fibbsPointsHarvested >= 0 || sinPointsHarvested >= 0 || cosPointsHarvested >= 0)
-                        //    {
-                        //        primesPointsHarvested -= 1;  //objectsToDraw[i]->numberOfVertices;// do something
-                        //        fibbsPointsHarvested -= 1;
-                        //        sinPointsHarvested -= -1;
-                        //        cosPointsHarvested -= -1;
-                        //    }
-                        //}
-                        //protagonist->collider.isInCollision = true;
                         gameObj->collider.isInCollision = true;
                     }
 
@@ -599,22 +571,7 @@ void YasEngine::handlePhysics()
                         objectsToDraw[j]->isAlive = false;
                         Mix_PlayChannel(-1, hitSound, 0);
 
-                        if(objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
-                        {
-                            --Spawner::numberOfSpawnedObjects;
-                            primesPointsHarvested += objectsToDraw[i]->numberOfVertices;
-                            fibbsPointsHarvested += objectsToDraw[i]->numberOfVertices;
-                            sinPointsHarvested += objectsToDraw[i]->numberOfVertices;
-                            cosPointsHarvested += objectsToDraw[i]->numberOfVertices;
-                        }
-                        if (objectsToDraw[j]->iAm == GameObject::COLLECTIBLE)
-                        {
-                            --Spawner::numberOfSpawnedObjects;
-                            primesPointsHarvested += objectsToDraw[j]->numberOfVertices;
-                            fibbsPointsHarvested += objectsToDraw[i]->numberOfVertices;
-                            sinPointsHarvested += objectsToDraw[i]->numberOfVertices;
-                            cosPointsHarvested += objectsToDraw[i]->numberOfVertices;
-                        }
+                        handleDestroingCollectibles(gameObj);
 					}
 				}
 			}
@@ -622,6 +579,77 @@ void YasEngine::handlePhysics()
     }
 } // END OF handlePhysics()
 
+//NAWIAZANIE DO MAPYT W GOLDEN AXE GDZIE WRAZ Z PRZECHODZENIEM LEVELU JEST RYSOWANA SCIERZKA JAKA PRZESZLI BOHATEROWIE
+
+void YasEngine::handleDestroyingGraphs(GameObject* gameObj)
+{
+    switch (level)
+    {
+        case 1:
+            if (primesPointsHarvested > 0)
+            {
+                primesPointsHarvested -= gameObj->numberOfVertices; //objectsToDraw[i]->numberOfVertices;// do somethingv;
+            }
+            else
+            {
+                primesPointsHarvested = 0;
+            }
+        break;
+
+        case 2:
+            if (fibbsPointsHarvested > 0)
+            {
+                fibbsPointsHarvested -= gameObj->numberOfVertices;;
+            }
+            else
+            {
+                fibbsPointsHarvested = 0;
+            }
+        break;
+
+        case 3:
+            if (sinePointsHarvested > 0)
+            {
+                sinePointsHarvested -= gameObj->numberOfVertices;
+            }
+            else
+            {
+                sinePointsHarvested = 0;
+            }
+        break;
+
+        case 4:
+            if (cosinePointsHarvested > 0)
+            {
+                cosinePointsHarvested -= gameObj->numberOfVertices;
+            }
+            else
+            {
+                cosinePointsHarvested = 0;
+            }
+        break;
+
+        default: 
+            ;
+    }
+}
+
+void YasEngine::handleDestroingCollectibles(GameObject* gameObj)
+{
+    if (gameObj->iAm == GameObject::COLLECTIBLE)
+    {
+        --Spawner::numberOfSpawnedObjects;
+        handlingAddingVerticesToGraphs(gameObj);
+    }
+}
+
+void YasEngine::handlingAddingVerticesToGraphs(GameObject* gameObj)
+{
+    primesPointsHarvested += gameObj->numberOfVertices;
+    fibbsPointsHarvested += gameObj->numberOfVertices;
+    sinePointsHarvested += gameObj->numberOfVertices;
+    cosinePointsHarvested += gameObj->numberOfVertices;
+}
 
 void YasEngine::handleCollectiblesWithWallsCollisions(GameObject* object)
 {
@@ -991,14 +1019,14 @@ void YasEngine::prepareDataForDrawingGraphs()
 
 
 
-    // sinusPicture = new MathPicture(100, 0, 100, new SinusPointsGenerator(), new PointsSet());
-    // cosinusPicture = new MathPicture(100, 0, 100, new CosinusPointsGenerator(), new PointsSet());
+    // sinePicture = new MathPicture(100, 0, 100, new SinePointsGenerator(), new PointsSet());
+    // cosinePicture = new MathPicture(100, 0, 100, new CosinePointsGenerator(), new PointsSet());
     // fibonacciePicture = new MathPicture(40, 0, 40, numbersMap.at("Fibonacci"), new FibonacciPointsGenerator(), new PointsSet());
 
 
 
-    // sinusPicture->generateFloatPoints();
-    // cosinusPicture->generateFloatPoints();
+    // sinePicture->generateFloatPoints();
+    // cosinePicture->generateFloatPoints();
     // fibonacciePicture->generateFloatPoints();
     // primeNumbersPicture->generateFloatPoints();
 
@@ -1006,9 +1034,8 @@ void YasEngine::prepareDataForDrawingGraphs()
 
 void YasEngine::prepareSinusDrawing()
 {
-    std::map<float, float>* sinuses = generateSinNumbers(100);//generatePrimeNumbersLessThanN(1000);
-    int numberOfPrimes = sinuses->size();
-    sinPointsHarvested = 0;
+    std::map<float, float>* sinuses = generateSineNumbers(100);//generatePrimeNumbersLessThanN(1000);
+    sinePointsHarvested = 0;
 
     // std::map < std::string, std::map<int, std::map<float, float>>> pairNumbersMap;
 
@@ -1028,14 +1055,13 @@ void YasEngine::prepareSinusDrawing()
         
     // }
 
-    sinusPicture = new MathPicture(maxNtoCalculateSinus, sinuses, new SinusPointsGenerator(), new PointsSet());
+    sinePicture = new MathPicture(sinuses, new SinePointsGenerator(), new PointsSet());
 }
 
 void YasEngine::prepareCosinusDrawing()
 {
-    std::map<float, float>* cosine = generateCosNumbers(100);//generatePrimeNumbersLessThanN(1000);
-    int numberOfPrimes = cosine->size();
-    cosPointsHarvested = 0;
+    std::map<float, float>* cosine = generateCosineNumbers(100);//generatePrimeNumbersLessThanN(1000);
+    cosinePointsHarvested = 0;
 
     // std::map < std::string, std::map<int, std::map<float, float>>> pairNumbersMap;
 
@@ -1055,13 +1081,12 @@ void YasEngine::prepareCosinusDrawing()
 
     // }
 
-    cosinusPicture = new MathPicture(maxNtoCalculateCosinus, cosine, new CosinusPointsGenerator(), new PointsSet());
+    cosinePicture = new MathPicture(cosine, new CosinePointsGenerator(), new PointsSet());
 }
 
 void YasEngine::prepareFibonacciDrawing()
 {
     std::vector<int> fibbs = generateNfibonaccinumbers(40);
-
     fibbsPointsHarvested = 0;
 
     numbersMap.insert(std::pair<std::string, std::map<int, float>*>("Fibbs", new std::map<int, float>));
@@ -1071,13 +1096,12 @@ void YasEngine::prepareFibonacciDrawing()
         numbersMap.at("Fibbs")->insert(std::pair<int, int>(i, fibbs.at(i)));
     }
 
-    fibonacciePicture = new MathPicture(maxNtoCalculateFibonacci, numbersMap.at("Fibbs"), new FibonacciPointsGenerator(), new PointsSet());
+    fibonacciePicture = new MathPicture(numbersMap.at("Fibbs"), new FibonacciPointsGenerator(), new PointsSet());
 }
 
 void YasEngine::preparePrimesDrawing()
 {
     std::vector<int> primes = generatePrimeNumbersLessThanN(1000);
-    int numberOfPrimes = primes.size();
     primesPointsHarvested = 0;
 
     numbersMap.insert(std::pair<std::string, std::map<int, float>*>("Primes", new std::map<int, float>));
@@ -1087,7 +1111,9 @@ void YasEngine::preparePrimesDrawing()
         numbersMap.at("Primes")->insert(std::pair<int, int>(i, primes.at(i)));
     }
 
-    primeNumbersPicture = new MathPicture(maxNtoCalculatePrimes, numbersMap.at("Primes"), new PrimeNumbersPointsGenerator(), new PointsSet());
+    primeNumbersPicture = new MathPicture(numbersMap.at("Primes"), new PrimeNumbersPointsGenerator(), new PointsSet());
+
+    std::cout << "preparedPrimesDrawing" << "\n";
 }
 
 void YasEngine::prepareInterface()

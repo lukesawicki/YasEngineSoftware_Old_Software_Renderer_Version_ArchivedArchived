@@ -150,20 +150,21 @@ class YasEngine
 		Mix_Chunk* hitSound;
 		Mix_Chunk* otherSound;
 
-		MathPicture* sinusPicture;
-		MathPicture* cosinusPicture;
+		MathPicture* sinePicture;
+		MathPicture* cosinePicture;
 		MathPicture* fibonacciePicture;
 		MathPicture* primeNumbersPicture;
 
-		int sinPointsHarvested = 0;
-		int cosPointsHarvested = 0;
+		int level = 1;
+		int sinePointsHarvested = 0;
+		int cosinePointsHarvested = 0;
 		int primesPointsHarvested = 0;
 		int fibbsPointsHarvested = 0;
 
 		int maxNtoCalculatePrimes = 1000;
 		int maxNtoCalculateFibonacci = 40;
-		int maxNtoCalculateSinus = 100;
-		int maxNtoCalculateCosinus = 100;
+		int maxNtoCalculateSine = 100;
+		int maxNtoCalculateCosine = 100;
 
         std::map<std::string, int> numberOfGivenColors;
         // std::map<int, float> sinusNumbers;
@@ -197,6 +198,9 @@ class YasEngine
 		void prepareBasicSettings();
 		void checkEndianness();
 		void handlePhysics();
+		void handleDestroyingGraphs(GameObject* gameObj);
+		void handleDestroingCollectibles(GameObject* gameObj);
+		void handlingAddingVerticesToGraphs(GameObject* gameObj);
 		void handleCollectiblesWithWallsCollisions(GameObject* object);
 		bool isObjectProtagonist(GameObject* object);
 		GameObject* getProtagonist(GameObject* object0, GameObject* object1);

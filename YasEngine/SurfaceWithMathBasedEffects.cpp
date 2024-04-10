@@ -363,8 +363,13 @@ void SurfaceWithMathBasedEffects::drawLine(const Vector2D<float>& point0, const 
 //     return maximum;
 // }
 
+// Draw currentNumberOfVertices vertices (parameter 3 (or 2 if you are counting from 0)
 void SurfaceWithMathBasedEffects::drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, int& currentNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos)
 {
+
+    //surfaceWithMathBasedEffects->
+    //drawNumbersAsGroupOfLines(fibonacciePicture->pointsSet->points, fibonacciePicture->basePointsFuel, fibbsPointsHarvested, PURPLE, false);
+
     int step = 1;
     if(!areLinesContinuos)
     {
@@ -373,12 +378,15 @@ void SurfaceWithMathBasedEffects::drawNumbersAsGroupOfLines(Vector2D<float>* ver
     
     if (currentNumberOfVertices > 1)
     {
+        //if (currentNumberOfVertices >= 900) {
+        //    std::cout << "current vertices " << currentNumberOfVertices << "\n";
+        //}
         if (currentNumberOfVertices <= 3) {
             drawLine(vertices[0], vertices[1], color);
         }
 	    else
 	    {
-            if(!(currentNumberOfVertices <= maximumNumberOfVertices -1))
+            if( currentNumberOfVertices > maximumNumberOfVertices - 1) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
             {
                 currentNumberOfVertices = maximumNumberOfVertices;
             }

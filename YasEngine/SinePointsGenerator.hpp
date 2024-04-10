@@ -7,7 +7,7 @@
 #include"Vector2D.hpp"
 #include "YasGraphicsLibrary.hpp"
 
-class SinusPointsGenerator: public PointsGenerator
+class SinePointsGenerator: public PointsGenerator
 {
 	public:
 		virtual PointsSet* generatePoints(int numberOfNumbers, std::map<int, float>* numbers) override;

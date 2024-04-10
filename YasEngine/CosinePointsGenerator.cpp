@@ -1,6 +1,6 @@
-#include"CosinusPointsGenerator.hpp"
+#include"CosinePointsGenerator.hpp"
 
-PointsSet* CosinusPointsGenerator::generatePoints(int numberOfNumbers, std::map<int, float>* numbers)
+PointsSet* CosinePointsGenerator::generatePoints(int numberOfNumbers, std::map<int, float>* numbers)
 {
 	this->pointsNumber = numberOfNumbers;
 	Vector2D<float>* points = new Vector2D<float>[pointsNumber];
@@ -27,7 +27,7 @@ PointsSet* CosinusPointsGenerator::generatePoints(int numberOfNumbers, std::map<
 	return pointsSet;
 }
 
-PointsSet* CosinusPointsGenerator::generateFloatPoints(int numberOfNumbers, std::map<float, float>* numbers)
+PointsSet* CosinePointsGenerator::generateFloatPoints(int numberOfNumbers, std::map<float, float>* numbers)
 {
 	this->pointsNumber = numberOfNumbers;
 	Vector2D<float>* points = new Vector2D<float>[pointsNumber];

@@ -48,10 +48,10 @@
     <ClInclude Include="FibonacciPointsGenerator.hpp">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="CosinusPointsGenerator.hpp">
+    <ClInclude Include="CosinePointsGenerator.hpp">
       <Filter>Utils</Filter>
     </ClInclude>
-    <ClInclude Include="SinusPointsGenerator.hpp">
+    <ClInclude Include="SinePointsGenerator.hpp">
       <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="Button.hpp">
@@ -146,7 +146,7 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="CosinusPointsGenerator.cpp">
+    <ClCompile Include="CosinePointsGenerator.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="FibonacciPointsGenerator.cpp">
@@ -170,7 +170,7 @@
     <ClCompile Include="YasGraphicsLibrary.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="SinusPointsGenerator.cpp">
+    <ClCompile Include="SinePointsGenerator.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="SurfaceWithMathBasedEffects.cpp">

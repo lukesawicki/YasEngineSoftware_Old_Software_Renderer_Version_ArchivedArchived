@@ -42,38 +42,38 @@ std::vector<int> generatePrimeNumbersLessThanN(int n)
 }
 
 
-std::map<float, float>* generateSinNumbers(int pointsNumber)
+std::map<float, float>* generateSineNumbers(int pointsNumber)
 {
     float divider = static_cast<float>(pointsNumber);
     float maximumXvalue = 2.0F * PI;
     float step = (maximumXvalue / divider);
 
-    std::map<float, float>* sinMap = new std::map<float, float>();
+    std::map<float, float>* sineMap = new std::map<float, float>();
 
     for (int i = 0; i < pointsNumber; i++)
     {
         float x = i * step;
         float y = sin(x);
-        sinMap->insert(std::pair<float, float>(x, y));
+        sineMap->insert(std::pair<float, float>(x, y));
     }
-    return sinMap;
+    return sineMap;
 }
 
-std::map<float, float>* generateCosNumbers(int pointsNumber)
+std::map<float, float>* generateCosineNumbers(int pointsNumber)
 {
     float divider = static_cast<float>(pointsNumber);
     float maximumXvalue = 2.0F * PI;
     float step = (maximumXvalue / divider);
 
-    std::map<float, float>* cosMap = new std::map<float, float>();
+    std::map<float, float>* cosineMap = new std::map<float, float>();
 
     for (int i = 0; i < pointsNumber; i++)
     {
         float x = i * step;
         float y = cos(x);
-        cosMap->insert(std::pair<float, float>(x, y));
+        cosineMap->insert(std::pair<float, float>(x, y));
     }
-    return cosMap;
+    return cosineMap;
 }
 
 // std::vector<int> generatePrimeNumbersLessThanN(int n)
