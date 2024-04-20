@@ -386,10 +386,7 @@ void SurfaceWithMathBasedEffects::drawNumbersAsGroupOfLines(Vector2D<float>* ver
         }
 	    else
 	    {
-            if( currentNumberOfVertices > maximumNumberOfVertices - 1) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
-            {
-                currentNumberOfVertices = maximumNumberOfVertices;
-            }
+
 	        for (int i = 0; i < currentNumberOfVertices -1; i += step)
 	        {
 	            drawLine(vertices[i], vertices[i + 1], color);

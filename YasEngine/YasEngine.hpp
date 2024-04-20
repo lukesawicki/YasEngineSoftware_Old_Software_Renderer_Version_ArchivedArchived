@@ -156,6 +156,8 @@ class YasEngine
 		MathPicture* primeNumbersPicture;
 
 		int level = 1;
+		int previousLevel = 0;
+		const int MAX_LEVEL = 4;
 		int sinePointsHarvested = 0;
 		int cosinePointsHarvested = 0;
 		int primesPointsHarvested = 0;
@@ -198,9 +200,9 @@ class YasEngine
 		void prepareBasicSettings();
 		void checkEndianness();
 		void handlePhysics();
-		void handleDestroyingGraphs(GameObject* gameObj);
+		void handleDisassemblingGraphs(GameObject* gameObj);
 		void handleDestroingCollectibles(GameObject* gameObj);
-		void handlingAddingVerticesToGraphs(GameObject* gameObj);
+		void handlingAssemblingGraphs(GameObject* gameObj);
 		void handleCollectiblesWithWallsCollisions(GameObject* object);
 		bool isObjectProtagonist(GameObject* object);
 		GameObject* getProtagonist(GameObject* object0, GameObject* object1);
@@ -232,6 +234,7 @@ class YasEngine
 		void render(double& deltaTime);
 		void renderGameObjects(double& deltaTime);
 		void renderOnViewports(double& deltaTime);
+		void renderLevelChabnge(double& deltaTime);
         Button::ButtonId checkWhichButtonClicked();
         void handleClickedButtons();
         void handleGameStateWhenESCbuttonPushed();

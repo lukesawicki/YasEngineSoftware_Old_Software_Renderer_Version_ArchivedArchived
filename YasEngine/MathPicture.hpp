@@ -8,7 +8,7 @@ class MathPicture
 		MathPicture(std::map<int, float>* numbers, PointsGenerator* pointsGenerator, PointsSet* npointsSet)
 		{
 			this->basePointsFuel = numbers->size();
-			this->maximumPointsFuel = numbers->size();
+			//this->maximumPointsFuel = numbers->size();
 			this->pointsGenerator = pointsGenerator;
 			this->numbers = numbers;
 			this->floatNumbers = nullptr;
@@ -17,7 +17,7 @@ class MathPicture
 		MathPicture(std::map<float, float>* floatNumbers, PointsGenerator* pointsGenerator, PointsSet* npointsSet)
 		{
 			this->basePointsFuel = floatNumbers->size();
-			this->maximumPointsFuel = floatNumbers->size();
+			//this->maximumPointsFuel = floatNumbers->size();
 			this->pointsGenerator = pointsGenerator;
 			this->numbers = nullptr;
 			this->floatNumbers = floatNumbers;
@@ -37,7 +37,7 @@ class MathPicture
 		}
 		int basePointsFuel = 0;
 		int minimalPointsFuel = 0;
-		int maximumPointsFuel = 0;
+		//int maximumPointsFuel = 0;
 		PointsGenerator* pointsGenerator;
 		PointsSet* pointsSet;
 		std::map<int, float>* numbers;

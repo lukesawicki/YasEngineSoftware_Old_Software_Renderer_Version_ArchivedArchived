@@ -489,6 +489,8 @@ void YasEngine::renderGameObjects(double& deltaTime)
     }
 }
 
+
+
 void YasEngine::renderOnViewports(double& deltaTime)
 {
     if (tests)
@@ -498,15 +500,54 @@ void YasEngine::renderOnViewports(double& deltaTime)
     // surfaceWithMathBasedEffects->verticalLineOnSurface(0, GREEN);
     // surfaceWithMathBasedEffects->horizontalLineOnSurface(0, RED);
     // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, verticesHarvested, YELLOW, true);
-    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinePicture->pointsSet->points, sinePicture->basePointsFuel , sinePointsHarvested, BLUE, true);
-    surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinePicture->pointsSet->points, sinePicture->basePointsFuel, sinePointsHarvested, RED, true);
 
-	surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(
-	 primeNumbersPicture->pointsSet->points, primeNumbersPicture->basePointsFuel, primesPointsHarvested, LIGHT_BLUE, false);
+    switch (level)
+    {
+
+    case 1:
+        surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(primeNumbersPicture->pointsSet->points, primeNumbersPicture->basePointsFuel, primesPointsHarvested, LIGHT_BLUE, false);
+        break;
+
+    case 2:
+        surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(fibonacciePicture->pointsSet->points, fibonacciePicture->basePointsFuel, fibbsPointsHarvested, PURPLE, false);
+        break;
+    case 3:
+        surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinePicture->pointsSet->points, sinePicture->basePointsFuel, sinePointsHarvested, BLUE, true);
+        break;
+    case 4:
+        surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinePicture->pointsSet->points, cosinePicture->basePointsFuel, cosinePointsHarvested, RED, true);
+        break;
+    default:
+        ;
+    }
+
     //-------------------------------------------------------------------------------------------------------------------------------\./that the number ofvertices which will be drawn
-	surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(fibonacciePicture->pointsSet->points, fibonacciePicture->basePointsFuel, fibbsPointsHarvested, PURPLE, false);
+	
 
 	surfaceWithMathBasedEffects->copyPixelsInToPIxelTable(*pixelsTable);
+}
+
+void YasEngine::renderLevelChabnge(double& deltaTime)
+{
+    switch (previousLevel)
+    {
+
+    case 0:
+        
+        break;
+
+    case 1:
+
+        break;
+    case 2:
+
+        break;
+    case 3:
+
+        break;
+    default:
+        ;
+    }
 }
 
 void YasEngine::handlePhysics()
@@ -554,7 +595,7 @@ void YasEngine::handlePhysics()
                     if((protagonist != nullptr) && gameObj->iAm == GameObject::COLLECTIBLE && !gameObj->collider.isInCollision && Collider::isCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
                     {
                         // handleBuildingGraph
-                        handleDestroyingGraphs(gameObj);
+                        handleDisassemblingGraphs(gameObj);
 
                         gameObj->collider.isInCollision = true;
                     }
@@ -571,7 +612,11 @@ void YasEngine::handlePhysics()
                         objectsToDraw[j]->isAlive = false;
                         Mix_PlayChannel(-1, hitSound, 0);
 
-                        handleDestroingCollectibles(gameObj);
+                        if (gameObj->iAm == GameObject::COLLECTIBLE)
+                        {
+                            handleDestroingCollectibles(gameObj);
+                            handlingAssemblingGraphs(gameObj);
+                        }
 					}
 				}
 			}
@@ -581,52 +626,48 @@ void YasEngine::handlePhysics()
 
 //NAWIAZANIE DO MAPYT W GOLDEN AXE GDZIE WRAZ Z PRZECHODZENIEM LEVELU JEST RYSOWANA SCIERZKA JAKA PRZESZLI BOHATEROWIE
 
-void YasEngine::handleDestroyingGraphs(GameObject* gameObj)
+void YasEngine::handleDisassemblingGraphs(GameObject* gameObj)
 {
+    if(primesPointsHarvested < 0)
+    {
+        primesPointsHarvested = 0;
+        return;
+    }
+    if (fibbsPointsHarvested < 0)
+    {
+        fibbsPointsHarvested = 0;
+        return;
+    }
+    if (sinePointsHarvested < 0)
+    {
+        sinePointsHarvested = 0;
+        return;
+    }
+    if (cosinePointsHarvested < 0)
+    {
+        cosinePointsHarvested = 0;
+        return;
+    }
+
     switch (level)
     {
         case 1:
-            if (primesPointsHarvested > 0)
-            {
-                primesPointsHarvested -= gameObj->numberOfVertices; //objectsToDraw[i]->numberOfVertices;// do somethingv;
-            }
-            else
-            {
-                primesPointsHarvested = 0;
-            }
+                primesPointsHarvested -= gameObj->numberOfVertices;
         break;
 
         case 2:
-            if (fibbsPointsHarvested > 0)
-            {
-                fibbsPointsHarvested -= gameObj->numberOfVertices;;
-            }
-            else
-            {
-                fibbsPointsHarvested = 0;
-            }
+
+                fibbsPointsHarvested -= gameObj->numberOfVertices;
         break;
 
         case 3:
-            if (sinePointsHarvested > 0)
-            {
+
                 sinePointsHarvested -= gameObj->numberOfVertices;
-            }
-            else
-            {
-                sinePointsHarvested = 0;
-            }
         break;
 
         case 4:
-            if (cosinePointsHarvested > 0)
-            {
+
                 cosinePointsHarvested -= gameObj->numberOfVertices;
-            }
-            else
-            {
-                cosinePointsHarvested = 0;
-            }
         break;
 
         default: 
@@ -636,19 +677,66 @@ void YasEngine::handleDestroyingGraphs(GameObject* gameObj)
 
 void YasEngine::handleDestroingCollectibles(GameObject* gameObj)
 {
-    if (gameObj->iAm == GameObject::COLLECTIBLE)
-    {
-        --Spawner::numberOfSpawnedObjects;
-        handlingAddingVerticesToGraphs(gameObj);
-    }
+    --Spawner::numberOfSpawnedObjects;
 }
 
-void YasEngine::handlingAddingVerticesToGraphs(GameObject* gameObj)
+void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
 {
-    primesPointsHarvested += gameObj->numberOfVertices;
-    fibbsPointsHarvested += gameObj->numberOfVertices;
-    sinePointsHarvested += gameObj->numberOfVertices;
-    cosinePointsHarvested += gameObj->numberOfVertices;
+    ///                                 1                                      2                       3
+    // primeNumbersPicture->pointsSet->points, primeNumbersPicture->basePointsFuel, primesPointsHarvested, LIGHT
+    // (primeNumbersPicture->pointsSet->points, primeNumbersPicture->basePointsFuel, primesPointsHarvested
+                            // 1                            2                            3              
+    //Vector2D<float>* vertices, int maximumNumberOfVertices, int& currentNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos
+
+    if (primesPointsHarvested > primeNumbersPicture->basePointsFuel - 1) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
+    {
+        primesPointsHarvested = primeNumbersPicture->basePointsFuel;
+        previousLevel = level;
+        level = 2;
+        return;
+    }
+
+    if (fibbsPointsHarvested > fibonacciePicture->basePointsFuel - 1) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
+    {
+        fibbsPointsHarvested = fibonacciePicture->basePointsFuel;
+        previousLevel = level;
+        level = 3;
+        return;
+    }
+
+    if (sinePointsHarvested > sinePicture->basePointsFuel - 1) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
+    {
+        sinePointsHarvested = sinePicture->basePointsFuel;
+        previousLevel = level;
+        level = 4;
+        return;
+    }
+
+    if (cosinePointsHarvested > cosinePicture->basePointsFuel - 1) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
+    {
+        cosinePointsHarvested = cosinePicture->basePointsFuel;
+        previousLevel = level;
+        level = -1;
+        return;
+    }
+
+    switch (level)
+    {
+    case 1:
+            primesPointsHarvested += gameObj->numberOfVertices;
+        break;
+    case 2:
+            fibbsPointsHarvested += gameObj->numberOfVertices;
+        break;
+    case 3:
+            sinePointsHarvested += gameObj->numberOfVertices;
+        break;
+    case 4:
+            cosinePointsHarvested += gameObj->numberOfVertices;
+        break;
+    default:
+        ;
+    }
 }
 
 void YasEngine::handleCollectiblesWithWallsCollisions(GameObject* object)
