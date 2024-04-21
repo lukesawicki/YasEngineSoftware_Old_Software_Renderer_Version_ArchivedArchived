@@ -157,6 +157,7 @@ class YasEngine
 
 		int level = 1;
 		int previousLevel = 0;
+		bool levelChanged = false;
 		const int MAX_LEVEL = 4;
 		int sinePointsHarvested = 0;
 		int cosinePointsHarvested = 0;
@@ -224,6 +225,7 @@ class YasEngine
 		void handleKeyboardInput(SDL_Event& event);
 		void handleMouseInput(SDL_Event& event);
 		void handleMouseMovement();
+		void deleteNotAliveObjects();
 		void handleSpawningCollectibles();
 		bool isObjectInSameQuarterAsProtagonist(int randomSpawner);
 		void handleProjectiles();
@@ -234,7 +236,7 @@ class YasEngine
 		void render(double& deltaTime);
 		void renderGameObjects(double& deltaTime);
 		void renderOnViewports(double& deltaTime);
-		void renderLevelChabnge(double& deltaTime);
+		void renderLevelChange();
         Button::ButtonId checkWhichButtonClicked();
         void handleClickedButtons();
         void handleGameStateWhenESCbuttonPushed();

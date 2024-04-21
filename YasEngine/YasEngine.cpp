@@ -289,7 +289,10 @@ void YasEngine::handleMouseInput(SDL_Event& event)
         switch (gameState)
         {
         case GAMEPLAY:
-            player->isShooting = true;
+            if (!levelChanged)
+            {
+                player->isShooting = true;
+            }
             break;
         case MAIN_MENU_RESTART:
             handleClickedButtons();
@@ -310,7 +313,10 @@ void YasEngine::handleMouseInput(SDL_Event& event)
         switch (gameState)
         {
         case GAMEPLAY:
-            player->isShooting = false;
+            if (!levelChanged)
+            {
+                player->isShooting = false;
+            }
             break;
         }
     }
@@ -330,6 +336,19 @@ void YasEngine::handleMouseMovement()
     // TODO sprawdzenie ktory Button zostal klikniety i obsluga tego
 
     windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
+}
+
+void YasEngine::deleteNotAliveObjects()
+{
+    for(int i=0; i<objectsToDraw.size(); i++)
+    {
+	    if(objectsToDraw[i]->isAlive == false)
+	    {
+            // delete objectsToDraw[i];
+            // objectsToDraw
+            objectsToDraw.erase(objectsToDraw.begin() + i);
+	    }
+    }
 }
 
 void YasEngine::handleSpawningCollectibles()
@@ -422,6 +441,8 @@ void YasEngine::update(double& deltaTime)
     // TODO switch with handling different things
     if(gameState==GameState::GAMEPLAY)
     {
+
+        deleteNotAliveObjects();
         handleSpawningCollectibles();
 	    handlePhysics();
         moveObjects();
@@ -445,8 +466,10 @@ void YasEngine::render(double& deltaTime) {
         drawButtons();
         break;
     case GAMEPLAY:
+
         renderGameObjects(deltaTime);
         renderOnViewports(deltaTime);
+        renderLevelChange();
         drawFrame(deltaTime);
         break;
     case OUTRO://                                 123456789_123456789_123456789_123456789_123456789_123456789_
@@ -527,27 +550,37 @@ void YasEngine::renderOnViewports(double& deltaTime)
 	surfaceWithMathBasedEffects->copyPixelsInToPIxelTable(*pixelsTable);
 }
 
-void YasEngine::renderLevelChabnge(double& deltaTime)
+void YasEngine::renderLevelChange()
 {
-    switch (previousLevel)
+    if (levelChanged)
     {
+        switch (previousLevel)
+        {
 
-    case 0:
-        
-        break;
-
-    case 1:
-
-        break;
-    case 2:
-
-        break;
-    case 3:
-
-        break;
-    default:
-        ;
-    }
+        case 1:
+            writer.write((-238) / 2, 200, "YOU JUST FINISHED LEVEL 1", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
+            writer.write((-170) / 2, 100, "YOU ARE HAPPY TO HAVE DISCOVERED", RED, *pixelsTable);
+            writer.write((-170) / 2, 0, "PRIME NUMBERS", YELLOW, *pixelsTable);
+            break;
+        case 2:
+            writer.write((-238) / 2, 200, "YOU JUST FINISHED LEVEL 2", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
+            writer.write((-170) / 2, 100, "YOU ARE HAPPY TO HAVE DISCOVERED", RED, *pixelsTable);
+            writer.write((-170) / 2, 0, "FIBONACCI NUMBERS", YELLOW, *pixelsTable);
+            break;
+        case 3:
+            writer.write((-238) / 2, 200, "YOU JUST FINISHED LEVEL 2", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
+            writer.write((-170) / 2, 100, "YOU ARE HAPPY TO HAVE DISCOVERED", RED, *pixelsTable);
+            writer.write((-170) / 2, 0, "SINE FUNCTION", YELLOW, *pixelsTable);
+        case 4:
+            writer.write((-238) / 2, 200, "YOU JUST FINISHED LEVEL 2", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
+            writer.write((-170) / 2, 100, "YOU ARE HAPPY TO HAVE DISCOVERED", RED, *pixelsTable);
+            writer.write((-170) / 2, 0, "COSINE FUNCTION", YELLOW, *pixelsTable);
+            writer.write((-170) / 2, 0, "AND YOU WON", YELLOW, *pixelsTable);
+            break;
+        default:
+            ;
+        }
+	}
 }
 
 void YasEngine::handlePhysics()
@@ -693,6 +726,7 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
         primesPointsHarvested = primeNumbersPicture->basePointsFuel;
         previousLevel = level;
         level = 2;
+        levelChanged = true;
         return;
     }
 
@@ -701,6 +735,7 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
         fibbsPointsHarvested = fibonacciePicture->basePointsFuel;
         previousLevel = level;
         level = 3;
+        levelChanged = true;
         return;
     }
 
@@ -709,6 +744,7 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
         sinePointsHarvested = sinePicture->basePointsFuel;
         previousLevel = level;
         level = 4;
+        levelChanged = true;
         return;
     }
 
@@ -717,6 +753,7 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
         cosinePointsHarvested = cosinePicture->basePointsFuel;
         previousLevel = level;
         level = -1;
+        levelChanged = true;
         return;
     }
 
@@ -1306,7 +1343,11 @@ void YasEngine::handleGameStateWhenESCbuttonPushed()
             gameState = GameState::OUTRO;
             break;
         case GAMEPLAY:
-            gameState = GameState::MAIN_MENU_RESTART;
+            if (!levelChanged)
+            {
+                gameState = GameState::MAIN_MENU_RESTART;
+            }
+            levelChanged = false;
             break;
         case OUTRO:
             quit = true;
@@ -1325,6 +1366,9 @@ void YasEngine::handleGameStateWhenSPACEbuttonPushed()
             break;
         case OUTRO:
             quit = true;
+            break;
+        case GAMEPLAY:
+            levelChanged = false;
             break;
         default:
             ;
