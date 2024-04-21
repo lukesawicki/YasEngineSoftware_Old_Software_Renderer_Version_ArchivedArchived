@@ -29,6 +29,7 @@ Projectile::Projectile(float radius, float x, float y, Vector2D<float> direction
 Projectile::~Projectile()
 {
 	delete[] worldVertices;
+	delete[] localVertices;
 }
 
 void Projectile::move(float deltaTime)

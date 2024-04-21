@@ -688,7 +688,7 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
                             // 1                            2                            3              
     //Vector2D<float>* vertices, int maximumNumberOfVertices, int& currentNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos
 
-    if (primesPointsHarvested > primeNumbersPicture->basePointsFuel - 1) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
+    if (level == 1 && primesPointsHarvested > primeNumbersPicture->basePointsFuel - 1) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
     {
         primesPointsHarvested = primeNumbersPicture->basePointsFuel;
         previousLevel = level;
@@ -696,7 +696,7 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
         return;
     }
 
-    if (fibbsPointsHarvested > fibonacciePicture->basePointsFuel - 1) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
+    if (level == 2 && fibbsPointsHarvested > fibonacciePicture->basePointsFuel - 1) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
     {
         fibbsPointsHarvested = fibonacciePicture->basePointsFuel;
         previousLevel = level;
@@ -704,7 +704,7 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
         return;
     }
 
-    if (sinePointsHarvested > sinePicture->basePointsFuel - 1) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
+    if (level == 3 && sinePointsHarvested > sinePicture->basePointsFuel - 1) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
     {
         sinePointsHarvested = sinePicture->basePointsFuel;
         previousLevel = level;
@@ -712,7 +712,7 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
         return;
     }
 
-    if (cosinePointsHarvested > cosinePicture->basePointsFuel - 1) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
+    if (level == 4 && cosinePointsHarvested > cosinePicture->basePointsFuel - 1) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
     {
         cosinePointsHarvested = cosinePicture->basePointsFuel;
         previousLevel = level;
