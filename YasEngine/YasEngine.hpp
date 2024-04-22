@@ -42,7 +42,9 @@ class YasEngine
             INTRO,
             MAIN_MENU_RESTART,
             GAMEPLAY,
-            OUTRO
+            OUTRO,
+			PAUSE,
+			LEVEL_CHANGE_SCREEN
         };
 
 		enum Wall
