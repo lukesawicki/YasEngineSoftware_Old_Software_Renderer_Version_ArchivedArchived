@@ -253,10 +253,16 @@ void YasEngine::handleKeyboardInput(SDL_Event& event)
             if (gameState == LEVEL_CHANGE_SCREEN) {
                 gameState = GameState::GAMEPLAY;
             }
+            if (gameState == GameState::YOU_WON) {
+                gameState = GameState::MAIN_MENU_RESTART;
+            }
             break;
         case SDLK_TAB:
             if (gameState == LEVEL_CHANGE_SCREEN) {
                 gameState = GameState::GAMEPLAY;
+            }
+            if (gameState == GameState::YOU_WON) {
+                gameState = GameState::MAIN_MENU_RESTART;
             }
             break;
         default:
@@ -487,6 +493,10 @@ void YasEngine::update(double& deltaTime)
         {
             gameState = LEVEL_CHANGE_SCREEN;
         }
+        if(levelChanged && level == -1)
+        {
+            gameState = GameState::YOU_WON;
+        }
         moveObjects();
         handleProjectiles();
         handlePlayer();
@@ -534,6 +544,10 @@ void YasEngine::render(double& deltaTime)
         break;
     case LEVEL_CHANGE_SCREEN:
         renderLevelChange();
+        break;
+    case YOU_WON:
+        renderWonScreen();
+        break;
     default:
         ;
     }
@@ -626,6 +640,18 @@ void YasEngine::renderLevelChange()
     default:
         ;
     }
+}
+
+void YasEngine::renderWonScreen()
+{
+        writer.write((-238) / 2, 200, "YOU WON", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
+        writer.write((-170) / 2, 100, "MATHEMATICS IS BEAUTIFUL", RED, *pixelsTable);
+        writer.write((-238) / 2, 200, "YOU ARE NOT SUPPOSED TO BELIEVE ME", YELLOW, *pixelsTable);
+        writer.write((-238) / 2, 200, "CHECK IT FOR YOURSELF", YELLOW, *pixelsTable);
+        writer.write((-238) / 2, 200, "FIND AND LEARN MORE ABOUT WHAT YOU HAVE JUST DISCOVERED", YELLOW, *pixelsTable);
+        writer.write((-238) / 2, 200, "PRIME NUMBERS", YELLOW, *pixelsTable);
+        writer.write((-238) / 2, 200, "FIBONACCI NUMBERS", YELLOW, *pixelsTable);
+        writer.write((-238) / 2, 200, "SINE AND COSINE FUNCTIONS", YELLOW, *pixelsTable);
 }
 
 void YasEngine::handlePhysics()
@@ -772,9 +798,12 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
     // (primeNumbersPicture->pointsSet->points, primeNumbersPicture->basePointsFuel, primesPointsHarvested
                             // 1                            2                            3              
     //Vector2D<float>* vertices, int maximumNumberOfVertices, int& currentNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos
+
+    int test1 = primesPointsHarvested;
+
     if (level == 1 && primesPointsHarvested > primeNumbersPicture->basePointsFuel - 1) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
     {
-        primesPointsHarvested = primeNumbersPicture->basePointsFuel;
+        primesPointsHarvested = primeNumbersPicture->basePointsFuel -1;
         previousLevel = level;
         level = 2;
         levelChanged = true;
@@ -790,9 +819,11 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
         return;
     }
 
+    int some = sinePointsHarvested;
+
     if (level == 3 && sinePointsHarvested > sinePicture->basePointsFuel - 1) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
     {
-        sinePointsHarvested = sinePicture->basePointsFuel;
+        sinePointsHarvested = sinePicture->basePointsFuel; //lukesawicki
         previousLevel = level;
         level = 4;
         levelChanged = true;
@@ -1169,8 +1200,8 @@ void YasEngine::prepareDataForDrawingGraphs()
 
     preparePrimesDrawing();
     prepareFibonacciDrawing();
-    prepareSinusDrawing();
-    prepareCosinusDrawing();
+    prepareSineDrawing();
+    prepareCosineDrawing();
 
     // std::map<std::string, std::map<int, float>*> numbersMap;
     // std::map < std::string, std::map<int, std::map<float, float>>> pairNumbersMap;
@@ -1207,9 +1238,9 @@ void YasEngine::prepareDataForDrawingGraphs()
 
 }
 
-void YasEngine::prepareSinusDrawing()
+void YasEngine::prepareSineDrawing()
 {
-    std::map<float, float>* sinuses = generateSineNumbers(100);//generatePrimeNumbersLessThanN(1000);
+    std::map<float, float>* sinuses = generateSineNumbers(40);//generatePrimeNumbersLessThanN(1000);
     sinePointsHarvested = 0;
 
     // std::map < std::string, std::map<int, std::map<float, float>>> pairNumbersMap;
@@ -1233,9 +1264,9 @@ void YasEngine::prepareSinusDrawing()
     sinePicture = new MathPicture(sinuses, new SinePointsGenerator(), new PointsSet());
 }
 
-void YasEngine::prepareCosinusDrawing()
+void YasEngine::prepareCosineDrawing()
 {
-    std::map<float, float>* cosine = generateCosineNumbers(100);//generatePrimeNumbersLessThanN(1000);
+    std::map<float, float>* cosine = generateCosineNumbers(40);//generatePrimeNumbersLessThanN(1000);
     cosinePointsHarvested = 0;
 
     // std::map < std::string, std::map<int, std::map<float, float>>> pairNumbersMap;
@@ -1405,6 +1436,9 @@ void YasEngine::handleGameStateWhenESCbuttonPushed()
 		case LEVEL_CHANGE_SCREEN:
             gameState = GameState::GAMEPLAY;
         break;
+        case YOU_WON:
+            gameState = GameState::MAIN_MENU_RESTART;
+            break;
         default:
             ;
     }
@@ -1420,8 +1454,14 @@ void YasEngine::handleGameStateWhenSPACEbuttonPushed()
         case OUTRO:
             quit = true;
             break;
+        case LEVEL_CHANGE_SCREEN:
+            gameState = GameState::GAMEPLAY;
+            break;
         case GAMEPLAY:
             // levelChanged = false;
+            break;
+        case YOU_WON:
+            gameState = GameState::MAIN_MENU_RESTART;
             break;
         default:
             ;

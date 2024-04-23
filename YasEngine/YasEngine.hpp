@@ -44,7 +44,8 @@ class YasEngine
             GAMEPLAY,
             OUTRO,
 			PAUSE,
-			LEVEL_CHANGE_SCREEN
+			LEVEL_CHANGE_SCREEN,
+			YOU_WON
         };
 
 		enum Wall
@@ -217,8 +218,8 @@ class YasEngine
 		void prepareGameWorld();
 		void setFrameAroundGameplaySpace();
         void prepareDataForDrawingGraphs();
-		void prepareSinusDrawing();
-		void prepareCosinusDrawing();
+		void prepareSineDrawing();
+		void prepareCosineDrawing();
 		void prepareFibonacciDrawing();
 		void preparePrimesDrawing();
 		void preparePlayer();
@@ -239,7 +240,8 @@ class YasEngine
 		void renderGameObjects(double& deltaTime);
 		void renderOnViewports(double& deltaTime);
 		void renderLevelChange();
-        Button::ButtonId checkWhichButtonClicked();
+		void renderWonScreen();
+		Button::ButtonId checkWhichButtonClicked();
         void handleClickedButtons();
         void handleGameStateWhenESCbuttonPushed();
         void handleGameStateWhenSPACEbuttonPushed();
