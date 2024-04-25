@@ -732,22 +732,27 @@ void YasEngine::handlePhysics()
 
 void YasEngine::handleDisassemblingGraphs(GameObject* gameObj)
 {
-    if(primesPointsHarvested < 0)
+    int newValueOfPrimesPointsHarvested = primesPointsHarvested - gameObj->numberOfVertices;
+    int newValueOfFibbsPointsHarvested = fibbsPointsHarvested - gameObj->numberOfVertices;
+    int newSinePointsHarvested = sinePointsHarvested - gameObj->numberOfVertices;
+    int newCosinePointsHarvested = cosinePointsHarvested - gameObj->numberOfVertices;
+
+    if(newValueOfPrimesPointsHarvested < 0)
     {
         primesPointsHarvested = 0;
         return;
     }
-    if (fibbsPointsHarvested < 0)
+    if (newValueOfFibbsPointsHarvested < 0)
     {
         fibbsPointsHarvested = 0;
         return;
     }
-    if (sinePointsHarvested < 0)
+    if (newSinePointsHarvested < 0)
     {
         sinePointsHarvested = 0;
         return;
     }
-    if (cosinePointsHarvested < 0)
+    if (newCosinePointsHarvested < 0)
     {
         cosinePointsHarvested = 0;
         return;
@@ -756,22 +761,22 @@ void YasEngine::handleDisassemblingGraphs(GameObject* gameObj)
     switch (level)
     {
         case 1:
-                primesPointsHarvested -= gameObj->numberOfVertices;
+                primesPointsHarvested = newValueOfPrimesPointsHarvested;
         break;
 
         case 2:
 
-                fibbsPointsHarvested -= gameObj->numberOfVertices;
+                fibbsPointsHarvested = newValueOfFibbsPointsHarvested;
         break;
 
         case 3:
 
-                sinePointsHarvested -= gameObj->numberOfVertices;
+                sinePointsHarvested = newSinePointsHarvested;
         break;
 
         case 4:
 
-                cosinePointsHarvested -= gameObj->numberOfVertices;
+                cosinePointsHarvested = newCosinePointsHarvested;
         break;
 
         default: 
@@ -799,9 +804,14 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
                             // 1                            2                            3              
     //Vector2D<float>* vertices, int maximumNumberOfVertices, int& currentNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos
 
+    int newValueOfPrimesPointsHarvested = primesPointsHarvested + gameObj->numberOfVertices;
+    int newValueOfFibbsPointsHarvested = fibbsPointsHarvested + gameObj->numberOfVertices;
+    int newSinePointsHarvested = sinePointsHarvested + gameObj->numberOfVertices;
+    int newCosinePointsHarvested = cosinePointsHarvested + gameObj->numberOfVertices;
+
     int test1 = primesPointsHarvested;
 
-    if (level == 1 && primesPointsHarvested > primeNumbersPicture->basePointsFuel - 1) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
+    if (level == 1 && newValueOfPrimesPointsHarvested >= primeNumbersPicture->basePointsFuel) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
     {
         primesPointsHarvested = primeNumbersPicture->basePointsFuel -1;
         previousLevel = level;
@@ -810,7 +820,7 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
         return;
     }
 
-    if (level == 2 && fibbsPointsHarvested > fibonacciePicture->basePointsFuel - 1) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
+    if (level == 2 && newValueOfFibbsPointsHarvested >= fibonacciePicture->basePointsFuel) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
     {
         fibbsPointsHarvested = fibonacciePicture->basePointsFuel;
         previousLevel = level;
@@ -821,7 +831,7 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
 
     int some = sinePointsHarvested;
 
-    if (level == 3 && sinePointsHarvested > sinePicture->basePointsFuel - 1) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
+    if (level == 3 && newSinePointsHarvested >= sinePicture->basePointsFuel) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
     {
         sinePointsHarvested = sinePicture->basePointsFuel; //lukesawicki
         previousLevel = level;
@@ -830,7 +840,7 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
         return;
     }
 
-    if (level == 4 && cosinePointsHarvested > cosinePicture->basePointsFuel - 1) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
+    if (level == 4 && newCosinePointsHarvested >= cosinePicture->basePointsFuel) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
     {
         cosinePointsHarvested = cosinePicture->basePointsFuel;
         previousLevel = level;
@@ -842,16 +852,35 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
     switch (level)
     {
     case 1:
-            primesPointsHarvested += gameObj->numberOfVertices;
+        
+        if (newValueOfPrimesPointsHarvested <= primeNumbersPicture->basePointsFuel)
+        {
+            primesPointsHarvested = newValueOfPrimesPointsHarvested;
+        }
         break;
     case 2:
-            fibbsPointsHarvested += gameObj->numberOfVertices;
+
+        if (newValueOfFibbsPointsHarvested <= fibonacciePicture->basePointsFuel)
+        {
+            fibbsPointsHarvested = newValueOfFibbsPointsHarvested;
+        }
+            
         break;
     case 3:
-            sinePointsHarvested += gameObj->numberOfVertices;
+        
+        if (newSinePointsHarvested <= sinePicture->basePointsFuel)
+        {
+            sinePointsHarvested = newSinePointsHarvested;
+        }
+            
         break;
     case 4:
-            cosinePointsHarvested += gameObj->numberOfVertices;
+        
+        if (newCosinePointsHarvested <= cosinePicture->basePointsFuel)
+        {
+            cosinePointsHarvested = newCosinePointsHarvested;
+        }
+            
         break;
     default:
         ;
@@ -1240,7 +1269,7 @@ void YasEngine::prepareDataForDrawingGraphs()
 
 void YasEngine::prepareSineDrawing()
 {
-    std::map<float, float>* sinuses = generateSineNumbers(40);//generatePrimeNumbersLessThanN(1000);
+    std::map<float, float>* sines = generateSineNumbers(40);//generatePrimeNumbersLessThanN(1000);
     sinePointsHarvested = 0;
 
     // std::map < std::string, std::map<int, std::map<float, float>>> pairNumbersMap;
@@ -1252,7 +1281,7 @@ void YasEngine::prepareSineDrawing()
     // for (int i = 0; i < sinuses->size(); i++)
     // {
     int i = 0;
-    for(std::pair<float, float> pair: *sinuses)
+    for(std::pair<float, float> pair: *sines)
     {
         std::map<float, float>* m = new std::map<float, float>();
         m->insert(pair);
@@ -1261,12 +1290,12 @@ void YasEngine::prepareSineDrawing()
         
     // }
 
-    sinePicture = new MathPicture(sinuses, new SinePointsGenerator(), new PointsSet());
+    sinePicture = new MathPicture(sines, new SinePointsGenerator(), new PointsSet());
 }
 
 void YasEngine::prepareCosineDrawing()
 {
-    std::map<float, float>* cosine = generateCosineNumbers(40);//generatePrimeNumbersLessThanN(1000);
+    std::map<float, float>* cosines = generateCosineNumbers(40);//generatePrimeNumbersLessThanN(1000);
     cosinePointsHarvested = 0;
 
     // std::map < std::string, std::map<int, std::map<float, float>>> pairNumbersMap;
@@ -1278,7 +1307,7 @@ void YasEngine::prepareCosineDrawing()
     // for (int i = 0; i < sinuses->size(); i++)
     // {
     int i = 0;
-    for (std::pair<float, float> pair : *cosine)
+    for (std::pair<float, float> pair : *cosines)
     {
         std::map<float, float>* m = new std::map<float, float>();
         m->insert(pair);
@@ -1287,7 +1316,7 @@ void YasEngine::prepareCosineDrawing()
 
     // }
 
-    cosinePicture = new MathPicture(cosine, new CosinePointsGenerator(), new PointsSet());
+    cosinePicture = new MathPicture(cosines, new CosinePointsGenerator(), new PointsSet());
 }
 
 void YasEngine::prepareFibonacciDrawing()

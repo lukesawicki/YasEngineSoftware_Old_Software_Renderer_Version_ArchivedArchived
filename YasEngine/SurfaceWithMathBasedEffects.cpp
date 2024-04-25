@@ -386,7 +386,7 @@ void SurfaceWithMathBasedEffects::drawNumbersAsGroupOfLines(Vector2D<float>* ver
         }
 	    else
 	    {
-            here cosine and sine have to much vertises
+            // here cosine and sine have to much vertises
 	        for (int i = 0; i < currentNumberOfVertices; i += step)
 	        {
 	            drawLine(vertices[i], vertices[i + 1], color);
