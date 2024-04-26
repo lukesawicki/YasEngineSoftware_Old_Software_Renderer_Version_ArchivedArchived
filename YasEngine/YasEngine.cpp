@@ -732,27 +732,22 @@ void YasEngine::handlePhysics()
 
 void YasEngine::handleDisassemblingGraphs(GameObject* gameObj)
 {
-    int newValueOfPrimesPointsHarvested = primesPointsHarvested - gameObj->numberOfVertices;
-    int newValueOfFibbsPointsHarvested = fibbsPointsHarvested - gameObj->numberOfVertices;
-    int newSinePointsHarvested = sinePointsHarvested - gameObj->numberOfVertices;
-    int newCosinePointsHarvested = cosinePointsHarvested - gameObj->numberOfVertices;
-
-    if(newValueOfPrimesPointsHarvested < 0)
+    if(primesPointsHarvested < 0)
     {
         primesPointsHarvested = 0;
         return;
     }
-    if (newValueOfFibbsPointsHarvested < 0)
+    if (fibbsPointsHarvested < 0)
     {
         fibbsPointsHarvested = 0;
         return;
     }
-    if (newSinePointsHarvested < 0)
+    if (sinePointsHarvested < 0)
     {
         sinePointsHarvested = 0;
         return;
     }
-    if (newCosinePointsHarvested < 0)
+    if (cosinePointsHarvested < 0)
     {
         cosinePointsHarvested = 0;
         return;
@@ -761,22 +756,22 @@ void YasEngine::handleDisassemblingGraphs(GameObject* gameObj)
     switch (level)
     {
         case 1:
-                primesPointsHarvested = newValueOfPrimesPointsHarvested;
+                primesPointsHarvested -= gameObj->numberOfVertices;
         break;
 
         case 2:
 
-                fibbsPointsHarvested = newValueOfFibbsPointsHarvested;
+                fibbsPointsHarvested -= gameObj->numberOfVertices;
         break;
 
         case 3:
 
-                sinePointsHarvested = newSinePointsHarvested;
+                sinePointsHarvested -= gameObj->numberOfVertices;
         break;
 
         case 4:
 
-                cosinePointsHarvested = newCosinePointsHarvested;
+                cosinePointsHarvested -= gameObj->numberOfVertices;
         break;
 
         default: 
@@ -813,7 +808,7 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
 
     if (level == 1 && newValueOfPrimesPointsHarvested >= primeNumbersPicture->basePointsFuel) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
     {
-        primesPointsHarvested = primeNumbersPicture->basePointsFuel -1;
+        primesPointsHarvested = primeNumbersPicture->basePointsFuel;
         previousLevel = level;
         level = 2;
         levelChanged = true;
