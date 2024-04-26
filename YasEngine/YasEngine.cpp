@@ -163,7 +163,7 @@ void YasEngine::prepareBasicSettings()
     SDL_Init(SDL_INIT_EVERYTHING);
 
     windowDimensions    =   new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
-    Uint32 windowFlags = SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_RESIZABLE;// | SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_ALWAYS_ON_TOP;
+    Uint32 windowFlags = SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_ALWAYS_ON_TOP;
     window              =   SDL_CreateWindow("YasEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, windowFlags);
 
     SDL_SetWindowMinimumSize(window, WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -630,28 +630,45 @@ void YasEngine::renderOnViewports(double& deltaTime)
 
 void YasEngine::renderLevelChange()
 {
+
     switch (previousLevel)
     {
 
     case 1:
-        writer.write((-238) / 2, 200, "YOU JUST FINISHED LEVEL 1", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
-        writer.write((-170) / 2, 100, "YOU ARE HAPPY TO HAVE DISCOVERED", RED, *pixelsTable);
-        writer.write((-170) / 2, 0, "PRIME NUMBERS", YELLOW, *pixelsTable);
+        //25
+        writer.write((-425) / 2, 200, "YOU.JUST.FINISHED.LEVEL.1", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
+
+        //32
+        writer.write((-544) / 2, 100, "YOU.ARE.HAPPY.TO.HAVE.DISCOVERED", BLUE, *pixelsTable);
+
+        //13
+        writer.write((-221) / 2, 0, "PRIME.NUMBERS", GREEN, *pixelsTable);
         break;
     case 2:
-        writer.write((-238) / 2, 200, "YOU JUST FINISHED LEVEL 2", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
-        writer.write((-170) / 2, 100, "YOU ARE HAPPY TO HAVE DISCOVERED", RED, *pixelsTable);
-        writer.write((-170) / 2, 0, "FIBONACCI NUMBERS", YELLOW, *pixelsTable);
+        //25
+        writer.write((-425) / 2, 200, "YOU.JUST.FINISHED.LEVEL.2", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
+        //32
+        writer.write((-544) / 2, 100, "YOU.ARE.HAPPY.TO.HAVE.DISCOVERED", BLUE, *pixelsTable);
+        //17
+        writer.write((-289) / 2, 0, "FIBONACCI.NUMBERS", GREEN, *pixelsTable);
         break;
     case 3:
-        writer.write((-238) / 2, 200, "YOU JUST FINISHED LEVEL 2", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
-        writer.write((-170) / 2, 100, "YOU ARE HAPPY TO HAVE DISCOVERED", RED, *pixelsTable);
-        writer.write((-170) / 2, 0, "SINE FUNCTION", YELLOW, *pixelsTable);
+        //25
+        writer.write((-425) / 2, 200, "YOU.JUST.FINISHED.LEVEL.2", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
+        //32
+        writer.write((-544) / 2, 100, "YOU.ARE.HAPPY.TO.HAVE.DISCOVERED", BLUE, *pixelsTable);
+        //13
+        writer.write((-221) / 2, 0, "SINE.FUNCTION", GREEN, *pixelsTable);
+        break;
     case 4:
-        writer.write((-238) / 2, 200, "YOU JUST FINISHED LEVEL 2", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
-        writer.write((-170) / 2, 100, "YOU ARE HAPPY TO HAVE DISCOVERED", RED, *pixelsTable);
-        writer.write((-170) / 2, 0, "COSINE FUNCTION", YELLOW, *pixelsTable);
-        writer.write((-170) / 2, 0, "AND YOU WON", YELLOW, *pixelsTable);
+        //25
+        writer.write((-425) / 2, 200, "YOU.JUST.FINISHED.LEVEL.2", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
+        //32
+        writer.write((-544) / 2, 100, "YOU.ARE.HAPPY.TO.HAVE.DISCOVERED", BLUE, *pixelsTable);
+        //15
+        writer.write((-255) / 2, 0, "COSINE.FUNCTION", GREEN, *pixelsTable);
+        // 11
+        writer.write((-187) / 2, -25, "AND.YOU.WON", YELLOW, *pixelsTable);
         break;
     default:
         ;
@@ -660,14 +677,14 @@ void YasEngine::renderLevelChange()
 
 void YasEngine::renderWonScreen()
 {
-        writer.write((-238) / 2, 200, "YOU WON", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
-        writer.write((-170) / 2, 100, "MATHEMATICS IS BEAUTIFUL", RED, *pixelsTable);
-        writer.write((-238) / 2, 200, "YOU ARE NOT SUPPOSED TO BELIEVE ME", YELLOW, *pixelsTable);
-        writer.write((-238) / 2, 200, "CHECK IT FOR YOURSELF", YELLOW, *pixelsTable);
-        writer.write((-238) / 2, 200, "FIND AND LEARN MORE ABOUT WHAT YOU HAVE JUST DISCOVERED", YELLOW, *pixelsTable);
-        writer.write((-238) / 2, 200, "PRIME NUMBERS", YELLOW, *pixelsTable);
-        writer.write((-238) / 2, 200, "FIBONACCI NUMBERS", YELLOW, *pixelsTable);
-        writer.write((-238) / 2, 200, "SINE AND COSINE FUNCTIONS", YELLOW, *pixelsTable);
+    writer.write((-119) / 2, 310, "YOU.WON", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
+    writer.write((-408) / 2, 210, "MATHEMATICS.IS.BEAUTIFUL", YELLOW, *pixelsTable);
+    writer.write((-578) / 2, 110, "YOU.ARE.NOT.SUPPOSED.TO.BELIEVE.ME", PURPLE, *pixelsTable);
+    writer.write((-357) / 2, 10, "CHECK.IT.FOR.YOURSELF", PURPLE, *pixelsTable);
+    writer.write((-935) / 2, -10, "FIND.AND.LEARN.MORE.ABOUT.WHAT.YOU.HAVE.JUST.DISCOVERED", PURPLE, *pixelsTable);
+    writer.write((-221) / 2, -110, "PRIME.NUMBERS", GREEN, *pixelsTable);
+    writer.write((-289) / 2, -160, "FIBONACCI.NUMBERS", YELLOW, *pixelsTable);
+    writer.write((-425) / 2, -210, "SINE.AND.COSINE.FUNCTIONS", LIGHT_BLUE, *pixelsTable);
 }
 
 void YasEngine::handlePhysics()
