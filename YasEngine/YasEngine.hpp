@@ -48,6 +48,8 @@ class YasEngine
 			YOU_WON
         };
 
+		bool playerWonAndExited = false;
+
 		enum Wall
 		{
 			LEFT,
@@ -197,7 +199,6 @@ class YasEngine
         int redShotDowns = 0;
         int greenShotdowns = 0;
         int blueShotdowns = 0;
-
 		bool engineInstantiated = false;
 		void readSettingsFromFile();
 		void prepareRendering();
@@ -212,7 +213,7 @@ class YasEngine
 		GameObject* getProtagonist(GameObject* object0, GameObject* object1);
 		GameObject* getNotProtagonist(GameObject* object0, GameObject* object1);
 		void handleProtagonistWithWallsCollisions(GameObject* object);
-		void moveObjectToMapBoundries(GameObject* gameObject, Wall wall);
+		void moveObjectToMapBoundries(GameObject* gameObject, Wall wall, int shift = 0);
 		void bounceCollectibles(GameObject* gameObject, Wall wall);
 		void moveObjects();
 		void prepareGameWorld();
@@ -234,6 +235,7 @@ class YasEngine
 		void handleProjectiles();
 		void handlePlayer();
 		void update(double& deltaTime);
+		void resetAll();
 		void drawHudElements(double& deltaTime);
 		void drawFrame(double& deltaTime);
 		void render(double& deltaTime);

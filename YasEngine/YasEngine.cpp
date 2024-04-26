@@ -255,6 +255,7 @@ void YasEngine::handleKeyboardInput(SDL_Event& event)
             }
             if (gameState == GameState::YOU_WON) {
                 gameState = GameState::MAIN_MENU_RESTART;
+                playerWonAndExited = true;
             }
             break;
         case SDLK_TAB:
@@ -263,6 +264,7 @@ void YasEngine::handleKeyboardInput(SDL_Event& event)
             }
             if (gameState == GameState::YOU_WON) {
                 gameState = GameState::MAIN_MENU_RESTART;
+                playerWonAndExited = true;
             }
             break;
         default:
@@ -380,39 +382,36 @@ void YasEngine::deleteNotAliveObjects()
 
 void YasEngine::handleSpawningCollectibles()
 {    
-        for (int i = 0; i < 8; i++)
+    for (int i = 0; i < 8; i++)
+    {
+        // LOSUJ 4 razy liczbe z 16 spawnerPostions
+        int randomSpawner = Randomizer::drawNumberClosedInterval(0, 15);
+        int firstLevelNodeIndex = spawnersPositions[randomSpawner]->firstLevelNode;
+        int secondLevelNodeIndex = spawnersPositions[randomSpawner]->secondLevelNode;
+        if (Spawner::numberOfSpawnedObjects < MAX_COLLECTIBLES_TO_SPAWN)
         {
-            // LOSUJ 4 razy liczbe z 16 spawnerPostions
-            int randomSpawner = Randomizer::drawNumberClosedInterval(0, 15);
-
-            int firstLevelNodeIndex = spawnersPositions[randomSpawner]->firstLevelNode;
-            int secondLevelNodeIndex = spawnersPositions[randomSpawner]->secondLevelNode;
-            if (Spawner::numberOfSpawnedObjects < MAX_COLLECTIBLES_TO_SPAWN)
+            if (isObjectInSameQuarterAsProtagonist(randomSpawner))
             {
-	            if (isObjectInSameQuarterAsProtagonist(randomSpawner))
-	            {
-	                continue;
-	            }
-	            
-	            spawners->childNodes[firstLevelNodeIndex]->childNodes[secondLevelNodeIndex]->spawner->spawnObject(go);
-	            if (go != nullptr)
-	            {
-	                Spawner::numberOfSpawnedObjects++;
-	                objectsToDraw.push_back(go);
-	                go = nullptr;
-				}
+                continue;
             }
-            else
+            spawners->childNodes[firstLevelNodeIndex]->childNodes[secondLevelNodeIndex]->spawner->spawnObject(go);
+            if (go != nullptr)
             {
-                spawners->childNodes[firstLevelNodeIndex]->childNodes[secondLevelNodeIndex]->spawner->resetTimes();
-            }
+                Spawner::numberOfSpawnedObjects++;
+                objectsToDraw.push_back(go);
+                go = nullptr;
+			}
         }
+        else
+        {
+            spawners->childNodes[firstLevelNodeIndex]->childNodes[secondLevelNodeIndex]->spawner->resetTimes();
+        }
+    }
 }
 
 bool YasEngine::isObjectInSameQuarterAsProtagonist(int randomSpawner)
 {
     int quarterSize = spawners->childNodes[spawnersPositions[randomSpawner]->firstLevelNode]->childNodes[spawnersPositions[randomSpawner]->secondLevelNode]->size;
-
     return (
         (player->getPosition().x < (spawners->childNodes[spawnersPositions[randomSpawner]->firstLevelNode]->childNodes[spawnersPositions[randomSpawner]->secondLevelNode]->position->x +
         quarterSize / 2)) &&
@@ -422,7 +421,6 @@ bool YasEngine::isObjectInSameQuarterAsProtagonist(int randomSpawner)
         quarterSize / 2)) &&
         (player->getPosition().y > (spawners->childNodes[spawnersPositions[randomSpawner]->firstLevelNode]->childNodes[spawnersPositions[randomSpawner]->secondLevelNode]->position->y -
         quarterSize / 2)));
-	
 }
 
 void YasEngine::handleProjectiles()
@@ -502,6 +500,24 @@ void YasEngine::update(double& deltaTime)
         handlePlayer();
     break;
     }
+
+    if(playerWonAndExited)
+    {
+        resetAll();
+    }
+}
+
+void YasEngine::resetAll()
+{
+    deleteNotAliveObjects();
+    level = 1;
+    previousLevel = 0;
+    levelChanged = false;
+    sinePointsHarvested = 0;
+    cosinePointsHarvested = 0;
+    primesPointsHarvested = 0;
+    fibbsPointsHarvested = 0;
+    playerWonAndExited = false;
 }
 
 void YasEngine::render(double& deltaTime)
@@ -1008,21 +1024,21 @@ void YasEngine::bounceCollectibles(GameObject* gameObject, Wall wall)
     // objectsToDraw[i]->setX(rightWall - objectsToDraw[i]->collider.radius - 1);
 }
 
-void YasEngine::moveObjectToMapBoundries(GameObject* gameObject, Wall wall)
+void YasEngine::moveObjectToMapBoundries(GameObject* gameObject, Wall wall, int shift)
 {
     switch (wall)
     {
     case LEFT:
-        gameObject->setX(mapFrame.leftLineSegment.point0.x + gameObject->collider.radius);
+        gameObject->setX(mapFrame.leftLineSegment.point0.x + gameObject->collider.radius + shift);
         break;
     case RIGHT:
-        gameObject->setX(mapFrame.rightLineSegment.point0.x - gameObject->collider.radius);
+        gameObject->setX(mapFrame.rightLineSegment.point0.x - gameObject->collider.radius - shift);
         break;
     case TOP:
-        gameObject->setY(mapFrame.topLineSegment.point0.y - gameObject->collider.radius);
+        gameObject->setY(mapFrame.topLineSegment.point0.y - gameObject->collider.radius - shift);
         break;
     case BOTTOM:
-        gameObject->setY(mapFrame.bottomLineSegment.point0.y + gameObject->collider.radius);
+        gameObject->setY(mapFrame.bottomLineSegment.point0.y + gameObject->collider.radius + shift);
         break;
     default:
         ;
@@ -1221,45 +1237,10 @@ void YasEngine::setFrameAroundGameplaySpace()
 
 void YasEngine::prepareDataForDrawingGraphs()
 {
-
     preparePrimesDrawing();
     prepareFibonacciDrawing();
     prepareSineDrawing();
     prepareCosineDrawing();
-
-    // std::map<std::string, std::map<int, float>*> numbersMap;
-    // std::map < std::string, std::map<int, std::map<float, float>>> pairNumbersMap;
-
-    // std::vector<int> fibonacciNumbers = generateNfibonaccinumbers(40);
-    // std::map<int, float>* fibbs = new std::map<int, float>;
-    // numbersMap.insert({ "Fibonacci",  fibbs });
-    // for(int i=0; i < fibonacciNumbers.size(); i++)
-    // {
-    //     numbersMap.at("Fibonacci")->insert(std::pair<int, float>(33, 33.44f));
-    // }
-
-    // std::vector<int> primeNumbers = generatePrimeNumbersLessThanN(1000);
-
-
-
-
-    // std::vector<int> generateNfibonaccinumbers(int n)
-
-    // std::vector<int> generatePrimeNumbersLessThanN(int n)
-
-
-
-    // sinePicture = new MathPicture(100, 0, 100, new SinePointsGenerator(), new PointsSet());
-    // cosinePicture = new MathPicture(100, 0, 100, new CosinePointsGenerator(), new PointsSet());
-    // fibonacciePicture = new MathPicture(40, 0, 40, numbersMap.at("Fibonacci"), new FibonacciPointsGenerator(), new PointsSet());
-
-
-
-    // sinePicture->generateFloatPoints();
-    // cosinePicture->generateFloatPoints();
-    // fibonacciePicture->generateFloatPoints();
-    // primeNumbersPicture->generateFloatPoints();
-
 }
 
 void YasEngine::prepareSineDrawing()
@@ -1448,11 +1429,7 @@ void YasEngine::handleGameStateWhenESCbuttonPushed()
             gameState = GameState::OUTRO;
         break;
         case GAMEPLAY:
-            // if (!levelChanged)
-            // {
-                gameState = GameState::MAIN_MENU_RESTART;
-            // }
-            // levelChanged = false;
+            gameState = GameState::MAIN_MENU_RESTART;
         break;
         case OUTRO:
             quit = true;
@@ -1462,6 +1439,7 @@ void YasEngine::handleGameStateWhenESCbuttonPushed()
         break;
         case YOU_WON:
             gameState = GameState::MAIN_MENU_RESTART;
+            playerWonAndExited = true;
             break;
         default:
             ;
@@ -1482,10 +1460,12 @@ void YasEngine::handleGameStateWhenSPACEbuttonPushed()
             gameState = GameState::GAMEPLAY;
             break;
         case GAMEPLAY:
-            // levelChanged = false;
+            levelChanged = false;
+            // break;
             break;
         case YOU_WON:
             gameState = GameState::MAIN_MENU_RESTART;
+            playerWonAndExited = true;
             break;
         default:
             ;
