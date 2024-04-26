@@ -6,7 +6,7 @@ PointsSet* SinePointsGenerator::generatePoints(int numberOfNumbers, std::map<int
 	Vector2D<float>* points = new Vector2D<float>[pointsNumber];
 	float divider = static_cast<float>(pointsNumber);
 	float maximumXvalue = 2.0F * PI;
-	float additionalFactor = 35.0F;
+	float additionalFactor = 50.0F;
 	float step = (maximumXvalue / divider);
 
 	for (int i = 0; i < pointsNumber; i++)
@@ -30,7 +30,7 @@ PointsSet* SinePointsGenerator::generateFloatPoints(int numberOfNumbers, std::ma
 {
 	this->pointsNumber = numberOfNumbers;
 	Vector2D<float>* points = new Vector2D<float>[pointsNumber];
-	int additionalFactor = 35;
+	int additionalFactor = 50;
 	int i = 0;
 	for (std::pair<float, float> pair : *numbers)
 	{
