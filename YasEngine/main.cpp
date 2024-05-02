@@ -8,12 +8,6 @@ void TODO(const char* todo)
 
 int main(int argc, char* argv[])
 {
-	TODO("LOG FOR BEAUTY OF MATH");
-	TODO("CONFIG FOR MUSIC VOLUME");
-	TODO("CONFIG FOR SOUND VOLUME");
-
-
-
 	YasEngine* yasEngine = YasEngine::GetInstance();
 	yasEngine->initialize();
 	yasEngine->YasEnginStart();

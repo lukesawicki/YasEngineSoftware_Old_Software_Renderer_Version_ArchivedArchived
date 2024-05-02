@@ -34,6 +34,11 @@ YasEngine* YasEngine::instance = nullptr;
 
 void YasEngine::initialize()
 {
+    int MAJOR_REVISION = 1;
+    int MINOR_REVISION = 3;
+    int BUG_FIX_RELEASE = 0;
+    int BUILD_NUMBER = 0;
+    std::cout << "YasEngine 1 | Beauty of Math 1 version: " << MAJOR_REVISION << "." << MINOR_REVISION << "." << BUG_FIX_RELEASE << "." << BUILD_NUMBER << "\n";
     readSettingsFromFile();
 
     srand(clock());
@@ -163,7 +168,7 @@ void YasEngine::prepareBasicSettings()
     SDL_Init(SDL_INIT_EVERYTHING);
 
     windowDimensions    =   new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
-    Uint32 windowFlags = SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_ALWAYS_ON_TOP;
+    Uint32 windowFlags = SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_ALWAYS_ON_TOP | SDL_WINDOW_RESIZABLE;
     window              =   SDL_CreateWindow("YasEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, windowFlags);
 
     SDL_SetWindowMinimumSize(window, WINDOW_WIDTH, WINDOW_HEIGHT);
