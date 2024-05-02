@@ -1,0 +1,52 @@
+[Major build number].[Minor build number].[Revision].[Package]
+
+i.e. Version: 1.0.15.2
+
+    Major build number: This indicates a major milestone in the game, increment this when going from beta to release, from release to major updates.
+
+    Minor build number: Used for feature updates, large bug fixes etc.
+
+    Revision: Minor alterations on existing features, small bug fixes, etc.
+
+    Package: Your code stays the same, external library changes or asset file update.
+
+
+    Type:
+
+    A - 5 points: 0,99; 49,0; 99,99; 25,50; 74,50
+
+    ////////////////
+
+
+    
+
+In version 1.9.0.1:
+
+    1: Major revision (new UI, lots of new features, conceptual change, etc.)
+
+    9: Minor revision (maybe a change to a search box, 1 feature added, collection of bug fixes)
+
+    0: Bug fix release
+
+    1: Build number (if used)�that's why you see the .NET framework using something like 2.0.4.2709
+
+
+Do small tasks truly small tasks
+And use tool like JIRA (bugtruker)
+One langugae in whole project
+
+Change GameObject to RenderingObject
+Move all classes which extend RenderingObject to folder RenderingObject
+(To think about doing separatelly physics, rendering, logic....)
+Change name Player to Ship (because ship is something which is getting points...) and move to Rendering
+And to change what is Ship
+And create something which is Player
+
+Divide Engine(rendering(Physics, Ai, Rendering and so ont)) From Gameplay 
+
+Move Classes which are tools to generate math numbers, points from this math number to folder Utils
+
+
+
+
+

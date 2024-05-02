@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{76b43af1-0a92-4f56-8eea-68f74936d9ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gameplay">
+      <UniqueIdentifier>{1058c12f-b632-4d53-9d46-6cee73f4e4df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{021342dd-a2ea-4f43-a71b-e4f545e0ca52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{f38990b1-4aa4-446b-aa84-151d1c480693}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Mathematics">
+      <UniqueIdentifier>{afa734d5-00e7-480e-a798-5eed55b3b751}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Physics">
+      <UniqueIdentifier>{32473984-788a-4e7b-ba45-cfd5f740aa4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Other">
+      <UniqueIdentifier>{302f86b0-e28e-4e4e-9785-1f4fd7cc3d79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HID">
+      <UniqueIdentifier>{f4ff4fa8-7241-4839-b406-a6e0f408c7e0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="YasEngine.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PrimeNumbersPointsGenerator.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="FibonacciPointsGenerator.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="CosinePointsGenerator.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="SinePointsGenerator.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="FontSurface.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="FontObject.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenWriter.hpp">
+      <Filter>GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="VariousTools.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="YasGraphicsLibrary.hpp">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2D.hpp">
+      <Filter>Mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector4D.hpp">
+      <Filter>Mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.hpp">
+      <Filter>Mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="PixelsTable.hpp">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="PointsGenerator.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Projectile.hpp">
+      <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Spawner.hpp">
+      <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="PointsSet.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.hpp">
+      <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="SurfaceWithMathBasedEffects.hpp">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="ViewPort.hpp">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.hpp">
+      <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.hpp">
+      <Filter>Physics</Filter>
+    </ClInclude>
+    <ClInclude Include="InputOutputHandler.hpp">
+      <Filter>HID</Filter>
+    </ClInclude>
+    <ClInclude Include="Collectible.hpp">
+      <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="Circle.hpp">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="TimePicker.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Randomizer.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="MapFrame.hpp">
+      <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="LineSegment.hpp">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="MathPicture.hpp">
+      <Filter>Gameplay</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="YasEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CosinePointsGenerator.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="FibonacciPointsGenerator.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="FontObject.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="FontSurface.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenWriter.cpp">
+      <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Mathematics</Filter>
+    </ClCompile>
+    <ClCompile Include="YasGraphicsLibrary.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="SinePointsGenerator.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="SurfaceWithMathBasedEffects.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Spawner.cpp">
+      <Filter>Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Projectile.cpp">
+      <Filter>Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="PrimeNumbersPointsGenerator.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="TimePicker.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Collectible.cpp">
+      <Filter>Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="PixelsTable.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Physics</Filter>
+    </ClCompile>
+    <ClCompile Include="Circle.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="BackupCpp.cpp">
+      <Filter>Other</Filter>
+    </ClCompile>
+    <ClCompile Include="Randomizer.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="MathPicture.cpp">
+      <Filter>Gameplay</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
