@@ -20,9 +20,6 @@ class SurfaceWithMathBasedEffects final : public ViewPort
 		void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, const Vector4D<Uint8>& drawingColor)  override;
 		void drawPolygon(GameObject* polygon)  override;
 		void copyPixelsInToPIxelTable(PixelsTable& pixelsTable);
-
-		// unsigned int calculateMaximumNumberOfElementsToProcess(const unsigned int& primaryMaximum, bool connectedLines);
-
 		void drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, int& currentNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos);
 
 		void horizontalLineOnSurface(int y, Vector4D<Uint8> color)

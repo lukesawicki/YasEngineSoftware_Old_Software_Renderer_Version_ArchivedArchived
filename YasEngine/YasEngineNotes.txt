@@ -47,6 +47,8 @@ Divide Engine(rendering(Physics, Ai, Rendering and so ont)) From Gameplay
 Move Classes which are tools to generate math numbers, points from this math number to folder Utils
 
 
-
+//v1 = rand() % 100;         // v1 in the range 0 to 99
+//v2 = rand() % 100 + 1;     // v2 in the range 1 to 100
+//v3 = rand() % 30 + 1985;   // v3 in the range 1985-2014 
 
 

@@ -31,7 +31,7 @@ void PixelsTable::clearColor(const Vector4D<Uint8>& drawingColor)
 	{
 		for (int x = 0; x < windowDimensions.x; x++)
 		{
-			pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + RED_POSITION] = drawingColor.x; // windowDimensions->x <- WINDOW WIDTH
+			pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + RED_POSITION] = drawingColor.x;
 			pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + GREEN_POSITION] = drawingColor.y;
 			pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + BLUE_POSITION] = drawingColor.z;
 			pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + ALPHA_POSITION] = drawingColor.w;
@@ -44,7 +44,7 @@ void PixelsTable::drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor)
  	cartesianPositionToWindow(x, y);
 	if (x >= 0 && x < windowDimensions.x && y >= 0 && y < windowDimensions.y)
 	{
-		pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + RED_POSITION] = drawingColor.x; // windowDimensions->x <- WINDOW WIDTH
+		pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + RED_POSITION] = drawingColor.x;
 		pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + GREEN_POSITION] = drawingColor.y;
 		pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + BLUE_POSITION] = drawingColor.z;
 		pixels[NUMBER_OF_COLORS * (y * windowDimensions.x + x) + ALPHA_POSITION] = drawingColor.w;

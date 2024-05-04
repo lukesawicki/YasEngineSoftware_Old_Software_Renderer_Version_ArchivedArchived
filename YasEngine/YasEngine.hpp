@@ -1,7 +1,6 @@
 #ifndef YASENGINE_HPP
 #define YASENGINE_HPP
 #include <document.h>
-#include<stdio.h>
 #include<iostream>
 #include<vector>
 #include<string>
@@ -13,19 +12,16 @@
 #include"Player.hpp"
 #include"InputOutputHandler.hpp"
 #include"SurfaceWithMathBasedEffects.hpp"
-#include "PointsSet.hpp"
 #include "Spawner.hpp"
 #include "Node.hpp"
 #include"ScreenWriter.hpp"
 #include"Button.hpp"
 #include "MapFrame.hpp"
 #include "MathPicture.hpp"
-#include "Randomizer.hpp"
 
 class YasEngine
 {	
 	public:
-		// Randomizer randomizer;
 		bool tests = false;
 		std::string engineVersion = "1.0.0.0";
 
@@ -104,7 +100,7 @@ class YasEngine
 
 	private:
 
-		TimePicker timePicker; // 2023-12-15
+		TimePicker timePicker;
 
 		Vector2D<float> A = Vector2D<float>(-300, 200);
 		Vector2D<float> B = Vector2D<float>(100, -350);
@@ -141,14 +137,11 @@ class YasEngine
 		Player* player;
 		SurfaceWithMathBasedEffects* surfaceWithMathBasedEffects;
 		std::vector<NodeNumbersOnTwoProceedingLevels*> spawnersPositions;
-		// std::vector<NodeNumbersOnTwoProceedingLevels*> fourRandomPositions;
 
 		const int MAX_COLLECTIBLES_TO_SPAWN = 64;
 
 		std::map<std::string, std::map<int, float>*> numbersMap;
 		std::map < std::string, std::map<int, std::map<float, float>*>* > pairNumbersMap;
-
-		// std::map<int, float>* numbers;
 
 		Mix_Music* music;
 		Mix_Chunk* shootSound;
@@ -175,12 +168,6 @@ class YasEngine
 		int maxNtoCalculateCosine = 100;
 
         std::map<std::string, int> numberOfGivenColors;
-        // std::map<int, float> sinusNumbers;
-        // std::map<int, float> cosinusNumbers;
-        // std::map<int, float> fibonacciNumbers;
-        // std::map<int, float> primeNumbers;
-
-		//std::vector<Spawner*> spawners;
 		Node* spawners;
 
 		Vector2D<float> testPoint0;

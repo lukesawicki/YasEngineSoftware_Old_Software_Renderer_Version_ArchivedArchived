@@ -7,8 +7,7 @@ class MathPicture
 	public:
 		MathPicture(std::map<int, float>* numbers, PointsGenerator* pointsGenerator, PointsSet* npointsSet)
 		{
-			this->basePointsFuel = numbers->size();
-			//this->maximumPointsFuel = numbers->size();
+			this->basePointsFuel = static_cast<int>(numbers->size());
 			this->pointsGenerator = pointsGenerator;
 			this->numbers = numbers;
 			this->floatNumbers = nullptr;
@@ -16,8 +15,7 @@ class MathPicture
 		}
 		MathPicture(std::map<float, float>* floatNumbers, PointsGenerator* pointsGenerator, PointsSet* npointsSet)
 		{
-			this->basePointsFuel = floatNumbers->size();
-			//this->maximumPointsFuel = floatNumbers->size();
+			this->basePointsFuel = static_cast<int>(floatNumbers->size());
 			this->pointsGenerator = pointsGenerator;
 			this->numbers = nullptr;
 			this->floatNumbers = floatNumbers;
@@ -27,17 +25,16 @@ class MathPicture
 		{
 			if (numbers != nullptr)
 			{
-				pointsSet = pointsGenerator->generatePoints(numbers->size(), numbers);
+				pointsSet = pointsGenerator->generatePoints(static_cast<int>(numbers->size()), numbers);
 			}
 			if (floatNumbers != nullptr)
 			{
-				pointsSet = pointsGenerator->generateFloatPoints(floatNumbers->size(), floatNumbers);
+				pointsSet = pointsGenerator->generateFloatPoints(static_cast<int>(floatNumbers->size()), floatNumbers);
 			}
 
 		}
 		int basePointsFuel = 0;
 		int minimalPointsFuel = 0;
-		//int maximumPointsFuel = 0;
 		PointsGenerator* pointsGenerator;
 		PointsSet* pointsSet;
 		std::map<int, float>* numbers;
@@ -45,7 +42,3 @@ class MathPicture
 };
 
 #endif
-
-
-
-// surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinusPoints->points, sinusPoints->pointsNumber, verticesHarvested, BLUE, true);

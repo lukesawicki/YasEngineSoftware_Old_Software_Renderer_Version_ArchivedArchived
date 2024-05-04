@@ -1,13 +1,6 @@
 #include<bitset>
 #include"YasGraphicsLibrary.hpp"
 
-// REFACTOR AFTER PUBLISHING FIRST GAME "THE BEAUTY OF MATHEMATICS"
-
-// void drawLineV2(const Vector2D<float>& point0, const Vector2D<float>& point1, PixelsTable& pixelsTable, const Vector4D<Uint8>& drawingColor) {
-    /*
-    * Draws a line in octant 0 or 3 ( |DeltaX| >= DeltaY ).
-    */
-
     void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, PixelsTable& pixelsTable, const Vector4D<Uint8>& drawingColor)
     {
         int x0 = static_cast<int>(point0.x);
@@ -127,7 +120,6 @@
                                 }
                             }
                         }
-    
                     }
                     else //if (deltaX == 0) // It is straight line where x is constant. So draw simple line from y0 to y1
                     {						
@@ -356,12 +348,7 @@
 
     Vector2D<float>* generateVerticesFromNumbersAsVerticalLines(const std::vector<int>& numbers)
     {
-        //if (numbers.size() < 4)
-        //{
-        //    return nullptr;
-        //}
-        //int numbersSize = numbers.size();
-        int maximumNumberOfVertices = calculateMaximumNumberOfElementsToProcess(numbers.size());
+        int maximumNumberOfVertices = calculateMaximumNumberOfElementsToProcess(static_cast<int>(numbers.size()));
 
         Vector2D<float>* vertices = new Vector2D<float>[maximumNumberOfVertices];
 
@@ -369,16 +356,6 @@
         {
             
         }
-
-        //int maximum = calculateMaximumNumberOfElementsToProcess(numbersSize);
-
-        //int j = 0;
-        //for (int i = 0; i < maximum; i += 2)
-        //{
-        //    vertices[j].x = numbers.at(i);
-        //    vertices[j].y = numbers.at(i + 1);
-        //    j++;
-        //}
 
         return vertices;
     }
@@ -392,7 +369,8 @@
         }
         if (maximumNumberOfVertices > 1)
         {
-            if (maximumNumberOfVertices <= 3) {
+            if (maximumNumberOfVertices <= 3)
+            {
                 drawLine(vertices[0], vertices[1], pixelsTable, color);
             }
             else

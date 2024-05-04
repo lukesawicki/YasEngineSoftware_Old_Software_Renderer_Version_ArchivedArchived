@@ -104,9 +104,6 @@ class GameObject
 
 	protected:
 		Vector2D<float> position;
-
-	private:
-
 };
 
 #endif

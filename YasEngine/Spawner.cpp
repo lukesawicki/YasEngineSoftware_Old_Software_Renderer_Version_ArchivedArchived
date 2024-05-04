@@ -8,14 +8,12 @@ int Spawner::numberOfSpawnedObjects = 0;
 Spawner::Spawner() {
     currentTime = timePicker.getMiliseconds();
     previousTime = currentTime;
-	// int timeShift = 1000;
 	timeBetweenSpawns = Randomizer::drawNumberClosedInterval(2000, 6000);
 }
 
 Spawner::Spawner(int x, int y) {
 	position.x = x;
 	position.y = y;
-	// int timeShift = 1000;
 	currentTime = timePicker.getMiliseconds();
 	previousTime = currentTime;
 	timeBetweenSpawns = +Randomizer::drawNumberClosedInterval(2000, 6000);
@@ -50,14 +48,12 @@ void Spawner::prepareObjectToSpawn(GameObject*& gameObject)
 {
 	int oldTargetPositionX = 0;
 	int oldTargetPositionY = 0;
-	// srand(clock());
-
-	int xPos = Randomizer::drawNumberClosedInterval(spawningMinRadius, spawningMaxRadius); // % spawningMaxRadius + spawningMinRadius;
+	int xPos = Randomizer::drawNumberClosedInterval(spawningMinRadius, spawningMaxRadius);
 	int yPos = Randomizer::drawNumberClosedInterval(spawningMinRadius, spawningMaxRadius);
 	int dirX = Randomizer::drawNumberClosedInterval(1, maxValueForDrawingSpawningDirection);
 	int dirY = Randomizer::drawNumberClosedInterval(1, maxValueForDrawingSpawningDirection);
 
-	int numberOfVertices = Randomizer::drawNumberClosedInterval(3, 7); //rand() % 7 + 3;
+	int numberOfVertices = Randomizer::drawNumberClosedInterval(3, 7);
 
 	if (dirX <= maxValueForDrawingSpawningDirection * 0.5)
 	{

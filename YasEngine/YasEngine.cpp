@@ -1,17 +1,11 @@
 #include"YasEngine.hpp"
-//#include<SDL_endian.h>
-
-// #include "document.h"     // rapidjson's DOM-style API
-#include "prettywriter.h" // for stringify JSON
-
+#include "prettywriter.h"
 #include <iostream>
 #include <fstream>
 #include <string>
-
 #include<bit>
 #include<SDL_mixer.h>
 #include <set>
-
 #include"VariousTools.hpp"
 #include"Circle.hpp"
 #include "Collider.hpp"
@@ -20,15 +14,7 @@
 #include"PrimeNumbersPointsGenerator.hpp"
 #include"SinePointsGenerator.hpp"
 
-// In version 1.9.0.1:
-//
-// 1 : Major revision(new UI, lots of new features, conceptual change, etc.)
-//
-// 9 : Minor revision(maybe a change to a search box, 1 feature added, collection of bug fixes)
-//
-// 0 : Bug fix release
-//
-// 1 : Build number(if used) that's why you see the .NET framework using something like 2.0.4.2709
+
 
 YasEngine* YasEngine::instance = nullptr;
 
@@ -53,7 +39,6 @@ void YasEngine::initialize()
     writer.initialize();
 
     surfaceWithMathBasedEffects = new SurfaceWithMathBasedEffects(0, static_cast<int>(windowDimensions->y * 0.5F), static_cast<int>(windowDimensions->x * 0.5F), static_cast<int>(windowDimensions->y), BLACK);
-
 }
 
 void YasEngine::clean()
@@ -63,15 +48,10 @@ void YasEngine::clean()
         delete drawableObject;
     }
 
-    // delete sinePoints;
-    // delete cosinePoints;
-    // delete fibonacciePoints;
-    // delete primeNumbersPoints;
-    delete surfaceWithMathBasedEffects;
+	delete surfaceWithMathBasedEffects;
     delete pixelsTable;
     delete windowDimensions;
 
-    // clean up our resources
     Mix_FreeChunk(shootSound);
     Mix_FreeChunk(hitSound);
     Mix_FreeMusic(music);
@@ -119,8 +99,6 @@ void YasEngine::YasEnginStart()
     }
 
     clean();
-
-    return;
 }
 
 void YasEngine::readSettingsFromFile()
@@ -200,18 +178,15 @@ void YasEngine::checkEndianness()
 void YasEngine::drawHudElements(double& deltaTime)
 {
     drawCrossHair(mouseX, mouseY, *pixelsTable, false);
-
-
-
 }
 
 void YasEngine::drawFrame(double& deltaTime)
 {
-    drawHorizontalLine(*pixelsTable, mapFrame.topLineSegment.point0.x, mapFrame.topLineSegment.point1.x, mapFrame.topLineSegment.point0.y, RED);
-    drawHorizontalLine(*pixelsTable, mapFrame.bottomLineSegment.point0.x, mapFrame.bottomLineSegment.point1.x, mapFrame.bottomLineSegment.point0.y, GREEN);
+    drawHorizontalLine(*pixelsTable, static_cast<int>(mapFrame.topLineSegment.point0.x), static_cast<int>(mapFrame.topLineSegment.point1.x), static_cast<int>(mapFrame.topLineSegment.point0.y), RED);
+    drawHorizontalLine(*pixelsTable, static_cast<int>(mapFrame.bottomLineSegment.point0.x), static_cast<int>(mapFrame.bottomLineSegment.point1.x), static_cast<int>(mapFrame.bottomLineSegment.point0.y), GREEN);
 
-    drawVerticalLine(*pixelsTable, mapFrame.leftLineSegment.point0.y, mapFrame.leftLineSegment.point1.y, mapFrame.leftLineSegment.point0.x, YELLOW);
-    drawVerticalLine(*pixelsTable, mapFrame.rightLineSegment.point0.y, mapFrame.rightLineSegment.point1.y, mapFrame.rightLineSegment.point0.x, YELLOW);
+    drawVerticalLine(*pixelsTable, static_cast<int>(mapFrame.leftLineSegment.point0.y), static_cast<int>(mapFrame.leftLineSegment.point1.y), static_cast<int>(mapFrame.leftLineSegment.point0.x), YELLOW);
+    drawVerticalLine(*pixelsTable, static_cast<int>(mapFrame.rightLineSegment.point0.y), static_cast<int>(mapFrame.rightLineSegment.point1.y), static_cast<int>(mapFrame.rightLineSegment.point0.x), YELLOW);
 }
 
 void YasEngine::handleInput(SDL_Event& event)
@@ -255,19 +230,23 @@ void YasEngine::handleKeyboardInput(SDL_Event& event)
             input->test_o_button = true;
             break;
         case SDLK_RETURN:
-            if (gameState == LEVEL_CHANGE_SCREEN) {
+            if (gameState == LEVEL_CHANGE_SCREEN)
+            {
                 gameState = GameState::GAMEPLAY;
             }
-            if (gameState == GameState::YOU_WON) {
+            if (gameState == GameState::YOU_WON)
+            {
                 gameState = GameState::MAIN_MENU_RESTART;
                 playerWonAndExited = true;
             }
             break;
         case SDLK_TAB:
-            if (gameState == LEVEL_CHANGE_SCREEN) {
+            if (gameState == LEVEL_CHANGE_SCREEN)
+            {
                 gameState = GameState::GAMEPLAY;
             }
-            if (gameState == GameState::YOU_WON) {
+            if (gameState == GameState::YOU_WON)
+            {
                 gameState = GameState::MAIN_MENU_RESTART;
                 playerWonAndExited = true;
             }
@@ -276,12 +255,6 @@ void YasEngine::handleKeyboardInput(SDL_Event& event)
             ;
         }
     }
-
-    // SDLK_RETURN = '\r',
-    //     SDLK_ESCAPE = '\x1B',
-    //     SDLK_BACKSPACE = '\b',
-    //     SDLK_TAB = '\t',
-    //     SDLK_SPACE = ' ',
 
     if (event.type == SDL_KEYUP)
     {
@@ -323,10 +296,8 @@ void YasEngine::handleMouseInput(SDL_Event& event)
         switch (gameState)
         {
         case GAMEPLAY:
-            // if (!levelChanged)
-            // {
-                player->isShooting = true;
-            // }
+            player->isShooting = true;
+
             break;
         case MAIN_MENU_RESTART:
             handleClickedButtons();
@@ -346,11 +317,8 @@ void YasEngine::handleMouseInput(SDL_Event& event)
     {
         switch (gameState)
         {
-        case GAMEPLAY:
-            // if (!levelChanged)
-            // {
+			case GAMEPLAY:
                 player->isShooting = false;
-            // }
             break;
         }
     }
@@ -367,8 +335,6 @@ void YasEngine::handleMouseMovement()
     mouseX = static_cast<float>(mousePositionChangeInformation->x);
     mouseY = static_cast<float>(mousePositionChangeInformation->y);
 
-    // TODO sprawdzenie ktory Button zostal klikniety i obsluga tego
-
     windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
 }
 
@@ -378,8 +344,6 @@ void YasEngine::deleteNotAliveObjects()
     {
 	    if(objectsToDraw[i]->isAlive == false)
 	    {
-            // delete objectsToDraw[i];
-            // objectsToDraw
             objectsToDraw.erase(objectsToDraw.begin() + i);
 	    }
     }
@@ -389,7 +353,6 @@ void YasEngine::handleSpawningCollectibles()
 {    
     for (int i = 0; i < 8; i++)
     {
-        // LOSUJ 4 razy liczbe z 16 spawnerPostions
         int randomSpawner = Randomizer::drawNumberClosedInterval(0, 15);
         int firstLevelNodeIndex = spawnersPositions[randomSpawner]->firstLevelNode;
         int secondLevelNodeIndex = spawnersPositions[randomSpawner]->secondLevelNode;
@@ -425,7 +388,8 @@ bool YasEngine::isObjectInSameQuarterAsProtagonist(int randomSpawner)
         (player->getPosition().y < (spawners->childNodes[spawnersPositions[randomSpawner]->firstLevelNode]->childNodes[spawnersPositions[randomSpawner]->secondLevelNode]->position->y +
         quarterSize / 2)) &&
         (player->getPosition().y > (spawners->childNodes[spawnersPositions[randomSpawner]->firstLevelNode]->childNodes[spawnersPositions[randomSpawner]->secondLevelNode]->position->y -
-        quarterSize / 2)));
+        quarterSize / 2))
+        );
 }
 
 void YasEngine::handleProjectiles()
@@ -455,11 +419,11 @@ void YasEngine::handlePlayer()
 void YasEngine::preparePlayer()
 {
     srand(clock());
-    int sizeOfGameplaySpace = windowDimensions->x * 0.25F;
+    int sizeOfGameplaySpace = static_cast<int>(windowDimensions->x * 0.25F);
     int x = Randomizer::drawNumberClosedInterval(0, sizeOfGameplaySpace) - 64;
     int y = Randomizer::drawNumberClosedInterval(0, sizeOfGameplaySpace) - 64;
 
-    player = new Player(( -sizeOfGameplaySpace)+x, 0+y);
+    player = new Player( static_cast<float>((-sizeOfGameplaySpace)+x), 0.0F+y);
     player->setColor(YELLOW);
     player->setInput(input);
     player->setInput(mousePositionChangeInformation);
@@ -474,8 +438,6 @@ void YasEngine::update(double& deltaTime)
         {
             if (objectsToDraw[i]->iAm != GameObject::PROTAGONIST)
             {
-                // delete objectsToDraw[i];
-                // objectsToDraw
                 objectsToDraw[i]->isAlive = false;
             }
         }
@@ -483,9 +445,6 @@ void YasEngine::update(double& deltaTime)
     }
     
     deleteNotAliveObjects();
-
-    // if (!levelChanged)
-    // {
 
     switch(gameState)
     {
@@ -582,16 +541,13 @@ void YasEngine::render(double& deltaTime)
 
 void YasEngine::renderGameObjects(double& deltaTime)
 {
-    // if (!levelChanged)
-    // {
-        for (auto object : objectsToDraw)
+    for (auto object : objectsToDraw)
+    {
+        if (object->isAlive) // TODO if gamestate == gameplay
         {
-            if (object->isAlive) // TODO if gamestate == gameplay
-            {
-                drawPolygon(object, *pixelsTable);
-            }
+            drawPolygon(object, *pixelsTable);
         }
-    // }
+    }
 }
 
 
@@ -602,11 +558,7 @@ void YasEngine::renderOnViewports(double& deltaTime)
     {
         surfaceWithMathBasedEffects->drawCartesianAxies();
     }
-    // surfaceWithMathBasedEffects->verticalLineOnSurface(0, GREEN);
-    // surfaceWithMathBasedEffects->horizontalLineOnSurface(0, RED);
-    // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, verticesHarvested, YELLOW, true);
-    // if (!levelChanged)
-    // {
+
         switch (level)
         {
 
@@ -1224,37 +1176,37 @@ void YasEngine::setFrameAroundGameplaySpace()
 
     // Top              ---->
 	// Left point     
-    mapFrame.topLineSegment.point0.x = (-(windowDimensions->x / 2)) + HORIZONTAL_SHIFT;
-    mapFrame.topLineSegment.point0.y = (windowDimensions->y / 2) - VERTHICAL_SHIFT;
+    mapFrame.topLineSegment.point0.x = static_cast<float>((-(windowDimensions->x / 2)) + HORIZONTAL_SHIFT);
+    mapFrame.topLineSegment.point0.y = static_cast<float>((windowDimensions->y / 2) - VERTHICAL_SHIFT);
     // Right point
-    mapFrame.topLineSegment.point1.x = -1 - HORIZONTAL_SHIFT;
-    mapFrame.topLineSegment.point1.y = (windowDimensions->y / 2) - VERTHICAL_SHIFT;
+    mapFrame.topLineSegment.point1.x = static_cast<float>(-1 - HORIZONTAL_SHIFT);
+    mapFrame.topLineSegment.point1.y = static_cast<float>((windowDimensions->y / 2) - VERTHICAL_SHIFT);
 
     // Bottom
     // Left point
-    mapFrame.bottomLineSegment.point0.x = (-(windowDimensions->x / 2)) + HORIZONTAL_SHIFT;
-    mapFrame.bottomLineSegment.point0.y = (-(windowDimensions->y / 2)) + VERTHICAL_SHIFT;
+    mapFrame.bottomLineSegment.point0.x = static_cast<float>((-(windowDimensions->x / 2)) + HORIZONTAL_SHIFT);
+    mapFrame.bottomLineSegment.point0.y = static_cast<float>((-(windowDimensions->y / 2)) + VERTHICAL_SHIFT);
 
     // Right point
-    mapFrame.bottomLineSegment.point1.x = -HORIZONTAL_SHIFT;
-    mapFrame.bottomLineSegment.point1.y = (-(windowDimensions->y / 2)) + VERTHICAL_SHIFT;
+    mapFrame.bottomLineSegment.point1.x = static_cast<float>(-HORIZONTAL_SHIFT);
+    mapFrame.bottomLineSegment.point1.y = static_cast<float>((-(windowDimensions->y / 2)) + VERTHICAL_SHIFT);
 
     // VERTICAL LINE SEGMENTS
 	// Left
     // Top point
-    mapFrame.leftLineSegment.point0.x = (-(windowDimensions->x / 2)) + HORIZONTAL_SHIFT;
-    mapFrame.leftLineSegment.point0.y = (windowDimensions->y / 2) - VERTHICAL_SHIFT;
+    mapFrame.leftLineSegment.point0.x = static_cast<float>((-(windowDimensions->x / 2)) + HORIZONTAL_SHIFT);
+    mapFrame.leftLineSegment.point0.y = static_cast<float>((windowDimensions->y / 2) - VERTHICAL_SHIFT);
     // Bottom point
-    mapFrame.leftLineSegment.point1.x = (-(windowDimensions->x / 2)) + HORIZONTAL_SHIFT;
-    mapFrame.leftLineSegment.point1.y = (-(windowDimensions->y / 2)) + VERTHICAL_SHIFT;
+    mapFrame.leftLineSegment.point1.x = static_cast<float>((-(windowDimensions->x / 2)) + HORIZONTAL_SHIFT);
+    mapFrame.leftLineSegment.point1.y = static_cast<float>((-(windowDimensions->y / 2)) + VERTHICAL_SHIFT);
 
     // Right
     // Top point
-    mapFrame.rightLineSegment.point0.x = -1 - HORIZONTAL_SHIFT;
-    mapFrame.rightLineSegment.point0.y = (windowDimensions->y / 2) - VERTHICAL_SHIFT;
+    mapFrame.rightLineSegment.point0.x = static_cast<float>(-1 - HORIZONTAL_SHIFT);
+    mapFrame.rightLineSegment.point0.y = static_cast<float>((windowDimensions->y / 2) - VERTHICAL_SHIFT);
     // Bottom point
-    mapFrame.rightLineSegment.point1.x = -1 - HORIZONTAL_SHIFT;
-    mapFrame.rightLineSegment.point1.y = (-(windowDimensions->y / 2)) + VERTHICAL_SHIFT;
+    mapFrame.rightLineSegment.point1.x = static_cast<float>(-1 - HORIZONTAL_SHIFT);
+    mapFrame.rightLineSegment.point1.y = static_cast<float>((-(windowDimensions->y / 2)) + VERTHICAL_SHIFT);
 }
 
 void YasEngine::prepareDataForDrawingGraphs()
@@ -1356,7 +1308,7 @@ void YasEngine::prepareInterface()
     buttons.at(0)->setPosition(0, 50);
     dynamic_cast<Button*>(buttons.at(0))->horizontalMargin = 10;
     dynamic_cast<Button*>(buttons.at(0))->verticalMargin = 5;
-    dynamic_cast<Button*>(buttons.at(0))->buttonWidth = writer.FONT_WIDTH * dynamic_cast<Button*>(buttons.at(0))->text.size() + 2*dynamic_cast<Button*>(buttons.at(0))->horizontalMargin;
+    dynamic_cast<Button*>(buttons.at(0))->buttonWidth = writer.FONT_WIDTH * static_cast<int>(dynamic_cast<Button*>(buttons.at(0))->text.size()) + 2*dynamic_cast<Button*>(buttons.at(0))->horizontalMargin;
     dynamic_cast<Button*>(buttons.at(0))->buttonHeight = writer.FONT_HEIGHT + 2*dynamic_cast<Button*>(buttons.at(0))->verticalMargin;
     buttons.at(0)->localVertices = new Vector2D<float>[4];
     buttons.at(0)->worldVertices = new Vector2D<float>[4];
@@ -1375,7 +1327,7 @@ void YasEngine::prepareInterface()
     buttons.at(1)->setPosition(0, -50);
     dynamic_cast<Button*>(buttons.at(1))->horizontalMargin = 10;
     dynamic_cast<Button*>(buttons.at(1))->verticalMargin = 5;
-    dynamic_cast<Button*>(buttons.at(1))->buttonWidth = writer.FONT_WIDTH * dynamic_cast<Button*>(buttons.at(1))->text.size() + 2*dynamic_cast<Button*>(buttons.at(1))->horizontalMargin;
+    dynamic_cast<Button*>(buttons.at(1))->buttonWidth = writer.FONT_WIDTH * static_cast<int>(dynamic_cast<Button*>(buttons.at(1))->text.size()) + 2*dynamic_cast<Button*>(buttons.at(1))->horizontalMargin;
     dynamic_cast<Button*>(buttons.at(1))->buttonHeight = writer.FONT_HEIGHT + 2*dynamic_cast<Button*>(buttons.at(1))->verticalMargin;
     buttons.at(1)->localVertices = new Vector2D<float>[4];
     buttons.at(1)->worldVertices = new Vector2D<float>[4];

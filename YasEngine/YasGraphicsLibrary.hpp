@@ -24,7 +24,6 @@ const Vector4D<Uint8> RED(255, 0, 0, 0);
 const Vector4D<Uint8> GREEN(0, 255, 0, 0);
 const Vector4D<Uint8> BLUE(0, 0, 255, 0);
 const Vector4D<Uint8> BLACK(0, 0, 0, 255);
-//const Vector4D<Uint8> ALT_BLACK(0, 0, 0, 0);
 const Vector4D<Uint8> WHITE(255, 255, 255, 0);
 const Vector4D<Uint8> YELLOW(255, 255, 0, 0);
 const Vector4D<Uint8> LIGHT_BLUE(0, 255, 255, 0);
@@ -39,6 +38,7 @@ void drawPolygon(GameObject* polygon, PixelsTable& pixelsTable);
 Vector2D<float>* generateVerticesFromNumbers(const std::vector<int>& numbers);
 
 void drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos, PixelsTable& pixelsTable);
+
 void drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable);
 
 void drawNumbersAsPolyline(Vector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable);
@@ -62,6 +62,7 @@ void drawHorizontalLine(PixelsTable& pixelsTable, int x0, int x1, int y, Vector4
 void drawVerticalLine(PixelsTable& pixelsTable, int y0, int y1, int x, Vector4D<Uint8> color);
     
 int xyPixelToArrayPosition(Vector2D<int>& point, int windowWidth);
+
 int xyPixelToArrayPosition(int x, int y, int windowWidth);
 
 void windowPositionToCartesianPosition(float& x, float& y, Vector2D<int>* windowDimensions);
@@ -69,4 +70,5 @@ void windowPositionToCartesianPosition(float& x, float& y, Vector2D<int>* window
 void drawMandelbrotSet();
 
 void drawRectangle(PixelsTable& pixelsTable, int x, int y, int width, int height, Vector4D<Uint8> color);
+
 #endif

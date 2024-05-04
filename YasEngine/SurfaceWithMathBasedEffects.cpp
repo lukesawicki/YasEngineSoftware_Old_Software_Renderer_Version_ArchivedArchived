@@ -37,7 +37,7 @@ void SurfaceWithMathBasedEffects::clearColor(const Vector4D<Uint8>& drawingColor
 	{
 		for (int x = 0; x < viewPortSizes.x; x++)
 		{
-			pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + RED_POSITION] = drawingColor.x; // windowDimensions->x <- WINDOW WIDTH
+			pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + RED_POSITION] = drawingColor.x;
 			pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + GREEN_POSITION] = drawingColor.y;
 			pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + BLUE_POSITION] = drawingColor.z;
 			pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + ALPHA_POSITION] = drawingColor.w;
@@ -50,7 +50,7 @@ void SurfaceWithMathBasedEffects::drawPoint(int x, int y, const Vector4D<Uint8>&
 	cartesianPositionToWindow(x, y);
 	if (x >= 0 && x < viewPortSizes.x && y >= 0 && y < viewPortSizes.y)
 	{
-		pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + RED_POSITION] = drawingColor.x; // windowDimensions->x <- WINDOW WIDTH
+		pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + RED_POSITION] = drawingColor.x;
 		pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + GREEN_POSITION] = drawingColor.y;
 		pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + BLUE_POSITION] = drawingColor.z;
 		pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + ALPHA_POSITION] = drawingColor.w;
@@ -176,7 +176,6 @@ void SurfaceWithMathBasedEffects::drawLine(const Vector2D<float>& point0, const 
                             }
                         }
                     }
-
                 }
                 else //if (deltaX == 0) // It is straight line where x is constant. So draw simple line from y0 to y1
                 {
@@ -349,27 +348,8 @@ void SurfaceWithMathBasedEffects::drawLine(const Vector2D<float>& point0, const 
     }
 }
 
-// unsigned int SurfaceWithMathBasedEffects::calculateMaximumNumberOfElementsToProcess(const unsigned int& primaryMaximum, bool connectedLines)
-// {
-//     int maximum = 0;
-//     if (primaryMaximum % 2 == 0)
-//     {
-//         maximum = primaryMaximum - 1;
-//     }
-//     else
-//     {
-//         maximum = primaryMaximum - 2;
-//     }
-//     return maximum;
-// }
-
-// Draw currentNumberOfVertices vertices (parameter 3 (or 2 if you are counting from 0)
 void SurfaceWithMathBasedEffects::drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, int& currentNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos)
 {
-
-    //surfaceWithMathBasedEffects->
-    //drawNumbersAsGroupOfLines(fibonacciePicture->pointsSet->points, fibonacciePicture->basePointsFuel, fibbsPointsHarvested, PURPLE, false);
-
     int step = 1;
     if(!areLinesContinuos)
     {
@@ -378,15 +358,12 @@ void SurfaceWithMathBasedEffects::drawNumbersAsGroupOfLines(Vector2D<float>* ver
     
     if (currentNumberOfVertices > 1)
     {
-        //if (currentNumberOfVertices >= 900) {
-        //    std::cout << "current vertices " << currentNumberOfVertices << "\n";
-        //}
-        if (currentNumberOfVertices <= 3) {
+        if (currentNumberOfVertices <= 3)
+        {
             drawLine(vertices[0], vertices[1], color);
         }
 	    else
 	    {
-            // here cosine and sine have to much vertises
 	        for (int i = 0; i < currentNumberOfVertices; i += step)
 	        {
 	            drawLine(vertices[i], vertices[i + 1], color);
@@ -402,7 +379,7 @@ void SurfaceWithMathBasedEffects::drawPolygon(GameObject* polygon)
 void SurfaceWithMathBasedEffects::copyPixelsInToPIxelTable(PixelsTable& pixelsTable)
 {
     int posX = position.x;
-    int posY = position.y; // + viewPortSizes.y;
+    int posY = position.y;
 
     pixelsTable.cartesianPositionToWindow(posX, posY);
 
@@ -412,10 +389,10 @@ void SurfaceWithMathBasedEffects::copyPixelsInToPIxelTable(PixelsTable& pixelsTa
     {
         for (int j = 0; j < viewPortSizes.x; j++)
         {
-            pixelsTable.pixels[NUMBER_OF_COLORS*((posY+i) * pixelsTable.windowDimensions.x + posX+j) + RED_POSITION] =   pixels[NUMBER_OF_COLORS * (i * viewPortSizes.x + j) + RED_POSITION];// + RED_POSITION];
-            pixelsTable.pixels[NUMBER_OF_COLORS*((posY+i) * pixelsTable.windowDimensions.x + posX+j) + GREEN_POSITION] = pixels[NUMBER_OF_COLORS * (i * viewPortSizes.x + j) + GREEN_POSITION];// + GREEN_POSITION];
-            pixelsTable.pixels[NUMBER_OF_COLORS*((posY+i) * pixelsTable.windowDimensions.x + posX+j) + BLUE_POSITION] =  pixels[NUMBER_OF_COLORS * (i * viewPortSizes.x + j) + BLUE_POSITION];// + BLUE_POSITION];
-            pixelsTable.pixels[NUMBER_OF_COLORS*((posY+i) * pixelsTable.windowDimensions.x + posX+j) + ALPHA_POSITION] = pixels[NUMBER_OF_COLORS * (i * viewPortSizes.x + j) + ALPHA_POSITION];// + ALPHA_POSITION];
+            pixelsTable.pixels[NUMBER_OF_COLORS*((posY+i) * pixelsTable.windowDimensions.x + posX+j) + RED_POSITION] =   pixels[NUMBER_OF_COLORS * (i * viewPortSizes.x + j) + RED_POSITION];
+            pixelsTable.pixels[NUMBER_OF_COLORS*((posY+i) * pixelsTable.windowDimensions.x + posX+j) + GREEN_POSITION] = pixels[NUMBER_OF_COLORS * (i * viewPortSizes.x + j) + GREEN_POSITION];
+            pixelsTable.pixels[NUMBER_OF_COLORS*((posY+i) * pixelsTable.windowDimensions.x + posX+j) + BLUE_POSITION] =  pixels[NUMBER_OF_COLORS * (i * viewPortSizes.x + j) + BLUE_POSITION];
+            pixelsTable.pixels[NUMBER_OF_COLORS*((posY+i) * pixelsTable.windowDimensions.x + posX+j) + ALPHA_POSITION] = pixels[NUMBER_OF_COLORS * (i * viewPortSizes.x + j) + ALPHA_POSITION];
             viewportIndex = viewportIndex + 1;
         }
         startPoint = startPoint + viewPortSizes.x;
