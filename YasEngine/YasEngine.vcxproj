@@ -196,6 +196,9 @@
     <ClCompile Include="YasEngine.cpp" />
     <ClCompile Include="YasGraphicsLibrary.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="YasEngineNotes.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

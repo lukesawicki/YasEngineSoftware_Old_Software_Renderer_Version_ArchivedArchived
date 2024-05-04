@@ -52,3 +52,4 @@ Move Classes which are tools to generate math numbers, points from this math num
 //v3 = rand() % 30 + 1985;   // v3 in the range 1985-2014 
 
 
+//NAWIAZANIE DO MAPYT W GOLDEN AXE GDZIE WRAZ Z PRZECHODZENIEM LEVELU JEST RYSOWANA SCIERZKA JAKA PRZESZLI BOHATEROWIE

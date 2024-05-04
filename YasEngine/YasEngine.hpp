@@ -23,7 +23,11 @@ class YasEngine
 {	
 	public:
 		bool tests = false;
-		std::string engineVersion = "1.0.0.0";
+		std::string engineVersion;
+		int MAJOR_REVISION = 1;
+		int MINOR_REVISION = 3;
+		int BUG_FIX_RELEASE = 0;
+		int BUILD_NUMBER = 0;
 
 		rapidjson::Document settings;
 		int musicVolume = MIX_MAX_VOLUME;
@@ -96,7 +100,6 @@ class YasEngine
 		void initialize();
 		void YasEnginStart();
 		void clean();
-
 
 	private:
 
