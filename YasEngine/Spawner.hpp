@@ -8,13 +8,12 @@
 class Spawner
 {
 	public:
-		// Randomizer randomizer;
         int timeBetweenSpawns;
         TimePicker timePicker;
 		Vector2D<int> position;
 		Vector2D<int> spawnPosition;
-		int spawningMaxRadius = 24; //100;
-		int spawningMinRadius = 8;// 24;
+		int spawningMaxRadius = 24;
+		int spawningMinRadius = 8;
 		int maxValueForDrawingSpawningDirection = 4;
         double startTime = 0;
 		double currentTime = 0;

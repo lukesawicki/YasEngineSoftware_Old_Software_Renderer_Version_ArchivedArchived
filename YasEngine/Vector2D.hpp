@@ -1,7 +1,6 @@
 #ifndef VECTOR2D_HPP
 #define VECTOR2D_HPP
 
-#include<iostream>
 #include<cmath>
 
 template <typename Type>
@@ -72,8 +71,7 @@ class Vector2D
 			return w;
 		}
 
-		//minued => odjemna  - subtrahed => odjemnik
-
+		//minuend => odjemna  - subtrahed => odjemnik
 		static void substract(Vector2D<Type>* minued, const Vector2D<Type>& subtrahed)
 		{
 			minued->x = minued->x - subtrahed.x;

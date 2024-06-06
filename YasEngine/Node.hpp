@@ -105,8 +105,8 @@ class Node
 
                 }
                 firstLevelQuadSize = static_cast<int>(zeroLevelQuadSize * 0.5);
-                firstLevelQuadPositionX = zeroLevelQuadPosX + (factorX * (firstLevelQuadSize * 0.5));
-                firstLevelQuadPositionY = zeroLevelQuadPosY + (factorY * (firstLevelQuadSize * 0.5));
+                firstLevelQuadPositionX = static_cast<int>(zeroLevelQuadPosX + (factorX * (firstLevelQuadSize * 0.5)));
+                firstLevelQuadPositionY = static_cast<int>(zeroLevelQuadPosY + (factorY * (firstLevelQuadSize * 0.5)));
 
                 positions.push_back(new Vector2D<int>(firstLevelQuadPositionX, firstLevelQuadPositionY));
 
@@ -131,14 +131,10 @@ class Node
                             break;
                     }
 
-                    secondLevelQuadsize = firstLevelQuadSize * 0.5;
-                    secondLevelQuadPositionX = firstLevelQuadPositionX + (factorX * (0.5 * secondLevelQuadsize));
-                    secondLevelQuadPositionY = firstLevelQuadPositionY + (factorY * (0.5 * secondLevelQuadsize));
+                    secondLevelQuadsize = static_cast<int>(firstLevelQuadSize * 0.5);
+                    secondLevelQuadPositionX = static_cast<int>(firstLevelQuadPositionX + (factorX * (0.5 * secondLevelQuadsize)));
+                    secondLevelQuadPositionY = static_cast<int>(firstLevelQuadPositionY + (factorY * (0.5 * secondLevelQuadsize)));
                     positions.push_back(new Vector2D<int>(secondLevelQuadPositionX, secondLevelQuadPositionY));
-                    //position = new Vector2D<int>(x, y);
-    //                spawnerQuadTree.childNodes[i] = new Node(position, spawnerQuadTree.size / 2,
-    //                                                                     &spawnerQuadTree);
-
                 } // end for
             }
 

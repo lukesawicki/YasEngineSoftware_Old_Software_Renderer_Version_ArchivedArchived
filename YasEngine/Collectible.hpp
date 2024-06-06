@@ -3,10 +3,13 @@
 #include "GameObject.hpp"
 #include "Randomizer.hpp"
 
+// Class which represent collectible
+/**
+ * Collectibles are derived from GameObject
+ */
 class Collectible: public GameObject
 {
 public:
-	// Randomizer randomizer;
 	Collectible(float radius, float x, float y, int numberOfVertices);
 	~Collectible();
 	void generate() override;
@@ -17,7 +20,6 @@ public:
 	void move(float deltaTime) override;
 	void setColor(const Vector4D<Uint8>& color) override;
 	void setRandomColor();
-	// Vector2D<float> velocity;
 };
 
 #endif

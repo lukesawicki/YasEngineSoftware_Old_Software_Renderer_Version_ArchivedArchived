@@ -1,4 +1,5 @@
 #include "GameObject.hpp"
+#include<string>
 
 #ifndef BUTTON_HPP
 #define BUTTON_HPP

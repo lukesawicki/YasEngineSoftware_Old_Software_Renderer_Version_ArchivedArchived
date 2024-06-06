@@ -216,4 +216,9 @@
       <Filter>Gameplay</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="YasEngineNotes.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+  </ItemGroup>
 </Project>

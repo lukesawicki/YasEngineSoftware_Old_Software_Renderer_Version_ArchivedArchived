@@ -1,4 +1,5 @@
 #include"CosinePointsGenerator.hpp"
+#include "YasGraphicsLibrary.hpp"
 
 PointsSet* CosinePointsGenerator::generatePoints(int numberOfNumbers, std::map<int, float>* numbers)
 {
@@ -13,9 +14,6 @@ PointsSet* CosinePointsGenerator::generatePoints(int numberOfNumbers, std::map<i
 	{
 		float x = i * step;
 		float y = cos(x);
-
-		// numbers.push_back(y);
-
 		points[i].x = round(x * additionalFactor);
 		points[i].y = round(y * additionalFactor);
 	}
@@ -35,8 +33,8 @@ PointsSet* CosinePointsGenerator::generateFloatPoints(int numberOfNumbers, std::
 	int i = 0;
 	for (std::pair<float, float> pair : *numbers)
 	{
-		points[i].x = pair.first * additionalFactor; // round(x * additionalFactor);
-		points[i].y = pair.second * additionalFactor; // round(y * additionalFactor);
+		points[i].x = pair.first * additionalFactor;
+		points[i].y = pair.second * additionalFactor;
 		i++;
 	}
 

@@ -1,6 +1,6 @@
 #include "Collectible.hpp"
 #include "YasGraphicsLibrary.hpp"
-#include<cstdlib>     /* srand, rand */
+#include<cstdlib>
 
 Collectible::Collectible(float radius, float x, float y, int numberOfVertices)
 {
@@ -12,56 +12,16 @@ Collectible::Collectible(float radius, float x, float y, int numberOfVertices)
 	this->position.y = y;
 	this->collider.x = x;
 	this->collider.y = y;
-	float angle = Randomizer::drawNumberClosedInterval(0, 180);
+	float angle = static_cast<float>(Randomizer::drawNumberClosedInterval(0, 180));
 	direction.x = 1;
 	direction.y = 0;
-	angle = angle * (PI / 180.0F); // PRZELICZYC NA RADIANY
+	angle = angle * (PI / 180.0F);
 	Vector2D<float>::rotateVectorOverTheAngle(&direction, angle);
 	velocity.x = speed * direction.x;
 	velocity.y = speed * direction.y;
 	setRandomColor();
 	generateRegularPolygonVertices(radius, numberOfVertices);
 }
-
-// void Player::rotateToMousePositionInLocalCoordinateSystem(float x, float y, Vector2D<int>* windowDimensions)
-// {
-// 	if (x <= windowDimensions->x && y <= windowDimensions->y)
-// 	{
-// 		float currentX = x;
-// 		float currentY = y;
-//
-// 		windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
-//
-// 		Vector2D<float> currentMousePosition = Vector2D<float>(currentX, currentY);
-//
-// 		Vector2D<float> mouseDirectionInLocalCoordynationSystem = Vector2D<float>::createUnitVectorFromBoundVector(currentMousePosition, position);
-//
-// 		float angleBetweenCurrentAndMouse = Vector2D<float>::angleBetweenVectors(direction, mouseDirectionInLocalCoordynationSystem);
-//
-// 		rotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
-// 		Vector2D<float>::rotateVectorOverTheAngle(&direction, angleBetweenCurrentAndMouse);
-// 	}
-// }
-
-// Projectile::Projectile(float radius, float x, float y, Vector2D<float> direction)
-// {
-// 	isAlive = true;
-// 	iAm = WhoAmI::PROJECTILE;
-// 	collider.radius = radius;
-// 	directionSwitched = false;
-// 	speed = 200;
-// 	Vector2D<float> position(x, y);
-// 	this->position.x = x;
-// 	this->position.y = y;
-// 	this->collider.x = x;
-// 	this->collider.y = y;
-//
-// 	velocity.x = speed * direction.x;
-// 	velocity.y = speed * direction.y;
-// 	color = YELLOW;
-// 	generateRegularPolygonVertices(radius, 4);
-// 	startTime = timePicker.getMiliseconds();
-// }
 
 Collectible::~Collectible()
 {
@@ -76,14 +36,7 @@ void Collectible::generate()
 		worldVertices[i].y = position.y + localVertices[i].y;
 	}
 }
-// void Projectile::generate()
-// {
-// 	for (int i = 0; i < numberOfVertices; i++)
-// 	{
-// 		worldVertices[i].x = position.x + localVertices[i].x;
-// 		worldVertices[i].y = position.y + localVertices[i].y;
-// 	}
-// }
+
 void Collectible::generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices)
 {
 	this->circumscribedCircleRadius = circumscribedCircleRadius;
@@ -123,19 +76,6 @@ void Collectible::move(float deltaTime)
 	position.y = position.y + deltaTime * velocity.y;
 	moveCollider();
 	regeneratePolygon();
-
-	// void Projectile::move(float deltaTime)
-	// {
-	// 	if (timePicker.getMiliseconds() - startTime >= 2000)
-	// 	{
-	// 		this->isAlive = false;
-	// 	}
-	//
-	// 	position.x = position.x + deltaTime * velocity.x;
-	// 	position.y = position.y + deltaTime * velocity.y;
-	// 	moveCollider();
-	// 	regeneratePolygon();
-	// }
 }
 
 void Collectible::setColor(const Vector4D<Uint8>& color)
@@ -145,7 +85,7 @@ void Collectible::setColor(const Vector4D<Uint8>& color)
 
 void Collectible::setRandomColor()
 {
-	int col = Randomizer::drawNumberClosedInterval(0, 8); // rand() % 5;
+	int col = Randomizer::drawNumberClosedInterval(0, 8);
 	switch(col)
 	{
 	case 0:
@@ -179,13 +119,3 @@ void Collectible::setRandomColor()
 		break;
 	}
 }
-
-//v1 = rand() % 100;         // v1 in the range 0 to 99
-//v2 = rand() % 100 + 1;     // v2 in the range 1 to 100
-//v3 = rand() % 30 + 1985;   // v3 in the range 1985-2014 
-
-//RED
-//GREEN
-//BLUE
-//WHITE
-//YELLOW

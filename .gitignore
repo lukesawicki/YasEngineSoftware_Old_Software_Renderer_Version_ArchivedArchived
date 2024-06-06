@@ -364,3 +364,6 @@ FodyWeavers.xsd
 
 #dlls
 *.dll
+
+#CONTENT Files
+*.wav

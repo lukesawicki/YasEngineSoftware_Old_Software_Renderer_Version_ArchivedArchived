@@ -1,6 +1,7 @@
 #ifndef VARIOUSTOOLS_HPP
 #define VARIOUSTOOLS_HPP
 #include<vector>
+#include<iostream>
 #include<SDL.h>
 
 static void listRenderersInformation()

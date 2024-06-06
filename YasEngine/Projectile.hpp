@@ -7,12 +7,9 @@
 
 class Projectile : public GameObject
 {
-	private:
-		// bool directionSwitched = false;
 	public:
 		int liveTime = 500;
         TimePicker timePicker;
-//		Timer timer;
 
         double startTime = 0;
         double currentTime = 0;

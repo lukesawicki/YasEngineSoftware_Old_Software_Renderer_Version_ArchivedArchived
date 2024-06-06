@@ -6,7 +6,7 @@ using namespace std;
 ScreenWriter::ScreenWriter()
 {
     int step;
-    step=65;//Capital letters
+    step=65;
     for(int i=0; i<26; i++)
     {
         charactersTable[i]=static_cast<char>(step++);
@@ -17,7 +17,6 @@ ScreenWriter::ScreenWriter()
         charactersTable[i]=static_cast<char>(step++);
     }
     charactersTable[36]=' ';
-    //Tablica znakow jest w celu wymowania z znakow z pliku graficznego na podstawie indeksu w tablicy znakow
 
     for(int i=0; i<NUMBER_OF_CHARACTERS; i++)
     {
@@ -1301,7 +1300,7 @@ void ScreenWriter::prepareFontVertices()
     fonts[35]->verticesBaseData->localVertices[11].x = 5;
     fonts[35]->verticesBaseData->localVertices[11].y = 0;
 
-    //   SPACE (PL SPACJA)
+    // SPACE
     fonts[36]->verticesBaseData->localVertices = new Vector2D<float>[2];
     fonts[36]->verticesBaseData->worldVertices = new Vector2D<float>[2];
 

@@ -1,44 +1,25 @@
-#include"YasEngine.hpp"
-//#include<SDL_endian.h>
-
-// #include "document.h"     // rapidjson's DOM-style API
-#include "prettywriter.h" // for stringify JSON
-
 #include <iostream>
 #include <fstream>
 #include <string>
-
-#include<bit>
-#include<SDL_mixer.h>
+#include <bit>
+#include <SDL_mixer.h>
 #include <set>
-
-#include"VariousTools.hpp"
-#include"Circle.hpp"
+#include "YasEngine.hpp"
+#include "prettywriter.h"
+#include "VariousTools.hpp"
+#include "Circle.hpp"
 #include "Collider.hpp"
 #include "CosinePointsGenerator.hpp"
 #include "FibonacciPointsGenerator.hpp"
-#include"PrimeNumbersPointsGenerator.hpp"
-#include"SinePointsGenerator.hpp"
-
-// In version 1.9.0.1:
-//
-// 1 : Major revision(new UI, lots of new features, conceptual change, etc.)
-//
-// 9 : Minor revision(maybe a change to a search box, 1 feature added, collection of bug fixes)
-//
-// 0 : Bug fix release
-//
-// 1 : Build number(if used) that's why you see the .NET framework using something like 2.0.4.2709
+#include "PrimeNumbersPointsGenerator.hpp"
+#include "SinePointsGenerator.hpp"
 
 YasEngine* YasEngine::instance = nullptr;
 
 void YasEngine::initialize()
 {
-    int MAJOR_REVISION = 1;
-    int MINOR_REVISION = 3;
-    int BUG_FIX_RELEASE = 0;
-    int BUILD_NUMBER = 0;
-    std::cout << "YasEngine 1 | Beauty of Math 1 version: " << MAJOR_REVISION << "." << MINOR_REVISION << "." << BUG_FIX_RELEASE << "." << BUILD_NUMBER << "\n";
+    engineVersion = "YasEngine 1 | Beauty of Math 1 version: " +  std::to_string(MAJOR_REVISION) + "." + std::to_string(MINOR_REVISION) + "." + std::to_string(BUG_FIX_RELEASE) + "." + std::to_string(BUILD_NUMBER);
+    std::cout << engineVersion << "\n";
     readSettingsFromFile();
 
     srand(clock());
@@ -53,7 +34,6 @@ void YasEngine::initialize()
     writer.initialize();
 
     surfaceWithMathBasedEffects = new SurfaceWithMathBasedEffects(0, static_cast<int>(windowDimensions->y * 0.5F), static_cast<int>(windowDimensions->x * 0.5F), static_cast<int>(windowDimensions->y), BLACK);
-
 }
 
 void YasEngine::clean()
@@ -63,15 +43,10 @@ void YasEngine::clean()
         delete drawableObject;
     }
 
-    // delete sinePoints;
-    // delete cosinePoints;
-    // delete fibonacciePoints;
-    // delete primeNumbersPoints;
-    delete surfaceWithMathBasedEffects;
+	delete surfaceWithMathBasedEffects;
     delete pixelsTable;
     delete windowDimensions;
 
-    // clean up our resources
     Mix_FreeChunk(shootSound);
     Mix_FreeChunk(hitSound);
     Mix_FreeMusic(music);
@@ -119,14 +94,13 @@ void YasEngine::YasEnginStart()
     }
 
     clean();
-
-    return;
 }
 
 void YasEngine::readSettingsFromFile()
 {
     std::ifstream settingsFile("settings.json");
-    if (!settingsFile.is_open()) {
+    if (!settingsFile.is_open())
+    {
         std::cerr << "Error opening JSON file" << std::endl;
         exit(1);
     }
@@ -137,7 +111,8 @@ void YasEngine::readSettingsFromFile()
     
     settings.Parse(settingsString.c_str());
 
-    if (settings.HasParseError()) {
+    if (settings.HasParseError())
+    {
         std::cerr << "Error parsing JSON" << std::endl;
         exit(1);
     }
@@ -200,18 +175,15 @@ void YasEngine::checkEndianness()
 void YasEngine::drawHudElements(double& deltaTime)
 {
     drawCrossHair(mouseX, mouseY, *pixelsTable, false);
-
-
-
 }
 
 void YasEngine::drawFrame(double& deltaTime)
 {
-    drawHorizontalLine(*pixelsTable, mapFrame.topLineSegment.point0.x, mapFrame.topLineSegment.point1.x, mapFrame.topLineSegment.point0.y, RED);
-    drawHorizontalLine(*pixelsTable, mapFrame.bottomLineSegment.point0.x, mapFrame.bottomLineSegment.point1.x, mapFrame.bottomLineSegment.point0.y, GREEN);
+    drawHorizontalLine(*pixelsTable, static_cast<int>(mapFrame.topLineSegment.point0.x), static_cast<int>(mapFrame.topLineSegment.point1.x), static_cast<int>(mapFrame.topLineSegment.point0.y), RED);
+    drawHorizontalLine(*pixelsTable, static_cast<int>(mapFrame.bottomLineSegment.point0.x), static_cast<int>(mapFrame.bottomLineSegment.point1.x), static_cast<int>(mapFrame.bottomLineSegment.point0.y), GREEN);
 
-    drawVerticalLine(*pixelsTable, mapFrame.leftLineSegment.point0.y, mapFrame.leftLineSegment.point1.y, mapFrame.leftLineSegment.point0.x, YELLOW);
-    drawVerticalLine(*pixelsTable, mapFrame.rightLineSegment.point0.y, mapFrame.rightLineSegment.point1.y, mapFrame.rightLineSegment.point0.x, YELLOW);
+    drawVerticalLine(*pixelsTable, static_cast<int>(mapFrame.leftLineSegment.point0.y), static_cast<int>(mapFrame.leftLineSegment.point1.y), static_cast<int>(mapFrame.leftLineSegment.point0.x), YELLOW);
+    drawVerticalLine(*pixelsTable, static_cast<int>(mapFrame.rightLineSegment.point0.y), static_cast<int>(mapFrame.rightLineSegment.point1.y), static_cast<int>(mapFrame.rightLineSegment.point0.x), YELLOW);
 }
 
 void YasEngine::handleInput(SDL_Event& event)
@@ -255,19 +227,23 @@ void YasEngine::handleKeyboardInput(SDL_Event& event)
             input->test_o_button = true;
             break;
         case SDLK_RETURN:
-            if (gameState == LEVEL_CHANGE_SCREEN) {
+            if (gameState == LEVEL_CHANGE_SCREEN)
+            {
                 gameState = GameState::GAMEPLAY;
             }
-            if (gameState == GameState::YOU_WON) {
+            if (gameState == GameState::YOU_WON)
+            {
                 gameState = GameState::MAIN_MENU_RESTART;
                 playerWonAndExited = true;
             }
             break;
         case SDLK_TAB:
-            if (gameState == LEVEL_CHANGE_SCREEN) {
+            if (gameState == LEVEL_CHANGE_SCREEN)
+            {
                 gameState = GameState::GAMEPLAY;
             }
-            if (gameState == GameState::YOU_WON) {
+            if (gameState == GameState::YOU_WON)
+            {
                 gameState = GameState::MAIN_MENU_RESTART;
                 playerWonAndExited = true;
             }
@@ -276,12 +252,6 @@ void YasEngine::handleKeyboardInput(SDL_Event& event)
             ;
         }
     }
-
-    // SDLK_RETURN = '\r',
-    //     SDLK_ESCAPE = '\x1B',
-    //     SDLK_BACKSPACE = '\b',
-    //     SDLK_TAB = '\t',
-    //     SDLK_SPACE = ' ',
 
     if (event.type == SDL_KEYUP)
     {
@@ -323,10 +293,8 @@ void YasEngine::handleMouseInput(SDL_Event& event)
         switch (gameState)
         {
         case GAMEPLAY:
-            // if (!levelChanged)
-            // {
-                player->isShooting = true;
-            // }
+            player->isShooting = true;
+
             break;
         case MAIN_MENU_RESTART:
             handleClickedButtons();
@@ -346,11 +314,8 @@ void YasEngine::handleMouseInput(SDL_Event& event)
     {
         switch (gameState)
         {
-        case GAMEPLAY:
-            // if (!levelChanged)
-            // {
+			case GAMEPLAY:
                 player->isShooting = false;
-            // }
             break;
         }
     }
@@ -367,8 +332,6 @@ void YasEngine::handleMouseMovement()
     mouseX = static_cast<float>(mousePositionChangeInformation->x);
     mouseY = static_cast<float>(mousePositionChangeInformation->y);
 
-    // TODO sprawdzenie ktory Button zostal klikniety i obsluga tego
-
     windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
 }
 
@@ -378,8 +341,6 @@ void YasEngine::deleteNotAliveObjects()
     {
 	    if(objectsToDraw[i]->isAlive == false)
 	    {
-            // delete objectsToDraw[i];
-            // objectsToDraw
             objectsToDraw.erase(objectsToDraw.begin() + i);
 	    }
     }
@@ -389,7 +350,6 @@ void YasEngine::handleSpawningCollectibles()
 {    
     for (int i = 0; i < 8; i++)
     {
-        // LOSUJ 4 razy liczbe z 16 spawnerPostions
         int randomSpawner = Randomizer::drawNumberClosedInterval(0, 15);
         int firstLevelNodeIndex = spawnersPositions[randomSpawner]->firstLevelNode;
         int secondLevelNodeIndex = spawnersPositions[randomSpawner]->secondLevelNode;
@@ -425,7 +385,8 @@ bool YasEngine::isObjectInSameQuarterAsProtagonist(int randomSpawner)
         (player->getPosition().y < (spawners->childNodes[spawnersPositions[randomSpawner]->firstLevelNode]->childNodes[spawnersPositions[randomSpawner]->secondLevelNode]->position->y +
         quarterSize / 2)) &&
         (player->getPosition().y > (spawners->childNodes[spawnersPositions[randomSpawner]->firstLevelNode]->childNodes[spawnersPositions[randomSpawner]->secondLevelNode]->position->y -
-        quarterSize / 2)));
+        quarterSize / 2))
+        );
 }
 
 void YasEngine::handleProjectiles()
@@ -455,11 +416,11 @@ void YasEngine::handlePlayer()
 void YasEngine::preparePlayer()
 {
     srand(clock());
-    int sizeOfGameplaySpace = windowDimensions->x * 0.25F;
+    int sizeOfGameplaySpace = static_cast<int>(windowDimensions->x * 0.25F);
     int x = Randomizer::drawNumberClosedInterval(0, sizeOfGameplaySpace) - 64;
     int y = Randomizer::drawNumberClosedInterval(0, sizeOfGameplaySpace) - 64;
 
-    player = new Player(( -sizeOfGameplaySpace)+x, 0+y);
+    player = new Player( static_cast<float>((-sizeOfGameplaySpace)+x), 0.0F+y);
     player->setColor(YELLOW);
     player->setInput(input);
     player->setInput(mousePositionChangeInformation);
@@ -474,8 +435,6 @@ void YasEngine::update(double& deltaTime)
         {
             if (objectsToDraw[i]->iAm != GameObject::PROTAGONIST)
             {
-                // delete objectsToDraw[i];
-                // objectsToDraw
                 objectsToDraw[i]->isAlive = false;
             }
         }
@@ -483,9 +442,6 @@ void YasEngine::update(double& deltaTime)
     }
     
     deleteNotAliveObjects();
-
-    // if (!levelChanged)
-    // {
 
     switch(gameState)
     {
@@ -545,7 +501,7 @@ void YasEngine::render(double& deltaTime)
         renderOnViewports(deltaTime);
         drawFrame(deltaTime);
         break;
-    case OUTRO://                                 123456789_123456789_123456789_123456789_123456789_123456789_
+    case OUTRO:
         writer.write((-37 * 17) / 2, 350, "GAME.DESIGN.PROGRAMMING.AND.MARKETING", LIGHT_BLUE, *pixelsTable);
         writer.write((-14 * 17) / 2, 325,               "LUKASZ.SAWICKI", PURPLE, *pixelsTable);
         writer.write((-22 * 17) / 2, 275,               "SOUND.DESIGN.AND.MUSIC", LIGHT_BLUE, *pixelsTable);
@@ -582,19 +538,14 @@ void YasEngine::render(double& deltaTime)
 
 void YasEngine::renderGameObjects(double& deltaTime)
 {
-    // if (!levelChanged)
-    // {
-        for (auto object : objectsToDraw)
+    for (auto object : objectsToDraw)
+    {
+        if (object->isAlive) // TODO if gamestate == gameplay
         {
-            if (object->isAlive) // TODO if gamestate == gameplay
-            {
-                drawPolygon(object, *pixelsTable);
-            }
+            drawPolygon(object, *pixelsTable);
         }
-    // }
+    }
 }
-
-
 
 void YasEngine::renderOnViewports(double& deltaTime)
 {
@@ -602,35 +553,28 @@ void YasEngine::renderOnViewports(double& deltaTime)
     {
         surfaceWithMathBasedEffects->drawCartesianAxies();
     }
-    // surfaceWithMathBasedEffects->verticalLineOnSurface(0, GREEN);
-    // surfaceWithMathBasedEffects->horizontalLineOnSurface(0, RED);
-    // surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinusPoints->points, cosinusPoints->pointsNumber, verticesHarvested, YELLOW, true);
-    // if (!levelChanged)
-    // {
-        switch (level)
-        {
 
-        case 1:
-            surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(primeNumbersPicture->pointsSet->points, primeNumbersPicture->basePointsFuel, primesPointsHarvested, LIGHT_BLUE, false);
-            break;
+    switch (level)
+    {
 
-        case 2:
-            surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(fibonacciePicture->pointsSet->points, fibonacciePicture->basePointsFuel, fibbsPointsHarvested, PURPLE, false);
-            break;
-        case 3:
-            surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinePicture->pointsSet->points, sinePicture->basePointsFuel, sinePointsHarvested, BLUE, true);
-            break;
-        case 4:
-            surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinePicture->pointsSet->points, cosinePicture->basePointsFuel, cosinePointsHarvested, RED, true);
-            break;
-        default:
-            ;
-        }
-    // }
-    //-------------------------------------------------------------------------------------------------------------------------------\./that the number ofvertices which will be drawn
-	
+    case 1:
+        surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(primeNumbersPicture->pointsSet->points, primeNumbersPicture->basePointsFuel, primesPointsHarvested, LIGHT_BLUE, false);
+        break;
 
-	surfaceWithMathBasedEffects->copyPixelsInToPIxelTable(*pixelsTable);
+    case 2:
+        surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(fibonacciePicture->pointsSet->points, fibonacciePicture->basePointsFuel, fibbsPointsHarvested, PURPLE, false);
+        break;
+    case 3:
+        surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(sinePicture->pointsSet->points, sinePicture->basePointsFuel, sinePointsHarvested, BLUE, true);
+        break;
+    case 4:
+        surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(cosinePicture->pointsSet->points, cosinePicture->basePointsFuel, cosinePointsHarvested, RED, true);
+        break;
+    default:
+        ;
+    }
+
+    surfaceWithMathBasedEffects->copyPixelsInToPIxelTable(*pixelsTable);
 }
 
 void YasEngine::renderLevelChange()
@@ -640,39 +584,25 @@ void YasEngine::renderLevelChange()
     {
 
     case 1:
-        //25
-        writer.write((-425) / 2, 200, "YOU.JUST.FINISHED.LEVEL.1", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
 
-        //32
+        writer.write((-425) / 2, 200, "YOU.JUST.FINISHED.LEVEL.1", LIGHT_BLUE, *pixelsTable);
         writer.write((-544) / 2, 100, "YOU.ARE.HAPPY.TO.HAVE.DISCOVERED", BLUE, *pixelsTable);
-
-        //13
         writer.write((-221) / 2, 0, "PRIME.NUMBERS", GREEN, *pixelsTable);
         break;
     case 2:
-        //25
-        writer.write((-425) / 2, 200, "YOU.JUST.FINISHED.LEVEL.2", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
-        //32
+        writer.write((-425) / 2, 200, "YOU.JUST.FINISHED.LEVEL.2", LIGHT_BLUE, *pixelsTable);
         writer.write((-544) / 2, 100, "YOU.ARE.HAPPY.TO.HAVE.DISCOVERED", BLUE, *pixelsTable);
-        //17
         writer.write((-289) / 2, 0, "FIBONACCI.NUMBERS", GREEN, *pixelsTable);
         break;
     case 3:
-        //25
-        writer.write((-425) / 2, 200, "YOU.JUST.FINISHED.LEVEL.2", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
-        //32
+        writer.write((-425) / 2, 200, "YOU.JUST.FINISHED.LEVEL.2", LIGHT_BLUE, *pixelsTable);
         writer.write((-544) / 2, 100, "YOU.ARE.HAPPY.TO.HAVE.DISCOVERED", BLUE, *pixelsTable);
-        //13
         writer.write((-221) / 2, 0, "SINE.FUNCTION", GREEN, *pixelsTable);
         break;
     case 4:
-        //25
-        writer.write((-425) / 2, 200, "YOU.JUST.FINISHED.LEVEL.2", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
-        //32
+        writer.write((-425) / 2, 200, "YOU.JUST.FINISHED.LEVEL.2", LIGHT_BLUE, *pixelsTable);
         writer.write((-544) / 2, 100, "YOU.ARE.HAPPY.TO.HAVE.DISCOVERED", BLUE, *pixelsTable);
-        //15
         writer.write((-255) / 2, 0, "COSINE.FUNCTION", GREEN, *pixelsTable);
-        // 11
         writer.write((-187) / 2, -25, "AND.YOU.WON", YELLOW, *pixelsTable);
         break;
     default:
@@ -682,7 +612,7 @@ void YasEngine::renderLevelChange()
 
 void YasEngine::renderWonScreen()
 {
-    writer.write((-119) / 2, 310, "YOU.WON", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
+    writer.write((-119) / 2, 310, "YOU.WON", LIGHT_BLUE, *pixelsTable);
     writer.write((-408) / 2, 210, "MATHEMATICS.IS.BEAUTIFUL", YELLOW, *pixelsTable);
     writer.write((-578) / 2, 110, "YOU.ARE.NOT.SUPPOSED.TO.BELIEVE.ME", PURPLE, *pixelsTable);
     writer.write((-357) / 2, 10, "CHECK.IT.FOR.YOURSELF", PURPLE, *pixelsTable);
@@ -698,7 +628,6 @@ void YasEngine::handlePhysics()
     {
         for (int i = 0; i < static_cast<int>(objectsToDraw.size() - 2); i++)
         {
-
             if (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
             {
                 handleCollectiblesWithWallsCollisions(objectsToDraw[i]);
@@ -708,12 +637,6 @@ void YasEngine::handlePhysics()
             {
                 handleProtagonistWithWallsCollisions(objectsToDraw[i]);
             }
-
-            // ****    SKIP HANDLING SHIP    ****
-            // if (objectsToDraw[i]->iAm == GameObject::PROTAGONIST)// || objectsToDraw[j]->iAm == GameObject::PROTAGONIST)
-            // {
-            //     continue;
-            // }
 
             for (int j = i; j < static_cast<int>(objectsToDraw.size()); j++)
             {
@@ -765,8 +688,6 @@ void YasEngine::handlePhysics()
 		}
     }
 } // END OF handlePhysics()
-
-//NAWIAZANIE DO MAPYT W GOLDEN AXE GDZIE WRAZ Z PRZECHODZENIEM LEVELU JEST RYSOWANA SCIERZKA JAKA PRZESZLI BOHATEROWIE
 
 void YasEngine::handleDisassemblingGraphs(GameObject* gameObj)
 {
@@ -831,12 +752,6 @@ void YasEngine::handleDestroingCollectibles(GameObject* gameObj)
 
 void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
 {
-    ///                                 1                                      2                       3
-    // primeNumbersPicture->pointsSet->points, primeNumbersPicture->basePointsFuel, primesPointsHarvested, LIGHT
-    // (primeNumbersPicture->pointsSet->points, primeNumbersPicture->basePointsFuel, primesPointsHarvested
-                            // 1                            2                            3              
-    //Vector2D<float>* vertices, int maximumNumberOfVertices, int& currentNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos
-
     int newValueOfPrimesPointsHarvested = primesPointsHarvested + gameObj->numberOfVertices;
     int newValueOfFibbsPointsHarvested = fibbsPointsHarvested + gameObj->numberOfVertices;
     int newSinePointsHarvested = sinePointsHarvested + gameObj->numberOfVertices;
@@ -844,7 +759,7 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
 
     int test1 = primesPointsHarvested;
 
-    if (level == 1 && newValueOfPrimesPointsHarvested >= primeNumbersPicture->basePointsFuel) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
+    if (level == 1 && newValueOfPrimesPointsHarvested >= primeNumbersPicture->basePointsFuel)
     {
         primesPointsHarvested = primeNumbersPicture->basePointsFuel;
         previousLevel = level;
@@ -853,7 +768,7 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
         return;
     }
 
-    if (level == 2 && newValueOfFibbsPointsHarvested >= fibonacciePicture->basePointsFuel) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
+    if (level == 2 && newValueOfFibbsPointsHarvested >= fibonacciePicture->basePointsFuel)
     {
         fibbsPointsHarvested = fibonacciePicture->basePointsFuel;
         previousLevel = level;
@@ -864,16 +779,16 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
 
     int some = sinePointsHarvested;
 
-    if (level == 3 && newSinePointsHarvested >= sinePicture->basePointsFuel) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
+    if (level == 3 && newSinePointsHarvested >= sinePicture->basePointsFuel)
     {
-        sinePointsHarvested = sinePicture->basePointsFuel; //lukesawicki
+        sinePointsHarvested = sinePicture->basePointsFuel;
         previousLevel = level;
         level = 4;
         levelChanged = true;
         return;
     }
 
-    if (level == 4 && newCosinePointsHarvested >= cosinePicture->basePointsFuel) //!(currentNumberOfVertices <= maximumNumberOfVertices -1))
+    if (level == 4 && newCosinePointsHarvested >= cosinePicture->basePointsFuel)
     {
         cosinePointsHarvested = cosinePicture->basePointsFuel;
         previousLevel = level;
@@ -926,7 +841,6 @@ void YasEngine::handleCollectiblesWithWallsCollisions(GameObject* object)
     float rightWall = mapFrame.rightLineSegment.point0.x;
     float topWall = mapFrame.topLineSegment.point0.y;
     float bottomWall = mapFrame.bottomLineSegment.point0.y;
-
 
     if (object->iAm == GameObject::COLLECTIBLE)
     {
@@ -1224,37 +1138,37 @@ void YasEngine::setFrameAroundGameplaySpace()
 
     // Top              ---->
 	// Left point     
-    mapFrame.topLineSegment.point0.x = (-(windowDimensions->x / 2)) + HORIZONTAL_SHIFT;
-    mapFrame.topLineSegment.point0.y = (windowDimensions->y / 2) - VERTHICAL_SHIFT;
+    mapFrame.topLineSegment.point0.x = static_cast<float>((-(windowDimensions->x / 2)) + HORIZONTAL_SHIFT);
+    mapFrame.topLineSegment.point0.y = static_cast<float>((windowDimensions->y / 2) - VERTHICAL_SHIFT);
     // Right point
-    mapFrame.topLineSegment.point1.x = -1 - HORIZONTAL_SHIFT;
-    mapFrame.topLineSegment.point1.y = (windowDimensions->y / 2) - VERTHICAL_SHIFT;
+    mapFrame.topLineSegment.point1.x = static_cast<float>(-1 - HORIZONTAL_SHIFT);
+    mapFrame.topLineSegment.point1.y = static_cast<float>((windowDimensions->y / 2) - VERTHICAL_SHIFT);
 
     // Bottom
     // Left point
-    mapFrame.bottomLineSegment.point0.x = (-(windowDimensions->x / 2)) + HORIZONTAL_SHIFT;
-    mapFrame.bottomLineSegment.point0.y = (-(windowDimensions->y / 2)) + VERTHICAL_SHIFT;
+    mapFrame.bottomLineSegment.point0.x = static_cast<float>((-(windowDimensions->x / 2)) + HORIZONTAL_SHIFT);
+    mapFrame.bottomLineSegment.point0.y = static_cast<float>((-(windowDimensions->y / 2)) + VERTHICAL_SHIFT);
 
     // Right point
-    mapFrame.bottomLineSegment.point1.x = -HORIZONTAL_SHIFT;
-    mapFrame.bottomLineSegment.point1.y = (-(windowDimensions->y / 2)) + VERTHICAL_SHIFT;
+    mapFrame.bottomLineSegment.point1.x = static_cast<float>(-HORIZONTAL_SHIFT);
+    mapFrame.bottomLineSegment.point1.y = static_cast<float>((-(windowDimensions->y / 2)) + VERTHICAL_SHIFT);
 
     // VERTICAL LINE SEGMENTS
 	// Left
     // Top point
-    mapFrame.leftLineSegment.point0.x = (-(windowDimensions->x / 2)) + HORIZONTAL_SHIFT;
-    mapFrame.leftLineSegment.point0.y = (windowDimensions->y / 2) - VERTHICAL_SHIFT;
+    mapFrame.leftLineSegment.point0.x = static_cast<float>((-(windowDimensions->x / 2)) + HORIZONTAL_SHIFT);
+    mapFrame.leftLineSegment.point0.y = static_cast<float>((windowDimensions->y / 2) - VERTHICAL_SHIFT);
     // Bottom point
-    mapFrame.leftLineSegment.point1.x = (-(windowDimensions->x / 2)) + HORIZONTAL_SHIFT;
-    mapFrame.leftLineSegment.point1.y = (-(windowDimensions->y / 2)) + VERTHICAL_SHIFT;
+    mapFrame.leftLineSegment.point1.x = static_cast<float>((-(windowDimensions->x / 2)) + HORIZONTAL_SHIFT);
+    mapFrame.leftLineSegment.point1.y = static_cast<float>((-(windowDimensions->y / 2)) + VERTHICAL_SHIFT);
 
     // Right
     // Top point
-    mapFrame.rightLineSegment.point0.x = -1 - HORIZONTAL_SHIFT;
-    mapFrame.rightLineSegment.point0.y = (windowDimensions->y / 2) - VERTHICAL_SHIFT;
+    mapFrame.rightLineSegment.point0.x = static_cast<float>(-1 - HORIZONTAL_SHIFT);
+    mapFrame.rightLineSegment.point0.y = static_cast<float>((windowDimensions->y / 2) - VERTHICAL_SHIFT);
     // Bottom point
-    mapFrame.rightLineSegment.point1.x = -1 - HORIZONTAL_SHIFT;
-    mapFrame.rightLineSegment.point1.y = (-(windowDimensions->y / 2)) + VERTHICAL_SHIFT;
+    mapFrame.rightLineSegment.point1.x = static_cast<float>(-1 - HORIZONTAL_SHIFT);
+    mapFrame.rightLineSegment.point1.y = static_cast<float>((-(windowDimensions->y / 2)) + VERTHICAL_SHIFT);
 }
 
 void YasEngine::prepareDataForDrawingGraphs()
@@ -1356,7 +1270,7 @@ void YasEngine::prepareInterface()
     buttons.at(0)->setPosition(0, 50);
     dynamic_cast<Button*>(buttons.at(0))->horizontalMargin = 10;
     dynamic_cast<Button*>(buttons.at(0))->verticalMargin = 5;
-    dynamic_cast<Button*>(buttons.at(0))->buttonWidth = writer.FONT_WIDTH * dynamic_cast<Button*>(buttons.at(0))->text.size() + 2*dynamic_cast<Button*>(buttons.at(0))->horizontalMargin;
+    dynamic_cast<Button*>(buttons.at(0))->buttonWidth = writer.FONT_WIDTH * static_cast<int>(dynamic_cast<Button*>(buttons.at(0))->text.size()) + 2*dynamic_cast<Button*>(buttons.at(0))->horizontalMargin;
     dynamic_cast<Button*>(buttons.at(0))->buttonHeight = writer.FONT_HEIGHT + 2*dynamic_cast<Button*>(buttons.at(0))->verticalMargin;
     buttons.at(0)->localVertices = new Vector2D<float>[4];
     buttons.at(0)->worldVertices = new Vector2D<float>[4];
@@ -1375,7 +1289,7 @@ void YasEngine::prepareInterface()
     buttons.at(1)->setPosition(0, -50);
     dynamic_cast<Button*>(buttons.at(1))->horizontalMargin = 10;
     dynamic_cast<Button*>(buttons.at(1))->verticalMargin = 5;
-    dynamic_cast<Button*>(buttons.at(1))->buttonWidth = writer.FONT_WIDTH * dynamic_cast<Button*>(buttons.at(1))->text.size() + 2*dynamic_cast<Button*>(buttons.at(1))->horizontalMargin;
+    dynamic_cast<Button*>(buttons.at(1))->buttonWidth = writer.FONT_WIDTH * static_cast<int>(dynamic_cast<Button*>(buttons.at(1))->text.size()) + 2*dynamic_cast<Button*>(buttons.at(1))->horizontalMargin;
     dynamic_cast<Button*>(buttons.at(1))->buttonHeight = writer.FONT_HEIGHT + 2*dynamic_cast<Button*>(buttons.at(1))->verticalMargin;
     buttons.at(1)->localVertices = new Vector2D<float>[4];
     buttons.at(1)->worldVertices = new Vector2D<float>[4];
