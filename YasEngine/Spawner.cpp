@@ -5,13 +5,15 @@
 
 int Spawner::numberOfSpawnedObjects = 0;
 
-Spawner::Spawner() {
+Spawner::Spawner()
+{
     currentTime = timePicker.getMiliseconds();
     previousTime = currentTime;
 	timeBetweenSpawns = Randomizer::drawNumberClosedInterval(2000, 6000);
 }
 
-Spawner::Spawner(int x, int y) {
+Spawner::Spawner(int x, int y)
+{
 	position.x = x;
 	position.y = y;
 	currentTime = timePicker.getMiliseconds();

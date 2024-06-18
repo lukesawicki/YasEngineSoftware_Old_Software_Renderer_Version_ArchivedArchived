@@ -98,7 +98,7 @@ class YasEngine
 		}
 		
 		void initialize();
-		void YasEnginStart();
+		void YasEngineStart();
 		void clean();
 
 	private:

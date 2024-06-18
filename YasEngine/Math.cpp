@@ -76,7 +76,7 @@ std::map<float, float>* generateCosineNumbers(int pointsNumber)
     return cosineMap;
 }
 
-std::vector<int> generateNfibonaccinumbers(int n)
+std::vector<int> generateNfibonacciNumbers(int n)
 {
     std::vector<int> fibbonacciNumbers;
     fibbonacciNumbers.push_back(1);

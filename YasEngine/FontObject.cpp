@@ -29,6 +29,7 @@ void FontObject::initialize(float radius, float x, float y, const Vector2D<float
 FontObject::~FontObject()
 {
 	delete[] worldVertices;
+	delete[] localVertices;
 }
 
 void FontObject::generate()

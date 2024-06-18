@@ -33,3 +33,7 @@ Button::Button(const ButtonId& buttonId, std::string text, const Vector4D<Uint8>
     this->color = color;
     numberOfVertices = 4;
 }
+
+Button::~Button()
+{
+}

@@ -1,6 +1,12 @@
 ﻿#include"FibonacciPointsGenerator.hpp"
 
 #include "Math.hpp"
+#include "YasGraphicsLibrary.hpp"
+
+FibonacciPointsGenerator::~FibonacciPointsGenerator()
+{
+	;
+}
 
 PointsSet* FibonacciPointsGenerator::generatePoints(int numberOfNumbers, std::map<int, float>* numbers)
 {
@@ -8,7 +14,7 @@ PointsSet* FibonacciPointsGenerator::generatePoints(int numberOfNumbers, std::ma
 	this->pointsNumber = numberOfNumbers;
 
 	Vector2D<float>* points = new Vector2D<float>[pointsNumber*2];
-	std::vector<int> fibonacci = generateNfibonaccinumbers(pointsNumber);
+	std::vector<int> fibonacci = generateNfibonacciNumbers(pointsNumber);
 
 	// Point constructor setting x and y to 0;
 	// This loop creates pairs of points = ( (0,0) ; (fibonacci(i) ,y=0) )
@@ -23,7 +29,7 @@ PointsSet* FibonacciPointsGenerator::generatePoints(int numberOfNumbers, std::ma
 	j = 0;
 	for (int i = 1; i < pointsNumber*2 - 1; i+=2)
 	{
-		Vector2D<float>::rotateVectorOverTheAngle(&points[i], static_cast<int>(fibonacci.at(j++)) * (PI / 180.0F));
+		Vector2D<float>::rotateVectorOverTheAngle(&points[i], fibonacci.at(j++) * (PI / 180.0F));
 	}
 
 	PointsSet* pointsSet = new PointsSet();

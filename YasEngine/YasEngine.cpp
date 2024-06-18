@@ -47,6 +47,17 @@ void YasEngine::clean()
     delete pixelsTable;
     delete windowDimensions;
 
+    delete sinePicture;
+    delete cosinePicture;
+    delete fibonacciePicture;
+    delete primeNumbersPicture;
+
+    delete mousePositionChangeInformation;
+
+    // delete player; // will be deleted in the loop at the beginning of that method
+
+    delete input;
+
     Mix_FreeChunk(shootSound);
     Mix_FreeChunk(hitSound);
     Mix_FreeMusic(music);
@@ -58,7 +69,7 @@ void YasEngine::clean()
     SDL_Quit();
 }
 
-void YasEngine::YasEnginStart()
+void YasEngine::YasEngineStart()
 {
     TimePicker timePicker = TimePicker();
     time = timePicker.getSeconds();
@@ -874,10 +885,12 @@ bool YasEngine::isObjectProtagonist(GameObject* object)
 
 GameObject* YasEngine::getProtagonist(GameObject* object0, GameObject* object1)
 {
-    if (isObjectProtagonist(object0)) {
+    if (isObjectProtagonist(object0))
+    {
         return object0;
     }
-    if (isObjectProtagonist(object1)) {
+    if (isObjectProtagonist(object1))
+    {
         return object1;
     }
     return nullptr;
@@ -885,10 +898,12 @@ GameObject* YasEngine::getProtagonist(GameObject* object0, GameObject* object1)
 
 GameObject* YasEngine::getNotProtagonist(GameObject* object0, GameObject* object1)
 {
-    if (!isObjectProtagonist(object0)) {
+    if (!isObjectProtagonist(object0))
+    {
         return object0;
     }
-    if (!isObjectProtagonist(object1)) {
+    if (!isObjectProtagonist(object1))
+    {
         return object1;
     }
     return nullptr;
@@ -1202,7 +1217,7 @@ void YasEngine::prepareSineDrawing()
         
     // }
 
-    sinePicture = new MathPicture(sines, new SinePointsGenerator(), new PointsSet());
+    sinePicture = new MathPicture(sines, new SinePointsGenerator());
 }
 
 void YasEngine::prepareCosineDrawing()
@@ -1228,12 +1243,12 @@ void YasEngine::prepareCosineDrawing()
 
     // }
 
-    cosinePicture = new MathPicture(cosines, new CosinePointsGenerator(), new PointsSet());
+    cosinePicture = new MathPicture(cosines, new CosinePointsGenerator());
 }
 
 void YasEngine::prepareFibonacciDrawing()
 {
-    std::vector<int> fibbs = generateNfibonaccinumbers(40);
+    std::vector<int> fibbs = generateNfibonacciNumbers(40);
     fibbsPointsHarvested = 0;
 
     numbersMap.insert(std::pair<std::string, std::map<int, float>*>("Fibbs", new std::map<int, float>));
@@ -1243,7 +1258,7 @@ void YasEngine::prepareFibonacciDrawing()
         numbersMap.at("Fibbs")->insert(std::pair<int, int>(i, fibbs.at(i)));
     }
 
-    fibonacciePicture = new MathPicture(numbersMap.at("Fibbs"), new FibonacciPointsGenerator(), new PointsSet());
+    fibonacciePicture = new MathPicture(numbersMap.at("Fibbs"), new FibonacciPointsGenerator());
 }
 
 void YasEngine::preparePrimesDrawing()
@@ -1258,7 +1273,7 @@ void YasEngine::preparePrimesDrawing()
         numbersMap.at("Primes")->insert(std::pair<int, int>(i, primes.at(i)));
     }
 
-    primeNumbersPicture = new MathPicture(numbersMap.at("Primes"), new PrimeNumbersPointsGenerator(), new PointsSet());
+    primeNumbersPicture = new MathPicture(numbersMap.at("Primes"), new PrimeNumbersPointsGenerator());
 
     std::cout << "preparedPrimesDrawing" << "\n";
 }

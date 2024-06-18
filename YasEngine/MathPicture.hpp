@@ -5,8 +5,9 @@
 class MathPicture
 {
 	public:
-		MathPicture(std::map<int, float>* numbers, PointsGenerator* pointsGenerator, PointsSet* nPointsSet);
-		MathPicture(std::map<float, float>* floatNumbers, PointsGenerator* pointsGenerator, PointsSet* nPointsSet);
+		MathPicture(std::map<int, float>* numbers, PointsGenerator* pointsGenerator);
+		MathPicture(std::map<float, float>* floatNumbers, PointsGenerator* pointsGenerator);
+		~MathPicture();
 		void generatePoints();
 		
 		int basePointsFuel = 0;

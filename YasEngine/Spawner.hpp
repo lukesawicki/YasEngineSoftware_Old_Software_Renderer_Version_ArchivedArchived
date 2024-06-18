@@ -1,5 +1,6 @@
 #ifndef SPAWNER_HPP
 #define SPAWNER_HPP
+
 #include "GameObject.hpp"
 #include "Randomizer.hpp"
 #include "Vector2D.hpp"

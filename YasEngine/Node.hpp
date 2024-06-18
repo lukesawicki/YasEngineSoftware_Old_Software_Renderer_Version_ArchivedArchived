@@ -85,7 +85,8 @@ class Node
 
             for(int j=0; j < 4; j++)
             {
-                switch(j) {
+                switch(j)
+            	{
                     case 0:
                         factorX = -1;
                         factorY = 1;;
@@ -112,7 +113,8 @@ class Node
 
                 for (int i = 0; i < 4; i++)
                 {
-                    switch (i) {
+                    switch (i)
+                	{
                         case 0:
                             factorX = -1;
                             factorY = 1;;

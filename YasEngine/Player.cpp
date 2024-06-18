@@ -78,6 +78,9 @@ Player::Player(float x, float y)
 Player::~Player()
 {
 	delete[] worldVertices;
+	delete[] localVertices;
+	// delete input; // It will be deleted in YasEngine
+	// delete mouse; // It will be deleted in YasEngine
 }
 
 void Player::move(float deltaTime)

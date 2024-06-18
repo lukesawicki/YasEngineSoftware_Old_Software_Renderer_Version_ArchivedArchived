@@ -35,20 +35,20 @@ class GameObject
 		virtual void generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices) = 0;
 		virtual void regeneratePolygon() = 0;
 		  
-		virtual void setPosition(float x, float y)
+		void setPosition(float x, float y)
 		{
 			position.x = x;
 			position.y = y;
             moveCollider();
 		}
 
-        virtual void setX(float x)
+        void setX(float x)
         {
             position.x = x;
             moveCollider();
         }
 
-        virtual void setY(float y)
+        void setY(float y)
         {
             position.y = y;
             moveCollider();

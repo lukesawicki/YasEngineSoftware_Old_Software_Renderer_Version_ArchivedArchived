@@ -1,8 +1,8 @@
-#include "GameObject.hpp"
-#include<string>
-
 #ifndef BUTTON_HPP
 #define BUTTON_HPP
+
+#include "GameObject.hpp"
+#include<string>
 
 class Button: public GameObject
 {
@@ -24,6 +24,7 @@ class Button: public GameObject
         ButtonId buttonId;
 
         Button(const ButtonId& buttonId, std::string text, const Vector4D<Uint8>& color);
+        ~Button();
 
         void generate() override;
         void generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices) override;

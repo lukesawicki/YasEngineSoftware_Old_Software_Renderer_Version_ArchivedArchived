@@ -21,6 +21,11 @@ class ScreenWriter final
                 verticesBaseData = new FontObject();
                 surface = new FontSurface();
             }
+            ~Font()
+            {
+                delete verticesBaseData;
+                delete surface;
+            }
             FontObject* verticesBaseData;
             FontSurface* surface;
         };

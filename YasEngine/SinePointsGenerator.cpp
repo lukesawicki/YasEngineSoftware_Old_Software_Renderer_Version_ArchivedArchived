@@ -1,4 +1,10 @@
 #include"SinePointsGenerator.hpp"
+#include "YasGraphicsLibrary.hpp"
+
+SinePointsGenerator::~SinePointsGenerator()
+{
+	;
+}
 
 PointsSet* SinePointsGenerator::generatePoints(int numberOfNumbers, std::map<int, float>* numbers)
 {

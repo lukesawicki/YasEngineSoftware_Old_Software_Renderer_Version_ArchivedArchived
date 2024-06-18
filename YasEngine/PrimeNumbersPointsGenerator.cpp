@@ -1,6 +1,11 @@
 #include"PrimeNumbersPointsGenerator.hpp"
 #include "YasGraphicsLibrary.hpp"
 
+PrimeNumbersPointsGenerator::~PrimeNumbersPointsGenerator()
+{
+	;
+}
+
 PointsSet* PrimeNumbersPointsGenerator::generatePoints(int numberOfNumbers, std::map<int, float>* numbers)
 {
 	this->pointsNumber = numberOfNumbers;

@@ -363,7 +363,8 @@ void FontSurface::drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maxim
     }
     if (maximumNumberOfVertices > 1)
     {
-        if (maximumNumberOfVertices <= 3) {
+        if (maximumNumberOfVertices <= 3)
+        {
             drawLine(vertices[0], vertices[1], color);
         }
         else

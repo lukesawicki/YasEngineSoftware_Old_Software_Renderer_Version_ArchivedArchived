@@ -1,6 +1,6 @@
 #include"MathPicture.hpp"
 
-MathPicture::MathPicture(std::map<int, float>* numbers, PointsGenerator* pointsGenerator, PointsSet* npointsSet)
+MathPicture::MathPicture(std::map<int, float>* numbers, PointsGenerator* pointsGenerator)
 {
 	this->basePointsFuel = static_cast<int>(numbers->size());
 	this->pointsGenerator = pointsGenerator;
@@ -9,13 +9,20 @@ MathPicture::MathPicture(std::map<int, float>* numbers, PointsGenerator* pointsG
 	generatePoints();
 }
 
-MathPicture::MathPicture(std::map<float, float>* floatNumbers, PointsGenerator* pointsGenerator, PointsSet* nPointsSet)
+MathPicture::MathPicture(std::map<float, float>* floatNumbers, PointsGenerator* pointsGenerator)
 {
 	this->basePointsFuel = static_cast<int>(floatNumbers->size());
 	this->pointsGenerator = pointsGenerator;
 	this->numbers = nullptr;
 	this->floatNumbers = floatNumbers;
 	generatePoints();
+}
+
+MathPicture::~MathPicture()
+{
+	delete pointsGenerator;
+	delete numbers;
+	delete floatNumbers;
 }
 
 void MathPicture::generatePoints()
