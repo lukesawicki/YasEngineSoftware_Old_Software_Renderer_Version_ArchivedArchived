@@ -1,4 +1,8 @@
 # YasEngineSoftware
+UPDATE: The first game on YasEngine was released few weeks ago:
+
+https://lukesawicki.itch.io/beauty-of-math
+
 YasEngine with software renderer.
 This version of YasEngine is for learning purposes only.
 I decided to move from Vulkan to OpenGL as somone smart advised me
