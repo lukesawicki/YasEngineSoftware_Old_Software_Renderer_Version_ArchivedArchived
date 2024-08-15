@@ -66,9 +66,6 @@
     <ClInclude Include="ScreenWriter.hpp">
       <Filter>GUI</Filter>
     </ClInclude>
-    <ClInclude Include="VariousTools.hpp">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="YasGraphicsLibrary.hpp">
       <Filter>Renderer</Filter>
     </ClInclude>

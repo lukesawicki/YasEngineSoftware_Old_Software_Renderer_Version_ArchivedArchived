@@ -5,8 +5,6 @@
 #include <SDL_mixer.h>
 #include <set>
 #include "YasEngine.hpp"
-#include "prettywriter.h"
-#include "VariousTools.hpp"
 #include "Circle.hpp"
 #include "Collider.hpp"
 #include "CosinePointsGenerator.hpp"
@@ -139,27 +137,26 @@ void YasEngine::readSettingsFromFile()
 void YasEngine::prepareRendering()
 {
     pixelsTable     =   new PixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, BLACK);
-    renderer        =   SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-
-    SDL_RenderSetLogicalSize(renderer, WINDOW_WIDTH, WINDOW_HEIGHT);
-    SDL_RenderSetIntegerScale(renderer, SDL_TRUE);
-
-    screenTexture   =   SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ABGR8888, SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
+    renderer        =   SDL_CreateRenderer(window, NULL);
+    SDL_SetRenderLogicalPresentation(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_LOGICAL_PRESENTATION_DISABLED, SDL_SCALEMODE_NEAREST);
+    screenTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBX32, SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
 void YasEngine::prepareBasicSettings()
 {
     checkEndianness();
 
-    SDL_Init(SDL_INIT_EVERYTHING);
+    SDL_Init(SDL_INIT_TIMER | SDL_INIT_EVENTS | SDL_INIT_AUDIO | SDL_INIT_VIDEO);
 
     windowDimensions    =   new Vector2D<int>(WINDOW_WIDTH, WINDOW_HEIGHT);
-    Uint32 windowFlags = SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_ALWAYS_ON_TOP | SDL_WINDOW_RESIZABLE;
-    window              =   SDL_CreateWindow("YasEngine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, windowFlags);
+    Uint32 windowFlags = SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_BORDERLESS | SDL_WINDOW_INPUT_FOCUS  | SDL_WINDOW_RESIZABLE | SDL_WINDOW_OPENGL; //SDL_WINDOW_ALWAYS_ON_TOP
+    window              =   SDL_CreateWindow("YasEngine", WINDOW_WIDTH, WINDOW_HEIGHT, windowFlags);
 
     SDL_SetWindowMinimumSize(window, WINDOW_WIDTH, WINDOW_HEIGHT);
-    SDL_ShowCursor(SDL_DISABLE);
+    SDL_HideCursor();
 }
+
+
 
 void YasEngine::checkEndianness()
 {
@@ -199,7 +196,7 @@ void YasEngine::drawFrame(double& deltaTime)
 
 void YasEngine::handleInput(SDL_Event& event)
 {
-    if (event.type == SDL_QUIT)
+    if (event.type == SDL_EVENT_QUIT)
     {
         quit = true;
     }
@@ -212,9 +209,9 @@ void YasEngine::handleInput(SDL_Event& event)
 
 void YasEngine::handleKeyboardInput(SDL_Event& event)
 {
-    if (event.type == SDL_KEYDOWN)
+    if (event.type == SDL_EVENT_KEY_DOWN)
     {
-        switch (event.key.keysym.sym)
+        switch (event.key.key)
         {
         case SDLK_ESCAPE:
             handleGameStateWhenESCbuttonPushed();
@@ -222,19 +219,19 @@ void YasEngine::handleKeyboardInput(SDL_Event& event)
         case SDLK_SPACE:
             handleGameStateWhenSPACEbuttonPushed();
             break;
-        case SDLK_w:
+        case SDLK_W:
             input->up = true;
             break;
-        case SDLK_s:
+        case SDLK_S:
             input->down = true;
             break;
-        case SDLK_a:
+        case SDLK_A:
             input->left = true;
             break;
-        case SDLK_d:
+        case SDLK_D:
             input->right = true;
             break;
-        case SDLK_o:
+        case SDLK_O:
             input->test_o_button = true;
             break;
         case SDLK_RETURN:
@@ -264,23 +261,23 @@ void YasEngine::handleKeyboardInput(SDL_Event& event)
         }
     }
 
-    if (event.type == SDL_KEYUP)
+    if (event.type == SDL_EVENT_KEY_UP)
     {
-        switch (event.key.keysym.sym)
+        switch (event.key.key)
         {
-        case SDLK_w:
+        case SDLK_W:
             input->up = false;
             break;
-        case SDLK_s:
+        case SDLK_S:
             input->down = false;
             break;
-        case SDLK_a:
+        case SDLK_A:
             input->left = false;
             break;
-        case SDLK_d:
+        case SDLK_D:
             input->right = false;
             break;
-        case SDLK_o:
+        case SDLK_O:
             if(input->test_o_button == true)
             {
                 Mix_PlayChannel(-1, otherSound, 0);
@@ -295,11 +292,11 @@ void YasEngine::handleKeyboardInput(SDL_Event& event)
 
 void YasEngine::handleMouseInput(SDL_Event& event)
 {
-    if (event.type == SDL_MOUSEMOTION)
+    if (event.type == SDL_EVENT_MOUSE_MOTION)
     {
         handleMouseMovement();
     }
-    if (event.type == SDL_MOUSEBUTTONDOWN && event.button.button == SDL_BUTTON_LEFT)
+    if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN && event.button.button == SDL_BUTTON_LEFT)
     {
         switch (gameState)
         {
@@ -321,7 +318,7 @@ void YasEngine::handleMouseInput(SDL_Event& event)
         }
     }
 
-    if (event.type == SDL_MOUSEBUTTONUP && event.button.button == SDL_BUTTON_LEFT)
+    if (event.type == SDL_EVENT_MOUSE_BUTTON_UP && event.button.button == SDL_BUTTON_LEFT)
     {
         switch (gameState)
         {
@@ -334,8 +331,8 @@ void YasEngine::handleMouseInput(SDL_Event& event)
 
 void YasEngine::handleMouseMovement()
 {
-    int x;
-    int y;
+    float x;
+    float y;
     SDL_GetMouseState(&x, &y);
     mousePositionChangeInformation->mouseMoved = true;
     mousePositionChangeInformation->x = x;
@@ -541,9 +538,9 @@ void YasEngine::render(double& deltaTime)
     }
 
     drawHudElements(deltaTime);
-
+    
     SDL_UpdateTexture(screenTexture , NULL, pixelsTable->pixels, WINDOW_WIDTH * 4);
-    SDL_RenderCopyExF(renderer, screenTexture, NULL, NULL, 0, NULL, SDL_RendererFlip::SDL_FLIP_NONE); //SDL_FLIP_VERTICAL);
+    SDL_RenderTexture(renderer, screenTexture, NULL, NULL);
     SDL_RenderPresent(renderer);
 }
 
@@ -1011,7 +1008,12 @@ void YasEngine::moveObjects()
 
 void YasEngine::prepareSoundAndMusic()
 {
-    if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096) < 0)
+    
+    audioSpecs.freq = 44100;
+    audioSpecs.format = MIX_DEFAULT_FORMAT;
+    audioSpecs.channels = 2;
+
+    if (Mix_OpenAudio(0, &audioSpecs) < 0)
     {
         std::cout << "Error cannot open audio device" << std::endl;
     }
@@ -1422,20 +1424,3 @@ void YasEngine::handleGameStateWhenSPACEbuttonPushed()
             ;
     }
 }
-
-
-// writer.write(0, 350, "GAME DESIGN PROGRAMMING AND MARKETING", YELLOW, *pixelsTable);
-// writer.write(0, 325, "LUKASZ SAWICKI", YELLOW, *pixelsTable);
-// writer.write(0, 275, "SOUND DESIGN AND MUSIC", YELLOW, *pixelsTable);
-// writer.write(0, 250, "JAKUB TWAROGOWSKI", YELLOW, *pixelsTable);
-// writer.write(0, 200, "QUALITY ASSURANCE", YELLOW, *pixelsTable);
-// writer.write(0, 175, "BARTLOMIEJ KAWA", YELLOW, *pixelsTable);
-// writer.write(0, 125, "SPECIAL THANKS:", PURPLE, *pixelsTable);
-// writer.write(0, 75, "MY DEAR SISTER IZABELA", YELLOW, *pixelsTable);
-// writer.write(0, 50, "MY LOVE MARIOLA", YELLOW, *pixelsTable);
-// writer.write(0, 0, "MY FRIENDS FROM WARSAW SCHOOL OF COMPUTER SCIENCE:", YELLOW, *pixelsTable);
-// writer.write(0, -25, "LUKASZ KRZYSZTOF MICHAL MAREK TOMASZ", YELLOW, *pixelsTable);
-// writer.write(0, -75, "MY FRENDS FROM GDS 4:", YELLOW, *pixelsTable);
-// writer.write(0, -100, "KASIA AND BARTOSZ", YELLOW, *pixelsTable);
-// writer.write(0, -150, "WHOLE COMMUNITY OF KNTG POLYGON", YELLOW, *pixelsTable);
-// writer.write(0, -200, "AND ALL MEMBERS OF TEAM XPORTAL", YELLOW, *pixelsTable);

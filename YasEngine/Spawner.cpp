@@ -1,7 +1,6 @@
 #include<cstdlib>
 #include"Spawner.hpp"
 #include "Collectible.hpp"
-#include "VariousTools.hpp"
 
 int Spawner::numberOfSpawnedObjects = 0;
 

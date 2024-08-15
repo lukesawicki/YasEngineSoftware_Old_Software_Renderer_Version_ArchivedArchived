@@ -1,6 +1,6 @@
 #ifndef YASENGINE_HPP
 #define YASENGINE_HPP
-#include <document.h>
+#include<document.h>
 #include<iostream>
 #include<vector>
 #include<string>
@@ -145,6 +145,8 @@ class YasEngine
 
 		std::map<std::string, std::map<int, float>*> numbersMap;
 		std::map < std::string, std::map<int, std::map<float, float>*>* > pairNumbersMap;
+
+		SDL_AudioSpec audioSpecs;
 
 		Mix_Music* music;
 		Mix_Chunk* shootSound;

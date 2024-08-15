@@ -33,7 +33,7 @@ void ScreenWriter::initialize(int szerokosc_znaku, int wysokosc_znaku, const cha
 {
 
 }
-void ScreenWriter::writeNew(int x, int y, string text, SDL_Surface *na_czym, int width, int height)
+void ScreenWriter::writeNew(int x, int y, string text, int width, int height)
 {
     SDL_Rect docelowe;
     int pom_w=0, pom_h=0;
