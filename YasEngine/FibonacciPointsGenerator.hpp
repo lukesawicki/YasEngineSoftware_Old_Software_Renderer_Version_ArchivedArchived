@@ -5,8 +5,7 @@
 #include"PointsGenerator.hpp"
 #include"PointsSet.hpp"
 
-class FibonacciPointsGenerator : public PointsGenerator
-{
+class FibonacciPointsGenerator : public PointsGenerator {
   public:
     ~FibonacciPointsGenerator();
     PointsSet* generatePoints(int numberOfNumbers, std::map<int, float>* numbers) override;

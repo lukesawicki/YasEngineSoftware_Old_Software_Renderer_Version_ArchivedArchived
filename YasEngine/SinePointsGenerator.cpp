@@ -1,13 +1,11 @@
 #include"SinePointsGenerator.hpp"
 #include "YasGraphicsLibrary.hpp"
 
-SinePointsGenerator::~SinePointsGenerator()
-{
+SinePointsGenerator::~SinePointsGenerator() {
   ;
 }
 
-PointsSet* SinePointsGenerator::generatePoints(int numberOfNumbers, std::map<int, float>* numbers)
-{
+PointsSet* SinePointsGenerator::generatePoints(int numberOfNumbers, std::map<int, float>* numbers) {
   this->pointsNumber = numberOfNumbers;
   Vector2D<float>* points = new Vector2D<float>[pointsNumber];
   float divider = static_cast<float>(pointsNumber);
@@ -15,8 +13,8 @@ PointsSet* SinePointsGenerator::generatePoints(int numberOfNumbers, std::map<int
   float additionalFactor = 50.0F;
   float step = (maximumXvalue / divider);
 
-  for (int i = 0; i < pointsNumber; i++)
-  {
+  for (int i = 0; i < pointsNumber; i++) {
+
     float x = i * step;
     float y = sin(x);
 
@@ -32,14 +30,13 @@ PointsSet* SinePointsGenerator::generatePoints(int numberOfNumbers, std::map<int
   return pointsSet;
 }
 
-PointsSet* SinePointsGenerator::generateFloatPoints(int numberOfNumbers, std::map<float, float>* numbers)
-{
+PointsSet* SinePointsGenerator::generateFloatPoints(int numberOfNumbers, std::map<float, float>* numbers) {
   this->pointsNumber = numberOfNumbers;
   Vector2D<float>* points = new Vector2D<float>[pointsNumber];
   int additionalFactor = 50;
   int i = 0;
-  for (std::pair<float, float> pair : *numbers)
-  {
+  for (std::pair<float, float> pair : *numbers) {
+
     points[i].x = pair.first * additionalFactor; // round(x * additionalFactor);
     points[i].y = pair.second * additionalFactor; // round(y * additionalFactor);
     i++;

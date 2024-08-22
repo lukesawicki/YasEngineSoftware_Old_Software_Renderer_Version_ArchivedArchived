@@ -6,8 +6,7 @@
 #include"PointsSet.hpp"
 #include"Math.hpp"
 
-class PrimeNumbersPointsGenerator : public PointsGenerator
-{
+class PrimeNumbersPointsGenerator : public PointsGenerator {
 public:
   static std::vector<int> numbers;
   ~PrimeNumbersPointsGenerator();

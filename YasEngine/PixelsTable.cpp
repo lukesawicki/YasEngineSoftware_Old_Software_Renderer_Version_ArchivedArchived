@@ -1,16 +1,14 @@
 #include"PixelsTable.hpp"
 #include "YasGraphicsLibrary.hpp"
 
-PixelsTable::PixelsTable(int width, int height, const Vector4D<Uint8>& defaultColor)
-{
+PixelsTable::PixelsTable(int width, int height, const Vector4D<Uint8>& defaultColor) {
 	this->windowDimensions.x = width;
 	this->windowDimensions.y = height;
 	this->pixels = new Uint8[windowDimensions.x * windowDimensions.y * NUMBER_OF_COLORS];
 	clearColor(defaultColor);
 }
 
-PixelsTable::PixelsTable(const PixelsTable& originalPixelsTable, const Vector4D<Uint8>& defaultColor)
-{
+PixelsTable::PixelsTable(const PixelsTable& originalPixelsTable, const Vector4D<Uint8>& defaultColor) {
 	this->windowDimensions.x = originalPixelsTable.windowDimensions.x;
 	this->windowDimensions.y = originalPixelsTable.windowDimensions.y;
 	this->pixels = new Uint8[originalPixelsTable.windowDimensions.x * originalPixelsTable.windowDimensions.y * NUMBER_OF_COLORS];
@@ -20,13 +18,11 @@ PixelsTable::PixelsTable(const PixelsTable& originalPixelsTable, const Vector4D<
 	}
 }
 
-PixelsTable::~PixelsTable()
-{
+PixelsTable::~PixelsTable() {
 	delete[] pixels;
 }
 
-void PixelsTable::clearColor(const Vector4D<Uint8>& drawingColor)
-{
+void PixelsTable::clearColor(const Vector4D<Uint8>& drawingColor) {
 	for (int y = 0; y < windowDimensions.y; y++)
 	{
 		for (int x = 0; x < windowDimensions.x; x++)
@@ -39,8 +35,7 @@ void PixelsTable::clearColor(const Vector4D<Uint8>& drawingColor)
 	}
 }
 
-void PixelsTable::drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor)
-{
+void PixelsTable::drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor) {
  	cartesianPositionToWindow(x, y);
 	if (x >= 0 && x < windowDimensions.x && y >= 0 && y < windowDimensions.y)
 	{
@@ -51,8 +46,7 @@ void PixelsTable::drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor)
 	}
 }
 
-void PixelsTable::cartesianPositionToWindow(int& x, int& y)
-{
+void PixelsTable::cartesianPositionToWindow(int& x, int& y) {
 	x = x + static_cast<int>(0.5F * windowDimensions.x);
 	y = -y + static_cast<int>(0.5F * windowDimensions.y);
 }

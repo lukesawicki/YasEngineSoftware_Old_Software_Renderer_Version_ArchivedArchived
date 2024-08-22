@@ -1,13 +1,11 @@
 #include"Projectile.hpp"
 
-static Uint32 kill(Projectile* projectileToKill, Uint32 interval, void* param)
-{
+static Uint32 kill(Projectile* projectileToKill, Uint32 interval, void* param) {
   projectileToKill->isAlive = false;
   return 0;
 }
 
-Projectile::Projectile(float radius, float x, float y, Vector2D<float> direction)
-{
+Projectile::Projectile(float radius, float x, float y, Vector2D<float> direction) {
   isAlive = true;
   iAm = WhoAmI::PROJECTILE;
   collider.radius = radius;
@@ -24,16 +22,14 @@ Projectile::Projectile(float radius, float x, float y, Vector2D<float> direction
   startTime = timePicker.getMiliseconds();
 }
 
-Projectile::~Projectile()
-{
+Projectile::~Projectile() {
   delete[] worldVertices;
   delete[] localVertices;
 }
 
-void Projectile::move(float deltaTime)
-{
-    if(timePicker.getMiliseconds() - startTime >= 2000)
-    {
+void Projectile::move(float deltaTime) {
+    if(timePicker.getMiliseconds() - startTime >= 2000) {
+
         this->isAlive = false;
     }
 
@@ -43,17 +39,15 @@ void Projectile::move(float deltaTime)
   regeneratePolygon();
 }
 
-void Projectile::generate()
-{
-  for (int i = 0; i < numberOfVertices; i++)
-  {
+void Projectile::generate() {
+  for (int i = 0; i < numberOfVertices; i++) {
+
     worldVertices[i].x = position.x + localVertices[i].x;
     worldVertices[i].y = position.y + localVertices[i].y;
   }
 }
 
-void Projectile::generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices)
-{
+void Projectile::generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices) {
   this->circumscribedCircleRadius = circumscribedCircleRadius;
   this->numberOfVertices = numberOfVertices;
   this->worldVertices = new Vector2D<float>[numberOfVertices];
@@ -61,8 +55,8 @@ void Projectile::generateRegularPolygonVertices(float circumscribedCircleRadius,
 
   angleForGenerateInIsoscelesPolygons = startAngle;
   stepAngle = 360.0F / numberOfVertices;
-  for (int i = 0; i < numberOfVertices; i++)
-  {
+  for (int i = 0; i < numberOfVertices; i++) {
+
     localVertices[i].x = 0.0F + static_cast<int>(circumscribedCircleRadius * cos(angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
     localVertices[i].y = 0.0F + static_cast<int>(circumscribedCircleRadius * sin(angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
     angleForGenerateInIsoscelesPolygons += stepAngle;
@@ -70,7 +64,6 @@ void Projectile::generateRegularPolygonVertices(float circumscribedCircleRadius,
   generate();
 }
 
-void Projectile::regeneratePolygon()
-{
+void Projectile::regeneratePolygon() {
   generate();
 }

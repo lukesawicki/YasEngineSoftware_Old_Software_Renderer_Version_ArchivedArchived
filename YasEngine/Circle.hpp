@@ -2,8 +2,7 @@
 #define CIRCLE_HPP
 #include"GameObject.hpp"
 
-class Circle : public GameObject
-{
+class Circle : public GameObject {
   private:
     bool directionSwitched;
   public:

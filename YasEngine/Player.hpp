@@ -4,8 +4,7 @@
 #include"GameObject.hpp"
 #include"Projectile.hpp"
 
-class Player : public GameObject
-{
+class Player : public GameObject {
   public:
     
     bool isShooting;

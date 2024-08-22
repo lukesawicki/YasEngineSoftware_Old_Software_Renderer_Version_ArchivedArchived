@@ -8,21 +8,20 @@
 #include "FontObject.hpp"
 #include "FontSurface.hpp"
 
-class ScreenWriter final
-{
+class ScreenWriter final {
     public:
         static const int NUMBER_OF_CHARACTERS = 37;
         static const int FONT_WIDTH = 17;
         static const int FONT_HEIGHT = 17;
 
         struct Font {
-            Font()
-            {
+            Font() {
+
                 verticesBaseData = new FontObject();
                 surface = new FontSurface();
             }
-            ~Font()
-            {
+            ~Font() {
+
                 delete verticesBaseData;
                 delete surface;
             }

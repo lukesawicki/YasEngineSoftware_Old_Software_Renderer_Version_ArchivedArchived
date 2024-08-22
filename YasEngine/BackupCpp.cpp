@@ -317,12 +317,14 @@
 //                    drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
 //                    x0++;
 //                    if (2 * (cumulativeError + deltaY) < deltaX)
-//                    {
+// {
+
 //                        //y stays the same
 //                        cumulativeError = cumulativeError + deltaY;
 //                    }
 //                    else
-//                    {
+// {
+
 //                        y0++;
 //                        cumulativeError = cumulativeError + deltaY - deltaX;
 //                    }
@@ -951,16 +953,19 @@
 //                     deltaX = static_cast<int>(point0.x - point1.x);
 //                     deltaY = static_cast<int>(point0.y - point1.y);
 //                     for (int i = originalPoint0X; i <= originalPoint1X; i++)
-//                     {
+//  {
+
 //                         pixelsTable.drawPoint(x0, y0, drawingColor);
 //                         x0++;
 //                         if ((2 * (cumulativeError + deltaY)) > -deltaX)
-//                         {
+//  {
+
 //                             //y stays the same
 //                             cumulativeError = cumulativeError + deltaY;
 //                         }
 //                         else
-//                         {
+//  {
+
 //                             y0--;
 //                             cumulativeError = cumulativeError + deltaY + deltaX;
 //                         }
@@ -969,20 +974,24 @@
 //                 else // POSITIVE SLOPE // (deltaY < 0) && (DELTAS CONDITION DX > DY) && (DELTA X < 0 CONDITION) -> IT MEANS OCTAN 4(POSITIVE SLOPE, POINTS IN "WRONG ORDER")
 //                 {
 //                     if (deltaX != 0)
-//                     {
+//  {
+
 //                         deltaX = static_cast<int>(point0.x - point1.x);
 //                         deltaY = static_cast<int>(point0.y - point1.y);
 //                         for (int i = originalPoint0X; i <= originalPoint1X; i++)
-//                         {
+//  {
+
 //                             pixelsTable.drawPoint(x0, y0, drawingColor);
 //                             x0++;
 //                             if ((2 * (cumulativeError + deltaY)) < deltaX)
-//                             {
+//      {
+
 //                                 //y stays the same
 //                                 cumulativeError = cumulativeError + deltaY;
 //                             }
 //                             else
-//                             {
+//      {
+
 //                                 y0++;
 //                                 cumulativeError = cumulativeError + deltaY - deltaX;
 //                             }
@@ -997,36 +1006,44 @@
 //                 {
 //                     // POSITIVE SLOPE
 //                     if (deltaY > 0)  // && (DELTAS CONDITION DX > DY) && (DELTA X > 0 CONDITION) -> IT MEANS OCTAN 0(POSITIVE SLOPE, POINTS IN "CORRECT ORDER")
-//                     {
+//  {
+
 //                         for (int i = originalPoint0X; i <= originalPoint1X; i++)
-//                         {
+//  {
+
 //                             pixelsTable.drawPoint(x0, y0, drawingColor);
 //                             x0++;
 //                             if ((2 * (cumulativeError + deltaY)) < deltaX)
-//                             {
+//      {
+
 //                                 //y stays the same
 //                                 cumulativeError = cumulativeError + deltaY;
 //                             }
 //                             else
-//                             {
+//      {
+
 //                                 y0++;
 //                                 cumulativeError = cumulativeError + deltaY - deltaX;
 //                             }
 //                         }
 //                     }
 //                     else  // NEGATIVE SLOPE // (deltaY < 0) && (DELTAS CONDITION DX > DY) && (DELTA X > 0 CONDITION) -> IT MEANS OCTAN 7(NEGATIVE SLOPE, POINTS IN "CORRECT ORDER")
-//                     {
+//  {
+
 //                         for (int i = originalPoint0X; i <= originalPoint1X; i++)
-//                         {
+//  {
+
 //                             pixelsTable.drawPoint(x0, y0, drawingColor);
 //                             x0++;
 //                             if ((2 * (cumulativeError + deltaY)) > -deltaX)
-//                             {
+//      {
+
 //                                 //y stays the same
 //                                 cumulativeError = cumulativeError + deltaY;
 //                             }
 //                             else
-//                             {
+//      {
+
 //                                 y0--;
 //                                 cumulativeError = cumulativeError + deltaY + deltaX;
 //                             }
@@ -1037,11 +1054,13 @@
 //                 else //if (deltaX == 0) // It is straight line where x is constant. So draw simple line from y0 to y1
 //                 {
 //                     if (copyPoint0.y > copyPoint1.y)
-//                     {
+//  {
+
 //                         swapVectors(copyPoint0, copyPoint1);
 //                     }
 //                     for (int i = copyPoint0.y; i <= copyPoint1.y; i++)
-//                     {
+//  {
+
 //                         pixelsTable.drawPoint(copyPoint0.x, i, drawingColor);
 //                     }
 //                 }
@@ -1064,16 +1083,19 @@
 //                     deltaX = static_cast<int>(point0.x - point1.x);
 //                     deltaY = static_cast<int>(point0.y - point1.y);
 //                     for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
-//                     {
+//  {
+
 //                         pixelsTable.drawPoint(x0, y0, drawingColor);
 //                         y0++;
 //                         if ((2 * (cumulativeError + deltaX)) > -deltaY)
-//                         {
+//  {
+
 //                             //y stays the same
 //                             cumulativeError = cumulativeError + deltaX;
 //                         }
 //                         else
-//                         {
+//  {
+
 //                             x0--;
 //                             cumulativeError = cumulativeError + deltaX + deltaY;
 //                         }
@@ -1084,16 +1106,19 @@
 //                     deltaX = static_cast<int>(point0.x - point1.x);
 //                     deltaY = static_cast<int>(point0.y - point1.y);
 //                     for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
-//                     {
+//  {
+
 //                         pixelsTable.drawPoint(x0, y0, drawingColor);
 //                         y0++;
 //                         if ((2 * (cumulativeError + deltaX)) < deltaY)
-//                         {
+//  {
+
 //                             //y stays the same
 //                             cumulativeError = cumulativeError + deltaX;
 //                         }
 //                         else
-//                         {
+//  {
+
 //                             x0++;
 //                             cumulativeError = cumulativeError + deltaX - deltaY;
 //                         }
@@ -1106,36 +1131,44 @@
 //                 {
 //                     // POSITIVE SLOPE
 //                     if (deltaX > 0) // && (DELTAS CONDITION DX < DY) && (DELTA Y > 0 CONDITION) -> IT MEANS OCTAN 1(POSITIVE SLOPE, POINT IN "CORRECT ORDER")
-//                     {
+//  {
+
 //                         for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
-//                         {
+//  {
+
 //                             pixelsTable.drawPoint(x0, y0, drawingColor);
 //                             y0++;
 //                             if ((2 * (cumulativeError + deltaX)) < deltaY)
-//                             {
+//      {
+
 //                                 //y stays the same
 //                                 cumulativeError = cumulativeError + deltaX;
 //                             }
 //                             else
-//                             {
+//      {
+
 //                                 x0++;
 //                                 cumulativeError = cumulativeError + deltaX - deltaY;
 //                             }
 //                         }
 //                     }
 //                     else // NEGATIVE SLOPE // (deltaX < 0) && (DELTAS CONDITION DX < DY) && (DELTA Y > 0 CONDITION) -> IT MEANS OCTAN 2(NEGATIVE SLOPE POINTS IN "CORRECT ORDER")
-//                     {
+//  {
+
 //                         for (int i = originalPoint0Y; i <= originalPoint1Y; i++)
-//                         {
+//  {
+
 //                             pixelsTable.drawPoint(x0, y0, drawingColor);
 //                             y0++;
 //                             if ((2 * (cumulativeError + deltaX)) > -deltaY)
-//                             {
+//      {
+
 //                                 //y stays the same
 //                                 cumulativeError = cumulativeError + deltaX;
 //                             }
 //                             else
-//                             {
+//      {
+
 //                                 x0--;
 //                                 cumulativeError = cumulativeError + deltaX + deltaY;
 //                             }
@@ -1145,11 +1178,13 @@
 //                 else // deltaY == 0 It is straight line where y is constant. So draw simple line from x0 to x1
 //                 {
 //                     if (copyPoint0.x > copyPoint1.x)
-//                     {
+//  {
+
 //                         swapVectors(copyPoint0, copyPoint1);
 //                     }
 //                     for (int i = copyPoint0.x; i <= copyPoint1.x; i++)
-//                     {
+//  {
+
 //                         pixelsTable.drawPoint(i, copyPoint0.y, drawingColor);
 //                     }
 //                 }

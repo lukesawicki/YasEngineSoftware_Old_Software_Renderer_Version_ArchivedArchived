@@ -5,8 +5,7 @@
 #include"GameObject.hpp"
 
 // Point of origin is on bottom left
-class ViewPort
-{
+class ViewPort {
   public:
     Vector2D<int> position;
     Vector2D<int> viewPortSizes;

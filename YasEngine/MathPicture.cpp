@@ -1,7 +1,6 @@
 #include"MathPicture.hpp"
 
-MathPicture::MathPicture(std::map<int, float>* numbers, PointsGenerator* pointsGenerator)
-{
+MathPicture::MathPicture(std::map<int, float>* numbers, PointsGenerator* pointsGenerator) {
   this->basePointsFuel = static_cast<int>(numbers->size());
   this->pointsGenerator = pointsGenerator;
   this->numbers = numbers;
@@ -9,8 +8,7 @@ MathPicture::MathPicture(std::map<int, float>* numbers, PointsGenerator* pointsG
   generatePoints();
 }
 
-MathPicture::MathPicture(std::map<float, float>* floatNumbers, PointsGenerator* pointsGenerator)
-{
+MathPicture::MathPicture(std::map<float, float>* floatNumbers, PointsGenerator* pointsGenerator) {
   this->basePointsFuel = static_cast<int>(floatNumbers->size());
   this->pointsGenerator = pointsGenerator;
   this->numbers = nullptr;
@@ -18,22 +16,19 @@ MathPicture::MathPicture(std::map<float, float>* floatNumbers, PointsGenerator* 
   generatePoints();
 }
 
-MathPicture::~MathPicture()
-{
+MathPicture::~MathPicture() {
   delete pointsGenerator;
   delete numbers;
   delete floatNumbers;
 }
 
-void MathPicture::generatePoints()
-{
-  if (numbers != nullptr)
-  {
+void MathPicture::generatePoints() {
+  if (numbers != nullptr) {
+
     pointsSet = pointsGenerator->generatePoints(static_cast<int>(numbers->size()), numbers);
   }
-  if (floatNumbers != nullptr)
-  {
+  if (floatNumbers != nullptr) {
+
     pointsSet = pointsGenerator->generateFloatPoints(static_cast<int>(floatNumbers->size()), floatNumbers);
   }
-
 }

@@ -5,8 +5,7 @@
 #include"Vector4D.hpp"
 
 
-class PixelsTable
-{
+class PixelsTable {
   public:
     Uint8* pixels = nullptr;
     Vector2D<int> windowDimensions;

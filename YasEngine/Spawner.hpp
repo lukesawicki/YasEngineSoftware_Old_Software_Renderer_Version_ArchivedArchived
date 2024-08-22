@@ -6,8 +6,7 @@
 #include "Vector2D.hpp"
 #include "TimePicker.hpp"
 
-class Spawner
-{
+class Spawner {
   public:
         int timeBetweenSpawns;
         TimePicker timePicker;

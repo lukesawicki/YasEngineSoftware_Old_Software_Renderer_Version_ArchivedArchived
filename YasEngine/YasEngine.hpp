@@ -35,62 +35,57 @@ class YasEngine
     int hitVolume = MIX_MAX_VOLUME;
     int otherVolume = MIX_MAX_VOLUME;
 
-        bool collided = false;
+    bool collided = false;
     GameObject* go;
-        enum GameState
-        {
-            INTRO,
-            MAIN_MENU_RESTART,
-            GAMEPLAY,
-            OUTRO,
-      PAUSE,
-      LEVEL_CHANGE_SCREEN,
-      YOU_WON
+        enum GameState {
+          INTRO,
+          MAIN_MENU_RESTART,
+          GAMEPLAY,
+          OUTRO,
+          PAUSE,
+          LEVEL_CHANGE_SCREEN,
+          YOU_WON
         };
 
     bool playerWonAndExited = false;
 
-    enum Wall
-    {
+    enum Wall {
       LEFT,
       RIGHT,
       TOP,
       BOTTOM
     };
 
-    struct NodeNumbersOnTwoProceedingLevels
-    {
-            int firstLevelNode = 0;
-            int secondLevelNode = 0;
-      NodeNumbersOnTwoProceedingLevels()
-      {
+    struct NodeNumbersOnTwoProceedingLevels {
+
+      int firstLevelNode = 0;
+      int secondLevelNode = 0;
+      NodeNumbersOnTwoProceedingLevels() {
                 firstLevelNode = 0;
                 secondLevelNode = 0;
       }
-      NodeNumbersOnTwoProceedingLevels(int first, int second)
-      {
+      NodeNumbersOnTwoProceedingLevels(int first, int second) {
         this->firstLevelNode = first;
         this->secondLevelNode = second;
       }
     };
 
-        std::vector<Vector2D<int>*> testPositions;
+    std::vector<Vector2D<int>*> testPositions;
 
-        GameState gameState = GameState::INTRO;
+    GameState gameState = GameState::INTRO;
 
-        std::vector<GameObject*> buttons;
+    std::vector<GameObject*> buttons;
 
     int basePointsNumber = 64;
 
-        std::vector<std::string> mainMenuTexts;
-        std::vector<std::string> introTexts;
-        std::vector<std::string> outroTexts;
-        std::vector<std::string> inGameTexts;
+    std::vector<std::string> mainMenuTexts;
+    std::vector<std::string> introTexts;
+    std::vector<std::string> outroTexts;
+    std::vector<std::string> inGameTexts;
 
-    static YasEngine* GetInstance()
-    {
-      if (instance != nullptr)
-      {
+    static YasEngine* GetInstance() {
+
+      if (instance != nullptr) {
         return instance;
       } 
       instance = new YasEngine();
@@ -172,7 +167,7 @@ class YasEngine
     int maxNtoCalculateSine = 100;
     int maxNtoCalculateCosine = 100;
 
-        std::map<std::string, int> numberOfGivenColors;
+    std::map<std::string, int> numberOfGivenColors;
     Node* spawners;
 
     Vector2D<float> testPoint0;
@@ -187,10 +182,9 @@ class YasEngine
     bool shouldApplicationStopRunning = false;
     YasInOut::Input* input = new YasInOut::Input();
     YasInOut::MousePositionChangeInformation* mousePositionChangeInformation = new YasInOut::MousePositionChangeInformation();
-
-        int redShotDowns = 0;
-        int greenShotdowns = 0;
-        int blueShotdowns = 0;
+    int redShotDowns = 0;
+    int greenShotdowns = 0;
+    int blueShotdowns = 0;
     bool engineInstantiated = false;
     void readSettingsFromFile();
     void prepareRendering();
@@ -210,13 +204,13 @@ class YasEngine
     void moveObjects();
     void prepareGameWorld();
     void setFrameAroundGameplaySpace();
-        void prepareDataForDrawingGraphs();
+    void prepareDataForDrawingGraphs();
     void prepareSineDrawing();
     void prepareCosineDrawing();
     void prepareFibonacciDrawing();
     void preparePrimesDrawing();
     void preparePlayer();
-        void prepareInterface();
+    void prepareInterface();
     void handleInput(SDL_Event& event);
     void handleKeyboardInput(SDL_Event& event);
     void handleMouseInput(SDL_Event& event);
@@ -236,11 +230,11 @@ class YasEngine
     void renderLevelChange();
     void renderWonScreen();
     Button::ButtonId checkWhichButtonClicked();
-        void handleClickedButtons();
-        void handleGameStateWhenESCbuttonPushed();
-        void handleGameStateWhenSPACEbuttonPushed();
+    void handleClickedButtons();
+    void handleGameStateWhenESCbuttonPushed();
+    void handleGameStateWhenSPACEbuttonPushed();
     void prepareSoundAndMusic();
-        void drawButtons();
+    void drawButtons();
 };
 
 #endif

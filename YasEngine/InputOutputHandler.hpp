@@ -1,8 +1,7 @@
 #ifndef INPUTOUTPUTHANDLER_HPP
 #define INPUTOUTPUTHANDLER_HPP
 
-namespace YasInOut
-{
+namespace YasInOut {
   struct Input {
     bool left;
     bool right;

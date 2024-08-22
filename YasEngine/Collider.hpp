@@ -2,8 +2,7 @@
 #define COLLIDER_HPP
 #include "Vector2D.hpp"
 
-class Collider
-{
+class Collider {
   public:
     float radius = 0.0F;
     float x = 0.0F;

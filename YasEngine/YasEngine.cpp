@@ -14,8 +14,7 @@
 
 YasEngine* YasEngine::instance = nullptr;
 
-void YasEngine::initialize()
-{
+void YasEngine::initialize() {
     engineVersion = "YasEngine 1 | Beauty of Math 1 version: " +  std::to_string(MAJOR_REVISION) + "." + std::to_string(MINOR_REVISION) + "." + std::to_string(BUG_FIX_RELEASE) + "." + std::to_string(BUILD_NUMBER);
     std::cout << engineVersion << "\n";
     readSettingsFromFile();
@@ -34,10 +33,9 @@ void YasEngine::initialize()
     surfaceWithMathBasedEffects = new SurfaceWithMathBasedEffects(0, static_cast<int>(windowDimensions->y * 0.5F), static_cast<int>(windowDimensions->x * 0.5F), static_cast<int>(windowDimensions->y), BLACK);
 }
 
-void YasEngine::clean()
-{
-    for (auto drawableObject : objectsToDraw)
-    {
+void YasEngine::clean() {
+    for (auto drawableObject : objectsToDraw) {
+
         delete drawableObject;
     }
 
@@ -67,17 +65,16 @@ void YasEngine::clean()
     SDL_Quit();
 }
 
-void YasEngine::YasEngineStart()
-{
+void YasEngine::YasEngineStart() {
     TimePicker timePicker = TimePicker();
     time = timePicker.getSeconds();
     fpsTime = 0.0F;
     frames = 0;
 
-    while (!quit)
-    {
-        while (SDL_PollEvent(&event))
-        {
+    while (!quit) {
+
+        while (SDL_PollEvent(&event)) {
+
             handleInput(event);
         }
 
@@ -87,8 +84,8 @@ void YasEngine::YasEngineStart()
 
         ++frames;
         fpsTime = fpsTime + deltaTime;
-        if (fpsTime >= 1.0F)
-        {
+        if (fpsTime >= 1.0F) {
+
             fps = frames / fpsTime;
             frames = 0;
             fpsTime = 0.0F;
@@ -96,8 +93,8 @@ void YasEngine::YasEngineStart()
 
         update(deltaTime);
         render(deltaTime);
-        if (levelChanged)
-        {
+        if (levelChanged) {
+
             levelChanged = false;
         }
     }
@@ -105,11 +102,10 @@ void YasEngine::YasEngineStart()
     clean();
 }
 
-void YasEngine::readSettingsFromFile()
-{
+void YasEngine::readSettingsFromFile() {
     std::ifstream settingsFile("settings.json");
-    if (!settingsFile.is_open())
-    {
+    if (!settingsFile.is_open()) {
+
         std::cerr << "Error opening JSON file" << std::endl;
         exit(1);
     }
@@ -120,8 +116,8 @@ void YasEngine::readSettingsFromFile()
     
     settings.Parse(settingsString.c_str());
 
-    if (settings.HasParseError())
-    {
+    if (settings.HasParseError()) {
+
         std::cerr << "Error parsing JSON" << std::endl;
         exit(1);
     }
@@ -134,16 +130,14 @@ void YasEngine::readSettingsFromFile()
     otherVolume = soundSettings["OTHER_VOLUME"].GetInt();
 }
 
-void YasEngine::prepareRendering()
-{
+void YasEngine::prepareRendering() {
     pixelsTable     =   new PixelsTable(WINDOW_WIDTH, WINDOW_HEIGHT, BLACK);
     renderer        =   SDL_CreateRenderer(window, NULL);
     SDL_SetRenderLogicalPresentation(renderer, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_LOGICAL_PRESENTATION_DISABLED, SDL_SCALEMODE_NEAREST);
     screenTexture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBX32, SDL_TEXTUREACCESS_STREAMING, WINDOW_WIDTH, WINDOW_HEIGHT);
 }
 
-void YasEngine::prepareBasicSettings()
-{
+void YasEngine::prepareBasicSettings() {
     checkEndianness();
 
     SDL_Init(SDL_INIT_TIMER | SDL_INIT_EVENTS | SDL_INIT_AUDIO | SDL_INIT_VIDEO);
@@ -158,35 +152,32 @@ void YasEngine::prepareBasicSettings()
 
 
 
-void YasEngine::checkEndianness()
-{
-    if constexpr (std::endian::native == std::endian::big)
-    {
+void YasEngine::checkEndianness() {
+    if constexpr (std::endian::native == std::endian::big) {
+
         std::cout << "BIG ENDIAN" << std::endl;
         endianness = 0;
     }
-    else
-    {
-        if (std::endian::native == std::endian::little)
-        {
+    else {
+
+        if (std::endian::native == std::endian::little) {
+
             std::cout << "LITTLE ENDIAN" << std::endl;
             endianness = 1;
         }
-        else
-        {
+        else {
+
             std::cout << "MIXED ENDIAN" << std::endl;
             endianness = 2;
         }
     }
 }
 
-void YasEngine::drawHudElements(double& deltaTime)
-{
+void YasEngine::drawHudElements(double& deltaTime) {
     drawCrossHair(mouseX, mouseY, *pixelsTable, false);
 }
 
-void YasEngine::drawFrame(double& deltaTime)
-{
+void YasEngine::drawFrame(double& deltaTime) {
     drawHorizontalLine(*pixelsTable, static_cast<int>(mapFrame.topLineSegment.point0.x), static_cast<int>(mapFrame.topLineSegment.point1.x), static_cast<int>(mapFrame.topLineSegment.point0.y), RED);
     drawHorizontalLine(*pixelsTable, static_cast<int>(mapFrame.bottomLineSegment.point0.x), static_cast<int>(mapFrame.bottomLineSegment.point1.x), static_cast<int>(mapFrame.bottomLineSegment.point0.y), GREEN);
 
@@ -194,25 +185,23 @@ void YasEngine::drawFrame(double& deltaTime)
     drawVerticalLine(*pixelsTable, static_cast<int>(mapFrame.rightLineSegment.point0.y), static_cast<int>(mapFrame.rightLineSegment.point1.y), static_cast<int>(mapFrame.rightLineSegment.point0.x), YELLOW);
 }
 
-void YasEngine::handleInput(SDL_Event& event)
-{
-    if (event.type == SDL_EVENT_QUIT)
-    {
+void YasEngine::handleInput(SDL_Event& event) {
+    if (event.type == SDL_EVENT_QUIT) {
+
         quit = true;
     }
-    else
-    {
+    else {
+
         handleKeyboardInput(event);
         handleMouseInput(event);
     }
 }
 
-void YasEngine::handleKeyboardInput(SDL_Event& event)
-{
-    if (event.type == SDL_EVENT_KEY_DOWN)
-    {
-        switch (event.key.key)
-        {
+void YasEngine::handleKeyboardInput(SDL_Event& event) {
+    if (event.type == SDL_EVENT_KEY_DOWN) {
+
+        switch (event.key.key) {
+
         case SDLK_ESCAPE:
             handleGameStateWhenESCbuttonPushed();
             break;
@@ -235,23 +224,23 @@ void YasEngine::handleKeyboardInput(SDL_Event& event)
             input->test_o_button = true;
             break;
         case SDLK_RETURN:
-            if (gameState == LEVEL_CHANGE_SCREEN)
-            {
+            if (gameState == LEVEL_CHANGE_SCREEN) {
+
                 gameState = GameState::GAMEPLAY;
             }
-            if (gameState == GameState::YOU_WON)
-            {
+            if (gameState == GameState::YOU_WON) {
+
                 gameState = GameState::MAIN_MENU_RESTART;
                 playerWonAndExited = true;
             }
             break;
         case SDLK_TAB:
-            if (gameState == LEVEL_CHANGE_SCREEN)
-            {
+            if (gameState == LEVEL_CHANGE_SCREEN) {
+
                 gameState = GameState::GAMEPLAY;
             }
-            if (gameState == GameState::YOU_WON)
-            {
+            if (gameState == GameState::YOU_WON) {
+
                 gameState = GameState::MAIN_MENU_RESTART;
                 playerWonAndExited = true;
             }
@@ -261,10 +250,10 @@ void YasEngine::handleKeyboardInput(SDL_Event& event)
         }
     }
 
-    if (event.type == SDL_EVENT_KEY_UP)
-    {
-        switch (event.key.key)
-        {
+    if (event.type == SDL_EVENT_KEY_UP) {
+
+        switch (event.key.key) {
+
         case SDLK_W:
             input->up = false;
             break;
@@ -278,8 +267,8 @@ void YasEngine::handleKeyboardInput(SDL_Event& event)
             input->right = false;
             break;
         case SDLK_O:
-            if(input->test_o_button == true)
-            {
+            if(input->test_o_button == true) {
+
                 Mix_PlayChannel(-1, otherSound, 0);
                 input->test_o_button = false;
             }
@@ -290,16 +279,15 @@ void YasEngine::handleKeyboardInput(SDL_Event& event)
     }
 }
 
-void YasEngine::handleMouseInput(SDL_Event& event)
-{
-    if (event.type == SDL_EVENT_MOUSE_MOTION)
-    {
+void YasEngine::handleMouseInput(SDL_Event& event) {
+    if (event.type == SDL_EVENT_MOUSE_MOTION) {
+
         handleMouseMovement();
     }
-    if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN && event.button.button == SDL_BUTTON_LEFT)
-    {
-        switch (gameState)
-        {
+    if (event.type == SDL_EVENT_MOUSE_BUTTON_DOWN && event.button.button == SDL_BUTTON_LEFT) {
+
+        switch (gameState) {
+
         case GAMEPLAY:
             player->isShooting = true;
 
@@ -318,10 +306,10 @@ void YasEngine::handleMouseInput(SDL_Event& event)
         }
     }
 
-    if (event.type == SDL_EVENT_MOUSE_BUTTON_UP && event.button.button == SDL_BUTTON_LEFT)
-    {
-        switch (gameState)
-        {
+    if (event.type == SDL_EVENT_MOUSE_BUTTON_UP && event.button.button == SDL_BUTTON_LEFT) {
+
+        switch (gameState) {
+
       case GAMEPLAY:
                 player->isShooting = false;
             break;
@@ -329,8 +317,7 @@ void YasEngine::handleMouseInput(SDL_Event& event)
     }
 }
 
-void YasEngine::handleMouseMovement()
-{
+void YasEngine::handleMouseMovement() {
     float x;
     float y;
     SDL_GetMouseState(&x, &y);
@@ -343,10 +330,9 @@ void YasEngine::handleMouseMovement()
     windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
 }
 
-void YasEngine::deleteNotAliveObjects()
-{
-    for(int i=0; i<objectsToDraw.size(); i++)
-    {
+void YasEngine::deleteNotAliveObjects() {
+    for(int i=0; i<objectsToDraw.size(); i++) {
+
       if(objectsToDraw[i]->isAlive == false)
       {
             objectsToDraw.erase(objectsToDraw.begin() + i);
@@ -356,34 +342,33 @@ void YasEngine::deleteNotAliveObjects()
 
 void YasEngine::handleSpawningCollectibles()
 {    
-    for (int i = 0; i < 8; i++)
-    {
+    for (int i = 0; i < 8; i++) {
+
         int randomSpawner = Randomizer::drawNumberClosedInterval(0, 15);
         int firstLevelNodeIndex = spawnersPositions[randomSpawner]->firstLevelNode;
         int secondLevelNodeIndex = spawnersPositions[randomSpawner]->secondLevelNode;
-        if (Spawner::numberOfSpawnedObjects < MAX_COLLECTIBLES_TO_SPAWN)
-        {
-            if (isObjectInSameQuarterAsProtagonist(randomSpawner))
-            {
+        if (Spawner::numberOfSpawnedObjects < MAX_COLLECTIBLES_TO_SPAWN) {
+
+            if (isObjectInSameQuarterAsProtagonist(randomSpawner)) {
+
                 continue;
             }
             spawners->childNodes[firstLevelNodeIndex]->childNodes[secondLevelNodeIndex]->spawner->spawnObject(go);
-            if (go != nullptr)
-            {
+            if (go != nullptr) {
+
                 Spawner::numberOfSpawnedObjects++;
                 objectsToDraw.push_back(go);
                 go = nullptr;
       }
         }
-        else
-        {
+        else {
+
             spawners->childNodes[firstLevelNodeIndex]->childNodes[secondLevelNodeIndex]->spawner->resetTimes();
         }
     }
 }
 
-bool YasEngine::isObjectInSameQuarterAsProtagonist(int randomSpawner)
-{
+bool YasEngine::isObjectInSameQuarterAsProtagonist(int randomSpawner) {
     int quarterSize = spawners->childNodes[spawnersPositions[randomSpawner]->firstLevelNode]->childNodes[spawnersPositions[randomSpawner]->secondLevelNode]->size;
     return (
         (player->getPosition().x < (spawners->childNodes[spawnersPositions[randomSpawner]->firstLevelNode]->childNodes[spawnersPositions[randomSpawner]->secondLevelNode]->position->x +
@@ -397,32 +382,29 @@ bool YasEngine::isObjectInSameQuarterAsProtagonist(int randomSpawner)
         );
 }
 
-void YasEngine::handleProjectiles()
-{
+void YasEngine::handleProjectiles() {
     Projectile* projectile = player->shoot();
 
-    if (projectile != nullptr)
-    {
+    if (projectile != nullptr) {
+
         Mix_PlayChannel(-1, shootSound, 0);
         objectsToDraw.push_back(projectile);
     }
 
-    if (projectile != nullptr)
-    {
+    if (projectile != nullptr) {
+
         projectile = nullptr;
     }
 }
 
-void YasEngine::handlePlayer()
-{
-    if (mousePositionChangeInformation->mouseMoved || input->up || input->down || input->left || input->right)
-    {
+void YasEngine::handlePlayer() {
+    if (mousePositionChangeInformation->mouseMoved || input->up || input->down || input->left || input->right) {
+
         player->rotateToMousePositionInLocalCoordinateSystem(static_cast<float>(mousePositionChangeInformation->x), static_cast<float>(mousePositionChangeInformation->y), windowDimensions);
     }
 }
 
-void YasEngine::preparePlayer()
-{
+void YasEngine::preparePlayer() {
     srand(clock());
     int sizeOfGameplaySpace = static_cast<int>(windowDimensions->x * 0.25F);
     int x = Randomizer::drawNumberClosedInterval(0, sizeOfGameplaySpace) - 64;
@@ -435,14 +417,13 @@ void YasEngine::preparePlayer()
     objectsToDraw.push_back(player);
 }
 
-void YasEngine::update(double& deltaTime)
-{
-    if (levelChanged)
-    {
-        for (int i = 0; i < objectsToDraw.size(); i++)
-        {
-            if (objectsToDraw[i]->iAm != GameObject::PROTAGONIST)
-            {
+void YasEngine::update(double& deltaTime) {
+    if (levelChanged) {
+
+        for (int i = 0; i < objectsToDraw.size(); i++) {
+
+            if (objectsToDraw[i]->iAm != GameObject::PROTAGONIST) {
+
                 objectsToDraw[i]->isAlive = false;
             }
         }
@@ -451,17 +432,17 @@ void YasEngine::update(double& deltaTime)
     
     deleteNotAliveObjects();
 
-    switch(gameState)
-    {
+    switch(gameState) {
+
     case GAMEPLAY:
         handleSpawningCollectibles();
         handlePhysics();
-        if(levelChanged)
-        {
+        if(levelChanged) {
+
             gameState = LEVEL_CHANGE_SCREEN;
         }
-        if(levelChanged && level == -1)
-        {
+        if(levelChanged && level == -1) {
+
             gameState = GameState::YOU_WON;
         }
         moveObjects();
@@ -470,14 +451,13 @@ void YasEngine::update(double& deltaTime)
     break;
     }
 
-    if(playerWonAndExited)
-    {
+    if(playerWonAndExited) {
+
         resetAll();
     }
 }
 
-void YasEngine::resetAll()
-{
+void YasEngine::resetAll() {
     deleteNotAliveObjects();
     level = 1;
     previousLevel = 0;
@@ -489,13 +469,12 @@ void YasEngine::resetAll()
     playerWonAndExited = false;
 }
 
-void YasEngine::render(double& deltaTime)
-{
+void YasEngine::render(double& deltaTime) {
     pixelsTable->clearColor(BLACK);
     surfaceWithMathBasedEffects->clearColor(BLACK);
 
-    switch (gameState)
-    {
+    switch (gameState) {
+
     case INTRO:
         writer.write( (-238)/2, 200, "BEOUTY.OF.MATH", LIGHT_BLUE, *pixelsTable); // TODO write title and version and tha game is powered by YasEngine
         writer.write((-170)/2, 100, "POWERED.BY", RED, *pixelsTable);
@@ -544,26 +523,24 @@ void YasEngine::render(double& deltaTime)
     SDL_RenderPresent(renderer);
 }
 
-void YasEngine::renderGameObjects(double& deltaTime)
-{
-    for (auto object : objectsToDraw)
-    {
-        if (object->isAlive) // TODO if gamestate == gameplay
-        {
+void YasEngine::renderGameObjects(double& deltaTime) {
+    for (auto object : objectsToDraw) {
+
+        if (object->isAlive) { // TODO if gamestate == gameplay
+
             drawPolygon(object, *pixelsTable);
         }
     }
 }
 
-void YasEngine::renderOnViewports(double& deltaTime)
-{
-    if (tests)
-    {
+void YasEngine::renderOnViewports(double& deltaTime) {
+    if (tests) {
+
         surfaceWithMathBasedEffects->drawCartesianAxies();
     }
 
-    switch (level)
-    {
+    switch (level) {
+
 
     case 1:
         surfaceWithMathBasedEffects->drawNumbersAsGroupOfLines(primeNumbersPicture->pointsSet->points, primeNumbersPicture->basePointsFuel, primesPointsHarvested, LIGHT_BLUE, false);
@@ -585,11 +562,10 @@ void YasEngine::renderOnViewports(double& deltaTime)
     surfaceWithMathBasedEffects->copyPixelsInToPIxelTable(*pixelsTable);
 }
 
-void YasEngine::renderLevelChange()
-{
+void YasEngine::renderLevelChange() {
 
-    switch (previousLevel)
-    {
+    switch (previousLevel) {
+
 
     case 1:
 
@@ -618,8 +594,7 @@ void YasEngine::renderLevelChange()
     }
 }
 
-void YasEngine::renderWonScreen()
-{
+void YasEngine::renderWonScreen() {
     writer.write((-119) / 2, 310, "YOU.WON", LIGHT_BLUE, *pixelsTable);
     writer.write((-408) / 2, 210, "MATHEMATICS.IS.BEAUTIFUL", YELLOW, *pixelsTable);
     writer.write((-578) / 2, 110, "YOU.ARE.NOT.SUPPOSED.TO.BELIEVE.ME", PURPLE, *pixelsTable);
@@ -630,43 +605,43 @@ void YasEngine::renderWonScreen()
     writer.write((-425) / 2, -210, "SINE.AND.COSINE.FUNCTIONS", LIGHT_BLUE, *pixelsTable);
 }
 
-void YasEngine::handlePhysics()
-{
-    if (objectsToDraw.size() >= 3)
-    {
-        for (int i = 0; i < static_cast<int>(objectsToDraw.size() - 2); i++)
-        {
-            if (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE)
-            {
+void YasEngine::handlePhysics() {
+    if (objectsToDraw.size() >= 3) {
+
+        for (int i = 0; i < static_cast<int>(objectsToDraw.size() - 2); i++) {
+
+            if (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE) {
+
                 handleCollectiblesWithWallsCollisions(objectsToDraw[i]);
             }
 
-            if (objectsToDraw[i]->iAm == GameObject::PROTAGONIST)
-            {
+            if (objectsToDraw[i]->iAm == GameObject::PROTAGONIST) {
+
                 handleProtagonistWithWallsCollisions(objectsToDraw[i]);
             }
 
-            for (int j = i; j < static_cast<int>(objectsToDraw.size()); j++)
-            {
+            for (int j = i; j < static_cast<int>(objectsToDraw.size()); j++) {
+
                 if (
           objectsToDraw[i] == objectsToDraw[j]                                                                    || 
                     (objectsToDraw[i]->iAm == GameObject::PROJECTILE && objectsToDraw[j]->iAm == GameObject::PROJECTILE)    ||
                     (objectsToDraw[i]->iAm == GameObject::PROJECTILE && objectsToDraw[j]->iAm == GameObject::PROTAGONIST)   ||
                     (objectsToDraw[i]->iAm == GameObject::PROTAGONIST && objectsToDraw[j]->iAm == GameObject::PROJECTILE)   ||
                     (objectsToDraw[i]->iAm == GameObject::COLLECTIBLE && objectsToDraw[j]->iAm == GameObject::COLLECTIBLE)
-                    )
-                {
+                    ) {
+
                     continue;
                 }
 
                 // LEFT Projectile <-> Collectible && Protagonist <-> Collectible)
-                if (objectsToDraw[i]->isAlive && objectsToDraw[j]->isAlive)
-                {
+                if (objectsToDraw[i]->isAlive && objectsToDraw[j]->isAlive) {
+
                     GameObject* protagonist = getProtagonist(objectsToDraw[i], objectsToDraw[j]);
                     GameObject* gameObj = getNotProtagonist(objectsToDraw[i], objectsToDraw[j]);
 
                     if((protagonist != nullptr) && gameObj->iAm == GameObject::COLLECTIBLE && !gameObj->collider.isInCollision && Collider::isCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
-                    {
+ {
+
                         // handleBuildingGraph
                         handleDisassemblingGraphs(gameObj);
 
@@ -675,18 +650,21 @@ void YasEngine::handlePhysics()
 
                     // if exited from collision
                     if ((protagonist != nullptr) && gameObj->iAm == GameObject::COLLECTIBLE && gameObj->collider.isInCollision && !Collider::isCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
-                    {
+ {
+
                         gameObj->collider.isInCollision = false;
                     }
 
                     if ((protagonist == nullptr) && Collider::isCollision(objectsToDraw[i]->collider, objectsToDraw[j]->collider))
-                    {
+ {
+
                         objectsToDraw[i]->isAlive = false;
                         objectsToDraw[j]->isAlive = false;
                         Mix_PlayChannel(-1, hitSound, 0);
 
                         if (gameObj->iAm == GameObject::COLLECTIBLE)
-                        {
+ {
+
                             handleDestroingCollectibles(gameObj);
                             handlingAssemblingGraphs(gameObj);
                         }
@@ -697,31 +675,30 @@ void YasEngine::handlePhysics()
     }
 } // END OF handlePhysics()
 
-void YasEngine::handleDisassemblingGraphs(GameObject* gameObj)
-{
-    if(primesPointsHarvested < 0)
-    {
+void YasEngine::handleDisassemblingGraphs(GameObject* gameObj) {
+    if(primesPointsHarvested < 0) {
+
         primesPointsHarvested = 0;
         return;
     }
-    if (fibbsPointsHarvested < 0)
-    {
+    if (fibbsPointsHarvested < 0) {
+
         fibbsPointsHarvested = 0;
         return;
     }
-    if (sinePointsHarvested < 0)
-    {
+    if (sinePointsHarvested < 0) {
+
         sinePointsHarvested = 0;
         return;
     }
-    if (cosinePointsHarvested < 0)
-    {
+    if (cosinePointsHarvested < 0) {
+
         cosinePointsHarvested = 0;
         return;
     }
 
-    switch (level)
-    {
+    switch (level) {
+
         case 1:
                 primesPointsHarvested -= gameObj->numberOfVertices;
         break;
@@ -746,20 +723,18 @@ void YasEngine::handleDisassemblingGraphs(GameObject* gameObj)
     }
 }
 
-void YasEngine::handleDestroingCollectibles(GameObject* gameObj)
-{
-    if (Spawner::numberOfSpawnedObjects > 0)
-    {
+void YasEngine::handleDestroingCollectibles(GameObject* gameObj) {
+    if (Spawner::numberOfSpawnedObjects > 0) {
+
         --Spawner::numberOfSpawnedObjects;
     }
-    else
-    {
+    else {
+
         Spawner::numberOfSpawnedObjects = 0;
     }
 }
 
-void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
-{
+void YasEngine::handlingAssemblingGraphs(GameObject* gameObj) {
     int newValueOfPrimesPointsHarvested = primesPointsHarvested + gameObj->numberOfVertices;
     int newValueOfFibbsPointsHarvested = fibbsPointsHarvested + gameObj->numberOfVertices;
     int newSinePointsHarvested = sinePointsHarvested + gameObj->numberOfVertices;
@@ -767,8 +742,8 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
 
     int test1 = primesPointsHarvested;
 
-    if (level == 1 && newValueOfPrimesPointsHarvested >= primeNumbersPicture->basePointsFuel)
-    {
+    if (level == 1 && newValueOfPrimesPointsHarvested >= primeNumbersPicture->basePointsFuel) {
+
         primesPointsHarvested = primeNumbersPicture->basePointsFuel;
         previousLevel = level;
         level = 2;
@@ -776,8 +751,8 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
         return;
     }
 
-    if (level == 2 && newValueOfFibbsPointsHarvested >= fibonacciePicture->basePointsFuel)
-    {
+    if (level == 2 && newValueOfFibbsPointsHarvested >= fibonacciePicture->basePointsFuel) {
+
         fibbsPointsHarvested = fibonacciePicture->basePointsFuel;
         previousLevel = level;
         level = 3;
@@ -787,8 +762,8 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
 
     int some = sinePointsHarvested;
 
-    if (level == 3 && newSinePointsHarvested >= sinePicture->basePointsFuel)
-    {
+    if (level == 3 && newSinePointsHarvested >= sinePicture->basePointsFuel) {
+
         sinePointsHarvested = sinePicture->basePointsFuel;
         previousLevel = level;
         level = 4;
@@ -796,8 +771,8 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
         return;
     }
 
-    if (level == 4 && newCosinePointsHarvested >= cosinePicture->basePointsFuel)
-    {
+    if (level == 4 && newCosinePointsHarvested >= cosinePicture->basePointsFuel) {
+
         cosinePointsHarvested = cosinePicture->basePointsFuel;
         previousLevel = level;
         level = -1;
@@ -805,35 +780,35 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
         return;
     }
 
-    switch (level)
-    {
+    switch (level) {
+
     case 1:
         
-        if (newValueOfPrimesPointsHarvested <= primeNumbersPicture->basePointsFuel)
-        {
+        if (newValueOfPrimesPointsHarvested <= primeNumbersPicture->basePointsFuel) {
+
             primesPointsHarvested = newValueOfPrimesPointsHarvested;
         }
         break;
     case 2:
 
-        if (newValueOfFibbsPointsHarvested <= fibonacciePicture->basePointsFuel)
-        {
+        if (newValueOfFibbsPointsHarvested <= fibonacciePicture->basePointsFuel) {
+
             fibbsPointsHarvested = newValueOfFibbsPointsHarvested;
         }
             
         break;
     case 3:
         
-        if (newSinePointsHarvested <= sinePicture->basePointsFuel)
-        {
+        if (newSinePointsHarvested <= sinePicture->basePointsFuel) {
+
             sinePointsHarvested = newSinePointsHarvested;
         }
             
         break;
     case 4:
         
-        if (newCosinePointsHarvested <= cosinePicture->basePointsFuel)
-        {
+        if (newCosinePointsHarvested <= cosinePicture->basePointsFuel) {
+
             cosinePointsHarvested = newCosinePointsHarvested;
         }
             
@@ -843,106 +818,100 @@ void YasEngine::handlingAssemblingGraphs(GameObject* gameObj)
     }
 }
 
-void YasEngine::handleCollectiblesWithWallsCollisions(GameObject* object)
-{
+void YasEngine::handleCollectiblesWithWallsCollisions(GameObject* object) {
     float leftWall = mapFrame.leftLineSegment.point0.x;
     float rightWall = mapFrame.rightLineSegment.point0.x;
     float topWall = mapFrame.topLineSegment.point0.y;
     float bottomWall = mapFrame.bottomLineSegment.point0.y;
 
-    if (object->iAm == GameObject::COLLECTIBLE)
-    {
+    if (object->iAm == GameObject::COLLECTIBLE) {
 
-        if (object->getColliderLeftSide() < static_cast<int>(leftWall))
-        {
+
+        if (object->getColliderLeftSide() < static_cast<int>(leftWall)) {
+
             bounceCollectibles(object, LEFT);
         }
 
-        if (object->getColliderRightSide() > static_cast<int>(rightWall))
-        {
+        if (object->getColliderRightSide() > static_cast<int>(rightWall)) {
+
             bounceCollectibles(object, RIGHT);
         }
 
-        if (object->getColliderTopSide() < static_cast<int>(topWall))
-        {
+        if (object->getColliderTopSide() < static_cast<int>(topWall)) {
+
             bounceCollectibles(object, TOP);
         }
 
-        if (object->getColliderBottomSide() > static_cast<int>(bottomWall))
-        {
+        if (object->getColliderBottomSide() > static_cast<int>(bottomWall)) {
+
             bounceCollectibles(object, BOTTOM);
         }
     }
 }
 
-bool YasEngine::isObjectProtagonist(GameObject* object)
-{
+bool YasEngine::isObjectProtagonist(GameObject* object) {
     return object->iAm == GameObject::PROTAGONIST;
 }
 
-GameObject* YasEngine::getProtagonist(GameObject* object0, GameObject* object1)
-{
-    if (isObjectProtagonist(object0))
-    {
+GameObject* YasEngine::getProtagonist(GameObject* object0, GameObject* object1) {
+    if (isObjectProtagonist(object0)) {
+
         return object0;
     }
-    if (isObjectProtagonist(object1))
-    {
+    if (isObjectProtagonist(object1)) {
+
         return object1;
     }
     return nullptr;
 }
 
-GameObject* YasEngine::getNotProtagonist(GameObject* object0, GameObject* object1)
-{
-    if (!isObjectProtagonist(object0))
-    {
+GameObject* YasEngine::getNotProtagonist(GameObject* object0, GameObject* object1) {
+    if (!isObjectProtagonist(object0)) {
+
         return object0;
     }
-    if (!isObjectProtagonist(object1))
-    {
+    if (!isObjectProtagonist(object1)) {
+
         return object1;
     }
     return nullptr;
 }
 
-void YasEngine::handleProtagonistWithWallsCollisions(GameObject* object)
-{
+void YasEngine::handleProtagonistWithWallsCollisions(GameObject* object) {
     float leftWall = mapFrame.leftLineSegment.point0.x;
     float rightWall = mapFrame.rightLineSegment.point0.x;
     float topWall = mapFrame.topLineSegment.point0.y;
     float bottomWall = mapFrame.bottomLineSegment.point0.y;
 
-    if (object->getColliderLeftSide() < static_cast<int>(leftWall))
-    {
+    if (object->getColliderLeftSide() < static_cast<int>(leftWall)) {
+
         moveObjectToMapBoundries(object, LEFT);
         // bounceCollectibles(object, LEFT);
     }
 
-    if (object->getColliderRightSide() > static_cast<int>(rightWall))
-    {
+    if (object->getColliderRightSide() > static_cast<int>(rightWall)) {
+
         moveObjectToMapBoundries(object, RIGHT);
         // bounceCollectibles(object, RIGHT);
     }
 
-    if (object->getColliderTopSide() > static_cast<int>(topWall))
-    {
+    if (object->getColliderTopSide() > static_cast<int>(topWall)) {
+
         moveObjectToMapBoundries(object, TOP);
         // bounceCollectibles(object, TOP);
     }
 
-    if (object->getColliderBottomSide() < static_cast<int>(bottomWall))
-    {
+    if (object->getColliderBottomSide() < static_cast<int>(bottomWall)) {
+
         moveObjectToMapBoundries(object, BOTTOM);
         // bounceCollectibles(object, BOTTOM);
     }
 }
 
-void YasEngine::bounceCollectibles(GameObject* gameObject, Wall wall)
-{
+void YasEngine::bounceCollectibles(GameObject* gameObject, Wall wall) {
     Vector2D<float> normal;
-    switch (wall)
-    {
+    switch (wall) {
+
     case LEFT:
         normal.x = 1;
         normal.y = 0;
@@ -972,10 +941,9 @@ void YasEngine::bounceCollectibles(GameObject* gameObject, Wall wall)
     // objectsToDraw[i]->setX(rightWall - objectsToDraw[i]->collider.radius - 1);
 }
 
-void YasEngine::moveObjectToMapBoundries(GameObject* gameObject, Wall wall, int shift)
-{
-    switch (wall)
-    {
+void YasEngine::moveObjectToMapBoundries(GameObject* gameObject, Wall wall, int shift) {
+    switch (wall) {
+
     case LEFT:
         gameObject->setX(mapFrame.leftLineSegment.point0.x + gameObject->collider.radius + shift);
         break;
@@ -994,35 +962,33 @@ void YasEngine::moveObjectToMapBoundries(GameObject* gameObject, Wall wall, int 
     }
 }
 
-void YasEngine::moveObjects()
-{
-    for (auto object : objectsToDraw)
-    {
-        if (object->isAlive)
-        {
+void YasEngine::moveObjects() {
+    for (auto object : objectsToDraw) {
+
+        if (object->isAlive) {
+
             object->move(static_cast<float>(deltaTime));
             object->regeneratePolygon();
         }
     }
 }
 
-void YasEngine::prepareSoundAndMusic()
-{
+void YasEngine::prepareSoundAndMusic() {
     
     audioSpecs.freq = 44100;
     audioSpecs.format = MIX_DEFAULT_FORMAT;
     audioSpecs.channels = 2;
 
-    if (Mix_OpenAudio(0, &audioSpecs) < 0)
-    {
+    if (Mix_OpenAudio(0, &audioSpecs) < 0) {
+
         std::cout << "Error cannot open audio device" << std::endl;
     }
 
     Mix_Init(MIX_DEFAULT_FORMAT);
 
     music = Mix_LoadMUS("music.wav");
-    if (music == NULL)
-    {
+    if (music == NULL) {
+
         std::cout << "Error while loading music. Cannot load music." << std::endl;
         std::cout << "SDL message: " << SDL_GetError() << std::endl << " | Mix library error: " << Mix_GetError() << std::endl;
         quit = true;
@@ -1041,8 +1007,8 @@ void YasEngine::prepareSoundAndMusic()
     Mix_VolumeChunk(otherSound, otherVolume);
 
 
-    if (shootSound == NULL || hitSound == NULL || otherSound == NULL)
-    {
+    if (shootSound == NULL || hitSound == NULL || otherSound == NULL) {
+
         std::cout << "Error while loading sounds. Cannot load sounds." << std::endl;
         std::cout << "SDL message: " << SDL_GetError() << std::endl << " | Mix library error: " << Mix_GetError() << std::endl;
         quit = true;
@@ -1050,8 +1016,7 @@ void YasEngine::prepareSoundAndMusic()
     Mix_PlayMusic(music, 999);
 }
 
-void YasEngine::prepareGameWorld()
-{
+void YasEngine::prepareGameWorld() {
     // srand(clock());
 
     int mainNodeX = -(windowDimensions->x / 4);
@@ -1064,16 +1029,16 @@ void YasEngine::prepareGameWorld()
 
     // adding nodes(first level) to head node
     Node::addNodes(*spawners);
-    for(int i=0; i<4; i++)
-    {
+    for(int i=0; i<4; i++) {
+
         // adding nodes(second level) to nodes
         Node::addNodes(*spawners->childNodes[i]);
     }
 
-    for(int i=0; i<4; i++)
-    {
-        for (int j = 0; j < 4; j++)
-        {
+    for(int i=0; i<4; i++) {
+
+        for (int j = 0; j < 4; j++) {
+
             spawnersPositions.push_back(new NodeNumbersOnTwoProceedingLevels(i, j));
         }
     }
@@ -1111,17 +1076,17 @@ void YasEngine::prepareGameWorld()
     // TO READ -----------> Latice
 
     // calculate position of player on tree 1 - level of nodes and number of node and 2 level of node and number
-    for(int i=0; i<4; i++)
-    {
-        for(int j=0; j<4; j++)
-        {
+    for(int i=0; i<4; i++) {
+
+        for(int j=0; j<4; j++) {
+
             if (
                 player->getPosition().x >= (spawners->childNodes[i]->childNodes[j]->position->x - spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
                 player->getPosition().x < (spawners->childNodes[i]->childNodes[j]->position->x + spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
                 player->getPosition().y <= (spawners->childNodes[i]->childNodes[j]->position->y + spawners->childNodes[i]->childNodes[j]->size * 0.5) &&
                 player->getPosition().y > (spawners->childNodes[i]->childNodes[j]->position->y - spawners->childNodes[i]->childNodes[j]->size * 0.5)
-                )
-            {
+                ) {
+
                 playerPosition.firstLevelNode = i;
                 playerPosition.secondLevelNode = j;
                 goto afterFor;
@@ -1130,10 +1095,10 @@ void YasEngine::prepareGameWorld()
     }
     afterFor:
 
-    for (int i = 0; i < 4; i++)
-    {
-        for (int j = 0; j < 4; j++)
-        {
+    for (int i = 0; i < 4; i++) {
+
+        for (int j = 0; j < 4; j++) {
+
             spawners->childNodes[i]->childNodes[j]->spawner = new Spawner(spawners->childNodes[i]->childNodes[j]->position->x, spawners->childNodes[i]->childNodes[j]->position->y);
         }
     }
@@ -1146,8 +1111,7 @@ void YasEngine::prepareGameWorld()
     prepareDataForDrawingGraphs();
 }
 
-void YasEngine::setFrameAroundGameplaySpace()
-{
+void YasEngine::setFrameAroundGameplaySpace() {
     const int VERTHICAL_SHIFT=10;
     const int HORIZONTAL_SHIFT=10;
 
@@ -1188,16 +1152,14 @@ void YasEngine::setFrameAroundGameplaySpace()
     mapFrame.rightLineSegment.point1.y = static_cast<float>((-(windowDimensions->y / 2)) + VERTHICAL_SHIFT);
 }
 
-void YasEngine::prepareDataForDrawingGraphs()
-{
+void YasEngine::prepareDataForDrawingGraphs() {
     preparePrimesDrawing();
     prepareFibonacciDrawing();
     prepareSineDrawing();
     prepareCosineDrawing();
 }
 
-void YasEngine::prepareSineDrawing()
-{
+void YasEngine::prepareSineDrawing() {
     std::map<float, float>* sines = generateSineNumbers(40);//generatePrimeNumbersLessThanN(1000);
     sinePointsHarvested = 0;
 
@@ -1210,8 +1172,8 @@ void YasEngine::prepareSineDrawing()
     // for (int i = 0; i < sinuses->size(); i++)
     // {
     int i = 0;
-    for(std::pair<float, float> pair: *sines)
-    {
+    for(std::pair<float, float> pair: *sines) {
+
         std::map<float, float>* m = new std::map<float, float>();
         m->insert(pair);
         pairNumbersMap.at("Sines")->insert(std::pair<int, std::map<float, float>*>(i,m));
@@ -1222,8 +1184,7 @@ void YasEngine::prepareSineDrawing()
     sinePicture = new MathPicture(sines, new SinePointsGenerator());
 }
 
-void YasEngine::prepareCosineDrawing()
-{
+void YasEngine::prepareCosineDrawing() {
     std::map<float, float>* cosines = generateCosineNumbers(40);//generatePrimeNumbersLessThanN(1000);
     cosinePointsHarvested = 0;
 
@@ -1236,8 +1197,8 @@ void YasEngine::prepareCosineDrawing()
     // for (int i = 0; i < sinuses->size(); i++)
     // {
     int i = 0;
-    for (std::pair<float, float> pair : *cosines)
-    {
+    for (std::pair<float, float> pair : *cosines) {
+
         std::map<float, float>* m = new std::map<float, float>();
         m->insert(pair);
         pairNumbersMap.at("Cosines")->insert(std::pair<int, std::map<float, float>*>(i, m));
@@ -1248,30 +1209,28 @@ void YasEngine::prepareCosineDrawing()
     cosinePicture = new MathPicture(cosines, new CosinePointsGenerator());
 }
 
-void YasEngine::prepareFibonacciDrawing()
-{
+void YasEngine::prepareFibonacciDrawing() {
     std::vector<int> fibbs = generateNfibonacciNumbers(40);
     fibbsPointsHarvested = 0;
 
     numbersMap.insert(std::pair<std::string, std::map<int, float>*>("Fibbs", new std::map<int, float>));
 
-    for (int i = 0; i < fibbs.size(); i++)
-    {
+    for (int i = 0; i < fibbs.size(); i++) {
+
         numbersMap.at("Fibbs")->insert(std::pair<int, int>(i, fibbs.at(i)));
     }
 
     fibonacciePicture = new MathPicture(numbersMap.at("Fibbs"), new FibonacciPointsGenerator());
 }
 
-void YasEngine::preparePrimesDrawing()
-{
+void YasEngine::preparePrimesDrawing() {
     std::vector<int> primes = generatePrimeNumbersLessThanN(1000);
     primesPointsHarvested = 0;
 
     numbersMap.insert(std::pair<std::string, std::map<int, float>*>("Primes", new std::map<int, float>));
 
-    for (int i = 0; i < primes.size(); i++)
-    {
+    for (int i = 0; i < primes.size(); i++) {
+
         numbersMap.at("Primes")->insert(std::pair<int, int>(i, primes.at(i)));
     }
 
@@ -1280,8 +1239,7 @@ void YasEngine::preparePrimesDrawing()
     std::cout << "preparedPrimesDrawing" << "\n";
 }
 
-void YasEngine::prepareInterface()
-{
+void YasEngine::prepareInterface() {
     //Button 1
     buttons.push_back(new Button(Button::RESTART_START, "START", RED));
     buttons.at(0)->setPosition(0, 50);
@@ -1323,22 +1281,20 @@ void YasEngine::prepareInterface()
     setFrameAroundGameplaySpace();
 }
 
-void YasEngine::drawButtons()
-{
-    for(unsigned int i=0; i<buttons.size(); i++)
-    {
+void YasEngine::drawButtons() {
+    for(unsigned int i=0; i<buttons.size(); i++) {
+
         drawPolygon(buttons.at(i), *pixelsTable);
         writer.write(static_cast<int>(buttons.at(i)->getPosition().x - dynamic_cast<Button*>(buttons.at(i))->buttonTextWidth * 0.5F + ScreenWriter::FONT_WIDTH * 0.5F), static_cast<int>(buttons.at(i)->getPosition().y), dynamic_cast<Button*>(buttons.at(i))->text,dynamic_cast<Button*>(buttons.at(i))->color, *pixelsTable);
     }
 }
 
-Button::ButtonId YasEngine::checkWhichButtonClicked()
-{
+Button::ButtonId YasEngine::checkWhichButtonClicked() {
     float x = static_cast<float>(mousePositionChangeInformation->x);
     float y = static_cast<float>(mousePositionChangeInformation->y);
     windowPositionToCartesianPosition(x, y, windowDimensions);
-    for(unsigned int i=0; i<buttons.size(); i++)
-    {
+    for(unsigned int i=0; i<buttons.size(); i++) {
+
         if(
         // mouse cursor under top Y
         y <= (buttons.at(i)->getPosition().y + dynamic_cast<Button*>(buttons.at(i))->buttonHeight * 0.5F) &&
@@ -1348,18 +1304,17 @@ Button::ButtonId YasEngine::checkWhichButtonClicked()
         x >= (buttons.at(i)->getPosition().x - dynamic_cast<Button*>(buttons.at(i))->buttonWidth * 0.5F) &&
         // cursor to the left of X
         x <= (buttons.at(i)->getPosition().x + dynamic_cast<Button*>(buttons.at(i))->buttonWidth * 0.5F)
-        )
-        {
+        ) {
+
             return dynamic_cast<Button*>(buttons.at(i))-> buttonId;
         }
     }
     return Button::NONE;
 }
 
-void YasEngine::handleClickedButtons()
-{
-    switch(checkWhichButtonClicked())
-    {
+void YasEngine::handleClickedButtons() {
+    switch(checkWhichButtonClicked()) {
+
         case Button::RESTART_START:
             gameState = GameState::GAMEPLAY;
             break;
@@ -1371,10 +1326,9 @@ void YasEngine::handleClickedButtons()
     }
 }
 
-void YasEngine::handleGameStateWhenESCbuttonPushed()
-{
-    switch(gameState)
-    {            
+void YasEngine::handleGameStateWhenESCbuttonPushed() {
+    switch(gameState) {
+            
         case INTRO:
             gameState = GameState::MAIN_MENU_RESTART;
         break;
@@ -1399,10 +1353,9 @@ void YasEngine::handleGameStateWhenESCbuttonPushed()
     }
 }
 
-void YasEngine::handleGameStateWhenSPACEbuttonPushed()
-{
-    switch(gameState)
-    {
+void YasEngine::handleGameStateWhenSPACEbuttonPushed() {
+    switch(gameState) {
+
         case INTRO:
             gameState = GameState::MAIN_MENU_RESTART;
             break;

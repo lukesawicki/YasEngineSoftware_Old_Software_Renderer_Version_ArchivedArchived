@@ -6,8 +6,7 @@
 #include"Vector2D.hpp"
 #include"Vector4D.hpp"
 
-class GameObject
-{
+class GameObject {
   public:
 
     enum WhoAmI { DEFAULT_VALUE, PROTAGONIST, PROJECTILE, COLLECTIBLE, GUI_ELEMENT };
@@ -35,52 +34,52 @@ class GameObject
     virtual void generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices) = 0;
     virtual void regeneratePolygon() = 0;
       
-    void setPosition(float x, float y)
-    {
+    void setPosition(float x, float y) {
+
       position.x = x;
       position.y = y;
             moveCollider();
     }
 
-        void setX(float x)
-        {
+        void setX(float x) {
+
             position.x = x;
             moveCollider();
         }
 
-        void setY(float y)
-        {
+        void setY(float y) {
+
             position.y = y;
             moveCollider();
         }
 
-        virtual Vector2D<float> getPosition()
-        {
+        virtual Vector2D<float> getPosition() {
+
             return position;
         }
 
-    virtual int getColliderLeftSide()
-    {
+    virtual int getColliderLeftSide() {
+
       return static_cast<int>(position.x - collider.radius);
     }
 
-    virtual int getColliderRightSide()
-    {
+    virtual int getColliderRightSide() {
+
       return static_cast<int>(position.x + collider.radius);
     }
 
-    virtual int getColliderTopSide()
-    {
+    virtual int getColliderTopSide() {
+
       return static_cast<int>(position.y + collider.radius);
     }
 
-    virtual int getColliderBottomSide()
-    {
+    virtual int getColliderBottomSide() {
+
       return static_cast<int>(position.y - collider.radius);
     }
 
-    virtual void setPosition(const Vector2D<float>& position)
-    {
+    virtual void setPosition(const Vector2D<float>& position) {
+
       this->position.x = position.x;
       this->position.y = position.y;
             moveCollider();
@@ -88,14 +87,14 @@ class GameObject
     
     virtual void move(float deltaTime) = 0;
 
-    virtual void moveCollider()
-    {
+    virtual void moveCollider() {
+
       collider.x = position.x;
       collider.y = position.y;
     }
 
-    virtual void setColor(const Vector4D<Uint8>& color)
-    {
+    virtual void setColor(const Vector4D<Uint8>& color) {
+
       this->color.x = color.x;
       this->color.y = color.y;
       this->color.z = color.z;

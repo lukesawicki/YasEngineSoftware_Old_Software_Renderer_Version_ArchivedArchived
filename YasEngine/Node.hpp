@@ -5,8 +5,7 @@
 #include"Spawner.hpp"
 #include"Vector2D.hpp"
 
-class Node
-{
+class Node {
   public:
 
     Node(Vector2D<int>* position, int size, Node* parent);
@@ -19,8 +18,8 @@ class Node
     Spawner* takeOutSpawner();
     void createSpanwer(const std::vector<int>& spawnerPositionNumber);
 
-    static void addNodes(Node& parentNode)
-    {
+    static void addNodes(Node& parentNode) {
+
       short factorX = 1;
       short factorY = 1;
 
@@ -28,10 +27,9 @@ class Node
 
       int childNodePositionX = 0;
       int childNodePositionY = 0;
-      for (int i = 0; i < 4; i++)
-      {
-        switch (i)
-        {
+      for (int i = 0; i < 4; i++) {
+        switch (i) {
+
         case 0:
           factorX = -1;
           factorY = 1;
@@ -63,8 +61,8 @@ class Node
       } // end for
     }
 
-        static std::vector<Vector2D<int>*> generateTestPositions()
-        {
+        static std::vector<Vector2D<int>*> generateTestPositions() {
+
             short factorX = 1;
             short factorY = 1;
 
@@ -83,10 +81,9 @@ class Node
             int secondLevelQuadsize = 0;
 
 
-            for(int j=0; j < 4; j++)
-            {
-                switch(j)
-              {
+            for(int j=0; j < 4; j++) {
+
+                switch(j) {
                     case 0:
                         factorX = -1;
                         factorY = 1;;
@@ -111,10 +108,9 @@ class Node
 
                 positions.push_back(new Vector2D<int>(firstLevelQuadPositionX, firstLevelQuadPositionY));
 
-                for (int i = 0; i < 4; i++)
-                {
-                    switch (i)
-                  {
+                for (int i = 0; i < 4; i++) {
+
+                    switch (i) {
                         case 0:
                             factorX = -1;
                             factorY = 1;;

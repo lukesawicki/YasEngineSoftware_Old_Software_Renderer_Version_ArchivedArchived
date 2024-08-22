@@ -2,21 +2,20 @@
 #define POINTSSET_HPP
 #include "Vector2D.hpp"
 
-class PointsSet
-{
+class PointsSet {
   public:
-    PointsSet()
-    {
+    PointsSet() {
+
       points = nullptr;
       pointsNumber = 0;
     }
-    ~PointsSet()
-    {
+    ~PointsSet() {
+
       delete[] points;
       pointsNumber = 0;
     }
-    PointsSet(Vector2D<float>* newPoints, long pointsNumber)
-    {
+    PointsSet(Vector2D<float>* newPoints, long pointsNumber) {
+
       points = newPoints;
       this->pointsNumber = pointsNumber;
     }

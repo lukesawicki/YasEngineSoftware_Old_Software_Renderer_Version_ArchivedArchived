@@ -4,8 +4,7 @@
 
 #include"PointsGenerator.hpp"
 
-class CosinePointsGenerator : public PointsGenerator
-{
+class CosinePointsGenerator : public PointsGenerator {
   public:
     ~CosinePointsGenerator();
     PointsSet* generatePoints(int numberOfNumbers, std::map<int, float>* numbers) override;

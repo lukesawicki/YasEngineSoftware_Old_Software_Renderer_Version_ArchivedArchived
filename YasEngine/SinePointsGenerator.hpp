@@ -5,8 +5,7 @@
 #include"PointsGenerator.hpp"
 #include"PointsSet.hpp"
 
-class SinePointsGenerator: public PointsGenerator
-{
+class SinePointsGenerator: public PointsGenerator {
   public:
     ~SinePointsGenerator();
     PointsSet* generatePoints(int numberOfNumbers, std::map<int, float>* numbers) override;

@@ -3,12 +3,10 @@
 #include "YasGraphicsLibrary.hpp"
 #include "Randomizer.hpp"
 
-FontObject::FontObject()
-{
+FontObject::FontObject() {
 }
 
-void FontObject::initialize(float radius, float x, float y, const Vector2D<float>& direction, int numberOfVertices)
-{
+void FontObject::initialize(float radius, float x, float y, const Vector2D<float>& direction, int numberOfVertices) {
   isAlive = true;
   iAm = GameObject::GUI_ELEMENT;
   collider.radius = 17;
@@ -25,23 +23,20 @@ void FontObject::initialize(float radius, float x, float y, const Vector2D<float
   setRandomColor();
 }
 
-FontObject::~FontObject()
-{
+FontObject::~FontObject() {
   delete[] worldVertices;
   delete[] localVertices;
 }
 
-void FontObject::generate()
-{
-  for (int i = 0; i < numberOfVertices; i++)
-  {
+void FontObject::generate() {
+  for (int i = 0; i < numberOfVertices; i++) {
+
     worldVertices[i].x = position.x + localVertices[i].x;
     worldVertices[i].y = position.y + localVertices[i].y;
   }
 }
 
-void FontObject::generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices)
-{
+void FontObject::generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices) {
   this->circumscribedCircleRadius = circumscribedCircleRadius;
   this->numberOfVertices = numberOfVertices;
   this->worldVertices = new Vector2D<float>[numberOfVertices];
@@ -49,8 +44,8 @@ void FontObject::generateRegularPolygonVertices(float circumscribedCircleRadius,
 
   angleForGenerateInIsoscelesPolygons = startAngle;
   stepAngle = 360.0F / numberOfVertices;
-  for (int i = 0; i < numberOfVertices; i++)
-  {
+  for (int i = 0; i < numberOfVertices; i++) {
+
     localVertices[i].x = 0.0F + static_cast<int>(circumscribedCircleRadius * cos(angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
     localVertices[i].y = 0.0F + static_cast<int>(circumscribedCircleRadius * sin(angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
     angleForGenerateInIsoscelesPolygons += stepAngle;
@@ -58,35 +53,29 @@ void FontObject::generateRegularPolygonVertices(float circumscribedCircleRadius,
   generate();
 }
 
-void FontObject::regeneratePolygon()
-{
+void FontObject::regeneratePolygon() {
   generate();
 }
 
-void FontObject::setPosition(float x, float y)
-{
+void FontObject::setPosition(float x, float y) {
   GameObject::setPosition(x, y);
 }
 
-void FontObject::setPosition(const Vector2D<float>& position)
-{
+void FontObject::setPosition(const Vector2D<float>& position) {
   GameObject::setPosition(position);
 }
 
-void FontObject::move(float deltaTime)
-{
+void FontObject::move(float deltaTime) {
 }
 
-void FontObject::setColor(const Vector4D<Uint8>& color)
-{
+void FontObject::setColor(const Vector4D<Uint8>& color) {
   GameObject::setColor(color);
 }
 
-void FontObject::setRandomColor()
-{
+void FontObject::setRandomColor() {
   int col = Randomizer::drawNumberClosedInterval(1, 4);
-  switch (col)
-  {
+  switch (col) {
+
   case 0:
     setColor(RED);
     break;

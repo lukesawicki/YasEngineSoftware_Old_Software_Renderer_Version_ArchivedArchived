@@ -3,11 +3,10 @@
 #include "PixelsTable.hpp"
 #include "ViewPort.hpp"
 
-class FontSurface : public ViewPort
-{
+class FontSurface : public ViewPort {
 public:
-    void cartesianPositionToWindow(int& x, int& y) const
-    {
+    void cartesianPositionToWindow(int& x, int& y) const {
+
         x = x + static_cast<int>(0.5F * viewPortSizes.x);
         y = -y + static_cast<int>(0.5F * viewPortSizes.y);
     }
@@ -23,20 +22,20 @@ public:
     unsigned int calculateMaximumNumberOfElementsToProcess(const unsigned int& primaryMaximum, bool connectedLines);
   void drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos);
 
-    void horizontalLineOnSurface(int y, Vector4D<Uint8> color)
-    {
+    void horizontalLineOnSurface(int y, Vector4D<Uint8> color) {
+
         int maxX = static_cast<int>(0.5F * viewPortSizes.x);
-        for (int i = -maxX; i < maxX; i++) //X
-        {
+        for (int i = -maxX; i < maxX; i++) { //X
+
             drawPoint(i, y, color);
         }
     }
 
-    void verticalLineOnSurface(int x, Vector4D<Uint8> color)
-    {
+    void verticalLineOnSurface(int x, Vector4D<Uint8> color) {
+
         int maxY = static_cast<int>(0.5F * viewPortSizes.y);
-        for (int i = -maxY; i < maxY; i++) //X
-        {
+        for (int i = -maxY; i < maxY; i++) { //X
+
             drawPoint(x, i, color);
         }
     }

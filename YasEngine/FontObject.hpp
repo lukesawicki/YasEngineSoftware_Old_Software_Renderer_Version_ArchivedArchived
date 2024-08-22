@@ -3,8 +3,7 @@
 
 #include "GameObject.hpp"
 
-class FontObject : public GameObject
-{
+class FontObject : public GameObject {
     public:
         FontObject();
         void initialize(float radius, float x, float y, const Vector2D<float>& direction, int numberOfVertices);

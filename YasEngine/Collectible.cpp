@@ -2,8 +2,7 @@
 #include "YasGraphicsLibrary.hpp"
 #include<cstdlib>
 
-Collectible::Collectible(float radius, float x, float y, int numberOfVertices)
-{
+Collectible::Collectible(float radius, float x, float y, int numberOfVertices) {
   isAlive = true;
   iAm = GameObject::COLLECTIBLE;
   collider.radius = radius;
@@ -23,22 +22,19 @@ Collectible::Collectible(float radius, float x, float y, int numberOfVertices)
   generateRegularPolygonVertices(radius, numberOfVertices);
 }
 
-Collectible::~Collectible()
-{
+Collectible::~Collectible() {
   delete[] worldVertices;
 }
 
-void Collectible::generate()
-{
-  for (int i = 0; i < numberOfVertices; i++)
-  {
+void Collectible::generate() {
+  for (int i = 0; i < numberOfVertices; i++) {
+
     worldVertices[i].x = position.x + localVertices[i].x;
     worldVertices[i].y = position.y + localVertices[i].y;
   }
 }
 
-void Collectible::generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices)
-{
+void Collectible::generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices) {
   this->circumscribedCircleRadius = circumscribedCircleRadius;
   this->numberOfVertices = numberOfVertices;
   this->worldVertices = new Vector2D<float>[numberOfVertices];
@@ -46,8 +42,8 @@ void Collectible::generateRegularPolygonVertices(float circumscribedCircleRadius
 
   angleForGenerateInIsoscelesPolygons = startAngle;
   stepAngle = 360.0F / numberOfVertices;
-  for (int i = 0; i < numberOfVertices; i++)
-  {
+  for (int i = 0; i < numberOfVertices; i++) {
+
     localVertices[i].x = 0.0F + static_cast<int>(circumscribedCircleRadius * cos(angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
     localVertices[i].y = 0.0F + static_cast<int>(circumscribedCircleRadius * sin(angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
     angleForGenerateInIsoscelesPolygons += stepAngle;
@@ -55,39 +51,33 @@ void Collectible::generateRegularPolygonVertices(float circumscribedCircleRadius
   generate();
 }
 
-void Collectible::regeneratePolygon()
-{
+void Collectible::regeneratePolygon() {
   generate();
 }
 
-void Collectible::setPosition(float x, float y)
-{
+void Collectible::setPosition(float x, float y) {
   GameObject::setPosition(x, y);
 }
 
-void Collectible::setPosition(const Vector2D<float>& position)
-{
+void Collectible::setPosition(const Vector2D<float>& position) {
   GameObject::setPosition(position);
 }
 
-void Collectible::move(float deltaTime)
-{
+void Collectible::move(float deltaTime) {
   position.x = position.x + deltaTime * velocity.x;
   position.y = position.y + deltaTime * velocity.y;
   moveCollider();
   regeneratePolygon();
 }
 
-void Collectible::setColor(const Vector4D<Uint8>& color)
-{
+void Collectible::setColor(const Vector4D<Uint8>& color) {
   GameObject::setColor(color);
 }
 
-void Collectible::setRandomColor()
-{
+void Collectible::setRandomColor() {
   int col = Randomizer::drawNumberClosedInterval(0, 8);
-  switch(col)
-  {
+  switch(col) {
+
   case 0:
     setColor(RED);
     break;

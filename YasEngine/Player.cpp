@@ -1,7 +1,6 @@
 #include"Player.hpp"
 
-Player::Player(float x, float y)
-{
+Player::Player(float x, float y) {
 
   collider.x = x;
   collider.y = y;
@@ -75,59 +74,56 @@ Player::Player(float x, float y)
   generate();
 }
 
-Player::~Player()
-{
+Player::~Player() {
   delete[] worldVertices;
   delete[] localVertices;
   // delete input; // It will be deleted in YasEngine
   // delete mouse; // It will be deleted in YasEngine
 }
 
-void Player::move(float deltaTime)
-{
+void Player::move(float deltaTime) {
   // LEFT
-  if (input->left && !input->right)
-  {
+  if (input->left && !input->right) {
+
     position.x = position.x + deltaTime * (-speed);
   }
 
   // RIGHT
-  if (input->right && !input->left)
-  {
+  if (input->right && !input->left) {
+
     position.x = position.x + deltaTime * speed;
   }
 
   // UP
-  if (input->up && !input->down)
-  {
+  if (input->up && !input->down) {
+
     position.y = position.y + deltaTime * speed;
   }
 
   // DOWN
-  if (input->down && !input->up)
-  {
+  if (input->down && !input->up) {
+
     position.y = position.y + deltaTime * (-speed);
   }
 
   moveCollider();
 
   // SPACE
-  if (input->shoot || mouse->leftMouseButton)
-  {
+  if (input->shoot || mouse->leftMouseButton) {
+
     isShooting = true;
   }
   regeneratePolygon();
 }
 
-void Player::rotate(float deltaTime)
-{
-  if (input->rotateCounterClockwise)
-  {
+void Player::rotate(float deltaTime) {
+  if (input->rotateCounterClockwise) {
+
     directionMouseAngle = directionMouseAngle * 3.141592F / 180.0F;
     directionMouseAngle = deltaTime * rotationSpeed;
     playerCurrentDirectionAngle = playerCurrentDirectionAngle + directionMouseAngle;
-    if (playerCurrentDirectionAngle >= 6.28319F)
-    {
+    if (playerCurrentDirectionAngle >= 6.28319F) {
+
       playerCurrentDirectionAngle = playerCurrentDirectionAngle - 6.28319F;
     }
     rotateAllVerticesOverAnAngle(directionMouseAngle);
@@ -135,10 +131,9 @@ void Player::rotate(float deltaTime)
   }
 }
 
-void Player::rotateToMousePosition(float x, float y, Vector2D<int>* windowDimensions)
-{
-  if (x <= windowDimensions->x && y <= windowDimensions->y)
-  {
+void Player::rotateToMousePosition(float x, float y, Vector2D<int>* windowDimensions) {
+  if (x <= windowDimensions->x && y <= windowDimensions->y) {
+
     float currentX = x;
     float currentY = y;
 
@@ -153,10 +148,9 @@ void Player::rotateToMousePosition(float x, float y, Vector2D<int>* windowDimens
   }
 }
 
-void Player::rotateToMousePositionInLocalCoordinateSystem(float x, float y, Vector2D<int>* windowDimensions)
-{
-  if (x <= windowDimensions->x && y <= windowDimensions->y)
-  {
+void Player::rotateToMousePositionInLocalCoordinateSystem(float x, float y, Vector2D<int>* windowDimensions) {
+  if (x <= windowDimensions->x && y <= windowDimensions->y) {
+
     float currentX = x;
     float currentY = y;
 
@@ -174,60 +168,52 @@ void Player::rotateToMousePositionInLocalCoordinateSystem(float x, float y, Vect
 }
 
 
-void Player::setDirection(float x, float y)
-{
+void Player::setDirection(float x, float y) {
   direction.x = x;
   direction.y = y;
 }
 
-void Player::generate()
-{
-    for (int i = 0; i < numberOfVertices; i++)
-    {
+void Player::generate() {
+    for (int i = 0; i < numberOfVertices; i++) {
+
         worldVertices[i].x = position.x + localVertices[i].x;
         worldVertices[i].y = position.y + localVertices[i].y;
     }
 }
 
-void Player::generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices)
-{
+void Player::generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices) {
 
 }
 
-void Player::regeneratePolygon()
-{
+void Player::regeneratePolygon() {
   generate();
 }
 
-void Player::rotateAllVerticesOverAnAngle(float angle)
-{
-  for (int i = 0; i < numberOfVertices; i++)
-  {
+void Player::rotateAllVerticesOverAnAngle(float angle) {
+  for (int i = 0; i < numberOfVertices; i++) {
+
     Vector2D<float>::rotateVectorOverTheAngle(&localVertices[i], angle);
   }
 }
 
-void Player::setInput(YasInOut::Input* input)
-{
+void Player::setInput(YasInOut::Input* input) {
   this->input = input;
 }
 
-void Player::setInput(YasInOut::MousePositionChangeInformation* mouse)
-{
+void Player::setInput(YasInOut::MousePositionChangeInformation* mouse) {
   this->mouse = mouse;
 }
 
-Projectile* Player::shoot()
-{
-  if (isShooting)
-  {
+Projectile* Player::shoot() {
+  if (isShooting) {
+
     isShooting = false;
     float projectileX = position.x + direction.x * projectilePositionShift;
     float projectileY = position.y + direction.y * projectilePositionShift;
     return new Projectile(8, projectileX, projectileY, direction);
   }
-  else
-  {
+  else {
+
     return nullptr;
   }
 }

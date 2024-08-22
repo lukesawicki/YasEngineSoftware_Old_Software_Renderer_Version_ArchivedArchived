@@ -2,8 +2,7 @@
 #define MAPFRAME_HPP
 #include "LineSegment.hpp"
 
-struct MapFrame
-{
+struct MapFrame {
   LineSegment leftLineSegment;
   LineSegment rightLineSegment;
   LineSegment topLineSegment;

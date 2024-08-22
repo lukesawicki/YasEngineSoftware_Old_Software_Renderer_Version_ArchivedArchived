@@ -4,11 +4,10 @@
 #include "GameObject.hpp"
 #include<string>
 
-class Button: public GameObject
-{
+class Button: public GameObject {
     public:
-        enum ButtonId
-        {
+        enum ButtonId {
+
             RESTART_START,
             QUIT,
             NONE
@@ -31,13 +30,13 @@ class Button: public GameObject
         void regeneratePolygon() override;
         void move(float deltaTime) override;
 
-    void setPosition(float x, float y)
-    {
+    void setPosition(float x, float y) {
+
         GameObject::setPosition(x, y);
     }
 
-    void setPosition(const Vector2D<float>& position)
-    {
+    void setPosition(const Vector2D<float>& position) {
+
         GameObject::setPosition(position);
     }
 };

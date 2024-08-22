@@ -3,50 +3,46 @@
 #include<sstream>
 #include"YasGraphicsLibrary.hpp"
 using namespace std;
-ScreenWriter::ScreenWriter()
-{
+ScreenWriter::ScreenWriter() {
     int step;
     step=65;
-    for(int i=0; i<26; i++)
-    {
+    for(int i=0; i<26; i++) {
+
         charactersTable[i]=static_cast<char>(step++);
     }
     step=48;//Digits
-    for(int i=26; i<36; i++)
-    {
+    for(int i=26; i<36; i++) {
+
         charactersTable[i]=static_cast<char>(step++);
     }
     charactersTable[36]=' ';
 
-    for(int i=0; i<NUMBER_OF_CHARACTERS; i++)
-    {
+    for(int i=0; i<NUMBER_OF_CHARACTERS; i++) {
+
         fonts.push_back(new Font());
     }
 }
-void ScreenWriter::initialize()
-{
+void ScreenWriter::initialize() {
     initializeFontSurfaces();
     initializeFontObjects();
     prepareFontVertices();
 }
-void ScreenWriter::initialize(int szerokosc_znaku, int wysokosc_znaku, const char* plik_znakow)
-{
+void ScreenWriter::initialize(int szerokosc_znaku, int wysokosc_znaku, const char* plik_znakow) {
 
 }
-void ScreenWriter::writeNew(int x, int y, string text, int width, int height)
-{
+void ScreenWriter::writeNew(int x, int y, string text, int width, int height) {
     SDL_Rect docelowe;
     int pom_w=0, pom_h=0;
     docelowe.x=x;
     docelowe.y=y;
     docelowe.w=width;
     docelowe.h=height;
-    for(int i=0; i<static_cast<int>(text.size()); i++)
-    {
-        for(int j=0; j<63; j++)
-        {
-            if(text.at(i) == charactersTable[j])
-            {
+    for(int i=0; i<static_cast<int>(text.size()); i++) {
+
+        for(int j=0; j<63; j++) {
+
+            if(text.at(i) == charactersTable[j]) {
+
                 docelowe.x=x+i*docelowe.w;
             }
 
@@ -54,14 +50,13 @@ void ScreenWriter::writeNew(int x, int y, string text, int width, int height)
     }
 }
 
-void ScreenWriter::write(int x, int y, string text, const Vector4D<Uint8>& color, PixelsTable& pixelsTable)
-{
-    for(int i=0; i<static_cast<int>(text.size()); i++)
-    {
-        for(int j=0; j<NUMBER_OF_CHARACTERS; j++)
-        {
-            if(text.at(i) == charactersTable[j])
-            {
+void ScreenWriter::write(int x, int y, string text, const Vector4D<Uint8>& color, PixelsTable& pixelsTable) {
+    for(int i=0; i<static_cast<int>(text.size()); i++) {
+
+        for(int j=0; j<NUMBER_OF_CHARACTERS; j++) {
+
+            if(text.at(i) == charactersTable[j]) {
+
                 fonts.at(j)->verticesBaseData->setPosition(static_cast<float>(x + i*FONT_WIDTH), static_cast<float>(y));
                 fonts.at(j)->verticesBaseData->generate();
                 drawNumbersAsGroupOfLines(fonts.at(j)->verticesBaseData->worldVertices, fonts.at(j)->verticesBaseData->numberOfVertices, color, false, pixelsTable);
@@ -71,25 +66,22 @@ void ScreenWriter::write(int x, int y, string text, const Vector4D<Uint8>& color
     }
 }
 
-void ScreenWriter::initializeFontObjects()
-{
+void ScreenWriter::initializeFontObjects() {
     Vector2D<float> direction(0, 1);
-    for(int i=0; i<NUMBER_OF_CHARACTERS; i++)
-    {
+    for(int i=0; i<NUMBER_OF_CHARACTERS; i++) {
+
         fonts.at(i)->verticesBaseData->initialize(17, 0, 0, direction, -1);
     }
 }
 
-void ScreenWriter::initializeFontSurfaces()
-{
-    for(int i=0; i<NUMBER_OF_CHARACTERS; i++)
-    {
+void ScreenWriter::initializeFontSurfaces() {
+    for(int i=0; i<NUMBER_OF_CHARACTERS; i++) {
+
         fonts.at(i)->surface->initialize(i*17, 0, 17, 17, GREEN);
     }
 }
 
-void ScreenWriter::prepareFontVertices()
-{
+void ScreenWriter::prepareFontVertices() {
     //A 6
     fonts[0]->verticesBaseData->localVertices = new Vector2D<float>[6];
     fonts[0]->verticesBaseData->worldVertices = new Vector2D<float>[6];

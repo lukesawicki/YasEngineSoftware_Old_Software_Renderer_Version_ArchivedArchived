@@ -5,8 +5,7 @@
 #include "TimePicker.hpp"
 
 
-class Projectile : public GameObject
-{
+class Projectile : public GameObject {
   public:
     int liveTime = 500;
         TimePicker timePicker;
