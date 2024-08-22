@@ -8,53 +8,53 @@ void SurfaceWithMathBasedEffects::render(double& deltaTime)
 
 SurfaceWithMathBasedEffects::SurfaceWithMathBasedEffects(int x, int y, int width, int height, const Vector4D<Uint8>& defaultColor)
 {
-	position.x = x;
-	position.y = y;
-	viewPortSizes.x = width;
-	viewPortSizes.y = height;
-	pixels = new Uint8[viewPortSizes.x * viewPortSizes.y * NUMBER_OF_COLORS];
-	clearColor(defaultColor);
+  position.x = x;
+  position.y = y;
+  viewPortSizes.x = width;
+  viewPortSizes.y = height;
+  pixels = new Uint8[viewPortSizes.x * viewPortSizes.y * NUMBER_OF_COLORS];
+  clearColor(defaultColor);
 }
 
 SurfaceWithMathBasedEffects::SurfaceWithMathBasedEffects(Vector2D<int> position, int width, int height, const Vector4D<Uint8>& defaultColor)
 {
-	this->position.x = position.x;
-	this->position.y = position.y;
-	viewPortSizes.x = width;
-	viewPortSizes.y = height;
-	this->pixels = new Uint8[viewPortSizes.x * viewPortSizes.y * NUMBER_OF_COLORS];
-	clearColor(defaultColor);
+  this->position.x = position.x;
+  this->position.y = position.y;
+  viewPortSizes.x = width;
+  viewPortSizes.y = height;
+  this->pixels = new Uint8[viewPortSizes.x * viewPortSizes.y * NUMBER_OF_COLORS];
+  clearColor(defaultColor);
 }
 
 SurfaceWithMathBasedEffects::~SurfaceWithMathBasedEffects()
 {
-	delete[] pixels;
+  delete[] pixels;
 }
 
 void SurfaceWithMathBasedEffects::clearColor(const Vector4D<Uint8>& drawingColor)
 {
-	for (int y = 0; y < viewPortSizes.y; y++)
-	{
-		for (int x = 0; x < viewPortSizes.x; x++)
-		{
-			pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + RED_POSITION] = drawingColor.x;
-			pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + GREEN_POSITION] = drawingColor.y;
-			pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + BLUE_POSITION] = drawingColor.z;
-			pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + ALPHA_POSITION] = drawingColor.w;
-		}
-	}
+  for (int y = 0; y < viewPortSizes.y; y++)
+  {
+    for (int x = 0; x < viewPortSizes.x; x++)
+    {
+      pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + RED_POSITION] = drawingColor.x;
+      pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + GREEN_POSITION] = drawingColor.y;
+      pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + BLUE_POSITION] = drawingColor.z;
+      pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + ALPHA_POSITION] = drawingColor.w;
+    }
+  }
 }
 
 void SurfaceWithMathBasedEffects::drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor)
 {
-	cartesianPositionToWindow(x, y);
-	if (x >= 0 && x < viewPortSizes.x && y >= 0 && y < viewPortSizes.y)
-	{
-		pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + RED_POSITION] = drawingColor.x;
-		pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + GREEN_POSITION] = drawingColor.y;
-		pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + BLUE_POSITION] = drawingColor.z;
-		pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + ALPHA_POSITION] = drawingColor.w;
-	}
+  cartesianPositionToWindow(x, y);
+  if (x >= 0 && x < viewPortSizes.x && y >= 0 && y < viewPortSizes.y)
+  {
+    pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + RED_POSITION] = drawingColor.x;
+    pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + GREEN_POSITION] = drawingColor.y;
+    pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + BLUE_POSITION] = drawingColor.z;
+    pixels[NUMBER_OF_COLORS * (y * viewPortSizes.x + x) + ALPHA_POSITION] = drawingColor.w;
+  }
 }
 
 void SurfaceWithMathBasedEffects::drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, const Vector4D<Uint8>& drawingColor)
@@ -362,13 +362,13 @@ void SurfaceWithMathBasedEffects::drawNumbersAsGroupOfLines(Vector2D<float>* ver
         {
             drawLine(vertices[0], vertices[1], color);
         }
-	    else
-	    {
-	        for (int i = 0; i < currentNumberOfVertices; i += step)
-	        {
-	            drawLine(vertices[i], vertices[i + 1], color);
-	        }
-	    }
+      else
+      {
+          for (int i = 0; i < currentNumberOfVertices; i += step)
+          {
+              drawLine(vertices[i], vertices[i + 1], color);
+          }
+      }
     }
 }
 

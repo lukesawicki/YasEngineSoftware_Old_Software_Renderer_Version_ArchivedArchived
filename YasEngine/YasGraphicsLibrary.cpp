@@ -122,15 +122,15 @@
                         }
                     }
                     else //if (deltaX == 0) // It is straight line where x is constant. So draw simple line from y0 to y1
-                    {						
-						if (copyPoint0.y > copyPoint1.y)
-						{
-							swapVectors(copyPoint0, copyPoint1);
-						}
-						for (int i = copyPoint0.y; i <= copyPoint1.y; i++)
-						{
-							pixelsTable.drawPoint(copyPoint0.x, i, drawingColor);
-						}
+                    {            
+            if (copyPoint0.y > copyPoint1.y)
+            {
+              swapVectors(copyPoint0, copyPoint1);
+            }
+            for (int i = copyPoint0.y; i <= copyPoint1.y; i++)
+            {
+              pixelsTable.drawPoint(copyPoint0.x, i, drawingColor);
+            }
                     }
                 }
             } // END GENTLE LINE IF
@@ -229,7 +229,7 @@
                             }
                         }
                     }
-					else // deltaY == 0 It is straight line where y is constant. So draw simple line from x0 to x1
+          else // deltaY == 0 It is straight line where y is constant. So draw simple line from x0 to x1
                     {
                         if (copyPoint0.x > copyPoint1.x)
                         {
@@ -515,20 +515,20 @@
     void horizontalLineOnWholeScreen(PixelsTable& pixelsTable, int y, Vector4D<Uint8> color)
     {
         int maxX = static_cast<int>(0.5F * pixelsTable.windowDimensions.x);
-		for (int i = -maxX; i < maxX; i++) //X
-		{
-			pixelsTable.drawPoint(i, y, color);
-		}
+    for (int i = -maxX; i < maxX; i++) //X
+    {
+      pixelsTable.drawPoint(i, y, color);
+    }
     }
 
-	void verticalLineOnWholeScreen(PixelsTable& pixelsTable, int x, Vector4D<Uint8> color)
-	{
-		int maxY = static_cast<int>(0.5F * pixelsTable.windowDimensions.y);
-		for (int i = -maxY; i < maxY; i++) //X
-		{
-			pixelsTable.drawPoint(x, i, color);
-		}
-	}
+  void verticalLineOnWholeScreen(PixelsTable& pixelsTable, int x, Vector4D<Uint8> color)
+  {
+    int maxY = static_cast<int>(0.5F * pixelsTable.windowDimensions.y);
+    for (int i = -maxY; i < maxY; i++) //X
+    {
+      pixelsTable.drawPoint(x, i, color);
+    }
+  }
 
     int xyPixelToArrayPosition(int x, int y, int windowWidth)
     {

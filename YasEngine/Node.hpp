@@ -7,52 +7,52 @@
 
 class Node
 {
-	public:
+  public:
 
-		Node(Vector2D<int>* position, int size, Node* parent);
-		Vector2D<int>* position;
-		int size;
-		Node* parentNode;
-		Node* childNodes[4];
-		Spawner* spawner;
-		bool isPlayerOnThisQuad;
-		Spawner* takeOutSpawner();
-		void createSpanwer(const std::vector<int>& spawnerPositionNumber);
+    Node(Vector2D<int>* position, int size, Node* parent);
+    Vector2D<int>* position;
+    int size;
+    Node* parentNode;
+    Node* childNodes[4];
+    Spawner* spawner;
+    bool isPlayerOnThisQuad;
+    Spawner* takeOutSpawner();
+    void createSpanwer(const std::vector<int>& spawnerPositionNumber);
 
-		static void addNodes(Node& parentNode)
-		{
-			short factorX = 1;
-			short factorY = 1;
+    static void addNodes(Node& parentNode)
+    {
+      short factorX = 1;
+      short factorY = 1;
 
-			Vector2D<int>* childNodePosition;
+      Vector2D<int>* childNodePosition;
 
-			int childNodePositionX = 0;
-			int childNodePositionY = 0;
-			for (int i = 0; i < 4; i++)
-			{
-				switch (i)
-				{
-				case 0:
-					factorX = -1;
-					factorY = 1;
-					;
-					break;
-				case 1:
-					factorX = 1;
-					factorY = 1;
-					;
-					break;
-				case 2:
-					factorX = -1;
-					factorY = -1;
-					;
-					break;
-				case 3:
-					factorX = 1;
-					factorY = -1;
-					;
-					break;
-				}
+      int childNodePositionX = 0;
+      int childNodePositionY = 0;
+      for (int i = 0; i < 4; i++)
+      {
+        switch (i)
+        {
+        case 0:
+          factorX = -1;
+          factorY = 1;
+          ;
+          break;
+        case 1:
+          factorX = 1;
+          factorY = 1;
+          ;
+          break;
+        case 2:
+          factorX = -1;
+          factorY = -1;
+          ;
+          break;
+        case 3:
+          factorX = 1;
+          factorY = -1;
+          ;
+          break;
+        }
 
                 int childNodeSize = static_cast<int>(parentNode.size * 0.5);
                 childNodePositionX = static_cast<int>(parentNode.position->x + (factorX * (childNodeSize * 0.5)));
@@ -60,8 +60,8 @@ class Node
                 childNodePosition = new Vector2D<int>(childNodePositionX, childNodePositionY);
                 parentNode.childNodes[i] = new Node(childNodePosition, childNodeSize, &parentNode);
 
-			} // end for
-		}
+      } // end for
+    }
 
         static std::vector<Vector2D<int>*> generateTestPositions()
         {
@@ -86,7 +86,7 @@ class Node
             for(int j=0; j < 4; j++)
             {
                 switch(j)
-            	{
+              {
                     case 0:
                         factorX = -1;
                         factorY = 1;;
@@ -114,7 +114,7 @@ class Node
                 for (int i = 0; i < 4; i++)
                 {
                     switch (i)
-                	{
+                  {
                         case 0:
                             factorX = -1;
                             factorY = 1;;

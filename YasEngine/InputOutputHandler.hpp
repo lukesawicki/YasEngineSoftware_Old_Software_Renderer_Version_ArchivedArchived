@@ -3,24 +3,24 @@
 
 namespace YasInOut
 {
-	struct Input {
-		bool left;
-		bool right;
-		bool up;
-		bool down;
-		bool shoot;
-		bool rotateCounterClockwise;
-		bool test_o_button;
+  struct Input {
+    bool left;
+    bool right;
+    bool up;
+    bool down;
+    bool shoot;
+    bool rotateCounterClockwise;
+    bool test_o_button;
 
-	};
+  };
 
-	struct MousePositionChangeInformation {
-		double x = 0.0;
-		double y = 0.0;
-		bool mouseMoved = false;
-		bool leftMouseButton;
-		bool rightMouseButton;
-	};
+  struct MousePositionChangeInformation {
+    double x = 0.0;
+    double y = 0.0;
+    bool mouseMoved = false;
+    bool leftMouseButton;
+    bool rightMouseButton;
+  };
 }
 
 #endif

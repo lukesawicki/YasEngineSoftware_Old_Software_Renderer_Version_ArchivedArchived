@@ -7,10 +7,10 @@
 
 class FibonacciPointsGenerator : public PointsGenerator
 {
-	public:
-		~FibonacciPointsGenerator();
-		PointsSet* generatePoints(int numberOfNumbers, std::map<int, float>* numbers) override;
-		PointsSet* generateFloatPoints(int numberOfNumbers, std::map<float, float>* numbers) override;
+  public:
+    ~FibonacciPointsGenerator();
+    PointsSet* generatePoints(int numberOfNumbers, std::map<int, float>* numbers) override;
+    PointsSet* generateFloatPoints(int numberOfNumbers, std::map<float, float>* numbers) override;
 
 };
 

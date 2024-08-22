@@ -4,11 +4,11 @@
 
 class PointsGenerator
 {
-	public:
-		int pointsNumber = 0;
-		virtual PointsSet* generatePoints(int numberOfNumbers, std::map<int, float>* numbers) = 0;
-		virtual PointsSet* generateFloatPoints(int numberOfNumbers, std::map<float, float>* numbers) = 0;
-		
+  public:
+    int pointsNumber = 0;
+    virtual PointsSet* generatePoints(int numberOfNumbers, std::map<int, float>* numbers) = 0;
+    virtual PointsSet* generateFloatPoints(int numberOfNumbers, std::map<float, float>* numbers) = 0;
+    
 };
 
 #endif

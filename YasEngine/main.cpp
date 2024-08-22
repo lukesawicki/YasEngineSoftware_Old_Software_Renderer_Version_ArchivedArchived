@@ -3,10 +3,10 @@
 
 int main(int argc, char* argv[])
 {
-	YasEngine* yasEngine = YasEngine::GetInstance();
-	yasEngine->initialize();
-	yasEngine->YasEngineStart();
-	return 0;
+  YasEngine* yasEngine = YasEngine::GetInstance();
+  yasEngine->initialize();
+  yasEngine->YasEngineStart();
+  return 0;
 }
 
 //                                                                            80                                     120

@@ -21,7 +21,7 @@ public:
     void copyPixelsInToPIxelTable(PixelsTable& pixelsTable);
 
     unsigned int calculateMaximumNumberOfElementsToProcess(const unsigned int& primaryMaximum, bool connectedLines);
-	void drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos);
+  void drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos);
 
     void horizontalLineOnSurface(int y, Vector4D<Uint8> color)
     {

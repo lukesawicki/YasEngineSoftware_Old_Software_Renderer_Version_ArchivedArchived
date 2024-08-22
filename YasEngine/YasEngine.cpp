@@ -41,7 +41,7 @@ void YasEngine::clean()
         delete drawableObject;
     }
 
-	delete surfaceWithMathBasedEffects;
+  delete surfaceWithMathBasedEffects;
     delete pixelsTable;
     delete windowDimensions;
 
@@ -60,7 +60,7 @@ void YasEngine::clean()
     Mix_FreeChunk(hitSound);
     Mix_FreeMusic(music);
     Mix_CloseAudio();
-	Mix_Quit();
+  Mix_Quit();
     SDL_DestroyTexture(screenTexture);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
@@ -322,7 +322,7 @@ void YasEngine::handleMouseInput(SDL_Event& event)
     {
         switch (gameState)
         {
-			case GAMEPLAY:
+      case GAMEPLAY:
                 player->isShooting = false;
             break;
         }
@@ -347,10 +347,10 @@ void YasEngine::deleteNotAliveObjects()
 {
     for(int i=0; i<objectsToDraw.size(); i++)
     {
-	    if(objectsToDraw[i]->isAlive == false)
-	    {
+      if(objectsToDraw[i]->isAlive == false)
+      {
             objectsToDraw.erase(objectsToDraw.begin() + i);
-	    }
+      }
     }
 }
 
@@ -373,7 +373,7 @@ void YasEngine::handleSpawningCollectibles()
                 Spawner::numberOfSpawnedObjects++;
                 objectsToDraw.push_back(go);
                 go = nullptr;
-			}
+      }
         }
         else
         {
@@ -649,7 +649,7 @@ void YasEngine::handlePhysics()
             for (int j = i; j < static_cast<int>(objectsToDraw.size()); j++)
             {
                 if (
-					objectsToDraw[i] == objectsToDraw[j]                                                                    || 
+          objectsToDraw[i] == objectsToDraw[j]                                                                    || 
                     (objectsToDraw[i]->iAm == GameObject::PROJECTILE && objectsToDraw[j]->iAm == GameObject::PROJECTILE)    ||
                     (objectsToDraw[i]->iAm == GameObject::PROJECTILE && objectsToDraw[j]->iAm == GameObject::PROTAGONIST)   ||
                     (objectsToDraw[i]->iAm == GameObject::PROTAGONIST && objectsToDraw[j]->iAm == GameObject::PROJECTILE)   ||
@@ -690,10 +690,10 @@ void YasEngine::handlePhysics()
                             handleDestroingCollectibles(gameObj);
                             handlingAssemblingGraphs(gameObj);
                         }
-					}
-				}
-			}
-		}
+          }
+        }
+      }
+    }
     }
 } // END OF handlePhysics()
 
@@ -1029,7 +1029,7 @@ void YasEngine::prepareSoundAndMusic()
     }
 
     Mix_VolumeMusic(musicVolume);
-	// Mix_VolumeMusic
+  // Mix_VolumeMusic
 
     shootSound = Mix_LoadWAV("shoot.wav");
     Mix_VolumeChunk(shootSound, shootVolume);
@@ -1154,7 +1154,7 @@ void YasEngine::setFrameAroundGameplaySpace()
     // HORIZONTAL LINE SEGMENTS
 
     // Top              ---->
-	// Left point     
+  // Left point     
     mapFrame.topLineSegment.point0.x = static_cast<float>((-(windowDimensions->x / 2)) + HORIZONTAL_SHIFT);
     mapFrame.topLineSegment.point0.y = static_cast<float>((windowDimensions->y / 2) - VERTHICAL_SHIFT);
     // Right point
@@ -1171,7 +1171,7 @@ void YasEngine::setFrameAroundGameplaySpace()
     mapFrame.bottomLineSegment.point1.y = static_cast<float>((-(windowDimensions->y / 2)) + VERTHICAL_SHIFT);
 
     // VERTICAL LINE SEGMENTS
-	// Left
+  // Left
     // Top point
     mapFrame.leftLineSegment.point0.x = static_cast<float>((-(windowDimensions->x / 2)) + HORIZONTAL_SHIFT);
     mapFrame.leftLineSegment.point0.y = static_cast<float>((windowDimensions->y / 2) - VERTHICAL_SHIFT);
@@ -1387,7 +1387,7 @@ void YasEngine::handleGameStateWhenESCbuttonPushed()
         case OUTRO:
             quit = true;
         break;
-		case LEVEL_CHANGE_SCREEN:
+    case LEVEL_CHANGE_SCREEN:
             gameState = GameState::GAMEPLAY;
         break;
         case YOU_WON:

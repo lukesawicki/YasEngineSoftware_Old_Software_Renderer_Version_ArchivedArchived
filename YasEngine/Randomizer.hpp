@@ -3,8 +3,8 @@
 
 class Randomizer
 {
-	public:
-		static int drawNumberClosedInterval(int min, int max);
+  public:
+    static int drawNumberClosedInterval(int min, int max);
 };
 
 #endif

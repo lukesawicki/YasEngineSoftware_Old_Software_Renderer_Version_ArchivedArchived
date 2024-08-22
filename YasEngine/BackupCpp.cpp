@@ -7,7 +7,7 @@
 //{
 //    uint8_t* createPixelsTable(Vector2D<int>* windowDimensions, Vector4D<uint8_t>* defaultColor)
 //    {
-//		uint8_t* pixels = new uint8_t[windowDimensions->x * windowDimensions->y * NUMBER_OF_COLORS];
+//    uint8_t* pixels = new uint8_t[windowDimensions->x * windowDimensions->y * NUMBER_OF_COLORS];
 //        clearColor(pixels, defaultColor, windowDimensions);
 //        return pixels;
 //    }
@@ -26,27 +26,27 @@
 //        }
 //    }
 //
-//	/// <summary>
-//	/// In parameters points has coordinates where point 0,0 is in the middle of screen so
+//  /// <summary>
+//  /// In parameters points has coordinates where point 0,0 is in the middle of screen so
 //    /// in this function point position is changing accordingly
 //    /// x = x + windowsDimensions.x/2;
 //    /// y = y + windowsDimensions.y/2; 
-//	/// </summary>
-//	/// <param name="point"></param>
-//	/// <param name="pixels"></param>
-//	/// <param name="drawingColor"></param>
-//	/// <param name="windowDimensions"></param>
-//	void drawPoint(Vector2D<int>* point, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
-//	{
+//  /// </summary>
+//  /// <param name="point"></param>
+//  /// <param name="pixels"></param>
+//  /// <param name="drawingColor"></param>
+//  /// <param name="windowDimensions"></param>
+//  void drawPoint(Vector2D<int>* point, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
+//  {
 //        point->x = point->x + windowDimensions->x * 0.5;
 //        point->y = point->y + windowDimensions->y * 0.5;
-//		pixels[NUMBER_OF_COLORS * (point->y * windowDimensions->x + point->x) + RED_POSITION] = drawingColor->x; // windowDimensions->x <- WINDOW WIDTH
-//		pixels[NUMBER_OF_COLORS * (point->y * windowDimensions->x + point->x) + GREEN_POSITION] = drawingColor->y;
-//		pixels[NUMBER_OF_COLORS * (point->y * windowDimensions->x + point->x) + BLUE_POSITION] = drawingColor->z;
-//		pixels[NUMBER_OF_COLORS * (point->y * windowDimensions->x + point->x) + ALPHA_POSITION] = drawingColor->w;
-//	}
+//    pixels[NUMBER_OF_COLORS * (point->y * windowDimensions->x + point->x) + RED_POSITION] = drawingColor->x; // windowDimensions->x <- WINDOW WIDTH
+//    pixels[NUMBER_OF_COLORS * (point->y * windowDimensions->x + point->x) + GREEN_POSITION] = drawingColor->y;
+//    pixels[NUMBER_OF_COLORS * (point->y * windowDimensions->x + point->x) + BLUE_POSITION] = drawingColor->z;
+//    pixels[NUMBER_OF_COLORS * (point->y * windowDimensions->x + point->x) + ALPHA_POSITION] = drawingColor->w;
+//  }
 //
-//	/// <summary>
+//  /// <summary>
 //    /// In parameters points has coordinates where point 0,0 is in the middle of screen so
 //    /// in this function point position is changing accordingly
 //    /// x = x + windowsDimensions.x/2;
@@ -56,17 +56,17 @@
 //    /// <param name="pixels"></param>
 //    /// <param name="drawingColor"></param>
 //    /// <param name="windowDimensions"></param>
-//	void drawPoint(int x, int y, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
-//	{
+//  void drawPoint(int x, int y, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
+//  {
 //        //x = x + windowDimensions->x * 0.5;
 //        //y = y + windowDimensions->y + 0.5;
-//		pixels[NUMBER_OF_COLORS * static_cast<int>(y * (1.5*windowDimensions->x) + (x + windowDimensions->x*0.5) ) + RED_POSITION  ] = drawingColor->x; // windowDimensions->x <- WINDOW WIDTH
-//		pixels[NUMBER_OF_COLORS * static_cast<int>(y * (1.5*windowDimensions->x) + (x + windowDimensions->x*0.5) ) + GREEN_POSITION] = drawingColor->y;
-//		pixels[NUMBER_OF_COLORS * static_cast<int>(y * (1.5*windowDimensions->x) + (x + windowDimensions->x*0.5) ) + BLUE_POSITION ] = drawingColor->z;
-//		pixels[NUMBER_OF_COLORS * static_cast<int>(y * (1.5*windowDimensions->x) + (x + windowDimensions->x*0.5) ) + ALPHA_POSITION] = drawingColor->w;
-//	}
+//    pixels[NUMBER_OF_COLORS * static_cast<int>(y * (1.5*windowDimensions->x) + (x + windowDimensions->x*0.5) ) + RED_POSITION  ] = drawingColor->x; // windowDimensions->x <- WINDOW WIDTH
+//    pixels[NUMBER_OF_COLORS * static_cast<int>(y * (1.5*windowDimensions->x) + (x + windowDimensions->x*0.5) ) + GREEN_POSITION] = drawingColor->y;
+//    pixels[NUMBER_OF_COLORS * static_cast<int>(y * (1.5*windowDimensions->x) + (x + windowDimensions->x*0.5) ) + BLUE_POSITION ] = drawingColor->z;
+//    pixels[NUMBER_OF_COLORS * static_cast<int>(y * (1.5*windowDimensions->x) + (x + windowDimensions->x*0.5) ) + ALPHA_POSITION] = drawingColor->w;
+//  }
 //
-//	/// <summary>
+//  /// <summary>
 //    /// In parameters points has coordinates where point 0,0 is in the middle of screen so
 //    /// in this function point position is changing accordingly
 //    /// x = x + windowsDimensions.x/2;
@@ -76,15 +76,15 @@
 //    /// <param name="pixels"></param>
 //    /// <param name="drawingColor"></param>
 //    /// <param name="windowDimensions"></param>
-//	void drawPoint(Vector2D<int>* point, uint8_t* pixels, uint8_t* drawingColor, Vector2D<int>* windowDimensions)
-//	{
-//		point->x = point->x + windowDimensions->x * 0.5;
-//		point->y = point->y + windowDimensions->y * 0.5;
-//		pixels[NUMBER_OF_COLORS * (point->y * windowDimensions->x + point->x) + RED_POSITION] = drawingColor[RED_POSITION]; // windowDimensions->x <- WINDOW WIDTH
-//		pixels[NUMBER_OF_COLORS * (point->y * windowDimensions->x + point->x) + GREEN_POSITION] = drawingColor[GREEN_POSITION];
-//		pixels[NUMBER_OF_COLORS * (point->y * windowDimensions->x + point->x) + BLUE_POSITION] = drawingColor[BLUE_POSITION];
-//		pixels[NUMBER_OF_COLORS * (point->y * windowDimensions->x + point->x) + ALPHA_POSITION] = drawingColor[ALPHA_POSITION];
-//	}
+//  void drawPoint(Vector2D<int>* point, uint8_t* pixels, uint8_t* drawingColor, Vector2D<int>* windowDimensions)
+//  {
+//    point->x = point->x + windowDimensions->x * 0.5;
+//    point->y = point->y + windowDimensions->y * 0.5;
+//    pixels[NUMBER_OF_COLORS * (point->y * windowDimensions->x + point->x) + RED_POSITION] = drawingColor[RED_POSITION]; // windowDimensions->x <- WINDOW WIDTH
+//    pixels[NUMBER_OF_COLORS * (point->y * windowDimensions->x + point->x) + GREEN_POSITION] = drawingColor[GREEN_POSITION];
+//    pixels[NUMBER_OF_COLORS * (point->y * windowDimensions->x + point->x) + BLUE_POSITION] = drawingColor[BLUE_POSITION];
+//    pixels[NUMBER_OF_COLORS * (point->y * windowDimensions->x + point->x) + ALPHA_POSITION] = drawingColor[ALPHA_POSITION];
+//  }
 //
 //    void  drawGentleSlopeLine(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
 //    {
@@ -138,20 +138,20 @@
 //
 //        int x = point0->x;
 //
-//		for (int i = point0->y; i <= point1->y; i++)
-//		{
-//			drawPoint(x, i, pixels, drawingColor, windowDimensions);
+//    for (int i = point0->y; i <= point1->y; i++)
+//    {
+//      drawPoint(x, i, pixels, drawingColor, windowDimensions);
 //
-//			if (difference > 0)
-//			{
-//				x = x + xIteration;
-//				difference = difference + (2 * (deltaX - deltaY));
-//			}
-//			else
-//			{
-//				difference = difference + 2 * deltaX;
-//			}
-//		}
+//      if (difference > 0)
+//      {
+//        x = x + xIteration;
+//        difference = difference + (2 * (deltaX - deltaY));
+//      }
+//      else
+//      {
+//        difference = difference + 2 * deltaX;
+//      }
+//    }
 //    }
 //
 //    void drawLine(Vector2D<int>* point0, Vector2D<int>* point1, uint8_t* pixels, Vector4D<uint8_t>* drawingColor, Vector2D<int>* windowDimensions)
@@ -350,49 +350,49 @@
 //     //           }
 //     //           else {
 //     //               //Horizontal line
-//					//if (deltaX > 0)
-//					//{
-//					//	for (int i = point0->y; i <= point1->y; i++) // int i = point0->x; i <= point1->x; i++
-//					//	{
-//					//	    drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
-//					//	    y0++; // x0++;
-//					//	    if (2 * (cumulativeError + deltaX) < deltaY) // cumulativeError + deltaY) < deltaX
-//					//	    {
-//					//	        //y stays the same
-//					//	        cumulativeError = cumulativeError + deltaX; // cumulativeError = cumulativeError + deltaY;
-//					//	    }
-//					//	    else
-//					//	    {
-//					//	        x0++; // y0++;
-//					//	        cumulativeError = cumulativeError + deltaX - deltaY; // cumulativeError = cumulativeError + deltaY - deltaX;
-//					//	    }
-//					//	}
-//					//}
-//					//else
-//					//{
-//					//	if (deltaX < 0)
-//					//	{
-//					//	    for (int i = point0->y; i <= point1->y; i++) // for (int i = point0->x; i <= point1->x; i++)
-//					//	    {
-//					//	        drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
-//					//	        y0++; // x0++;
-//					//	        if (2 * (cumulativeError + deltaX) > -deltaY) // if (2 * (cumulativeError + deltaY) > -deltaX)
-//					//	        {
-//					//	            //y stays the same
-//					//	            cumulativeError = cumulativeError + deltaX; // cumulativeError = cumulativeError + deltaY;
-//					//	        }
-//					//	        else
-//					//	        {
-//					//	            x0--; // y0--;
-//					//	            cumulativeError = cumulativeError + deltaX + deltaY; // cumulativeError = cumulativeError + deltaY + deltaX;
-//					//	        }
-//					//	    }
-//					//	}
-//					//	else
-//					//	{
-//					//	    //Vertical line
-//					//	}
-//					//}
+//          //if (deltaX > 0)
+//          //{
+//          //  for (int i = point0->y; i <= point1->y; i++) // int i = point0->x; i <= point1->x; i++
+//          //  {
+//          //      drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+//          //      y0++; // x0++;
+//          //      if (2 * (cumulativeError + deltaX) < deltaY) // cumulativeError + deltaY) < deltaX
+//          //      {
+//          //          //y stays the same
+//          //          cumulativeError = cumulativeError + deltaX; // cumulativeError = cumulativeError + deltaY;
+//          //      }
+//          //      else
+//          //      {
+//          //          x0++; // y0++;
+//          //          cumulativeError = cumulativeError + deltaX - deltaY; // cumulativeError = cumulativeError + deltaY - deltaX;
+//          //      }
+//          //  }
+//          //}
+//          //else
+//          //{
+//          //  if (deltaX < 0)
+//          //  {
+//          //      for (int i = point0->y; i <= point1->y; i++) // for (int i = point0->x; i <= point1->x; i++)
+//          //      {
+//          //          drawPoint(x0, y0, pixels, drawingColor, windowDimensions);
+//          //          y0++; // x0++;
+//          //          if (2 * (cumulativeError + deltaX) > -deltaY) // if (2 * (cumulativeError + deltaY) > -deltaX)
+//          //          {
+//          //              //y stays the same
+//          //              cumulativeError = cumulativeError + deltaX; // cumulativeError = cumulativeError + deltaY;
+//          //          }
+//          //          else
+//          //          {
+//          //              x0--; // y0--;
+//          //              cumulativeError = cumulativeError + deltaX + deltaY; // cumulativeError = cumulativeError + deltaY + deltaX;
+//          //          }
+//          //      }
+//          //  }
+//          //  else
+//          //  {
+//          //      //Vertical line
+//          //  }
+//          //}
 //     //           }
 //     //       }
 //
@@ -473,40 +473,40 @@
 //////////// ROTATING LIKE CRAZY RANDOMLY
 //void Player::rotateToMousePosition(double oldX, double oldY, double x, double y, YasVector2D<int>* windowDimensions)
 //{
-//	double currentX = x;
-//	double currentY = y;
-//	windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
-//	YasVector2D<double> mousePositionVector(currentX, currentY);
-//	YasVector2D<double>::normalizedVector(mousePositionVector);
+//  double currentX = x;
+//  double currentY = y;
+//  windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
+//  YasVector2D<double> mousePositionVector(currentX, currentY);
+//  YasVector2D<double>::normalizedVector(mousePositionVector);
 //
 //
-//	directionMouseAngle = atan2f(
-//		// uzyc nie diraction a old mouse position
-//		(direction.x * mousePositionVector.x + direction.y * mousePositionVector.y),
-//		(YasVector2D<double>::getVectorMagnitude(direction) * YasVector2D<double>::getVectorMagnitude(mousePositionVector))
-//	);
+//  directionMouseAngle = atan2f(
+//    // uzyc nie diraction a old mouse position
+//    (direction.x * mousePositionVector.x + direction.y * mousePositionVector.y),
+//    (YasVector2D<double>::getVectorMagnitude(direction) * YasVector2D<double>::getVectorMagnitude(mousePositionVector))
+//  );
 //
-//	oldDirectionMouseAngle = directionMouseAngle;
+//  oldDirectionMouseAngle = directionMouseAngle;
 //
-//	//directionMouseAngle = atan2f(
-//	// 
-//	//	(direction.x * mousePositionVector.x + direction.y * mousePositionVector.y),
-//	//	(YasVector2D<double>::getVectorMagnitude(direction) * YasVector2D<double>::getVectorMagnitude(mousePositionVector))
-//	//	
-//	//);
+//  //directionMouseAngle = atan2f(
+//  // 
+//  //  (direction.x * mousePositionVector.x + direction.y * mousePositionVector.y),
+//  //  (YasVector2D<double>::getVectorMagnitude(direction) * YasVector2D<double>::getVectorMagnitude(mousePositionVector))
+//  //  
+//  //);
 //
-//	direction.x = mousePositionVector.x;
-//	direction.y = mousePositionVector.y;
+//  direction.x = mousePositionVector.x;
+//  direction.y = mousePositionVector.y;
 //
-//	for (int i = 0; i < numberOfVertices; i++)
-//	{
-//		float x = localVertices[i].x * cos(directionMouseAngle) - localVertices[i].y * sin(directionMouseAngle);
-//		float y = localVertices[i].x * sin(directionMouseAngle) + localVertices[i].y * cos(directionMouseAngle);
+//  for (int i = 0; i < numberOfVertices; i++)
+//  {
+//    float x = localVertices[i].x * cos(directionMouseAngle) - localVertices[i].y * sin(directionMouseAngle);
+//    float y = localVertices[i].x * sin(directionMouseAngle) + localVertices[i].y * cos(directionMouseAngle);
 //
-//		localVertices[i].x = x;
-//		localVertices[i].y = y;
-//	}
-//	generate();
+//    localVertices[i].x = x;
+//    localVertices[i].y = y;
+//  }
+//  generate();
 //}
 
 /////////////
@@ -517,24 +517,24 @@
 //void Player::rotateToMousePosition(float mouseX, float mouseY, YasVector2D<int>& windowDimensions)
 //{
 //
-//	windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
-//	YasVector2D<float> mousePositionVector(mouseX, mouseY);
-//	YasVector2D<float>* normalizedMousePositionVector = YasVector2D<float>::getNormalizedVector(mousePositionVector);
+//  windowPositionToCartesianPosition(mouseX, mouseY, windowDimensions);
+//  YasVector2D<float> mousePositionVector(mouseX, mouseY);
+//  YasVector2D<float>* normalizedMousePositionVector = YasVector2D<float>::getNormalizedVector(mousePositionVector);
 //
-//	direction.x = normalizedMousePositionVector->x;
-//	direction.y = normalizedMousePositionVector->y;
+//  direction.x = normalizedMousePositionVector->x;
+//  direction.y = normalizedMousePositionVector->y;
 //
-//	generate();
+//  generate();
 //
 //}
 
 
 //void Player::rotateDirection(double angle)
 //{
-//	double directionX = direction.x * cos(angle) - direction.y * sin(angle);
-//	double directionY = direction.x * sin(angle) + direction.y * cos(angle);
-//	direction.x = directionX;
-//	direction.y = directionY;
+//  double directionX = direction.x * cos(angle) - direction.y * sin(angle);
+//  double directionY = direction.x * sin(angle) + direction.y * cos(angle);
+//  direction.x = directionX;
+//  direction.y = directionY;
 //}
 
 
@@ -741,21 +741,21 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //void drawCartesianAxies(Vector2D<int>* windowDimensions, uint8_t* pixels)
 //{
-//	int centerX = static_cast<int>(0.5F * windowDimensions->x);
-//	int centerY = static_cast<int>(0.5F * windowDimensions->y);
+//  int centerX = static_cast<int>(0.5F * windowDimensions->x);
+//  int centerY = static_cast<int>(0.5F * windowDimensions->y);
 //
-//	Vector4D<uint8_t> xDrawingColorRed(255, 0, 0, 0); // RED
-//	Vector4D<uint8_t> yDrawingColorGreen(0, 255, 0, 0); // GREEN
+//  Vector4D<uint8_t> xDrawingColorRed(255, 0, 0, 0); // RED
+//  Vector4D<uint8_t> yDrawingColorGreen(0, 255, 0, 0); // GREEN
 //
-//	for (int i = 0; i < windowDimensions->x; i++) //X
-//	{
-//		drawPoint(i, centerY, pixels, &xDrawingColorRed, windowDimensions);
-//	}
+//  for (int i = 0; i < windowDimensions->x; i++) //X
+//  {
+//    drawPoint(i, centerY, pixels, &xDrawingColorRed, windowDimensions);
+//  }
 //
-//	for (int i = 0; i < windowDimensions->y; i++) //Y
-//	{
-//		drawPoint(centerX, i, pixels, &yDrawingColorGreen, windowDimensions);
-//	}
+//  for (int i = 0; i < windowDimensions->y; i++) //Y
+//  {
+//    drawPoint(centerX, i, pixels, &yDrawingColorGreen, windowDimensions);
+//  }
 //}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

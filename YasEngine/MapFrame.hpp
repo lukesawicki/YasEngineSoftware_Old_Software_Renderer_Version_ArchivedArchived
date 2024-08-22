@@ -4,10 +4,10 @@
 
 struct MapFrame
 {
-	LineSegment leftLineSegment;
-	LineSegment rightLineSegment;
-	LineSegment topLineSegment;
-	LineSegment bottomLineSegment;
+  LineSegment leftLineSegment;
+  LineSegment rightLineSegment;
+  LineSegment topLineSegment;
+  LineSegment bottomLineSegment;
 };
 
 #endif
