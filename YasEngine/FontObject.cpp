@@ -30,7 +30,6 @@ FontObject::~FontObject() {
 
 void FontObject::generate() {
   for (int i = 0; i < numberOfVertices; i++) {
-
     worldVertices[i].x = position.x + localVertices[i].x;
     worldVertices[i].y = position.y + localVertices[i].y;
   }
@@ -45,9 +44,10 @@ void FontObject::generateRegularPolygonVertices(float circumscribedCircleRadius,
   angleForGenerateInIsoscelesPolygons = startAngle;
   stepAngle = 360.0F / numberOfVertices;
   for (int i = 0; i < numberOfVertices; i++) {
-
-    localVertices[i].x = 0.0F + static_cast<int>(circumscribedCircleRadius * cos(angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
-    localVertices[i].y = 0.0F + static_cast<int>(circumscribedCircleRadius * sin(angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
+    localVertices[i].x = 0.0F + static_cast<int>(circumscribedCircleRadius * cos(
+      angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
+    localVertices[i].y = 0.0F + static_cast<int>(circumscribedCircleRadius * sin(
+      angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
     angleForGenerateInIsoscelesPolygons += stepAngle;
   }
   generate();
@@ -75,7 +75,6 @@ void FontObject::setColor(const Vector4D<Uint8>& color) {
 void FontObject::setRandomColor() {
   int col = Randomizer::drawNumberClosedInterval(1, 4);
   switch (col) {
-
   case 0:
     setColor(RED);
     break;

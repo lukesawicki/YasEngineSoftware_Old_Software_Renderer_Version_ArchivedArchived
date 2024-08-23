@@ -28,7 +28,6 @@ Collectible::~Collectible() {
 
 void Collectible::generate() {
   for (int i = 0; i < numberOfVertices; i++) {
-
     worldVertices[i].x = position.x + localVertices[i].x;
     worldVertices[i].y = position.y + localVertices[i].y;
   }
@@ -43,9 +42,10 @@ void Collectible::generateRegularPolygonVertices(float circumscribedCircleRadius
   angleForGenerateInIsoscelesPolygons = startAngle;
   stepAngle = 360.0F / numberOfVertices;
   for (int i = 0; i < numberOfVertices; i++) {
-
-    localVertices[i].x = 0.0F + static_cast<int>(circumscribedCircleRadius * cos(angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
-    localVertices[i].y = 0.0F + static_cast<int>(circumscribedCircleRadius * sin(angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
+    localVertices[i].x = 0.0F + static_cast<int>(circumscribedCircleRadius * cos(
+      angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
+    localVertices[i].y = 0.0F + static_cast<int>(circumscribedCircleRadius * sin(
+      angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
     angleForGenerateInIsoscelesPolygons += stepAngle;
   }
   generate();
@@ -76,8 +76,7 @@ void Collectible::setColor(const Vector4D<Uint8>& color) {
 
 void Collectible::setRandomColor() {
   int col = Randomizer::drawNumberClosedInterval(0, 8);
-  switch(col) {
-
+  switch (col) {
   case 0:
     setColor(RED);
     break;

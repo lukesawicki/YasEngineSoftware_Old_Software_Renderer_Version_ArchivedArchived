@@ -28,10 +28,9 @@ Projectile::~Projectile() {
 }
 
 void Projectile::move(float deltaTime) {
-    if(timePicker.getMiliseconds() - startTime >= 2000) {
-
-        this->isAlive = false;
-    }
+  if (timePicker.getMiliseconds() - startTime >= 2000) {
+    this->isAlive = false;
+  }
 
   position.x = position.x + deltaTime * velocity.x;
   position.y = position.y + deltaTime * velocity.y;
@@ -41,7 +40,6 @@ void Projectile::move(float deltaTime) {
 
 void Projectile::generate() {
   for (int i = 0; i < numberOfVertices; i++) {
-
     worldVertices[i].x = position.x + localVertices[i].x;
     worldVertices[i].y = position.y + localVertices[i].y;
   }
@@ -56,9 +54,10 @@ void Projectile::generateRegularPolygonVertices(float circumscribedCircleRadius,
   angleForGenerateInIsoscelesPolygons = startAngle;
   stepAngle = 360.0F / numberOfVertices;
   for (int i = 0; i < numberOfVertices; i++) {
-
-    localVertices[i].x = 0.0F + static_cast<int>(circumscribedCircleRadius * cos(angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
-    localVertices[i].y = 0.0F + static_cast<int>(circumscribedCircleRadius * sin(angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
+    localVertices[i].x = 0.0F + static_cast<int>(circumscribedCircleRadius * cos(
+      angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
+    localVertices[i].y = 0.0F + static_cast<int>(circumscribedCircleRadius * sin(
+      angleForGenerateInIsoscelesPolygons * (PI / 180.0F)));
     angleForGenerateInIsoscelesPolygons += stepAngle;
   }
   generate();

@@ -467,9 +467,6 @@
 ///// END 20210925
 
 
-
-
-
 //////////// ROTATION TO MOUSE POSITION //////////////
 //////////// IN THIS VERSION ROTATING SIMPLE LINE TO SHOW IN WHICH DIRECTION WILL BE SHOOTING WORKING CORRECTLY BUT OUR OBJECT
 //////////// ROTATING LIKE CRAZY RANDOMLY
@@ -514,8 +511,6 @@
 /////////////
 
 
-
-
 //void Player::rotateToMousePosition(float mouseX, float mouseY, YasVector2D<int>& windowDimensions)
 //{
 //
@@ -538,7 +533,6 @@
 //  direction.x = directionX;
 //  direction.y = directionY;
 //}
-
 
 
 ////////////////////
@@ -633,7 +627,7 @@
 
 //-----------------------------------------------------------------------------|---------------------------------------|
 //                                                                            80                                     120
-                                        //2021-01-17-1125pm
+//2021-01-17-1125pm
 
 //void drawBresenhamLine(Vector2D<float>* point0, Vector2D<float>* point1, SDL_Renderer* renderer);
 //void drawBresenhamLine20200117_01(Vector2D<float>* point0, Vector2D<float>* point1, SDL_Renderer* renderer);
@@ -729,17 +723,17 @@
 // 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //void cartesianPositionToWindow(Vector2D<int>* point, Vector2D<int>* windowDimensions)
-    //{
-    //    point->x = point->x + (windowDimensions->x / 2);
-    //    point->y = (point->y * -1) + (windowDimensions->y / 2); // point->y = (point->y * -1) + (windowDimensions->y / 2);
-    //}
+//void cartesianPositionToWindow(Vector2D<int>* point, Vector2D<int>* windowDimensions)
+//{
+//    point->x = point->x + (windowDimensions->x / 2);
+//    point->y = (point->y * -1) + (windowDimensions->y / 2); // point->y = (point->y * -1) + (windowDimensions->y / 2);
+//}
 
-    //void windowPositionToCartesian(Vector2D<int>* point, Vector2D<int>* windowDimensions)
-    //{
-    //    point->x = point->x - (windowDimensions->x / 2);
-    //    point->y = (point->y * -1) + (windowDimensions->y / 2);
-    //}
+//void windowPositionToCartesian(Vector2D<int>* point, Vector2D<int>* windowDimensions)
+//{
+//    point->x = point->x - (windowDimensions->x / 2);
+//    point->y = (point->y * -1) + (windowDimensions->y / 2);
+//}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //void drawCartesianAxies(Vector2D<int>* windowDimensions, uint8_t* pixels)
 //{
@@ -883,33 +877,29 @@
 //-----------------------------------------------------------------------------|---------------------------------------|
 
 
-
-
-    // SECOND TIME I DO CREATING FOUR(4) RANDOM POSITIONS AND PUSH THERE SOME POSITIONS FROM LIST ALL POSITIONS 
-    // while(fourRandomPositions.size() < 4) //checksWithTrueResult <= 4)
-    // {
-    //     srand(clock());
-    //     int position = rand() % 16;
-    //     for (int i = 0; i < fourRandomPositions.size(); i++)
-    //     {
-    //         if(//!(playerPosition.firstLevelNode == spawnersPositions.at(i)->firstLevelNode && playerPosition.secondLevelNode == spawnersPositions.at(i)->secondLevelNode) &&
-    //            (
-    //             (sqrt(pow((spawners->childNodes[fourRandomPositions.at(i)->firstLevelNode]->childNodes[fourRandomPositions.at(i)->secondLevelNode]->position->x -
-    //                        spawners->childNodes[spawnersPositions.at(position)->firstLevelNode]->childNodes[spawnersPositions.at(position)->secondLevelNode]->position->x), 2) +
-    //
-    //                   pow((spawners->childNodes[fourRandomPositions.at(i)->firstLevelNode]->childNodes[fourRandomPositions.at(i)->secondLevelNode]->position->y -
-    //                        spawners->childNodes[spawnersPositions.at(position)->firstLevelNode]->childNodes[spawnersPositions.at(position)->secondLevelNode]->position->y), 2)) > quadDiagonal)
-    //             )
-    //         )
-    //         { // TODO check if checksWithResult is 4 then break all loops
-    //             // TODO check if position is inside collection
-    //             fourRandomPositions.push_back(spawnersPositions.at(position));
-    //             checksWithTrueResult++;
-    //         }
-    //     }
-    // }
-
-
+// SECOND TIME I DO CREATING FOUR(4) RANDOM POSITIONS AND PUSH THERE SOME POSITIONS FROM LIST ALL POSITIONS 
+// while(fourRandomPositions.size() < 4) //checksWithTrueResult <= 4)
+// {
+//     srand(clock());
+//     int position = rand() % 16;
+//     for (int i = 0; i < fourRandomPositions.size(); i++)
+//     {
+//         if(//!(playerPosition.firstLevelNode == spawnersPositions.at(i)->firstLevelNode && playerPosition.secondLevelNode == spawnersPositions.at(i)->secondLevelNode) &&
+//            (
+//             (sqrt(pow((spawners->childNodes[fourRandomPositions.at(i)->firstLevelNode]->childNodes[fourRandomPositions.at(i)->secondLevelNode]->position->x -
+//                        spawners->childNodes[spawnersPositions.at(position)->firstLevelNode]->childNodes[spawnersPositions.at(position)->secondLevelNode]->position->x), 2) +
+//
+//                   pow((spawners->childNodes[fourRandomPositions.at(i)->firstLevelNode]->childNodes[fourRandomPositions.at(i)->secondLevelNode]->position->y -
+//                        spawners->childNodes[spawnersPositions.at(position)->firstLevelNode]->childNodes[spawnersPositions.at(position)->secondLevelNode]->position->y), 2)) > quadDiagonal)
+//             )
+//         )
+//         { // TODO check if checksWithResult is 4 then break all loops
+//             // TODO check if position is inside collection
+//             fourRandomPositions.push_back(spawnersPositions.at(position));
+//             checksWithTrueResult++;
+//         }
+//     }
+// }
 
 
 ///////   NAIVE VERSION OF DRAWING LINE BEFORE OPTIMALIZATION AND REFACOTR 2023-11-30   ////////
@@ -1273,4 +1263,3 @@
 // 0 : Bug fix release
 //
 // 1 : Build number(if used) that's why you see the .NET framework using something like 2.0.4.2709
-

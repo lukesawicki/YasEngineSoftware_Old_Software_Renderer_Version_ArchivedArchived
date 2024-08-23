@@ -10,4 +10,3 @@ struct MapFrame {
 };
 
 #endif
-

@@ -24,11 +24,9 @@ MathPicture::~MathPicture() {
 
 void MathPicture::generatePoints() {
   if (numbers != nullptr) {
-
     pointsSet = pointsGenerator->generatePoints(static_cast<int>(numbers->size()), numbers);
   }
   if (floatNumbers != nullptr) {
-
     pointsSet = pointsGenerator->generateFloatPoints(static_cast<int>(floatNumbers->size()), floatNumbers);
   }
 }

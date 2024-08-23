@@ -1,7 +1,6 @@
 #include"Player.hpp"
 
 Player::Player(float x, float y) {
-
   collider.x = x;
   collider.y = y;
   collider.radius = 20;
@@ -29,7 +28,7 @@ Player::Player(float x, float y) {
   localVertices[2].x = 8;
   localVertices[2].y = -9;
 
-  localVertices[3].x =-2 ;
+  localVertices[3].x = -2;
   localVertices[3].y = -7;
 
   localVertices[4].x = -2;
@@ -84,25 +83,21 @@ Player::~Player() {
 void Player::move(float deltaTime) {
   // LEFT
   if (input->left && !input->right) {
-
     position.x = position.x + deltaTime * (-speed);
   }
 
   // RIGHT
   if (input->right && !input->left) {
-
     position.x = position.x + deltaTime * speed;
   }
 
   // UP
   if (input->up && !input->down) {
-
     position.y = position.y + deltaTime * speed;
   }
 
   // DOWN
   if (input->down && !input->up) {
-
     position.y = position.y + deltaTime * (-speed);
   }
 
@@ -110,7 +105,6 @@ void Player::move(float deltaTime) {
 
   // SPACE
   if (input->shoot || mouse->leftMouseButton) {
-
     isShooting = true;
   }
   regeneratePolygon();
@@ -118,12 +112,10 @@ void Player::move(float deltaTime) {
 
 void Player::rotate(float deltaTime) {
   if (input->rotateCounterClockwise) {
-
     directionMouseAngle = directionMouseAngle * 3.141592F / 180.0F;
     directionMouseAngle = deltaTime * rotationSpeed;
     playerCurrentDirectionAngle = playerCurrentDirectionAngle + directionMouseAngle;
     if (playerCurrentDirectionAngle >= 6.28319F) {
-
       playerCurrentDirectionAngle = playerCurrentDirectionAngle - 6.28319F;
     }
     rotateAllVerticesOverAnAngle(directionMouseAngle);
@@ -133,7 +125,6 @@ void Player::rotate(float deltaTime) {
 
 void Player::rotateToMousePosition(float x, float y, Vector2D<int>* windowDimensions) {
   if (x <= windowDimensions->x && y <= windowDimensions->y) {
-
     float currentX = x;
     float currentY = y;
 
@@ -150,7 +141,6 @@ void Player::rotateToMousePosition(float x, float y, Vector2D<int>* windowDimens
 
 void Player::rotateToMousePositionInLocalCoordinateSystem(float x, float y, Vector2D<int>* windowDimensions) {
   if (x <= windowDimensions->x && y <= windowDimensions->y) {
-
     float currentX = x;
     float currentY = y;
 
@@ -158,9 +148,11 @@ void Player::rotateToMousePositionInLocalCoordinateSystem(float x, float y, Vect
 
     Vector2D<float> currentMousePosition = Vector2D<float>(currentX, currentY);
 
-    Vector2D<float> mouseDirectionInLocalCoordynationSystem = Vector2D<float>::createUnitVectorFromBoundVector(currentMousePosition, position);
+    Vector2D<float> mouseDirectionInLocalCoordynationSystem = Vector2D<float>::createUnitVectorFromBoundVector(
+      currentMousePosition, position);
 
-    float angleBetweenCurrentAndMouse = Vector2D<float>::angleBetweenVectors(direction, mouseDirectionInLocalCoordynationSystem);
+    float angleBetweenCurrentAndMouse = Vector2D<float>::angleBetweenVectors(
+      direction, mouseDirectionInLocalCoordynationSystem);
 
     rotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
     Vector2D<float>::rotateVectorOverTheAngle(&direction, angleBetweenCurrentAndMouse);
@@ -174,15 +166,13 @@ void Player::setDirection(float x, float y) {
 }
 
 void Player::generate() {
-    for (int i = 0; i < numberOfVertices; i++) {
-
-        worldVertices[i].x = position.x + localVertices[i].x;
-        worldVertices[i].y = position.y + localVertices[i].y;
-    }
+  for (int i = 0; i < numberOfVertices; i++) {
+    worldVertices[i].x = position.x + localVertices[i].x;
+    worldVertices[i].y = position.y + localVertices[i].y;
+  }
 }
 
 void Player::generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices) {
-
 }
 
 void Player::regeneratePolygon() {
@@ -191,7 +181,6 @@ void Player::regeneratePolygon() {
 
 void Player::rotateAllVerticesOverAnAngle(float angle) {
   for (int i = 0; i < numberOfVertices; i++) {
-
     Vector2D<float>::rotateVectorOverTheAngle(&localVertices[i], angle);
   }
 }
@@ -206,14 +195,12 @@ void Player::setInput(YasInOut::MousePositionChangeInformation* mouse) {
 
 Projectile* Player::shoot() {
   if (isShooting) {
-
     isShooting = false;
     float projectileX = position.x + direction.x * projectilePositionShift;
     float projectileY = position.y + direction.y * projectilePositionShift;
     return new Projectile(8, projectileX, projectileY, direction);
   }
   else {
-
     return nullptr;
   }
 }

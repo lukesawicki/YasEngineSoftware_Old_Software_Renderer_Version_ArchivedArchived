@@ -19,222 +19,223 @@
 #include "MapFrame.hpp"
 #include "MathPicture.hpp"
 
-class YasEngine
-{  
-  public:
-    bool tests = false;
-    std::string engineVersion;
-    int MAJOR_REVISION = 1;
-    int MINOR_REVISION = 3;
-    int BUG_FIX_RELEASE = 0;
-    int BUILD_NUMBER = 0;
+class YasEngine {
+public:
+  bool tests = false;
+  std::string engineVersion;
+  int MAJOR_REVISION = 1;
+  int MINOR_REVISION = 3;
+  int BUG_FIX_RELEASE = 0;
+  int BUILD_NUMBER = 0;
 
-    rapidjson::Document settings;
-    int musicVolume = MIX_MAX_VOLUME;
-    int shootVolume = MIX_MAX_VOLUME;
-    int hitVolume = MIX_MAX_VOLUME;
-    int otherVolume = MIX_MAX_VOLUME;
+  rapidjson::Document settings;
+  int musicVolume = MIX_MAX_VOLUME;
+  int shootVolume = MIX_MAX_VOLUME;
+  int hitVolume = MIX_MAX_VOLUME;
+  int otherVolume = MIX_MAX_VOLUME;
 
-    bool collided = false;
-    GameObject* go;
-        enum GameState {
-          INTRO,
-          MAIN_MENU_RESTART,
-          GAMEPLAY,
-          OUTRO,
-          PAUSE,
-          LEVEL_CHANGE_SCREEN,
-          YOU_WON
-        };
+  bool collided = false;
+  GameObject* go;
 
-    bool playerWonAndExited = false;
+  enum GameState {
+    INTRO,
+    MAIN_MENU_RESTART,
+    GAMEPLAY,
+    OUTRO,
+    PAUSE,
+    LEVEL_CHANGE_SCREEN,
+    YOU_WON
+  };
 
-    enum Wall {
-      LEFT,
-      RIGHT,
-      TOP,
-      BOTTOM
-    };
+  bool playerWonAndExited = false;
 
-    struct NodeNumbersOnTwoProceedingLevels {
+  enum Wall {
+    LEFT,
+    RIGHT,
+    TOP,
+    BOTTOM
+  };
 
-      int firstLevelNode = 0;
-      int secondLevelNode = 0;
-      NodeNumbersOnTwoProceedingLevels() {
-                firstLevelNode = 0;
-                secondLevelNode = 0;
-      }
-      NodeNumbersOnTwoProceedingLevels(int first, int second) {
-        this->firstLevelNode = first;
-        this->secondLevelNode = second;
-      }
-    };
+  struct NodeNumbersOnTwoProceedingLevels {
+    int firstLevelNode = 0;
+    int secondLevelNode = 0;
 
-    std::vector<Vector2D<int>*> testPositions;
+    NodeNumbersOnTwoProceedingLevels() {
+      firstLevelNode = 0;
+      secondLevelNode = 0;
+    }
 
-    GameState gameState = GameState::INTRO;
+    NodeNumbersOnTwoProceedingLevels(int first, int second) {
+      this->firstLevelNode = first;
+      this->secondLevelNode = second;
+    }
+  };
 
-    std::vector<GameObject*> buttons;
+  std::vector<Vector2D<int>*> testPositions;
 
-    int basePointsNumber = 64;
+  GameState gameState = GameState::INTRO;
 
-    std::vector<std::string> mainMenuTexts;
-    std::vector<std::string> introTexts;
-    std::vector<std::string> outroTexts;
-    std::vector<std::string> inGameTexts;
+  std::vector<GameObject*> buttons;
 
-    static YasEngine* GetInstance() {
+  int basePointsNumber = 64;
 
-      if (instance != nullptr) {
-        return instance;
-      } 
-      instance = new YasEngine();
+  std::vector<std::string> mainMenuTexts;
+  std::vector<std::string> introTexts;
+  std::vector<std::string> outroTexts;
+  std::vector<std::string> inGameTexts;
+
+  static YasEngine* GetInstance() {
+    if (instance != nullptr) {
       return instance;
     }
-    
-    void initialize();
-    void YasEngineStart();
-    void clean();
+    instance = new YasEngine();
+    return instance;
+  }
 
-  private:
+  void initialize();
+  void YasEngineStart();
+  void clean();
 
-    TimePicker timePicker;
+private:
+  TimePicker timePicker;
 
-    Vector2D<float> A = Vector2D<float>(-300, 200);
-    Vector2D<float> B = Vector2D<float>(100, -350);
+  Vector2D<float> A = Vector2D<float>(-300, 200);
+  Vector2D<float> B = Vector2D<float>(100, -350);
 
-    static YasEngine* instance;
-    
-    int endianness;
+  static YasEngine* instance;
 
-    SDL_Window* window;
-    SDL_Renderer* renderer;
-    SDL_Texture* screenTexture;
-    
-    PixelsTable* pixelsTable;
-    Vector2D<int>* windowDimensions;
-    SDL_Event event;
-    bool quit = false;
+  int endianness;
 
-    double time;
-    double newTime;
-    double deltaTime;
-    double fps;
-    double fpsTime;
-    unsigned int frames;
+  SDL_Window* window;
+  SDL_Renderer* renderer;
+  SDL_Texture* screenTexture;
 
-    float mouseX;
-    float mouseY;
+  PixelsTable* pixelsTable;
+  Vector2D<int>* windowDimensions;
+  SDL_Event event;
+  bool quit = false;
 
-    int WINDOW_WIDTH = 1600;
-    int WINDOW_HEIGHT = 800;
+  double time;
+  double newTime;
+  double deltaTime;
+  double fps;
+  double fpsTime;
+  unsigned int frames;
 
-    std::vector<GameObject*> objectsToDraw;
-    bool first16Spawned = false;
-    int howMany = 0;
-    Player* player;
-    SurfaceWithMathBasedEffects* surfaceWithMathBasedEffects;
-    std::vector<NodeNumbersOnTwoProceedingLevels*> spawnersPositions;
+  float mouseX;
+  float mouseY;
 
-    const int MAX_COLLECTIBLES_TO_SPAWN = 64;
+  int WINDOW_WIDTH = 1600;
+  int WINDOW_HEIGHT = 800;
 
-    std::map<std::string, std::map<int, float>*> numbersMap;
-    std::map < std::string, std::map<int, std::map<float, float>*>* > pairNumbersMap;
+  std::vector<GameObject*> objectsToDraw;
+  bool first16Spawned = false;
+  int howMany = 0;
+  Player* player;
+  SurfaceWithMathBasedEffects* surfaceWithMathBasedEffects;
+  std::vector<NodeNumbersOnTwoProceedingLevels*> spawnersPositions;
 
-    SDL_AudioSpec audioSpecs;
+  const int MAX_COLLECTIBLES_TO_SPAWN = 64;
 
-    Mix_Music* music;
-    Mix_Chunk* shootSound;
-    Mix_Chunk* hitSound;
-    Mix_Chunk* otherSound;
+  std::map<std::string, std::map<int, float>*> numbersMap;
+  std::map<std::string, std::map<int, std::map<float, float>*>*> pairNumbersMap;
 
-    MathPicture* sinePicture;
-    MathPicture* cosinePicture;
-    MathPicture* fibonacciePicture;
-    MathPicture* primeNumbersPicture;
+  SDL_AudioSpec audioSpecs;
 
-    int level = 1;
-    int previousLevel = 0;
-    bool levelChanged = false;
-    const int MAX_LEVEL = 4;
-    int sinePointsHarvested = 0;
-    int cosinePointsHarvested = 0;
-    int primesPointsHarvested = 0;
-    int fibbsPointsHarvested = 0;
+  Mix_Music* music;
+  Mix_Chunk* shootSound;
+  Mix_Chunk* hitSound;
+  Mix_Chunk* otherSound;
 
-    int maxNtoCalculatePrimes = 1000;
-    int maxNtoCalculateFibonacci = 40;
-    int maxNtoCalculateSine = 100;
-    int maxNtoCalculateCosine = 100;
+  MathPicture* sinePicture;
+  MathPicture* cosinePicture;
+  MathPicture* fibonacciePicture;
+  MathPicture* primeNumbersPicture;
 
-    std::map<std::string, int> numberOfGivenColors;
-    Node* spawners;
+  int level = 1;
+  int previousLevel = 0;
+  bool levelChanged = false;
+  const int MAX_LEVEL = 4;
+  int sinePointsHarvested = 0;
+  int cosinePointsHarvested = 0;
+  int primesPointsHarvested = 0;
+  int fibbsPointsHarvested = 0;
 
-    Vector2D<float> testPoint0;
-    Vector2D<float> testPoint1;
+  int maxNtoCalculatePrimes = 1000;
+  int maxNtoCalculateFibonacci = 40;
+  int maxNtoCalculateSine = 100;
+  int maxNtoCalculateCosine = 100;
 
-        ScreenWriter writer;
-        int step = 0;
+  std::map<std::string, int> numberOfGivenColors;
+  Node* spawners;
 
-    MapFrame mapFrame;
+  Vector2D<float> testPoint0;
+  Vector2D<float> testPoint1;
 
-    YasEngine() {};
-    bool shouldApplicationStopRunning = false;
-    YasInOut::Input* input = new YasInOut::Input();
-    YasInOut::MousePositionChangeInformation* mousePositionChangeInformation = new YasInOut::MousePositionChangeInformation();
-    int redShotDowns = 0;
-    int greenShotdowns = 0;
-    int blueShotdowns = 0;
-    bool engineInstantiated = false;
-    void readSettingsFromFile();
-    void prepareRendering();
-    void prepareBasicSettings();
-    void checkEndianness();
-    void handlePhysics();
-    void handleDisassemblingGraphs(GameObject* gameObj);
-    void handleDestroingCollectibles(GameObject* gameObj);
-    void handlingAssemblingGraphs(GameObject* gameObj);
-    void handleCollectiblesWithWallsCollisions(GameObject* object);
-    bool isObjectProtagonist(GameObject* object);
-    GameObject* getProtagonist(GameObject* object0, GameObject* object1);
-    GameObject* getNotProtagonist(GameObject* object0, GameObject* object1);
-    void handleProtagonistWithWallsCollisions(GameObject* object);
-    void moveObjectToMapBoundries(GameObject* gameObject, Wall wall, int shift = 0);
-    void bounceCollectibles(GameObject* gameObject, Wall wall);
-    void moveObjects();
-    void prepareGameWorld();
-    void setFrameAroundGameplaySpace();
-    void prepareDataForDrawingGraphs();
-    void prepareSineDrawing();
-    void prepareCosineDrawing();
-    void prepareFibonacciDrawing();
-    void preparePrimesDrawing();
-    void preparePlayer();
-    void prepareInterface();
-    void handleInput(SDL_Event& event);
-    void handleKeyboardInput(SDL_Event& event);
-    void handleMouseInput(SDL_Event& event);
-    void handleMouseMovement();
-    void deleteNotAliveObjects();
-    void handleSpawningCollectibles();
-    bool isObjectInSameQuarterAsProtagonist(int randomSpawner);
-    void handleProjectiles();
-    void handlePlayer();
-    void update(double& deltaTime);
-    void resetAll();
-    void drawHudElements(double& deltaTime);
-    void drawFrame(double& deltaTime);
-    void render(double& deltaTime);
-    void renderGameObjects(double& deltaTime);
-    void renderOnViewports(double& deltaTime);
-    void renderLevelChange();
-    void renderWonScreen();
-    Button::ButtonId checkWhichButtonClicked();
-    void handleClickedButtons();
-    void handleGameStateWhenESCbuttonPushed();
-    void handleGameStateWhenSPACEbuttonPushed();
-    void prepareSoundAndMusic();
-    void drawButtons();
+  ScreenWriter writer;
+  int step = 0;
+
+  MapFrame mapFrame;
+
+  YasEngine() {
+  };
+  bool shouldApplicationStopRunning = false;
+  YasInOut::Input* input = new YasInOut::Input();
+  YasInOut::MousePositionChangeInformation* mousePositionChangeInformation = new
+    YasInOut::MousePositionChangeInformation();
+  int redShotDowns = 0;
+  int greenShotdowns = 0;
+  int blueShotdowns = 0;
+  bool engineInstantiated = false;
+  void readSettingsFromFile();
+  void prepareRendering();
+  void prepareBasicSettings();
+  void checkEndianness();
+  void handlePhysics();
+  void handleDisassemblingGraphs(GameObject* gameObj);
+  void handleDestroingCollectibles(GameObject* gameObj);
+  void handlingAssemblingGraphs(GameObject* gameObj);
+  void handleCollectiblesWithWallsCollisions(GameObject* object);
+  bool isObjectProtagonist(GameObject* object);
+  GameObject* getProtagonist(GameObject* object0, GameObject* object1);
+  GameObject* getNotProtagonist(GameObject* object0, GameObject* object1);
+  void handleProtagonistWithWallsCollisions(GameObject* object);
+  void moveObjectToMapBoundries(GameObject* gameObject, Wall wall, int shift = 0);
+  void bounceCollectibles(GameObject* gameObject, Wall wall);
+  void moveObjects();
+  void prepareGameWorld();
+  void setFrameAroundGameplaySpace();
+  void prepareDataForDrawingGraphs();
+  void prepareSineDrawing();
+  void prepareCosineDrawing();
+  void prepareFibonacciDrawing();
+  void preparePrimesDrawing();
+  void preparePlayer();
+  void prepareInterface();
+  void handleInput(SDL_Event& event);
+  void handleKeyboardInput(SDL_Event& event);
+  void handleMouseInput(SDL_Event& event);
+  void handleMouseMovement();
+  void deleteNotAliveObjects();
+  void handleSpawningCollectibles();
+  bool isObjectInSameQuarterAsProtagonist(int randomSpawner);
+  void handleProjectiles();
+  void handlePlayer();
+  void update(double& deltaTime);
+  void resetAll();
+  void drawHudElements(double& deltaTime);
+  void drawFrame(double& deltaTime);
+  void render(double& deltaTime);
+  void renderGameObjects(double& deltaTime);
+  void renderOnViewports(double& deltaTime);
+  void renderLevelChange();
+  void renderWonScreen();
+  Button::ButtonId checkWhichButtonClicked();
+  void handleClickedButtons();
+  void handleGameStateWhenESCbuttonPushed();
+  void handleGameStateWhenSPACEbuttonPushed();
+  void prepareSoundAndMusic();
+  void drawButtons();
 };
 
 #endif

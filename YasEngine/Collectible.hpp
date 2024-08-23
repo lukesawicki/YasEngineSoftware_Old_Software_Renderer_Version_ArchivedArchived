@@ -8,7 +8,7 @@
 /**
  * Collectibles are derived from GameObject
  */
-class Collectible: public GameObject {
+class Collectible : public GameObject {
 public:
   Collectible(float radius, float x, float y, int numberOfVertices);
   ~Collectible();

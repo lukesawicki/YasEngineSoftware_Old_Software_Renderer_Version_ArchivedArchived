@@ -5,8 +5,8 @@
 int Spawner::numberOfSpawnedObjects = 0;
 
 Spawner::Spawner() {
-    currentTime = timePicker.getMiliseconds();
-    previousTime = currentTime;
+  currentTime = timePicker.getMiliseconds();
+  previousTime = currentTime;
   timeBetweenSpawns = Randomizer::drawNumberClosedInterval(2000, 6000);
 }
 
@@ -20,7 +20,6 @@ Spawner::Spawner(int x, int y) {
 
 void Spawner::spawnObject(GameObject*& gameObject) {
   if (!firstSpawned) {
-
     prepareObjectToSpawn(gameObject);
     previousTime = timePicker.getMiliseconds();
     firstSpawned = true;
@@ -28,13 +27,12 @@ void Spawner::spawnObject(GameObject*& gameObject) {
     return;
   }
 
-    currentTime = timePicker.getMiliseconds();
+  currentTime = timePicker.getMiliseconds();
 
-    if( (currentTime - previousTime) >= timeBetweenSpawns) {
-
+  if ((currentTime - previousTime) >= timeBetweenSpawns) {
     prepareObjectToSpawn(gameObject);
-        previousTime = currentTime;
-    }
+    previousTime = currentTime;
+  }
 }
 
 void Spawner::resetTimes() {
@@ -52,22 +50,18 @@ void Spawner::prepareObjectToSpawn(GameObject*& gameObject) {
   int numberOfVertices = Randomizer::drawNumberClosedInterval(3, 7);
 
   if (dirX <= maxValueForDrawingSpawningDirection * 0.5) {
-
     dirX = -1;
   }
 
   if (dirX >= maxValueForDrawingSpawningDirection * 0.5) {
-
     dirX = 1;
   }
 
   if (dirY <= maxValueForDrawingSpawningDirection * 0.5) {
-
     dirY = -1;
   }
 
   if (dirY >= maxValueForDrawingSpawningDirection * 0.5) {
-
     dirY = 1;
   }
 
@@ -75,9 +69,7 @@ void Spawner::prepareObjectToSpawn(GameObject*& gameObject) {
   int targetPositionY = position.y + dirY * yPos;
 
   if (oldTargetPositionX != targetPositionX || oldTargetPositionY != targetPositionY) {
-
-    gameObject = new Collectible(16, static_cast<float>(targetPositionX), static_cast<float>(targetPositionY), numberOfVertices);
+    gameObject = new Collectible(16, static_cast<float>(targetPositionX), static_cast<float>(targetPositionY),
+                                 numberOfVertices);
   }
 }
-
-

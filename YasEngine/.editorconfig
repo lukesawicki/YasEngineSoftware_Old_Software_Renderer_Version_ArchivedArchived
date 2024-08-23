@@ -83,8 +83,8 @@ cpp_includes_use_forward_slash = true
 
 guideline = 
 {
-position = 80;
-color = 'gray';
+position = 80 ;
+color = 'gray' ;
 }
 
 [*.{appxmanifest,axml,build,config,cshtml,csproj,dbml,discomap,dtd,htm,html,jsproj,lsproj,njsproj,nuspec,proj,props,razor,resw,resx,StyleCop,targets,tasks,vbproj,xml,xsd}]
@@ -133,3 +133,21 @@ resharper_redundant_base_qualifier_highlighting = warning
 resharper_suggest_var_or_type_built_in_types_highlighting = hint
 resharper_suggest_var_or_type_elsewhere_highlighting = hint
 resharper_suggest_var_or_type_simple_types_highlighting = hint
+
+# ReSharper properties
+resharper_cpp_anonymous_method_declaration_braces = end_of_line
+resharper_cpp_case_block_braces = end_of_line
+resharper_cpp_invocable_declaration_braces = end_of_line
+resharper_cpp_other_braces = end_of_line
+resharper_cpp_type_declaration_braces = end_of_line
+resharper_export_declaration_braces = end_of_line
+resharper_namespace_declaration_braces = end_of_line
+resharper_requires_expression_braces = end_of_line
+resharper_show_autodetect_configure_formatting_tip = false
+resharper_simple_block_style = line_break
+resharper_use_indent_from_vs = false
+
+[*.{appxmanifest,asax,ascx,aspx,axaml,axml,blockshader,build,c,c++,c++m,cc,ccm,cginc,compute,config,cp,cpp,cppm,cs,cshtml,csproj,cu,cuh,cxx,cxxm,dbml,discomap,dtd,fx,fxh,h,hh,hlsl,hlsli,hlslinc,hpp,htm,html,hxx,inc,inl,ino,ipp,ixx,jsproj,lsproj,master,mpp,mq4,mq5,mqh,mxx,njsproj,nuspec,paml,proj,props,razor,resw,resx,shaderFoundry,skin,StyleCop,targets,tasks,tpp,usf,ush,vb,vbproj,xaml,xamlx,xml,xoml,xsd}]
+indent_style = space
+indent_size = 2
+tab_width = 2

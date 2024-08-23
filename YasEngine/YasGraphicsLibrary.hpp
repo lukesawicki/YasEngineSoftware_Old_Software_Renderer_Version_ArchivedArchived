@@ -31,13 +31,15 @@ const Vector4D<Uint8> PURPLE(255, 0, 255, 0);
 const Vector4D<Uint8> XPORTAL(255, 77, 0, 0);
 const Vector4D<Uint8> POLYGON(250, 180, 10, 0);
 
-void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, PixelsTable& pixelsTable, const Vector4D<Uint8>& drawingColor);
+void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1, PixelsTable& pixelsTable,
+              const Vector4D<Uint8>& drawingColor);
 
 void drawPolygon(GameObject* polygon, PixelsTable& pixelsTable);
 
 Vector2D<float>* generateVerticesFromNumbers(const std::vector<int>& numbers);
 
-void drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color, bool areLinesContinuos, PixelsTable& pixelsTable);
+void drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, const Vector4D<Uint8>& color,
+                               bool areLinesContinuos, PixelsTable& pixelsTable);
 
 void drawNumbersAsGroupOfLines(Vector2D<float>* vertices, int maximumNumberOfVertices, PixelsTable& pixelsTable);
 
@@ -60,7 +62,7 @@ void drawCrossHair(float x, float y, PixelsTable& pixelsTable, bool isFullScreen
 void drawHorizontalLine(PixelsTable& pixelsTable, int x0, int x1, int y, Vector4D<Uint8> color);
 
 void drawVerticalLine(PixelsTable& pixelsTable, int y0, int y1, int x, Vector4D<Uint8> color);
-    
+
 int xyPixelToArrayPosition(Vector2D<int>& point, int windowWidth);
 
 int xyPixelToArrayPosition(int x, int y, int windowWidth);
