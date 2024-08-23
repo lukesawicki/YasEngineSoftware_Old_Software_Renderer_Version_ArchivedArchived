@@ -14,7 +14,7 @@ void Button::generateRegularPolygonVertices(float circumscribedCircleRadius,
 
 void Button::regeneratePolygon() { generate(); }
 
-void Button::move(float deltaTime) {}
+void Button::Move(float deltaTime) {}
 
 Button::Button(const ButtonId& buttonId, std::string text,
                const Vector4D<Uint8>& color) {

@@ -71,7 +71,7 @@ void FontObject::setPosition(const Vector2D<float>& position) {
   GameObject::setPosition(position);
 }
 
-void FontObject::move(float deltaTime) {}
+void FontObject::Move(float deltaTime) {}
 
 void FontObject::setColor(const Vector4D<Uint8>& color) {
   GameObject::setColor(color);

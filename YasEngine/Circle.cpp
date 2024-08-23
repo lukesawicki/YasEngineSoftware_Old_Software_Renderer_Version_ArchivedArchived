@@ -13,7 +13,7 @@ Circle::Circle(float radius, float x, float y) {
 
 Circle::~Circle() { delete[] world_vertices_; }
 
-void Circle::move(float deltaTime) {
+void Circle::Move(float deltaTime) {
   position.x = position.x + static_cast<float>(deltaTime) * speed_;
   if (position.x < circumscribed_circle_radius_ && !directionSwitched) {
     speed_ = speed_ * -1;

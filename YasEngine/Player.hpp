@@ -20,7 +20,7 @@ class Player : public GameObject {
 
   Player(float x, float y);
   ~Player();
-  void move(float deltaTime) override;
+  void Move(float deltaTime) override;
   void rotateAllVerticesOverAnAngle(float angle);
   void rotate(float deltaTime);
 

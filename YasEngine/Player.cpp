@@ -82,7 +82,7 @@ Player::~Player() {
   // delete mouse_; // It will be deleted in YasEngine
 }
 
-void Player::move(float deltaTime) {
+void Player::Move(float deltaTime) {
   // LEFT
   if (input_->left && !input_->right) {
     position.x = position.x + deltaTime * (-speed_);

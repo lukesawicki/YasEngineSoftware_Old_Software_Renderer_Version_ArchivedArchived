@@ -15,7 +15,7 @@ class FontObject : public GameObject {
   void regeneratePolygon() override;
   void setPosition(float x, float y);
   void setPosition(const Vector2D<float>& position) override;
-  void move(float deltaTime) override;
+  void Move(float deltaTime) override;
   void setColor(const Vector4D<Uint8>& color) override;
   void setRandomColor();
   Vector2D<float> velocity_;

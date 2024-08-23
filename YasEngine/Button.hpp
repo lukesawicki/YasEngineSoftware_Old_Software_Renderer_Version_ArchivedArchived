@@ -26,7 +26,7 @@ class Button : public GameObject {
   void generateRegularPolygonVertices(float circumscribedCircleRadius,
                                       int numberOfVertices) override;
   void regeneratePolygon() override;
-  void move(float deltaTime) override;
+  void Move(float deltaTime) override;
 
   void setPosition(float x, float y) { GameObject::setPosition(x, y); }
 

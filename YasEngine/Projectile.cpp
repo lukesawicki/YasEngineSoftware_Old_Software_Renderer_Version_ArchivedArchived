@@ -30,7 +30,7 @@ Projectile::~Projectile() {
   delete[] local_vertices_;
 }
 
-void Projectile::move(float deltaTime) {
+void Projectile::Move(float deltaTime) {
   if (time_picker_.getMiliseconds() - start_time_ >= 2000) {
     this->is_alive_ = false;
   }

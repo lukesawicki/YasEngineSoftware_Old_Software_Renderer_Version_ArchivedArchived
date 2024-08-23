@@ -80,7 +80,7 @@ class GameObject {
     moveCollider();
   }
 
-  virtual void move(float deltaTime) = 0;
+  virtual void Move(float deltaTime) = 0;
 
   virtual void moveCollider() {
     collider_.x = position.x;

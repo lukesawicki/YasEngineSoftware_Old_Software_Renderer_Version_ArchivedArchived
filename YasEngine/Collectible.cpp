@@ -70,7 +70,7 @@ void Collectible::setPosition(const Vector2D<float>& position) {
   GameObject::setPosition(position);
 }
 
-void Collectible::move(float deltaTime) {
+void Collectible::Move(float deltaTime) {
   position.x = position.x + deltaTime * velocity_.x;
   position.y = position.y + deltaTime * velocity_.y;
   moveCollider();

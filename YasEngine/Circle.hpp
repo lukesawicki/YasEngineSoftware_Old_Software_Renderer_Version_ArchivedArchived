@@ -9,7 +9,7 @@ class Circle : public GameObject {
  public:
   Circle(float radius, float x, float y);
   ~Circle();
-  void move(float deltaTime) override;
+  void Move(float deltaTime) override;
   void generate() override;
   void generateRegularPolygonVertices(float circumscribedCircleRadius,
                                       int numberOfVertices) override;

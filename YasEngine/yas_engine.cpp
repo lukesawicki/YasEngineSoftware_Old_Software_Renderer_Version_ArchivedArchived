@@ -972,7 +972,7 @@ void YasEngine::moveObjectToMapBoundries(GameObject* gameObject, Wall wall,
 void YasEngine::moveObjects() {
   for (auto object : objectsToDraw) {
     if (object->is_alive_) {
-      object->move(static_cast<float>(deltaTime));
+      object->Move(static_cast<float>(deltaTime));
       object->regeneratePolygon();
     }
   }
