@@ -1,16 +1,14 @@
-#ifndef COLLECTIBLE_HPP
-#define COLLECTIBLE_HPP
+#ifndef YASENGINESOFTWARE_FONTOBJECT_HPP
+#define YASENGINESOFTWARE_FONTOBJECT_HPP
 
 #include "game_object.hpp"
 
-// Class which represent collectible
-/**
- * Collectibles are derived from GameObject
- */
-class Collectible : public GameObject {
+class FontObject : public GameObject {
  public:
-  Collectible(float radius, float x, float y, int numberOfVertices);
-  ~Collectible();
+  FontObject();
+  void initialize(float radius, float x, float y,
+                  const Vector2D<float>& direction, int numberOfVertices);
+  virtual ~FontObject();
   void generate() override;
   void generateRegularPolygonVertices(float circumscribedCircleRadius,
                                       int numberOfVertices) override;
@@ -20,6 +18,7 @@ class Collectible : public GameObject {
   void move(float deltaTime) override;
   void setColor(const Vector4D<Uint8>& color) override;
   void setRandomColor();
+  Vector2D<float> velocity_;
 };
 
-#endif
+#endif  // YASENGINESOFTWARE_FONTOBJECT_HPP

@@ -1,75 +1,84 @@
-#include<cstdlib>
-#include"Spawner.hpp"
-#include "Collectible.hpp"
+#include "spawner.hpp"
 
-int Spawner::numberOfSpawnedObjects = 0;
+#include <cstdlib>
+
+#include "collectible.hpp"
+#include "randomizer.hpp"
+
+int Spawner::number_of_spawned_objects_ = 0;
 
 Spawner::Spawner() {
-  currentTime = timePicker.getMiliseconds();
-  previousTime = currentTime;
-  timeBetweenSpawns = Randomizer::drawNumberClosedInterval(2000, 6000);
+  current_time_ = time_picker_.getMiliseconds();
+  previous_time_ = current_time_;
+  time_between_spawns_ = Randomizer::drawNumberClosedInterval(2000, 6000);
 }
 
 Spawner::Spawner(int x, int y) {
-  position.x = x;
-  position.y = y;
-  currentTime = timePicker.getMiliseconds();
-  previousTime = currentTime;
-  timeBetweenSpawns = +Randomizer::drawNumberClosedInterval(2000, 6000);
+  position_.x = x;
+  position_.y = y;
+  current_time_ = time_picker_.getMiliseconds();
+  previous_time_ = current_time_;
+  time_between_spawns_ = +Randomizer::drawNumberClosedInterval(2000, 6000);
 }
 
 void Spawner::spawnObject(GameObject*& gameObject) {
-  if (!firstSpawned) {
+  if (!first_spawned_) {
     prepareObjectToSpawn(gameObject);
-    previousTime = timePicker.getMiliseconds();
-    firstSpawned = true;
-    currentTime = timePicker.getMiliseconds();
+    previous_time_ = time_picker_.getMiliseconds();
+    first_spawned_ = true;
+    current_time_ = time_picker_.getMiliseconds();
     return;
   }
 
-  currentTime = timePicker.getMiliseconds();
+  current_time_ = time_picker_.getMiliseconds();
 
-  if ((currentTime - previousTime) >= timeBetweenSpawns) {
+  if ((current_time_ - previous_time_) >= time_between_spawns_) {
     prepareObjectToSpawn(gameObject);
-    previousTime = currentTime;
+    previous_time_ = current_time_;
   }
 }
 
 void Spawner::resetTimes() {
-  previousTime = currentTime = timePicker.getMiliseconds();
+  previous_time_ = current_time_ = time_picker_.getMiliseconds();
 }
 
 void Spawner::prepareObjectToSpawn(GameObject*& gameObject) {
   int oldTargetPositionX = 0;
   int oldTargetPositionY = 0;
-  int xPos = Randomizer::drawNumberClosedInterval(spawningMinRadius, spawningMaxRadius);
-  int yPos = Randomizer::drawNumberClosedInterval(spawningMinRadius, spawningMaxRadius);
-  int dirX = Randomizer::drawNumberClosedInterval(1, maxValueForDrawingSpawningDirection);
-  int dirY = Randomizer::drawNumberClosedInterval(1, maxValueForDrawingSpawningDirection);
+  int xPos = Randomizer::drawNumberClosedInterval(spawning_min_radius_,
+                                                  spawning_max_radius_);
+  int yPos = Randomizer::drawNumberClosedInterval(spawning_min_radius_,
+                                                  spawning_max_radius_);
+  int dirX = Randomizer::drawNumberClosedInterval(
+      1, max_value_for_drawing_spawning_direction_);
+  int dirY = Randomizer::drawNumberClosedInterval(
+      1, max_value_for_drawing_spawning_direction_);
 
   int numberOfVertices = Randomizer::drawNumberClosedInterval(3, 7);
 
-  if (dirX <= maxValueForDrawingSpawningDirection * 0.5) {
+  if (dirX <= max_value_for_drawing_spawning_direction_ * 0.5) {
     dirX = -1;
   }
 
-  if (dirX >= maxValueForDrawingSpawningDirection * 0.5) {
+  if (dirX >= max_value_for_drawing_spawning_direction_ * 0.5) {
     dirX = 1;
   }
 
-  if (dirY <= maxValueForDrawingSpawningDirection * 0.5) {
+  if (dirY <= max_value_for_drawing_spawning_direction_ * 0.5) {
     dirY = -1;
   }
 
-  if (dirY >= maxValueForDrawingSpawningDirection * 0.5) {
+  if (dirY >= max_value_for_drawing_spawning_direction_ * 0.5) {
     dirY = 1;
   }
 
-  int targetPositionX = position.x + dirX * xPos;
-  int targetPositionY = position.y + dirY * yPos;
+  int targetPositionX = position_.x + dirX * xPos;
+  int targetPositionY = position_.y + dirY * yPos;
 
-  if (oldTargetPositionX != targetPositionX || oldTargetPositionY != targetPositionY) {
-    gameObject = new Collectible(16, static_cast<float>(targetPositionX), static_cast<float>(targetPositionY),
-                                 numberOfVertices);
+  if (oldTargetPositionX != targetPositionX ||
+      oldTargetPositionY != targetPositionY) {
+    gameObject =
+        new Collectible(16, static_cast<float>(targetPositionX),
+                        static_cast<float>(targetPositionY), numberOfVertices);
   }
 }

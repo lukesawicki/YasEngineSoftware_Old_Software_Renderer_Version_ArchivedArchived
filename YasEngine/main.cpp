@@ -1,12 +1,13 @@
-#include"YasEngine.hpp"
+#include "yas_engine.hpp"
 #define SDL_MAIN_HANDLED
 
 int main(int argc, char* argv[]) {
-  YasEngine* yasEngine = YasEngine::GetInstance();
-  yasEngine->initialize();
-  yasEngine->YasEngineStart();
+  YasEngine* yas_engine = YasEngine::GetInstance();
+  yas_engine->initialize();
+  yas_engine->YasEngineStart();
   return 0;
 }
 
-//                                                                            80                                     120
+//                                                                            80
+//                                                                            120
 //-----------------------------------------------------------------------------|---------------------------------------|

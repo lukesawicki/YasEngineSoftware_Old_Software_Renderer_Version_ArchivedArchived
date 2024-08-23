@@ -1,26 +1,25 @@
 #ifndef SPAWNER_HPP
 #define SPAWNER_HPP
 
-#include "GameObject.hpp"
-#include "Randomizer.hpp"
-#include "Vector2D.hpp"
-#include "TimePicker.hpp"
+#include "game_object.hpp"
+#include "time_picker.hpp"
+#include "vector_2d.hpp"
 
 class Spawner {
-public:
-  int timeBetweenSpawns;
-  TimePicker timePicker;
-  Vector2D<int> position;
-  Vector2D<int> spawnPosition;
-  int spawningMaxRadius = 24;
-  int spawningMinRadius = 8;
-  int maxValueForDrawingSpawningDirection = 4;
-  double startTime = 0;
-  double currentTime = 0;
-  double previousTime = 0;
-  bool firstSpawned = false;
+ public:
+  int time_between_spawns_;
+  TimePicker time_picker_;
+  Vector2D<int> position_;
+  Vector2D<int> spawn_position_;
+  int spawning_max_radius_ = 24;
+  int spawning_min_radius_ = 8;
+  int max_value_for_drawing_spawning_direction_ = 4;
+  double start_time_ = 0;
+  double current_time_ = 0;
+  double previous_time_ = 0;
+  bool first_spawned_ = false;
 
-  static int numberOfSpawnedObjects;
+  static int number_of_spawned_objects_;
 
   Spawner();
 
@@ -28,7 +27,7 @@ public:
   void spawnObject(GameObject*& gameObject);
   void resetTimes();
 
-private:
+ private:
   void prepareObjectToSpawn(GameObject*& gameObject);
 };
 

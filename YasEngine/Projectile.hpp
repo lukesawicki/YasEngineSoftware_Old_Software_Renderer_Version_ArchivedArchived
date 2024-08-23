@@ -1,24 +1,24 @@
 #ifndef PROJECTILE_HPP
 #define PROJECTILE_HPP
-#include"YasGraphicsLibrary.hpp"
-#include"GameObject.hpp"
-#include"TimePicker.hpp"
+#include "game_object.hpp"
+#include "time_picker.hpp"
 
 
 class Projectile : public GameObject {
-public:
-  int liveTime = 500;
-  TimePicker timePicker;
+ public:
+  int live_time_ = 500;
+  TimePicker time_picker_;
 
-  double startTime = 0;
-  double currentTime = 0;
+  double start_time_ = 0;
+  double current_time_ = 0;
 
-  Vector2D<float> velocity;
+  Vector2D<float> velocity_;
   Projectile(float radius, float x, float y, Vector2D<float> direction);
   ~Projectile();
   void move(float deltaTime) override;
   void generate() override;
-  void generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices) override;
+  void generateRegularPolygonVertices(float circumscribedCircleRadius,
+                                      int numberOfVertices) override;
   void regeneratePolygon() override;
 };
 

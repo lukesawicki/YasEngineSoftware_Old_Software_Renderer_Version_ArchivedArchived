@@ -1,17 +1,18 @@
 #ifndef CIRCLE_HPP
 #define CIRCLE_HPP
-#include"GameObject.hpp"
+#include "game_object.hpp"
 
 class Circle : public GameObject {
-private:
+ private:
   bool directionSwitched;
 
-public:
+ public:
   Circle(float radius, float x, float y);
   ~Circle();
   void move(float deltaTime) override;
   void generate() override;
-  void generateRegularPolygonVertices(float circumscribedCircleRadius, int numberOfVertices) override;
+  void generateRegularPolygonVertices(float circumscribedCircleRadius,
+                                      int numberOfVertices) override;
   void regeneratePolygon() override;
 };
 
