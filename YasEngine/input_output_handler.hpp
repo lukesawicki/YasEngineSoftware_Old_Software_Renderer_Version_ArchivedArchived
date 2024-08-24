@@ -8,7 +8,7 @@ struct Input {
   bool up;
   bool down;
   bool shoot;
-  bool rotateCounterClockwise;
+  bool rotate_counter_clockwise;
   bool test_o_button;
 };
 
@@ -16,8 +16,8 @@ struct MousePositionChangeInformation {
   double x = 0.0;
   double y = 0.0;
   bool mouseMoved = false;
-  bool leftMouseButton;
-  bool rightMouseButton;
+  bool left_mouse_button;
+  bool right_mouse_button;
 };
 }  // namespace YasInOut
 

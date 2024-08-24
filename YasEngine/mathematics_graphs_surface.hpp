@@ -3,20 +3,20 @@
 #include "pixels_table.hpp"
 #include "viewport.hpp"
 
-class SurfaceWithMathBasedEffects final : public ViewPort {
+class MathematicsGraphsSurface final : public ViewPort {
  public:
   void render(double& deltaTime);
 
   void cartesianPositionToWindow(int& x, int& y) const {
-    x = x + static_cast<int>(0.5F * view_port_sizes_.x);
-    y = -y + static_cast<int>(0.5F * view_port_sizes_.y);
+    x = x + static_cast<int>(0.5F * view_port_sizes_.x_);
+    y = -y + static_cast<int>(0.5F * view_port_sizes_.y_);
   }
 
-  SurfaceWithMathBasedEffects(int x, int y, int width, int height,
-                              const Vector4D<Uint8>& defaultColor);
-  SurfaceWithMathBasedEffects(Vector2D<int> position, int width, int height,
-                              const Vector4D<Uint8>& defaultColor);
-  virtual ~SurfaceWithMathBasedEffects();
+  MathematicsGraphsSurface(int x, int y, int width, int height,
+                           const Vector4D<Uint8>& defaultColor);
+  MathematicsGraphsSurface(Vector2D<int> position, int width, int height,
+                           const Vector4D<Uint8>& defaultColor);
+  virtual ~MathematicsGraphsSurface();
   void clearColor(const Vector4D<Uint8>& drawingColor) override;
   void drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor) override;
   void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1,
@@ -30,7 +30,7 @@ class SurfaceWithMathBasedEffects final : public ViewPort {
                                  bool areLinesContinuos);
 
   void horizontalLineOnSurface(int y, Vector4D<Uint8> color) {
-    int maxX = static_cast<int>(0.5F * view_port_sizes_.x);
+    int maxX = static_cast<int>(0.5F * view_port_sizes_.x_);
     for (int i = -maxX; i < maxX; i++) {
       // X
 
@@ -39,7 +39,7 @@ class SurfaceWithMathBasedEffects final : public ViewPort {
   }
 
   void verticalLineOnSurface(int x, Vector4D<Uint8> color) {
-    int maxY = static_cast<int>(0.5F * view_port_sizes_.y);
+    int maxY = static_cast<int>(0.5F * view_port_sizes_.y_);
     for (int i = -maxY; i < maxY; i++) {
       // X
       drawPoint(x, i, color);

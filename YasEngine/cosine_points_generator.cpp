@@ -16,13 +16,13 @@ PointsSet* CosinePointsGenerator::generatePoints(
   for (int i = 0; i < points_number_; i++) {
     float x = i * step;
     float y = cos(x);
-    points[i].x = round(x * additionalFactor);
-    points[i].y = round(y * additionalFactor);
+    points[i].x_ = round(x * additionalFactor);
+    points[i].y_ = round(y * additionalFactor);
   }
 
   PointsSet* pointsSet = new PointsSet();
-  pointsSet->points = points;
-  pointsSet->pointsNumber = points_number_;
+  pointsSet->points_ = points;
+  pointsSet->points_number_ = points_number_;
   return pointsSet;
 }
 
@@ -33,13 +33,13 @@ PointsSet* CosinePointsGenerator::generateFloatPoints(
   int additionalFactor = 50;
   int i = 0;
   for (std::pair<float, float> pair : *numbers) {
-    points[i].x = pair.first * additionalFactor;
-    points[i].y = pair.second * additionalFactor;
+    points[i].x_ = pair.first * additionalFactor;
+    points[i].y_ = pair.second * additionalFactor;
     i++;
   }
 
   PointsSet* pointsSet = new PointsSet();
-  pointsSet->points = points;
-  pointsSet->pointsNumber = points_number_;
+  pointsSet->points_ = points;
+  pointsSet->points_number_ = points_number_;
   return pointsSet;
 }

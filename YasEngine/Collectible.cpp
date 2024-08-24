@@ -8,34 +8,34 @@
 Collectible::Collectible(float radius, float x, float y, int numberOfVertices) {
   is_alive_ = true;
   i_am_ = GameObject::kCollectible;
-  collider_.radius = radius;
+  collider_.radius_ = radius;
   speed_ = 20;
-  this->position.x = x;
-  this->position.y = y;
-  this->collider_.x = x;
-  this->collider_.y = y;
+  this->position.x_ = x;
+  this->position.y_ = y;
+  this->collider_.x_ = x;
+  this->collider_.y_ = y;
   float angle =
       static_cast<float>(Randomizer::drawNumberClosedInterval(0, 180));
-  direction_.x = 1;
-  direction_.y = 0;
+  direction_.x_ = 1;
+  direction_.y_ = 0;
   angle = angle * (kPi / 180.0F);
   Vector2D<float>::rotateVectorOverTheAngle(&direction_, angle);
-  velocity_.x = speed_ * direction_.x;
-  velocity_.y = speed_ * direction_.y;
-  setRandomColor();
-  generateRegularPolygonVertices(radius, numberOfVertices);
+  velocity_.x_ = speed_ * direction_.x_;
+  velocity_.y_ = speed_ * direction_.y_;
+  SetRandomColor();
+  GenerateRegularPolygonVertices(radius, numberOfVertices);
 }
 
 Collectible::~Collectible() { delete[] world_vertices_; }
 
-void Collectible::generate() {
+void Collectible::Generate() {
   for (int i = 0; i < number_of_vertices_; i++) {
-    world_vertices_[i].x = position.x + local_vertices_[i].x;
-    world_vertices_[i].y = position.y + local_vertices_[i].y;
+    world_vertices_[i].x_ = position.x_ + local_vertices_[i].x_;
+    world_vertices_[i].y_ = position.y_ + local_vertices_[i].y_;
   }
 }
 
-void Collectible::generateRegularPolygonVertices(
+void Collectible::GenerateRegularPolygonVertices(
     float circumscribedCircleRadius, int numberOfVertices) {
   this->circumscribed_circle_radius_ = circumscribedCircleRadius;
   this->number_of_vertices_ = numberOfVertices;
@@ -45,73 +45,71 @@ void Collectible::generateRegularPolygonVertices(
   angle_for_generate_in_isosceles_polygons_ = start_angle_;
   step_angle_ = 360.0F / numberOfVertices;
   for (int i = 0; i < numberOfVertices; i++) {
-    local_vertices_[i].x =
-        0.0F + static_cast<int>(
-                   circumscribedCircleRadius *
+    local_vertices_[i].x_ =
+        0.0F + static_cast<int>(circumscribedCircleRadius *
                                 cos(angle_for_generate_in_isosceles_polygons_ *
                                     (kPi / 180.0F)));
-    local_vertices_[i].y =
-        0.0F + static_cast<int>(
-                   circumscribedCircleRadius *
+    local_vertices_[i].y_ =
+        0.0F + static_cast<int>(circumscribedCircleRadius *
                                 sin(angle_for_generate_in_isosceles_polygons_ *
                                     (kPi / 180.0F)));
     angle_for_generate_in_isosceles_polygons_ += step_angle_;
   }
-  generate();
+  Generate();
 }
 
-void Collectible::regeneratePolygon() { generate(); }
+void Collectible::RegeneratePolygon() { Generate(); }
 
-void Collectible::setPosition(float x, float y) {
+void Collectible::set_position(float x, float y) {
   GameObject::setPosition(x, y);
 }
 
-void Collectible::setPosition(const Vector2D<float>& position) {
-  GameObject::setPosition(position);
+void Collectible::set_position(const Vector2D<float>& position) {
+  GameObject::set_position(position);
 }
 
 void Collectible::Move(float deltaTime) {
-  position.x = position.x + deltaTime * velocity_.x;
-  position.y = position.y + deltaTime * velocity_.y;
+  position.x_ = position.x_ + deltaTime * velocity_.x_;
+  position.y_ = position.y_ + deltaTime * velocity_.y_;
   moveCollider();
-  regeneratePolygon();
+  RegeneratePolygon();
 }
 
-void Collectible::setColor(const Vector4D<Uint8>& color) {
-  GameObject::setColor(color);
+void Collectible::set_color(const Vector4D<Uint8>& color) {
+  GameObject::set_color(color);
 }
 
-void Collectible::setRandomColor() {
+void Collectible::SetRandomColor() {
   int col = Randomizer::drawNumberClosedInterval(0, 8);
   switch (col) {
     case 0:
-      setColor(kRed);
+      set_color(kRed);
       break;
     case 1:
-      setColor(kGreen);
+      set_color(kGreen);
       break;
     case 2:
-      setColor(kBlue);
+      set_color(kBlue);
       break;
     case 3:
-      setColor(kWhite);
+      set_color(kWhite);
       break;
     case 4:
-      setColor(kYellow);
+      set_color(kYellow);
     case 5:
-      setColor(kLightBlue);
+      set_color(kLightBlue);
       break;
     case 6:
-      setColor(kPolygon);
+      set_color(kPolygon);
       break;
     case 7:
-      setColor(kXportal);
+      set_color(kXportal);
       break;
     case 8:
-      setColor(kPurple);
+      set_color(kPurple);
       break;
     default:
-      setColor(kBlue);
+      set_color(kBlue);
       break;
   }
 }

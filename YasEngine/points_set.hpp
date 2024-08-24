@@ -5,19 +5,19 @@
 class PointsSet {
  public:
   PointsSet() {
-    points = nullptr;
-    pointsNumber = 0;
+    points_ = nullptr;
+    points_number_ = 0;
   }
   ~PointsSet() {
-    delete[] points;
-    pointsNumber = 0;
+    delete[] points_;
+    points_number_ = 0;
   }
   PointsSet(Vector2D<float>* newPoints, long pointsNumber) {
-    points = newPoints;
-    this->pointsNumber = pointsNumber;
+    points_ = newPoints;
+    this->points_number_ = pointsNumber;
   }
-  Vector2D<float>* points = nullptr;
-  long pointsNumber;
+  Vector2D<float>* points_ = nullptr;
+  long points_number_;
 };
 
 #endif

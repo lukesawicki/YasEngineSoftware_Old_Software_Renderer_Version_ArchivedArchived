@@ -13,11 +13,11 @@ PointsSet* FibonacciPointsGenerator::generatePoints(
   Vector2D<float>* points = new Vector2D<float>[points_number_ * 2];
   std::vector<int> fibonacci = generateNfibonacciNumbers(points_number_);
 
-  // Point constructor setting x and y to 0;
-  // This loop creates pairs of points = ( (0,0) ; (fibonacci(i) ,y=0) )
+  // Point constructor setting x_ and y_ to 0;
+  // This loop creates pairs of points_ = ( (0,0) ; (fibonacci(i) ,y_=0) )
   int j = 0;
   for (int i = 1; i < (points_number_ * 2) - 1; i += 2) {
-    points[i].x = static_cast<float>(fibonacci.at(
+    points[i].x_ = static_cast<float>(fibonacci.at(
         j++));  // 100.0F; // static_cast<float>(fibonacci.at(j++));
   }
 
@@ -30,9 +30,9 @@ PointsSet* FibonacciPointsGenerator::generatePoints(
   }
 
   PointsSet* pointsSet = new PointsSet();
-  pointsSet->points = points;
+  pointsSet->points_ = points;
 
-  pointsSet->pointsNumber = points_number_;
+  pointsSet->points_number_ = points_number_;
 
   return pointsSet;
 }

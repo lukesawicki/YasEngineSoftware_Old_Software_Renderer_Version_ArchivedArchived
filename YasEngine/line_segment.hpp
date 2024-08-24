@@ -2,8 +2,8 @@
 #define LINESEGMENT_HPP
 
 struct LineSegment {
-  Vector2D<float> point0;
-  Vector2D<float> point1;
+  Vector2D<float> point_0;
+  Vector2D<float> point_1;
 };
 
 #endif

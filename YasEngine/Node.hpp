@@ -50,9 +50,9 @@ class Node {
       }
 
       int childNodeSize = static_cast<int>(parentNode.size_ * 0.5);
-      childNodePositionX = static_cast<int>(parentNode.position_->x +
+      childNodePositionX = static_cast<int>(parentNode.position_->x_ +
                                             (factorX * (childNodeSize * 0.5)));
-      childNodePositionY = static_cast<int>(parentNode.position_->y +
+      childNodePositionY = static_cast<int>(parentNode.position_->y_ +
                                             (factorY * (childNodeSize * 0.5)));
       childNodePosition =
           new Vector2D<int>(childNodePositionX, childNodePositionY);
@@ -145,7 +145,6 @@ class Node {
                                               secondLevelQuadPositionY));
       }  // end for
     }
-
     return positions;
   }
 };

@@ -13,13 +13,13 @@ void Node::createSpanwer(const std::vector<int>& spawnerPositionNumber) {
 
   this->child_nodes_[spawnerPositionNumber.at(0)]
       ->child_nodes_[spawnerPositionNumber.at(1)]
-      ->spawner_->position_.x = this->child_nodes_[spawnerPositionNumber.at(0)]
-                                   ->child_nodes_[spawnerPositionNumber.at(1)]
-                                   ->position_->x;
+      ->spawner_->position_.x_ = this->child_nodes_[spawnerPositionNumber.at(0)]
+                                     ->child_nodes_[spawnerPositionNumber.at(1)]
+                                     ->position_->x_;
 
   this->child_nodes_[spawnerPositionNumber.at(0)]
       ->child_nodes_[spawnerPositionNumber.at(1)]
-      ->spawner_->position_.y = this->child_nodes_[spawnerPositionNumber.at(0)]
-                                   ->child_nodes_[spawnerPositionNumber.at(1)]
-                                   ->position_->y;
+      ->spawner_->position_.y_ = this->child_nodes_[spawnerPositionNumber.at(0)]
+                                     ->child_nodes_[spawnerPositionNumber.at(1)]
+                                     ->position_->y_;
 }

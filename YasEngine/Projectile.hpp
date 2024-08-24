@@ -3,7 +3,6 @@
 #include "game_object.hpp"
 #include "time_picker.hpp"
 
-
 class Projectile : public GameObject {
  public:
   int live_time_ = 500;
@@ -16,10 +15,10 @@ class Projectile : public GameObject {
   Projectile(float radius, float x, float y, Vector2D<float> direction);
   ~Projectile();
   void Move(float deltaTime) override;
-  void generate() override;
-  void generateRegularPolygonVertices(float circumscribedCircleRadius,
+  void Generate() override;
+  void GenerateRegularPolygonVertices(float circumscribedCircleRadius,
                                       int numberOfVertices) override;
-  void regeneratePolygon() override;
+  void RegeneratePolygon() override;
 };
 
 #endif

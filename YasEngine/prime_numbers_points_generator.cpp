@@ -12,9 +12,9 @@ PointsSet* PrimeNumbersPointsGenerator::generatePoints(
 
   int j = 0;
   for (int i = 1; i < (points_number_ * 2) - 1; i += 2) {
-    // float n = // (*numbers).at(i);
-    points[i].x = numbers->at(j++);  // primeNumbers.at(j++));//100.0F; //
-                                     // static_cast<float>(fibonacci.at(j++));
+    // float n = // (*numbers_).at(i);
+    points[i].x_ = numbers->at(j++);  // primeNumbers.at(j++));//100.0F; //
+                                      // static_cast<float>(fibonacci.at(j++));
   }
 
   j = 0;
@@ -24,8 +24,8 @@ PointsSet* PrimeNumbersPointsGenerator::generatePoints(
   }
 
   PointsSet* pointsSet = new PointsSet();
-  pointsSet->points = points;
-  pointsSet->pointsNumber = points_number_;
+  pointsSet->points_ = points;
+  pointsSet->points_number_ = points_number_;
   return pointsSet;
 }
 

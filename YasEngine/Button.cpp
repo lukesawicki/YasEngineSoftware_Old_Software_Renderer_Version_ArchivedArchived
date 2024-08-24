@@ -2,17 +2,17 @@
 
 #include "screen_writer.hpp"
 
-void Button::generate() {
+void Button::Generate() {
   for (int i = 0; i < number_of_vertices_; i++) {
-    world_vertices_[i].x = position.x + local_vertices_[i].x;
-    world_vertices_[i].y = position.y + local_vertices_[i].y;
+    world_vertices_[i].x_ = position.x_ + local_vertices_[i].x_;
+    world_vertices_[i].y_ = position.y_ + local_vertices_[i].y_;
   }
 }
 
-void Button::generateRegularPolygonVertices(float circumscribedCircleRadius,
+void Button::GenerateRegularPolygonVertices(float circumscribedCircleRadius,
                                             int numberOfVertices) {}
 
-void Button::regeneratePolygon() { generate(); }
+void Button::RegeneratePolygon() { Generate(); }
 
 void Button::Move(float deltaTime) {}
 

@@ -22,21 +22,21 @@
 
 class YasEngine {
  public:
-  bool tests = false;
-  std::string engineVersion;
+  bool tests_ = false;
+  std::string engine_version_;
   int MAJOR_REVISION = 1;
   int MINOR_REVISION = 3;
   int BUG_FIX_RELEASE = 0;
   int BUILD_NUMBER = 0;
 
   rapidjson::Document settings;
-  int musicVolume = MIX_MAX_VOLUME;
-  int shootVolume = MIX_MAX_VOLUME;
-  int hitVolume = MIX_MAX_VOLUME;
-  int otherVolume = MIX_MAX_VOLUME;
+  int music_volume_ = MIX_MAX_VOLUME;
+  int shoot_volume_ = MIX_MAX_VOLUME;
+  int hit_volume_ = MIX_MAX_VOLUME;
+  int other_volume_ = MIX_MAX_VOLUME;
 
-  bool collided = false;
-  GameObject* go;
+  bool collided_ = false;
+  GameObject* game_object_;
 
   enum GameState {
     kIntro,
@@ -48,44 +48,44 @@ class YasEngine {
     kYouWon
   };
 
-  bool playerWonAndExited = false;
+  bool player_won_and_exited_ = false;
 
   enum Wall { kLeft, kRight, kTop, kBottom };
 
   struct NodeNumbersOnTwoProceedingLevels {
-    int firstLevelNode = 0;
-    int secondLevelNode = 0;
+    int first_level_node = 0;
+    int second_level_node = 0;
 
     NodeNumbersOnTwoProceedingLevels() {
-      firstLevelNode = 0;
-      secondLevelNode = 0;
+      first_level_node = 0;
+      second_level_node = 0;
     }
 
     NodeNumbersOnTwoProceedingLevels(int first, int second) {
-      this->firstLevelNode = first;
-      this->secondLevelNode = second;
+      this->first_level_node = first;
+      this->second_level_node = second;
     }
   };
 
-  std::vector<Vector2D<int>*> testPositions;
+  std::vector<Vector2D<int>*> test_positions_;
 
-  GameState gameState = GameState::kIntro;
+  GameState game_state_ = GameState::kIntro;
 
-  std::vector<GameObject*> buttons;
+  std::vector<GameObject*> buttons_;
 
-  int basePointsNumber = 64;
+  int base_points_number_ = 64;
 
-  std::vector<std::string> mainMenuTexts;
-  std::vector<std::string> introTexts;
-  std::vector<std::string> outroTexts;
-  std::vector<std::string> inGameTexts;
+  std::vector<std::string> main_menu_texts_;
+  std::vector<std::string> intro_texts_;
+  std::vector<std::string> outro_texts_;
+  std::vector<std::string> in_game_texts_;
 
   static YasEngine* GetInstance() {
-    if (instance != nullptr) {
-      return instance;
+    if (instance_ != nullptr) {
+      return instance_;
     }
-    instance = new YasEngine();
-    return instance;
+    instance_ = new YasEngine();
+    return instance_;
   }
 
   void initialize();
@@ -93,95 +93,96 @@ class YasEngine {
   void clean();
 
  private:
-  TimePicker timePicker;
+  TimePicker time_picker_;
 
   Vector2D<float> A = Vector2D<float>(-300, 200);
   Vector2D<float> B = Vector2D<float>(100, -350);
 
-  static YasEngine* instance;
+  static YasEngine* instance_;
 
-  int endianness;
+  int endianness_;
 
-  SDL_Window* window;
-  SDL_Renderer* renderer;
-  SDL_Texture* screenTexture;
+  SDL_Window* window_;
+  SDL_Renderer* renderer_;
+  SDL_Texture* screen_texture_;
 
-  PixelsTable* pixelsTable;
-  Vector2D<int>* windowDimensions;
-  SDL_Event event;
-  bool quit = false;
+  PixelsTable* pixels_table_;
+  Vector2D<int>* window_dimensions_;
+  SDL_Event event_;
+  bool quit_ = false;
 
-  double time;
-  double newTime;
-  double deltaTime;
-  double fps;
-  double fpsTime;
-  unsigned int frames;
+  double time_;
+  double new_time_;
+  double delta_time_;
+  double fps_;
+  double fps_time_;
+  unsigned int frames_;
 
-  float mouseX;
-  float mouseY;
+  float mouse_x_;
+  float mouse_y_;
 
-  int WINDOW_WIDTH = 1600;
-  int WINDOW_HEIGHT = 800;
+  int window_width_ = 1600;
+  int window_height_ = 800;
 
-  std::vector<GameObject*> objectsToDraw;
-  bool first16Spawned = false;
-  int howMany = 0;
-  Player* player;
-  SurfaceWithMathBasedEffects* surfaceWithMathBasedEffects;
-  std::vector<NodeNumbersOnTwoProceedingLevels*> spawnersPositions;
+  std::vector<GameObject*> objects_to_draw_;
+  bool first_16_spawned_ = false;
+  int how_many_ = 0;
+  Player* player_;
+  MathematicsGraphsSurface* mathematics_graphs_surface_;
+  std::vector<NodeNumbersOnTwoProceedingLevels*> spawners_positions_;
 
-  const int MAX_COLLECTIBLES_TO_SPAWN = 64;
+  const int kmax_collectibles_to_spawn_ = 64;
 
-  std::map<std::string, std::map<int, float>*> numbersMap;
-  std::map<std::string, std::map<int, std::map<float, float>*>*> pairNumbersMap;
+  std::map<std::string, std::map<int, float>*> numbers_map_;
+  std::map<std::string, std::map<int, std::map<float, float>*>*>
+      pair_numbers_map_;
 
-  SDL_AudioSpec audioSpecs;
+  SDL_AudioSpec audio_specs_;
 
-  Mix_Music* music;
-  Mix_Chunk* shootSound;
-  Mix_Chunk* hitSound;
-  Mix_Chunk* otherSound;
+  Mix_Music* music_;
+  Mix_Chunk* shoot_sound_;
+  Mix_Chunk* hit_sound_;
+  Mix_Chunk* other_sound_;
 
-  MathPicture* sinePicture;
-  MathPicture* cosinePicture;
-  MathPicture* fibonacciePicture;
-  MathPicture* primeNumbersPicture;
+  MathPicture* sine_picture_;
+  MathPicture* cosine_picture_;
+  MathPicture* fibonaccie_picture_;
+  MathPicture* prime_numbers_picture_;
 
-  int level = 1;
-  int previousLevel = 0;
-  bool levelChanged = false;
-  const int MAX_LEVEL = 4;
-  int sinePointsHarvested = 0;
-  int cosinePointsHarvested = 0;
-  int primesPointsHarvested = 0;
-  int fibbsPointsHarvested = 0;
+  int level_ = 1;
+  int previous_level_ = 0;
+  bool level_changed_ = false;
+  const int kmax_level_ = 4;
+  int sine_points_harvested_ = 0;
+  int cosine_points_harvested_ = 0;
+  int primes_points_harvested_ = 0;
+  int fibonacci_points_harvested_ = 0;
 
-  int maxNtoCalculatePrimes = 1000;
-  int maxNtoCalculateFibonacci = 40;
-  int maxNtoCalculateSine = 100;
-  int maxNtoCalculateCosine = 100;
+  int max_n_to_calculate_primes_ = 1000;
+  int max_n_to_calculate_fibonacci_ = 40;
+  int max_n_to_calculate_sine_ = 100;
+  int max_n_to_calculate_cosine_ = 100;
 
-  std::map<std::string, int> numberOfGivenColors;
-  Node* spawners;
+  std::map<std::string, int> number_of_given_colors_;
+  Node* spawners_;
 
-  Vector2D<float> testPoint0;
-  Vector2D<float> testPoint1;
+  Vector2D<float> test_point_0_;
+  Vector2D<float> test_point_1_;
 
-  ScreenWriter writer;
-  int step = 0;
+  ScreenWriter writer_;
+  int step_ = 0;
 
-  MapFrame mapFrame;
+  MapFrame map_frame_;
 
   YasEngine() {};
-  bool shouldApplicationStopRunning = false;
-  YasInOut::Input* input = new YasInOut::Input();
-  YasInOut::MousePositionChangeInformation* mousePositionChangeInformation =
+  bool should_application_stop_running_ = false;
+  YasInOut::Input* input_ = new YasInOut::Input();
+  YasInOut::MousePositionChangeInformation* mouse_position_change_information_ =
       new YasInOut::MousePositionChangeInformation();
-  int redShotDowns = 0;
-  int greenShotdowns = 0;
-  int blueShotdowns = 0;
-  bool engineInstantiated = false;
+  int red_shot_downs_ = 0;
+  int green_shotdowns_ = 0;
+  int blue_shotdowns_ = 0;
+  bool engine_instantiated_ = false;
   void readSettingsFromFile();
   void prepareRendering();
   void prepareBasicSettings();

@@ -17,15 +17,15 @@ PointsSet* SinePointsGenerator::generatePoints(int numberOfNumbers,
     float x = i * step;
     float y = sin(x);
 
-    // numbers.push_back(y);
+    // numbers.push_back(y_);
 
-    points[i].x = x * additionalFactor;  // round(x * additionalFactor);
-    points[i].y = y * additionalFactor;  // round(y * additionalFactor);
+    points[i].x_ = x * additionalFactor;  // round(x_ * additionalFactor);
+    points[i].y_ = y * additionalFactor;  // round(y_ * additionalFactor);
   }
 
   PointsSet* pointsSet = new PointsSet();
-  pointsSet->points = points;
-  pointsSet->pointsNumber = points_number_;
+  pointsSet->points_ = points;
+  pointsSet->points_number_ = points_number_;
   return pointsSet;
 }
 
@@ -36,15 +36,15 @@ PointsSet* SinePointsGenerator::generateFloatPoints(
   int additionalFactor = 50;
   int i = 0;
   for (std::pair<float, float> pair : *numbers) {
-    points[i].x =
-        pair.first * additionalFactor;  // round(x * additionalFactor);
-    points[i].y =
-        pair.second * additionalFactor;  // round(y * additionalFactor);
+    points[i].x_ =
+        pair.first * additionalFactor;  // round(x_ * additionalFactor);
+    points[i].y_ =
+        pair.second * additionalFactor;  // round(y_ * additionalFactor);
     i++;
   }
 
   PointsSet* pointsSet = new PointsSet();
-  pointsSet->points = points;
-  pointsSet->pointsNumber = points_number_;
+  pointsSet->points_ = points;
+  pointsSet->points_number_ = points_number_;
   return pointsSet;
 }

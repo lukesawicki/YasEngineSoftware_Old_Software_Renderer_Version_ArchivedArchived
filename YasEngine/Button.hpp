@@ -22,16 +22,16 @@ class Button : public GameObject {
          const Vector4D<Uint8>& color);
   ~Button();
 
-  void generate() override;
-  void generateRegularPolygonVertices(float circumscribedCircleRadius,
+  void Generate() override;
+  void GenerateRegularPolygonVertices(float circumscribedCircleRadius,
                                       int numberOfVertices) override;
-  void regeneratePolygon() override;
+  void RegeneratePolygon() override;
   void Move(float deltaTime) override;
 
   void setPosition(float x, float y) { GameObject::setPosition(x, y); }
 
-  void setPosition(const Vector2D<float>& position) {
-    GameObject::setPosition(position);
+  void set_position(const Vector2D<float>& position) {
+    GameObject::set_position(position);
   }
 };
 

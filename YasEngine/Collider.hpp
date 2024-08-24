@@ -4,12 +4,12 @@
 
 class Collider {
  public:
-  float radius = 0.0F;
-  float x = 0.0F;
-  float y = 0.0F;
+  float radius_ = 0.0F;
+  float x_ = 0.0F;
+  float y_ = 0.0F;
   Collider();
   Collider(float radius, float x, float y);
-  bool isInCollision = false;
+  bool is_in_collision_ = false;
 
   static bool isCollision(const Collider& object0, const Collider& object1);
   static bool isCollidingWithWall(const Collider& object0,

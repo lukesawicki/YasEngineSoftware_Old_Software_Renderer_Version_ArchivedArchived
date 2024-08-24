@@ -11,15 +11,15 @@ class Collectible : public GameObject {
  public:
   Collectible(float radius, float x, float y, int numberOfVertices);
   ~Collectible();
-  void generate() override;
-  void generateRegularPolygonVertices(float circumscribedCircleRadius,
+  void Generate() override;
+  void GenerateRegularPolygonVertices(float circumscribedCircleRadius,
                                       int numberOfVertices) override;
-  void regeneratePolygon() override;
-  void setPosition(float x, float y);
-  void setPosition(const Vector2D<float>& position) override;
+  void RegeneratePolygon() override;
+  void set_position(float x, float y);
+  void set_position(const Vector2D<float>& position) override;
   void Move(float deltaTime) override;
-  void setColor(const Vector4D<Uint8>& color) override;
-  void setRandomColor();
+  void set_color(const Vector4D<Uint8>& color) override;
+  void SetRandomColor();
 };
 
 #endif

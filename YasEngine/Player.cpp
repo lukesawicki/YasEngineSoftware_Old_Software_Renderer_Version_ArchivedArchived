@@ -1,17 +1,18 @@
 #include "player.hpp"
+
 #include "yas_engine.hpp"
 #include "yas_graphics_library.hpp"
 
 Player::Player(float x, float y) {
-  collider_.x = x;
-  collider_.y = y;
-  collider_.radius = 20;
+  collider_.x_ = x;
+  collider_.y_ = y;
+  collider_.radius_ = 20;
   i_am_ = WhoAmI::kProtagonist;
-  position.x = x;
-  position.y = y;
+  position.x_ = x;
+  position.y_ = y;
 
-  direction_.x = 1;
-  direction_.y = 0;
+  direction_.x_ = 1;
+  direction_.y_ = 0;
 
   speed_ = 200;
   rotation_speed_ = 5;
@@ -21,58 +22,58 @@ Player::Player(float x, float y) {
   world_vertices_ = new Vector2D<float>[number_of_vertices_];
   local_vertices_ = new Vector2D<float>[number_of_vertices_];
 
-  local_vertices_[0].x = -12;
-  local_vertices_[0].y = -11;
+  local_vertices_[0].x_ = -12;
+  local_vertices_[0].y_ = -11;
 
-  local_vertices_[1].x = -2;
-  local_vertices_[1].y = -11;
+  local_vertices_[1].x_ = -2;
+  local_vertices_[1].y_ = -11;
 
-  local_vertices_[2].x = 8;
-  local_vertices_[2].y = -9;
+  local_vertices_[2].x_ = 8;
+  local_vertices_[2].y_ = -9;
 
-  local_vertices_[3].x = -2;
-  local_vertices_[3].y = -7;
+  local_vertices_[3].x_ = -2;
+  local_vertices_[3].y_ = -7;
 
-  local_vertices_[4].x = -2;
-  local_vertices_[4].y = -3;
+  local_vertices_[4].x_ = -2;
+  local_vertices_[4].y_ = -3;
 
-  local_vertices_[5].x = 12;
-  local_vertices_[5].y = 0;
+  local_vertices_[5].x_ = 12;
+  local_vertices_[5].y_ = 0;
 
-  local_vertices_[6].x = -2;
-  local_vertices_[6].y = 3;
+  local_vertices_[6].x_ = -2;
+  local_vertices_[6].y_ = 3;
 
-  local_vertices_[7].x = -2;
-  local_vertices_[7].y = 7;
+  local_vertices_[7].x_ = -2;
+  local_vertices_[7].y_ = 7;
 
-  local_vertices_[8].x = 8;
-  local_vertices_[8].y = 9;
+  local_vertices_[8].x_ = 8;
+  local_vertices_[8].y_ = 9;
 
-  local_vertices_[9].x = -2;
-  local_vertices_[9].y = 11;
+  local_vertices_[9].x_ = -2;
+  local_vertices_[9].y_ = 11;
 
-  local_vertices_[10].x = -12;
-  local_vertices_[10].y = 11;
+  local_vertices_[10].x_ = -12;
+  local_vertices_[10].y_ = 11;
 
-  local_vertices_[11].x = -8;
-  local_vertices_[11].y = 7;
+  local_vertices_[11].x_ = -8;
+  local_vertices_[11].y_ = 7;
 
-  local_vertices_[12].x = -12;
-  local_vertices_[12].y = 3;
+  local_vertices_[12].x_ = -12;
+  local_vertices_[12].y_ = 3;
 
-  local_vertices_[13].x = -8;
-  local_vertices_[13].y = 3;
+  local_vertices_[13].x_ = -8;
+  local_vertices_[13].y_ = 3;
 
-  local_vertices_[14].x = -8;
-  local_vertices_[14].y = -3;
+  local_vertices_[14].x_ = -8;
+  local_vertices_[14].y_ = -3;
 
-  local_vertices_[15].x = -12;
-  local_vertices_[15].y = -3;
+  local_vertices_[15].x_ = -12;
+  local_vertices_[15].y_ = -3;
 
-  local_vertices_[16].x = -8;
-  local_vertices_[16].y = -7;
+  local_vertices_[16].x_ = -8;
+  local_vertices_[16].y_ = -7;
 
-  generate();
+  Generate();
 }
 
 Player::~Player() {
@@ -85,35 +86,35 @@ Player::~Player() {
 void Player::Move(float deltaTime) {
   // LEFT
   if (input_->left && !input_->right) {
-    position.x = position.x + deltaTime * (-speed_);
+    position.x_ = position.x_ + deltaTime * (-speed_);
   }
 
   // RIGHT
   if (input_->right && !input_->left) {
-    position.x = position.x + deltaTime * speed_;
+    position.x_ = position.x_ + deltaTime * speed_;
   }
 
   // UP
   if (input_->up && !input_->down) {
-    position.y = position.y + deltaTime * speed_;
+    position.y_ = position.y_ + deltaTime * speed_;
   }
 
   // DOWN
   if (input_->down && !input_->up) {
-    position.y = position.y + deltaTime * (-speed_);
+    position.y_ = position.y_ + deltaTime * (-speed_);
   }
 
   moveCollider();
 
   // SPACE
-  if (input_->shoot || mouse_->leftMouseButton) {
+  if (input_->shoot || mouse_->left_mouse_button) {
     is_shooting_ = true;
   }
-  regeneratePolygon();
+  RegeneratePolygon();
 }
 
 void Player::rotate(float deltaTime) {
-  if (input_->rotateCounterClockwise) {
+  if (input_->rotate_counter_clockwise) {
     direction_mouse_angle_ = direction_mouse_angle_ * 3.141592F / 180.0F;
     direction_mouse_angle_ = deltaTime * rotation_speed_;
     player_current_direction_angle_ =
@@ -123,13 +124,13 @@ void Player::rotate(float deltaTime) {
           player_current_direction_angle_ - 6.28319F;
     }
     rotateAllVerticesOverAnAngle(direction_mouse_angle_);
-    generate();
+    Generate();
   }
 }
 
 void Player::rotateToMousePosition(float x, float y,
                                    Vector2D<int>* windowDimensions) {
-  if (x <= windowDimensions->x && y <= windowDimensions->y) {
+  if (x <= windowDimensions->x_ && y <= windowDimensions->y_) {
     float currentX = x;
     float currentY = y;
 
@@ -142,13 +143,13 @@ void Player::rotateToMousePosition(float x, float y,
     float angleBetweenCurrentAndMouse =
         Vector2D<float>::angleBetweenVectors(direction_, mousePositionVector);
     rotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
-    setDirection(mousePositionVector.x, mousePositionVector.y);
+    setDirection(mousePositionVector.x_, mousePositionVector.y_);
   }
 }
 
 void Player::rotateToMousePositionInLocalCoordinateSystem(
     float x, float y, Vector2D<int>* windowDimensions) {
-  if (x <= windowDimensions->x && y <= windowDimensions->y) {
+  if (x <= windowDimensions->x_ && y <= windowDimensions->y_) {
     float currentX = x;
     float currentY = y;
 
@@ -170,21 +171,21 @@ void Player::rotateToMousePositionInLocalCoordinateSystem(
 }
 
 void Player::setDirection(float x, float y) {
-  direction_.x = x;
-  direction_.y = y;
+  direction_.x_ = x;
+  direction_.y_ = y;
 }
 
-void Player::generate() {
+void Player::Generate() {
   for (int i = 0; i < number_of_vertices_; i++) {
-    world_vertices_[i].x = position.x + local_vertices_[i].x;
-    world_vertices_[i].y = position.y + local_vertices_[i].y;
+    world_vertices_[i].x_ = position.x_ + local_vertices_[i].x_;
+    world_vertices_[i].y_ = position.y_ + local_vertices_[i].y_;
   }
 }
 
-void Player::generateRegularPolygonVertices(float circumscribedCircleRadius,
+void Player::GenerateRegularPolygonVertices(float circumscribedCircleRadius,
                                             int numberOfVertices) {}
 
-void Player::regeneratePolygon() { generate(); }
+void Player::RegeneratePolygon() { Generate(); }
 
 void Player::rotateAllVerticesOverAnAngle(float angle) {
   for (int i = 0; i < number_of_vertices_; i++) {
@@ -201,8 +202,10 @@ void Player::setInput(YasInOut::MousePositionChangeInformation* mouse) {
 Projectile* Player::shoot() {
   if (is_shooting_) {
     is_shooting_ = false;
-    float projectileX = position.x + direction_.x * projectile_position_shift_;
-    float projectileY = position.y + direction_.y * projectile_position_shift_;
+    float projectileX =
+        position.x_ + direction_.x_ * projectile_position_shift_;
+    float projectileY =
+        position.y_ + direction_.y_ * projectile_position_shift_;
     return new Projectile(8, projectileX, projectileY, direction_);
   } else {
     return nullptr;

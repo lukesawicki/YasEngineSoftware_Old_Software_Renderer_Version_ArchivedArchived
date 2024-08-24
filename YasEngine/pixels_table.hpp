@@ -7,8 +7,8 @@
 
 class PixelsTable {
  public:
-  Uint8* pixels = nullptr;
-  Vector2D<int> windowDimensions;
+  Uint8* pixels_ = nullptr;
+  Vector2D<int> window_dimensions_;
   PixelsTable(int width, int height, const Vector4D<Uint8>& defaultColor);
   PixelsTable(const PixelsTable& originalPixelsTable,
               const Vector4D<Uint8>& defaultColor);

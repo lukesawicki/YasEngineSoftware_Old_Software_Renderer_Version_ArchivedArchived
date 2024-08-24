@@ -12,17 +12,17 @@ void FontObject::initialize(float radius, float x, float y,
                             int numberOfVertices) {
   is_alive_ = true;
   i_am_ = GameObject::kGuiElement;
-  collider_.radius = 17;
+  collider_.radius_ = 17;
   speed_ = 200;
-  this->direction_.x = direction.x;
-  this->direction_.y = direction.y;
-  this->position.x = x;
-  this->position.y = y;
-  this->collider_.x = x;
-  this->collider_.y = y;
+  this->direction_.x_ = direction.x_;
+  this->direction_.y_ = direction.y_;
+  this->position.x_ = x;
+  this->position.y_ = y;
+  this->collider_.x_ = x;
+  this->collider_.y_ = y;
   start_angle_ = 90;
-  velocity_.x = speed_ * direction.x;
-  velocity_.y = speed_ * direction.y;
+  velocity_.x_ = speed_ * direction.x_;
+  velocity_.y_ = speed_ * direction.y_;
   setRandomColor();
 }
 
@@ -31,14 +31,14 @@ FontObject::~FontObject() {
   delete[] local_vertices_;
 }
 
-void FontObject::generate() {
+void FontObject::Generate() {
   for (int i = 0; i < number_of_vertices_; i++) {
-    world_vertices_[i].x = position.x + local_vertices_[i].x;
-    world_vertices_[i].y = position.y + local_vertices_[i].y;
+    world_vertices_[i].x_ = position.x_ + local_vertices_[i].x_;
+    world_vertices_[i].y_ = position.y_ + local_vertices_[i].y_;
   }
 }
 
-void FontObject::generateRegularPolygonVertices(float circumscribedCircleRadius,
+void FontObject::GenerateRegularPolygonVertices(float circumscribedCircleRadius,
                                                 int numberOfVertices) {
   this->circumscribed_circle_radius_ = circumscribedCircleRadius;
   this->number_of_vertices_ = numberOfVertices;
@@ -48,55 +48,55 @@ void FontObject::generateRegularPolygonVertices(float circumscribedCircleRadius,
   angle_for_generate_in_isosceles_polygons_ = start_angle_;
   step_angle_ = 360.0F / numberOfVertices;
   for (int i = 0; i < numberOfVertices; i++) {
-    local_vertices_[i].x =
+    local_vertices_[i].x_ =
         0.0F + static_cast<int>(circumscribedCircleRadius *
                                 cos(angle_for_generate_in_isosceles_polygons_ *
                                     (kPi / 180.0F)));
-    local_vertices_[i].y =
+    local_vertices_[i].y_ =
         0.0F + static_cast<int>(circumscribedCircleRadius *
                                 sin(angle_for_generate_in_isosceles_polygons_ *
                                     (kPi / 180.0F)));
     angle_for_generate_in_isosceles_polygons_ += step_angle_;
   }
-  generate();
+  Generate();
 }
 
-void FontObject::regeneratePolygon() { generate(); }
+void FontObject::RegeneratePolygon() { Generate(); }
 
 void FontObject::setPosition(float x, float y) {
   GameObject::setPosition(x, y);
 }
 
-void FontObject::setPosition(const Vector2D<float>& position) {
-  GameObject::setPosition(position);
+void FontObject::set_position(const Vector2D<float>& position) {
+  GameObject::set_position(position);
 }
 
 void FontObject::Move(float deltaTime) {}
 
-void FontObject::setColor(const Vector4D<Uint8>& color) {
-  GameObject::setColor(color);
+void FontObject::set_color(const Vector4D<Uint8>& color) {
+  GameObject::set_color(color);
 }
 
 void FontObject::setRandomColor() {
   int col = Randomizer::drawNumberClosedInterval(1, 4);
   switch (col) {
     case 0:
-      setColor(kRed);
+      set_color(kRed);
       break;
     case 1:
-      setColor(kGreen);
+      set_color(kGreen);
       break;
     case 2:
-      setColor(kBlue);
+      set_color(kBlue);
       break;
     case 3:
-      setColor(kWhite);
+      set_color(kWhite);
       break;
     case 4:
-      setColor(kYellow);
+      set_color(kYellow);
       break;
     default:
-      setColor(kBlue);
+      set_color(kBlue);
       break;
   }
 }

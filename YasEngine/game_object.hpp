@@ -35,63 +35,63 @@ class GameObject {
 
   Vector2D<float> velocity_;
 
-  virtual void generate() = 0;
-  virtual void generateRegularPolygonVertices(float circumscribedCircleRadius,
+  virtual void Generate() = 0;
+  virtual void GenerateRegularPolygonVertices(float circumscribedCircleRadius,
                                               int numberOfVertices) = 0;
-  virtual void regeneratePolygon() = 0;
+  virtual void RegeneratePolygon() = 0;
 
   void setPosition(float x, float y) {
-    position.x = x;
-    position.y = y;
+    position.x_ = x;
+    position.y_ = y;
     moveCollider();
   }
 
   void setX(float x) {
-    position.x = x;
+    position.x_ = x;
     moveCollider();
   }
 
   void setY(float y) {
-    position.y = y;
+    position.y_ = y;
     moveCollider();
   }
 
   virtual Vector2D<float> getPosition() { return position; }
 
   virtual int getColliderLeftSide() {
-    return static_cast<int>(position.x - collider_.radius);
+    return static_cast<int>(position.x_ - collider_.radius_);
   }
 
   virtual int getColliderRightSide() {
-    return static_cast<int>(position.x + collider_.radius);
+    return static_cast<int>(position.x_ + collider_.radius_);
   }
 
   virtual int getColliderTopSide() {
-    return static_cast<int>(position.y + collider_.radius);
+    return static_cast<int>(position.y_ + collider_.radius_);
   }
 
   virtual int getColliderBottomSide() {
-    return static_cast<int>(position.y - collider_.radius);
+    return static_cast<int>(position.y_ - collider_.radius_);
   }
 
-  virtual void setPosition(const Vector2D<float>& position) {
-    this->position.x = position.x;
-    this->position.y = position.y;
+  virtual void set_position(const Vector2D<float>& position) {
+    this->position.x_ = position.x_;
+    this->position.y_ = position.y_;
     moveCollider();
   }
 
   virtual void Move(float deltaTime) = 0;
 
   virtual void moveCollider() {
-    collider_.x = position.x;
-    collider_.y = position.y;
+    collider_.x_ = position.x_;
+    collider_.y_ = position.y_;
   }
 
-  virtual void setColor(const Vector4D<Uint8>& color) {
-    this->color_.x = color.x;
-    this->color_.y = color.y;
-    this->color_.z = color.z;
-    this->color_.w = color.w;
+  virtual void set_color(const Vector4D<Uint8>& color) {
+    this->color_.x_ = color.x_;
+    this->color_.y_ = color.y_;
+    this->color_.z_ = color.z_;
+    this->color_.w_ = color.w_;
   }
 
  protected:

@@ -6,8 +6,8 @@
 class FontSurface : public ViewPort {
  public:
   void cartesianPositionToWindow(int& x, int& y) const {
-    x = x + static_cast<int>(0.5F * view_port_sizes_.x);
-    y = -y + static_cast<int>(0.5F * view_port_sizes_.y);
+    x = x + static_cast<int>(0.5F * view_port_sizes_.x_);
+    y = -y + static_cast<int>(0.5F * view_port_sizes_.y_);
   }
 
   FontSurface();
@@ -29,7 +29,7 @@ class FontSurface : public ViewPort {
                                  bool areLinesContinuos);
 
   void horizontalLineOnSurface(int y, Vector4D<Uint8> color) {
-    int maxX = static_cast<int>(0.5F * view_port_sizes_.x);
+    int maxX = static_cast<int>(0.5F * view_port_sizes_.x_);
     for (int i = -maxX; i < maxX; i++) {
       // X
 
@@ -38,7 +38,7 @@ class FontSurface : public ViewPort {
   }
 
   void verticalLineOnSurface(int x, Vector4D<Uint8> color) {
-    int maxY = static_cast<int>(0.5F * view_port_sizes_.y);
+    int maxY = static_cast<int>(0.5F * view_port_sizes_.y_);
     for (int i = -maxY; i < maxY; i++) {
       // X
 

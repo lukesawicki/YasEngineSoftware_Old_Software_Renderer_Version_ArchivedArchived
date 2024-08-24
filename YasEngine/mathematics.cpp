@@ -76,6 +76,6 @@ std::vector<int> generateNfibonacciNumbers(int n) {
 
 double distanceBetweenPoints(const Vector2D<int>& vector0,
                              const Vector2D<int>& vector1) {
-  return sqrt(pow((vector0.x - vector1.x), 2) +
-              pow((vector0.y - vector1.y), 2));
+  return sqrt(pow((vector0.x_ - vector1.x_), 2) +
+              pow((vector0.y_ - vector1.y_), 2));
 }

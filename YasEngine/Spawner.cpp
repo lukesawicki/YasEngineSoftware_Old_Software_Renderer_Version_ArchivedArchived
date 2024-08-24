@@ -14,8 +14,8 @@ Spawner::Spawner() {
 }
 
 Spawner::Spawner(int x, int y) {
-  position_.x = x;
-  position_.y = y;
+  position_.x_ = x;
+  position_.y_ = y;
   current_time_ = time_picker_.getMiliseconds();
   previous_time_ = current_time_;
   time_between_spawns_ = +Randomizer::drawNumberClosedInterval(2000, 6000);
@@ -72,8 +72,8 @@ void Spawner::prepareObjectToSpawn(GameObject*& gameObject) {
     dirY = 1;
   }
 
-  int targetPositionX = position_.x + dirX * xPos;
-  int targetPositionY = position_.y + dirY * yPos;
+  int targetPositionX = position_.x_ + dirX * xPos;
+  int targetPositionY = position_.y_ + dirY * yPos;
 
   if (oldTargetPositionX != targetPositionX ||
       oldTargetPositionY != targetPositionY) {
