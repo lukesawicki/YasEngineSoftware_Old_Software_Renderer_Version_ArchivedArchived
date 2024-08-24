@@ -12,9 +12,9 @@ class PointsSet {
     delete[] points_;
     points_number_ = 0;
   }
-  PointsSet(Vector2D<float>* newPoints, long pointsNumber) {
-    points_ = newPoints;
-    this->points_number_ = pointsNumber;
+  PointsSet(Vector2D<float>* points, long points_number) {
+    points_ = points;
+    this->points_number_ = points_number;
   }
   Vector2D<float>* points_ = nullptr;
   long points_number_;

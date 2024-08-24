@@ -5,48 +5,48 @@
 
 class FontSurface : public ViewPort {
  public:
-  void cartesianPositionToWindow(int& x, int& y) const {
+  void CartesianPositionToWindow(int& x, int& y) const {
     x = x + static_cast<int>(0.5F * view_port_sizes_.x_);
     y = -y + static_cast<int>(0.5F * view_port_sizes_.y_);
   }
 
   FontSurface();
-  void initialize(int x, int y, int width, int height,
-                  const Vector4D<Uint8>& defaultColor);
+  void Initialize(int x, int y, int width, int height,
+                  const Vector4D<Uint8>& default_color);
   virtual ~FontSurface();
-  void clearColor(const Vector4D<Uint8>& drawingColor) override;
-  void drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor) override;
-  void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1,
-                const Vector4D<Uint8>& drawingColor) override;
-  void drawPolygon(GameObject* polygon) override;
-  void copyPixelsInToPIxelTable(PixelsTable& pixelsTable);
+  void ClearColor(const Vector4D<Uint8>& drawing_color) override;
+  void DrawPoint(int x, int y, const Vector4D<Uint8>& drawing_color) override;
+  void DrawLine(const Vector2D<float>& point0, const Vector2D<float>& point1,
+                const Vector4D<Uint8>& drawing_color) override;
+  void DrawPolygon(GameObject* polygon) override;
+  void CopyPixelsInToPIxelTable(PixelsTable& pixels_table);
 
-  unsigned int calculateMaximumNumberOfElementsToProcess(
-      const unsigned int& primaryMaximum, bool connectedLines);
-  void drawNumbersAsGroupOfLines(Vector2D<float>* vertices,
-                                 int maximumNumberOfVertices,
+  unsigned int CalculateMaximumNumberOfElementsToProcess(
+      const unsigned int& primary_maximum, bool connected_lines);
+  void DrawNumbersAsGroupOfLines(Vector2D<float>* vertices,
+                                 int maximum_number_of_vertices,
                                  const Vector4D<Uint8>& color,
-                                 bool areLinesContinuos);
+                                 bool are_lines_continuous);
 
-  void horizontalLineOnSurface(int y, Vector4D<Uint8> color) {
+  void HorizontalLineOnSurface(int y, Vector4D<Uint8> color) {
     int maxX = static_cast<int>(0.5F * view_port_sizes_.x_);
     for (int i = -maxX; i < maxX; i++) {
       // X
 
-      drawPoint(i, y, color);
+      DrawPoint(i, y, color);
     }
   }
 
-  void verticalLineOnSurface(int x, Vector4D<Uint8> color) {
+  void VerticalLineOnSurface(int x, Vector4D<Uint8> color) {
     int maxY = static_cast<int>(0.5F * view_port_sizes_.y_);
     for (int i = -maxY; i < maxY; i++) {
       // X
 
-      drawPoint(x, i, color);
+      DrawPoint(x, i, color);
     }
   }
 
-  void drawCartesianAxies();
+  void DrawCartesianAxies();
 };
 
 #endif  // YASENGINESOFTWARE_FONTSURFACE_HPP

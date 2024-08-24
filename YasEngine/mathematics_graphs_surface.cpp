@@ -2,82 +2,82 @@
 
 #include "yas_graphics_library.hpp"
 
-void MathematicsGraphsSurface::render(double& deltaTime) {}
+void MathematicsGraphsSurface::Render(double& deltaTime) {}
 
 MathematicsGraphsSurface::MathematicsGraphsSurface(
-    int x, int y, int width, int height, const Vector4D<Uint8>& defaultColor) {
+    int x, int y, int width, int height, const Vector4D<Uint8>& default_color) {
   position_.x_ = x;
   position_.y_ = y;
   view_port_sizes_.x_ = width;
   view_port_sizes_.y_ = height;
   pixels_ =
       new Uint8[view_port_sizes_.x_ * view_port_sizes_.y_ * kNumberOfColors];
-  clearColor(defaultColor);
+  ClearColor(default_color);
 }
 
 MathematicsGraphsSurface::MathematicsGraphsSurface(
     Vector2D<int> position, int width, int height,
-    const Vector4D<Uint8>& defaultColor) {
+    const Vector4D<Uint8>& default_color) {
   this->position_.x_ = position.x_;
   this->position_.y_ = position.y_;
   view_port_sizes_.x_ = width;
   view_port_sizes_.y_ = height;
   this->pixels_ =
       new Uint8[view_port_sizes_.x_ * view_port_sizes_.y_ * kNumberOfColors];
-  clearColor(defaultColor);
+  ClearColor(default_color);
 }
 
 MathematicsGraphsSurface::~MathematicsGraphsSurface() { delete[] pixels_; }
 
-void MathematicsGraphsSurface::clearColor(const Vector4D<Uint8>& drawingColor) {
+void MathematicsGraphsSurface::ClearColor(const Vector4D<Uint8>& drawing_color) {
   for (int y = 0; y < view_port_sizes_.y_; y++) {
     for (int x = 0; x < view_port_sizes_.x_; x++) {
       pixels_[kNumberOfColors * (y * view_port_sizes_.x_ + x) + kRedPosition] =
-          drawingColor.x_;
+          drawing_color.x_;
       pixels_[kNumberOfColors * (y * view_port_sizes_.x_ + x) +
-              kGreenPosition] = drawingColor.y_;
+              kGreenPosition] = drawing_color.y_;
       pixels_[kNumberOfColors * (y * view_port_sizes_.x_ + x) + kBluePosition] =
-          drawingColor.z_;
+          drawing_color.z_;
       pixels_[kNumberOfColors * (y * view_port_sizes_.x_ + x) +
-              kAlphaPosition] = drawingColor.w_;
+              kAlphaPosition] = drawing_color.w_;
     }
   }
 }
 
-void MathematicsGraphsSurface::drawPoint(int x, int y,
-                                         const Vector4D<Uint8>& drawingColor) {
-  cartesianPositionToWindow(x, y);
+void MathematicsGraphsSurface::DrawPoint(int x, int y,
+                                         const Vector4D<Uint8>& drawing_color) {
+  CartesianPositionToWindow(x, y);
   if (x >= 0 && x < view_port_sizes_.x_ && y >= 0 && y < view_port_sizes_.y_) {
     pixels_[kNumberOfColors * (y * view_port_sizes_.x_ + x) + kRedPosition] =
-        drawingColor.x_;
+        drawing_color.x_;
     pixels_[kNumberOfColors * (y * view_port_sizes_.x_ + x) + kGreenPosition] =
-        drawingColor.y_;
+        drawing_color.y_;
     pixels_[kNumberOfColors * (y * view_port_sizes_.x_ + x) + kBluePosition] =
-        drawingColor.z_;
+        drawing_color.z_;
     pixels_[kNumberOfColors * (y * view_port_sizes_.x_ + x) + kAlphaPosition] =
-        drawingColor.w_;
+        drawing_color.w_;
   }
 }
 
-void MathematicsGraphsSurface::drawLine(const Vector2D<float>& point0,
-                                        const Vector2D<float>& point1,
-                                        const Vector4D<Uint8>& drawingColor) {
-  int x0 = static_cast<int>(point0.x_);
-  int y0 = static_cast<int>(point0.y_);
+void MathematicsGraphsSurface::DrawLine(const Vector2D<float>& point_0,
+                                        const Vector2D<float>& point_1,
+                                        const Vector4D<Uint8>& drawing_color) {
+  int x0 = static_cast<int>(point_0.x_);
+  int y0 = static_cast<int>(point_0.y_);
 
-  int originalPoint0X = static_cast<int>(point0.x_);
-  int originalPoint0Y = static_cast<int>(point0.y_);
+  int originalPoint0X = static_cast<int>(point_0.x_);
+  int originalPoint0Y = static_cast<int>(point_0.y_);
 
-  int originalPoint1X = static_cast<int>(point1.x_);
-  int originalPoint1Y = static_cast<int>(point1.y_);
+  int originalPoint1X = static_cast<int>(point_1.x_);
+  int originalPoint1Y = static_cast<int>(point_1.y_);
 
-  Vector2D<int> copyPoint0(static_cast<int>(point0.x_),
-                           static_cast<int>(point0.y_));
-  Vector2D<int> copyPoint1(static_cast<int>(point1.x_),
-                           static_cast<int>(point1.y_));
+  Vector2D<int> copyPoint0(static_cast<int>(point_0.x_),
+                           static_cast<int>(point_0.y_));
+  Vector2D<int> copyPoint1(static_cast<int>(point_1.x_),
+                           static_cast<int>(point_1.y_));
 
-  int deltaX = static_cast<int>(point1.x_ - point0.x_);
-  int deltaY = static_cast<int>(point1.y_ - point0.y_);
+  int deltaX = static_cast<int>(point_1.x_ - point_0.x_);
+  int deltaY = static_cast<int>(point_1.y_ - point_0.y_);
   int cumulativeError = 0;
 
   if (abs(deltaX) != abs(deltaY)) {
@@ -88,21 +88,21 @@ void MathematicsGraphsSurface::drawLine(const Vector2D<float>& point0,
       if (deltaX < 0) {
         // DELTA X < 0 CONDITION (IT MEANS WRONG ORDER)
 
-        originalPoint0X = static_cast<int>(point1.x_);
-        originalPoint1X = static_cast<int>(point0.x_);
+        originalPoint0X = static_cast<int>(point_1.x_);
+        originalPoint1X = static_cast<int>(point_0.x_);
 
         // switch x_ for drawing
-        x0 = static_cast<int>(point1.x_);
-        y0 = static_cast<int>(point1.y_);
+        x0 = static_cast<int>(point_1.x_);
+        y0 = static_cast<int>(point_1.y_);
 
         // NEGATIVE SLOPE)
         if (deltaY > 0) {
           // && (DELTAS CONDITION DX > DY) && (DELTA X < 0 CONDITION) -> IT
           // MEANS OCTAN 3(NEGATIVE SLOPE, POINTS IN "WRONG ORDER")
-          deltaX = static_cast<int>(point0.x_ - point1.x_);
-          deltaY = static_cast<int>(point0.y_ - point1.y_);
+          deltaX = static_cast<int>(point_0.x_ - point_1.x_);
+          deltaY = static_cast<int>(point_0.y_ - point_1.y_);
           for (int i = originalPoint0X; i <= originalPoint1X; i++) {
-            drawPoint(x0, y0, drawingColor);
+            DrawPoint(x0, y0, drawing_color);
             x0++;
             if ((2 * (cumulativeError + deltaY)) > -deltaX) {
               // y_ stays the same
@@ -118,10 +118,10 @@ void MathematicsGraphsSurface::drawLine(const Vector2D<float>& point0,
           // IN "WRONG ORDER")
 
           if (deltaX != 0) {
-            deltaX = static_cast<int>(point0.x_ - point1.x_);
-            deltaY = static_cast<int>(point0.y_ - point1.y_);
+            deltaX = static_cast<int>(point_0.x_ - point_1.x_);
+            deltaY = static_cast<int>(point_0.y_ - point_1.y_);
             for (int i = originalPoint0X; i <= originalPoint1X; i++) {
-              drawPoint(x0, y0, drawingColor);
+              DrawPoint(x0, y0, drawing_color);
               x0++;
               if ((2 * (cumulativeError + deltaY)) < deltaX) {
                 // y_ stays the same
@@ -143,7 +143,7 @@ void MathematicsGraphsSurface::drawLine(const Vector2D<float>& point0,
             // MEANS OCTAN 0(POSITIVE SLOPE, POINTS IN "CORRECT ORDER")
 
             for (int i = originalPoint0X; i <= originalPoint1X; i++) {
-              drawPoint(x0, y0, drawingColor);
+              DrawPoint(x0, y0, drawing_color);
               x0++;
               if ((2 * (cumulativeError + deltaY)) < deltaX) {
                 // y_ stays the same
@@ -158,7 +158,7 @@ void MathematicsGraphsSurface::drawLine(const Vector2D<float>& point0,
             // (DELTA X > 0 CONDITION) -> IT MEANS OCTAN 7(NEGATIVE SLOPE,
             // POINTS IN "CORRECT ORDER")
             for (int i = originalPoint0X; i <= originalPoint1X; i++) {
-              drawPoint(x0, y0, drawingColor);
+              DrawPoint(x0, y0, drawing_color);
               x0++;
               if ((2 * (cumulativeError + deltaY)) > -deltaX) {
                 // y_ stays the same
@@ -173,10 +173,10 @@ void MathematicsGraphsSurface::drawLine(const Vector2D<float>& point0,
           // if (deltaX == 0) // It is straight line where x_ is constant. So
           // draw simple line from y0 to y1
           if (copyPoint0.y_ > copyPoint1.y_) {
-            swapVectors(copyPoint0, copyPoint1);
+            SwapVectors(copyPoint0, copyPoint1);
           }
           for (int i = copyPoint0.y_; i <= copyPoint1.y_; i++) {
-            drawPoint(copyPoint0.x_, i, drawingColor);
+            DrawPoint(copyPoint0.x_, i, drawing_color);
           }
         }
       }
@@ -186,21 +186,21 @@ void MathematicsGraphsSurface::drawLine(const Vector2D<float>& point0,
       if (deltaY < 0) {
         // DELTA Y < 0 CONDITION (IT MEANS WRONG ORDER (BECAUSE IN HERE Y IS
         // LEADING AXIES)
-        originalPoint0Y = static_cast<int>(point1.y_);
-        originalPoint1Y = static_cast<int>(point0.y_);
+        originalPoint0Y = static_cast<int>(point_1.y_);
+        originalPoint1Y = static_cast<int>(point_0.y_);
 
         // switch x_ for drawing
-        x0 = static_cast<int>(point1.x_);
-        y0 = static_cast<int>(point1.y_);
+        x0 = static_cast<int>(point_1.x_);
+        y0 = static_cast<int>(point_1.y_);
 
         // NEGATIVE SLOPE
         if (deltaX > 0) {
           // && (DELTAS CONDITION DX < DY) && (DELTA Y < 0 CONDITION) IT MEANS
           // OCTAN 6(NEGATIVE SLOPE, POINTS IN "WRONG ORDER")
-          deltaX = static_cast<int>(point0.x_ - point1.x_);
-          deltaY = static_cast<int>(point0.y_ - point1.y_);
+          deltaX = static_cast<int>(point_0.x_ - point_1.x_);
+          deltaY = static_cast<int>(point_0.y_ - point_1.y_);
           for (int i = originalPoint0Y; i <= originalPoint1Y; i++) {
-            drawPoint(x0, y0, drawingColor);
+            DrawPoint(x0, y0, drawing_color);
             y0++;
             if ((2 * (cumulativeError + deltaX)) > -deltaY) {
               // y_ stays the same
@@ -214,10 +214,10 @@ void MathematicsGraphsSurface::drawLine(const Vector2D<float>& point0,
           // POSITIVE SLOPE  // deltaX < 0 && (DELTAS CONDITION DX < DY) &&
           // (DELTA Y < 0 CONDITION) IT MEANS OCTAN 5(POSITIVE SLOPE, POINTS IN
           // "WRONG ORDER")
-          deltaX = static_cast<int>(point0.x_ - point1.x_);
-          deltaY = static_cast<int>(point0.y_ - point1.y_);
+          deltaX = static_cast<int>(point_0.x_ - point_1.x_);
+          deltaY = static_cast<int>(point_0.y_ - point_1.y_);
           for (int i = originalPoint0Y; i <= originalPoint1Y; i++) {
-            drawPoint(x0, y0, drawingColor);
+            DrawPoint(x0, y0, drawing_color);
             y0++;
             if ((2 * (cumulativeError + deltaX)) < deltaY) {
               // y_ stays the same
@@ -237,7 +237,7 @@ void MathematicsGraphsSurface::drawLine(const Vector2D<float>& point0,
             // MEANS OCTAN 1(POSITIVE SLOPE, POINT IN "CORRECT ORDER")
 
             for (int i = originalPoint0Y; i <= originalPoint1Y; i++) {
-              drawPoint(x0, y0, drawingColor);
+              DrawPoint(x0, y0, drawing_color);
               y0++;
               if ((2 * (cumulativeError + deltaX)) < deltaY) {
                 // y_ stays the same
@@ -252,7 +252,7 @@ void MathematicsGraphsSurface::drawLine(const Vector2D<float>& point0,
             // (DELTA Y > 0 CONDITION) -> IT MEANS OCTAN 2(NEGATIVE SLOPE POINTS
             // IN "CORRECT ORDER")
             for (int i = originalPoint0Y; i <= originalPoint1Y; i++) {
-              drawPoint(x0, y0, drawingColor);
+              DrawPoint(x0, y0, drawing_color);
               y0++;
               if ((2 * (cumulativeError + deltaX)) > -deltaY) {
                 // y_ stays the same
@@ -267,10 +267,10 @@ void MathematicsGraphsSurface::drawLine(const Vector2D<float>& point0,
           // deltaY == 0 It is straight line where y_ is constant. So draw
           // simple line from x0 to x1
           if (copyPoint0.x_ > copyPoint1.x_) {
-            swapVectors(copyPoint0, copyPoint1);
+            SwapVectors(copyPoint0, copyPoint1);
           }
           for (int i = copyPoint0.x_; i <= copyPoint1.x_; i++) {
-            drawPoint(i, copyPoint0.y_, drawingColor);
+            DrawPoint(i, copyPoint0.y_, drawing_color);
           }
         }
       }
@@ -280,20 +280,20 @@ void MathematicsGraphsSurface::drawLine(const Vector2D<float>& point0,
     if (deltaX == 0 && deltaY == 0) {
       // if both are equals 0 just draw point.
 
-      drawPoint(x0, y0, drawingColor);
+      DrawPoint(x0, y0, drawing_color);
     } else {
       int absDeltaX = abs(copyPoint1.x_ - copyPoint0.x_);
       // Positive line
       int i = 0;
       if (copyPoint0.x_ < copyPoint1.x_ && copyPoint0.y_ < copyPoint1.y_) {
         while (i < absDeltaX) {
-          drawPoint(copyPoint0.x_ + i, copyPoint0.y_ + i, drawingColor);
+          DrawPoint(copyPoint0.x_ + i, copyPoint0.y_ + i, drawing_color);
           i++;
         }
       }
       if (copyPoint1.x_ < copyPoint0.x_ && copyPoint0.y_ > copyPoint1.y_) {
         while (i < absDeltaX) {
-          drawPoint(copyPoint1.x_ + i, copyPoint1.y_ + i, drawingColor);
+          DrawPoint(copyPoint1.x_ + i, copyPoint1.y_ + i, drawing_color);
           i++;
         }
       }
@@ -301,13 +301,13 @@ void MathematicsGraphsSurface::drawLine(const Vector2D<float>& point0,
       // Negative line
       if (copyPoint0.x_ < copyPoint1.x_ && copyPoint0.y_ > copyPoint1.y_) {
         while (i < absDeltaX) {
-          drawPoint(copyPoint0.x_ + i, copyPoint0.y_ - i, drawingColor);
+          DrawPoint(copyPoint0.x_ + i, copyPoint0.y_ - i, drawing_color);
           i++;
         }
       }
       if (copyPoint1.x_ < copyPoint0.x_ && copyPoint1.y_ > copyPoint0.y_) {
         while (i < absDeltaX) {
-          drawPoint(copyPoint1.x_ + i, copyPoint1.y_ - i, drawingColor);
+          DrawPoint(copyPoint1.x_ + i, copyPoint1.y_ - i, drawing_color);
           i++;
         }
       }
@@ -315,60 +315,60 @@ void MathematicsGraphsSurface::drawLine(const Vector2D<float>& point0,
   }
 }
 
-void MathematicsGraphsSurface::drawNumbersAsGroupOfLines(
-    Vector2D<float>* vertices, int maximumNumberOfVertices,
-    int& currentNumberOfVertices, const Vector4D<Uint8>& color,
-    bool areLinesContinuos) {
+void MathematicsGraphsSurface::DrawNumbersAsGroupOfLines(
+    Vector2D<float>* vertices, int maximum_number_of_vertices,
+    int& current_number_of_vertices, const Vector4D<Uint8>& color,
+    bool are_lines_continuous) {
   int step = 1;
-  if (!areLinesContinuos) {
+  if (!are_lines_continuous) {
     step = 2;
   }
 
-  if (currentNumberOfVertices > 1) {
-    if (currentNumberOfVertices <= 3) {
-      drawLine(vertices[0], vertices[1], color);
+  if (current_number_of_vertices > 1) {
+    if (current_number_of_vertices <= 3) {
+      DrawLine(vertices[0], vertices[1], color);
     } else {
-      for (int i = 0; i < currentNumberOfVertices; i += step) {
-        drawLine(vertices[i], vertices[i + 1], color);
+      for (int i = 0; i < current_number_of_vertices; i += step) {
+        DrawLine(vertices[i], vertices[i + 1], color);
       }
     }
   }
 }
 
-void MathematicsGraphsSurface::drawPolygon(GameObject* polygon) {}
+void MathematicsGraphsSurface::DrawPolygon(GameObject* polygon) {}
 
-void MathematicsGraphsSurface::copyPixelsInToPIxelTable(
-    PixelsTable& pixelsTable) {
+void MathematicsGraphsSurface::CopyPixelsInToPIxelTable(
+    PixelsTable& pixels_table) {
   int posX = position_.x_;
   int posY = position_.y_;
 
-  pixelsTable.cartesianPositionToWindow(posX, posY);
+  pixels_table.CartesianPositionToWindow(posX, posY);
 
   int startPoint =
-      kNumberOfColors * (posY * pixelsTable.window_dimensions_.x_ + posX);
+      kNumberOfColors * (posY * pixels_table.window_dimensions_.x_ + posX);
   int viewportIndex = 0;
   for (int i = 0; i < view_port_sizes_.y_; i++) {
     for (int j = 0; j < view_port_sizes_.x_; j++) {
-      pixelsTable.pixels_[kNumberOfColors *
-                              ((posY + i) * pixelsTable.window_dimensions_.x_ +
+      pixels_table.pixels_[kNumberOfColors *
+                              ((posY + i) * pixels_table.window_dimensions_.x_ +
                                posX + j) +
                           kRedPosition] =
           pixels_[kNumberOfColors * (i * view_port_sizes_.x_ + j) +
                   kRedPosition];
-      pixelsTable.pixels_[kNumberOfColors *
-                              ((posY + i) * pixelsTable.window_dimensions_.x_ +
+      pixels_table.pixels_[kNumberOfColors *
+                              ((posY + i) * pixels_table.window_dimensions_.x_ +
                                posX + j) +
                           kGreenPosition] =
           pixels_[kNumberOfColors * (i * view_port_sizes_.x_ + j) +
                   kGreenPosition];
-      pixelsTable.pixels_[kNumberOfColors *
-                              ((posY + i) * pixelsTable.window_dimensions_.x_ +
+      pixels_table.pixels_[kNumberOfColors *
+                              ((posY + i) * pixels_table.window_dimensions_.x_ +
                                posX + j) +
                           kBluePosition] =
           pixels_[kNumberOfColors * (i * view_port_sizes_.x_ + j) +
                   kBluePosition];
-      pixelsTable.pixels_[kNumberOfColors *
-                              ((posY + i) * pixelsTable.window_dimensions_.x_ +
+      pixels_table.pixels_[kNumberOfColors *
+                              ((posY + i) * pixels_table.window_dimensions_.x_ +
                                posX + j) +
                           kAlphaPosition] =
           pixels_[kNumberOfColors * (i * view_port_sizes_.x_ + j) +
@@ -379,7 +379,7 @@ void MathematicsGraphsSurface::copyPixelsInToPIxelTable(
   }
 }
 
-void MathematicsGraphsSurface::drawCartesianAxies() {
-  horizontalLineOnSurface(0, kRed);
-  verticalLineOnSurface(0, kGreen);
+void MathematicsGraphsSurface::DrawCartesianAxies() {
+  HorizontalLineOnSurface(0, kRed);
+  VerticalLineOnSurface(0, kGreen);
 }

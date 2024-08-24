@@ -24,11 +24,11 @@ class Spawner {
   Spawner();
 
   Spawner(int x, int y);
-  void spawnObject(GameObject*& gameObject);
-  void resetTimes();
+  void SpawnObject(GameObject*& game_object);
+  void ResetTimes();
 
  private:
-  void prepareObjectToSpawn(GameObject*& gameObject);
+  void PrepareObjectToSpawn(GameObject*& game_object);
 };
 
 #endif

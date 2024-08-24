@@ -5,7 +5,7 @@
 #include "randomizer.hpp"
 #include "yas_graphics_library.hpp"
 
-Collectible::Collectible(float radius, float x, float y, int numberOfVertices) {
+Collectible::Collectible(float radius, float x, float y, int number_of_vertices) {
   is_alive_ = true;
   i_am_ = GameObject::kCollectible;
   collider_.radius_ = radius;
@@ -15,15 +15,15 @@ Collectible::Collectible(float radius, float x, float y, int numberOfVertices) {
   this->collider_.x_ = x;
   this->collider_.y_ = y;
   float angle =
-      static_cast<float>(Randomizer::drawNumberClosedInterval(0, 180));
+      static_cast<float>(Randomizer::DrawNumberClosedInterval(0, 180));
   direction_.x_ = 1;
   direction_.y_ = 0;
   angle = angle * (kPi / 180.0F);
-  Vector2D<float>::rotateVectorOverTheAngle(&direction_, angle);
+  Vector2D<float>::RotateVectorOverTheAngle(&direction_, angle);
   velocity_.x_ = speed_ * direction_.x_;
   velocity_.y_ = speed_ * direction_.y_;
   SetRandomColor();
-  GenerateRegularPolygonVertices(radius, numberOfVertices);
+  GenerateRegularPolygonVertices(radius, number_of_vertices);
 }
 
 Collectible::~Collectible() { delete[] world_vertices_; }
@@ -36,21 +36,21 @@ void Collectible::Generate() {
 }
 
 void Collectible::GenerateRegularPolygonVertices(
-    float circumscribedCircleRadius, int numberOfVertices) {
-  this->circumscribed_circle_radius_ = circumscribedCircleRadius;
-  this->number_of_vertices_ = numberOfVertices;
-  this->world_vertices_ = new Vector2D<float>[numberOfVertices];
-  this->local_vertices_ = new Vector2D<float>[numberOfVertices];
+    float circumscribed_circle_radius, int number_of_vertices) {
+  this->circumscribed_circle_radius_ = circumscribed_circle_radius;
+  this->number_of_vertices_ = number_of_vertices;
+  this->world_vertices_ = new Vector2D<float>[number_of_vertices];
+  this->local_vertices_ = new Vector2D<float>[number_of_vertices];
 
   angle_for_generate_in_isosceles_polygons_ = start_angle_;
-  step_angle_ = 360.0F / numberOfVertices;
-  for (int i = 0; i < numberOfVertices; i++) {
+  step_angle_ = 360.0F / number_of_vertices;
+  for (int i = 0; i < number_of_vertices; i++) {
     local_vertices_[i].x_ =
-        0.0F + static_cast<int>(circumscribedCircleRadius *
+        0.0F + static_cast<int>(circumscribed_circle_radius *
                                 cos(angle_for_generate_in_isosceles_polygons_ *
                                     (kPi / 180.0F)));
     local_vertices_[i].y_ =
-        0.0F + static_cast<int>(circumscribedCircleRadius *
+        0.0F + static_cast<int>(circumscribed_circle_radius *
                                 sin(angle_for_generate_in_isosceles_polygons_ *
                                     (kPi / 180.0F)));
     angle_for_generate_in_isosceles_polygons_ += step_angle_;
@@ -61,17 +61,17 @@ void Collectible::GenerateRegularPolygonVertices(
 void Collectible::RegeneratePolygon() { Generate(); }
 
 void Collectible::set_position(float x, float y) {
-  GameObject::setPosition(x, y);
+  GameObject::set_position(x, y);
 }
 
 void Collectible::set_position(const Vector2D<float>& position) {
   GameObject::set_position(position);
 }
 
-void Collectible::Move(float deltaTime) {
-  position.x_ = position.x_ + deltaTime * velocity_.x_;
-  position.y_ = position.y_ + deltaTime * velocity_.y_;
-  moveCollider();
+void Collectible::Move(float delta_time) {
+  position.x_ = position.x_ + delta_time * velocity_.x_;
+  position.y_ = position.y_ + delta_time * velocity_.y_;
+  MoveCollider();
   RegeneratePolygon();
 }
 
@@ -80,7 +80,7 @@ void Collectible::set_color(const Vector4D<Uint8>& color) {
 }
 
 void Collectible::SetRandomColor() {
-  int col = Randomizer::drawNumberClosedInterval(0, 8);
+  int col = Randomizer::DrawNumberClosedInterval(0, 8);
   switch (col) {
     case 0:
       set_color(kRed);

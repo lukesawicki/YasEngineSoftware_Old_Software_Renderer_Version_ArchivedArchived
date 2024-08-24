@@ -6,7 +6,7 @@
 #include "vector_2d.hpp"
 #include "yas_graphics_library.hpp"
 
-std::vector<int> generatePrimeNumbersLessThanN(int n) {
+std::vector<int> GeneratePrimeNumbersLessThanN(int n) {
   std::vector<int> primeNumbers;
   std::map<int, bool> numbers;
 
@@ -34,14 +34,14 @@ std::vector<int> generatePrimeNumbersLessThanN(int n) {
   return primeNumbers;
 }
 
-std::map<float, float>* generateSineNumbers(int pointsNumber) {
-  float divider = static_cast<float>(pointsNumber);
+std::map<float, float>* GenerateSineNumbers(int points_number) {
+  float divider = static_cast<float>(points_number);
   float maximumXvalue = 2.0F * kPi;
   float step = (maximumXvalue / divider);
 
   std::map<float, float>* sineMap = new std::map<float, float>();
 
-  for (int i = 0; i < pointsNumber; i++) {
+  for (int i = 0; i < points_number; i++) {
     float x = i * step;
     float y = sin(x);
     sineMap->insert(std::pair<float, float>(x, y));
@@ -49,7 +49,7 @@ std::map<float, float>* generateSineNumbers(int pointsNumber) {
   return sineMap;
 }
 
-std::map<float, float>* generateCosineNumbers(int pointsNumber) {
+std::map<float, float>* GenerateCosineNumbers(int pointsNumber) {
   float divider = static_cast<float>(pointsNumber);
   float maximumXvalue = 2.0F * kPi;
   float step = (maximumXvalue / divider);
@@ -62,7 +62,7 @@ std::map<float, float>* generateCosineNumbers(int pointsNumber) {
   return cosineMap;
 }
 
-std::vector<int> generateNfibonacciNumbers(int n) {
+std::vector<int> GenerateNfibonacciNumbers(int n) {
   std::vector<int> fibbonacciNumbers;
   fibbonacciNumbers.push_back(1);
   fibbonacciNumbers.push_back(1);
@@ -74,8 +74,8 @@ std::vector<int> generateNfibonacciNumbers(int n) {
   return fibbonacciNumbers;
 }
 
-double distanceBetweenPoints(const Vector2D<int>& vector0,
-                             const Vector2D<int>& vector1) {
-  return sqrt(pow((vector0.x_ - vector1.x_), 2) +
-              pow((vector0.y_ - vector1.y_), 2));
+double DistanceBetweenPoints(const Vector2D<int>& vector_0,
+                             const Vector2D<int>& vector_1) {
+  return sqrt(pow((vector_0.x_ - vector_1.x_), 2) +
+              pow((vector_0.y_ - vector_1.y_), 2));
 }

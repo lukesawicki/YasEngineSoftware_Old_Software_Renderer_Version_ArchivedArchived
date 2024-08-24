@@ -20,20 +20,20 @@ class Player : public GameObject {
 
   Player(float x, float y);
   ~Player();
-  void Move(float deltaTime) override;
-  void rotateAllVerticesOverAnAngle(float angle);
-  void rotate(float deltaTime);
+  void Move(float delta_time) override;
+  void RotateAllVerticesOverAnAngle(float angle);
+  void Rotate(float delta_time);
 
-  void rotateToMousePosition(float x, float y, Vector2D<int>* windowDimensions);
-  void rotateToMousePositionInLocalCoordinateSystem(
-      float x, float y, Vector2D<int>* windowDimensions);
-  void setDirection(float x, float y);
+  void RotateToMousePosition(float x, float y, Vector2D<int>* window_dimensions);
+  void RotateToMousePositionInLocalCoordinateSystem(
+      float x, float y, Vector2D<int>* window_dimensions);
+  void set_direction(float x, float y);
   void Generate() override;
-  void GenerateRegularPolygonVertices(float circumscribedCircleRadius,
-                                      int numberOfVertices) override;
+  void GenerateRegularPolygonVertices(float circumscribed_circle_radius,
+                                      int number_of_vertices) override;
   void RegeneratePolygon() override;
-  void setInput(YasInOut::Input* input);
-  void setInput(YasInOut::MousePositionChangeInformation* mouse);
+  void set_input(YasInOut::Input* input);
+  void set_input(YasInOut::MousePositionChangeInformation* mouse);
   Projectile* shoot();
 
  private:

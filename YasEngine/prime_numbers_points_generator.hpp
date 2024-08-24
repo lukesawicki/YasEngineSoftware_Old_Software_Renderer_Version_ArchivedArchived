@@ -10,9 +10,9 @@ class PrimeNumbersPointsGenerator : public PointsGenerator {
  public:
   static std::vector<int> numbers_;
   ~PrimeNumbersPointsGenerator();
-  PointsSet* generatePoints(int numberOfNumbers,
+  PointsSet* GeneratePoints(int number_of_numbers,
                             std::map<int, float>* numbers) override;
-  PointsSet* generateFloatPoints(int numberOfNumbers,
+  PointsSet* GenerateFloatPoints(int number_of_numbers,
                                  std::map<float, float>* numbers) override;
 };
 

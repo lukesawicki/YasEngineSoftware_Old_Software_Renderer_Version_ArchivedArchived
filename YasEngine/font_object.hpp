@@ -7,17 +7,17 @@ class FontObject : public GameObject {
  public:
   FontObject();
   void initialize(float radius, float x, float y,
-                  const Vector2D<float>& direction, int numberOfVertices);
+                  const Vector2D<float>& direction, int number_of_vertices);
   virtual ~FontObject();
   void Generate() override;
-  void GenerateRegularPolygonVertices(float circumscribedCircleRadius,
-                                      int numberOfVertices) override;
+  void GenerateRegularPolygonVertices(float circumscribed_circle_radius,
+                                      int number_of_vertices) override;
   void RegeneratePolygon() override;
-  void setPosition(float x, float y);
+  void set_position(float x, float y);
   void set_position(const Vector2D<float>& position) override;
-  void Move(float deltaTime) override;
+  void Move(float delta_time) override;
   void set_color(const Vector4D<Uint8>& color) override;
-  void setRandomColor();
+  void SetRandomColor();
   Vector2D<float> velocity_;
 };
 

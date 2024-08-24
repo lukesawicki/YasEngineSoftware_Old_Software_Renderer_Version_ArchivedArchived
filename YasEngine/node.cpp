@@ -6,20 +6,20 @@ Node::Node(Vector2D<int>* position, int size, Node* parent) {
   this->parentNode_ = parent;
 }
 
-void Node::createSpanwer(const std::vector<int>& spawnerPositionNumber) {
-  this->child_nodes_[spawnerPositionNumber.at(0)]
-      ->child_nodes_[spawnerPositionNumber.at(1)]
+void Node::CreateSpanwer(const std::vector<int>& spawner_position_number) {
+  this->child_nodes_[spawner_position_number.at(0)]
+      ->child_nodes_[spawner_position_number.at(1)]
       ->spawner_ = new Spawner();
 
-  this->child_nodes_[spawnerPositionNumber.at(0)]
-      ->child_nodes_[spawnerPositionNumber.at(1)]
-      ->spawner_->position_.x_ = this->child_nodes_[spawnerPositionNumber.at(0)]
-                                     ->child_nodes_[spawnerPositionNumber.at(1)]
+  this->child_nodes_[spawner_position_number.at(0)]
+      ->child_nodes_[spawner_position_number.at(1)]
+      ->spawner_->position_.x_ = this->child_nodes_[spawner_position_number.at(0)]
+                                     ->child_nodes_[spawner_position_number.at(1)]
                                      ->position_->x_;
 
-  this->child_nodes_[spawnerPositionNumber.at(0)]
-      ->child_nodes_[spawnerPositionNumber.at(1)]
-      ->spawner_->position_.y_ = this->child_nodes_[spawnerPositionNumber.at(0)]
-                                     ->child_nodes_[spawnerPositionNumber.at(1)]
+  this->child_nodes_[spawner_position_number.at(0)]
+      ->child_nodes_[spawner_position_number.at(1)]
+      ->spawner_->position_.y_ = this->child_nodes_[spawner_position_number.at(0)]
+                                     ->child_nodes_[spawner_position_number.at(1)]
                                      ->position_->y_;
 }

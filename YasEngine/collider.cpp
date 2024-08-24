@@ -12,33 +12,33 @@ Collider::Collider(float radius, float x, float y) {
   this->y_ = y;
 }
 
-bool Collider::isCollision(const Collider& object0, const Collider& object1) {
-  return (sqrt(pow(object1.x_ - object0.x_, 2.0) +
-               pow(object1.y_ - object0.y_, 2.0))) <=
-         (static_cast<double>(object0.radius_) +
-          static_cast<double>(object1.radius_));
+bool Collider::IsCollision(const Collider& object_0, const Collider& object_1) {
+  return (sqrt(pow(object_1.x_ - object_0.x_, 2.0) +
+               pow(object_1.y_ - object_0.y_, 2.0))) <=
+         (static_cast<double>(object_0.radius_) +
+          static_cast<double>(object_1.radius_));
 }
 
-bool Collider::isCollidingWithWall(const Collider& object0,
-                                   const Vector2D<int>& worldSizes) {
-  return object0.x_ - object0.radius_ <
-             -static_cast<float>(worldSizes.x_) * 0.5F ||  // LEFT
-         object0.x_ + object0.radius_ >
-             static_cast<float>(worldSizes.x_) * 0.5F ||  // RIGHT
-         object0.y_ + object0.radius_ >
-             static_cast<float>(worldSizes.y_) * 0.5F ||  // TOP
-         object0.y_ - object0.radius_ <
-             -static_cast<float>(worldSizes.y_) * 0.5F;  // BOTTOM
+bool Collider::IsCollidingWithWall(const Collider& object_0,
+                                   const Vector2D<int>& world_sizes) {
+  return object_0.x_ - object_0.radius_ <
+             -static_cast<float>(world_sizes.x_) * 0.5F ||  // LEFT
+         object_0.x_ + object_0.radius_ >
+             static_cast<float>(world_sizes.x_) * 0.5F ||  // RIGHT
+         object_0.y_ + object_0.radius_ >
+             static_cast<float>(world_sizes.y_) * 0.5F ||  // TOP
+         object_0.y_ - object_0.radius_ <
+             -static_cast<float>(world_sizes.y_) * 0.5F;  // BOTTOM
 }
 
-bool Collider::isCollidingWithCustomWalls(const Collider& object0,
-                                          const Vector2D<int>& worldSizes) {
-  return object0.x_ - object0.radius_ <
-             -static_cast<float>(worldSizes.x_) * 0.5F ||  // LEFT
-         object0.x_ + object0.radius_ >
-             static_cast<float>(worldSizes.x_) * 0.0F ||  // RIGHT
-         object0.y_ + object0.radius_ >
-             static_cast<float>(worldSizes.y_) * 0.5F ||  // TOP
-         object0.y_ - object0.radius_ <
-             -static_cast<float>(worldSizes.y_) * 0.5F;  // BOTTOM
+bool Collider::IsCollidingWithCustomWalls(const Collider& object_0,
+                                          const Vector2D<int>& world_sizes) {
+  return object_0.x_ - object_0.radius_ <
+             -static_cast<float>(world_sizes.x_) * 0.5F ||  // LEFT
+         object_0.x_ + object_0.radius_ >
+             static_cast<float>(world_sizes.x_) * 0.0F ||  // RIGHT
+         object_0.y_ + object_0.radius_ >
+             static_cast<float>(world_sizes.y_) * 0.5F ||  // TOP
+         object_0.y_ - object_0.radius_ <
+             -static_cast<float>(world_sizes.y_) * 0.5F;  // BOTTOM
 }

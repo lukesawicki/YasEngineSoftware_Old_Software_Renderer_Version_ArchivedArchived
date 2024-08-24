@@ -3,7 +3,7 @@
 
 class Randomizer {
  public:
-  static int drawNumberClosedInterval(int min, int max);
+  static int DrawNumberClosedInterval(int min, int max);
 };
 
 #endif

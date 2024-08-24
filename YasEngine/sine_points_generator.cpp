@@ -4,9 +4,9 @@
 
 SinePointsGenerator::~SinePointsGenerator() { ; }
 
-PointsSet* SinePointsGenerator::generatePoints(int numberOfNumbers,
+PointsSet* SinePointsGenerator::GeneratePoints(int number_of_numbers,
                                                std::map<int, float>* numbers) {
-  this->points_number_ = numberOfNumbers;
+  this->points_number_ = number_of_numbers;
   Vector2D<float>* points = new Vector2D<float>[points_number_];
   float divider = static_cast<float>(points_number_);
   float maximumXvalue = 2.0F * kPi;
@@ -29,9 +29,9 @@ PointsSet* SinePointsGenerator::generatePoints(int numberOfNumbers,
   return pointsSet;
 }
 
-PointsSet* SinePointsGenerator::generateFloatPoints(
-    int numberOfNumbers, std::map<float, float>* numbers) {
-  this->points_number_ = numberOfNumbers;
+PointsSet* SinePointsGenerator::GenerateFloatPoints(
+    int number_of_numbers, std::map<float, float>* numbers) {
+  this->points_number_ = number_of_numbers;
   Vector2D<float>* points = new Vector2D<float>[points_number_];
   int additionalFactor = 50;
   int i = 0;

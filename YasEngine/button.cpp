@@ -9,12 +9,12 @@ void Button::Generate() {
   }
 }
 
-void Button::GenerateRegularPolygonVertices(float circumscribedCircleRadius,
-                                            int numberOfVertices) {}
+void Button::GenerateRegularPolygonVertices(float circumscribed_circle_radius,
+                                            int number_of_vertices) {}
 
 void Button::RegeneratePolygon() { Generate(); }
 
-void Button::Move(float deltaTime) {}
+void Button::Move(float delta_time) {}
 
 Button::Button(const ButtonId& buttonId, std::string text,
                const Vector4D<Uint8>& color) {

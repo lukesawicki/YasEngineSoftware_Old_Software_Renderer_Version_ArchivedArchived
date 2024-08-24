@@ -83,28 +83,28 @@ Player::~Player() {
   // delete mouse_; // It will be deleted in YasEngine
 }
 
-void Player::Move(float deltaTime) {
+void Player::Move(float delta_time) {
   // LEFT
   if (input_->left && !input_->right) {
-    position.x_ = position.x_ + deltaTime * (-speed_);
+    position.x_ = position.x_ + delta_time * (-speed_);
   }
 
   // RIGHT
   if (input_->right && !input_->left) {
-    position.x_ = position.x_ + deltaTime * speed_;
+    position.x_ = position.x_ + delta_time * speed_;
   }
 
   // UP
   if (input_->up && !input_->down) {
-    position.y_ = position.y_ + deltaTime * speed_;
+    position.y_ = position.y_ + delta_time * speed_;
   }
 
   // DOWN
   if (input_->down && !input_->up) {
-    position.y_ = position.y_ + deltaTime * (-speed_);
+    position.y_ = position.y_ + delta_time * (-speed_);
   }
 
-  moveCollider();
+  MoveCollider();
 
   // SPACE
   if (input_->shoot || mouse_->left_mouse_button) {
@@ -113,64 +113,64 @@ void Player::Move(float deltaTime) {
   RegeneratePolygon();
 }
 
-void Player::rotate(float deltaTime) {
+void Player::Rotate(float delta_time) {
   if (input_->rotate_counter_clockwise) {
     direction_mouse_angle_ = direction_mouse_angle_ * 3.141592F / 180.0F;
-    direction_mouse_angle_ = deltaTime * rotation_speed_;
+    direction_mouse_angle_ = delta_time * rotation_speed_;
     player_current_direction_angle_ =
         player_current_direction_angle_ + direction_mouse_angle_;
     if (player_current_direction_angle_ >= 6.28319F) {
       player_current_direction_angle_ =
           player_current_direction_angle_ - 6.28319F;
     }
-    rotateAllVerticesOverAnAngle(direction_mouse_angle_);
+    RotateAllVerticesOverAnAngle(direction_mouse_angle_);
     Generate();
   }
 }
 
-void Player::rotateToMousePosition(float x, float y,
-                                   Vector2D<int>* windowDimensions) {
-  if (x <= windowDimensions->x_ && y <= windowDimensions->y_) {
+void Player::RotateToMousePosition(float x, float y,
+                                   Vector2D<int>* window_dimensions) {
+  if (x <= window_dimensions->x_ && y <= window_dimensions->y_) {
     float currentX = x;
     float currentY = y;
 
-    windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
+    WindowPositionToCartesianPosition(currentX, currentY, window_dimensions);
 
     Vector2D<float> mousePositionVector(static_cast<float>(currentX),
                                         static_cast<float>(currentY));
-    // Vector2D<float>::normalizedVector(mousePositionVector);
+    // Vector2D<float>::NormalizedVector(mousePositionVector);
 
     float angleBetweenCurrentAndMouse =
-        Vector2D<float>::angleBetweenVectors(direction_, mousePositionVector);
-    rotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
-    setDirection(mousePositionVector.x_, mousePositionVector.y_);
+        Vector2D<float>::AngleBetweenVectors(direction_, mousePositionVector);
+    RotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
+    set_direction(mousePositionVector.x_, mousePositionVector.y_);
   }
 }
 
-void Player::rotateToMousePositionInLocalCoordinateSystem(
-    float x, float y, Vector2D<int>* windowDimensions) {
-  if (x <= windowDimensions->x_ && y <= windowDimensions->y_) {
+void Player::RotateToMousePositionInLocalCoordinateSystem(
+    float x, float y, Vector2D<int>* window_dimensions) {
+  if (x <= window_dimensions->x_ && y <= window_dimensions->y_) {
     float currentX = x;
     float currentY = y;
 
-    windowPositionToCartesianPosition(currentX, currentY, windowDimensions);
+    WindowPositionToCartesianPosition(currentX, currentY, window_dimensions);
 
     Vector2D<float> currentMousePosition = Vector2D<float>(currentX, currentY);
 
     Vector2D<float> mouseDirectionInLocalCoordynationSystem =
-        Vector2D<float>::createUnitVectorFromBoundVector(currentMousePosition,
+        Vector2D<float>::CreateUnitVectorFromBoundVector(currentMousePosition,
                                                          position);
 
-    float angleBetweenCurrentAndMouse = Vector2D<float>::angleBetweenVectors(
+    float angleBetweenCurrentAndMouse = Vector2D<float>::AngleBetweenVectors(
         direction_, mouseDirectionInLocalCoordynationSystem);
 
-    rotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
-    Vector2D<float>::rotateVectorOverTheAngle(&direction_,
+    RotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
+    Vector2D<float>::RotateVectorOverTheAngle(&direction_,
                                               angleBetweenCurrentAndMouse);
   }
 }
 
-void Player::setDirection(float x, float y) {
+void Player::set_direction(float x, float y) {
   direction_.x_ = x;
   direction_.y_ = y;
 }
@@ -182,20 +182,20 @@ void Player::Generate() {
   }
 }
 
-void Player::GenerateRegularPolygonVertices(float circumscribedCircleRadius,
-                                            int numberOfVertices) {}
+void Player::GenerateRegularPolygonVertices(float circumscribed_circle_radius,
+                                            int number_of_vertices) {}
 
 void Player::RegeneratePolygon() { Generate(); }
 
-void Player::rotateAllVerticesOverAnAngle(float angle) {
+void Player::RotateAllVerticesOverAnAngle(float angle) {
   for (int i = 0; i < number_of_vertices_; i++) {
-    Vector2D<float>::rotateVectorOverTheAngle(&local_vertices_[i], angle);
+    Vector2D<float>::RotateVectorOverTheAngle(&local_vertices_[i], angle);
   }
 }
 
-void Player::setInput(YasInOut::Input* input) { this->input_ = input; }
+void Player::set_input(YasInOut::Input* input) { this->input_ = input; }
 
-void Player::setInput(YasInOut::MousePositionChangeInformation* mouse) {
+void Player::set_input(YasInOut::MousePositionChangeInformation* mouse) {
   this->mouse_ = mouse;
 }
 

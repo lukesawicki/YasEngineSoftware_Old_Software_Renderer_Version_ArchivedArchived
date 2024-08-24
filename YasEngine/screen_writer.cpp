@@ -23,63 +23,63 @@ ScreenWriter::ScreenWriter() {
   }
 }
 
-void ScreenWriter::initialize() {
-  initializeFontSurfaces();
-  initializeFontObjects();
-  prepareFontVertices();
+void ScreenWriter::Initialize() {
+  InitializeFontSurfaces();
+  InitializeFontObjects();
+  PrepareFontVertices();
 }
 
-void ScreenWriter::initialize(int szerokosc_znaku, int wysokosc_znaku,
-                              const char* plik_znakow) {}
+void ScreenWriter::Initialize(int character_width, int character_height,
+                              const char* file_with_characters) {}
 
-void ScreenWriter::writeNew(int x, int y, string text, int width, int height) {
-  SDL_Rect docelowe;
+void ScreenWriter::WriteNew(int x, int y, string text, int width, int height) {
+  SDL_Rect targetRect;
   int pom_w = 0, pom_h = 0;
-  docelowe.x = x;
-  docelowe.y = y;
-  docelowe.w = width;
-  docelowe.h = height;
+  targetRect.x = x;
+  targetRect.y = y;
+  targetRect.w = width;
+  targetRect.h = height;
   for (int i = 0; i < static_cast<int>(text.size()); i++) {
     for (int j = 0; j < 63; j++) {
       if (text.at(i) == characters_table_[j]) {
-        docelowe.x = x + i * docelowe.w;
+        targetRect.x = x + i * targetRect.w;
       }
     }
   }
 }
 
-void ScreenWriter::write(int x, int y, string text,
+void ScreenWriter::Write(int x, int y, string text,
                          const Vector4D<Uint8>& color,
-                         PixelsTable& pixelsTable) {
+                         PixelsTable& pixels_table) {
   for (int i = 0; i < static_cast<int>(text.size()); i++) {
     for (int j = 0; j < knumber_of_characters; j++) {
       if (text.at(i) == characters_table_[j]) {
-        fonts_.at(j)->verticesBaseData->setPosition(
+        fonts_.at(j)->verticesBaseData->set_position(
             static_cast<float>(x + i * kfont_width), static_cast<float>(y));
         fonts_.at(j)->verticesBaseData->Generate();
-        drawNumbersAsGroupOfLines(
+        DrawNumbersAsGroupOfLines(
             fonts_.at(j)->verticesBaseData->world_vertices_,
             fonts_.at(j)->verticesBaseData->number_of_vertices_, color, false,
-            pixelsTable);
+            pixels_table);
       }
     }
   }
 }
 
-void ScreenWriter::initializeFontObjects() {
+void ScreenWriter::InitializeFontObjects() {
   Vector2D<float> direction(0, 1);
   for (int i = 0; i < knumber_of_characters; i++) {
     fonts_.at(i)->verticesBaseData->initialize(17, 0, 0, direction, -1);
   }
 }
 
-void ScreenWriter::initializeFontSurfaces() {
+void ScreenWriter::InitializeFontSurfaces() {
   for (int i = 0; i < knumber_of_characters; i++) {
-    fonts_.at(i)->surface->initialize(i * 17, 0, 17, 17, kGreen);
+    fonts_.at(i)->surface->Initialize(i * 17, 0, 17, 17, kGreen);
   }
 }
 
-void ScreenWriter::prepareFontVertices() {
+void ScreenWriter::PrepareFontVertices() {
   // A 6
   fonts_[0]->verticesBaseData->local_vertices_ = new Vector2D<float>[6];
   fonts_[0]->verticesBaseData->world_vertices_ = new Vector2D<float>[6];

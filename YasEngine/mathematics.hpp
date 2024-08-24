@@ -5,11 +5,11 @@
 
 #include "vector_2d.hpp"
 
-std::map<float, float>* generateSineNumbers(int pointsNumber);
-std::map<float, float>* generateCosineNumbers(int pointsNumber);
-std::vector<int> generatePrimeNumbersLessThanN(int n);
-std::vector<int> generateNfibonacciNumbers(int n);
-double distanceBetweenPoints(const Vector2D<int>& vector0,
-                             const Vector2D<int>& vector1);
+std::map<float, float>* GenerateSineNumbers(int points_number);
+std::map<float, float>* GenerateCosineNumbers(int points_number);
+std::vector<int> GeneratePrimeNumbersLessThanN(int n);
+std::vector<int> GenerateNfibonacciNumbers(int n);
+double DistanceBetweenPoints(const Vector2D<int>& vector_0,
+                             const Vector2D<int>& vector_1);
 
 #endif

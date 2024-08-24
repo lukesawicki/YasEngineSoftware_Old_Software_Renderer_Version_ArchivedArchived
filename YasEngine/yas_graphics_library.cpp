@@ -2,7 +2,7 @@
 
 #include <bitset>
 
-void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1,
+void DrawLine(const Vector2D<float>& point0, const Vector2D<float>& point1,
               PixelsTable& pixelsTable, const Vector4D<Uint8>& drawingColor) {
   int x0 = static_cast<int>(point0.x_);
   int y0 = static_cast<int>(point0.y_);
@@ -43,7 +43,7 @@ void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1,
           deltaX = static_cast<int>(point0.x_ - point1.x_);
           deltaY = static_cast<int>(point0.y_ - point1.y_);
           for (int i = originalPoint0X; i <= originalPoint1X; i++) {
-            pixelsTable.drawPoint(x0, y0, drawingColor);
+            pixelsTable.DrawPoint(x0, y0, drawingColor);
             x0++;
             if ((2 * (cumulativeError + deltaY)) > -deltaX) {
               // y_ stays the same
@@ -62,7 +62,7 @@ void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1,
             deltaX = static_cast<int>(point0.x_ - point1.x_);
             deltaY = static_cast<int>(point0.y_ - point1.y_);
             for (int i = originalPoint0X; i <= originalPoint1X; i++) {
-              pixelsTable.drawPoint(x0, y0, drawingColor);
+              pixelsTable.DrawPoint(x0, y0, drawingColor);
               x0++;
               if ((2 * (cumulativeError + deltaY)) < deltaX) {
                 // y_ stays the same
@@ -82,7 +82,7 @@ void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1,
             // && (DELTAS CONDITION DX > DY) && (DELTA X > 0 CONDITION) -> IT
             // MEANS OCTAN 0(POSITIVE SLOPE, POINTS IN "CORRECT ORDER")
             for (int i = originalPoint0X; i <= originalPoint1X; i++) {
-              pixelsTable.drawPoint(x0, y0, drawingColor);
+              pixelsTable.DrawPoint(x0, y0, drawingColor);
               x0++;
               if ((2 * (cumulativeError + deltaY)) < deltaX) {
                 // y_ stays the same
@@ -97,7 +97,7 @@ void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1,
             // (DELTA X > 0 CONDITION) -> IT MEANS OCTAN 7(NEGATIVE SLOPE,
             // POINTS IN "CORRECT ORDER")
             for (int i = originalPoint0X; i <= originalPoint1X; i++) {
-              pixelsTable.drawPoint(x0, y0, drawingColor);
+              pixelsTable.DrawPoint(x0, y0, drawingColor);
               x0++;
               if ((2 * (cumulativeError + deltaY)) > -deltaX) {
                 // y_ stays the same
@@ -112,10 +112,10 @@ void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1,
           // if (deltaX == 0) // It is straight line where x_ is constant. So
           // draw simple line from y0 to y1
           if (copyPoint0.y_ > copyPoint1.y_) {
-            swapVectors(copyPoint0, copyPoint1);
+            SwapVectors(copyPoint0, copyPoint1);
           }
           for (int i = copyPoint0.y_; i <= copyPoint1.y_; i++) {
-            pixelsTable.drawPoint(copyPoint0.x_, i, drawingColor);
+            pixelsTable.DrawPoint(copyPoint0.x_, i, drawingColor);
           }
         }
       }
@@ -139,7 +139,7 @@ void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1,
           deltaX = static_cast<int>(point0.x_ - point1.x_);
           deltaY = static_cast<int>(point0.y_ - point1.y_);
           for (int i = originalPoint0Y; i <= originalPoint1Y; i++) {
-            pixelsTable.drawPoint(x0, y0, drawingColor);
+            pixelsTable.DrawPoint(x0, y0, drawingColor);
             y0++;
             if ((2 * (cumulativeError + deltaX)) > -deltaY) {
               // y_ stays the same
@@ -157,7 +157,7 @@ void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1,
           deltaX = static_cast<int>(point0.x_ - point1.x_);
           deltaY = static_cast<int>(point0.y_ - point1.y_);
           for (int i = originalPoint0Y; i <= originalPoint1Y; i++) {
-            pixelsTable.drawPoint(x0, y0, drawingColor);
+            pixelsTable.DrawPoint(x0, y0, drawingColor);
             y0++;
             if ((2 * (cumulativeError + deltaX)) < deltaY) {
               // y_ stays the same
@@ -177,7 +177,7 @@ void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1,
             // MEANS OCTAN 1(POSITIVE SLOPE, POINT IN "CORRECT ORDER")
 
             for (int i = originalPoint0Y; i <= originalPoint1Y; i++) {
-              pixelsTable.drawPoint(x0, y0, drawingColor);
+              pixelsTable.DrawPoint(x0, y0, drawingColor);
               y0++;
               if ((2 * (cumulativeError + deltaX)) < deltaY) {
                 // y_ stays the same
@@ -192,7 +192,7 @@ void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1,
             // (DELTA Y > 0 CONDITION) -> IT MEANS OCTAN 2(NEGATIVE SLOPE POINTS
             // IN "CORRECT ORDER")
             for (int i = originalPoint0Y; i <= originalPoint1Y; i++) {
-              pixelsTable.drawPoint(x0, y0, drawingColor);
+              pixelsTable.DrawPoint(x0, y0, drawingColor);
               y0++;
               if ((2 * (cumulativeError + deltaX)) > -deltaY) {
                 // y_ stays the same
@@ -207,10 +207,10 @@ void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1,
           // deltaY == 0 It is straight line where y_ is constant. So draw
           // simple line from x0 to x1
           if (copyPoint0.x_ > copyPoint1.x_) {
-            swapVectors(copyPoint0, copyPoint1);
+            SwapVectors(copyPoint0, copyPoint1);
           }
           for (int i = copyPoint0.x_; i <= copyPoint1.x_; i++) {
-            pixelsTable.drawPoint(i, copyPoint0.y_, drawingColor);
+            pixelsTable.DrawPoint(i, copyPoint0.y_, drawingColor);
           }
         }
       }
@@ -220,21 +220,21 @@ void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1,
     if (deltaX == 0 && deltaY == 0) {
       // if both are equals 0 just draw point.
 
-      pixelsTable.drawPoint(x0, y0, drawingColor);
+      pixelsTable.DrawPoint(x0, y0, drawingColor);
     } else {
       int absDeltaX = abs(copyPoint1.x_ - copyPoint0.x_);
       // Positive line
       int i = 0;
       if (copyPoint0.x_ < copyPoint1.x_ && copyPoint0.y_ < copyPoint1.y_) {
         while (i < absDeltaX) {
-          pixelsTable.drawPoint(copyPoint0.x_ + i, copyPoint0.y_ + i,
+          pixelsTable.DrawPoint(copyPoint0.x_ + i, copyPoint0.y_ + i,
                                 drawingColor);
           i++;
         }
       }
       if (copyPoint1.x_ < copyPoint0.x_ && copyPoint0.y_ > copyPoint1.y_) {
         while (i < absDeltaX) {
-          pixelsTable.drawPoint(copyPoint1.x_ + i, copyPoint1.y_ + i,
+          pixelsTable.DrawPoint(copyPoint1.x_ + i, copyPoint1.y_ + i,
                                 drawingColor);
           i++;
         }
@@ -243,14 +243,14 @@ void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1,
       // Negative line
       if (copyPoint0.x_ < copyPoint1.x_ && copyPoint0.y_ > copyPoint1.y_) {
         while (i < absDeltaX) {
-          pixelsTable.drawPoint(copyPoint0.x_ + i, copyPoint0.y_ - i,
+          pixelsTable.DrawPoint(copyPoint0.x_ + i, copyPoint0.y_ - i,
                                 drawingColor);
           i++;
         }
       }
       if (copyPoint1.x_ < copyPoint0.x_ && copyPoint1.y_ > copyPoint0.y_) {
         while (i < absDeltaX) {
-          pixelsTable.drawPoint(copyPoint1.x_ + i, copyPoint1.y_ - i,
+          pixelsTable.DrawPoint(copyPoint1.x_ + i, copyPoint1.y_ - i,
                                 drawingColor);
           i++;
         }
@@ -259,15 +259,15 @@ void drawLine(const Vector2D<float>& point0, const Vector2D<float>& point1,
   }
 }
 
-void drawPolygon(GameObject* polygon, PixelsTable& pixelsTable) {
-  drawLine(polygon->world_vertices_[0], polygon->world_vertices_[1],
+void DrawPolygon(GameObject* polygon, PixelsTable& pixelsTable) {
+  DrawLine(polygon->world_vertices_[0], polygon->world_vertices_[1],
            pixelsTable, polygon->color_);
   for (int i = 0; i < polygon->number_of_vertices_; i++) {
     if ((i == polygon->number_of_vertices_ - 1)) {
-      drawLine(polygon->world_vertices_[i], polygon->world_vertices_[0],
+      DrawLine(polygon->world_vertices_[i], polygon->world_vertices_[0],
                pixelsTable, polygon->color_);
     } else {
-      drawLine(polygon->world_vertices_[i], polygon->world_vertices_[i + 1],
+      DrawLine(polygon->world_vertices_[i], polygon->world_vertices_[i + 1],
                pixelsTable, polygon->color_);
     }
   }
@@ -284,7 +284,7 @@ unsigned int calculateMaximumNumberOfElementsToProcess(
   return maximum;
 }
 
-Vector2D<float>* generateVerticesFromNumbers(const std::vector<int>& numbers) {
+Vector2D<float>* GenerateVerticesFromNumbers(const std::vector<int>& numbers) {
   if (numbers.size() < 4) {
     return nullptr;
   }
@@ -319,7 +319,7 @@ Vector2D<float>* generateVerticesFromNumbersAsVerticalLines(
   return vertices;
 }
 
-void drawNumbersAsGroupOfLines(Vector2D<float>* vertices,
+void DrawNumbersAsGroupOfLines(Vector2D<float>* vertices,
                                int maximumNumberOfVertices,
                                const Vector4D<Uint8>& color,
                                bool areLinesContinuos,
@@ -330,38 +330,38 @@ void drawNumbersAsGroupOfLines(Vector2D<float>* vertices,
   }
   if (maximumNumberOfVertices > 1) {
     if (maximumNumberOfVertices <= 3) {
-      drawLine(vertices[0], vertices[1], pixelsTable, color);
+      DrawLine(vertices[0], vertices[1], pixelsTable, color);
     } else {
       for (int i = 0; i < maximumNumberOfVertices - 1; i += step) {
-        drawLine(vertices[i], vertices[i + 1], pixelsTable, color);
+        DrawLine(vertices[i], vertices[i + 1], pixelsTable, color);
       }
     }
   }
 }
 
-void drawNumbersAsGroupOfLines(Vector2D<float>* vertices,
+void DrawNumbersAsGroupOfLines(Vector2D<float>* vertices,
                                int maximumNumberOfVertices,
                                PixelsTable& pixelsTable) {
   if (maximumNumberOfVertices <= 3) {
-    drawLine(vertices[0], vertices[1], pixelsTable, kYellow);
+    DrawLine(vertices[0], vertices[1], pixelsTable, kYellow);
   } else {
     int maximumVerticesToGenerateSegments =
         calculateMaximumNumberOfElementsToProcess(maximumNumberOfVertices);
 
     for (int i = 0; i < maximumVerticesToGenerateSegments; i += 2) {
-      drawLine(vertices[i], vertices[i + 1], pixelsTable, kYellow);
+      DrawLine(vertices[i], vertices[i + 1], pixelsTable, kYellow);
     }
   }
 }
 
-void drawNumbersAsPolyline(Vector2D<float>* vertices,
+void DrawNumbersAsPolyline(Vector2D<float>* vertices,
                            int maximumNumberOfVertices,
                            PixelsTable& pixelsTable) {
   if (maximumNumberOfVertices == 2) {
-    drawLine(vertices[0], vertices[1], pixelsTable, kYellow);
+    DrawLine(vertices[0], vertices[1], pixelsTable, kYellow);
   } else {
     for (int i = 0; i < maximumNumberOfVertices - 1; i++) {
-      drawLine(vertices[i], vertices[i + 1], pixelsTable, kYellow);
+      DrawLine(vertices[i], vertices[i + 1], pixelsTable, kYellow);
     }
   }
 }
@@ -372,22 +372,22 @@ void drawBinaryRepresentationOfFixedNumbers(std::vector<int> numbers,
     std::string str = std::bitset<10>(numbers.at(i)).to_string();
     for (int j = 0; j < 10; j++) {
       if (str.at(j) == '1') {
-        pixelsTable.drawPoint(j, i, kYellow);
+        pixelsTable.DrawPoint(j, i, kYellow);
       } else {
-        pixelsTable.drawPoint(j, i, kBlue);
+        pixelsTable.DrawPoint(j, i, kBlue);
       }
     }
     str.clear();
   }
 }
 
-void drawPolygonDirection(GameObject* polygon, PixelsTable& pixelsTable) {
+void DrawPolygonDirection(GameObject* polygon, PixelsTable& pixelsTable) {
   Vector2D<float> direction(polygon->direction_.x_ * 100,
                             polygon->direction_.y_ * 100);
-  drawLine(polygon->vector_zero_, direction, pixelsTable, polygon->color_);
+  DrawLine(polygon->vector_zero_, direction, pixelsTable, polygon->color_);
 }
 
-void swapVectors(Vector2D<int>& point0, Vector2D<int>& point1) {
+void SwapVectors(Vector2D<int>& point0, Vector2D<int>& point1) {
   int temporaryX = point0.x_;
   int temporaryY = point0.y_;
   point0.x_ = point1.x_;
@@ -396,7 +396,7 @@ void swapVectors(Vector2D<int>& point0, Vector2D<int>& point1) {
   point1.y_ = temporaryY;
 }
 
-void swapVectors(Vector2D<float>& point0, Vector2D<float>& point1) {
+void SwapVectors(Vector2D<float>& point0, Vector2D<float>& point1) {
   float temporaryX = point0.x_;
   float temporaryY = point0.y_;
   point0.x_ = point1.x_;
@@ -405,48 +405,48 @@ void swapVectors(Vector2D<float>& point0, Vector2D<float>& point1) {
   point1.y_ = temporaryY;
 }
 
-void drawCartesianAxies(PixelsTable& pixelsTable) {
-  horizontalLineOnWholeScreen(pixelsTable, 0, kRed);
-  verticalLineOnWholeScreen(pixelsTable, 0, kGreen);
+void DrawCartesianAxies(PixelsTable& pixelsTable) {
+  HorizontalLineOnWholeScreen(pixelsTable, 0, kRed);
+  VerticalLineOnWholeScreen(pixelsTable, 0, kGreen);
 }
 
-void drawCrossHair(float x, float y, PixelsTable& pixelsTable,
+void DrawCrossHair(float x, float y, PixelsTable& pixelsTable,
                    bool isFullScreen) {
-  drawCrossHair(x, y, pixelsTable, isFullScreen, kGreen);
+  DrawCrossHair(x, y, pixelsTable, isFullScreen, kGreen);
 }
 
-void drawCrossHair(float x, float y, PixelsTable& pixelsTable,
+void DrawCrossHair(float x, float y, PixelsTable& pixelsTable,
                    bool isFullScreen, Vector4D<Uint8> color) {
   if (isFullScreen) {
-    horizontalLineOnWholeScreen(pixelsTable, static_cast<int>(y), kBlue);
-    verticalLineOnWholeScreen(pixelsTable, static_cast<int>(x), kBlue);
+    HorizontalLineOnWholeScreen(pixelsTable, static_cast<int>(y), kBlue);
+    VerticalLineOnWholeScreen(pixelsTable, static_cast<int>(x), kBlue);
   } else {
     // TODO refactor methods drawHor... and drawVer... should have float
     // arguments and then round and cast
-    drawHorizontalLine(pixelsTable, static_cast<int>(round(x) - 15),
+    DrawHorizontalLine(pixelsTable, static_cast<int>(round(x) - 15),
                        static_cast<int>(round(x) - 5),
                        static_cast<int>(round(y)), color);
-    drawHorizontalLine(pixelsTable, static_cast<int>(round(x) + 5),
+    DrawHorizontalLine(pixelsTable, static_cast<int>(round(x) + 5),
                        static_cast<int>(round(x) + 15),
                        static_cast<int>(round(y)), color);
 
-    drawVerticalLine(pixelsTable, static_cast<int>(round(y) - 15),
+    DrawVerticalLine(pixelsTable, static_cast<int>(round(y) - 15),
                      static_cast<int>(round(y) - 5), static_cast<int>(round(x)),
                      color);
-    drawVerticalLine(pixelsTable, static_cast<int>(round(y) + 5),
+    DrawVerticalLine(pixelsTable, static_cast<int>(round(y) + 5),
                      static_cast<int>(round(y) + 15),
                      static_cast<int>(round(x)), color);
   }
 }
 
-void drawHorizontalLine(PixelsTable& pixelsTable, int x0, int x1, int y,
+void DrawHorizontalLine(PixelsTable& pixelsTable, int x0, int x1, int y,
                         Vector4D<Uint8> color) {
   for (int i = x0; i < x1; i++) {
-    pixelsTable.drawPoint(i, y, color);
+    pixelsTable.DrawPoint(i, y, color);
   }
 }
 
-void drawVerticalLine(PixelsTable& pixelsTable, int y0, int y1, int x,
+void DrawVerticalLine(PixelsTable& pixelsTable, int y0, int y1, int x,
                       Vector4D<Uint8> color) {
   if (y0 > y1) {
     int tmp = y0;
@@ -454,52 +454,52 @@ void drawVerticalLine(PixelsTable& pixelsTable, int y0, int y1, int x,
     y1 = tmp;
   }
   for (int i = y0; i < y1; i++) {
-    pixelsTable.drawPoint(x, i, color);
+    pixelsTable.DrawPoint(x, i, color);
   }
 }
 
-void horizontalLineOnWholeScreen(PixelsTable& pixelsTable, int y,
+void HorizontalLineOnWholeScreen(PixelsTable& pixelsTable, int y,
                                  Vector4D<Uint8> color) {
   int maxX = static_cast<int>(0.5F * pixelsTable.window_dimensions_.x_);
   for (int i = -maxX; i < maxX; i++) {
     // X
 
-    pixelsTable.drawPoint(i, y, color);
+    pixelsTable.DrawPoint(i, y, color);
   }
 }
 
-void verticalLineOnWholeScreen(PixelsTable& pixelsTable, int x,
+void VerticalLineOnWholeScreen(PixelsTable& pixelsTable, int x,
                                Vector4D<Uint8> color) {
   int maxY = static_cast<int>(0.5F * pixelsTable.window_dimensions_.y_);
   for (int i = -maxY; i < maxY; i++) {
     // X
 
-    pixelsTable.drawPoint(x, i, color);
+    pixelsTable.DrawPoint(x, i, color);
   }
 }
 
-int xyPixelToArrayPosition(int x, int y, int windowWidth) {
+int ScreenPixelPositionToArrayPosition(int x, int y, int windowWidth) {
   return y * windowWidth + x;
 }
 
-int xyPixelToArrayPosition(Vector2D<int>& point, int windowWidth) {
+int ScreenPixelPositionToArrayPosition(Vector2D<int>& point, int windowWidth) {
   return point.y_ * windowWidth + point.x_;
 }
 
-void windowPositionToCartesianPosition(float& x, float& y,
+void WindowPositionToCartesianPosition(float& x, float& y,
                                        Vector2D<int>* windowDimensions) {
   x = x - static_cast<int>(0.5 * windowDimensions->x_);
   y = (-(y - static_cast<int>(0.5 * windowDimensions->y_)));
 }
 
-void drawMandelbrotSet() {}
+void DrawMandelbrotSet() {}
 
-void drawRectangle(PixelsTable& pixelsTable, int x, int y, int width,
+void DrawRectangle(PixelsTable& pixelsTable, int x, int y, int width,
                    int height, Vector4D<Uint8> color) {
   int posX = x;
   int posY = y;
 
-  pixelsTable.cartesianPositionToWindow(posX, posY);
+  pixelsTable.CartesianPositionToWindow(posX, posY);
 
   int startPoint =
       kNumberOfColors * (posY * pixelsTable.window_dimensions_.x_ + posX);

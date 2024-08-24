@@ -11,12 +11,12 @@ class ViewPort {
   Vector2D<int> view_port_sizes_;
   Uint8* pixels_ = nullptr;
 
-  virtual void clearColor(const Vector4D<Uint8>& drawingColor) = 0;
-  virtual void drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor) = 0;
-  virtual void drawLine(const Vector2D<float>& point0,
-                        const Vector2D<float>& point1,
-                        const Vector4D<Uint8>& drawingColor) = 0;
-  virtual void drawPolygon(GameObject* polygon) = 0;
+  virtual void ClearColor(const Vector4D<Uint8>& drawing_color) = 0;
+  virtual void DrawPoint(int x, int y, const Vector4D<Uint8>& drawing_color) = 0;
+  virtual void DrawLine(const Vector2D<float>& point_0,
+                        const Vector2D<float>& point_1,
+                        const Vector4D<Uint8>& drawing_color) = 0;
+  virtual void DrawPolygon(GameObject* polygon) = 0;
 };
 
 #endif

@@ -4,9 +4,9 @@
 
 PrimeNumbersPointsGenerator::~PrimeNumbersPointsGenerator() { ; }
 
-PointsSet* PrimeNumbersPointsGenerator::generatePoints(
-    int numberOfNumbers, std::map<int, float>* numbers) {
-  this->points_number_ = numberOfNumbers;
+PointsSet* PrimeNumbersPointsGenerator::GeneratePoints(
+    int number_of_numbers, std::map<int, float>* numbers) {
+  this->points_number_ = number_of_numbers;
 
   Vector2D<float>* points = new Vector2D<float>[points_number_ * 2];
 
@@ -19,7 +19,7 @@ PointsSet* PrimeNumbersPointsGenerator::generatePoints(
 
   j = 0;
   for (int i = 1; i < points_number_ * 2 - 1; i += 2) {
-    Vector2D<float>::rotateVectorOverTheAngle(
+    Vector2D<float>::RotateVectorOverTheAngle(
         &points[i], static_cast<int>(numbers->at(j++)) * (kPi / 180.0F));
   }
 
@@ -29,7 +29,7 @@ PointsSet* PrimeNumbersPointsGenerator::generatePoints(
   return pointsSet;
 }
 
-PointsSet* PrimeNumbersPointsGenerator::generateFloatPoints(
-    int numberOfNumbers, std::map<float, float>* numbers) {
+PointsSet* PrimeNumbersPointsGenerator::GenerateFloatPoints(
+    int number_of_numbers, std::map<float, float>* numbers) {
   return nullptr;
 }

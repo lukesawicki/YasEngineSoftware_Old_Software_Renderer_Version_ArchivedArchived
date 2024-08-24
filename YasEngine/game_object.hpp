@@ -36,53 +36,53 @@ class GameObject {
   Vector2D<float> velocity_;
 
   virtual void Generate() = 0;
-  virtual void GenerateRegularPolygonVertices(float circumscribedCircleRadius,
-                                              int numberOfVertices) = 0;
+  virtual void GenerateRegularPolygonVertices(float circumscribed_circle_radius,
+                                              int number_of_vertices) = 0;
   virtual void RegeneratePolygon() = 0;
 
-  void setPosition(float x, float y) {
+  void set_position(float x, float y) {
     position.x_ = x;
     position.y_ = y;
-    moveCollider();
+    MoveCollider();
   }
 
-  void setX(float x) {
+  void set_x(float x) {
     position.x_ = x;
-    moveCollider();
+    MoveCollider();
   }
 
-  void setY(float y) {
+  void set_y(float y) {
     position.y_ = y;
-    moveCollider();
+    MoveCollider();
   }
 
-  virtual Vector2D<float> getPosition() { return position; }
+  virtual Vector2D<float> get_position() { return position; }
 
-  virtual int getColliderLeftSide() {
+  virtual int GetColliderLeftSide() {
     return static_cast<int>(position.x_ - collider_.radius_);
   }
 
-  virtual int getColliderRightSide() {
+  virtual int GetColliderRightSide() {
     return static_cast<int>(position.x_ + collider_.radius_);
   }
 
-  virtual int getColliderTopSide() {
+  virtual int GetColliderTopSide() {
     return static_cast<int>(position.y_ + collider_.radius_);
   }
 
-  virtual int getColliderBottomSide() {
+  virtual int GetColliderBottomSide() {
     return static_cast<int>(position.y_ - collider_.radius_);
   }
 
   virtual void set_position(const Vector2D<float>& position) {
     this->position.x_ = position.x_;
     this->position.y_ = position.y_;
-    moveCollider();
+    MoveCollider();
   }
 
-  virtual void Move(float deltaTime) = 0;
+  virtual void Move(float delta_time) = 0;
 
-  virtual void moveCollider() {
+  virtual void MoveCollider() {
     collider_.x_ = position.x_;
     collider_.y_ = position.y_;
   }

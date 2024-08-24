@@ -23,12 +23,12 @@ class Button : public GameObject {
   ~Button();
 
   void Generate() override;
-  void GenerateRegularPolygonVertices(float circumscribedCircleRadius,
-                                      int numberOfVertices) override;
+  void GenerateRegularPolygonVertices(float circumscribed_circle_radius,
+                                      int number_of_vertices) override;
   void RegeneratePolygon() override;
-  void Move(float deltaTime) override;
+  void Move(float delta_time) override;
 
-  void setPosition(float x, float y) { GameObject::setPosition(x, y); }
+  void set_position(float x, float y) { GameObject::set_position(x, y); }
 
   void set_position(const Vector2D<float>& position) {
     GameObject::set_position(position);

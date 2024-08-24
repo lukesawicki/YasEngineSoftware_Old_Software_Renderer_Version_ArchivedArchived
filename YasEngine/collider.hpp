@@ -11,11 +11,11 @@ class Collider {
   Collider(float radius, float x, float y);
   bool is_in_collision_ = false;
 
-  static bool isCollision(const Collider& object0, const Collider& object1);
-  static bool isCollidingWithWall(const Collider& object0,
-                                  const Vector2D<int>& worldSizes);
-  static bool isCollidingWithCustomWalls(const Collider& object0,
-                                         const Vector2D<int>& worldSizes);
+  static bool IsCollision(const Collider& object_0, const Collider& object_1);
+  static bool IsCollidingWithWall(const Collider& object_0,
+                                  const Vector2D<int>& world_sizes);
+  static bool IsCollidingWithCustomWalls(const Collider& object_0,
+                                         const Vector2D<int>& world_sizes);
 
  private:
 };

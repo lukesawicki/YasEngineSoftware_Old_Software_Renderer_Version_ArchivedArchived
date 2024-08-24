@@ -7,9 +7,9 @@
 
 TimePicker::TimePicker() { ; }
 
-double TimePicker::getSeconds() { return SDL_GetTicks() / 1000.0; }
+double TimePicker::GetSeconds() { return SDL_GetTicks() / 1000.0; }
 
-double TimePicker::getMiliseconds() { return SDL_GetTicks(); }
+double TimePicker::GetMiliseconds() { return SDL_GetTicks(); }
 //                                                                            80
 //                                                                            120
 //-----------------------------------------------------------------------------|---------------------------------------|

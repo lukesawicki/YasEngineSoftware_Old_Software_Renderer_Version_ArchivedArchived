@@ -9,7 +9,7 @@ FontObject::FontObject() {}
 
 void FontObject::initialize(float radius, float x, float y,
                             const Vector2D<float>& direction,
-                            int numberOfVertices) {
+                            int number_of_vertices) {
   is_alive_ = true;
   i_am_ = GameObject::kGuiElement;
   collider_.radius_ = 17;
@@ -23,7 +23,7 @@ void FontObject::initialize(float radius, float x, float y,
   start_angle_ = 90;
   velocity_.x_ = speed_ * direction.x_;
   velocity_.y_ = speed_ * direction.y_;
-  setRandomColor();
+  SetRandomColor();
 }
 
 FontObject::~FontObject() {
@@ -38,22 +38,22 @@ void FontObject::Generate() {
   }
 }
 
-void FontObject::GenerateRegularPolygonVertices(float circumscribedCircleRadius,
-                                                int numberOfVertices) {
-  this->circumscribed_circle_radius_ = circumscribedCircleRadius;
-  this->number_of_vertices_ = numberOfVertices;
-  this->world_vertices_ = new Vector2D<float>[numberOfVertices];
-  this->local_vertices_ = new Vector2D<float>[numberOfVertices];
+void FontObject::GenerateRegularPolygonVertices(float circumscribed_circle_radius,
+                                                int number_of_vertices) {
+  this->circumscribed_circle_radius_ = circumscribed_circle_radius;
+  this->number_of_vertices_ = number_of_vertices;
+  this->world_vertices_ = new Vector2D<float>[number_of_vertices];
+  this->local_vertices_ = new Vector2D<float>[number_of_vertices];
 
   angle_for_generate_in_isosceles_polygons_ = start_angle_;
-  step_angle_ = 360.0F / numberOfVertices;
-  for (int i = 0; i < numberOfVertices; i++) {
+  step_angle_ = 360.0F / number_of_vertices;
+  for (int i = 0; i < number_of_vertices; i++) {
     local_vertices_[i].x_ =
-        0.0F + static_cast<int>(circumscribedCircleRadius *
+        0.0F + static_cast<int>(circumscribed_circle_radius *
                                 cos(angle_for_generate_in_isosceles_polygons_ *
                                     (kPi / 180.0F)));
     local_vertices_[i].y_ =
-        0.0F + static_cast<int>(circumscribedCircleRadius *
+        0.0F + static_cast<int>(circumscribed_circle_radius *
                                 sin(angle_for_generate_in_isosceles_polygons_ *
                                     (kPi / 180.0F)));
     angle_for_generate_in_isosceles_polygons_ += step_angle_;
@@ -63,22 +63,22 @@ void FontObject::GenerateRegularPolygonVertices(float circumscribedCircleRadius,
 
 void FontObject::RegeneratePolygon() { Generate(); }
 
-void FontObject::setPosition(float x, float y) {
-  GameObject::setPosition(x, y);
+void FontObject::set_position(float x, float y) {
+  GameObject::set_position(x, y);
 }
 
 void FontObject::set_position(const Vector2D<float>& position) {
   GameObject::set_position(position);
 }
 
-void FontObject::Move(float deltaTime) {}
+void FontObject::Move(float delta_time) {}
 
 void FontObject::set_color(const Vector4D<Uint8>& color) {
   GameObject::set_color(color);
 }
 
-void FontObject::setRandomColor() {
-  int col = Randomizer::drawNumberClosedInterval(1, 4);
+void FontObject::SetRandomColor() {
+  int col = Randomizer::DrawNumberClosedInterval(1, 4);
   switch (col) {
     case 0:
       set_color(kRed);

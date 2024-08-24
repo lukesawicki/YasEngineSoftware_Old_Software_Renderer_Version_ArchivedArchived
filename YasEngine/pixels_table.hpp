@@ -9,13 +9,13 @@ class PixelsTable {
  public:
   Uint8* pixels_ = nullptr;
   Vector2D<int> window_dimensions_;
-  PixelsTable(int width, int height, const Vector4D<Uint8>& defaultColor);
+  PixelsTable(int width, int height, const Vector4D<Uint8>& default_color);
   PixelsTable(const PixelsTable& originalPixelsTable,
-              const Vector4D<Uint8>& defaultColor);
+              const Vector4D<Uint8>& default_color);
   ~PixelsTable();
-  void clearColor(const Vector4D<Uint8>& drawingColor);
-  void drawPoint(int x, int y, const Vector4D<Uint8>& drawingColor);
-  void cartesianPositionToWindow(int& x, int& y);
+  void ClearColor(const Vector4D<Uint8>& drawing_color);
+  void DrawPoint(int x, int y, const Vector4D<Uint8>& drawing_color);
+  void CartesianPositionToWindow(int& x, int& y);
 };
 
 #endif

@@ -32,15 +32,15 @@ class ScreenWriter final {
   std::vector<Font*> fonts_;
   char characters_table_[knumber_of_characters];
   ScreenWriter();
-  void initialize();
-  void initializeFontObjects();
-  void initializeFontSurfaces();
-  void prepareFontVertices();
-  void write(int x, int y, std::string text, const Vector4D<Uint8>& color,
-             PixelsTable& pixelsTable);
-  void initialize(int characterWidth, int characterHeight,
-                  const char* plik_znakow);
-  void writeNew(int x, int y, std::string text, int width, int height);
+  void Initialize();
+  void InitializeFontObjects();
+  void InitializeFontSurfaces();
+  void PrepareFontVertices();
+  void Write(int x, int y, std::string text, const Vector4D<Uint8>& color,
+             PixelsTable& pixels_table);
+  void Initialize(int character_width, int character_height,
+                  const char* file_with_characters);
+  void WriteNew(int x, int y, std::string text, int width, int height);
 };
 
 #endif  // SCREENWRITER_HPP

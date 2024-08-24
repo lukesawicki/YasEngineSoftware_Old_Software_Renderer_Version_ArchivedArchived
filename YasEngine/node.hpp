@@ -15,9 +15,9 @@ class Node {
   Node* child_nodes_[4];
   Spawner* spawner_;
   bool is_player_on_this_quad_;
-  void createSpanwer(const std::vector<int>& spawnerPositionNumber);
+  void CreateSpanwer(const std::vector<int>& spawner_position_number);
 
-  static void addNodes(Node& parentNode) {
+  static void AddNodes(Node& parent_node) {
     short factorX = 1;
     short factorY = 1;
 
@@ -49,20 +49,20 @@ class Node {
           break;
       }
 
-      int childNodeSize = static_cast<int>(parentNode.size_ * 0.5);
-      childNodePositionX = static_cast<int>(parentNode.position_->x_ +
+      int childNodeSize = static_cast<int>(parent_node.size_ * 0.5);
+      childNodePositionX = static_cast<int>(parent_node.position_->x_ +
                                             (factorX * (childNodeSize * 0.5)));
-      childNodePositionY = static_cast<int>(parentNode.position_->y_ +
+      childNodePositionY = static_cast<int>(parent_node.position_->y_ +
                                             (factorY * (childNodeSize * 0.5)));
       childNodePosition =
           new Vector2D<int>(childNodePositionX, childNodePositionY);
-      parentNode.child_nodes_[i] =
-          new Node(childNodePosition, childNodeSize, &parentNode);
+      parent_node.child_nodes_[i] =
+          new Node(childNodePosition, childNodeSize, &parent_node);
 
     }  // end for
   }
 
-  static std::vector<Vector2D<int>*> generateTestPositions() {
+  static std::vector<Vector2D<int>*> GenerateTestPositions() {
     short factorX = 1;
     short factorY = 1;
 

@@ -14,10 +14,10 @@ class Projectile : public GameObject {
   Vector2D<float> velocity_;
   Projectile(float radius, float x, float y, Vector2D<float> direction);
   ~Projectile();
-  void Move(float deltaTime) override;
+  void Move(float delta_time) override;
   void Generate() override;
-  void GenerateRegularPolygonVertices(float circumscribedCircleRadius,
-                                      int numberOfVertices) override;
+  void GenerateRegularPolygonVertices(float circumscribed_circle_radius,
+                                      int number_of_vertices) override;
   void RegeneratePolygon() override;
 };
 

@@ -4,9 +4,9 @@
 
 CosinePointsGenerator::~CosinePointsGenerator() { ; }
 
-PointsSet* CosinePointsGenerator::generatePoints(
-    int numberOfNumbers, std::map<int, float>* numbers) {
-  this->points_number_ = numberOfNumbers;
+PointsSet* CosinePointsGenerator::GeneratePoints(
+    int number_of_numbers, std::map<int, float>* numbers) {
+  this->points_number_ = number_of_numbers;
   Vector2D<float>* points = new Vector2D<float>[points_number_];
   float divider = static_cast<float>(points_number_);
   float maximumXvalue = 2.0F * kPi;
@@ -26,9 +26,9 @@ PointsSet* CosinePointsGenerator::generatePoints(
   return pointsSet;
 }
 
-PointsSet* CosinePointsGenerator::generateFloatPoints(
-    int numberOfNumbers, std::map<float, float>* numbers) {
-  this->points_number_ = numberOfNumbers;
+PointsSet* CosinePointsGenerator::GenerateFloatPoints(
+    int number_of_numbers, std::map<float, float>* numbers) {
+  this->points_number_ = number_of_numbers;
   Vector2D<float>* points = new Vector2D<float>[points_number_];
   int additionalFactor = 50;
   int i = 0;
