@@ -23,10 +23,10 @@ PointsSet* PrimeNumbersPointsGenerator::GeneratePoints(
         &points[i], static_cast<int>(numbers->at(j++)) * (kPi / 180.0F));
   }
 
-  PointsSet* pointsSet = new PointsSet();
-  pointsSet->points_ = points;
-  pointsSet->points_number_ = points_number_;
-  return pointsSet;
+  PointsSet* points_set = new PointsSet();
+  points_set->points_ = points;
+  points_set->points_number_ = points_number_;
+  return points_set;
 }
 
 PointsSet* PrimeNumbersPointsGenerator::GenerateFloatPoints(

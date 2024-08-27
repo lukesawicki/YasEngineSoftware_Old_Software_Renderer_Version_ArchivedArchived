@@ -43,42 +43,42 @@ void Spawner::ResetTimes() {
 }
 
 void Spawner::PrepareObjectToSpawn(GameObject*& game_object) {
-  int oldTargetPositionX = 0;
-  int oldTargetPositionY = 0;
-  int xPos = Randomizer::DrawNumberClosedInterval(spawning_min_radius_,
+  int old_target_position_x = 0;
+  int old_target_position_y = 0;
+  int position_x = Randomizer::DrawNumberClosedInterval(spawning_min_radius_,
                                                   spawning_max_radius_);
-  int yPos = Randomizer::DrawNumberClosedInterval(spawning_min_radius_,
+  int position_y = Randomizer::DrawNumberClosedInterval(spawning_min_radius_,
                                                   spawning_max_radius_);
-  int dirX = Randomizer::DrawNumberClosedInterval(
+  int direction_x = Randomizer::DrawNumberClosedInterval(
       1, max_value_for_drawing_spawning_direction_);
-  int dirY = Randomizer::DrawNumberClosedInterval(
+  int direction_y = Randomizer::DrawNumberClosedInterval(
       1, max_value_for_drawing_spawning_direction_);
 
-  int numberOfVertices = Randomizer::DrawNumberClosedInterval(3, 7);
+  int number_of_vertices = Randomizer::DrawNumberClosedInterval(3, 7);
 
-  if (dirX <= max_value_for_drawing_spawning_direction_ * 0.5) {
-    dirX = -1;
+  if (direction_x <= max_value_for_drawing_spawning_direction_ * 0.5) {
+    direction_x = -1;
   }
 
-  if (dirX >= max_value_for_drawing_spawning_direction_ * 0.5) {
-    dirX = 1;
+  if (direction_x >= max_value_for_drawing_spawning_direction_ * 0.5) {
+    direction_x = 1;
   }
 
-  if (dirY <= max_value_for_drawing_spawning_direction_ * 0.5) {
-    dirY = -1;
+  if (direction_y <= max_value_for_drawing_spawning_direction_ * 0.5) {
+    direction_y = -1;
   }
 
-  if (dirY >= max_value_for_drawing_spawning_direction_ * 0.5) {
-    dirY = 1;
+  if (direction_y >= max_value_for_drawing_spawning_direction_ * 0.5) {
+    direction_y = 1;
   }
 
-  int targetPositionX = position_.x_ + dirX * xPos;
-  int targetPositionY = position_.y_ + dirY * yPos;
+  int targetPositionX = position_.x_ + direction_x * position_x;
+  int targetPositionY = position_.y_ + direction_y * position_y;
 
-  if (oldTargetPositionX != targetPositionX ||
-      oldTargetPositionY != targetPositionY) {
+  if (old_target_position_x != targetPositionX ||
+      old_target_position_y != targetPositionY) {
     game_object =
         new Collectible(16, static_cast<float>(targetPositionX),
-                        static_cast<float>(targetPositionY), numberOfVertices);
+                        static_cast<float>(targetPositionY), number_of_vertices);
   }
 }

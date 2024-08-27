@@ -131,18 +131,18 @@ void Player::Rotate(float delta_time) {
 void Player::RotateToMousePosition(float x, float y,
                                    Vector2D<int>* window_dimensions) {
   if (x <= window_dimensions->x_ && y <= window_dimensions->y_) {
-    float currentX = x;
-    float currentY = y;
+    float current_x = x;
+    float current_y = y;
 
-    WindowPositionToCartesianPosition(currentX, currentY, window_dimensions);
+    WindowPositionToCartesianPosition(current_x, current_y, window_dimensions);
 
-    Vector2D<float> mousePositionVector(static_cast<float>(currentX),
-                                        static_cast<float>(currentY));
+    Vector2D<float> mousePositionVector(static_cast<float>(current_x),
+                                        static_cast<float>(current_y));
     // Vector2D<float>::NormalizedVector(mousePositionVector);
 
-    float angleBetweenCurrentAndMouse =
+    float angle_between_current_and_mouse =
         Vector2D<float>::AngleBetweenVectors(direction_, mousePositionVector);
-    RotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
+    RotateAllVerticesOverAnAngle(angle_between_current_and_mouse);
     set_direction(mousePositionVector.x_, mousePositionVector.y_);
   }
 }
@@ -150,23 +150,23 @@ void Player::RotateToMousePosition(float x, float y,
 void Player::RotateToMousePositionInLocalCoordinateSystem(
     float x, float y, Vector2D<int>* window_dimensions) {
   if (x <= window_dimensions->x_ && y <= window_dimensions->y_) {
-    float currentX = x;
-    float currentY = y;
+    float current_x = x;
+    float current_y = y;
 
-    WindowPositionToCartesianPosition(currentX, currentY, window_dimensions);
+    WindowPositionToCartesianPosition(current_x, current_y, window_dimensions);
 
-    Vector2D<float> currentMousePosition = Vector2D<float>(currentX, currentY);
+    Vector2D<float> current_mouse_position = Vector2D<float>(current_x, current_y);
 
-    Vector2D<float> mouseDirectionInLocalCoordynationSystem =
-        Vector2D<float>::CreateUnitVectorFromBoundVector(currentMousePosition,
+    Vector2D<float> mouse_direction_in_local_coordination_system =
+        Vector2D<float>::CreateUnitVectorFromBoundVector(current_mouse_position,
                                                          position);
 
-    float angleBetweenCurrentAndMouse = Vector2D<float>::AngleBetweenVectors(
-        direction_, mouseDirectionInLocalCoordynationSystem);
+    float angle_between_current_and_mouse = Vector2D<float>::AngleBetweenVectors(
+        direction_, mouse_direction_in_local_coordination_system);
 
-    RotateAllVerticesOverAnAngle(angleBetweenCurrentAndMouse);
+    RotateAllVerticesOverAnAngle(angle_between_current_and_mouse);
     Vector2D<float>::RotateVectorOverTheAngle(&direction_,
-                                              angleBetweenCurrentAndMouse);
+                                              angle_between_current_and_mouse);
   }
 }
 

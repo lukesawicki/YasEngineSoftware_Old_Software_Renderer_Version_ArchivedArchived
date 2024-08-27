@@ -223,8 +223,8 @@ class YasEngine {
   void DrawHudElements(double& delta_time);
   void DrawFrame(double& delta_time);
   void Render(double& delta_time);
-  void RenderGameObjects(double& delta_time);
-  void RenderOnViewports(double& delta_time);
+  void RenderGameObjects();
+  void RenderOnViewports();
   void RenderLevelChange();
   void RenderWonScreen();
   Button::ButtonId CheckWhichButtonClicked();

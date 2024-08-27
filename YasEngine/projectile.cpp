@@ -50,10 +50,10 @@ void Projectile::Generate() {
 
 void Projectile::GenerateRegularPolygonVertices(float circumscribed_circle_radius,
                                                 int number_of_vertices) {
-  this->circumscribed_circle_radius_ = circumscribed_circle_radius;
-  this->number_of_vertices_ = number_of_vertices;
-  this->world_vertices_ = new Vector2D<float>[number_of_vertices];
-  this->local_vertices_ = new Vector2D<float>[number_of_vertices];
+  circumscribed_circle_radius_ = circumscribed_circle_radius;
+  number_of_vertices_ = number_of_vertices;
+  world_vertices_ = new Vector2D<float>[number_of_vertices];
+  local_vertices_ = new Vector2D<float>[number_of_vertices];
 
   angle_for_generate_in_isosceles_polygons_ = start_angle_;
   step_angle_ = 360.0F / number_of_vertices;

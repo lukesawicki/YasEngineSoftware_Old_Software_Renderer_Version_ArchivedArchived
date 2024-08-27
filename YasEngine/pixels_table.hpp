@@ -10,7 +10,7 @@ class PixelsTable {
   Uint8* pixels_ = nullptr;
   Vector2D<int> window_dimensions_;
   PixelsTable(int width, int height, const Vector4D<Uint8>& default_color);
-  PixelsTable(const PixelsTable& originalPixelsTable,
+  PixelsTable(const PixelsTable& original_pixels_table,
               const Vector4D<Uint8>& default_color);
   ~PixelsTable();
   void ClearColor(const Vector4D<Uint8>& drawing_color);

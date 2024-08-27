@@ -33,61 +33,61 @@ const Vector4D<Uint8> kPurple(255, 0, 255, 0);
 const Vector4D<Uint8> kXportal(255, 77, 0, 0);
 const Vector4D<Uint8> kPolygon(250, 180, 10, 0);
 
-void DrawLine(const Vector2D<float>& point0, const Vector2D<float>& point1,
-              PixelsTable& pixelsTable, const Vector4D<Uint8>& drawingColor);
+void DrawLine(const Vector2D<float>& point_0, const Vector2D<float>& point_1,
+              PixelsTable& pixels_table, const Vector4D<Uint8>& drawing_color);
 
-void DrawPolygon(GameObject* polygon, PixelsTable& pixelsTable);
+void DrawPolygon(GameObject* polygon, PixelsTable& pixels_table);
 
 Vector2D<float>* GenerateVerticesFromNumbers(const std::vector<int>& numbers);
 
 void DrawNumbersAsGroupOfLines(Vector2D<float>* vertices,
-                               int maximumNumberOfVertices,
+                               int maximum_number_of_vertices,
                                const Vector4D<Uint8>& color,
-                               bool areLinesContinuos,
-                               PixelsTable& pixelsTable);
+                               bool are_lines_continuous,
+                               PixelsTable& pixels_table);
 
 void DrawNumbersAsGroupOfLines(Vector2D<float>* vertices,
-                               int maximumNumberOfVertices,
-                               PixelsTable& pixelsTable);
+                               int maximum_number_of_vertices,
+                               PixelsTable& pixels_table);
 
-void DrawNumbersAsPolyline(Vector2D<float>* vertices,
-                           int maximumNumberOfVertices,
-                           PixelsTable& pixelsTable);
+void DrawNumbersAsLineStrip(Vector2D<float>* vertices,
+                           int maximum_number_of_vertices,
+                           PixelsTable& pixels_table);
 
-void DrawPolygonDirection(GameObject* polygon, PixelsTable& pixelsTable);
+void DrawPolygonDirection(GameObject* polygon, PixelsTable& pixels_table);
 
-void SwapVectors(Vector2D<int>& point0, Vector2D<int>& point1);
+void SwapVectors(Vector2D<int>& point_0, Vector2D<int>& point_1);
 
-void HorizontalLineOnWholeScreen(PixelsTable& pixelsTable, int y,
+void HorizontalLineOnWholeScreen(PixelsTable& pixels_table, int y,
                                  Vector4D<Uint8> color);
 
-void VerticalLineOnWholeScreen(PixelsTable& pixelsTable, int x,
+void VerticalLineOnWholeScreen(PixelsTable& pixels_table, int x,
                                Vector4D<Uint8> color);
 
-void DrawCartesianAxies(PixelsTable& pixelsTable);
+void DrawCartesianAxes(PixelsTable& pixels_table);
 
-void DrawCrossHair(float x, float y, PixelsTable& pixelsTable,
-                   bool isFullScreen);
+void DrawCrossHair(float x, float y, PixelsTable& pixels_table,
+                   bool is_full_screen);
 
-void DrawCrossHair(float x, float y, PixelsTable& pixelsTable,
-                   bool isFullScreen, Vector4D<Uint8> color);
+void DrawCrossHair(float x, float y, PixelsTable& pixels_table,
+                   bool is_full_screen, Vector4D<Uint8> color);
 
-void DrawHorizontalLine(PixelsTable& pixelsTable, int x0, int x1, int y,
+void DrawHorizontalLine(PixelsTable& pixels_table, int x_0, int x_1, int y,
                         Vector4D<Uint8> color);
 
-void DrawVerticalLine(PixelsTable& pixelsTable, int y0, int y1, int x,
+void DrawVerticalLine(PixelsTable& pixels_table, int y_0, int y_1, int x,
                       Vector4D<Uint8> color);
 
-int ScreenPixelPositionToArrayPosition(Vector2D<int>& point, int windowWidth);
+int ScreenPixelPositionToArrayPosition(Vector2D<int>& point, int window_width);
 
-int ScreenPixelPositionToArrayPosition(int x, int y, int windowWidth);
+int ScreenPixelPositionToArrayPosition(int x, int y, int window_width);
 
 void WindowPositionToCartesianPosition(float& x, float& y,
-                                       Vector2D<int>* windowDimensions);
+                                       Vector2D<int>* window_dimensions);
 
 void DrawMandelbrotSet();
 
-void DrawRectangle(PixelsTable& pixelsTable, int x, int y, int width,
+void DrawRectangle(PixelsTable& pixels_table, int x, int y, int width,
                    int height, Vector4D<Uint8> color);
 
 #endif

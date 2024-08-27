@@ -4,24 +4,24 @@
 
 PixelsTable::PixelsTable(int width, int height,
                          const Vector4D<Uint8>& default_color) {
-  this->window_dimensions_.x_ = width;
-  this->window_dimensions_.y_ = height;
-  this->pixels_ = new Uint8[window_dimensions_.x_ * window_dimensions_.y_ *
+  window_dimensions_.x_ = width;
+  window_dimensions_.y_ = height;
+  pixels_ = new Uint8[window_dimensions_.x_ * window_dimensions_.y_ *
                             kNumberOfColors];
   ClearColor(default_color);
 }
 
-PixelsTable::PixelsTable(const PixelsTable& originalPixelsTable,
-                         const Vector4D<Uint8>& defaultColor) {
-  this->window_dimensions_.x_ = originalPixelsTable.window_dimensions_.x_;
-  this->window_dimensions_.y_ = originalPixelsTable.window_dimensions_.y_;
-  this->pixels_ =
-      new Uint8[originalPixelsTable.window_dimensions_.x_ *
-                originalPixelsTable.window_dimensions_.y_ * kNumberOfColors];
+PixelsTable::PixelsTable(const PixelsTable& original_pixels_table,
+                         const Vector4D<Uint8>& default_color) {
+  window_dimensions_.x_ = original_pixels_table.window_dimensions_.x_;
+  window_dimensions_.y_ = original_pixels_table.window_dimensions_.y_;
+  pixels_ =
+      new Uint8[original_pixels_table.window_dimensions_.x_ *
+                original_pixels_table.window_dimensions_.y_ * kNumberOfColors];
   for (int i = 0;
        i < window_dimensions_.x_ * window_dimensions_.y_ * kNumberOfColors;
        i++) {
-    this->pixels_[i] = originalPixelsTable.pixels_[i];
+    pixels_[i] = original_pixels_table.pixels_[i];
   }
 }
 

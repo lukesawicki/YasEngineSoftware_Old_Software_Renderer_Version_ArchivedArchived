@@ -78,8 +78,8 @@ void FontObject::set_color(const Vector4D<Uint8>& color) {
 }
 
 void FontObject::SetRandomColor() {
-  int col = Randomizer::DrawNumberClosedInterval(1, 4);
-  switch (col) {
+  int color = Randomizer::DrawNumberClosedInterval(1, 4);
+  switch (color) {
     case 0:
       set_color(kRed);
       break;

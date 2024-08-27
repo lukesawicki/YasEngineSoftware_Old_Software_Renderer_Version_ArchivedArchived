@@ -44,8 +44,8 @@ void YasEngine::initialize() {
 }
 
 void YasEngine::clean() {
-  for (auto drawableObject : objects_to_draw_) {
-    delete drawableObject;
+  for (auto drawable_object : objects_to_draw_) {
+    delete drawable_object;
   }
 
   delete mathematics_graphs_surface_;
@@ -109,29 +109,29 @@ void YasEngine::YasEngineStart() {
 }
 
 void YasEngine::ReadSettingsFromFile() {
-  std::ifstream settingsFile("settings.json");
-  if (!settingsFile.is_open()) {
+  std::ifstream settings_file("settings.json");
+  if (!settings_file.is_open()) {
     std::cerr << "Error opening JSON file" << std::endl;
     exit(1);
   }
 
-  std::string settingsString((std::istreambuf_iterator<char>(settingsFile)),
+  std::string settings_string((std::istreambuf_iterator<char>(settings_file)),
                              std::istreambuf_iterator<char>());
-  settingsFile.close();
+  settings_file.close();
 
-  settings.Parse(settingsString.c_str());
+  settings.Parse(settings_string.c_str());
 
   if (settings.HasParseError()) {
     std::cerr << "Error parsing JSON" << std::endl;
     exit(1);
   }
 
-  const rapidjson::Value& soundSettings = settings["SOUND_MUSIC"];
+  const rapidjson::Value& sound_settings = settings["SOUND_MUSIC"];
 
-  music_volume_ = soundSettings["MUSIC_VOLUME"].GetInt();
-  shoot_volume_ = soundSettings["SHOOT_VOLUME"].GetInt();
-  hit_volume_ = soundSettings["HIT_VOLUME"].GetInt();
-  other_volume_ = soundSettings["OTHER_VOLUME"].GetInt();
+  music_volume_ = sound_settings["MUSIC_VOLUME"].GetInt();
+  shoot_volume_ = sound_settings["SHOOT_VOLUME"].GetInt();
+  hit_volume_ = sound_settings["HIT_VOLUME"].GetInt();
+  other_volume_ = sound_settings["OTHER_VOLUME"].GetInt();
 }
 
 void YasEngine::PrepareRendering() {
@@ -339,17 +339,17 @@ void YasEngine::DeleteNotAliveObjects() {
 
 void YasEngine::HandleSpawningCollectibles() {
   for (int i = 0; i < 8; i++) {
-    int randomSpawner = Randomizer::DrawNumberClosedInterval(0, 15);
-    int firstLevelNodeIndex =
-        spawners_positions_[randomSpawner]->first_level_node;
-    int secondLevelNodeIndex =
-        spawners_positions_[randomSpawner]->second_level_node;
+    int random_spawner = Randomizer::DrawNumberClosedInterval(0, 15);
+    int first_level_node_index =
+        spawners_positions_[random_spawner]->first_level_node;
+    int second_level_node_index =
+        spawners_positions_[random_spawner]->second_level_node;
     if (Spawner::number_of_spawned_objects_ < kmax_collectibles_to_spawn_) {
-      if (IsObjectInSameQuarterAsProtagonist(randomSpawner)) {
+      if (IsObjectInSameQuarterAsProtagonist(random_spawner)) {
         continue;
       }
-      spawners_->child_nodes_[firstLevelNodeIndex]
-          ->child_nodes_[secondLevelNodeIndex]
+      spawners_->child_nodes_[first_level_node_index]
+          ->child_nodes_[second_level_node_index]
           ->spawner_->SpawnObject(game_object_);
       if (game_object_ != nullptr) {
         Spawner::number_of_spawned_objects_++;
@@ -357,15 +357,15 @@ void YasEngine::HandleSpawningCollectibles() {
         game_object_ = nullptr;
       }
     } else {
-      spawners_->child_nodes_[firstLevelNodeIndex]
-          ->child_nodes_[secondLevelNodeIndex]
+      spawners_->child_nodes_[first_level_node_index]
+          ->child_nodes_[second_level_node_index]
           ->spawner_->ResetTimes();
     }
   }
 }
 
 bool YasEngine::IsObjectInSameQuarterAsProtagonist(int random_spawner) {
-  int quarterSize =
+  int quarter_size =
       spawners_
           ->child_nodes_[spawners_positions_[random_spawner]->first_level_node]
           ->child_nodes_[spawners_positions_[random_spawner]->second_level_node]
@@ -377,28 +377,28 @@ bool YasEngine::IsObjectInSameQuarterAsProtagonist(int random_spawner) {
             ->child_nodes_[spawners_positions_[random_spawner]
                                ->second_level_node]
             ->position_->x_ +
-        quarterSize / 2)) &&
+        quarter_size / 2)) &&
       (player_->get_position().x_ >
        (spawners_
             ->child_nodes_[spawners_positions_[random_spawner]->first_level_node]
             ->child_nodes_[spawners_positions_[random_spawner]
                                ->second_level_node]
             ->position_->x_ -
-        quarterSize / 2)) &&
+        quarter_size / 2)) &&
       (player_->get_position().y_ <
        (spawners_
             ->child_nodes_[spawners_positions_[random_spawner]->first_level_node]
             ->child_nodes_[spawners_positions_[random_spawner]
                                ->second_level_node]
             ->position_->y_ +
-        quarterSize / 2)) &&
+        quarter_size / 2)) &&
       (player_->get_position().y_ >
        (spawners_
             ->child_nodes_[spawners_positions_[random_spawner]->first_level_node]
             ->child_nodes_[spawners_positions_[random_spawner]
                                ->second_level_node]
             ->position_->y_ -
-        quarterSize / 2)));
+        quarter_size / 2)));
 }
 
 void YasEngine::HandleProjectiles() {
@@ -426,12 +426,12 @@ void YasEngine::HandlePlayer() {
 
 void YasEngine::PreparePlayer() {
   srand(clock());
-  int sizeOfkGameplaySpace = static_cast<int>(window_dimensions_->x_ * 0.25F);
-  int x = Randomizer::DrawNumberClosedInterval(0, sizeOfkGameplaySpace) - 64;
-  int y = Randomizer::DrawNumberClosedInterval(0, sizeOfkGameplaySpace) - 64;
+  int size_Of_gameplay_space = static_cast<int>(window_dimensions_->x_ * 0.25F);
+  int x = Randomizer::DrawNumberClosedInterval(0, size_Of_gameplay_space) - 64;
+  int y = Randomizer::DrawNumberClosedInterval(0, size_Of_gameplay_space) - 64;
 
   player_ =
-      new Player(static_cast<float>((-sizeOfkGameplaySpace) + x), 0.0F + y);
+      new Player(static_cast<float>((-size_Of_gameplay_space) + x), 0.0F + y);
   player_->set_color(kYellow);
   player_->set_input(input_);
   player_->set_input(mouse_position_change_information_);
@@ -499,8 +499,8 @@ void YasEngine::Render(double& delta_time) {
       DrawButtons();
       break;
     case kGameplay:
-      RenderGameObjects(delta_time);
-      RenderOnViewports(delta_time);
+      RenderGameObjects();
+      RenderOnViewports();
       DrawFrame(delta_time);
       break;
     case kOutro:
@@ -555,7 +555,7 @@ void YasEngine::Render(double& delta_time) {
   SDL_RenderPresent(renderer_);
 }
 
-void YasEngine::RenderGameObjects(double& delta_time) {
+void YasEngine::RenderGameObjects() {
   for (auto object : objects_to_draw_) {
     if (object->is_alive_) {
       // TODO if gamestate == kGameplay
@@ -565,7 +565,7 @@ void YasEngine::RenderGameObjects(double& delta_time) {
   }
 }
 
-void YasEngine::RenderOnViewports(double& delta_time) {
+void YasEngine::RenderOnViewports() {
   if (tests_) {
     mathematics_graphs_surface_->DrawCartesianAxies();
   }
@@ -774,18 +774,16 @@ void YasEngine::HandleDestroingCollectibles(GameObject* game_object) {
 }
 
 void YasEngine::HandlingAssemblingGraphs(GameObject* game_object) {
-  int newValueOfPrimesPointsHarvested =
+  int new_value_of_primes_points_harvested =
       primes_points_harvested_ + game_object->number_of_vertices_;
-  int newValueOfFibbsPointsHarvested =
+  int new_value_of_fibbs_points_harvested =
       fibonacci_points_harvested_ + game_object->number_of_vertices_;
-  int newSinePointsHarvested =
+  int new_sine_points_harvested =
       sine_points_harvested_ + game_object->number_of_vertices_;
-  int newCosinePointsHarvested =
+  int new_cosine_points_harvested =
       cosine_points_harvested_ + game_object->number_of_vertices_;
 
-  int test1 = primes_points_harvested_;
-
-  if (level_ == 1 && newValueOfPrimesPointsHarvested >=
+  if (level_ == 1 && new_value_of_primes_points_harvested >=
                          prime_numbers_picture_->base_points_fuel_) {
     primes_points_harvested_ = prime_numbers_picture_->base_points_fuel_;
     previous_level_ = level_;
@@ -794,7 +792,7 @@ void YasEngine::HandlingAssemblingGraphs(GameObject* game_object) {
     return;
   }
 
-  if (level_ == 2 && newValueOfFibbsPointsHarvested >=
+  if (level_ == 2 && new_value_of_fibbs_points_harvested >=
                          fibonaccie_picture_->base_points_fuel_) {
     fibonacci_points_harvested_ = fibonaccie_picture_->base_points_fuel_;
     previous_level_ = level_;
@@ -806,7 +804,7 @@ void YasEngine::HandlingAssemblingGraphs(GameObject* game_object) {
   int some = sine_points_harvested_;
 
   if (level_ == 3 &&
-      newSinePointsHarvested >= sine_picture_->base_points_fuel_) {
+      new_sine_points_harvested >= sine_picture_->base_points_fuel_) {
     sine_points_harvested_ = sine_picture_->base_points_fuel_;
     previous_level_ = level_;
     level_ = 4;
@@ -815,7 +813,7 @@ void YasEngine::HandlingAssemblingGraphs(GameObject* game_object) {
   }
 
   if (level_ == 4 &&
-      newCosinePointsHarvested >= cosine_picture_->base_points_fuel_) {
+      new_cosine_points_harvested >= cosine_picture_->base_points_fuel_) {
     cosine_points_harvested_ = cosine_picture_->base_points_fuel_;
     previous_level_ = level_;
     level_ = -1;
@@ -826,30 +824,30 @@ void YasEngine::HandlingAssemblingGraphs(GameObject* game_object) {
   switch (level_) {
     case 1:
 
-      if (newValueOfPrimesPointsHarvested <=
+      if (new_value_of_primes_points_harvested <=
           prime_numbers_picture_->base_points_fuel_) {
-        primes_points_harvested_ = newValueOfPrimesPointsHarvested;
+        primes_points_harvested_ = new_value_of_primes_points_harvested;
       }
       break;
     case 2:
 
-      if (newValueOfFibbsPointsHarvested <=
+      if (new_value_of_fibbs_points_harvested <=
           fibonaccie_picture_->base_points_fuel_) {
-        fibonacci_points_harvested_ = newValueOfFibbsPointsHarvested;
+        fibonacci_points_harvested_ = new_value_of_fibbs_points_harvested;
       }
 
       break;
     case 3:
 
-      if (newSinePointsHarvested <= sine_picture_->base_points_fuel_) {
-        sine_points_harvested_ = newSinePointsHarvested;
+      if (new_sine_points_harvested <= sine_picture_->base_points_fuel_) {
+        sine_points_harvested_ = new_sine_points_harvested;
       }
 
       break;
     case 4:
 
-      if (newCosinePointsHarvested <= cosine_picture_->base_points_fuel_) {
-        cosine_points_harvested_ = newCosinePointsHarvested;
+      if (new_cosine_points_harvested <= cosine_picture_->base_points_fuel_) {
+        cosine_points_harvested_ = new_cosine_points_harvested;
       }
 
       break;
@@ -858,25 +856,25 @@ void YasEngine::HandlingAssemblingGraphs(GameObject* game_object) {
 }
 
 void YasEngine::HandleCollectiblesWithWallsCollisions(GameObject* object) {
-  float leftWall = map_frame_.left_line_segment.point_0.x_;
-  float rightWall = map_frame_.right_line_segment.point_0.x_;
-  float topWall = map_frame_.top_line_segment.point_0.y_;
-  float bottomWall = map_frame_.bottom_line_segment.point_0.y_;
+  float left_wall = map_frame_.left_line_segment.point_0.x_;
+  float right_wall = map_frame_.right_line_segment.point_0.x_;
+  float top_wall = map_frame_.top_line_segment.point_0.y_;
+  float bottom_wall = map_frame_.bottom_line_segment.point_0.y_;
 
   if (object->i_am_ == GameObject::kCollectible) {
-    if (object->GetColliderLeftSide() < static_cast<int>(leftWall)) {
+    if (object->GetColliderLeftSide() < static_cast<int>(left_wall)) {
       BounceCollectibles(object, kLeft);
     }
 
-    if (object->GetColliderRightSide() > static_cast<int>(rightWall)) {
+    if (object->GetColliderRightSide() > static_cast<int>(right_wall)) {
       BounceCollectibles(object, kRight);
     }
 
-    if (object->GetColliderTopSide() < static_cast<int>(topWall)) {
+    if (object->GetColliderTopSide() < static_cast<int>(top_wall)) {
       BounceCollectibles(object, kTop);
     }
 
-    if (object->GetColliderBottomSide() > static_cast<int>(bottomWall)) {
+    if (object->GetColliderBottomSide() > static_cast<int>(bottom_wall)) {
       BounceCollectibles(object, kBottom);
     }
   }
@@ -909,27 +907,27 @@ GameObject* YasEngine::GetNotProtagonist(GameObject* game_object_0,
 }
 
 void YasEngine::HandleProtagonistWithWallsCollisions(GameObject* game_object) {
-  float leftWall = map_frame_.left_line_segment.point_0.x_;
-  float rightWall = map_frame_.right_line_segment.point_0.x_;
-  float topWall = map_frame_.top_line_segment.point_0.y_;
-  float bottomWall = map_frame_.bottom_line_segment.point_0.y_;
+  float left_wall = map_frame_.left_line_segment.point_0.x_;
+  float right_wall = map_frame_.right_line_segment.point_0.x_;
+  float top_wall = map_frame_.top_line_segment.point_0.y_;
+  float bottom_wall = map_frame_.bottom_line_segment.point_0.y_;
 
-  if (game_object->GetColliderLeftSide() < static_cast<int>(leftWall)) {
+  if (game_object->GetColliderLeftSide() < static_cast<int>(left_wall)) {
     MoveObjectToMapBoundries(game_object, kLeft);
     // BounceCollectibles(game_object, LEFT);
   }
 
-  if (game_object->GetColliderRightSide() > static_cast<int>(rightWall)) {
+  if (game_object->GetColliderRightSide() > static_cast<int>(right_wall)) {
     MoveObjectToMapBoundries(game_object, kRight);
     // BounceCollectibles(game_object, RIGHT);
   }
 
-  if (game_object->GetColliderTopSide() > static_cast<int>(topWall)) {
+  if (game_object->GetColliderTopSide() > static_cast<int>(top_wall)) {
     MoveObjectToMapBoundries(game_object, kTop);
     // BounceCollectibles(game_object, TOP);
   }
 
-  if (game_object->GetColliderBottomSide() < static_cast<int>(bottomWall)) {
+  if (game_object->GetColliderBottomSide() < static_cast<int>(bottom_wall)) {
     MoveObjectToMapBoundries(game_object, kBottom);
     // BounceCollectibles(game_object, BOTTOM);
   }
@@ -958,8 +956,8 @@ void YasEngine::BounceCollectibles(GameObject* game_object, Wall wall) {
       break;
   }
 
-  float dotProduct = Vector2D<float>::DotProduct(game_object->velocity_, normal);
-  Vector2D<float>::MultiplyByScalar(&normal, dotProduct * 2.0f);
+  float dot_product = Vector2D<float>::DotProduct(game_object->velocity_, normal);
+  Vector2D<float>::MultiplyByScalar(&normal, dot_product * 2.0f);
   Vector2D<float>::Substract(&game_object->velocity_, normal);
 
   // TO PREVENT COLLECTIBLE STUCK IN THE WALL
@@ -1043,11 +1041,11 @@ void YasEngine::PrepareSoundAndMusic() {
 void YasEngine::PrepareGameWorld() {
   // srand(clock());
 
-  int mainNodeX = -(window_dimensions_->x_ / 4);
-  int mainNodeY = 0;
+  int main_node_x = -(window_dimensions_->x_ / 4);
+  int main_node_y = 0;
 
-  std::cout << "Main node X: " << mainNodeX << "\n";
-  std::cout << "Main node Y: " << mainNodeY << "\n";
+  std::cout << "Main node X: " << main_node_x << "\n";
+  std::cout << "Main node Y: " << main_node_y << "\n";
 
   spawners_ = new Node(new Vector2D<int>(-(window_dimensions_->x_ / 4), 0),
                        window_dimensions_->x_ / 2, nullptr);
@@ -1064,11 +1062,6 @@ void YasEngine::PrepareGameWorld() {
       spawners_positions_.push_back(new NodeNumbersOnTwoProceedingLevels(i, j));
     }
   }
-
-  int drawnNumbers = 0;  // PL - wylosowane a nie narysowane w_ tym kontekscie
-  int iteration = 0;
-  bool drawn = false;  // PL - bylo wylosowane
-  NodeNumbersOnTwoProceedingLevels playerPosition;
 
   //                   H
   //    0         1         2          3
@@ -1113,8 +1106,6 @@ void YasEngine::PrepareGameWorld() {
           player_->get_position().y_ >
               (spawners_->child_nodes_[i]->child_nodes_[j]->position_->y_ -
                spawners_->child_nodes_[i]->child_nodes_[j]->size_ * 0.5)) {
-        playerPosition.first_level_node = i;
-        playerPosition.second_level_node = j;
         goto afterFor;
       }
     }
@@ -1208,7 +1199,7 @@ void YasEngine::PrepareSineDrawing() {
   // std::map < std::string, std::map<int, std::map<float, float>>>
   // pair_numbers_map_;
 
-  std::map<int, std::map<float, float>> numbekRedSines;
+  std::map<int, std::map<float, float>> numbek_red_sines;
 
   pair_numbers_map_.insert(
       std::pair<std::string, std::map<int, std::map<float, float>*>*>(

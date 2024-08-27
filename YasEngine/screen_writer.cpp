@@ -33,16 +33,16 @@ void ScreenWriter::Initialize(int character_width, int character_height,
                               const char* file_with_characters) {}
 
 void ScreenWriter::WriteNew(int x, int y, string text, int width, int height) {
-  SDL_Rect targetRect;
+  SDL_Rect target_rect;
   int pom_w = 0, pom_h = 0;
-  targetRect.x = x;
-  targetRect.y = y;
-  targetRect.w = width;
-  targetRect.h = height;
+  target_rect.x = x;
+  target_rect.y = y;
+  target_rect.w = width;
+  target_rect.h = height;
   for (int i = 0; i < static_cast<int>(text.size()); i++) {
     for (int j = 0; j < 63; j++) {
       if (text.at(i) == characters_table_[j]) {
-        targetRect.x = x + i * targetRect.w;
+        target_rect.x = x + i * target_rect.w;
       }
     }
   }

@@ -11,138 +11,126 @@ class Node {
   Node(Vector2D<int>* position, int size, Node* parent);
   Vector2D<int>* position_;
   int size_;
-  Node* parentNode_;
+  Node* parent_node_;
   Node* child_nodes_[4];
   Spawner* spawner_;
   bool is_player_on_this_quad_;
   void CreateSpanwer(const std::vector<int>& spawner_position_number);
 
   static void AddNodes(Node& parent_node) {
-    short factorX = 1;
-    short factorY = 1;
+    short factor_x = 1;
+    short factor_y = 1;
 
-    Vector2D<int>* childNodePosition;
-
-    int childNodePositionX = 0;
-    int childNodePositionY = 0;
     for (int i = 0; i < 4; i++) {
       switch (i) {
         case 0:
-          factorX = -1;
-          factorY = 1;
+          factor_x = -1;
+          factor_y = 1;
           ;
           break;
         case 1:
-          factorX = 1;
-          factorY = 1;
+          factor_x = 1;
+          factor_y = 1;
           ;
           break;
         case 2:
-          factorX = -1;
-          factorY = -1;
+          factor_x = -1;
+          factor_y = -1;
           ;
           break;
         case 3:
-          factorX = 1;
-          factorY = -1;
+          factor_x = 1;
+          factor_y = -1;
           ;
           break;
       }
 
-      int childNodeSize = static_cast<int>(parent_node.size_ * 0.5);
-      childNodePositionX = static_cast<int>(parent_node.position_->x_ +
-                                            (factorX * (childNodeSize * 0.5)));
-      childNodePositionY = static_cast<int>(parent_node.position_->y_ +
-                                            (factorY * (childNodeSize * 0.5)));
-      childNodePosition =
-          new Vector2D<int>(childNodePositionX, childNodePositionY);
+      int child_node_size = static_cast<int>(parent_node.size_ * 0.5);
+      int child_node_position_x = static_cast<int>(parent_node.position_->x_ +
+                                            (factor_x * (child_node_size * 0.5)));
+      int child_node_position_y = static_cast<int>(parent_node.position_->y_ +
+                                            (factor_y * (child_node_size * 0.5)));
+      Vector2D<int>* child_node_position =
+          new Vector2D<int>(child_node_position_x, child_node_position_y);
       parent_node.child_nodes_[i] =
-          new Node(childNodePosition, childNodeSize, &parent_node);
+          new Node(child_node_position, child_node_size, &parent_node);
 
     }  // end for
   }
 
   static std::vector<Vector2D<int>*> GenerateTestPositions() {
-    short factorX = 1;
-    short factorY = 1;
+    short factor_x = 1;
+    short factor_y = 1;
 
     std::vector<Vector2D<int>*> positions;
 
-    int zeroLevelQuadSize = 800;
-    int zeroLevelQuadPosX = -400;
-    int zeroLevelQuadPosY = 0;
-
-    int firstLevelQuadPositionX = 0;
-    int firstLevelQuadPositionY = 0;
-    int firstLevelQuadSize = 0;
-
-    int secondLevelQuadPositionX = 0;
-    int secondLevelQuadPositionY = 0;
-    int secondLevelQuadsize = 0;
+    int zero_level_quad_size = 800;
+    int zero_level_quad_pos_x = -400;
+    int zero_level_quad_pos_y = 0;
 
     for (int j = 0; j < 4; j++) {
       switch (j) {
         case 0:
-          factorX = -1;
-          factorY = 1;
+          factor_x = -1;
+          factor_y = 1;
           ;
           break;
         case 1:
-          factorX = 1;
-          factorY = 1;
+          factor_x = 1;
+          factor_y = 1;
           ;
           break;
         case 2:
-          factorX = -1;
-          factorY = -1;
+          factor_x = -1;
+          factor_y = -1;
           ;
           break;
         case 3:
-          factorX = 1;
-          factorY = -1;
+          factor_x = 1;
+          factor_y = -1;
           ;
           break;
       }
-      firstLevelQuadSize = static_cast<int>(zeroLevelQuadSize * 0.5);
-      firstLevelQuadPositionX = static_cast<int>(
-          zeroLevelQuadPosX + (factorX * (firstLevelQuadSize * 0.5)));
-      firstLevelQuadPositionY = static_cast<int>(
-          zeroLevelQuadPosY + (factorY * (firstLevelQuadSize * 0.5)));
+      int first_level_quad_size = static_cast<int>(zero_level_quad_size * 0.5);
+      int first_level_quad_position_x = static_cast<int>(
+          zero_level_quad_pos_x + (factor_x * (first_level_quad_size * 0.5)));
+      int first_level_quad_position_y = static_cast<int>(
+          zero_level_quad_pos_y + (factor_y * (first_level_quad_size * 0.5)));
 
       positions.push_back(
-          new Vector2D<int>(firstLevelQuadPositionX, firstLevelQuadPositionY));
+          new Vector2D<int>(first_level_quad_position_x, first_level_quad_position_y));
 
       for (int i = 0; i < 4; i++) {
         switch (i) {
           case 0:
-            factorX = -1;
-            factorY = 1;
+            factor_x = -1;
+            factor_y = 1;
             ;
             break;
           case 1:
-            factorX = 1;
-            factorY = 1;
+            factor_x = 1;
+            factor_y = 1;
             ;
             break;
           case 2:
-            factorX = -1;
-            factorY = -1;
+            factor_x = -1;
+            factor_y = -1;
             ;
             break;
           case 3:
-            factorX = 1;
-            factorY = -1;
+            factor_x = 1;
+            factor_y = -1;
             ;
             break;
         }
 
-        secondLevelQuadsize = static_cast<int>(firstLevelQuadSize * 0.5);
-        secondLevelQuadPositionX = static_cast<int>(
-            firstLevelQuadPositionX + (factorX * (0.5 * secondLevelQuadsize)));
-        secondLevelQuadPositionY = static_cast<int>(
-            firstLevelQuadPositionY + (factorY * (0.5 * secondLevelQuadsize)));
-        positions.push_back(new Vector2D<int>(secondLevelQuadPositionX,
-                                              secondLevelQuadPositionY));
+        int second_level_quadsize = static_cast<int>(first_level_quad_size * 0.5);
+        int second_level_quad_position_x = static_cast<int>(
+            first_level_quad_position_x + (factor_x * (0.5 * second_level_quadsize)));
+        int second_level_quad_position_y = static_cast<int>(
+            first_level_quad_position_y + (factor_y * (0.5 * second_level_quadsize)));
+        positions.push_back(new Vector2D<int>(second_level_quad_position_x,
+                                              second_level_quad_position_y));
       }  // end for
     }
     return positions;

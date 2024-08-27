@@ -7,7 +7,7 @@
 #include "yas_graphics_library.hpp"
 
 std::vector<int> GeneratePrimeNumbersLessThanN(int n) {
-  std::vector<int> primeNumbers;
+  std::vector<int> prime_numbers;
   std::map<int, bool> numbers;
 
   for (int i = 2; i <= n; i++) {
@@ -28,50 +28,50 @@ std::vector<int> GeneratePrimeNumbersLessThanN(int n) {
 
   for (unsigned int i = 2; i < numbers.size(); i++) {
     if (numbers.at(i)) {
-      primeNumbers.push_back(i);
+      prime_numbers.push_back(i);
     }
   }
-  return primeNumbers;
+  return prime_numbers;
 }
 
 std::map<float, float>* GenerateSineNumbers(int points_number) {
   float divider = static_cast<float>(points_number);
-  float maximumXvalue = 2.0F * kPi;
-  float step = (maximumXvalue / divider);
+  float maximum_x_value = 2.0F * kPi;
+  float step = (maximum_x_value / divider);
 
-  std::map<float, float>* sineMap = new std::map<float, float>();
+  std::map<float, float>* sine_map = new std::map<float, float>();
 
   for (int i = 0; i < points_number; i++) {
     float x = i * step;
     float y = sin(x);
-    sineMap->insert(std::pair<float, float>(x, y));
+    sine_map->insert(std::pair<float, float>(x, y));
   }
-  return sineMap;
+  return sine_map;
 }
 
-std::map<float, float>* GenerateCosineNumbers(int pointsNumber) {
-  float divider = static_cast<float>(pointsNumber);
-  float maximumXvalue = 2.0F * kPi;
-  float step = (maximumXvalue / divider);
-  std::map<float, float>* cosineMap = new std::map<float, float>();
-  for (int i = 0; i < pointsNumber; i++) {
+std::map<float, float>* GenerateCosineNumbers(int points_number) {
+  float divider = static_cast<float>(points_number);
+  float maximum_x_value = 2.0F * kPi;
+  float step = (maximum_x_value / divider);
+  std::map<float, float>* cosine_map = new std::map<float, float>();
+  for (int i = 0; i < points_number; i++) {
     float x = i * step;
     float y = cos(x);
-    cosineMap->insert(std::pair<float, float>(x, y));
+    cosine_map->insert(std::pair<float, float>(x, y));
   }
-  return cosineMap;
+  return cosine_map;
 }
 
 std::vector<int> GenerateNfibonacciNumbers(int n) {
-  std::vector<int> fibbonacciNumbers;
-  fibbonacciNumbers.push_back(1);
-  fibbonacciNumbers.push_back(1);
-  fibbonacciNumbers.push_back(2);
+  std::vector<int> fibonacci_numbers;
+  fibonacci_numbers.push_back(1);
+  fibonacci_numbers.push_back(1);
+  fibonacci_numbers.push_back(2);
   for (int i = 3; i < n; i++) {
-    int newFib = fibbonacciNumbers.at(i - 1) + fibbonacciNumbers.at(i - 2);
-    fibbonacciNumbers.push_back(newFib);
+    int newFib = fibonacci_numbers.at(i - 1) + fibonacci_numbers.at(i - 2);
+    fibonacci_numbers.push_back(newFib);
   }
-  return fibbonacciNumbers;
+  return fibonacci_numbers;
 }
 
 double DistanceBetweenPoints(const Vector2D<int>& vector_0,

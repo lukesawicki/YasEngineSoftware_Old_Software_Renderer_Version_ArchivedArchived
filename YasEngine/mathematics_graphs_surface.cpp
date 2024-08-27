@@ -18,11 +18,11 @@ MathematicsGraphsSurface::MathematicsGraphsSurface(
 MathematicsGraphsSurface::MathematicsGraphsSurface(
     Vector2D<int> position, int width, int height,
     const Vector4D<Uint8>& default_color) {
-  this->position_.x_ = position.x_;
-  this->position_.y_ = position.y_;
+  position_.x_ = position.x_;
+  position_.y_ = position.y_;
   view_port_sizes_.x_ = width;
   view_port_sizes_.y_ = height;
-  this->pixels_ =
+  pixels_ =
       new Uint8[view_port_sizes_.x_ * view_port_sizes_.y_ * kNumberOfColors];
   ClearColor(default_color);
 }
@@ -62,54 +62,54 @@ void MathematicsGraphsSurface::DrawPoint(int x, int y,
 void MathematicsGraphsSurface::DrawLine(const Vector2D<float>& point_0,
                                         const Vector2D<float>& point_1,
                                         const Vector4D<Uint8>& drawing_color) {
-  int x0 = static_cast<int>(point_0.x_);
-  int y0 = static_cast<int>(point_0.y_);
+  int x_0 = static_cast<int>(point_0.x_);
+  int y_0 = static_cast<int>(point_0.y_);
 
-  int originalPoint0X = static_cast<int>(point_0.x_);
-  int originalPoint0Y = static_cast<int>(point_0.y_);
+  int original_point_0_x = static_cast<int>(point_0.x_);
+  int original_point_0_y = static_cast<int>(point_0.y_);
 
-  int originalPoint1X = static_cast<int>(point_1.x_);
-  int originalPoint1Y = static_cast<int>(point_1.y_);
+  int original_point_1_x = static_cast<int>(point_1.x_);
+  int original_point_1_y = static_cast<int>(point_1.y_);
 
-  Vector2D<int> copyPoint0(static_cast<int>(point_0.x_),
+  Vector2D<int> copy_point_0(static_cast<int>(point_0.x_),
                            static_cast<int>(point_0.y_));
-  Vector2D<int> copyPoint1(static_cast<int>(point_1.x_),
+  Vector2D<int> copy_point_1(static_cast<int>(point_1.x_),
                            static_cast<int>(point_1.y_));
 
-  int deltaX = static_cast<int>(point_1.x_ - point_0.x_);
-  int deltaY = static_cast<int>(point_1.y_ - point_0.y_);
-  int cumulativeError = 0;
+  int delta_x = static_cast<int>(point_1.x_ - point_0.x_);
+  int delta_y = static_cast<int>(point_1.y_ - point_0.y_);
+  int cumulative_error = 0;
 
-  if (abs(deltaX) != abs(deltaY)) {
+  if (abs(delta_x) != abs(delta_y)) {
     // START GENTLE LINE IF
-    if (abs(deltaX) > abs(deltaY)) {
+    if (abs(delta_x) > abs(delta_y)) {
       // DELTAS CONDITION DX > DY
 
-      if (deltaX < 0) {
+      if (delta_x < 0) {
         // DELTA X < 0 CONDITION (IT MEANS WRONG ORDER)
 
-        originalPoint0X = static_cast<int>(point_1.x_);
-        originalPoint1X = static_cast<int>(point_0.x_);
+        original_point_0_x = static_cast<int>(point_1.x_);
+        original_point_1_x = static_cast<int>(point_0.x_);
 
         // switch x_ for drawing
-        x0 = static_cast<int>(point_1.x_);
-        y0 = static_cast<int>(point_1.y_);
+        x_0 = static_cast<int>(point_1.x_);
+        y_0 = static_cast<int>(point_1.y_);
 
         // NEGATIVE SLOPE)
-        if (deltaY > 0) {
+        if (delta_y > 0) {
           // && (DELTAS CONDITION DX > DY) && (DELTA X < 0 CONDITION) -> IT
           // MEANS OCTAN 3(NEGATIVE SLOPE, POINTS IN "WRONG ORDER")
-          deltaX = static_cast<int>(point_0.x_ - point_1.x_);
-          deltaY = static_cast<int>(point_0.y_ - point_1.y_);
-          for (int i = originalPoint0X; i <= originalPoint1X; i++) {
-            DrawPoint(x0, y0, drawing_color);
-            x0++;
-            if ((2 * (cumulativeError + deltaY)) > -deltaX) {
+          delta_x = static_cast<int>(point_0.x_ - point_1.x_);
+          delta_y = static_cast<int>(point_0.y_ - point_1.y_);
+          for (int i = original_point_0_x; i <= original_point_1_x; i++) {
+            DrawPoint(x_0, y_0, drawing_color);
+            x_0++;
+            if ((2 * (cumulative_error + delta_y)) > -delta_x) {
               // y_ stays the same
-              cumulativeError = cumulativeError + deltaY;
+              cumulative_error = cumulative_error + delta_y;
             } else {
-              y0--;
-              cumulativeError = cumulativeError + deltaY + deltaX;
+              y_0--;
+              cumulative_error = cumulative_error + delta_y + delta_x;
             }
           }
         } else {
@@ -117,18 +117,18 @@ void MathematicsGraphsSurface::DrawLine(const Vector2D<float>& point_0,
           // (DELTA X < 0 CONDITION) -> IT MEANS OCTAN 4(POSITIVE SLOPE, POINTS
           // IN "WRONG ORDER")
 
-          if (deltaX != 0) {
-            deltaX = static_cast<int>(point_0.x_ - point_1.x_);
-            deltaY = static_cast<int>(point_0.y_ - point_1.y_);
-            for (int i = originalPoint0X; i <= originalPoint1X; i++) {
-              DrawPoint(x0, y0, drawing_color);
-              x0++;
-              if ((2 * (cumulativeError + deltaY)) < deltaX) {
+          if (delta_x != 0) {
+            delta_x = static_cast<int>(point_0.x_ - point_1.x_);
+            delta_y = static_cast<int>(point_0.y_ - point_1.y_);
+            for (int i = original_point_0_x; i <= original_point_1_x; i++) {
+              DrawPoint(x_0, y_0, drawing_color);
+              x_0++;
+              if ((2 * (cumulative_error + delta_y)) < delta_x) {
                 // y_ stays the same
-                cumulativeError = cumulativeError + deltaY;
+                cumulative_error = cumulative_error + delta_y;
               } else {
-                y0++;
-                cumulativeError = cumulativeError + deltaY - deltaX;
+                y_0++;
+                cumulative_error = cumulative_error + delta_y - delta_x;
               }
             }
           }
@@ -136,178 +136,178 @@ void MathematicsGraphsSurface::DrawLine(const Vector2D<float>& point_0,
       } else {
         // DELTA X > 0 CONDITION  (IT MEANS CORRECT ORDER)
 
-        if (deltaX != 0) {
+        if (delta_x != 0) {
           // POSITIVE SLOPE
-          if (deltaY > 0) {
+          if (delta_y > 0) {
             // && (DELTAS CONDITION DX > DY) && (DELTA X > 0 CONDITION) -> IT
             // MEANS OCTAN 0(POSITIVE SLOPE, POINTS IN "CORRECT ORDER")
 
-            for (int i = originalPoint0X; i <= originalPoint1X; i++) {
-              DrawPoint(x0, y0, drawing_color);
-              x0++;
-              if ((2 * (cumulativeError + deltaY)) < deltaX) {
+            for (int i = original_point_0_x; i <= original_point_1_x; i++) {
+              DrawPoint(x_0, y_0, drawing_color);
+              x_0++;
+              if ((2 * (cumulative_error + delta_y)) < delta_x) {
                 // y_ stays the same
-                cumulativeError = cumulativeError + deltaY;
+                cumulative_error = cumulative_error + delta_y;
               } else {
-                y0++;
-                cumulativeError = cumulativeError + deltaY - deltaX;
+                y_0++;
+                cumulative_error = cumulative_error + delta_y - delta_x;
               }
             }
           } else {
             // NEGATIVE SLOPE // (deltaY < 0) && (DELTAS CONDITION DX > DY) &&
             // (DELTA X > 0 CONDITION) -> IT MEANS OCTAN 7(NEGATIVE SLOPE,
             // POINTS IN "CORRECT ORDER")
-            for (int i = originalPoint0X; i <= originalPoint1X; i++) {
-              DrawPoint(x0, y0, drawing_color);
-              x0++;
-              if ((2 * (cumulativeError + deltaY)) > -deltaX) {
+            for (int i = original_point_0_x; i <= original_point_1_x; i++) {
+              DrawPoint(x_0, y_0, drawing_color);
+              x_0++;
+              if ((2 * (cumulative_error + delta_y)) > -delta_x) {
                 // y_ stays the same
-                cumulativeError = cumulativeError + deltaY;
+                cumulative_error = cumulative_error + delta_y;
               } else {
-                y0--;
-                cumulativeError = cumulativeError + deltaY + deltaX;
+                y_0--;
+                cumulative_error = cumulative_error + delta_y + delta_x;
               }
             }
           }
         } else {
           // if (deltaX == 0) // It is straight line where x_ is constant. So
           // draw simple line from y0 to y1
-          if (copyPoint0.y_ > copyPoint1.y_) {
-            SwapVectors(copyPoint0, copyPoint1);
+          if (copy_point_0.y_ > copy_point_1.y_) {
+            SwapVectors(copy_point_0, copy_point_1);
           }
-          for (int i = copyPoint0.y_; i <= copyPoint1.y_; i++) {
-            DrawPoint(copyPoint0.x_, i, drawing_color);
+          for (int i = copy_point_0.y_; i <= copy_point_1.y_; i++) {
+            DrawPoint(copy_point_0.x_, i, drawing_color);
           }
         }
       }
     }  // END GENTLE LINE IF
     else {
       // abs(deltaX) < abs(deltaY) // DELTAS CONDITION DX < DY  // STEEP SLOPE
-      if (deltaY < 0) {
+      if (delta_y < 0) {
         // DELTA Y < 0 CONDITION (IT MEANS WRONG ORDER (BECAUSE IN HERE Y IS
         // LEADING AXIES)
-        originalPoint0Y = static_cast<int>(point_1.y_);
-        originalPoint1Y = static_cast<int>(point_0.y_);
+        original_point_0_y = static_cast<int>(point_1.y_);
+        original_point_1_y = static_cast<int>(point_0.y_);
 
         // switch x_ for drawing
-        x0 = static_cast<int>(point_1.x_);
-        y0 = static_cast<int>(point_1.y_);
+        x_0 = static_cast<int>(point_1.x_);
+        y_0 = static_cast<int>(point_1.y_);
 
         // NEGATIVE SLOPE
-        if (deltaX > 0) {
+        if (delta_x > 0) {
           // && (DELTAS CONDITION DX < DY) && (DELTA Y < 0 CONDITION) IT MEANS
           // OCTAN 6(NEGATIVE SLOPE, POINTS IN "WRONG ORDER")
-          deltaX = static_cast<int>(point_0.x_ - point_1.x_);
-          deltaY = static_cast<int>(point_0.y_ - point_1.y_);
-          for (int i = originalPoint0Y; i <= originalPoint1Y; i++) {
-            DrawPoint(x0, y0, drawing_color);
-            y0++;
-            if ((2 * (cumulativeError + deltaX)) > -deltaY) {
+          delta_x = static_cast<int>(point_0.x_ - point_1.x_);
+          delta_y = static_cast<int>(point_0.y_ - point_1.y_);
+          for (int i = original_point_0_y; i <= original_point_1_y; i++) {
+            DrawPoint(x_0, y_0, drawing_color);
+            y_0++;
+            if ((2 * (cumulative_error + delta_x)) > -delta_y) {
               // y_ stays the same
-              cumulativeError = cumulativeError + deltaX;
+              cumulative_error = cumulative_error + delta_x;
             } else {
-              x0--;
-              cumulativeError = cumulativeError + deltaX + deltaY;
+              x_0--;
+              cumulative_error = cumulative_error + delta_x + delta_y;
             }
           }
         } else {
           // POSITIVE SLOPE  // deltaX < 0 && (DELTAS CONDITION DX < DY) &&
           // (DELTA Y < 0 CONDITION) IT MEANS OCTAN 5(POSITIVE SLOPE, POINTS IN
           // "WRONG ORDER")
-          deltaX = static_cast<int>(point_0.x_ - point_1.x_);
-          deltaY = static_cast<int>(point_0.y_ - point_1.y_);
-          for (int i = originalPoint0Y; i <= originalPoint1Y; i++) {
-            DrawPoint(x0, y0, drawing_color);
-            y0++;
-            if ((2 * (cumulativeError + deltaX)) < deltaY) {
+          delta_x = static_cast<int>(point_0.x_ - point_1.x_);
+          delta_y = static_cast<int>(point_0.y_ - point_1.y_);
+          for (int i = original_point_0_y; i <= original_point_1_y; i++) {
+            DrawPoint(x_0, y_0, drawing_color);
+            y_0++;
+            if ((2 * (cumulative_error + delta_x)) < delta_y) {
               // y_ stays the same
-              cumulativeError = cumulativeError + deltaX;
+              cumulative_error = cumulative_error + delta_x;
             } else {
-              x0++;
-              cumulativeError = cumulativeError + deltaX - deltaY;
+              x_0++;
+              cumulative_error = cumulative_error + delta_x - delta_y;
             }
           }
         }
       } else {
         // DELTA Y > 0 CONDITION  (IT MEANS CORRECT ORDER)
-        if (deltaY != 0) {
+        if (delta_y != 0) {
           // POSITIVE SLOPE
-          if (deltaX > 0) {
+          if (delta_x > 0) {
             // && (DELTAS CONDITION DX < DY) && (DELTA Y > 0 CONDITION) -> IT
             // MEANS OCTAN 1(POSITIVE SLOPE, POINT IN "CORRECT ORDER")
 
-            for (int i = originalPoint0Y; i <= originalPoint1Y; i++) {
-              DrawPoint(x0, y0, drawing_color);
-              y0++;
-              if ((2 * (cumulativeError + deltaX)) < deltaY) {
+            for (int i = original_point_0_y; i <= original_point_1_y; i++) {
+              DrawPoint(x_0, y_0, drawing_color);
+              y_0++;
+              if ((2 * (cumulative_error + delta_x)) < delta_y) {
                 // y_ stays the same
-                cumulativeError = cumulativeError + deltaX;
+                cumulative_error = cumulative_error + delta_x;
               } else {
-                x0++;
-                cumulativeError = cumulativeError + deltaX - deltaY;
+                x_0++;
+                cumulative_error = cumulative_error + delta_x - delta_y;
               }
             }
           } else {
             // NEGATIVE SLOPE // (deltaX < 0) && (DELTAS CONDITION DX < DY) &&
             // (DELTA Y > 0 CONDITION) -> IT MEANS OCTAN 2(NEGATIVE SLOPE POINTS
             // IN "CORRECT ORDER")
-            for (int i = originalPoint0Y; i <= originalPoint1Y; i++) {
-              DrawPoint(x0, y0, drawing_color);
-              y0++;
-              if ((2 * (cumulativeError + deltaX)) > -deltaY) {
+            for (int i = original_point_0_y; i <= original_point_1_y; i++) {
+              DrawPoint(x_0, y_0, drawing_color);
+              y_0++;
+              if ((2 * (cumulative_error + delta_x)) > -delta_y) {
                 // y_ stays the same
-                cumulativeError = cumulativeError + deltaX;
+                cumulative_error = cumulative_error + delta_x;
               } else {
-                x0--;
-                cumulativeError = cumulativeError + deltaX + deltaY;
+                x_0--;
+                cumulative_error = cumulative_error + delta_x + delta_y;
               }
             }
           }
         } else {
           // deltaY == 0 It is straight line where y_ is constant. So draw
           // simple line from x0 to x1
-          if (copyPoint0.x_ > copyPoint1.x_) {
-            SwapVectors(copyPoint0, copyPoint1);
+          if (copy_point_0.x_ > copy_point_1.x_) {
+            SwapVectors(copy_point_0, copy_point_1);
           }
-          for (int i = copyPoint0.x_; i <= copyPoint1.x_; i++) {
-            DrawPoint(i, copyPoint0.y_, drawing_color);
+          for (int i = copy_point_0.x_; i <= copy_point_1.x_; i++) {
+            DrawPoint(i, copy_point_0.y_, drawing_color);
           }
         }
       }
     }
   } else {
     // deltaX is equals deltaY
-    if (deltaX == 0 && deltaY == 0) {
+    if (delta_x == 0 && delta_y == 0) {
       // if both are equals 0 just draw point.
 
-      DrawPoint(x0, y0, drawing_color);
+      DrawPoint(x_0, y_0, drawing_color);
     } else {
-      int absDeltaX = abs(copyPoint1.x_ - copyPoint0.x_);
+      int absolute_value_of_delta_x = abs(copy_point_1.x_ - copy_point_0.x_);
       // Positive line
       int i = 0;
-      if (copyPoint0.x_ < copyPoint1.x_ && copyPoint0.y_ < copyPoint1.y_) {
-        while (i < absDeltaX) {
-          DrawPoint(copyPoint0.x_ + i, copyPoint0.y_ + i, drawing_color);
+      if (copy_point_0.x_ < copy_point_1.x_ && copy_point_0.y_ < copy_point_1.y_) {
+        while (i < absolute_value_of_delta_x) {
+          DrawPoint(copy_point_0.x_ + i, copy_point_0.y_ + i, drawing_color);
           i++;
         }
       }
-      if (copyPoint1.x_ < copyPoint0.x_ && copyPoint0.y_ > copyPoint1.y_) {
-        while (i < absDeltaX) {
-          DrawPoint(copyPoint1.x_ + i, copyPoint1.y_ + i, drawing_color);
+      if (copy_point_1.x_ < copy_point_0.x_ && copy_point_0.y_ > copy_point_1.y_) {
+        while (i < absolute_value_of_delta_x) {
+          DrawPoint(copy_point_1.x_ + i, copy_point_1.y_ + i, drawing_color);
           i++;
         }
       }
 
       // Negative line
-      if (copyPoint0.x_ < copyPoint1.x_ && copyPoint0.y_ > copyPoint1.y_) {
-        while (i < absDeltaX) {
-          DrawPoint(copyPoint0.x_ + i, copyPoint0.y_ - i, drawing_color);
+      if (copy_point_0.x_ < copy_point_1.x_ && copy_point_0.y_ > copy_point_1.y_) {
+        while (i < absolute_value_of_delta_x) {
+          DrawPoint(copy_point_0.x_ + i, copy_point_0.y_ - i, drawing_color);
           i++;
         }
       }
-      if (copyPoint1.x_ < copyPoint0.x_ && copyPoint1.y_ > copyPoint0.y_) {
-        while (i < absDeltaX) {
-          DrawPoint(copyPoint1.x_ + i, copyPoint1.y_ - i, drawing_color);
+      if (copy_point_1.x_ < copy_point_0.x_ && copy_point_1.y_ > copy_point_0.y_) {
+        while (i < absolute_value_of_delta_x) {
+          DrawPoint(copy_point_1.x_ + i, copy_point_1.y_ - i, drawing_color);
           i++;
         }
       }
@@ -339,43 +339,43 @@ void MathematicsGraphsSurface::DrawPolygon(GameObject* polygon) {}
 
 void MathematicsGraphsSurface::CopyPixelsInToPIxelTable(
     PixelsTable& pixels_table) {
-  int posX = position_.x_;
-  int posY = position_.y_;
+  int position_x = position_.x_;
+  int position_y = position_.y_;
 
-  pixels_table.CartesianPositionToWindow(posX, posY);
+  pixels_table.CartesianPositionToWindow(position_x, position_y);
 
-  int startPoint =
-      kNumberOfColors * (posY * pixels_table.window_dimensions_.x_ + posX);
-  int viewportIndex = 0;
+  int start_point =
+      kNumberOfColors * (position_y * pixels_table.window_dimensions_.x_ + position_x);
+  int viewport_index = 0;
   for (int i = 0; i < view_port_sizes_.y_; i++) {
     for (int j = 0; j < view_port_sizes_.x_; j++) {
       pixels_table.pixels_[kNumberOfColors *
-                              ((posY + i) * pixels_table.window_dimensions_.x_ +
-                               posX + j) +
+                              ((position_y + i) * pixels_table.window_dimensions_.x_ +
+                               position_x + j) +
                           kRedPosition] =
           pixels_[kNumberOfColors * (i * view_port_sizes_.x_ + j) +
                   kRedPosition];
       pixels_table.pixels_[kNumberOfColors *
-                              ((posY + i) * pixels_table.window_dimensions_.x_ +
-                               posX + j) +
+                              ((position_y + i) * pixels_table.window_dimensions_.x_ +
+                               position_x + j) +
                           kGreenPosition] =
           pixels_[kNumberOfColors * (i * view_port_sizes_.x_ + j) +
                   kGreenPosition];
       pixels_table.pixels_[kNumberOfColors *
-                              ((posY + i) * pixels_table.window_dimensions_.x_ +
-                               posX + j) +
+                              ((position_y + i) * pixels_table.window_dimensions_.x_ +
+                               position_x + j) +
                           kBluePosition] =
           pixels_[kNumberOfColors * (i * view_port_sizes_.x_ + j) +
                   kBluePosition];
       pixels_table.pixels_[kNumberOfColors *
-                              ((posY + i) * pixels_table.window_dimensions_.x_ +
-                               posX + j) +
+                              ((position_y + i) * pixels_table.window_dimensions_.x_ +
+                               position_x + j) +
                           kAlphaPosition] =
           pixels_[kNumberOfColors * (i * view_port_sizes_.x_ + j) +
                   kAlphaPosition];
-      viewportIndex = viewportIndex + 1;
+      viewport_index = viewport_index + 1;
     }
-    startPoint = startPoint + view_port_sizes_.x_;
+    start_point = start_point + view_port_sizes_.x_;
   }
 }
 
