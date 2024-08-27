@@ -21,4 +21,4 @@ class FontObject : public GameObject {
   Vector2D<float> velocity_;
 };
 
-#endif  // YASENGINESOFTWARE_FONTOBJECT_HPP
+#endif

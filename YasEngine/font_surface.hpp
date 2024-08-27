@@ -49,4 +49,4 @@ class FontSurface : public ViewPort {
   void DrawCartesianAxies();
 };
 
-#endif  // YASENGINESOFTWARE_FONTSURFACE_HPP
+#endif

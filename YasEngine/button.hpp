@@ -18,7 +18,7 @@ class Button : public GameObject {
 
   ButtonId button_id_;
 
-  Button(const ButtonId& buttonId, std::string text,
+  Button(const ButtonId& button_id, std::string text,
          const Vector4D<Uint8>& color);
   ~Button();
 
@@ -35,4 +35,4 @@ class Button : public GameObject {
   }
 };
 
-#endif  // BUTTON_HPP
+#endif

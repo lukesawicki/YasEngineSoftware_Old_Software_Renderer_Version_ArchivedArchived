@@ -16,9 +16,9 @@ void Button::RegeneratePolygon() { Generate(); }
 
 void Button::Move(float delta_time) {}
 
-Button::Button(const ButtonId& buttonId, std::string text,
+Button::Button(const ButtonId& button_id, std::string text,
                const Vector4D<Uint8>& color) {
-  this->button_id_ = buttonId;
+  this->button_id_ = button_id;
   this->text_.assign(text);
   this->button_text_width_ =
       ScreenWriter::kfont_width * static_cast<int>(text.size());

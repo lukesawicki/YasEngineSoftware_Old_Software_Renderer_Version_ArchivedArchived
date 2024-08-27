@@ -39,7 +39,6 @@ void FontSurface::DrawPoint(int x, int y, const Vector4D<Uint8>& drawing_color) 
   if (x >= 0 && x < view_port_sizes_.x_ && y >= 0 && y < view_port_sizes_.y_) {
     pixels_[kNumberOfColors * (y * view_port_sizes_.x_ + x) + kRedPosition] =
         drawing_color.x_;
-    // window_dimensions_->x_ <- WINDOW WIDTH
     pixels_[kNumberOfColors * (y * view_port_sizes_.x_ + x) + kGreenPosition] =
         drawing_color.y_;
     pixels_[kNumberOfColors * (y * view_port_sizes_.x_ + x) + kBluePosition] =

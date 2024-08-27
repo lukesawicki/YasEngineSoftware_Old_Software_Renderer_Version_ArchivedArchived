@@ -43,4 +43,4 @@ class ScreenWriter final {
   void WriteNew(int x, int y, std::string text, int width, int height);
 };
 
-#endif  // SCREENWRITER_HPP
+#endif

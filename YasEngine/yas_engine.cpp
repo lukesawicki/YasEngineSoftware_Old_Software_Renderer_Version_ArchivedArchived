@@ -1018,7 +1018,6 @@ void YasEngine::PrepareSoundAndMusic() {
   }
 
   Mix_VolumeMusic(music_volume_);
-  // Mix_VolumeMusic
 
   shoot_sound_ = Mix_LoadWAV("shoot.wav");
   Mix_VolumeChunk(shoot_sound_, shoot_volume_);
@@ -1039,7 +1038,7 @@ void YasEngine::PrepareSoundAndMusic() {
 }
 
 void YasEngine::PrepareGameWorld() {
-  // srand(clock());
+  srand(clock());
 
   int main_node_x = -(window_dimensions_->x_ / 4);
   int main_node_y = 0;
