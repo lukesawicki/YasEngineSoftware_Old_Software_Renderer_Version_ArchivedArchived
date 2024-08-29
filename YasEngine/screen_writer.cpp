@@ -51,7 +51,22 @@ ScreenWriter::ScreenWriter(const Vector2D<int>* window_dimensions) {
   }
 
   std::sort(top.begin(), top.end());
-  std::sort(bottom.begin(), bottom.end());
+
+  vertical_top_positions_ = new int[top.size()];
+
+  for (int i = 0; i < top.size(); i++) {
+    vertical_top_positions_[i] = top.at(i);
+    std::cout << top[i] << "\n";
+  }
+
+  std::sort(bottom.begin(), bottom.end(), std::greater<int>());
+
+  vertical_bottom_positions_ = new int[bottom.size()];
+
+  for (int i = 0; i < bottom.size(); i++) {
+    vertical_bottom_positions_[i] = bottom.at(i);
+    std::cout << bottom[i] << "\n";
+  }
 
   int step;
   step = 65;

@@ -150,6 +150,13 @@ void YasEngine::PrepareBasicSettings() {
 
   SDL_Init(SDL_INIT_TIMER | SDL_INIT_EVENTS | SDL_INIT_AUDIO | SDL_INIT_VIDEO);
 
+      // Get the number of displays available
+  SDL_DisplayID display_id = SDL_GetPrimaryDisplay();
+  const SDL_DisplayMode* display_mode = SDL_GetCurrentDisplayMode(display_id);
+
+  window_width_ = display_mode->w;
+  window_height_ = display_mode->w / 2;
+
   window_dimensions_ = new Vector2D<int>(window_width_, window_height_);
   Uint32 windowFlags = SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_BORDERLESS |
     SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_RESIZABLE |
@@ -493,11 +500,14 @@ void YasEngine::Render(double& delta_time) {
 
   switch (game_state_) {
   case kIntro:
-    writer_->Write(-1 * ((line_22.size() * writer_->kfont_width_) / 2), 200,
+      writer_->Write(-1 * ((line_22.size() * writer_->kfont_width_) / 2),
+                     writer_->vertical_top_positions_[1],
                    line_22, kLightBlue, *pixels_table_);
-    writer_->Write(-1 * ((line_23.size() * writer_->kfont_width_) / 2), 100,
+    writer_->Write(-1 * ((line_23.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_top_positions_[0],
                    line_23, kRed, *pixels_table_);
-    writer_->Write(-1 * ((line_24.size() * writer_->kfont_width_) / 2), 0,
+      writer_->Write(-1 * ((line_24.size() * writer_->kfont_width_) / 2),
+                     writer_->vertical_bottom_positions_[0],
                    line_24, kYellow, *pixels_table_);
     break;
   case kMainMenuRestart:
@@ -509,35 +519,50 @@ void YasEngine::Render(double& delta_time) {
     DrawFrame(delta_time);
     break;
   case kOutro:
-    writer_->Write(-1 * ((line_25.size() * writer_->kfont_width_) / 2), 350,
+    writer_->Write(-1 * ((line_25.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_top_positions_[7],
                    line_25, kLightBlue, *pixels_table_);
-    writer_->Write(-1 * ((line_26.size() * writer_->kfont_width_) / 2), 325,
+    writer_->Write(-1 * ((line_26.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_top_positions_[6],
                    line_26, kPurple, *pixels_table_);
-    writer_->Write(-1 * ((line_27.size() * writer_->kfont_width_) / 2), 275,
+    writer_->Write(-1 * ((line_27.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_top_positions_[5],
                    line_27, kLightBlue, *pixels_table_);
-    writer_->Write(-1 * ((line_28.size() * writer_->kfont_width_) / 2), 250,
+    writer_->Write(-1 * ((line_28.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_top_positions_[4],
                    line_28, kPurple, *pixels_table_);
-    writer_->Write(-1 * ((line_29.size() * writer_->kfont_width_) / 2), 200,
+    writer_->Write(-1 * ((line_29.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_top_positions_[3],
                    line_29, kLightBlue, *pixels_table_);
-    writer_->Write(-1 * ((line_30.size() * writer_->kfont_width_) / 2), 175,
+    writer_->Write(-1 * ((line_30.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_top_positions_[2],
                    line_30, kPurple, *pixels_table_);
-    writer_->Write(-1 * ((line_31.size() * writer_->kfont_width_) / 2), 125,
+    writer_->Write(-1 * ((line_31.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_top_positions_[1],
                    line_31, kGreen, *pixels_table_);
-    writer_->Write(-1 * ((line_32.size() * writer_->kfont_width_) / 2), 75,
+    writer_->Write(-1 * ((line_32.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_top_positions_[0],
                    line_32, kYellow, *pixels_table_);
-    writer_->Write(-1 * ((line_33.size() * writer_->kfont_width_) / 2), 50,
+    writer_->Write(-1 * ((line_33.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_bottom_positions_[0],
                    line_33, kYellow, *pixels_table_);
-    writer_->Write(-1 * ((line_34.size() * writer_->kfont_width_) / 2), 0,
+    writer_->Write(-1 * ((line_34.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_bottom_positions_[1],
                    line_34, kBlue, *pixels_table_);
-    writer_->Write(-1 * ((line_35.size() * writer_->kfont_width_) / 2), -25,
+    writer_->Write(-1 * ((line_35.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_bottom_positions_[2],
                    line_35, kYellow, *pixels_table_);
-    writer_->Write(-1 * ((line_36.size() * writer_->kfont_width_) / 2), -75,
+    writer_->Write(-1 * ((line_36.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_bottom_positions_[3],
                    line_36, kBlue, *pixels_table_);
-    writer_->Write(-1 * ((line_37.size() * writer_->kfont_width_) / 2), -100,
+    writer_->Write(-1 * ((line_37.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_bottom_positions_[4],
                    line_37, kYellow, *pixels_table_);
-    writer_->Write(-1 * ((line_38.size() * writer_->kfont_width_) / 2), -150,
+    writer_->Write(-1 * ((line_38.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_bottom_positions_[5],
                    line_38, kPolygon, *pixels_table_);
-    writer_->Write(-1 * ((line_39.size() * writer_->kfont_width_) / 2), -200,
+    writer_->Write(-1 * ((line_39.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_bottom_positions_[6],
                    line_39, kXportal, *pixels_table_);
 
     break;
@@ -608,37 +633,54 @@ void YasEngine::RenderLevelChange() {
   switch (previous_level_) {
   case 1:
 
-    writer_->Write(-1 * ((line_1.size() * writer_->kfont_width_) / 2), 200, line_1, kLightBlue,
+    writer_->Write(-1 * ((line_1.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_top_positions_[1], line_1, kLightBlue,
                    *pixels_table_);
-    writer_->Write(-1 * ((line_2.size() * writer_->kfont_width_) / 2), 100, line_2, kBlue,
+    writer_->Write(-1 * ((line_2.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_top_positions_[0], line_2, kBlue,
                    *pixels_table_);
-    writer_->Write(-1 * ((line_3.size() * writer_->kfont_width_) / 2), 0, line_3, kGreen, *pixels_table_);
+    writer_->Write(-1 * ((line_3.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_bottom_positions_[0], line_3, kGreen,
+                   *pixels_table_);
     break;
   case 2:
 
-    writer_->Write(-1 * ((line_4.size() * writer_->kfont_width_) / 2), 200, line_4, kLightBlue,
+    writer_->Write(-1 * ((line_4.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_top_positions_[1], line_4, kLightBlue,
                    *pixels_table_);
-    writer_->Write(-1 * ((line_5.size() * writer_->kfont_width_) / 2), 100, line_5, kBlue,
+    writer_->Write(-1 * ((line_5.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_top_positions_[0], line_5, kBlue,
                    *pixels_table_);
-    writer_->Write(-1 * ((line_6.size() * writer_->kfont_width_) / 2), 0, line_6, kGreen,
+    writer_->Write(-1 * ((line_6.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_bottom_positions_[0], line_6, kGreen,
                    *pixels_table_);
     break;
   case 3:
 
-    writer_->Write(-1 * ((line_7.size() * writer_->kfont_width_) / 2), 200, line_7, kLightBlue,
+    writer_->Write(-1 * ((line_7.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_top_positions_[1], line_7, kLightBlue,
                    *pixels_table_);
-    writer_->Write(-1 * ((line_8.size() * writer_->kfont_width_) / 2), 100, line_8, kBlue,
+    writer_->Write(-1 * ((line_8.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_top_positions_[0], line_8, kBlue,
                    *pixels_table_);
-    writer_->Write(-1 * ((line_9.size() * writer_->kfont_width_) / 2), 0, line_9, kGreen, *pixels_table_);
+    writer_->Write(-1 * ((line_9.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_bottom_positions_[0], line_9, kGreen,
+                   *pixels_table_);
     break;
   case 4:
 
-    writer_->Write(-1 * ((line_10.size() * writer_->kfont_width_) / 2), 200, line_10, kLightBlue,
+    writer_->Write(-1 * ((line_10.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_top_positions_[1], line_10, kLightBlue,
                    *pixels_table_);
-    writer_->Write(-1 * ((line_11.size() * writer_->kfont_width_) / 2), 100, line_11, kBlue,
+    writer_->Write(-1 * ((line_11.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_top_positions_[0], line_11, kBlue,
                    *pixels_table_);
-    writer_->Write(-1 * ((line_12.size() * writer_->kfont_width_) / 2), 0, line_12, kGreen, *pixels_table_);
-    writer_->Write(-1 * ((line_13.size() * writer_->kfont_width_) / 2), -25, line_13, kYellow, *pixels_table_);
+    writer_->Write(-1 * ((line_12.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_bottom_positions_[0], line_12, kGreen,
+                   *pixels_table_);
+    writer_->Write(-1 * ((line_13.size() * writer_->kfont_width_) / 2),
+                   writer_->vertical_bottom_positions_[1], line_13, kYellow,
+                   *pixels_table_);
     break;
   default: ;
   }
@@ -647,23 +689,31 @@ void YasEngine::RenderLevelChange() {
 void YasEngine::RenderWonScreen() {
   //  8 wierszy
 
-  writer_->Write(-1 * ((line_14.size() * writer_->kfont_width_) / 2), 0 + 4 + 17 + 4 + 17 + 4 + 17, line_14, kLightBlue,
+  writer_->Write(-1 * ((line_14.size() * writer_->kfont_width_) / 2),
+                 writer_->vertical_top_positions_[3], line_14, kLightBlue,
                  *pixels_table_);
-  writer_->Write(-1 * ((line_15.size() * writer_->kfont_width_) / 2), 0 + 4 + 17 + 4 + 17, line_15,
+  writer_->Write(-1 * ((line_15.size() * writer_->kfont_width_) / 2),
+                 writer_->vertical_top_positions_[2], line_15,
                  kYellow,
                  *pixels_table_);
-  writer_->Write(-1 * ((line_16.size() * writer_->kfont_width_) / 2), 0 + 4 + 17, line_16,
+  writer_->Write(-1 * ((line_16.size() * writer_->kfont_width_) / 2),
+                 writer_->vertical_top_positions_[1], line_16,
                  kPurple,
                  *pixels_table_);
-  writer_->Write(-1 * ((line_17.size() * writer_->kfont_width_) / 2), 0, line_17, kPurple,
+  writer_->Write(-1 * ((line_17.size() * writer_->kfont_width_) / 2),
+                 writer_->vertical_top_positions_[0], line_17, kPurple,
                  *pixels_table_);
-  writer_->Write(-1 * ((line_18.size() * writer_->kfont_width_) / 2), 0 - 4 - 17, line_18,
+  writer_->Write(-1 * ((line_18.size() * writer_->kfont_width_) / 2),
+                 writer_->vertical_bottom_positions_[0], line_18,
                  kPurple, *pixels_table_);
-  writer_->Write(-1 * ((line_19.size() * writer_->kfont_width_) / 2), 0 - 4 - 17 - 4 - 17, line_19, kGreen,
+  writer_->Write(-1 * ((line_19.size() * writer_->kfont_width_) / 2),
+                 writer_->vertical_bottom_positions_[1], line_19, kGreen,
                  *pixels_table_);
-  writer_->Write(-1 * ((line_20.size() * writer_->kfont_width_) / 2), 0 - 4 - 17 - 4 - 17 - 4 - 17, line_20,
+  writer_->Write(-1 * ((line_20.size() * writer_->kfont_width_) / 2),
+                 writer_->vertical_bottom_positions_[2], line_20,
                  kYellow, *pixels_table_);
-  writer_->Write(-1 * ((line_21.size() * writer_->kfont_width_) / 2), 0 - 4 - 17 - 4 - 17 - 4 - 17 - 4 - 17, line_21,
+  writer_->Write(-1 * ((line_21.size() * writer_->kfont_width_) / 2),
+                 writer_->vertical_bottom_positions_[3], line_21,
                  kLightBlue,
                  *pixels_table_);
 }
