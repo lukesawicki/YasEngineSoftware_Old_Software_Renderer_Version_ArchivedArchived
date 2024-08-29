@@ -342,33 +342,6 @@ void DrawNumbersAsGroupOfLines(Vector2D<float>* vertices,
   }
 }
 
-void DrawNumbersAsGroupOfLines(Vector2D<float>* vertices,
-                               int maximum_number_of_vertices,
-                               PixelsTable& pixels_table) {
-  if (maximum_number_of_vertices <= 3) {
-    DrawLine(vertices[0], vertices[1], pixels_table, kYellow);
-  } else {
-    int maximumVerticesToGenerateSegments =
-        CalculateMaximumNumberOfElementsToProcess(maximum_number_of_vertices);
-
-    for (int i = 0; i < maximumVerticesToGenerateSegments; i += 2) {
-      DrawLine(vertices[i], vertices[i + 1], pixels_table, kYellow);
-    }
-  }
-}
-
-void DrawNumbersAsLineStrip(Vector2D<float>* vertices,
-                           int maximum_number_of_vertices,
-                           PixelsTable& pixels_table) {
-  if (maximum_number_of_vertices == 2) {
-    DrawLine(vertices[0], vertices[1], pixels_table, kYellow);
-  } else {
-    for (int i = 0; i < maximum_number_of_vertices - 1; i++) {
-      DrawLine(vertices[i], vertices[i + 1], pixels_table, kYellow);
-    }
-  }
-}
-
 void drawBinaryRepresentationOfFixedNumbers(std::vector<int> numbers,
                                             PixelsTable& pixels_table) {
   for (unsigned int i = 0; i < static_cast<unsigned int>(numbers.size()); i++) {

@@ -46,14 +46,6 @@ void DrawNumbersAsGroupOfLines(Vector2D<float>* vertices,
                                bool are_lines_continuous,
                                PixelsTable& pixels_table);
 
-void DrawNumbersAsGroupOfLines(Vector2D<float>* vertices,
-                               int maximum_number_of_vertices,
-                               PixelsTable& pixels_table);
-
-void DrawNumbersAsLineStrip(Vector2D<float>* vertices,
-                           int maximum_number_of_vertices,
-                           PixelsTable& pixels_table);
-
 void DrawPolygonDirection(GameObject* polygon, PixelsTable& pixels_table);
 
 void SwapVectors(Vector2D<int>& point_0, Vector2D<int>& point_1);
