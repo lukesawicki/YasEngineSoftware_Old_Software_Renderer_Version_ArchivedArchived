@@ -193,7 +193,9 @@ void Player::RotateAllVerticesOverAnAngle(float angle) {
   }
 }
 
-void Player::set_input(YasInOut::Input* input) { this->input_ = input; }
+void Player::set_input(YasInOut::Input* input) {
+  this->input_ = input;
+}
 
 void Player::set_input(YasInOut::MousePositionChangeInformation* mouse) {
   this->mouse_ = mouse;

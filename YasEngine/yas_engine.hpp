@@ -121,8 +121,8 @@ class YasEngine {
   float mouse_x_;
   float mouse_y_;
 
-  int window_width_ = 1600;
-  int window_height_ = 800;
+  int window_width_ = 800;
+  int window_height_ = 400;
 
   std::vector<GameObject*> objects_to_draw_;
   bool first_16_spawned_ = false;
@@ -169,7 +169,7 @@ class YasEngine {
   Vector2D<float> test_point_0_;
   Vector2D<float> test_point_1_;
 
-  ScreenWriter writer_;
+  ScreenWriter* writer_;
   int step_ = 0;
 
   MapFrame map_frame_;
@@ -183,6 +183,69 @@ class YasEngine {
   int green_shotdowns_ = 0;
   int blue_shotdowns_ = 0;
   bool is_engine_instantiated_ = false;
+
+  std::string line_1 = "YOU.JUST.FINISHED.LEVEL.1";
+  std::string line_2 = "YOU.ARE.HAPPY.TO.HAVE.DISCOVERED";
+  std::string line_3 = "PRIME.NUMBERS";
+
+  std::string line_4 = "YOU.JUST.FINISHED.LEVEL.2";
+  std::string line_5 = "YOU.ARE.HAPPY.TO.HAVE.DISCOVERED";
+  std::string line_6 = "FIBONACCI.NUMBERS";
+
+  std::string line_7 = "YOU.JUST.FINISHED.LEVEL.2";
+  std::string line_8 = "YOU.ARE.HAPPY.TO.HAVE.DISCOVERED";
+  std::string line_9 = "SINE.FUNCTION";
+
+  std::string line_10 = "YOU.JUST.FINISHED.LEVEL.2";
+  std::string line_11 = "YOU.ARE.HAPPY.TO.HAVE.DISCOVERED";
+  std::string line_12 = "COSINE.FUNCTION";
+  std::string line_13 = "AND.YOU.WON";
+
+  std::string line_14 = "YOU.WON";
+  std::string line_15 = "MATHEMATICS.IS.BEAUTIFUL";
+  std::string line_16 = "YOU.ARE.NOT.SUPPOSED.TO.BELIEVE.ME";
+  std::string line_17 = "CHECK.IT.FOR.YOURSELF";
+  std::string line_18 =
+      "FIND.AND.LEARN.MORE.ABOUT.WHAT.YOU.HAVE.JUST.DISCOVERED";
+  std::string line_19 = "PRIME.NUMBERS";
+  std::string line_20 = "FIBONACCI.NUMBERS";
+  std::string line_21 = "SINE.AND.COSINE.FUNCTIONS";
+
+  std::string line_22 = "BEAUTY.OF.MATH";
+  std::string line_23 = "POWERED.BY";
+  std::string line_24 = "YAS.ENGINE";
+
+  std::string line_25 = "GAME.DESIGN.PROGRAMMING.AND.MARKETING";
+  std::string line_26 = "LUKASZ.SAWICKI";
+  std::string line_27 = "SOUND.DESIGN.AND.MUSIC";
+  std::string line_28 = "JAKUB.TWAROGOWSKI";
+  std::string line_29 = "QUALITY.ASSURANCE";
+  std::string line_30 = "BARTLOMIEJ.KAWA";
+  std::string line_31 = "SPECIAL.THANKS:";
+  std::string line_32 = "MY.DEAR.SISTER.IZABELA";
+  std::string line_33 = "MY.LOVE.MARIOLA";
+  std::string line_34 = "MY.FRIENDS.FROM.WARSAW.SCHOOL.OF.COMPUTER.SCIENCE:";
+  std::string line_35 = "LUKASZ.KRZYSZTOF.MICHAL.MAREK.TOMASZ";
+  std::string line_36 = "MY.FRENDS.FROM.GDS.4:";
+  std::string line_37 = "KASIA.AND.BARTOSZ";
+  std::string line_38 = "WHOLE.COMMUNITY.OF.KNTG.POLYGON";
+  std::string line_39 = "AND.ALL.MEMBERS.OF.TEAM.XPORTAL";
+  std::string line_40 = "GAME.DESIGN.PROGRAMMING.AND.MARKETING";
+  std::string line_41 = "LUKASZ.SAWICKI";
+  std::string line_42 = "SOUND.DESIGN.AND.MUSIC";
+  std::string line_43 = "JAKUB.TWAROGOWSKI";
+  std::string line_44 = "QUALITY.ASSURANCE";
+  std::string line_45 = "BARTLOMIEJ.KAWA";
+  std::string line_46 = "SPECIAL.THANKS:";
+  std::string line_47 = "MY.DEAR.SISTER.IZABELA";
+  std::string line_48 = "MY.LOVE.MARIOLA";
+  std::string line_49 = "MY.FRIENDS.FROM.WARSAW.SCHOOL.OF.COMPUTER.SCIENCE:";
+  std::string line_50 = "LUKASZ.KRZYSZTOF.MICHAL.MAREK.TOMASZ";
+  std::string line_51 = "MY.FRENDS.FROM.GDS.4:";
+  std::string line_52 = "KASIA.AND.BARTOSZ";
+  std::string line_53 = "WHOLE.COMMUNITY.OF.KNTG.POLYGON";
+  std::string line_54 = "AND.ALL.MEMBERS.OF.TEAM.XPORTAL";
+
   void ReadSettingsFromFile();
   void PrepareRendering();
   void PrepareBasicSettings();

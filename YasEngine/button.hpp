@@ -4,6 +4,7 @@
 #include <string>
 
 #include "game_object.hpp"
+#include "screen_writer.hpp"
 
 class Button : public GameObject {
  public:
@@ -16,10 +17,12 @@ class Button : public GameObject {
   int vertical_margin_;
   int horizontal_margin_;
 
+  ScreenWriter* screen_writer_;
+
   ButtonId button_id_;
 
   Button(const ButtonId& button_id, std::string text,
-         const Vector4D<Uint8>& color);
+         const Vector4D<Uint8>& color, ScreenWriter* screen_writer);
   ~Button();
 
   void Generate() override;

@@ -1,12 +1,58 @@
 #include "screen_writer.hpp"
 
+#include <algorithm>
 #include <iostream>
 #include <sstream>
 
 #include "yas_graphics_library.hpp"
 using namespace std;
 
-ScreenWriter::ScreenWriter() {
+ScreenWriter::ScreenWriter(const Vector2D<int>* window_dimensions) {
+  max_characters_horizontally_ =
+      (window_dimensions->x_ / kfont_width_) - 1;
+  max_characters_vertically_ =
+      (window_dimensions->y_ /
+       (kfont_height_ + kfont_bottom_margin_height_ + kfont_top_margin_height_)) - 1;
+
+  std::vector<int> sorted;
+
+  bool isEven = (max_characters_vertically_ % 2 == 0);
+
+  std::vector<int> top;
+  std::vector<int> bottom;
+
+  int half_size = 0;
+
+  half_size = max_characters_vertically_ / 2;
+
+  if (isEven) {
+    // top
+    for (int i = 1; i <= half_size; i++) {
+      top.push_back(i * (kfont_height_ + kfont_bottom_margin_height_ +
+                         kfont_top_margin_height_));
+    }
+    //bottom
+    for (int i = 0; i < half_size; i++) {
+      bottom.push_back(-1*(i * (kfont_height_ + kfont_bottom_margin_height_ +
+                         kfont_top_margin_height_)));
+    }
+  }
+  else { // isOdd
+    // top
+    for (int i = 1; i <= half_size; i++) {
+      top.push_back(i * (kfont_height_ + kfont_bottom_margin_height_ +
+                         kfont_top_margin_height_));
+    }
+    // bottom
+    for (int i = 0; i <= half_size; i++) {
+      bottom.push_back(-1 * (i * (kfont_height_ + kfont_bottom_margin_height_ +
+                               kfont_top_margin_height_)));
+    }
+  }
+
+  std::sort(top.begin(), top.end());
+  std::sort(bottom.begin(), bottom.end());
+
   int step;
   step = 65;
   for (int i = 0; i < 26; i++) {
@@ -18,7 +64,7 @@ ScreenWriter::ScreenWriter() {
   }
   characters_table_[36] = ' ';
 
-  for (int i = 0; i < knumber_of_characters; i++) {
+  for (int i = 0; i < knumber_of_characters_; i++) {
     fonts_.push_back(new Font());
   }
 }
@@ -29,33 +75,14 @@ void ScreenWriter::Initialize() {
   PrepareFontVertices();
 }
 
-void ScreenWriter::Initialize(int character_width, int character_height,
-                              const char* file_with_characters) {}
-
-void ScreenWriter::WriteNew(int x, int y, string text, int width, int height) {
-  SDL_Rect target_rect;
-  int pom_w = 0, pom_h = 0;
-  target_rect.x = x;
-  target_rect.y = y;
-  target_rect.w = width;
-  target_rect.h = height;
-  for (int i = 0; i < static_cast<int>(text.size()); i++) {
-    for (int j = 0; j < 63; j++) {
-      if (text.at(i) == characters_table_[j]) {
-        target_rect.x = x + i * target_rect.w;
-      }
-    }
-  }
-}
-
 void ScreenWriter::Write(int x, int y, string text,
                          const Vector4D<Uint8>& color,
                          PixelsTable& pixels_table) {
   for (int i = 0; i < static_cast<int>(text.size()); i++) {
-    for (int j = 0; j < knumber_of_characters; j++) {
+    for (int j = 0; j < knumber_of_characters_; j++) {
       if (text.at(i) == characters_table_[j]) {
         fonts_.at(j)->verticesBaseData->set_position(
-            static_cast<float>(x + i * kfont_width), static_cast<float>(y));
+            static_cast<float>(x + i * kfont_width_), static_cast<float>(y));
         fonts_.at(j)->verticesBaseData->Generate();
         DrawNumbersAsGroupOfLines(
             fonts_.at(j)->verticesBaseData->world_vertices_,
@@ -68,13 +95,13 @@ void ScreenWriter::Write(int x, int y, string text,
 
 void ScreenWriter::InitializeFontObjects() {
   Vector2D<float> direction(0, 1);
-  for (int i = 0; i < knumber_of_characters; i++) {
+  for (int i = 0; i < knumber_of_characters_; i++) {
     fonts_.at(i)->verticesBaseData->initialize(17, 0, 0, direction, -1);
   }
 }
 
 void ScreenWriter::InitializeFontSurfaces() {
-  for (int i = 0; i < knumber_of_characters; i++) {
+  for (int i = 0; i < knumber_of_characters_; i++) {
     fonts_.at(i)->surface->Initialize(i * 17, 0, 17, 17, kGreen);
   }
 }

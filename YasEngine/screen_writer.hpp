@@ -8,11 +8,19 @@
 #include "font_object.hpp"
 #include "font_surface.hpp"
 
-class ScreenWriter final {
+class ScreenWriter {
  public:
-  static const int knumber_of_characters = 37;
-  static const int kfont_width = 17;
-  static const int kfont_height = 17;
+  static const int knumber_of_characters_ = 37;
+  static const int kfont_width_ = 17;
+  static const int kfont_height_ = 17;
+  static const int kfont_top_margin_height_ = 2;
+  static const int kfont_bottom_margin_height_ = 2;
+  int max_characters_horizontally_;
+  int max_characters_vertically_;
+  int* vertical_top_positions_;
+  int top_max;
+  int* vertical_bottom_positions_;
+  int top_bottom;
 
   struct Font {
     Font() {
@@ -30,17 +38,14 @@ class ScreenWriter final {
   };
 
   std::vector<Font*> fonts_;
-  char characters_table_[knumber_of_characters];
-  ScreenWriter();
+  char characters_table_[knumber_of_characters_];
+  ScreenWriter(const Vector2D<int>* window_dimensions);
   void Initialize();
   void InitializeFontObjects();
   void InitializeFontSurfaces();
   void PrepareFontVertices();
   void Write(int x, int y, std::string text, const Vector4D<Uint8>& color,
              PixelsTable& pixels_table);
-  void Initialize(int character_width, int character_height,
-                  const char* file_with_characters);
-  void WriteNew(int x, int y, std::string text, int width, int height);
 };
 
 #endif

@@ -17,11 +17,12 @@ void Button::RegeneratePolygon() { Generate(); }
 void Button::Move(float delta_time) {}
 
 Button::Button(const ButtonId& button_id, std::string text,
-               const Vector4D<Uint8>& color) {
+               const Vector4D<Uint8>& color, ScreenWriter* screen_writer) {
   this->button_id_ = button_id;
   this->text_.assign(text);
+  screen_writer_ = screen_writer;
   this->button_text_width_ =
-      ScreenWriter::kfont_width * static_cast<int>(text.size());
+      screen_writer_->kfont_width_ * static_cast<int>(text.size());
   this->color_ = color;
   number_of_vertices_ = 4;
 }
