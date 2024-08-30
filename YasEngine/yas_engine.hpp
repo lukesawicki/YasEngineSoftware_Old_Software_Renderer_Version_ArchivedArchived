@@ -245,11 +245,11 @@ class YasEngine {
   std::vector<Vector4D<float>*> local_box_;
   std::vector<Vector4D<float>*> world_box_;
   Vector2D<float>* box_2d_;
-
+  //
   Vector2D<float>* testLines;
-
+  //
   const int kdistanceFromProjectionPlane = 200;
-
+  //
   Vector4D<float> box_position_;
 
   void ReadSettingsFromFile();
@@ -279,7 +279,6 @@ class YasEngine {
   void HandleMouseMovement();
   void DeleteNotAliveObjects();
   void HandleSpawningCollectibles();
-  bool IsObjectInSameQuarterAsProtagonist(int random_spawner);
   void HandleProjectiles();
   void HandlePlayer();
   void Update(double& delta_time);

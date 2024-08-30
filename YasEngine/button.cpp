@@ -22,7 +22,7 @@ Button::Button(const ButtonId& button_id, std::string text,
   this->text_.assign(text);
   screen_writer_ = screen_writer;
   this->button_text_width_ =
-      screen_writer_->kfont_width_ * static_cast<int>(text.size());
+      ScreenWriter::kfont_width_ * static_cast<int>(text.size());
   this->color_ = color;
   number_of_vertices_ = 4;
 }

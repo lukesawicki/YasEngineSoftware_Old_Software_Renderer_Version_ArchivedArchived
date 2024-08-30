@@ -59,14 +59,14 @@ void YasEngine::clean() {
 
   delete input_;
 
-    for (int i = 0; i < local_box_.size(); i++) {
-      delete local_box_[i];
-    }
-
-      for (int i = 0; i < world_box_.size(); i++) {
-      delete world_box_[i];
-    }
-
+    // for (int i = 0; i < local_box_.size(); i++) {
+    //   delete local_box_[i];
+    // }
+    //
+    //   for (int i = 0; i < world_box_.size(); i++) {
+    //   delete world_box_[i];
+    // }
+    //
     delete[] testLines;
 
     // std::vector<Vector4D<float>*> local_box_;
@@ -866,8 +866,8 @@ void YasEngine::PrepareGameWorld() {
 
   box_position_.x_ = 0;
   box_position_.y_ = 0;
-  box_position_.z_ = -200;
-
+  box_position_.z_ = -10;
+  //
   local_box_.push_back(new Vector4D<float>(-50, 50, 50, 0));    // przod od ekranu
   local_box_.push_back(new Vector4D<float>(50, 50, 50,0));     // przod od ekranu
   local_box_.push_back(new Vector4D<float>(50, -50, 50, 0));    // przod od ekranu
@@ -876,13 +876,13 @@ void YasEngine::PrepareGameWorld() {
   local_box_.push_back(new Vector4D<float>(50, 50, -50,0));    // przod od ekranu
   local_box_.push_back(new Vector4D<float>(50, -50, -50,0));   // przod od ekranu
   local_box_.push_back(new Vector4D<float>(-50, -50, -50,0));  // przod od ekranu
-
+  
   for (int i = 0; i < local_box_.size(); i++) {
     world_box_.push_back(
         new Vector4D(local_box_.at(i)->x_, local_box_.at(i)->y_,
                      local_box_.at(i)->z_, local_box_.at(i)->w_));
   }
-
+  
     for (int i = 0; i < local_box_.size(); i++) {
     // world_box_.at(i)->= local_box_->+ box_position_;
     world_box_.at(i)->x_ = local_box_.at(i)->x_ + box_position_.x_;
@@ -890,8 +890,28 @@ void YasEngine::PrepareGameWorld() {
     world_box_.at(i)->z_ = local_box_.at(i)->z_ + box_position_.z_;
     world_box_.at(i)->w_ = local_box_.at(i)->w_ + box_position_.w_;
   }
-
+  
   box_2d_ = new Vector2D<float>[world_box_.size()];
+
+  testLines = new Vector2D<float>[8];
+  testLines[0].x_= 5;
+  testLines[0].y_= 5;
+  testLines[1].x_= 30;
+  testLines[1].y_= -80;
+  testLines[2].x_= 200;
+  testLines[2].y_= 220;
+  testLines[3].x_= 150;
+  testLines[3].y_= -90;
+  testLines[4].x_= 100;
+  testLines[4].y_= -130;
+  testLines[5].x_= 200;
+  testLines[5].y_= -50;
+  testLines[6].x_= 300;
+  testLines[6].y_= -25;
+  testLines[7].x_= 0;
+  testLines[7].y_= 0;
+
+
 }
 
 void YasEngine::PrepareDataForDrawingGraphs() {
@@ -1085,10 +1105,13 @@ void YasEngine::BoxProcessing() {
     world_box_.at(i)->z_ = local_box_.at(i)->z_ + box_position_.z_;
     world_box_.at(i)->w_ = local_box_.at(i)->w_ + box_position_.w_;
   }
-
+  
   for (int i = 0; i < world_box_.size(); i++) {
-    box_2d_[i].x_ = (world_box_.at(i)->x_ * kdistanceFromProjectionPlane) /
+
+    box_2d_[i].x_ = 0 +(world_box_.at(i)->x_ * kdistanceFromProjectionPlane) /
                         world_box_.at(i)->z_;
+    box_2d_[i].y_ = 0 - (world_box_.at(i)->y_ * kdistanceFromProjectionPlane) /
+                    world_box_.at(i)->z_;
   }
 
 }
@@ -1100,8 +1123,8 @@ void YasEngine::BoxProcessing() {
 // PixelsTable& pixels_table) {
 
 void YasEngine::DrawBox() {
-  // DrawNumbersAsGroupOfLines(box_2d_, world_box_.size(), kBlue, false, *pixels_table_);
-  // DrawNumbersAsGroupOfLines(testLines, 8, kYellow, false, *pixels_table_);
+  DrawNumbersAsGroupOfLines(box_2d_, world_box_.size(), kBlue, true, *pixels_table_);
+  DrawNumbersAsGroupOfLines(testLines, 8, kYellow, true, *pixels_table_);
 }
 
 Button::ButtonId YasEngine::CheckWhichButtonClicked() {

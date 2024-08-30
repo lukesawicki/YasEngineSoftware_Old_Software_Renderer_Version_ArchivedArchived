@@ -41,12 +41,18 @@ void DrawPolygon(GameObject* polygon, PixelsTable& pixels_table);
 Vector2D<float>* GenerateVerticesFromNumbers(const std::vector<int>& numbers);
 
 void DrawNumbersAsGroupOfLines(Vector2D<float>* vertices,
-                               int current_number_of_vertices,
+                               int maximum_number_of_vertices,
                                const Vector4D<Uint8>& color,
                                bool are_lines_continuous,
                                PixelsTable& pixels_table);
 
-void DrawPolygonDirection(GameObject* polygon, PixelsTable& pixels_table);
+void DrawNumbersAsGroupOfLines(Vector2D<float>* vertices,
+                               int maximum_number_of_vertices,
+                               PixelsTable& pixels_table);
+
+void DrawNumbersAsLineStrip(Vector2D<float>* vertices,
+                           int maximum_number_of_vertices,
+                           PixelsTable& pixels_table);void DrawPolygonDirection(GameObject* polygon, PixelsTable& pixels_table);
 
 void SwapVectors(Vector2D<int>& point_0, Vector2D<int>& point_1);
 
