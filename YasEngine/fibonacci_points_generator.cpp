@@ -5,7 +5,7 @@
 
 FibonacciPointsGenerator::~FibonacciPointsGenerator() { ; }
 
-PointsSet* FibonacciPointsGenerator::GeneratePoints(
+Points_2d_Set* FibonacciPointsGenerator::GeneratePoints(
     int number_of_numbers, std::map<int, float>* numbers) {
   // 40
   this->points_number_ = number_of_numbers;
@@ -29,7 +29,7 @@ PointsSet* FibonacciPointsGenerator::GeneratePoints(
         &points[i], fibonacci_numbers.at(j++) * (kPi / 180.0F));
   }
 
-  PointsSet* points_set = new PointsSet();
+  Points_2d_Set* points_set = new Points_2d_Set();
   points_set->points_ = points;
 
   points_set->points_number_ = points_number_;
@@ -37,7 +37,7 @@ PointsSet* FibonacciPointsGenerator::GeneratePoints(
   return points_set;
 }
 
-PointsSet* FibonacciPointsGenerator::GenerateFloatPoints(
+Points_2d_Set* FibonacciPointsGenerator::GenerateFloatPoints(
     int number_of_numbers, std::map<float, float>* numbers) {
   return nullptr;
 }

@@ -1,5 +1,5 @@
-#ifndef VECTOR4D_HPP
-#define VECTOR4D_HPP
+#ifndef VECTOR_4D_HPP
+#define VECTOR_4D_HPP
 
 template <typename Type>
 class Vector4D {

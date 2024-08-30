@@ -87,17 +87,8 @@
     <ClInclude Include="spawner.hpp">
       <Filter>Gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="points_set.hpp">
-      <Filter>Utils</Filter>
-    </ClInclude>
     <ClInclude Include="game_object.hpp">
       <Filter>Gameplay</Filter>
-    </ClInclude>
-    <ClInclude Include="mathematics_graphs_surface.hpp">
-      <Filter>Renderer</Filter>
-    </ClInclude>
-    <ClInclude Include="viewport.hpp">
-      <Filter>Renderer</Filter>
     </ClInclude>
     <ClInclude Include="node.hpp">
       <Filter>Utils</Filter>
@@ -131,6 +122,21 @@
     </ClInclude>
     <ClInclude Include="math_picture.hpp">
       <Filter>Gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="drawingSurface.hpp">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="matrix.hpp">
+      <Filter>Mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="points_2d_set.hpp">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="mesh.hpp">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="point_3d.hpp">
+      <Filter>Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -167,9 +173,6 @@
     <ClCompile Include="sine_points_generator.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="mathematics_graphs_surface.cpp">
-      <Filter>Renderer</Filter>
-    </ClCompile>
     <ClCompile Include="spawner.cpp">
       <Filter>Gameplay</Filter>
     </ClCompile>
@@ -205,6 +208,9 @@
     </ClCompile>
     <ClCompile Include="math_picture.cpp">
       <Filter>Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="vector_3d.cpp">
+      <Filter>Mathematics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

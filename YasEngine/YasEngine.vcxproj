@@ -140,6 +140,7 @@
     <ClInclude Include="collider.hpp" />
     <ClInclude Include="cosine_points_generator.hpp" />
     <ClInclude Include="collectible.hpp" />
+    <ClInclude Include="drawingSurface.hpp" />
     <ClInclude Include="fibonacci_points_generator.hpp" />
     <ClInclude Include="font_object.hpp" />
     <ClInclude Include="font_surface.hpp" />
@@ -149,22 +150,23 @@
     <ClInclude Include="map_frame.hpp" />
     <ClInclude Include="mathematics.hpp" />
     <ClInclude Include="math_picture.hpp" />
+    <ClInclude Include="matrix.hpp" />
+    <ClInclude Include="mesh.hpp" />
     <ClInclude Include="node.hpp" />
     <ClInclude Include="pixels_table.hpp" />
     <ClInclude Include="player.hpp" />
     <ClInclude Include="points_generator.hpp" />
-    <ClInclude Include="points_set.hpp" />
+    <ClInclude Include="points_2d_set.hpp" />
+    <ClInclude Include="point_3d.hpp" />
     <ClInclude Include="prime_numbers_points_generator.hpp" />
     <ClInclude Include="projectile.hpp" />
     <ClInclude Include="randomizer.hpp" />
     <ClInclude Include="screen_writer.hpp" />
     <ClInclude Include="sine_points_generator.hpp" />
     <ClInclude Include="spawner.hpp" />
-    <ClInclude Include="mathematics_graphs_surface.hpp" />
     <ClInclude Include="time_picker.hpp" />
     <ClInclude Include="vector_2d.hpp" />
     <ClInclude Include="vector_4d.hpp" />
-    <ClInclude Include="viewport.hpp" />
     <ClInclude Include="yas_engine.hpp" />
     <ClInclude Include="yas_graphics_library.hpp" />
   </ItemGroup>
@@ -189,8 +191,8 @@
     <ClCompile Include="screen_writer.cpp" />
     <ClCompile Include="sine_points_generator.cpp" />
     <ClCompile Include="spawner.cpp" />
-    <ClCompile Include="mathematics_graphs_surface.cpp" />
     <ClCompile Include="time_picker.cpp" />
+    <ClCompile Include="vector_3d.cpp" />
     <ClCompile Include="yas_engine.cpp" />
     <ClCompile Include="yas_graphics_library.cpp" />
   </ItemGroup>

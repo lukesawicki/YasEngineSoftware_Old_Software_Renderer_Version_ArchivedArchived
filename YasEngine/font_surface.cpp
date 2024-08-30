@@ -1,6 +1,5 @@
 #include "font_surface.hpp"
 
-#include "mathematics_graphs_surface.hpp"
 #include "yas_graphics_library.hpp"
 
 FontSurface::FontSurface() {}

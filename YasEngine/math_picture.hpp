@@ -15,7 +15,7 @@ class MathPicture {
   int base_points_fuel_ = 0;
   int minimal_points_fuel_ = 0;
   PointsGenerator* points_generator_;
-  PointsSet* points_set_;
+  Points_2d_Set* points_set_;
   std::map<int, float>* numbers_;
   std::map<float, float>* float_numbers_;
 };

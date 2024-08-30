@@ -1,9 +1,9 @@
 #ifndef FONT_SURFACE_HPP
 #define FONT_SURFACE_HPP
 #include "pixels_table.hpp"
-#include "viewport.hpp"
+#include "DrawingSurface.hpp"
 
-class FontSurface : public ViewPort {
+class FontSurface : public DrawingSurface {
  public:
   void CartesianPositionToWindow(int& x, int& y) const {
     x = x + static_cast<int>(0.5F * view_port_sizes_.x_);

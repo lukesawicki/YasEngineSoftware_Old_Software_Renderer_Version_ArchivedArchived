@@ -13,7 +13,6 @@
 #include "input_output_handler.hpp"
 #include "map_frame.hpp"
 #include "math_picture.hpp"
-#include "mathematics_graphs_surface.hpp"
 #include "node.hpp"
 #include "pixels_table.hpp"
 #include "player.hpp"
@@ -121,14 +120,14 @@ class YasEngine {
   float mouse_x_;
   float mouse_y_;
 
-  int window_width_ = 800;
-  int window_height_ = 400;
+  int window_width_ = 0;
+  int window_height_ = 0;
 
   std::vector<GameObject*> objects_to_draw_;
   bool first_16_spawned_ = false;
   int how_many_ = 0;
   Player* player_;
-  MathematicsGraphsSurface* mathematics_graphs_surface_;
+  
   std::vector<NodeNumbersOnTwoProceedingLevels*> spawners_positions_;
 
   const int kmax_collectibles_to_spawn_ = 64;
@@ -164,15 +163,12 @@ class YasEngine {
   int max_n_to_calculate_cosine_ = 100;
 
   std::map<std::string, int> number_of_given_colors_;
-  Node* spawners_;
 
   Vector2D<float> test_point_0_;
   Vector2D<float> test_point_1_;
 
   ScreenWriter* writer_;
   int step_ = 0;
-
-  MapFrame map_frame_;
 
   YasEngine() {};
   bool should_application_stop_running_ = false;
@@ -246,6 +242,16 @@ class YasEngine {
   std::string line_53 = "WHOLE.COMMUNITY.OF.KNTG.POLYGON";
   std::string line_54 = "AND.ALL.MEMBERS.OF.TEAM.XPORTAL";
 
+  std::vector<Vector4D<float>*> local_box_;
+  std::vector<Vector4D<float>*> world_box_;
+  Vector2D<float>* box_2d_;
+
+  Vector2D<float>* testLines;
+
+  const int kdistanceFromProjectionPlane = 200;
+
+  Vector4D<float> box_position_;
+
   void ReadSettingsFromFile();
   void PrepareRendering();
   void PrepareBasicSettings();
@@ -254,17 +260,12 @@ class YasEngine {
   void HandleDisassemblingGraphs(GameObject* game_object);
   void HandleDestroingCollectibles(GameObject* game_object);
   void HandlingAssemblingGraphs(GameObject* game_object);
-  void HandleCollectiblesWithWallsCollisions(GameObject* object);
   bool IsObjectProtagonist(GameObject* game_object);
   GameObject* GetProtagonist(GameObject* game_object_0, GameObject* game_object_1);
   GameObject* GetNotProtagonist(GameObject* game_object_0, GameObject* game_object_1);
-  void HandleProtagonistWithWallsCollisions(GameObject* game_object);
-  void MoveObjectToMapBoundries(GameObject* game_object, Wall wall,
-                                int shift = 0);
   void BounceCollectibles(GameObject* game_object, Wall wall);
   void MoveObjects();
   void PrepareGameWorld();
-  void SetFrameAroundGameplaySpace();
   void PrepareDataForDrawingGraphs();
   void PrepareSineDrawing();
   void PrepareCosineDrawing();
@@ -284,10 +285,8 @@ class YasEngine {
   void Update(double& delta_time);
   void ResetAll();
   void DrawHudElements(double& delta_time);
-  void DrawFrame(double& delta_time);
   void Render(double& delta_time);
   void RenderGameObjects();
-  void RenderOnViewports();
   void RenderLevelChange();
   void RenderWonScreen();
   Button::ButtonId CheckWhichButtonClicked();
@@ -296,6 +295,11 @@ class YasEngine {
   void HandleGameStateWhenSPACEbuttonPushed();
   void PrepareSoundAndMusic();
   void DrawButtons();
+  void BoxProcessing();
+  void DrawBox();
+  
+
+
 };
 
 #endif

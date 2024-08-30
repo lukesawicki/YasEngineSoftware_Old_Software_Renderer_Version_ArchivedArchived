@@ -4,15 +4,15 @@
 
 #include "mathematics.hpp"
 #include "points_generator.hpp"
-#include "points_set.hpp"
+#include "Points_2d_Set.hpp"
 
 class PrimeNumbersPointsGenerator : public PointsGenerator {
  public:
   static std::vector<int> numbers_;
   ~PrimeNumbersPointsGenerator();
-  PointsSet* GeneratePoints(int number_of_numbers,
+  Points_2d_Set* GeneratePoints(int number_of_numbers,
                             std::map<int, float>* numbers) override;
-  PointsSet* GenerateFloatPoints(int number_of_numbers,
+  Points_2d_Set* GenerateFloatPoints(int number_of_numbers,
                                  std::map<float, float>* numbers) override;
 };
 

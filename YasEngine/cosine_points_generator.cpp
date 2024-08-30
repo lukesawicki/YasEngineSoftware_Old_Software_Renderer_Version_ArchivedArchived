@@ -4,7 +4,7 @@
 
 CosinePointsGenerator::~CosinePointsGenerator() { ; }
 
-PointsSet* CosinePointsGenerator::GeneratePoints(
+Points_2d_Set* CosinePointsGenerator::GeneratePoints(
     int number_of_numbers, std::map<int, float>* numbers) {
   this->points_number_ = number_of_numbers;
   Vector2D<float>* points = new Vector2D<float>[points_number_];
@@ -20,13 +20,13 @@ PointsSet* CosinePointsGenerator::GeneratePoints(
     points[i].y_ = round(y * additional_factor);
   }
 
-  PointsSet* points_set = new PointsSet();
+  Points_2d_Set* points_set = new Points_2d_Set();
   points_set->points_ = points;
   points_set->points_number_ = points_number_;
   return points_set;
 }
 
-PointsSet* CosinePointsGenerator::GenerateFloatPoints(
+Points_2d_Set* CosinePointsGenerator::GenerateFloatPoints(
     int number_of_numbers, std::map<float, float>* numbers) {
   this->points_number_ = number_of_numbers;
   Vector2D<float>* points = new Vector2D<float>[points_number_];
@@ -38,7 +38,7 @@ PointsSet* CosinePointsGenerator::GenerateFloatPoints(
     i++;
   }
 
-  PointsSet* points_set = new PointsSet();
+  Points_2d_Set* points_set = new Points_2d_Set();
   points_set->points_ = points;
   points_set->points_number_ = points_number_;
   return points_set;

@@ -37,10 +37,6 @@ void YasEngine::initialize() {
   writer_ = new ScreenWriter(window_dimensions_);
   writer_->Initialize();
 
-  mathematics_graphs_surface_ = new MathematicsGraphsSurface(
-    0, static_cast<int>(window_dimensions_->y_ * 0.5F),
-    static_cast<int>(window_dimensions_->x_ * 0.5F),
-    static_cast<int>(window_dimensions_->y_), kBlack);
 }
 
 void YasEngine::clean() {
@@ -48,7 +44,6 @@ void YasEngine::clean() {
     delete drawable_object;
   }
 
-  delete mathematics_graphs_surface_;
   delete pixels_table_;
   delete window_dimensions_;
 
@@ -63,6 +58,22 @@ void YasEngine::clean() {
   // method
 
   delete input_;
+
+    for (int i = 0; i < local_box_.size(); i++) {
+      delete local_box_[i];
+    }
+
+      for (int i = 0; i < world_box_.size(); i++) {
+      delete world_box_[i];
+    }
+
+    delete[] testLines;
+
+    // std::vector<Vector4D<float>*> local_box_;
+    // std::vector<Vector4D<float>*> world_box_;
+    // Vector2D<float>* box_2d_;
+    //
+    // Vector2D<float>* testLines;
 
   Mix_FreeChunk(shoot_sound_);
   Mix_FreeChunk(hit_sound_);
@@ -154,8 +165,8 @@ void YasEngine::PrepareBasicSettings() {
   SDL_DisplayID display_id = SDL_GetPrimaryDisplay();
   const SDL_DisplayMode* display_mode = SDL_GetCurrentDisplayMode(display_id);
 
-  window_width_ = display_mode->w;
-  window_height_ = display_mode->w / 2;
+  window_width_ = display_mode->w * 0.75;
+  window_height_ = display_mode->h * 0.75;
 
   window_dimensions_ = new Vector2D<int>(window_width_, window_height_);
   Uint32 windowFlags = SDL_WINDOW_INPUT_FOCUS | SDL_WINDOW_BORDERLESS |
@@ -187,28 +198,6 @@ void YasEngine::CheckEndianness() {
 
 void YasEngine::DrawHudElements(double& delta_time) {
   DrawCrossHair(mouse_x_, mouse_y_, *pixels_table_, false);
-}
-
-void YasEngine::DrawFrame(double& delta_time) {
-  DrawHorizontalLine(
-    *pixels_table_, static_cast<int>(map_frame_.top_line_segment.point_0.x_),
-    static_cast<int>(map_frame_.top_line_segment.point_1.x_),
-    static_cast<int>(map_frame_.top_line_segment.point_0.y_), kRed);
-  DrawHorizontalLine(
-    *pixels_table_,
-    static_cast<int>(map_frame_.bottom_line_segment.point_0.x_),
-    static_cast<int>(map_frame_.bottom_line_segment.point_1.x_),
-    static_cast<int>(map_frame_.bottom_line_segment.point_0.y_), kGreen);
-
-  DrawVerticalLine(
-    *pixels_table_, static_cast<int>(map_frame_.left_line_segment.point_0.y_),
-    static_cast<int>(map_frame_.left_line_segment.point_1.y_),
-    static_cast<int>(map_frame_.left_line_segment.point_0.x_), kYellow);
-  DrawVerticalLine(*pixels_table_,
-                   static_cast<int>(map_frame_.right_line_segment.point_0.y_),
-                   static_cast<int>(map_frame_.right_line_segment.point_1.y_),
-                   static_cast<int>(map_frame_.right_line_segment.point_0.x_),
-                   kYellow);
 }
 
 void YasEngine::HandleInput(SDL_Event& event) {
@@ -348,68 +337,7 @@ void YasEngine::DeleteNotAliveObjects() {
 }
 
 void YasEngine::HandleSpawningCollectibles() {
-  for (int i = 0; i < 8; i++) {
-    int random_spawner = Randomizer::DrawNumberClosedInterval(0, 15);
-    int first_level_node_index =
-      spawners_positions_[random_spawner]->first_level_node;
-    int second_level_node_index =
-      spawners_positions_[random_spawner]->second_level_node;
-    if (Spawner::number_of_spawned_objects_ < kmax_collectibles_to_spawn_) {
-      if (IsObjectInSameQuarterAsProtagonist(random_spawner)) {
-        continue;
-      }
-      spawners_->child_nodes_[first_level_node_index]
-        ->child_nodes_[second_level_node_index]
-        ->spawner_->SpawnObject(game_object_);
-      if (game_object_ != nullptr) {
-        Spawner::number_of_spawned_objects_++;
-        objects_to_draw_.push_back(game_object_);
-        game_object_ = nullptr;
-      }
-    }
-    else {
-      spawners_->child_nodes_[first_level_node_index]
-        ->child_nodes_[second_level_node_index]
-        ->spawner_->ResetTimes();
-    }
-  }
-}
 
-bool YasEngine::IsObjectInSameQuarterAsProtagonist(int random_spawner) {
-  int quarter_size =
-    spawners_
-    ->child_nodes_[spawners_positions_[random_spawner]->first_level_node]
-    ->child_nodes_[spawners_positions_[random_spawner]->second_level_node]
-    ->size_;
-  return (
-    (player_->get_position().x_ <
-      (spawners_
-       ->child_nodes_[spawners_positions_[random_spawner]->first_level_node]
-       ->child_nodes_[spawners_positions_[random_spawner]
-         ->second_level_node]
-       ->position_->x_ +
-        quarter_size / 2)) &&
-    (player_->get_position().x_ >
-      (spawners_
-       ->child_nodes_[spawners_positions_[random_spawner]->first_level_node]
-       ->child_nodes_[spawners_positions_[random_spawner]
-         ->second_level_node]
-       ->position_->x_ -
-        quarter_size / 2)) &&
-    (player_->get_position().y_ <
-      (spawners_
-       ->child_nodes_[spawners_positions_[random_spawner]->first_level_node]
-       ->child_nodes_[spawners_positions_[random_spawner]
-         ->second_level_node]
-       ->position_->y_ +
-        quarter_size / 2)) &&
-    (player_->get_position().y_ >
-      (spawners_
-       ->child_nodes_[spawners_positions_[random_spawner]->first_level_node]
-       ->child_nodes_[spawners_positions_[random_spawner]
-         ->second_level_node]
-       ->position_->y_ -
-        quarter_size / 2)));
 }
 
 void YasEngine::HandleProjectiles() {
@@ -474,12 +402,14 @@ void YasEngine::Update(double& delta_time) {
     MoveObjects();
     HandleProjectiles();
     HandlePlayer();
+    BoxProcessing();
     break;
   }
 
   if (player_won_and_exited_) {
     ResetAll();
   }
+  
 }
 
 void YasEngine::ResetAll() {
@@ -496,7 +426,6 @@ void YasEngine::ResetAll() {
 
 void YasEngine::Render(double& delta_time) {
   pixels_table_->ClearColor(kBlack);
-  mathematics_graphs_surface_->ClearColor(kBlack);
 
   switch (game_state_) {
   case kIntro:
@@ -515,8 +444,7 @@ void YasEngine::Render(double& delta_time) {
     break;
   case kGameplay:
     RenderGameObjects();
-    RenderOnViewports();
-    DrawFrame(delta_time);
+    DrawBox();
     break;
   case kOutro:
     writer_->Write(-1 * ((line_25.size() * writer_->kfont_width_) / 2),
@@ -591,42 +519,6 @@ void YasEngine::RenderGameObjects() {
       DrawPolygon(object, *pixels_table_);
     }
   }
-}
-
-void YasEngine::RenderOnViewports() {
-  if (tests_) {
-    mathematics_graphs_surface_->DrawCartesianAxies();
-  }
-
-  switch (level_) {
-  case 1:
-    mathematics_graphs_surface_->DrawNumbersAsGroupOfLines(
-      prime_numbers_picture_->points_set_->points_,
-      prime_numbers_picture_->base_points_fuel_, primes_points_harvested_,
-      kLightBlue, false);
-    break;
-
-  case 2:
-    mathematics_graphs_surface_->DrawNumbersAsGroupOfLines(
-      fibonaccie_picture_->points_set_->points_,
-      fibonaccie_picture_->base_points_fuel_, fibonacci_points_harvested_,
-      kPurple, false);
-    break;
-  case 3:
-    mathematics_graphs_surface_->DrawNumbersAsGroupOfLines(
-      sine_picture_->points_set_->points_, sine_picture_->base_points_fuel_,
-      sine_points_harvested_, kBlue, true);
-    break;
-  case 4:
-    mathematics_graphs_surface_->DrawNumbersAsGroupOfLines(
-      cosine_picture_->points_set_->points_,
-      cosine_picture_->base_points_fuel_, cosine_points_harvested_, kRed,
-      true);
-    break;
-  default: ;
-  }
-
-  mathematics_graphs_surface_->CopyPixelsInToPIxelTable(*pixels_table_);
 }
 
 void YasEngine::RenderLevelChange() {
@@ -719,72 +611,7 @@ void YasEngine::RenderWonScreen() {
 }
 
 void YasEngine::HandlePhysics() {
-  if (objects_to_draw_.size() >= 3) {
-    for (int i = 0; i < static_cast<int>(objects_to_draw_.size() - 2); i++) {
-      if (objects_to_draw_[i]->i_am_ == GameObject::kCollectible) {
-        HandleCollectiblesWithWallsCollisions(objects_to_draw_[i]);
-      }
 
-      if (objects_to_draw_[i]->i_am_ == GameObject::kProtagonist) {
-        HandleProtagonistWithWallsCollisions(objects_to_draw_[i]);
-      }
-
-      for (int j = i; j < static_cast<int>(objects_to_draw_.size()); j++) {
-        if (objects_to_draw_[i] == objects_to_draw_[j] ||
-          (objects_to_draw_[i]->i_am_ == GameObject::kProjectile &&
-            objects_to_draw_[j]->i_am_ == GameObject::kProjectile) ||
-          (objects_to_draw_[i]->i_am_ == GameObject::kProjectile &&
-            objects_to_draw_[j]->i_am_ == GameObject::kProtagonist) ||
-          (objects_to_draw_[i]->i_am_ == GameObject::kProtagonist &&
-            objects_to_draw_[j]->i_am_ == GameObject::kProjectile) ||
-          (objects_to_draw_[i]->i_am_ == GameObject::kCollectible &&
-            objects_to_draw_[j]->i_am_ == GameObject::kCollectible)) {
-          continue;
-        }
-
-        // LEFT Projectile <-> Collectible && Protagonist <-> Collectible)
-        if (objects_to_draw_[i]->is_alive_ && objects_to_draw_[j]->is_alive_) {
-          GameObject* protagonist =
-            GetProtagonist(objects_to_draw_[i], objects_to_draw_[j]);
-          GameObject* gameObj =
-            GetNotProtagonist(objects_to_draw_[i], objects_to_draw_[j]);
-
-          if ((protagonist != nullptr) &&
-            gameObj->i_am_ == GameObject::kCollectible &&
-            !gameObj->collider_.is_in_collision_ &&
-            Collider::IsCollision(objects_to_draw_[i]->collider_,
-                                  objects_to_draw_[j]->collider_)) {
-            // handleBuildingGraph
-            HandleDisassemblingGraphs(gameObj);
-
-            gameObj->collider_.is_in_collision_ = true;
-          }
-
-          // if exited from collision
-          if ((protagonist != nullptr) &&
-            gameObj->i_am_ == GameObject::kCollectible &&
-            gameObj->collider_.is_in_collision_ &&
-            !Collider::IsCollision(objects_to_draw_[i]->collider_,
-                                   objects_to_draw_[j]->collider_)) {
-            gameObj->collider_.is_in_collision_ = false;
-          }
-
-          if ((protagonist == nullptr) &&
-            Collider::IsCollision(objects_to_draw_[i]->collider_,
-                                  objects_to_draw_[j]->collider_)) {
-            objects_to_draw_[i]->is_alive_ = false;
-            objects_to_draw_[j]->is_alive_ = false;
-            Mix_PlayChannel(-1, hit_sound_, 0);
-
-            if (gameObj->i_am_ == GameObject::kCollectible) {
-              HandleDestroingCollectibles(gameObj);
-              HandlingAssemblingGraphs(gameObj);
-            }
-          }
-        }
-      }
-    }
-  }
 } // END OF HandlePhysics()
 
 void YasEngine::HandleDisassemblingGraphs(GameObject* game_object) {
@@ -920,31 +747,6 @@ void YasEngine::HandlingAssemblingGraphs(GameObject* game_object) {
   }
 }
 
-void YasEngine::HandleCollectiblesWithWallsCollisions(GameObject* object) {
-  float left_wall = map_frame_.left_line_segment.point_0.x_;
-  float right_wall = map_frame_.right_line_segment.point_0.x_;
-  float top_wall = map_frame_.top_line_segment.point_0.y_;
-  float bottom_wall = map_frame_.bottom_line_segment.point_0.y_;
-
-  if (object->i_am_ == GameObject::kCollectible) {
-    if (object->GetColliderLeftSide() < static_cast<int>(left_wall)) {
-      BounceCollectibles(object, kLeft);
-    }
-
-    if (object->GetColliderRightSide() > static_cast<int>(right_wall)) {
-      BounceCollectibles(object, kRight);
-    }
-
-    if (object->GetColliderTopSide() < static_cast<int>(top_wall)) {
-      BounceCollectibles(object, kTop);
-    }
-
-    if (object->GetColliderBottomSide() > static_cast<int>(bottom_wall)) {
-      BounceCollectibles(object, kBottom);
-    }
-  }
-}
-
 bool YasEngine::IsObjectProtagonist(GameObject* game_object) {
   return game_object->i_am_ == GameObject::kProtagonist;
 }
@@ -969,33 +771,6 @@ GameObject* YasEngine::GetNotProtagonist(GameObject* game_object_0,
     return game_object_1;
   }
   return nullptr;
-}
-
-void YasEngine::HandleProtagonistWithWallsCollisions(GameObject* game_object) {
-  float left_wall = map_frame_.left_line_segment.point_0.x_;
-  float right_wall = map_frame_.right_line_segment.point_0.x_;
-  float top_wall = map_frame_.top_line_segment.point_0.y_;
-  float bottom_wall = map_frame_.bottom_line_segment.point_0.y_;
-
-  if (game_object->GetColliderLeftSide() < static_cast<int>(left_wall)) {
-    MoveObjectToMapBoundries(game_object, kLeft);
-    // BounceCollectibles(game_object, LEFT);
-  }
-
-  if (game_object->GetColliderRightSide() > static_cast<int>(right_wall)) {
-    MoveObjectToMapBoundries(game_object, kRight);
-    // BounceCollectibles(game_object, RIGHT);
-  }
-
-  if (game_object->GetColliderTopSide() > static_cast<int>(top_wall)) {
-    MoveObjectToMapBoundries(game_object, kTop);
-    // BounceCollectibles(game_object, TOP);
-  }
-
-  if (game_object->GetColliderBottomSide() < static_cast<int>(bottom_wall)) {
-    MoveObjectToMapBoundries(game_object, kBottom);
-    // BounceCollectibles(game_object, BOTTOM);
-  }
 }
 
 void YasEngine::BounceCollectibles(GameObject* game_object, Wall wall) {
@@ -1028,30 +803,6 @@ void YasEngine::BounceCollectibles(GameObject* game_object, Wall wall) {
   // TO PREVENT COLLECTIBLE STUCK IN THE WALL
   // objects_to_draw_[i]->set_x(rightWall - objects_to_draw_[i]->collider.radius_
   // - 1);
-}
-
-void YasEngine::MoveObjectToMapBoundries(GameObject* game_object, Wall wall,
-                                         int shift) {
-  switch (wall) {
-  case kLeft:
-    game_object->set_x(map_frame_.left_line_segment.point_0.x_ +
-      game_object->collider_.radius_ + shift);
-    break;
-  case kRight:
-    game_object->set_x(map_frame_.right_line_segment.point_0.x_ -
-      game_object->collider_.radius_ - shift);
-    break;
-  case kTop:
-    game_object->set_y(map_frame_.top_line_segment.point_0.y_ -
-      game_object->collider_.radius_ - shift);
-    break;
-  case kBottom:
-    game_object->set_y(map_frame_.bottom_line_segment.point_0.y_ +
-      game_object->collider_.radius_ + shift);
-    break;
-  default: ;
-    break;
-  }
 }
 
 void YasEngine::MoveObjects() {
@@ -1105,147 +856,42 @@ void YasEngine::PrepareSoundAndMusic() {
 void YasEngine::PrepareGameWorld() {
   srand(clock());
 
-  int main_node_x = -(window_dimensions_->x_ / 4);
-  int main_node_y = 0;
-
-  std::cout << "Main node X: " << main_node_x << "\n";
-  std::cout << "Main node Y: " << main_node_y << "\n";
-
-  spawners_ = new Node(new Vector2D<int>(-(window_dimensions_->x_ / 4), 0),
-                       window_dimensions_->x_ / 2, nullptr);
-
-  // adding nodes(first level_) to head node
-  Node::AddNodes(*spawners_);
-  for (int i = 0; i < 4; i++) {
-    // adding nodes(second level_) to nodes
-    Node::AddNodes(*spawners_->child_nodes_[i]);
-  }
-
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 4; j++) {
-      spawners_positions_.push_back(new NodeNumbersOnTwoProceedingLevels(i, j));
-    }
-  }
-
-  //                   H
-  //    0         1         2          3
-  // 0 1 2 3   0 1 2 3___0 1 2 3   0 1 2 3
-
-  //    |````` `````|
-  //    |           |
-  //    |     H     |
-  //    |           |
-  //    |           |
-  //    |___________|
-  //    |`````|`````|
-  //    |  0  |  1  |
-  //    |_____|_____|
-  //    |     |     |
-  //    |  2  |  3  |
-  //    |_____|_____|
-  //     ___________
-  //    | 0|1 | 0|1 |
-  //    |--|--|--|--|
-  //    | 2|3 | 2|3 |
-  //    -------------
-  //    | 0|1 | 0|1 |
-  //    |--|--|--|--|
-  //    | 2|3 | 2|3 |
-  //     ```````````
-  // TO READ -----------> Latice
-
-  // calculate position_ of player_ on tree 1 - level_ of nodes and number of
-  // node and 2 level_ of node and number
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 4; j++) {
-      if (player_->get_position().x_ >=
-        (spawners_->child_nodes_[i]->child_nodes_[j]->position_->x_ -
-          spawners_->child_nodes_[i]->child_nodes_[j]->size_ * 0.5) &&
-        player_->get_position().x_ <
-        (spawners_->child_nodes_[i]->child_nodes_[j]->position_->x_ +
-          spawners_->child_nodes_[i]->child_nodes_[j]->size_ * 0.5) &&
-        player_->get_position().y_ <=
-        (spawners_->child_nodes_[i]->child_nodes_[j]->position_->y_ +
-          spawners_->child_nodes_[i]->child_nodes_[j]->size_ * 0.5) &&
-        player_->get_position().y_ >
-        (spawners_->child_nodes_[i]->child_nodes_[j]->position_->y_ -
-          spawners_->child_nodes_[i]->child_nodes_[j]->size_ * 0.5)) {
-        goto afterFor;
-      }
-    }
-  }
-afterFor:
-
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 4; j++) {
-      spawners_->child_nodes_[i]->child_nodes_[j]->spawner_ = new Spawner(
-        spawners_->child_nodes_[i]->child_nodes_[j]->position_->x_,
-        spawners_->child_nodes_[i]->child_nodes_[j]->position_->y_);
-    }
-  }
-
   number_of_given_colors_.insert({"kRed", 0});
   number_of_given_colors_.insert({"GREEN", 0});
   number_of_given_colors_.insert({"kBlue", 0});
   number_of_given_colors_.insert({"YELLOW", 0});
-  PrepareDataForDrawingGraphs();
-}
+  // PrepareDataForDrawingGraphs();
 
-void YasEngine::SetFrameAroundGameplaySpace() {
-  const int kvertical_shift = 10;
-  const int kshift = 10;
+  // BOX in 3D
 
-  // HORIZONTAL LINE SEGMENTS
+  box_position_.x_ = 0;
+  box_position_.y_ = 0;
+  box_position_.z_ = -200;
 
-  // Top              ---->
-  // Left point
-  map_frame_.top_line_segment.point_0.x_ =
-    static_cast<float>((-(window_dimensions_->x_ / 2)) + kshift);
-  map_frame_.top_line_segment.point_0.y_ =
-    static_cast<float>((window_dimensions_->y_ / 2) - kvertical_shift);
-  // Right point
-  map_frame_.top_line_segment.point_1.x_ =
-    static_cast<float>(-1 - kshift);
-  map_frame_.top_line_segment.point_1.y_ =
-    static_cast<float>((window_dimensions_->y_ / 2) - kvertical_shift);
+  local_box_.push_back(new Vector4D<float>(-50, 50, 50, 0));    // przod od ekranu
+  local_box_.push_back(new Vector4D<float>(50, 50, 50,0));     // przod od ekranu
+  local_box_.push_back(new Vector4D<float>(50, -50, 50, 0));    // przod od ekranu
+  local_box_.push_back(new Vector4D<float>(-50, -50, 50, 0));   // przod od ekranu
+  local_box_.push_back(new Vector4D<float>(-50, 50, -50,0));   // przod od ekranu
+  local_box_.push_back(new Vector4D<float>(50, 50, -50,0));    // przod od ekranu
+  local_box_.push_back(new Vector4D<float>(50, -50, -50,0));   // przod od ekranu
+  local_box_.push_back(new Vector4D<float>(-50, -50, -50,0));  // przod od ekranu
 
-  // Bottom
-  // Left point
-  map_frame_.bottom_line_segment.point_0.x_ =
-    static_cast<float>((-(window_dimensions_->x_ / 2)) + kshift);
-  map_frame_.bottom_line_segment.point_0.y_ =
-    static_cast<float>((-(window_dimensions_->y_ / 2)) + kvertical_shift);
+  for (int i = 0; i < local_box_.size(); i++) {
+    world_box_.push_back(
+        new Vector4D(local_box_.at(i)->x_, local_box_.at(i)->y_,
+                     local_box_.at(i)->z_, local_box_.at(i)->w_));
+  }
 
-  // Right point
-  map_frame_.bottom_line_segment.point_1.x_ =
-    static_cast<float>(-kshift);
-  map_frame_.bottom_line_segment.point_1.y_ =
-    static_cast<float>((-(window_dimensions_->y_ / 2)) + kvertical_shift);
+    for (int i = 0; i < local_box_.size(); i++) {
+    // world_box_.at(i)->= local_box_->+ box_position_;
+    world_box_.at(i)->x_ = local_box_.at(i)->x_ + box_position_.x_;
+    world_box_.at(i)->y_ = local_box_.at(i)->y_ + box_position_.y_;
+    world_box_.at(i)->z_ = local_box_.at(i)->z_ + box_position_.z_;
+    world_box_.at(i)->w_ = local_box_.at(i)->w_ + box_position_.w_;
+  }
 
-  // VERTICAL LINE SEGMENTS
-  // Left
-  // Top point
-  map_frame_.left_line_segment.point_0.x_ =
-    static_cast<float>((-(window_dimensions_->x_ / 2)) + kshift);
-  map_frame_.left_line_segment.point_0.y_ =
-    static_cast<float>((window_dimensions_->y_ / 2) - kvertical_shift);
-  // Bottom point
-  map_frame_.left_line_segment.point_1.x_ =
-    static_cast<float>((-(window_dimensions_->x_ / 2)) + kshift);
-  map_frame_.left_line_segment.point_1.y_ =
-    static_cast<float>((-(window_dimensions_->y_ / 2)) + kvertical_shift);
-
-  // Right
-  // Top point
-  map_frame_.right_line_segment.point_0.x_ =
-    static_cast<float>(-1 - kshift);
-  map_frame_.right_line_segment.point_0.y_ =
-    static_cast<float>((window_dimensions_->y_ / 2) - kvertical_shift);
-  // Bottom point
-  map_frame_.right_line_segment.point_1.x_ =
-    static_cast<float>(-1 - kshift);
-  map_frame_.right_line_segment.point_1.y_ =
-    static_cast<float>((-(window_dimensions_->y_ / 2)) + kvertical_shift);
+  box_2d_ = new Vector2D<float>[world_box_.size()];
 }
 
 void YasEngine::PrepareDataForDrawingGraphs() {
@@ -1412,7 +1058,6 @@ void YasEngine::PrepareInterface() {
     0 - dynamic_cast<Button*>(buttons_.at(1))->button_height_ * 0.5F;
   buttons_.at(1)->Generate();
 
-  SetFrameAroundGameplaySpace();
 }
 
 void YasEngine::DrawButtons() {
@@ -1427,6 +1072,36 @@ void YasEngine::DrawButtons() {
       dynamic_cast<Button*>(buttons_.at(i))->text_,
       dynamic_cast<Button*>(buttons_.at(i))->color_, *pixels_table_);
   }
+}
+
+void YasEngine::BoxProcessing() {
+  // std::vector<Vector4D<float>*> local_box_;
+  // std::vector<Vector4D<float>*> world_box_;
+  // std::vector<Vector2D<float>*> box_2d_;
+  for (int i = 0; i < local_box_.size(); i++) {
+    // world_box_.at(i)->= local_box_->+ box_position_;
+    world_box_.at(i)->x_ = local_box_.at(i)->x_ + box_position_.x_;
+    world_box_.at(i)->y_ = local_box_.at(i)->y_ + box_position_.y_;
+    world_box_.at(i)->z_ = local_box_.at(i)->z_ + box_position_.z_;
+    world_box_.at(i)->w_ = local_box_.at(i)->w_ + box_position_.w_;
+  }
+
+  for (int i = 0; i < world_box_.size(); i++) {
+    box_2d_[i].x_ = (world_box_.at(i)->x_ * kdistanceFromProjectionPlane) /
+                        world_box_.at(i)->z_;
+  }
+
+}
+
+// Vector2D<float>* vertices,
+// int maximum_number_of_vertices,
+// const Vector4D<Uint8>& color,
+// bool are_lines_continuous,
+// PixelsTable& pixels_table) {
+
+void YasEngine::DrawBox() {
+  // DrawNumbersAsGroupOfLines(box_2d_, world_box_.size(), kBlue, false, *pixels_table_);
+  // DrawNumbersAsGroupOfLines(testLines, 8, kYellow, false, *pixels_table_);
 }
 
 Button::ButtonId YasEngine::CheckWhichButtonClicked() {

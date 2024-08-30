@@ -41,7 +41,7 @@ void DrawPolygon(GameObject* polygon, PixelsTable& pixels_table);
 Vector2D<float>* GenerateVerticesFromNumbers(const std::vector<int>& numbers);
 
 void DrawNumbersAsGroupOfLines(Vector2D<float>* vertices,
-                               int maximum_number_of_vertices,
+                               int current_number_of_vertices,
                                const Vector4D<Uint8>& color,
                                bool are_lines_continuous,
                                PixelsTable& pixels_table);

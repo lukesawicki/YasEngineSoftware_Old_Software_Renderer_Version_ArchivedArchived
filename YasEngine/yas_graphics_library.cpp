@@ -323,19 +323,20 @@ Vector2D<float>* GenerateVerticesFromNumbersAsVerticalLines(
 }
 
 void DrawNumbersAsGroupOfLines(Vector2D<float>* vertices,
-                               int maximum_number_of_vertices,
+                               int current_number_of_vertices,
                                const Vector4D<Uint8>& color,
-                               bool are_lines_continuous,
-                               PixelsTable& pixels_table) {
+                               bool are_lines_continuous, PixelsTable& pixels_table) {
   int step = 1;
+  int end = -1;
   if (!are_lines_continuous) {
     step = 2;
   }
-  if (maximum_number_of_vertices > 1) {
-    if (maximum_number_of_vertices <= 3) {
+  
+  if (current_number_of_vertices > 1) {
+    if (current_number_of_vertices <= 3) {
       DrawLine(vertices[0], vertices[1], pixels_table, color);
     } else {
-      for (int i = 0; i < maximum_number_of_vertices - 1; i += step) {
+      for (int i = 0; i < current_number_of_vertices - end; i += step) {
         DrawLine(vertices[i], vertices[i + 1], pixels_table, color);
       }
     }

@@ -1,0 +1,19 @@
+box.push_back(new Vector4D<float>(-50, 50,  -50)); // przod od ekranu
+box.push_back(new Vector4D<float>( 50, 50,  -50)); // przod od ekranu
+box.push_back(new Vector4D<float>( 50,-50,  -50)); // przod od ekranu
+box.push_back(new Vector4D<float>(-50,-50,  -50)); // przod od ekranu
+box.push_back(new Vector4D<float>(-50, 50, -150)); // przod od ekranu
+box.push_back(new Vector4D<float>( 50, 50, -150)); // przod od ekranu
+box.push_back(new Vector4D<float>( 50,-50, -150)); // przod od ekranu
+box.push_back(new Vector4D<float>(-50,-50, -150)); // przod od ekranu
+
+
+
+box.push_back(new Vector4D<float>(-50, 50,  50)); // przod od ekranu
+box.push_back(new Vector4D<float>( 50, 50,  50)); // przod od ekranu
+box.push_back(new Vector4D<float>( 50,-50,  50)); // przod od ekranu
+box.push_back(new Vector4D<float>(-50,-50,  50)); // przod od ekranu
+box.push_back(new Vector4D<float>(-50, 50, -50)); // przod od ekranu
+box.push_back(new Vector4D<float>( 50, 50, -50)); // przod od ekranu
+box.push_back(new Vector4D<float>( 50,-50, -50)); // przod od ekranu
+box.push_back(new Vector4D<float>(-50,-50, -50)); // przod od ekranu

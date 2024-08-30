@@ -56,7 +56,7 @@ ScreenWriter::ScreenWriter(const Vector2D<int>* window_dimensions) {
 
   for (int i = 0; i < top.size(); i++) {
     vertical_top_positions_[i] = top.at(i);
-    std::cout << top[i] << "\n";
+    // std::cout << top[i] << "\n";
   }
 
   std::sort(bottom.begin(), bottom.end(), std::greater<int>());
@@ -65,7 +65,7 @@ ScreenWriter::ScreenWriter(const Vector2D<int>* window_dimensions) {
 
   for (int i = 0; i < bottom.size(); i++) {
     vertical_bottom_positions_[i] = bottom.at(i);
-    std::cout << bottom[i] << "\n";
+    // std::cout << bottom[i] << "\n";
   }
 
   int step;
