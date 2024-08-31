@@ -22,6 +22,13 @@ class Vector4D {
     this->z_ = z;
     this->w_ = w;
   }
+
+  Vector4D(const Vector4D* vector_4d) {
+    x_ = vector_4d->x_;
+    y_ = vector_4d->y_;
+    z_ = vector_4d->z_;
+    w_ = vector_4d->w_;
+  }
 };
 
 #endif

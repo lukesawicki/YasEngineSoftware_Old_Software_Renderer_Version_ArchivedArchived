@@ -138,6 +138,12 @@
     <ClInclude Include="point_3d.hpp">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="vector_3d.hpp">
+      <Filter>Mathematics</Filter>
+    </ClInclude>
+    <ClInclude Include="triangle_2d.hpp">
+      <Filter>Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="yas_engine.cpp">
@@ -209,8 +215,8 @@
     <ClCompile Include="math_picture.cpp">
       <Filter>Gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="vector_3d.cpp">
-      <Filter>Mathematics</Filter>
+    <ClCompile Include="triangle_3d.hpp">
+      <Filter>Renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

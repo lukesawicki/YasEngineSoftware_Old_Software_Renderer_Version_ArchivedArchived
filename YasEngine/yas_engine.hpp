@@ -17,6 +17,8 @@
 #include "pixels_table.hpp"
 #include "player.hpp"
 #include "screen_writer.hpp"
+#include "triangle_2d.hpp"
+#include "triangle_3d.hpp"
 #include "vector_2d.hpp"
 
 class YasEngine {
@@ -244,7 +246,16 @@ class YasEngine {
 
   std::vector<Vector4D<float>*> local_box_;
   std::vector<Vector4D<float>*> world_box_;
+  std::vector<Triangle3D*> box_triangles_world;
+  std::vector<Triangle3D*> box_triangles_local;
+
+  void pushUniqueTriangle(std::vector<Triangle3D*>& triangles,
+                          Triangle3D* triangle);
+
   Vector2D<float>* box_2d_;
+
+  std::vector<Triangle2D*> triangles_2d_;
+  
   float box_speed_ = 30;
 
   //
@@ -298,9 +309,6 @@ class YasEngine {
   void DrawButtons();
   void BoxProcessing();
   void DrawBox();
-  
-
-
 };
 
 #endif

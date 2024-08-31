@@ -19,6 +19,11 @@ class Vector2D {
     this->y_ = y;
   }
 
+    Vector2D(const Vector2D* vector_2d) {
+    x_ = vector_2d->x_;
+    y_ = vector_2d->y_;
+  }
+
   static void NormalizedVector(Vector2D<Type>& vector) {
     double magnitude = GetVectorMagnitude(vector);
     double x = vector.x_ / magnitude;

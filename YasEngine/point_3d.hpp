@@ -30,18 +30,11 @@ class Point3d {
     this->w_ = w;
   }
 
-  Point3d(Type r, Type g, Type b, Type a) {
-    this->r_ = r;
-    this->g_ = g;
-    this->b_ = b;
-    this->a_ = a;
-  }
-
-    SetColor(const Vector4D<Uint8>& color) {
-    this->r_ = color.x;
-    this->g_ = color.y;
-    this->b_ = color.z;
-    this->a_ = color.w;
+  void SetColor(const Vector4D<Uint8>& color) {
+    this->r_ = color.x_;
+    this->g_ = color.y_;
+    this->b_ = color.z_;
+    this->a_ = color.w_;
   }
 
   Point3d(Vector4D<Type> position) {
