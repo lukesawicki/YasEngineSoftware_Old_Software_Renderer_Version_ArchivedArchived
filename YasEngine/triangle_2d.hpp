@@ -6,6 +6,12 @@ struct Triangle2D {
   Vector2D<float>* first_vertex;
   Vector2D<float>* second_vertex;
   Vector2D<float>* third_vertex;
+
+  Triangle2D() {
+    first_vertex = new Vector2D<float>;
+    second_vertex = new Vector2D<float>;
+    third_vertex = new Vector2D<float>;
+  }
 };
 
 #endif

@@ -987,6 +987,10 @@ void YasEngine::PrepareGameWorld() {
       box_triangles_local.push_back(triangles.at(i));
  }
 
+  for (int i = 0; i < triangles.size(); i++) {
+   box_triangles_world.push_back(new Triangle3D(box_triangles_local.at(i)));
+ }
+
   for (int i = 0; i < local_box_.size(); i++) {
     world_box_.push_back(
         new Vector4D(local_box_.at(i)->x_, local_box_.at(i)->y_,
