@@ -31,7 +31,7 @@ class GameObject {
   float start_angle_ = 0.0F;
   float step_angle_;
   float direction_mouse_angle_ = 0;
-  float speed_ = 0.0F;
+  float speed_ = 20.0F;
 
   Vector2D<float> velocity_;
 

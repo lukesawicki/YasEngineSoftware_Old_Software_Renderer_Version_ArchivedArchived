@@ -245,10 +245,12 @@ class YasEngine {
   std::vector<Vector4D<float>*> local_box_;
   std::vector<Vector4D<float>*> world_box_;
   Vector2D<float>* box_2d_;
+  float box_speed_ = 30;
+
   //
   Vector2D<float>* testLines;
   //
-  const int kdistanceFromProjectionPlane = 200;
+  const int kdistanceFromProjectionPlane = 50;
   //
   Vector4D<float> box_position_;
 

@@ -866,7 +866,7 @@ void YasEngine::PrepareGameWorld() {
 
   box_position_.x_ = 0;
   box_position_.y_ = 0;
-  box_position_.z_ = -10;
+  box_position_.z_ = -200;
   //
   local_box_.push_back(new Vector4D<float>(-50, 50, 50, 0));    // przod od ekranu
   local_box_.push_back(new Vector4D<float>(50, 50, 50,0));     // przod od ekranu
@@ -1108,10 +1108,19 @@ void YasEngine::BoxProcessing() {
   
   for (int i = 0; i < world_box_.size(); i++) {
 
-    box_2d_[i].x_ = 0 +(world_box_.at(i)->x_ * kdistanceFromProjectionPlane) /
-                        world_box_.at(i)->z_;
-    box_2d_[i].y_ = 0 - (world_box_.at(i)->y_ * kdistanceFromProjectionPlane) /
-                    world_box_.at(i)->z_;
+    box_2d_[i].x_ = 0 + ((world_box_.at(i)->x_ * kdistanceFromProjectionPlane) /
+                        world_box_.at(i)->z_);
+    box_2d_[i].y_ = 0 - ((world_box_.at(i)->y_ * kdistanceFromProjectionPlane) /
+                    world_box_.at(i)->z_);
+  }
+
+  if (input_->up && !input_->down) {
+    box_position_.z_ = box_position_.z_ + delta_time_ * box_speed_;
+  }
+
+  // DOWN
+  if (input_->down && !input_->up) {
+    box_position_.z_ = box_position_.z_ + delta_time_ * (-box_speed_);
   }
 
 }
@@ -1123,8 +1132,17 @@ void YasEngine::BoxProcessing() {
 // PixelsTable& pixels_table) {
 
 void YasEngine::DrawBox() {
-  DrawNumbersAsGroupOfLines(box_2d_, world_box_.size(), kBlue, true, *pixels_table_);
+  // DrawNumbersAsGroupOfLines(box_2d_, world_box_.size(), kBlue, true, *pixels_table_);
   DrawNumbersAsGroupOfLines(testLines, 8, kYellow, true, *pixels_table_);
+
+  for (int i = 0; i < 8; i++) {
+    for (int j = 0; j < 8; j++) {
+      if (i != j) {
+        DrawLine(box_2d_[i], box_2d_[j], *pixels_table_, kBlue);
+      }
+    }
+  }
+
 }
 
 Button::ButtonId YasEngine::CheckWhichButtonClicked() {
