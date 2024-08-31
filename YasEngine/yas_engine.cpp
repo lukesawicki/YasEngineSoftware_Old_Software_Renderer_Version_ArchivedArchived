@@ -1259,34 +1259,34 @@ void YasEngine::BoxProcessing() {
 
 
   for (int i = 0; i < triangles_2d_.size(); i++) {
-    triangles_2d_.at(i)->first_vertex->x_ =
+    triangles_2d_.at(i)->first_vertex->x_ = 0 +
         ((box_triangles_world.at(i)->first_vertex->x_ *
-          kdistanceFromProjectionPlane) / box_triangles_world.at(i)->first_vertex->x_);
-        triangles_2d_.at(i)->first_vertex->y_ =
+          kdistanceFromProjectionPlane) / box_triangles_world.at(i)->first_vertex->z_);
+        triangles_2d_.at(i)->first_vertex->y_ = 0 -
         ((box_triangles_world.at(i)->first_vertex->y_ *
-          kdistanceFromProjectionPlane) / box_triangles_world.at(i)->first_vertex->y_);
+          kdistanceFromProjectionPlane) / box_triangles_world.at(i)->first_vertex->z_);
 
-        triangles_2d_.at(i)->second_vertex->x_ =
+        triangles_2d_.at(i)->second_vertex->x_ = 0 +
             ((box_triangles_world.at(i)->second_vertex->x_ *
-          kdistanceFromProjectionPlane) / box_triangles_world.at(i)->second_vertex->x_);
-        triangles_2d_.at(i)->second_vertex->y_ =
+          kdistanceFromProjectionPlane) / box_triangles_world.at(i)->second_vertex->z_);
+        triangles_2d_.at(i)->second_vertex->y_ = 0 -
             ((box_triangles_world.at(i)->second_vertex->y_ *
-          kdistanceFromProjectionPlane) / box_triangles_world.at(i)->second_vertex->y_);
+          kdistanceFromProjectionPlane) / box_triangles_world.at(i)->second_vertex->z_);
 
-        triangles_2d_.at(i)->third_vertex->x_ =
+        triangles_2d_.at(i)->third_vertex->x_ = 0 +
             ((box_triangles_world.at(i)->third_vertex->x_ *
-          kdistanceFromProjectionPlane) / box_triangles_world.at(i)->third_vertex->x_);
-        triangles_2d_.at(i)->third_vertex->y_ =
+          kdistanceFromProjectionPlane) / box_triangles_world.at(i)->third_vertex->z_);
+        triangles_2d_.at(i)->third_vertex->y_ = 0 -
             ((box_triangles_world.at(i)->third_vertex->y_ *
-          kdistanceFromProjectionPlane) / box_triangles_world.at(i)->third_vertex->y_);
+          kdistanceFromProjectionPlane) / box_triangles_world.at(i)->third_vertex->z_);
   }
 
-  //   for (int i = 0; i < world_box_.size(); i++) {
-  //   box_2d_[i].x_ = 0 + ((world_box_.at(i)->x_ * kdistanceFromProjectionPlane) /
-  //                        world_box_.at(i)->z_);
-  //   box_2d_[i].y_ = 0 - ((world_box_.at(i)->y_ * kdistanceFromProjectionPlane) /
-  //                        world_box_.at(i)->z_);
-  // }
+    for (int i = 0; i < world_box_.size(); i++) {
+    box_2d_[i].x_ = 0 + ((world_box_.at(i)->x_ * kdistanceFromProjectionPlane) /
+                         world_box_.at(i)->z_);
+    box_2d_[i].y_ = 0 - ((world_box_.at(i)->y_ * kdistanceFromProjectionPlane) /
+                         world_box_.at(i)->z_);
+    }
 
 
 
