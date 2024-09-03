@@ -899,118 +899,180 @@ void YasEngine::PrepareGameWorld() {
   local_box_.push_back(new Vector4D<float>(50, 50, 50,0));     // przod od ekranu
   local_box_.push_back(new Vector4D<float>(50, -50, 50, 0));    // przod od ekranu
   local_box_.push_back(new Vector4D<float>(-50, -50, 50, 0));   // przod od ekranu
+
   local_box_.push_back(new Vector4D<float>(-50, 50, -50,0));   // przod od ekranu
   local_box_.push_back(new Vector4D<float>(50, 50, -50,0));    // przod od ekranu
   local_box_.push_back(new Vector4D<float>(50, -50, -50,0));   // przod od ekranu
   local_box_.push_back(new Vector4D<float>(-50, -50, -50,0));  // przod od ekranu
 
-  bool end = false;
-  std::vector<Triangle3D*> triangles;
-  Triangle3D* tri;
+  trojkaty = new Vector4D<float>[36];
+  trojkatySwiat = new Vector4D<float>[36];
+
+  trojkaty[0] = local_box_.at(0);
+  trojkaty[1] = local_box_.at(1);
+  trojkaty[2] = local_box_.at(2);
+
+  trojkaty[3] = local_box_.at(0);
+  trojkaty[4] = local_box_.at(2);
+  trojkaty[5] = local_box_.at(3);
+
+  trojkaty[6] = local_box_.at(5);
+  trojkaty[7] = local_box_.at(4);
+  trojkaty[8] = local_box_.at(7);
+
+  trojkaty[9] = local_box_.at(5);
+  trojkaty[10] = local_box_.at(7);
+  trojkaty[11] = local_box_.at(6);
+
+  trojkaty[12] = local_box_.at(4);
+  trojkaty[13] = local_box_.at(5);
+  trojkaty[14] = local_box_.at(1);
+
+  trojkaty[15] = local_box_.at(4);
+  trojkaty[16] = local_box_.at(1);
+  trojkaty[17] = local_box_.at(0);
+
+  trojkaty[18] = local_box_.at(3);
+  trojkaty[19] = local_box_.at(2);
+  trojkaty[20] = local_box_.at(6);
+
+  trojkaty[21] = local_box_.at(3);
+  trojkaty[22] = local_box_.at(6);
+  trojkaty[23] = local_box_.at(7);
+
+  trojkaty[24] = local_box_.at(4);
+  trojkaty[25] = local_box_.at(0);
+  trojkaty[26] = local_box_.at(3);
+
+  trojkaty[27] = local_box_.at(4);
+  trojkaty[28] = local_box_.at(3);
+  trojkaty[29] = local_box_.at(7);
+
+  trojkaty[30] = local_box_.at(1);
+  trojkaty[31] = local_box_.at(5);
+  trojkaty[32] = local_box_.at(6);
+
+  trojkaty[33] = local_box_.at(1);
+  trojkaty[34] = local_box_.at(6);
+  trojkaty[35] = local_box_.at(2);
+
+  
+
+  for (int i = 0; i < 36; i++) {
+    trojkatySwiat[i] =
+        new Vector4D<float>(trojkaty[i].x_, trojkaty[i].y_, trojkaty[i].z_, 0);
+  }
+
+  // bool end = false;
+  // std::vector<Triangle3D*> triangles;
+  // Triangle3D* tri;
   // while (!end) {
-    for (int i = 0; i < 8; i++) {
-      float x = local_box_.at(i)->x_;
-      std::vector<Vector4D<float>*> square_planes_x;
-      for (int j = 0; j < 8; j++) {
-        if (local_box_.at(j)->x_ == x) {
-          square_planes_x.push_back(
-              new Vector4D<float>(local_box_.at(j)->x_, local_box_.at(j)->y_,
-                                  local_box_.at(j)->z_, local_box_.at(j)->w_));
-        }
-      }
-      tri = new Triangle3D();
-      tri->first_vertex = new Vector4D<float>(square_planes_x.at(0));
-      tri->second_vertex = new Vector4D<float>(square_planes_x.at(1));
-      tri->third_vertex = new Vector4D<float>(square_planes_x.at(2));
-      pushUniqueTriangle(triangles, tri);
-      tri = new Triangle3D();
-      tri->first_vertex = new Vector4D<float>(square_planes_x.at(2));
-      tri->second_vertex = new Vector4D<float>(square_planes_x.at(3));
-      tri->third_vertex = new Vector4D<float>(square_planes_x.at(0));
-      pushUniqueTriangle(triangles, tri);
-      // triangles.push_back(tri);
-      tri = nullptr;
-      ///////////////////////square_planes_x.clear();
-
-      float y = local_box_.at(i)->y_;
-      std::vector<Vector4D<float>*> square_planes_y;
-      for (int j = 0; j < 8; j++) {
-        if (local_box_.at(j)->y_ == y) {
-          square_planes_y.push_back(
-              new Vector4D<float>(local_box_.at(j)->x_, local_box_.at(j)->y_,
-                                  local_box_.at(j)->z_, local_box_.at(j)->w_));
-        }
-      }
-      tri = new Triangle3D();
-      tri->first_vertex = new Vector4D<float>(square_planes_y.at(0));
-      tri->second_vertex = new Vector4D<float>(square_planes_y.at(1));
-      tri->third_vertex = new Vector4D<float>(square_planes_y.at(2));
-      pushUniqueTriangle(triangles, tri);
-      tri = new Triangle3D();
-      tri->first_vertex = new Vector4D<float>(square_planes_y.at(2));
-      tri->second_vertex = new Vector4D<float>(square_planes_y.at(3));
-      tri->third_vertex = new Vector4D<float>(square_planes_y.at(0));
-      pushUniqueTriangle(triangles, tri);
-      // triangles.push_back(tri);
-      tri = nullptr;
-      ///////////////////////square_planes_y.clear();
-
-      float z = local_box_.at(i)->z_;
-      std::vector<Vector4D<float>*> square_planes_z;
-      for (int j = 0; j < 8; j++) {
-        if (local_box_.at(j)->z_ == z) {
-          square_planes_z.push_back(
-              new Vector4D<float>(local_box_.at(j)->x_, local_box_.at(j)->y_,
-                                  local_box_.at(j)->z_, local_box_.at(j)->w_));
-        }
-      }
-      tri = new Triangle3D();
-      tri->first_vertex = new Vector4D<float>(square_planes_z.at(0));
-      tri->second_vertex = new Vector4D<float>(square_planes_z.at(1));
-      tri->third_vertex = new Vector4D<float>(square_planes_z.at(2));
-      pushUniqueTriangle(triangles, tri);
-      tri = new Triangle3D();
-      tri->first_vertex = new Vector4D<float>(square_planes_z.at(2));
-      tri->second_vertex = new Vector4D<float>(square_planes_z.at(3));
-      tri->third_vertex = new Vector4D<float>(square_planes_z.at(0));
-      pushUniqueTriangle(triangles, tri);
-      // triangles.push_back(tri);
-      tri = nullptr;
-      ///////////////////////square_planes_z.clear();
-    }
+    // for (int i = 0; i < 8; i++) {
+    //   float x = local_box_.at(i)->x_;
+    //   std::vector<Vector4D<float>*> square_planes_x;
+    //   for (int j = 0; j < 8; j++) {
+    //     if (local_box_.at(j)->x_ == x) {
+    //       square_planes_x.push_back(
+    //           new Vector4D<float>(local_box_.at(j)->x_, local_box_.at(j)->y_,
+    //                               local_box_.at(j)->z_, local_box_.at(j)->w_));
+    //     }
+    //   }
+    //   tri = new Triangle3D();
+    //   tri->first_vertex = new Vector4D<float>(square_planes_x.at(0));
+    //   tri->second_vertex = new Vector4D<float>(square_planes_x.at(1));
+    //   tri->third_vertex = new Vector4D<float>(square_planes_x.at(2));
+    //   pushUniqueTriangle(triangles, tri);
+    //   tri = new Triangle3D();
+    //   tri->first_vertex = new Vector4D<float>(square_planes_x.at(2));
+    //   tri->second_vertex = new Vector4D<float>(square_planes_x.at(3));
+    //   tri->third_vertex = new Vector4D<float>(square_planes_x.at(0));
+    //   pushUniqueTriangle(triangles, tri);
+    //   // triangles.push_back(tri);
+    //   tri = nullptr;
+    //   ///////////////////////square_planes_x.clear();
+    //
+    //   float y = local_box_.at(i)->y_;
+    //   std::vector<Vector4D<float>*> square_planes_y;
+    //   for (int j = 0; j < 8; j++) {
+    //     if (local_box_.at(j)->y_ == y) {
+    //       square_planes_y.push_back(
+    //           new Vector4D<float>(local_box_.at(j)->x_, local_box_.at(j)->y_,
+    //                               local_box_.at(j)->z_, local_box_.at(j)->w_));
+    //     }
+    //   }
+    //   tri = new Triangle3D();
+    //   tri->first_vertex = new Vector4D<float>(square_planes_y.at(0));
+    //   tri->second_vertex = new Vector4D<float>(square_planes_y.at(1));
+    //   tri->third_vertex = new Vector4D<float>(square_planes_y.at(2));
+    //   pushUniqueTriangle(triangles, tri);
+    //   tri = new Triangle3D();
+    //   tri->first_vertex = new Vector4D<float>(square_planes_y.at(2));
+    //   tri->second_vertex = new Vector4D<float>(square_planes_y.at(3));
+    //   tri->third_vertex = new Vector4D<float>(square_planes_y.at(0));
+    //   pushUniqueTriangle(triangles, tri);
+    //   // triangles.push_back(tri);
+    //   tri = nullptr;
+    //   ///////////////////////square_planes_y.clear();
+    //
+    //   float z = local_box_.at(i)->z_;
+    //   std::vector<Vector4D<float>*> square_planes_z;
+    //   for (int j = 0; j < 8; j++) {
+    //     if (local_box_.at(j)->z_ == z) {
+    //       square_planes_z.push_back(
+    //           new Vector4D<float>(local_box_.at(j)->x_, local_box_.at(j)->y_,
+    //                               local_box_.at(j)->z_, local_box_.at(j)->w_));
+    //     }
+    //   }
+    //   tri = new Triangle3D();
+    //   tri->first_vertex = new Vector4D<float>(square_planes_z.at(0));
+    //   tri->second_vertex = new Vector4D<float>(square_planes_z.at(1));
+    //   tri->third_vertex = new Vector4D<float>(square_planes_z.at(2));
+    //   pushUniqueTriangle(triangles, tri);
+    //   tri = new Triangle3D();
+    //   tri->first_vertex = new Vector4D<float>(square_planes_z.at(2));
+    //   tri->second_vertex = new Vector4D<float>(square_planes_z.at(3));
+    //   tri->third_vertex = new Vector4D<float>(square_planes_z.at(0));
+    //   pushUniqueTriangle(triangles, tri);
+    //   // triangles.push_back(tri);
+    //   tri = nullptr;
+    //   ///////////////////////square_planes_z.clear();
+    // }
     // if (triangles.size() >= 12) {
     //   end = true;
     // }
   // }
+ //
+ // for (int i = 0; i < triangles.size(); i++) {
+ //      box_triangles_local.push_back(triangles.at(i));
+ // }
+ //
+ //  for (int i = 0; i < triangles.size(); i++) {
+ //   box_triangles_world.push_back(new Triangle3D(box_triangles_local.at(i)));
+ // }
 
- for (int i = 0; i < triangles.size(); i++) {
-      box_triangles_local.push_back(triangles.at(i));
- }
-
-  for (int i = 0; i < triangles.size(); i++) {
-   box_triangles_world.push_back(new Triangle3D(box_triangles_local.at(i)));
- }
-
-  for (int i = 0; i < local_box_.size(); i++) {
-    world_box_.push_back(
-        new Vector4D(local_box_.at(i)->x_, local_box_.at(i)->y_,
-                     local_box_.at(i)->z_, local_box_.at(i)->w_));
-  }
+  // for (int i = 0; i < local_box_.size(); i++) {
+  //   world_box_.push_back(
+  //       new Vector4D(local_box_.at(i)->x_, local_box_.at(i)->y_,
+  //                    local_box_.at(i)->z_, local_box_.at(i)->w_));
+  // }
   
-    for (int i = 0; i < local_box_.size(); i++) {
-    // world_box_.at(i)->= local_box_->+ box_position_;
-    world_box_.at(i)->x_ = local_box_.at(i)->x_ + box_position_.x_;
-    world_box_.at(i)->y_ = local_box_.at(i)->y_ + box_position_.y_;
-    world_box_.at(i)->z_ = local_box_.at(i)->z_ + box_position_.z_;
-    world_box_.at(i)->w_ = local_box_.at(i)->w_ + box_position_.w_;
-  }
+  //   for (int i = 0; i < local_box_.size(); i++) {
+  //   // world_box_.at(i)->= local_box_->+ box_position_;
+  //   world_box_.at(i)->x_ = local_box_.at(i)->x_ + box_position_.x_;
+  //   world_box_.at(i)->y_ = local_box_.at(i)->y_ + box_position_.y_;
+  //   world_box_.at(i)->z_ = local_box_.at(i)->z_ + box_position_.z_;
+  //   world_box_.at(i)->w_ = local_box_.at(i)->w_ + box_position_.w_;
+  // }
 
-  box_2d_ = new Vector2D<float>[world_box_.size()];
-
-  for (int i = 0; i < box_triangles_local.size(); i++) {
-    triangles_2d_.push_back(new Triangle2D);
-  }
-
+  // box_2d_ = new Vector2D<float>[world_box_.size()];
+  //
+  // for (int i = 0; i < box_triangles_local.size(); i++) {
+  //   triangles_2d_.push_back(new Triangle2D);
+  // }
+  //
+  // for (int i = 0; i < 36; i++) {
+  //
+  // }
 
   // testLines = new Vector2D<float>[8];
   // testLines[0].x_= 5;
@@ -1218,21 +1280,20 @@ void YasEngine::BoxProcessing() {
   // std::vector<Vector4D<float>*> world_box_;
   // std::vector<Vector2D<float>*> box_2d_;
   // model to world
-  for (int i = 0; i < local_box_.size(); i++) {
-    // world_box_.at(i)->= local_box_->+ box_position_;
-    world_box_.at(i)->x_ = local_box_.at(i)->x_ + box_position_.x_;
-    world_box_.at(i)->y_ = local_box_.at(i)->y_ + box_position_.y_;
-    world_box_.at(i)->z_ = local_box_.at(i)->z_ + box_position_.z_;
-    world_box_.at(i)->w_ = local_box_.at(i)->w_ + box_position_.w_;
-  }
-  
-  for (int i = 0; i < world_box_.size(); i++) {
+  // for (int i = 0; i < local_box_.size(); i++) {
+  //   // world_box_.at(i)->= local_box_->+ box_position_;
+  //   world_box_.at(i)->x_ = local_box_.at(i)->x_ + box_position_.x_;
+  //   world_box_.at(i)->y_ = local_box_.at(i)->y_ + box_position_.y_;
+  //   world_box_.at(i)->z_ = local_box_.at(i)->z_ + box_position_.z_;
+  //   world_box_.at(i)->w_ = local_box_.at(i)->w_ + box_position_.w_;
+  // }
 
-    box_2d_[i].x_ = 0 + ((world_box_.at(i)->x_ * kdistanceFromProjectionPlane) /
-                        world_box_.at(i)->z_);
-    box_2d_[i].y_ = 0 - ((world_box_.at(i)->y_ * kdistanceFromProjectionPlane) /
-                    world_box_.at(i)->z_);
-  }
+  // for (int i = 0; i < world_box_.size(); i++) {
+  //   box_2d_[i].x_ = 0 + ((world_box_.at(i)->x_ * kdistanceFromProjectionPlane) /
+  //                        world_box_.at(i)->z_);
+  //   box_2d_[i].y_ = 0 - ((world_box_.at(i)->y_ * kdistanceFromProjectionPlane) /
+  //                        world_box_.at(i)->z_);
+  // }
 
   if (input_->up && !input_->down) {
     box_position_.z_ = box_position_.z_ + delta_time_ * box_speed_;
@@ -1243,52 +1304,74 @@ void YasEngine::BoxProcessing() {
     box_position_.z_ = box_position_.z_ + delta_time_ * (-box_speed_);
   }
 
-  for (int i = 0; i < box_triangles_local.size(); i++) {
-    box_triangles_world.at(i)->first_vertex->x_ = box_triangles_local.at(i)->first_vertex->x_ + box_position_.x_;
-    box_triangles_world.at(i)->first_vertex->y_ = box_triangles_local.at(i)->first_vertex->y_ + box_position_.y_;
-    box_triangles_world.at(i)->first_vertex->z_ = box_triangles_local.at(i)->first_vertex->z_ + box_position_.z_;
+  // for (int i = 0; i < box_triangles_local.size(); i++) {
+  //   box_triangles_world.at(i)->first_vertex->x_ =
+  //       box_triangles_local.at(i)->first_vertex->x_ + box_position_.x_;
+  //   box_triangles_world.at(i)->first_vertex->y_ =
+  //       box_triangles_local.at(i)->first_vertex->y_ + box_position_.y_;
+  //   box_triangles_world.at(i)->first_vertex->z_ =
+  //       box_triangles_local.at(i)->first_vertex->z_ + box_position_.z_;
+  //
+  //   box_triangles_world.at(i)->second_vertex->x_ =
+  //       box_triangles_local.at(i)->second_vertex->x_ + box_position_.x_;
+  //   box_triangles_world.at(i)->second_vertex->y_ =
+  //       box_triangles_local.at(i)->second_vertex->y_ + box_position_.y_;
+  //   box_triangles_world.at(i)->second_vertex->z_ =
+  //       box_triangles_local.at(i)->second_vertex->z_ + box_position_.z_;
+  //
+  //   box_triangles_world.at(i)->third_vertex->x_ =
+  //       box_triangles_local.at(i)->third_vertex->x_ + box_position_.x_;
+  //   box_triangles_world.at(i)->third_vertex->y_ =
+  //       box_triangles_local.at(i)->third_vertex->y_ + box_position_.y_;
+  //   box_triangles_world.at(i)->third_vertex->z_ =
+  //       box_triangles_local.at(i)->third_vertex->z_ + box_position_.z_;
+  // }
 
-    box_triangles_world.at(i)->second_vertex->x_ = box_triangles_local.at(i)->second_vertex->x_ + box_position_.x_;
-    box_triangles_world.at(i)->second_vertex->y_ = box_triangles_local.at(i)->second_vertex->y_ + box_position_.y_;
-    box_triangles_world.at(i)->second_vertex->z_ = box_triangles_local.at(i)->second_vertex->z_ + box_position_.z_;
-
-    box_triangles_world.at(i)->third_vertex->x_ = box_triangles_local.at(i)->third_vertex->x_ + box_position_.x_;
-    box_triangles_world.at(i)->third_vertex->y_ = box_triangles_local.at(i)->third_vertex->y_ + box_position_.y_;
-    box_triangles_world.at(i)->third_vertex->z_ = box_triangles_local.at(i)->third_vertex->z_ + box_position_.z_;
+  for (int i = 0; i < 36; i++) {
+    trojkatySwiat[i].x_ = trojkaty[i].x_ + box_position_.x_;
+    trojkatySwiat[i].y_ = trojkaty[i].y_ + box_position_.y_;
+    trojkatySwiat[i].z_ = trojkaty[i].z_ + box_position_.z_;
   }
 
 
-  for (int i = 0; i < triangles_2d_.size(); i++) {
-    triangles_2d_.at(i)->first_vertex->x_ = 0 +
-        ((box_triangles_world.at(i)->first_vertex->x_ *
-          kdistanceFromProjectionPlane) / box_triangles_world.at(i)->first_vertex->z_);
-        triangles_2d_.at(i)->first_vertex->y_ = 0 -
-        ((box_triangles_world.at(i)->first_vertex->y_ *
-          kdistanceFromProjectionPlane) / box_triangles_world.at(i)->first_vertex->z_);
+  // for (int i = 0; i < triangles_2d_.size(); i++) {
+  //   triangles_2d_.at(i)->first_vertex->x_ = 0 +
+  //       ((box_triangles_world.at(i)->first_vertex->x_ *
+  //         kdistanceFromProjectionPlane) / box_triangles_world.at(i)->first_vertex->z_);
+  //       triangles_2d_.at(i)->first_vertex->y_ = 0 -
+  //       ((box_triangles_world.at(i)->first_vertex->y_ *
+  //         kdistanceFromProjectionPlane) / box_triangles_world.at(i)->first_vertex->z_);
+  //
+  //       triangles_2d_.at(i)->second_vertex->x_ = 0 +
+  //           ((box_triangles_world.at(i)->second_vertex->x_ *
+  //         kdistanceFromProjectionPlane) / box_triangles_world.at(i)->second_vertex->z_);
+  //       triangles_2d_.at(i)->second_vertex->y_ = 0 -
+  //           ((box_triangles_world.at(i)->second_vertex->y_ *
+  //         kdistanceFromProjectionPlane) / box_triangles_world.at(i)->second_vertex->z_);
+  //
+  //       triangles_2d_.at(i)->third_vertex->x_ = 0 +
+  //           ((box_triangles_world.at(i)->third_vertex->x_ *
+  //         kdistanceFromProjectionPlane) / box_triangles_world.at(i)->third_vertex->z_);
+  //       triangles_2d_.at(i)->third_vertex->y_ = 0 -
+  //           ((box_triangles_world.at(i)->third_vertex->y_ *
+  //         kdistanceFromProjectionPlane) / box_triangles_world.at(i)->third_vertex->z_);
+  // }
 
-        triangles_2d_.at(i)->second_vertex->x_ = 0 +
-            ((box_triangles_world.at(i)->second_vertex->x_ *
-          kdistanceFromProjectionPlane) / box_triangles_world.at(i)->second_vertex->z_);
-        triangles_2d_.at(i)->second_vertex->y_ = 0 -
-            ((box_triangles_world.at(i)->second_vertex->y_ *
-          kdistanceFromProjectionPlane) / box_triangles_world.at(i)->second_vertex->z_);
+    // for (int i = 0; i < world_box_.size(); i++) {
+    // box_2d_[i].x_ = 0 + ((world_box_.at(i)->x_ * kdistanceFromProjectionPlane) /
+    //                      world_box_.at(i)->z_);
+    // box_2d_[i].y_ = 0 - ((world_box_.at(i)->y_ * kdistanceFromProjectionPlane) /
+    //                      world_box_.at(i)->z_);
+    // }
 
-        triangles_2d_.at(i)->third_vertex->x_ = 0 +
-            ((box_triangles_world.at(i)->third_vertex->x_ *
-          kdistanceFromProjectionPlane) / box_triangles_world.at(i)->third_vertex->z_);
-        triangles_2d_.at(i)->third_vertex->y_ = 0 -
-            ((box_triangles_world.at(i)->third_vertex->y_ *
-          kdistanceFromProjectionPlane) / box_triangles_world.at(i)->third_vertex->z_);
-  }
-
-    for (int i = 0; i < world_box_.size(); i++) {
-    box_2d_[i].x_ = 0 + ((world_box_.at(i)->x_ * kdistanceFromProjectionPlane) /
-                         world_box_.at(i)->z_);
-    box_2d_[i].y_ = 0 - ((world_box_.at(i)->y_ * kdistanceFromProjectionPlane) /
-                         world_box_.at(i)->z_);
+    for (int i = 0; i < 36; i++) {
+      szescian2d[i].x_ =
+          0 + ((trojkatySwiat[i].x_ * kdistanceFromProjectionPlane) /
+               trojkatySwiat[i].z_);
+      szescian2d[i].y_ =
+          0 - ((trojkatySwiat[i].y_ * kdistanceFromProjectionPlane) /
+               trojkatySwiat[i].z_);
     }
-
-
 
 }
 
@@ -1299,26 +1382,11 @@ void YasEngine::BoxProcessing() {
 // PixelsTable& pixels_table) {
 
 void YasEngine::DrawBox() {
-
-  // for (int i = 0; i < 8; i++) {
-  //   for (int j = 0; j < 8; j++) {
-  //     if (i != j) {
-  //       DrawLine(box_2d_[i], box_2d_[j], *pixels_table_, kBlue);
-  //     }
-  //   }
-  // }
-
-  for (int i = 0; i < triangles_2d_.size(); i++) {
-    DrawLine(triangles_2d_.at(i)->first_vertex,
-             triangles_2d_.at(i)->second_vertex, *pixels_table_, kYellow);
-    DrawLine(triangles_2d_.at(i)->second_vertex,
-             triangles_2d_.at(i)->third_vertex, *pixels_table_, kYellow);
-    DrawLine(triangles_2d_.at(i)->third_vertex,
-             triangles_2d_.at(i)->first_vertex, *pixels_table_, kYellow);
+    for (int i = 0; i < 33; i +=3 ) {
+      DrawLine(szescian2d[i+0], szescian2d[i+1], *pixels_table_, kYellow);
+      DrawLine(szescian2d[i + 1], szescian2d[i + 2], *pixels_table_, kYellow);
+      DrawLine(szescian2d[i + 2], szescian2d[i + 0], *pixels_table_, kYellow);
   }
-
-
-
 }
 
 Button::ButtonId YasEngine::CheckWhichButtonClicked() {

@@ -248,11 +248,15 @@ class YasEngine {
   std::vector<Vector4D<float>*> world_box_;
   std::vector<Triangle3D*> box_triangles_world;
   std::vector<Triangle3D*> box_triangles_local;
-
+  Vector4D<float>* trojkaty;
+  Vector4D<float>* trojkatySwiat;
+  std::vector<Vector4D<float>*> czworoscian;
   void pushUniqueTriangle(std::vector<Triangle3D*>& triangles,
                           Triangle3D* triangle);
 
   Vector2D<float>* box_2d_;
+  Vector2D<float>* szescian2d = new Vector2D<float>[36];
+
 
   std::vector<Triangle2D*> triangles_2d_;
   
