@@ -1,13 +1,12 @@
 #ifndef VECTOR_4D_HPP
 #define VECTOR_4D_HPP
 
-template <typename Type>
-class Vector4D {
+typedef class Vector4D {
  public:
-  Type x_;
-  Type y_;
-  Type z_;
-  Type w_;
+  float x_;
+  float y_;
+  float z_;
+  float w_;
 
   Vector4D() {
     this->x_ = 0;
@@ -16,7 +15,7 @@ class Vector4D {
     this->w_ = 0;
   }
 
-  Vector4D(Type x, Type y, Type z, Type w) {
+  Vector4D(float x, float y, float z, float w = 0) {
     this->x_ = x;
     this->y_ = y;
     this->z_ = z;

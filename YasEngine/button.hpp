@@ -22,7 +22,7 @@ class Button : public GameObject {
   ButtonId button_id_;
 
   Button(const ButtonId& button_id, std::string text,
-         const Vector4D<Uint8>& color, ScreenWriter* screen_writer);
+         const Color& color, ScreenWriter* screen_writer);
   ~Button();
 
   void Generate() override;
@@ -33,7 +33,7 @@ class Button : public GameObject {
 
   void set_position(float x, float y) { GameObject::set_position(x, y); }
 
-  void set_position(const Vector2D<float>& position) {
+  void set_position(const Vector2D& position) {
     GameObject::set_position(position);
   }
 };

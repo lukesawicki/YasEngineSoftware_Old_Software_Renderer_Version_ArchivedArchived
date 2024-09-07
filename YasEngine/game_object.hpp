@@ -1,16 +1,15 @@
 #ifndef game_object_hpp
 #define game_object_hpp
-#include <SDL.h>
 
 #include "collider.hpp"
 #include "vector_2d.hpp"
-#include "vector_4d.hpp"
+#include "color.hpp"
 
 class GameObject {
  public:
   enum WhoAmI {
     kDefaultValue,
-    kProtagonist,
+    kPlayer,
     kProjectile,
     kCollectible,
     kGuiElement
@@ -19,11 +18,11 @@ class GameObject {
   WhoAmI i_am_;
   bool is_alive_ = true;
   Collider collider_;
-  Vector2D<float>* local_vertices_ = nullptr;
-  Vector2D<float>* world_vertices_ = nullptr;
-  Vector2D<float> vector_zero_;
-  Vector2D<float> direction_;
-  Vector4D<Uint8> color_;
+  Vector2D* local_vertices_ = nullptr;
+  Vector2D* world_vertices_ = nullptr;
+  Vector2D vector_zero_;
+  Vector2D direction_;
+  Color color_;
   int number_of_vertices_;
   float rotation_speed_;
   float circumscribed_circle_radius_;
@@ -33,7 +32,7 @@ class GameObject {
   float direction_mouse_angle_ = 0;
   float speed_ = 20.0F;
 
-  Vector2D<float> velocity_;
+  Vector2D velocity_;
 
   virtual void Generate() = 0;
   virtual void GenerateRegularPolygonVertices(float circumscribed_circle_radius,
@@ -56,7 +55,7 @@ class GameObject {
     MoveCollider();
   }
 
-  virtual Vector2D<float> get_position() { return position; }
+  virtual Vector2D get_position() { return position; }
 
   virtual int GetColliderLeftSide() {
     return static_cast<int>(position.x_ - collider_.radius_);
@@ -74,7 +73,7 @@ class GameObject {
     return static_cast<int>(position.y_ - collider_.radius_);
   }
 
-  virtual void set_position(const Vector2D<float>& position) {
+  virtual void set_position(const Vector2D& position) {
     this->position.x_ = position.x_;
     this->position.y_ = position.y_;
     MoveCollider();
@@ -87,15 +86,15 @@ class GameObject {
     collider_.y_ = position.y_;
   }
 
-  virtual void set_color(const Vector4D<Uint8>& color) {
-    this->color_.x_ = color.x_;
-    this->color_.y_ = color.y_;
-    this->color_.z_ = color.z_;
-    this->color_.w_ = color.w_;
+  virtual void set_color(const Color& color) {
+    this->color_.red = color.red;
+    this->color_.green = color.green;
+    this->color_.blue = color.blue;
+    this->color_.alpha = color.alpha;
   }
 
  protected:
-  Vector2D<float> position;
+  Vector2D position;
 };
 
 #endif

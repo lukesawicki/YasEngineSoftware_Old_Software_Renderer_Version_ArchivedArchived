@@ -8,7 +8,7 @@
 FontObject::FontObject() {}
 
 void FontObject::initialize(float radius, float x, float y,
-                            const Vector2D<float>& direction,
+                            const Vector2D& direction,
                             int number_of_vertices) {
   is_alive_ = true;
   i_am_ = GameObject::kGuiElement;
@@ -42,8 +42,8 @@ void FontObject::GenerateRegularPolygonVertices(float circumscribed_circle_radiu
                                                 int number_of_vertices) {
   this->circumscribed_circle_radius_ = circumscribed_circle_radius;
   this->number_of_vertices_ = number_of_vertices;
-  this->world_vertices_ = new Vector2D<float>[number_of_vertices];
-  this->local_vertices_ = new Vector2D<float>[number_of_vertices];
+  this->world_vertices_ = new Vector2D[number_of_vertices];
+  this->local_vertices_ = new Vector2D[number_of_vertices];
 
   angle_for_generate_in_isosceles_polygons_ = start_angle_;
   step_angle_ = 360.0F / number_of_vertices;
@@ -67,13 +67,13 @@ void FontObject::set_position(float x, float y) {
   GameObject::set_position(x, y);
 }
 
-void FontObject::set_position(const Vector2D<float>& position) {
+void FontObject::set_position(const Vector2D& position) {
   GameObject::set_position(position);
 }
 
 void FontObject::Move(float delta_time) {}
 
-void FontObject::set_color(const Vector4D<Uint8>& color) {
+void FontObject::set_color(const Color& color) {
   GameObject::set_color(color);
 }
 

@@ -1,12 +1,11 @@
-#ifndef VECTOR_3D_HPP
-#define VECTOR_3D_HPP
+#ifndef VECTOR_4D_HPP
+#define VECTOR_4D_HPP
 
-template <typename Type>
-class Vector3D {
+typedef class Vector3D {
  public:
-  Type x_;
-  Type y_;
-  Type z_;
+  float x_;
+  float y_;
+  float z_;
 
   Vector3D() {
     this->x_ = 0;
@@ -14,11 +13,17 @@ class Vector3D {
     this->z_ = 0;
   }
 
-  Vector3D(Type x, Type y, Type z) {
+  Vector3D(float x, float y, float z, float w = 0) {
     this->x_ = x;
     this->y_ = y;
     this->z_ = z;
   }
-};
+
+  Vector3D(const Vector3D* vector_4d) {
+    x_ = vector_4d->x_;
+    y_ = vector_4d->y_;
+    z_ = vector_4d->z_;
+  }
+} Point3D;
 
 #endif

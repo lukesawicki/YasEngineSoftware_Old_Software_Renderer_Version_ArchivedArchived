@@ -17,7 +17,7 @@ void Button::RegeneratePolygon() { Generate(); }
 void Button::Move(float delta_time) {}
 
 Button::Button(const ButtonId& button_id, std::string text,
-               const Vector4D<Uint8>& color, ScreenWriter* screen_writer) {
+               const Color& color, ScreenWriter* screen_writer) {
   this->button_id_ = button_id;
   this->text_.assign(text);
   screen_writer_ = screen_writer;

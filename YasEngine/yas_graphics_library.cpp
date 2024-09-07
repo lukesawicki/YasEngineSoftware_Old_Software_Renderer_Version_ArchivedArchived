@@ -1,9 +1,10 @@
+#include <bitset>
 #include "yas_graphics_library.hpp"
 
-#include <bitset>
-/////////////             TODO TO DO
-void DrawLine(const Vector2D<float>& point_0, const Vector2D<float>& point_1,
-              PixelsTable& pixels_table, const Vector4D<Uint8>& drawing_color) {
+struct Color;
+
+void DrawLine(const Vector2D& point_0, const Vector2D& point_1,
+              PixelsTable& pixels_table, const Color& drawing_color) {
   int x_0 = static_cast<int>(point_0.x_);
   int y_0 = static_cast<int>(point_0.y_);
 
@@ -13,9 +14,9 @@ void DrawLine(const Vector2D<float>& point_0, const Vector2D<float>& point_1,
   int original_point_1_x = static_cast<int>(point_1.x_);
   int original_point_1_y = static_cast<int>(point_1.y_);
 
-  Vector2D<int> copy_point_0(static_cast<int>(point_0.x_),
+  Vector2D copy_point_0(static_cast<int>(point_0.x_),
                            static_cast<int>(point_0.y_));
-  Vector2D<int> copy_point_1(static_cast<int>(point_1.x_),
+  Vector2D copy_point_1(static_cast<int>(point_1.x_),
                            static_cast<int>(point_1.y_));
 
   int delta_x = static_cast<int>(point_1.x_ - point_0.x_);
@@ -286,14 +287,14 @@ unsigned int CalculateMaximumNumberOfElementsToProcess(
   return maximum;
 }
 
-Vector2D<float>* GenerateVerticesFromNumbers(const std::vector<int>& numbers) {
+Vector2D* GenerateVerticesFromNumbers(const std::vector<int>& numbers) {
   if (numbers.size() < 4) {
     return nullptr;
   }
   const unsigned int numbers_size = static_cast<unsigned int>(numbers.size());
   const unsigned int maximum_number_of_vertices = numbers_size / 2;
 
-  Vector2D<float>* vertices = new Vector2D<float>[maximum_number_of_vertices];
+  Vector2D* vertices = new Vector2D[maximum_number_of_vertices];
 
   const unsigned int maximum = CalculateMaximumNumberOfElementsToProcess(
       numbers_size);
@@ -309,21 +310,21 @@ Vector2D<float>* GenerateVerticesFromNumbers(const std::vector<int>& numbers) {
 }
 
 // TODO review WTF is that (why  not  in header file
-Vector2D<float>* GenerateVerticesFromNumbersAsVerticalLines(
+Vector2D* GenerateVerticesFromNumbersAsVerticalLines(
     const std::vector<int>& numbers) {
   int maximum_number_of_vertices = CalculateMaximumNumberOfElementsToProcess(
       static_cast<int>(numbers.size()));
 
-  Vector2D<float>* vertices = new Vector2D<float>[maximum_number_of_vertices];
+  Vector2D* vertices = new Vector2D[maximum_number_of_vertices];
 
   for (int i = 0; i < static_cast<int>(numbers.size()); i++) {
   }
 
   return vertices;
 }
-void DrawNumbersAsGroupOfLines(Vector2D<float>* vertices,
+void DrawNumbersAsGroupOfLines(Vector2D* vertices,
                                int maximum_number_of_vertices,
-                               const Vector4D<Uint8>& color,
+                               const Color& color,
                                bool are_lines_continuous,
                                PixelsTable& pixels_table) {
   int step = 1;
@@ -341,7 +342,7 @@ void DrawNumbersAsGroupOfLines(Vector2D<float>* vertices,
   }
 }
 
-void DrawNumbersAsGroupOfLines(Vector2D<float>* vertices,
+void DrawNumbersAsGroupOfLines(Vector2D* vertices,
                                int maximum_number_of_vertices,
                                PixelsTable& pixels_table) {
   if (maximum_number_of_vertices <= 3) {
@@ -356,7 +357,7 @@ void DrawNumbersAsGroupOfLines(Vector2D<float>* vertices,
   }
 }
 
-void DrawNumbersAsLineStrip(Vector2D<float>* vertices,
+void DrawNumbersAsLineStrip(Vector2D* vertices,
                            int maximum_number_of_vertices,
                            PixelsTable& pixels_table) {
   if (maximum_number_of_vertices == 2) {
@@ -382,27 +383,18 @@ void DrawNumbersAsLineStrip(Vector2D<float>* vertices,
 }
 
 void DrawPolygonDirection(GameObject* polygon, PixelsTable& pixels_table) {
-  Vector2D<float> direction(polygon->direction_.x_ * 100,
+  Vector2D direction(polygon->direction_.x_ * 100,
                             polygon->direction_.y_ * 100);
   DrawLine(polygon->vector_zero_, direction, pixels_table, polygon->color_);
 }
 
-void SwapVectors(Vector2D<int>& point_0, Vector2D<int>& point_1) {
+void SwapVectors(Vector2D& point_0, Vector2D& point_1) {
   int temporary_x = point_0.x_;
   int temporary_y= point_0.y_;
   point_0.x_ = point_1.x_;
   point_0.y_ = point_1.y_;
   point_1.x_ = temporary_x;
   point_1.y_ = temporary_y;
-}
-
-void SwapVectors(Vector2D<float>& point0, Vector2D<float>& point1) {
-  float temporary_x = point0.x_;
-  float temporary_y = point0.y_;
-  point0.x_ = point1.x_;
-  point0.y_ = point1.y_;
-  point1.x_ = temporary_x;
-  point1.y_ = temporary_y;
 }
 
 void DrawCartesianAxes(PixelsTable& pixels_table) {
@@ -416,7 +408,7 @@ void DrawCrossHair(float x, float y, PixelsTable& pixels_table,
 }
 
 void DrawCrossHair(float x, float y, PixelsTable& pixels_table,
-                   bool is_full_screen, Vector4D<Uint8> color) {
+                   bool is_full_screen, Color color) {
   if (is_full_screen) {
     HorizontalLineOnWholeScreen(pixels_table, static_cast<int>(y), kBlue);
     VerticalLineOnWholeScreen(pixels_table, static_cast<int>(x), kBlue);
@@ -440,14 +432,14 @@ void DrawCrossHair(float x, float y, PixelsTable& pixels_table,
 }
 
 void DrawHorizontalLine(PixelsTable& pixels_table, int x_0, int x_1, int y,
-                        Vector4D<Uint8> color) {
+                        Color color) {
   for (int i = x_0; i < x_1; i++) {
     pixels_table.DrawPoint(i, y, color);
   }
 }
 
 void DrawVerticalLine(PixelsTable& pixels_table, int y_0, int y_1, int x,
-                      Vector4D<Uint8> color) {
+                      Color color) {
   if (y_0 > y_1) {
     int temporary = y_0;
     y_0 = y_1;
@@ -459,8 +451,8 @@ void DrawVerticalLine(PixelsTable& pixels_table, int y_0, int y_1, int x,
 }
 
 void HorizontalLineOnWholeScreen(PixelsTable& pixels_table, int y,
-                                 Vector4D<Uint8> color) {
-  int max_x = static_cast<int>(0.5F * pixels_table.window_dimensions_.x_);
+                                 Color color) {
+  int max_x = static_cast<int>(0.5F * pixels_table.window_dimensions_.width);
   for (int i = -max_x; i < max_x; i++) {
     // X
 
@@ -469,8 +461,8 @@ void HorizontalLineOnWholeScreen(PixelsTable& pixels_table, int y,
 }
 
 void VerticalLineOnWholeScreen(PixelsTable& pixels_table, int x,
-                               Vector4D<Uint8> color) {
-  int max_y = static_cast<int>(0.5F * pixels_table.window_dimensions_.y_);
+                               Color color) {
+  int max_y = static_cast<int>(0.5F * pixels_table.window_dimensions_.height);
   for (int i = -max_y; i < max_y; i++) {
     // X
 
@@ -482,46 +474,49 @@ int ScreenPixelPositionToArrayPosition(int x, int y, int window_width) {
   return y * window_width + x;
 }
 
-int ScreenPixelPositionToArrayPosition(Vector2D<int>& point, int window_width) {
+int ScreenPixelPositionToArrayPosition(Vector2D& point, int window_width) {
   return point.y_ * window_width + point.x_;
 }
 
 void WindowPositionToCartesianPosition(float& x, float& y,
-                                       Vector2D<int>* window_dimensions) {
-  x = x - static_cast<int>(0.5 * window_dimensions->x_);
-  y = (-(y - static_cast<int>(0.5 * window_dimensions->y_)));
+                                       Dimensions2D* window_dimensions) {
+  x = x - static_cast<int>(0.5 * window_dimensions->width);
+  y = (-(y - static_cast<int>(0.5 * window_dimensions->height)));
 }
 
 void DrawMandelbrotSet() {}
 
 void DrawRectangle(PixelsTable& pixels_table, int x, int y, int width,
-                   int height, Vector4D<Uint8> color) {
+                   int height, Color color) {
   int position_x = x;
   int position_y = y;
 
   pixels_table.CartesianPositionToWindow(position_x, position_y);
 
   int start_point =
-      kNumberOfColors * (position_y * pixels_table.window_dimensions_.x_ + position_x);
+      kNumberOfColors * (position_y * pixels_table.window_dimensions_.width + position_x);
   int viewport_index = 0;
   for (int i = 0; i < height; i++) {
     for (int j = 0; j < width; j++) {
       pixels_table.pixels_[kNumberOfColors *
-                              ((position_y + i) * pixels_table.window_dimensions_.x_ +
+                               ((position_y + i) *
+                                    pixels_table.window_dimensions_.width +
                                position_x + j) +
-                          kRedPosition] = color.x_;  // + kRedPosition];
+                           kRedPosition] = color.red;  // + kRedPosition];
       pixels_table.pixels_[kNumberOfColors *
-                              ((position_y + i) * pixels_table.window_dimensions_.x_ +
+                               ((position_y + i) *
+                                    pixels_table.window_dimensions_.width +
                                position_x + j) +
-                          kGreenPosition] = color.y_;  // + kGreenPosition];
+                          kGreenPosition] = color.green;  // + kGreenPosition];
       pixels_table.pixels_[kNumberOfColors *
-                              ((position_y + i) * pixels_table.window_dimensions_.x_ +
+                               ((position_y + i) *
+                                    pixels_table.window_dimensions_.width +
                                position_x + j) +
-                          kBluePosition] = color.z_;  // + kBluePosition];
+                          kBluePosition] = color.blue;  // + kBluePosition];
       pixels_table.pixels_[kNumberOfColors *
-                              ((position_y + i) * pixels_table.window_dimensions_.x_ +
+                              ((position_y + i) * pixels_table.window_dimensions_.width +
                                position_x + j) +
-                          kAlphaPosition] = color.w_;  // + kAlphaPosition];
+                          kAlphaPosition] = color.alpha;  // + kAlphaPosition];
       viewport_index = viewport_index + 1;
     }
     start_point = start_point + width;

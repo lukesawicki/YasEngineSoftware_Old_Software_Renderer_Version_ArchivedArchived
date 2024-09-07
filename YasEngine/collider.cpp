@@ -20,7 +20,7 @@ bool Collider::IsCollision(const Collider& object_0, const Collider& object_1) {
 }
 
 bool Collider::IsCollidingWithWall(const Collider& object_0,
-                                   const Vector2D<int>& world_sizes) {
+                                   const Vector2D& world_sizes) {
   return object_0.x_ - object_0.radius_ <
              -static_cast<float>(world_sizes.x_) * 0.5F ||  // LEFT
          object_0.x_ + object_0.radius_ >
@@ -32,7 +32,7 @@ bool Collider::IsCollidingWithWall(const Collider& object_0,
 }
 
 bool Collider::IsCollidingWithCustomWalls(const Collider& object_0,
-                                          const Vector2D<int>& world_sizes) {
+                                          const Vector2D& world_sizes) {
   return object_0.x_ - object_0.radius_ <
              -static_cast<float>(world_sizes.x_) * 0.5F ||  // LEFT
          object_0.x_ + object_0.radius_ >

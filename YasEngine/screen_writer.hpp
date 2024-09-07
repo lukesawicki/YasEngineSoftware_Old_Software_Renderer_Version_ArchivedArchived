@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 
+#include "dimensions_2d.hpp"
 #include "font_object.hpp"
 #include "font_surface.hpp"
 
@@ -39,12 +40,12 @@ class ScreenWriter {
 
   std::vector<Font*> fonts_;
   char characters_table_[knumber_of_characters_];
-  ScreenWriter(const Vector2D<int>* window_dimensions);
+  ScreenWriter(const Dimensions2D* window_dimensions);
   void Initialize();
   void InitializeFontObjects();
   void InitializeFontSurfaces();
   void PrepareFontVertices();
-  void Write(int x, int y, std::string text, const Vector4D<Uint8>& color,
+  void Write(int x, int y, std::string text, const Color& color,
              PixelsTable& pixels_table);
 };
 

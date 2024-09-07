@@ -5,51 +5,57 @@
 FontSurface::FontSurface() {}
 
 void FontSurface::Initialize(int x, int y, int width, int height,
-                             const Vector4D<Uint8>& default_color) {
+                             const Color& default_color) {
   position_.x_ = x;
   position_.y_ = y;
-  view_port_sizes_.x_ = width;
-  view_port_sizes_.y_ = height;
-  pixels_ =
-      new Uint8[view_port_sizes_.x_ * view_port_sizes_.y_ * kNumberOfColors];
+  view_port_sizes_.width = width;
+  view_port_sizes_.height = height;
+  pixels_ = new Uint8[view_port_sizes_.width * view_port_sizes_.height *
+                      kNumberOfColors];
   ClearColor(default_color);
 }
 
 FontSurface::~FontSurface() { delete[] pixels_; }
 
-void FontSurface::ClearColor(const Vector4D<Uint8>& drawing_color) {
-  for (int y = 0; y < view_port_sizes_.y_; y++) {
-    for (int x = 0; x < view_port_sizes_.x_; x++) {
-      pixels_[kNumberOfColors * (y * view_port_sizes_.x_ + x) + kRedPosition] =
-          drawing_color.x_;
+void FontSurface::ClearColor(const Color& drawing_color) {
+  for (int y = 0; y < view_port_sizes_.height; y++) {
+    for (int x = 0; x < view_port_sizes_.width; x++) {
+      pixels_[kNumberOfColors * (y * view_port_sizes_.width + x) +
+              kRedPosition] =
+          drawing_color.red;
       // window_dimensions_->x_ <- WINDOW WIDTH
-      pixels_[kNumberOfColors * (y * view_port_sizes_.x_ + x) +
-              kGreenPosition] = drawing_color.y_;
-      pixels_[kNumberOfColors * (y * view_port_sizes_.x_ + x) + kBluePosition] =
-          drawing_color.z_;
-      pixels_[kNumberOfColors * (y * view_port_sizes_.x_ + x) +
-              kAlphaPosition] = drawing_color.w_;
+      pixels_[kNumberOfColors * (y * view_port_sizes_.width + x) +
+              kGreenPosition] = drawing_color.green;
+      pixels_[kNumberOfColors * (y * view_port_sizes_.width + x) +
+              kBluePosition] =
+          drawing_color.blue;
+      pixels_[kNumberOfColors * (y * view_port_sizes_.width + x) +
+              kAlphaPosition] = drawing_color.alpha;
     }
   }
 }
 
-void FontSurface::DrawPoint(int x, int y, const Vector4D<Uint8>& drawing_color) {
+void FontSurface::DrawPoint(int x, int y, const Color& drawing_color) {
   CartesianPositionToWindow(x, y);
-  if (x >= 0 && x < view_port_sizes_.x_ && y >= 0 && y < view_port_sizes_.y_) {
-    pixels_[kNumberOfColors * (y * view_port_sizes_.x_ + x) + kRedPosition] =
-        drawing_color.x_;
-    pixels_[kNumberOfColors * (y * view_port_sizes_.x_ + x) + kGreenPosition] =
-        drawing_color.y_;
-    pixels_[kNumberOfColors * (y * view_port_sizes_.x_ + x) + kBluePosition] =
-        drawing_color.z_;
-    pixels_[kNumberOfColors * (y * view_port_sizes_.x_ + x) + kAlphaPosition] =
-        drawing_color.w_;
+  if (x >= 0 && x < view_port_sizes_.width && y >= 0 &&
+      y < view_port_sizes_.height) {
+    pixels_[kNumberOfColors * (y * view_port_sizes_.width + x) + kRedPosition] =
+        drawing_color.red;
+    pixels_[kNumberOfColors * (y * view_port_sizes_.width + x) +
+            kGreenPosition] =
+        drawing_color.green;
+    pixels_[kNumberOfColors * (y * view_port_sizes_.width + x) +
+            kBluePosition] =
+        drawing_color.blue;
+    pixels_[kNumberOfColors * (y * view_port_sizes_.width + x) +
+            kAlphaPosition] =
+        drawing_color.alpha;
   }
 }
 
-void FontSurface::DrawLine(const Vector2D<float>& point0,
-                           const Vector2D<float>& point1,
-                           const Vector4D<Uint8>& drawing_color) {
+void FontSurface::DrawLine(const Vector2D& point0,
+                           const Vector2D& point1,
+                           const Color& drawing_color) {
   int x_0 = static_cast<int>(point0.x_);
   int y_0 = static_cast<int>(point0.y_);
 
@@ -59,9 +65,9 @@ void FontSurface::DrawLine(const Vector2D<float>& point0,
   int original_point_1_x = static_cast<int>(point1.x_);
   int original_point_1_y = static_cast<int>(point1.y_);
 
-  Vector2D<int> copy_point_0(static_cast<int>(point0.x_),
+  Vector2D copy_point_0(static_cast<int>(point0.x_),
                            static_cast<int>(point0.y_));
-  Vector2D<int> copy_point_1(static_cast<int>(point1.x_),
+  Vector2D copy_point_1(static_cast<int>(point1.x_),
                            static_cast<int>(point1.y_));
 
   int delta_x = static_cast<int>(point1.x_ - point0.x_);
@@ -310,9 +316,9 @@ unsigned int FontSurface::CalculateMaximumNumberOfElementsToProcess(
   return maximum;
 }
 
-void FontSurface::DrawNumbersAsGroupOfLines(Vector2D<float>* vertices,
+void FontSurface::DrawNumbersAsGroupOfLines(Vector2D* vertices,
                                             int maximum_number_of_vertices,
-                                            const Vector4D<Uint8>& color,
+                                            const Color& color,
                                             bool are_lines_continuous) {
   int step = 1;
   if (!are_lines_continuous) {
@@ -333,42 +339,47 @@ void FontSurface::DrawPolygon(GameObject* polygon) {}
 
 void FontSurface::CopyPixelsInToPIxelTable(PixelsTable& pixels_table) {
   int position_x = position_.x_;
-  int position_y = position_.y_ + view_port_sizes_.y_;
+  int position_y = position_.y_ + view_port_sizes_.height;
 
   pixels_table.CartesianPositionToWindow(position_x, position_y);
 
   int start_point =
-      kNumberOfColors * (position_y * pixels_table.window_dimensions_.x_ + position_x);
+      kNumberOfColors *
+      (position_y * pixels_table.window_dimensions_.width + position_x);
   int viewport_index = 0;
-  for (int i = 0; i < view_port_sizes_.y_; i++) {
-    for (int j = 0; j < view_port_sizes_.x_; j++) {
+  for (int i = 0; i < view_port_sizes_.height; i++) {
+    for (int j = 0; j < view_port_sizes_.width; j++) {
       pixels_table.pixels_[kNumberOfColors *
-                              ((position_y + i) * pixels_table.window_dimensions_.x_ +
+                               ((position_y + i) *
+                                    pixels_table.window_dimensions_.width +
                                position_x + j) +
                           kRedPosition] =
-          pixels_[kNumberOfColors * (i * view_port_sizes_.x_ + j) +
+          pixels_[kNumberOfColors * (i * view_port_sizes_.width + j) +
                   kRedPosition];  // + kRedPosition];
       pixels_table.pixels_[kNumberOfColors *
-                              ((position_y + i) * pixels_table.window_dimensions_.x_ +
+                               ((position_y + i) *
+                                    pixels_table.window_dimensions_.width +
                                position_x + j) +
                           kGreenPosition] =
-          pixels_[kNumberOfColors * (i * view_port_sizes_.x_ + j) +
+          pixels_[kNumberOfColors * (i * view_port_sizes_.width + j) +
                   kGreenPosition];  // + kGreenPosition];
       pixels_table.pixels_[kNumberOfColors *
-                              ((position_y + i) * pixels_table.window_dimensions_.x_ +
+                               ((position_y + i) *
+                                    pixels_table.window_dimensions_.width +
                                position_x + j) +
                           kBluePosition] =
-          pixels_[kNumberOfColors * (i * view_port_sizes_.x_ + j) +
+          pixels_[kNumberOfColors * (i * view_port_sizes_.width + j) +
                   kBluePosition];  // + kBluePosition];
       pixels_table.pixels_[kNumberOfColors *
-                              ((position_y + i) * pixels_table.window_dimensions_.x_ +
+                               ((position_y + i) *
+                                    pixels_table.window_dimensions_.width +
                                position_x + j) +
                           kAlphaPosition] =
-          pixels_[kNumberOfColors * (i * view_port_sizes_.x_ + j) +
+          pixels_[kNumberOfColors * (i * view_port_sizes_.width + j) +
                   kAlphaPosition];  // + kAlphaPosition];
       viewport_index = viewport_index + 1;
     }
-    start_point = start_point + view_port_sizes_.x_;
+    start_point = start_point + view_port_sizes_.width;
   }
 }
 

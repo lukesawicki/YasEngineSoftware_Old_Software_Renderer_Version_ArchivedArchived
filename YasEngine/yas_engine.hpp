@@ -11,26 +11,24 @@
 #include "button.hpp"
 #include "game_object.hpp"
 #include "input_output_handler.hpp"
-#include "map_frame.hpp"
-#include "math_picture.hpp"
-#include "node.hpp"
 #include "pixels_table.hpp"
 #include "player.hpp"
 #include "screen_writer.hpp"
 #include "triangle_2d.hpp"
 #include "triangle_3d.hpp"
 #include "vector_2d.hpp"
+#include "dimensions_2d.hpp"
 
 class YasEngine {
  public:
   bool tests_ = false;
   std::string engine_version_;
-  int MAJOR_REVISION = 1;
-  int MINOR_REVISION = 3;
-  int BUG_FIX_RELEASE = 0;
-  int BUILD_NUMBER = 0;
+  int major_revision_ = 1;
+  int minor_revision_ = 3;
+  int bug_fix_release_ = 0;
+  int build_number_ = 0;
 
-  rapidjson::Document settings;
+  rapidjson::Document settings_;
   int music_volume_ = MIX_MAX_VOLUME;
   int shoot_volume_ = MIX_MAX_VOLUME;
   int hit_volume_ = MIX_MAX_VOLUME;
@@ -53,22 +51,7 @@ class YasEngine {
 
   enum Wall { kLeft, kRight, kTop, kBottom };
 
-  struct NodeNumbersOnTwoProceedingLevels {
-    int first_level_node = 0;
-    int second_level_node = 0;
-
-    NodeNumbersOnTwoProceedingLevels() {
-      first_level_node = 0;
-      second_level_node = 0;
-    }
-
-    NodeNumbersOnTwoProceedingLevels(int first, int second) {
-      this->first_level_node = first;
-      this->second_level_node = second;
-    }
-  };
-
-  std::vector<Vector2D<int>*> test_positions_;
+  std::vector<Vector2D*> test_positions_;
 
   GameState game_state_ = GameState::kIntro;
 
@@ -94,10 +77,9 @@ class YasEngine {
   void clean();
 
  private:
-  TimePicker time_picker_;
 
-  Vector2D<float> A = Vector2D<float>(-300, 200);
-  Vector2D<float> B = Vector2D<float>(100, -350);
+  Vector2D A = Vector2D(-300, 200);
+  Vector2D B = Vector2D(100, -350);
 
   static YasEngine* instance_;
 
@@ -108,7 +90,7 @@ class YasEngine {
   SDL_Texture* screen_texture_;
 
   PixelsTable* pixels_table_;
-  Vector2D<int>* window_dimensions_;
+  Dimensions2D* window_dimensions_;
   SDL_Event event_;
   bool quit_ = false;
 
@@ -130,8 +112,6 @@ class YasEngine {
   int how_many_ = 0;
   Player* player_;
   
-  std::vector<NodeNumbersOnTwoProceedingLevels*> spawners_positions_;
-
   const int kmax_collectibles_to_spawn_ = 64;
 
   std::map<std::string, std::map<int, float>*> numbers_map_;
@@ -144,11 +124,6 @@ class YasEngine {
   Mix_Chunk* shoot_sound_;
   Mix_Chunk* hit_sound_;
   Mix_Chunk* other_sound_;
-
-  MathPicture* sine_picture_;
-  MathPicture* cosine_picture_;
-  MathPicture* fibonaccie_picture_;
-  MathPicture* prime_numbers_picture_;
 
   int level_ = 1;
   int previous_level_ = 0;
@@ -166,8 +141,8 @@ class YasEngine {
 
   std::map<std::string, int> number_of_given_colors_;
 
-  Vector2D<float> test_point_0_;
-  Vector2D<float> test_point_1_;
+  Vector2D test_point_0_;
+  Vector2D test_point_1_;
 
   ScreenWriter* writer_;
   int step_ = 0;
@@ -182,80 +157,23 @@ class YasEngine {
   int blue_shotdowns_ = 0;
   bool is_engine_instantiated_ = false;
 
-  std::string line_1 = "YOU.JUST.FINISHED.LEVEL.1";
-  std::string line_2 = "YOU.ARE.HAPPY.TO.HAVE.DISCOVERED";
-  std::string line_3 = "PRIME.NUMBERS";
-
-  std::string line_4 = "YOU.JUST.FINISHED.LEVEL.2";
-  std::string line_5 = "YOU.ARE.HAPPY.TO.HAVE.DISCOVERED";
-  std::string line_6 = "FIBONACCI.NUMBERS";
-
-  std::string line_7 = "YOU.JUST.FINISHED.LEVEL.2";
-  std::string line_8 = "YOU.ARE.HAPPY.TO.HAVE.DISCOVERED";
-  std::string line_9 = "SINE.FUNCTION";
-
-  std::string line_10 = "YOU.JUST.FINISHED.LEVEL.2";
-  std::string line_11 = "YOU.ARE.HAPPY.TO.HAVE.DISCOVERED";
-  std::string line_12 = "COSINE.FUNCTION";
-  std::string line_13 = "AND.YOU.WON";
-
-  std::string line_14 = "YOU.WON";
-  std::string line_15 = "MATHEMATICS.IS.BEAUTIFUL";
-  std::string line_16 = "YOU.ARE.NOT.SUPPOSED.TO.BELIEVE.ME";
-  std::string line_17 = "CHECK.IT.FOR.YOURSELF";
-  std::string line_18 =
-      "FIND.AND.LEARN.MORE.ABOUT.WHAT.YOU.HAVE.JUST.DISCOVERED";
-  std::string line_19 = "PRIME.NUMBERS";
-  std::string line_20 = "FIBONACCI.NUMBERS";
-  std::string line_21 = "SINE.AND.COSINE.FUNCTIONS";
-
   std::string line_22 = "BEAUTY.OF.MATH";
   std::string line_23 = "POWERED.BY";
   std::string line_24 = "YAS.ENGINE";
 
   std::string line_25 = "GAME.DESIGN.PROGRAMMING.AND.MARKETING";
   std::string line_26 = "LUKASZ.SAWICKI";
-  std::string line_27 = "SOUND.DESIGN.AND.MUSIC";
-  std::string line_28 = "JAKUB.TWAROGOWSKI";
-  std::string line_29 = "QUALITY.ASSURANCE";
-  std::string line_30 = "BARTLOMIEJ.KAWA";
-  std::string line_31 = "SPECIAL.THANKS:";
-  std::string line_32 = "MY.DEAR.SISTER.IZABELA";
-  std::string line_33 = "MY.LOVE.MARIOLA";
-  std::string line_34 = "MY.FRIENDS.FROM.WARSAW.SCHOOL.OF.COMPUTER.SCIENCE:";
-  std::string line_35 = "LUKASZ.KRZYSZTOF.MICHAL.MAREK.TOMASZ";
-  std::string line_36 = "MY.FRENDS.FROM.GDS.4:";
-  std::string line_37 = "KASIA.AND.BARTOSZ";
-  std::string line_38 = "WHOLE.COMMUNITY.OF.KNTG.POLYGON";
-  std::string line_39 = "AND.ALL.MEMBERS.OF.TEAM.XPORTAL";
-  std::string line_40 = "GAME.DESIGN.PROGRAMMING.AND.MARKETING";
-  std::string line_41 = "LUKASZ.SAWICKI";
-  std::string line_42 = "SOUND.DESIGN.AND.MUSIC";
-  std::string line_43 = "JAKUB.TWAROGOWSKI";
-  std::string line_44 = "QUALITY.ASSURANCE";
-  std::string line_45 = "BARTLOMIEJ.KAWA";
-  std::string line_46 = "SPECIAL.THANKS:";
-  std::string line_47 = "MY.DEAR.SISTER.IZABELA";
-  std::string line_48 = "MY.LOVE.MARIOLA";
-  std::string line_49 = "MY.FRIENDS.FROM.WARSAW.SCHOOL.OF.COMPUTER.SCIENCE:";
-  std::string line_50 = "LUKASZ.KRZYSZTOF.MICHAL.MAREK.TOMASZ";
-  std::string line_51 = "MY.FRENDS.FROM.GDS.4:";
-  std::string line_52 = "KASIA.AND.BARTOSZ";
-  std::string line_53 = "WHOLE.COMMUNITY.OF.KNTG.POLYGON";
-  std::string line_54 = "AND.ALL.MEMBERS.OF.TEAM.XPORTAL";
 
-  std::vector<Vector4D<float>*> local_box_;
-  std::vector<Vector4D<float>*> world_box_;
+  std::vector<Vector4D*> local_box_;
+  std::vector<Vector4D*> world_box_;
   std::vector<Triangle3D*> box_triangles_world;
   std::vector<Triangle3D*> box_triangles_local;
-  Vector4D<float>* trojkaty;
-  Vector4D<float>* trojkatySwiat;
-  std::vector<Vector4D<float>*> czworoscian;
-  void pushUniqueTriangle(std::vector<Triangle3D*>& triangles,
-                          Triangle3D* triangle);
+  Vector4D* trojkaty;
+  Vector4D* trojkatySwiat;
+  std::vector<Vector4D*> czworoscian;
 
-  Vector2D<float>* box_2d_;
-  Vector2D<float>* szescian2d = new Vector2D<float>[36];
+  Vector2D* box_2d_;
+  Vector2D* szescian2d = new Vector2D[36];
 
 
   std::vector<Triangle2D*> triangles_2d_;
@@ -263,31 +181,19 @@ class YasEngine {
   float box_speed_ = 30;
 
   //
-  Vector2D<float>* testLines;
+  Vector2D* testLines;
   //
-  const int kdistanceFromProjectionPlane = 50;
+  const int kdistanceFromProjectionPlane = -50;
   //
-  Vector4D<float> box_position_;
+  Vector4D box_position_;
 
   void ReadSettingsFromFile();
   void PrepareRendering();
   void PrepareBasicSettings();
   void CheckEndianness();
   void HandlePhysics();
-  void HandleDisassemblingGraphs(GameObject* game_object);
-  void HandleDestroingCollectibles(GameObject* game_object);
-  void HandlingAssemblingGraphs(GameObject* game_object);
-  bool IsObjectProtagonist(GameObject* game_object);
-  GameObject* GetProtagonist(GameObject* game_object_0, GameObject* game_object_1);
-  GameObject* GetNotProtagonist(GameObject* game_object_0, GameObject* game_object_1);
-  void BounceCollectibles(GameObject* game_object, Wall wall);
   void MoveObjects();
   void PrepareGameWorld();
-  void PrepareDataForDrawingGraphs();
-  void PrepareSineDrawing();
-  void PrepareCosineDrawing();
-  void PrepareFibonacciDrawing();
-  void PreparePrimesDrawing();
   void PreparePlayer();
   void PrepareInterface();
   void HandleInput(SDL_Event& event);
@@ -295,16 +201,12 @@ class YasEngine {
   void HandleMouseInput(SDL_Event& event);
   void HandleMouseMovement();
   void DeleteNotAliveObjects();
-  void HandleSpawningCollectibles();
-  void HandleProjectiles();
   void HandlePlayer();
   void Update(double& delta_time);
   void ResetAll();
   void DrawHudElements(double& delta_time);
   void Render(double& delta_time);
   void RenderGameObjects();
-  void RenderLevelChange();
-  void RenderWonScreen();
   Button::ButtonId CheckWhichButtonClicked();
   void HandleClickedButtons();
   void HandleGameStateWhenESCbuttonPushed();

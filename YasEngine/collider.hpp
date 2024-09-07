@@ -13,9 +13,9 @@ class Collider {
 
   static bool IsCollision(const Collider& object_0, const Collider& object_1);
   static bool IsCollidingWithWall(const Collider& object_0,
-                                  const Vector2D<int>& world_sizes);
+                                  const Vector2D& world_sizes);
   static bool IsCollidingWithCustomWalls(const Collider& object_0,
-                                         const Vector2D<int>& world_sizes);
+                                         const Vector2D& world_sizes);
 
  private:
 };

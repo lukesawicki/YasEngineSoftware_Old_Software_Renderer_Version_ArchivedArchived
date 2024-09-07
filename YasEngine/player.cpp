@@ -7,7 +7,7 @@ Player::Player(float x, float y) {
   collider_.x_ = x;
   collider_.y_ = y;
   collider_.radius_ = 20;
-  i_am_ = WhoAmI::kProtagonist;
+  i_am_ = WhoAmI::kPlayer;
   position.x_ = x;
   position.y_ = y;
 
@@ -19,8 +19,8 @@ Player::Player(float x, float y) {
 
   number_of_vertices_ = 17;
 
-  world_vertices_ = new Vector2D<float>[number_of_vertices_];
-  local_vertices_ = new Vector2D<float>[number_of_vertices_];
+  world_vertices_ = new Vector2D[number_of_vertices_];
+  local_vertices_ = new Vector2D[number_of_vertices_];
 
   local_vertices_[0].x_ = -12;
   local_vertices_[0].y_ = -11;
@@ -129,43 +129,43 @@ void Player::Rotate(float delta_time) {
 }
 
 void Player::RotateToMousePosition(float x, float y,
-                                   Vector2D<int>* window_dimensions) {
-  if (x <= window_dimensions->x_ && y <= window_dimensions->y_) {
+                                   Dimensions2D* window_dimensions) {
+  if (x <= window_dimensions->width && y <= window_dimensions->height) {
     float current_x = x;
     float current_y = y;
 
     WindowPositionToCartesianPosition(current_x, current_y, window_dimensions);
 
-    Vector2D<float> mousePositionVector(static_cast<float>(current_x),
+    Vector2D mousePositionVector(static_cast<float>(current_x),
                                         static_cast<float>(current_y));
-    // Vector2D<float>::NormalizedVector(mousePositionVector);
+    // Vector2D::NormalizedVector(mousePositionVector);
 
     float angle_between_current_and_mouse =
-        Vector2D<float>::AngleBetweenVectors(direction_, mousePositionVector);
+        Vector2D::AngleBetweenVectors(direction_, mousePositionVector);
     RotateAllVerticesOverAnAngle(angle_between_current_and_mouse);
     set_direction(mousePositionVector.x_, mousePositionVector.y_);
   }
 }
 
 void Player::RotateToMousePositionInLocalCoordinateSystem(
-    float x, float y, Vector2D<int>* window_dimensions) {
-  if (x <= window_dimensions->x_ && y <= window_dimensions->y_) {
+    float x, float y, Dimensions2D* window_dimensions) {
+  if (x <= window_dimensions->width && y <= window_dimensions->height) {
     float current_x = x;
     float current_y = y;
 
     WindowPositionToCartesianPosition(current_x, current_y, window_dimensions);
 
-    Vector2D<float> current_mouse_position = Vector2D<float>(current_x, current_y);
+    Vector2D current_mouse_position = Vector2D(current_x, current_y);
 
-    Vector2D<float> mouse_direction_in_local_coordination_system =
-        Vector2D<float>::CreateUnitVectorFromBoundVector(current_mouse_position,
+    Vector2D mouse_direction_in_local_coordination_system =
+        Vector2D::CreateUnitVectorFromBoundVector(current_mouse_position,
                                                          position);
 
-    float angle_between_current_and_mouse = Vector2D<float>::AngleBetweenVectors(
+    float angle_between_current_and_mouse = Vector2D::AngleBetweenVectors(
         direction_, mouse_direction_in_local_coordination_system);
 
     RotateAllVerticesOverAnAngle(angle_between_current_and_mouse);
-    Vector2D<float>::RotateVectorOverTheAngle(&direction_,
+    Vector2D::RotateVectorOverTheAngle(&direction_,
                                               angle_between_current_and_mouse);
   }
 }
@@ -189,7 +189,7 @@ void Player::RegeneratePolygon() { Generate(); }
 
 void Player::RotateAllVerticesOverAnAngle(float angle) {
   for (int i = 0; i < number_of_vertices_; i++) {
-    Vector2D<float>::RotateVectorOverTheAngle(&local_vertices_[i], angle);
+    Vector2D::RotateVectorOverTheAngle(&local_vertices_[i], angle);
   }
 }
 
@@ -199,17 +199,4 @@ void Player::set_input(YasInOut::Input* input) {
 
 void Player::set_input(YasInOut::MousePositionChangeInformation* mouse) {
   this->mouse_ = mouse;
-}
-
-Projectile* Player::shoot() {
-  if (is_shooting_) {
-    is_shooting_ = false;
-    float projectileX =
-        position.x_ + direction_.x_ * projectile_position_shift_;
-    float projectileY =
-        position.y_ + direction_.y_ * projectile_position_shift_;
-    return new Projectile(8, projectileX, projectileY, direction_);
-  } else {
-    return nullptr;
-  }
 }
