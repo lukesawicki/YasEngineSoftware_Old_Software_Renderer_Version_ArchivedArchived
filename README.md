@@ -1,4 +1,10 @@
 # YasEngineSoftware
+
+I'm stopping developing this version of engine. I will focus on creating my own Renderer YasRenderer and after creating simple renderer I will return to YasEngine to create new version of YasEngine with full 3D software renderer.
+This new 3D YasEngine will be used for the purpose of creating new 3D game loosely based on Beauty of Math.
+For new interesting code look here:
+
+
 UPDATE: The first game on YasEngine was released few weeks ago:
 
 https://lukesawicki.itch.io/beauty-of-math
